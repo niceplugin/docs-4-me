@@ -1,0 +1,139 @@
+/**
+ * CSS 변수를 재정의하여 기본 테마 스타일링을 커스터마이즈:
+ * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ */
+
+/**
+ * 색상
+ *
+ * 각 색상은 동일한 색상 스케일 시스템을 가지며 3단계의 선명한
+ * 색상과 1개의 부드러운 색상을 포함합니다.
+ *
+ * - `XXX-1`: 주로 컬러 텍스트에 사용되는 가장 선명한 색상입니다.
+ *   `XXX-soft` 위에 사용될 때 명도 대비비를 만족해야 합니다.
+ *
+ * - `XXX-2`: 주로 버튼의 호버 상태에 사용되는 색상입니다.
+ *
+ * - `XXX-3`: 버튼의 배경색 등 단색 배경에 사용되는 색상입니다.
+ *   순수 흰색(#ffffff) 텍스트와 대비비를 만족해야 합니다.
+ *
+ *
+ * - `XXX-soft`: 커스텀 컨테이너나 배지와 같은 미묘한 배경에 사용되는 색상입니다.
+ *   `XXX-1` 색상을 올렸을 때 대비비를 만족해야 합니다.
+ *
+ *
+ *   부드러운 색상은 반투명 알파 채널이어야 합니다. 이것은 여러 "soft"
+ *   색상을 겹쳐 강조 효과를 만드는 데 중요합니다. 예를 들어 커스텀 컨테이너
+ *   내 인라인 코드 블록이 있을 때 그렇습니다.
+ *
+ *
+ * - `default`: 메뉴 호버 상태의 배경색과 같이 특별한 의미 없이
+ *   미묘한 표시에만 사용되는 색상입니다.
+ *
+ * - `brand`: 링크 텍스트, 브랜드 테마가 적용된 버튼 등
+ *   기본 브랜드 색상에 사용됩니다.
+ *
+ * - `tip`: 유용한 정보를 나타내는 데 사용됩니다.
+ *   기본 테마에서는 기본적으로 브랜드 색상이 사용됩니다.
+ *
+ * - `warning`: 사용자에게 경고를 표시하는 데 사용됩니다.
+ *   맞춤형 컨테이너, 배지 등에 사용됩니다.
+ *
+ * - `danger`: 사용자에게 오류나 위험 메시지를 표시하는 데 사용됩니다.
+ *   맞춤형 컨테이너, 배지 등에 사용됩니다.
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-c-default-1: var(--vp-c-gray-1);
+  --vp-c-default-2: var(--vp-c-gray-2);
+  --vp-c-default-3: var(--vp-c-gray-3);
+  --vp-c-default-soft: var(--vp-c-gray-soft);
+
+  --vp-c-brand-1: var(--vp-c-indigo-1);
+  --vp-c-brand-2: var(--vp-c-indigo-2);
+  --vp-c-brand-3: var(--vp-c-indigo-3);
+  --vp-c-brand-soft: var(--vp-c-indigo-soft);
+
+  --vp-c-tip-1: var(--vp-c-purple-1);
+  --vp-c-tip-2: var(--vp-c-purple-2);
+  --vp-c-tip-3: var(--vp-c-purple-3);
+  --vp-c-tip-soft: var(--vp-c-purple-soft);
+
+  --vp-c-warning-1: var(--vp-c-yellow-1);
+  --vp-c-warning-2: var(--vp-c-yellow-2);
+  --vp-c-warning-3: var(--vp-c-yellow-3);
+  --vp-c-warning-soft: var(--vp-c-yellow-soft);
+
+  --vp-c-danger-1: var(--vp-c-red-1);
+  --vp-c-danger-2: var(--vp-c-red-2);
+  --vp-c-danger-3: var(--vp-c-red-3);
+  --vp-c-danger-soft: var(--vp-c-red-soft);
+}
+
+/**
+ * Component: Button
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-bg: var(--vp-c-brand-3);
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: var(--vp-c-white);
+  --vp-button-brand-active-bg: var(--vp-c-brand-1);
+}
+
+/**
+ * Component: Home
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    oklch(63.7% 0.237 25.331) 30%,
+    oklch(76.9% 0.188 70.08)
+  );
+
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    oklch(63.7% 0.237 25.331) 50%,
+    oklch(76.9% 0.188 70.08) 50%
+  );
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(56px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
+}
+
+/**
+ * Component: Custom Block
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-custom-block-tip-border: transparent;
+  --vp-custom-block-tip-text: var(--vp-c-text-1);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
+  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+}
+
+/**
+ * Component: Algolia
+ * -------------------------------------------------------------------------- */
+
+.DocSearch {
+  --docsearch-primary-color: var(--vp-c-brand-1) !important;
+}
+
