@@ -2162,7 +2162,7 @@ $browser->assertAuthenticatedAs($user);
 #### assertVue
 
 Dusk even allows you to make assertions on the state of [Vue component](https://vuejs.org) data. For example, imagine your application contains the following Vue component:
-
+```
     // HTML...
 
     <profile dusk="profile-component"></profile>
@@ -2180,7 +2180,7 @@ Dusk even allows you to make assertions on the state of [Vue component](https://
             };
         }
     });
-
+```
 You may assert on the state of the Vue component like so:
 
 ```php tab=Pest
