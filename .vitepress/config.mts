@@ -21,7 +21,7 @@ export default defineConfig({
 
     nav: [
       { text: '홈', link: '/' },
-      { text: '라라벨 12.x', link: '/laravel/12.x/installation' }
+      { text: '라라벨 12.x', link: '/laravel/12.x/installation', activeMatch: '/laravel/' }
     ],
 
     outline: {

@@ -137,3 +137,33 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+/**
+ * 문서 해더 색상
+ */
+
+main h1, main h2, main h3, main h4, main h5, main h6 {
+  color: var(--vp-c-warning-2);
+}
+
+/**
+ * 활성 링크 색상
+ */
+
+a.link.active span {
+  color: var(--vp-c-warning-2) !important;
+  text-decoration: underline;
+}
+
+.is-active a.link .text {
+  color: var(--vp-c-warning-2) !important;
+  position: relative;
+}
+.is-active a.link .text::before {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  padding-right: 0.25rem;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  content: '▶';
+}
