@@ -51,10 +51,6 @@ export default defineConfig({
     sidebar: {
       ...sidebar_laravel,
     },
-
-    socialLinks: [
-      // { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
   },
   markdown: {
     config(md) {
