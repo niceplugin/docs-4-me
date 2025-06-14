@@ -26,7 +26,7 @@ export const sidebar_laravel = {
         text: '아키텍처 개념',
         collapsed: true,
         items: [
-          { text: '요청 생명주기', link: '/laravel/12.x/lifecycle' },
+          { text: '요청 라이프사이클', link: '/laravel/12.x/lifecycle' },
           { text: '서비스 컨테이너', link: '/laravel/12.x/container' },
           { text: '서비스 프로바이더', link: '/laravel/12.x/providers' },
           { text: '파사드 (Facades)', link: '/laravel/12.x/facades' },

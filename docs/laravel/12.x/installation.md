@@ -218,7 +218,7 @@ Laravel 애플리케이션을 개발할 때 원하는 어떤 코드 에디터든
 
 <div class="content-list" markdown="1">
 
-- [요청 생명주기](/laravel/12.x/lifecycle)
+- [요청 라이프사이클](/laravel/12.x/lifecycle)
 - [환경설정](/laravel/12.x/configuration)
 - [디렉터리 구조](/laravel/12.x/structure)
 - [프론트엔드](/laravel/12.x/frontend)
