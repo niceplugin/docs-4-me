@@ -6,8 +6,8 @@ export const sidebar_laravel = {
         collapsed: true,
         items: [
           { text: '릴리즈 노트', link: '/laravel/12.x/releases' },
-          { text: '업그레이드 가이드', link: '/laravel/12.x/upgrade' },
-          { text: '기여 가이드', link: '/laravel/12.x/contributions' },
+          { text: '업그레이드 가이드', link: 'https://laravel.com/docs/12.x/upgrade' },
+          { text: '기여 가이드', link: 'https://laravel.com/docs/12.x/contributions' },
         ]
       },
       {
