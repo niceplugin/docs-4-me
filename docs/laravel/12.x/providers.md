@@ -170,7 +170,7 @@ return [
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\ComposerServiceProvider::class, // [tl! add]
+    App\Providers\ComposerServiceProvider::class, // [!code ++]
 ];
 ```
 

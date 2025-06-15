@@ -115,7 +115,7 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel([
-            'resources/css/app.css', // [tl! remove]
+            'resources/css/app.css', // [!code --]
             'resources/js/app.js',
         ]),
     ],
@@ -126,7 +126,7 @@ Instead, you should import your CSS via JavaScript. Typically, this would be don
 
 ```js
 import './bootstrap';
-import '../css/app.css'; // [tl! add]
+import '../css/app.css'; // [!code ++]
 ```
 
 The Laravel plugin also supports multiple entry points and advanced configuration options such as [SSR entry points](#ssr).
@@ -148,7 +148,7 @@ export default defineConfig({
     plugins: [
         laravel({
             // ...
-            detectTls: 'my-app.test', // [tl! add]
+            detectTls: 'my-app.test', // [!code ++]
         }),
     ],
 });
@@ -158,20 +158,20 @@ When using another web server, you should generate a trusted certificate and man
 
 ```js
 // ...
-import fs from 'fs'; // [tl! add]
+import fs from 'fs'; // [!code ++]
 
-const host = 'my-app.test'; // [tl! add]
+const host = 'my-app.test'; // [!code ++]
 
 export default defineConfig({
     // ...
-    server: { // [tl! add]
-        host, // [tl! add]
-        hmr: { host }, // [tl! add]
-        https: { // [tl! add]
-            key: fs.readFileSync(`/path/to/${host}.key`), // [tl! add]
-            cert: fs.readFileSync(`/path/to/${host}.crt`), // [tl! add]
-        }, // [tl! add]
-    }, // [tl! add]
+    server: { // [!code ++]
+        host, // [!code ++]
+        hmr: { host }, // [!code ++]
+        https: { // [!code ++]
+            key: fs.readFileSync(`/path/to/${host}.key`), // [!code ++]
+            cert: fs.readFileSync(`/path/to/${host}.crt`), // [!code ++]
+        }, // [!code ++]
+    }, // [!code ++]
 });
 ```
 
@@ -739,8 +739,8 @@ To ensure you don't forget to rebuild the SSR entry point, we recommend augmenti
 ```json
 "scripts": {
      "dev": "vite",
-     "build": "vite build" // [tl! remove]
-     "build": "vite build && vite build --ssr" // [tl! add]
+     "build": "vite build" // [!code --]
+     "build": "vite build && vite build --ssr" // [!code ++]
 }
 ```
 
@@ -824,14 +824,14 @@ You may then enable this plugin in your `vite.config.js` file:
 ```js
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import manifestSRI from 'vite-plugin-manifest-sri';// [tl! add]
+import manifestSRI from 'vite-plugin-manifest-sri';// [!code ++]
 
 export default defineConfig({
     plugins: [
         laravel({
             // ...
         }),
-        manifestSRI(),// [tl! add]
+        manifestSRI(),// [!code ++]
     ],
 });
 ```
@@ -959,14 +959,14 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {  // [tl! add]
-        cors: {  // [tl! add]
-            origin: [  // [tl! add]
-                'https://backend.laravel',  // [tl! add]
-                'http://admin.laravel:8566',  // [tl! add]
-            ],  // [tl! add]
-        },  // [tl! add]
-    },  // [tl! add]
+    server: {  // [!code ++]
+        cors: {  // [!code ++]
+            origin: [  // [!code ++]
+                'https://backend.laravel',  // [!code ++]
+                'http://admin.laravel:8566',  // [!code ++]
+            ],  // [!code ++]
+        },  // [!code ++]
+    },  // [!code ++]
 });
 ```
 
@@ -983,14 +983,14 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {  // [tl! add]
-        cors: {  // [tl! add]
-            origin: [ // [tl! add]
+    server: {  // [!code ++]
+        cors: {  // [!code ++]
+            origin: [ // [!code ++]
                 // Supports: SCHEME://DOMAIN.laravel[:PORT] [tl! add]
                 /^https?:\/\/.*\.laravel(:\d+)?$/, //[tl! add]
-            ], // [tl! add]
-        }, // [tl! add]
-    }, // [tl! add]
+            ], // [!code ++]
+        }, // [!code ++]
+    }, // [!code ++]
 });
 ```
 

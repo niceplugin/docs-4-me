@@ -199,8 +199,8 @@ The constructor of the `Illuminate\Database\Schema\Blueprint` class now expects 
 The `HasUuids` trait now returns UUIDs that are compatible with version 7 of the UUID spec (ordered UUIDs). If you would like to continue using ordered UUIDv4 strings for your model's IDs, you should now use the `HasVersion4Uuids` trait:
 
 ```php
-use Illuminate\Database\Eloquent\Concerns\HasUuids; // [tl! remove]
-use Illuminate\Database\Eloquent\Concerns\HasVersion4Uuids as HasUuids; // [tl! add]
+use Illuminate\Database\Eloquent\Concerns\HasUuids; // [!code --]
+use Illuminate\Database\Eloquent\Concerns\HasVersion4Uuids as HasUuids; // [!code ++]
 ```
 
 The `HasVersion7Uuids` trait has been removed. If you were previously using this trait, you should use the `HasUuids` trait instead, which now provides the same behavior.

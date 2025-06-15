@@ -602,9 +602,9 @@ use App\Models\User;
 use Illuminate\Support\Lottery;
 use Laravel\Pennant\Feature;
 
-Feature::define('new-api', fn (User $user) => match (true) {// [tl! remove]
-Feature::define('new-api', fn (User|null $user) => match (true) {// [tl! add]
-    $user === null => true,// [tl! add]
+Feature::define('new-api', fn (User $user) => match (true) {// [!code --]
+Feature::define('new-api', fn (User|null $user) => match (true) {// [!code ++]
+    $user === null => true,// [!code ++]
     $user->isInternalTeamMember() => true,
     $user->isHighTrafficCustomer() => false,
     default => Lottery::odds(1 / 100),

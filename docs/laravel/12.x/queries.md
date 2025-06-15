@@ -1544,20 +1544,20 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
 DB::table('flights')
-    ->when($destination, function (Builder $query, string $destination) { // [tl! remove]
-        $query->where('destination', $destination); // [tl! remove]
-    }) // [tl! remove]
-    ->tap(new DestinationFilter($destination)) // [tl! add]
+    ->when($destination, function (Builder $query, string $destination) { // [!code --]
+        $query->where('destination', $destination); // [!code --]
+    }) // [!code --]
+    ->tap(new DestinationFilter($destination)) // [!code ++]
     ->orderByDesc('price')
     ->get();
 
 // ...
 
 DB::table('flights')
-    ->when($destination, function (Builder $query, string $destination) { // [tl! remove]
-        $query->where('destination', $destination); // [tl! remove]
-    }) // [tl! remove]
-    ->tap(new DestinationFilter($destination)) // [tl! add]
+    ->when($destination, function (Builder $query, string $destination) { // [!code --]
+        $query->where('destination', $destination); // [!code --]
+    }) // [!code --]
+    ->tap(new DestinationFilter($destination)) // [!code ++]
     ->where('user', $request->user()->id)
     ->orderBy('destination')
     ->get();

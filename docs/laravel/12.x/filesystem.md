@@ -361,7 +361,7 @@ If you started developing your application before support for temporary URLs was
 'local' => [
     'driver' => 'local',
     'root' => storage_path('app/private'),
-    'serve' => true, // [tl! add]
+    'serve' => true, // [!code ++]
     'throw' => false,
 ],
 ```
