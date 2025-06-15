@@ -71,6 +71,34 @@
 }
 
 /**
+ * 색상: 배경
+ *
+ * - `bg`: 메인 화면에 사용되는 배경색입니다.
+ *
+ * - `bg-alt`: "사이드바"나 "코드 블록"과 같은 영역에 사용되는 대체 배경색입니다.
+ *
+ * - `bg-elv`: 띄워진 느낌을 주는 영역(예: "다이얼로그")에 사용되는 상승된 배경색입니다.
+ *
+ * - `bg-soft`: 페이지 내 일부 컴포넌트를 약간 구분하기 위해 사용되는 부드러운 배경색입니다.
+ *   예: "carbon 광고", "테이블" 등
+ * -------------------------------------------------------------------------- */
+
+
+:root {
+  --vp-c-bg: oklch(97% 0.001 106.424);
+  --vp-c-bg-alt: oklch(92.3% 0.003 48.717);
+  --vp-c-bg-elv: oklch(97% 0.001 106.424);
+  --vp-c-bg-soft: oklch(92.3% 0.003 48.717);
+}
+
+.dark {
+  --vp-c-bg: oklch(14.7% 0.004 49.25);
+  --vp-c-bg-alt: oklch(21.6% 0.006 56.043);
+  --vp-c-bg-elv: oklch(14.7% 0.004 49.25);
+  --vp-c-bg-soft: oklch(21.6% 0.006 56.043);
+}
+
+/**
  * Component: Button
  * -------------------------------------------------------------------------- */
 
@@ -138,11 +166,23 @@
 }
 
 /**
+ * 페이지 커스텀
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --custom-active: oklch(66.6% 0.179 58.318);
+}
+
+.dark {
+  --custom-active: #da8b17;
+}
+
+/**
  * 문서 해더 색상
  */
 
 main h1, main h2, main h3, main h4, main h5, main h6 {
-  color: var(--vp-c-warning-2);
+  color: var(--custom-active);
 }
 
 /**
@@ -150,12 +190,12 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
  */
 
 a.link.active span {
-  color: var(--vp-c-warning-2) !important;
+  color: var(--custom-active) !important;
   text-decoration: underline;
 }
 
 .is-active a.link .text {
-  color: var(--vp-c-warning-2) !important;
+  color: var(--custom-active) !important;
   position: relative;
 }
 .is-active a.link .text::before {
@@ -166,4 +206,13 @@ a.link.active span {
   transform: translateY(-50%);
   font-size: 0.75rem;
   content: '▶';
+}
+
+/**
+ * 어사이드 활성 바
+ */
+
+.content > .outline-marker {
+  width: 4px;
+  background-color: var(--custom-active);
 }
