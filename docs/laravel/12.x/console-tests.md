@@ -1,19 +1,19 @@
-# Console Tests
+# 콘솔 테스트
 
-- [Introduction](#introduction)
-- [Success / Failure Expectations](#success-failure-expectations)
-- [Input / Output Expectations](#input-output-expectations)
-- [Console Events](#console-events)
 
-<a name="introduction"></a>
-## Introduction
 
-In addition to simplifying HTTP testing, Laravel provides a simple API for testing your application's [custom console commands](/laravel/12.x/artisan).
 
-<a name="success-failure-expectations"></a>
-## Success / Failure Expectations
 
-To get started, let's explore how to make assertions regarding an Artisan command's exit code. To accomplish this, we will use the `artisan` method to invoke an Artisan command from our test. Then, we will use the `assertExitCode` method to assert that the command completed with a given exit code:
+
+
+## 소개 {#introduction}
+
+HTTP 테스트를 간소화하는 것 외에도, Laravel은 애플리케이션의 [커스텀 콘솔 명령어](/docs/{{version}}/artisan)를 테스트할 수 있는 간단한 API를 제공합니다.
+
+
+## 성공 / 실패 기대값 {#success-failure-expectations}
+
+먼저, 아티즌(Artisan) 명령어의 종료 코드에 대한 어설션을 어떻게 작성하는지 살펴보겠습니다. 이를 위해 테스트에서 `artisan` 메서드를 사용해 아티즌 명령어를 실행한 뒤, `assertExitCode` 메서드를 사용해 명령어가 특정 종료 코드로 완료되었는지 검증할 수 있습니다:
 
 ```php tab=Pest
 test('console command', function () {
@@ -23,7 +23,7 @@ test('console command', function () {
 
 ```php tab=PHPUnit
 /**
- * Test a console command.
+ * 콘솔 명령어 테스트.
  */
 public function test_console_command(): void
 {
@@ -31,13 +31,13 @@ public function test_console_command(): void
 }
 ```
 
-You may use the `assertNotExitCode` method to assert that the command did not exit with a given exit code:
+`assertNotExitCode` 메서드를 사용하면 명령어가 특정 종료 코드로 종료되지 않았는지 검증할 수 있습니다:
 
 ```php
 $this->artisan('inspire')->assertNotExitCode(1);
 ```
 
-Of course, all terminal commands typically exit with a status code of `0` when they are successful and a non-zero exit code when they are not successful. Therefore, for convenience, you may utilize the `assertSuccessful` and `assertFailed` assertions to assert that a given command exited with a successful exit code or not:
+물론, 모든 터미널 명령어는 일반적으로 성공 시 `0`의 상태 코드로 종료되고, 실패 시 0이 아닌 종료 코드로 종료됩니다. 따라서 편의를 위해, `assertSuccessful`과 `assertFailed` 어설션을 사용해 명령어가 성공적으로 종료되었는지 또는 실패했는지 검증할 수 있습니다:
 
 ```php
 $this->artisan('inspire')->assertSuccessful();
@@ -45,10 +45,10 @@ $this->artisan('inspire')->assertSuccessful();
 $this->artisan('inspire')->assertFailed();
 ```
 
-<a name="input-output-expectations"></a>
-## Input / Output Expectations
 
-Laravel allows you to easily "mock" user input for your console commands using the `expectsQuestion` method. In addition, you may specify the exit code and text that you expect to be output by the console command using the `assertExitCode` and `expectsOutput` methods. For example, consider the following console command:
+## 입력 / 출력 기대값 {#input-output-expectations}
+
+Laravel은 `expectsQuestion` 메서드를 사용하여 콘솔 명령어에 대한 사용자 입력을 손쉽게 "모킹"할 수 있도록 지원합니다. 또한, `assertExitCode` 및 `expectsOutput` 메서드를 사용하여 콘솔 명령어가 출력할 것으로 예상되는 종료 코드와 텍스트를 지정할 수 있습니다. 예를 들어, 다음과 같은 콘솔 명령어를 살펴보겠습니다:
 
 ```php
 Artisan::command('question', function () {
@@ -64,7 +64,7 @@ Artisan::command('question', function () {
 });
 ```
 
-You may test this command with the following test:
+다음과 같은 테스트로 이 명령어를 테스트할 수 있습니다:
 
 ```php tab=Pest
 test('console command', function () {
@@ -79,7 +79,7 @@ test('console command', function () {
 
 ```php tab=PHPUnit
 /**
- * Test a console command.
+ * 콘솔 명령어 테스트.
  */
 public function test_console_command(): void
 {
@@ -92,7 +92,7 @@ public function test_console_command(): void
 }
 ```
 
-If you are utilizing the `search` or `multisearch` functions provided by [Laravel Prompts](/laravel/12.x/prompts), you may use the `expectsSearch` assertion to mock the user's input, search results, and selection:
+[Laravel Prompts](/docs/{{version}}/prompts)에서 제공하는 `search` 또는 `multisearch` 기능을 사용하는 경우, `expectsSearch` 어설션을 사용하여 사용자의 입력, 검색 결과, 선택을 모킹할 수 있습니다:
 
 ```php tab=Pest
 test('console command', function () {
@@ -108,7 +108,7 @@ test('console command', function () {
 
 ```php tab=PHPUnit
 /**
- * Test a console command.
+ * 콘솔 명령어 테스트.
  */
 public function test_console_command(): void
 {
@@ -122,7 +122,7 @@ public function test_console_command(): void
 }
 ```
 
-You may also assert that a console command does not generate any output using the `doesntExpectOutput` method:
+또한, `doesntExpectOutput` 메서드를 사용하여 콘솔 명령어가 어떠한 출력도 생성하지 않는지 검증할 수 있습니다:
 
 ```php tab=Pest
 test('console command', function () {
@@ -134,7 +134,7 @@ test('console command', function () {
 
 ```php tab=PHPUnit
 /**
- * Test a console command.
+ * 콘솔 명령어 테스트.
  */
 public function test_console_command(): void
 {
@@ -144,7 +144,7 @@ public function test_console_command(): void
 }
 ```
 
-The `expectsOutputToContain` and `doesntExpectOutputToContain` methods may be used to make assertions against a portion of the output:
+`expectsOutputToContain` 및 `doesntExpectOutputToContain` 메서드는 출력의 일부에 대해 어설션을 할 때 사용할 수 있습니다:
 
 ```php tab=Pest
 test('console command', function () {
@@ -156,7 +156,7 @@ test('console command', function () {
 
 ```php tab=PHPUnit
 /**
- * Test a console command.
+ * 콘솔 명령어 테스트.
  */
 public function test_console_command(): void
 {
@@ -166,10 +166,10 @@ public function test_console_command(): void
 }
 ```
 
-<a name="confirmation-expectations"></a>
-#### Confirmation Expectations
 
-When writing a command which expects confirmation in the form of a "yes" or "no" answer, you may utilize the `expectsConfirmation` method:
+#### 확인 기대값 {#confirmation-expectations}
+
+"예" 또는 "아니오" 형태의 확인을 기대하는 커맨드를 작성할 때, `expectsConfirmation` 메서드를 사용할 수 있습니다:
 
 ```php
 $this->artisan('module:import')
@@ -177,10 +177,10 @@ $this->artisan('module:import')
     ->assertExitCode(1);
 ```
 
-<a name="table-expectations"></a>
-#### Table Expectations
 
-If your command displays a table of information using Artisan's `table` method, it can be cumbersome to write output expectations for the entire table. Instead, you may use the `expectsTable` method. This method accepts the table's headers as its first argument and the table's data as its second argument:
+#### 테이블 기대값 {#table-expectations}
+
+Artisan의 `table` 메서드를 사용하여 정보를 테이블 형식으로 출력하는 명령어의 경우, 전체 테이블에 대한 출력 기대값을 작성하는 것은 번거로울 수 있습니다. 대신, `expectsTable` 메서드를 사용할 수 있습니다. 이 메서드는 첫 번째 인자로 테이블의 헤더를, 두 번째 인자로 테이블의 데이터를 받습니다:
 
 ```php
 $this->artisan('users:all')
@@ -193,10 +193,10 @@ $this->artisan('users:all')
     ]);
 ```
 
-<a name="console-events"></a>
-## Console Events
 
-By default, the `Illuminate\Console\Events\CommandStarting` and `Illuminate\Console\Events\CommandFinished` events are not dispatched while running your application's tests. However, you can enable these events for a given test class by adding the `Illuminate\Foundation\Testing\WithConsoleEvents` trait to the class:
+## 콘솔 이벤트 {#console-events}
+
+기본적으로, `Illuminate\Console\Events\CommandStarting`와 `Illuminate\Console\Events\CommandFinished` 이벤트는 애플리케이션의 테스트를 실행하는 동안 디스패치되지 않습니다. 하지만, 테스트 클래스에 `Illuminate\Foundation\Testing\WithConsoleEvents` 트레이트를 추가하면 해당 이벤트를 활성화할 수 있습니다:
 
 ```php tab=Pest
 <?php

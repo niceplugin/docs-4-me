@@ -1,28 +1,28 @@
-# Eloquent: Factories
+# Eloquent: 팩토리
 
-- [Introduction](#introduction)
-- [Defining Model Factories](#defining-model-factories)
-    - [Generating Factories](#generating-factories)
-    - [Factory States](#factory-states)
-    - [Factory Callbacks](#factory-callbacks)
-- [Creating Models Using Factories](#creating-models-using-factories)
-    - [Instantiating Models](#instantiating-models)
-    - [Persisting Models](#persisting-models)
-    - [Sequences](#sequences)
-- [Factory Relationships](#factory-relationships)
-    - [Has Many Relationships](#has-many-relationships)
-    - [Belongs To Relationships](#belongs-to-relationships)
-    - [Many to Many Relationships](#many-to-many-relationships)
-    - [Polymorphic Relationships](#polymorphic-relationships)
-    - [Defining Relationships Within Factories](#defining-relationships-within-factories)
-    - [Recycling an Existing Model for Relationships](#recycling-an-existing-model-for-relationships)
 
-<a name="introduction"></a>
-## Introduction
 
-When testing your application or seeding your database, you may need to insert a few records into your database. Instead of manually specifying the value of each column, Laravel allows you to define a set of default attributes for each of your [Eloquent models](/laravel/12.x/eloquent) using model factories.
 
-To see an example of how to write a factory, take a look at the `database/factories/UserFactory.php` file in your application. This factory is included with all new Laravel applications and contains the following factory definition:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 소개 {#introduction}
+
+애플리케이션을 테스트하거나 데이터베이스에 시딩할 때, 데이터베이스에 몇 개의 레코드를 삽입해야 할 수도 있습니다. 각 컬럼의 값을 수동으로 지정하는 대신, Laravel은 [Eloquent 모델](/docs/{{version}}/eloquent)마다 모델 팩토리를 사용하여 기본 속성 집합을 정의할 수 있도록 해줍니다.
+
+팩토리를 작성하는 예제를 보려면, 애플리케이션의 `database/factories/UserFactory.php` 파일을 확인해 보세요. 이 팩토리는 모든 새로운 Laravel 애플리케이션에 포함되어 있으며, 다음과 같은 팩토리 정의를 담고 있습니다:
 
 ```php
 namespace Database\Factories;
@@ -37,12 +37,12 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * 팩토리에서 사용 중인 현재 비밀번호입니다.
      */
     protected static ?string $password;
 
     /**
-     * Define the model's default state.
+     * 모델의 기본 상태를 정의합니다.
      *
      * @return array<string, mixed>
      */
@@ -58,7 +58,7 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * 모델의 이메일 주소가 인증되지 않았음을 나타냅니다.
      */
     public function unverified(): static
     {
@@ -69,39 +69,39 @@ class UserFactory extends Factory
 }
 ```
 
-As you can see, in their most basic form, factories are classes that extend Laravel's base factory class and define a `definition` method. The `definition` method returns the default set of attribute values that should be applied when creating a model using the factory.
+보시다시피, 가장 기본적인 형태에서 팩토리는 Laravel의 기본 팩토리 클래스를 확장하고 `definition` 메서드를 정의하는 클래스입니다. `definition` 메서드는 팩토리를 사용해 모델을 생성할 때 적용되어야 하는 기본 속성 값 집합을 반환합니다.
 
-Via the `fake` helper, factories have access to the [Faker](https://github.com/FakerPHP/Faker) PHP library, which allows you to conveniently generate various kinds of random data for testing and seeding.
+팩토리에서는 `fake` 헬퍼를 통해 [Faker](https://github.com/FakerPHP/Faker) PHP 라이브러리에 접근할 수 있으며, 이를 통해 테스트 및 시딩에 사용할 다양한 종류의 랜덤 데이터를 편리하게 생성할 수 있습니다.
 
 > [!NOTE]
-> You can change your application's Faker locale by updating the `faker_locale` option in your `config/app.php` configuration file.
+> 애플리케이션의 Faker 로케일은 `config/app.php` 설정 파일의 `faker_locale` 옵션을 수정하여 변경할 수 있습니다.
 
-<a name="defining-model-factories"></a>
-## Defining Model Factories
 
-<a name="generating-factories"></a>
-### Generating Factories
+## 모델 팩토리 정의하기 {#defining-model-factories}
 
-To create a factory, execute the `make:factory` [Artisan command](/laravel/12.x/artisan):
+
+### 팩토리 생성하기 {#generating-factories}
+
+팩토리를 생성하려면 `make:factory` [Artisan 명령어](/docs/{{version}}/artisan)를 실행하세요:
 
 ```shell
 php artisan make:factory PostFactory
 ```
 
-The new factory class will be placed in your `database/factories` directory.
+새로 생성된 팩토리 클래스는 `database/factories` 디렉터리에 위치하게 됩니다.
 
-<a name="factory-and-model-discovery-conventions"></a>
-#### Model and Factory Discovery Conventions
 
-Once you have defined your factories, you may use the static `factory` method provided to your models by the `Illuminate\Database\Eloquent\Factories\HasFactory` trait in order to instantiate a factory instance for that model.
+#### 모델 및 팩토리 자동 검색 규칙 {#factory-and-model-discovery-conventions}
 
-The `HasFactory` trait's `factory` method will use conventions to determine the proper factory for the model the trait is assigned to. Specifically, the method will look for a factory in the `Database\Factories` namespace that has a class name matching the model name and is suffixed with `Factory`. If these conventions do not apply to your particular application or factory, you may overwrite the `newFactory` method on your model to return an instance of the model's corresponding factory directly:
+팩토리를 정의한 후에는, `Illuminate\Database\Eloquent\Factories\HasFactory` 트레이트가 모델에 제공하는 정적 `factory` 메서드를 사용하여 해당 모델의 팩토리 인스턴스를 생성할 수 있습니다.
+
+`HasFactory` 트레이트의 `factory` 메서드는 규칙을 사용하여 트레이트가 할당된 모델에 적합한 팩토리를 결정합니다. 구체적으로, 이 메서드는 `Database\Factories` 네임스페이스에서 모델 이름과 일치하고 `Factory`로 끝나는 클래스명을 가진 팩토리를 찾습니다. 이러한 규칙이 애플리케이션이나 팩토리에 적용되지 않는 경우, 모델에서 `newFactory` 메서드를 오버라이드하여 해당 모델에 맞는 팩토리 인스턴스를 직접 반환할 수 있습니다:
 
 ```php
 use Database\Factories\Administration\FlightFactory;
 
 /**
- * Create a new factory instance for the model.
+ * 모델을 위한 새로운 팩토리 인스턴스를 생성합니다.
  */
 protected static function newFactory()
 {
@@ -109,7 +109,7 @@ protected static function newFactory()
 }
 ```
 
-Then, define a `model` property on the corresponding factory:
+그런 다음, 해당 팩토리에서 `model` 프로퍼티를 정의합니다:
 
 ```php
 use App\Administration\Flight;
@@ -118,7 +118,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class FlightFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
+     * 팩토리가 대응하는 모델의 이름입니다.
      *
      * @var class-string<\Illuminate\Database\Eloquent\Model>
      */
@@ -126,18 +126,18 @@ class FlightFactory extends Factory
 }
 ```
 
-<a name="factory-states"></a>
-### Factory States
 
-State manipulation methods allow you to define discrete modifications that can be applied to your model factories in any combination. For example, your `Database\Factories\UserFactory` factory might contain a `suspended` state method that modifies one of its default attribute values.
+### 팩토리 상태 {#factory-states}
 
-State transformation methods typically call the `state` method provided by Laravel's base factory class. The `state` method accepts a closure which will receive the array of raw attributes defined for the factory and should return an array of attributes to modify:
+상태 조작 메서드를 사용하면 모델 팩토리에 대해 개별적으로 적용할 수 있는 수정 사항을 정의할 수 있습니다. 예를 들어, `Database\Factories\UserFactory` 팩토리에는 기본 속성 값 중 하나를 수정하는 `suspended` 상태 메서드가 포함될 수 있습니다.
+
+상태 변환 메서드는 일반적으로 Laravel의 기본 팩토리 클래스에서 제공하는 `state` 메서드를 호출합니다. `state` 메서드는 팩토리에 정의된 원시 속성 배열을 전달받는 클로저를 인수로 받아, 수정할 속성 배열을 반환해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * Indicate that the user is suspended.
+ * 사용자가 정지되었음을 나타냅니다.
  */
 public function suspended(): Factory
 {
@@ -149,10 +149,10 @@ public function suspended(): Factory
 }
 ```
 
-<a name="trashed-state"></a>
-#### "Trashed" State
 
-If your Eloquent model can be [soft deleted](/laravel/12.x/eloquent#soft-deleting), you may invoke the built-in `trashed` state method to indicate that the created model should already be "soft deleted". You do not need to manually define the `trashed` state as it is automatically available to all factories:
+#### "Trashed" 상태 {#trashed-state}
+
+만약 여러분의 Eloquent 모델이 [소프트 삭제](/docs/{{version}}/eloquent#soft-deleting)를 지원한다면, 내장된 `trashed` 상태 메서드를 호출하여 생성된 모델이 이미 "소프트 삭제"된 상태임을 나타낼 수 있습니다. `trashed` 상태는 모든 팩토리에서 자동으로 제공되므로, 직접 정의할 필요가 없습니다:
 
 ```php
 use App\Models\User;
@@ -160,10 +160,10 @@ use App\Models\User;
 $user = User::factory()->trashed()->create();
 ```
 
-<a name="factory-callbacks"></a>
-### Factory Callbacks
 
-Factory callbacks are registered using the `afterMaking` and `afterCreating` methods and allow you to perform additional tasks after making or creating a model. You should register these callbacks by defining a `configure` method on your factory class. This method will be automatically called by Laravel when the factory is instantiated:
+### 팩토리 콜백 {#factory-callbacks}
+
+팩토리 콜백은 `afterMaking` 및 `afterCreating` 메서드를 사용하여 등록하며, 모델을 생성하거나 만든 후에 추가 작업을 수행할 수 있도록 해줍니다. 이러한 콜백은 팩토리 클래스에 `configure` 메서드를 정의하여 등록해야 합니다. 이 메서드는 팩토리가 인스턴스화될 때 Laravel에 의해 자동으로 호출됩니다:
 
 ```php
 namespace Database\Factories;
@@ -174,7 +174,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class UserFactory extends Factory
 {
     /**
-     * Configure the model factory.
+     * 모델 팩토리 구성.
      */
     public function configure(): static
     {
@@ -189,14 +189,14 @@ class UserFactory extends Factory
 }
 ```
 
-You may also register factory callbacks within state methods to perform additional tasks that are specific to a given state:
+또한, 상태 메서드 내에서 팩토리 콜백을 등록하여 특정 상태에만 해당하는 추가 작업을 수행할 수도 있습니다:
 
 ```php
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * Indicate that the user is suspended.
+ * 사용자가 정지 상태임을 나타냅니다.
  */
 public function suspended(): Factory
 {
@@ -212,13 +212,13 @@ public function suspended(): Factory
 }
 ```
 
-<a name="creating-models-using-factories"></a>
-## Creating Models Using Factories
 
-<a name="instantiating-models"></a>
-### Instantiating Models
+## 팩토리를 사용한 모델 생성 {#creating-models-using-factories}
 
-Once you have defined your factories, you may use the static `factory` method provided to your models by the `Illuminate\Database\Eloquent\Factories\HasFactory` trait in order to instantiate a factory instance for that model. Let's take a look at a few examples of creating models. First, we'll use the `make` method to create models without persisting them to the database:
+
+### 모델 인스턴스화 {#instantiating-models}
+
+팩토리를 정의한 후에는, `Illuminate\Database\Eloquent\Factories\HasFactory` 트레이트가 모델에 제공하는 정적 `factory` 메서드를 사용하여 해당 모델의 팩토리 인스턴스를 생성할 수 있습니다. 모델을 생성하는 몇 가지 예제를 살펴보겠습니다. 먼저, `make` 메서드를 사용하여 데이터베이스에 저장하지 않고 모델을 생성해보겠습니다:
 
 ```php
 use App\Models\User;
@@ -226,25 +226,25 @@ use App\Models\User;
 $user = User::factory()->make();
 ```
 
-You may create a collection of many models using the `count` method:
+`count` 메서드를 사용하여 여러 개의 모델 컬렉션을 생성할 수도 있습니다:
 
 ```php
 $users = User::factory()->count(3)->make();
 ```
 
-<a name="applying-states"></a>
-#### Applying States
 
-You may also apply any of your [states](#factory-states) to the models. If you would like to apply multiple state transformations to the models, you may simply call the state transformation methods directly:
+#### 상태 적용하기 {#applying-states}
+
+[상태](#factory-states) 중 어떤 것이든 모델에 적용할 수 있습니다. 여러 상태 변환을 모델에 적용하고 싶다면, 상태 변환 메서드를 직접 호출하면 됩니다:
 
 ```php
 $users = User::factory()->count(5)->suspended()->make();
 ```
 
-<a name="overriding-attributes"></a>
-#### Overriding Attributes
 
-If you would like to override some of the default values of your models, you may pass an array of values to the `make` method. Only the specified attributes will be replaced while the rest of the attributes remain set to their default values as specified by the factory:
+#### 속성 재정의 {#overriding-attributes}
+
+모델의 기본값 중 일부를 재정의하고 싶다면, `make` 메서드에 값의 배열을 전달할 수 있습니다. 지정한 속성만 교체되며, 나머지 속성은 팩토리에서 지정한 기본값으로 설정된 상태로 유지됩니다:
 
 ```php
 $user = User::factory()->make([
@@ -252,7 +252,7 @@ $user = User::factory()->make([
 ]);
 ```
 
-Alternatively, the `state` method may be called directly on the factory instance to perform an inline state transformation:
+또는, 팩토리 인스턴스에서 `state` 메서드를 직접 호출하여 인라인 상태 변환을 수행할 수도 있습니다:
 
 ```php
 $user = User::factory()->state([
@@ -261,24 +261,24 @@ $user = User::factory()->state([
 ```
 
 > [!NOTE]
-> [Mass assignment protection](/laravel/12.x/eloquent#mass-assignment) is automatically disabled when creating models using factories.
+> 팩토리를 사용해 모델을 생성할 때는 [대량 할당 보호](/docs/{{version}}/eloquent#mass-assignment)가 자동으로 비활성화됩니다.
 
-<a name="persisting-models"></a>
-### Persisting Models
 
-The `create` method instantiates model instances and persists them to the database using Eloquent's `save` method:
+### 모델 영속화 {#persisting-models}
+
+`create` 메서드는 모델 인스턴스를 생성하고 Eloquent의 `save` 메서드를 사용하여 데이터베이스에 저장합니다:
 
 ```php
 use App\Models\User;
 
-// Create a single App\Models\User instance...
+// 단일 App\Models\User 인스턴스 생성...
 $user = User::factory()->create();
 
-// Create three App\Models\User instances...
+// 세 개의 App\Models\User 인스턴스 생성...
 $users = User::factory()->count(3)->create();
 ```
 
-You may override the factory's default model attributes by passing an array of attributes to the `create` method:
+`create` 메서드에 속성 배열을 전달하여 팩토리의 기본 모델 속성을 오버라이드할 수 있습니다:
 
 ```php
 $user = User::factory()->create([
@@ -286,10 +286,10 @@ $user = User::factory()->create([
 ]);
 ```
 
-<a name="sequences"></a>
-### Sequences
 
-Sometimes you may wish to alternate the value of a given model attribute for each created model. You may accomplish this by defining a state transformation as a sequence. For example, you may wish to alternate the value of an `admin` column between `Y` and `N` for each created user:
+### 시퀀스 {#sequences}
+
+때때로 각 모델이 생성될 때마다 특정 모델 속성의 값을 번갈아가며 지정하고 싶을 수 있습니다. 이럴 때는 상태 변환을 시퀀스로 정의하여 해결할 수 있습니다. 예를 들어, 각 생성된 사용자에 대해 `admin` 컬럼의 값을 `Y`와 `N`으로 번갈아가며 지정하고 싶을 때 다음과 같이 할 수 있습니다:
 
 ```php
 use App\Models\User;
@@ -304,9 +304,9 @@ $users = User::factory()
     ->create();
 ```
 
-In this example, five users will be created with an `admin` value of `Y` and five users will be created with an `admin` value of `N`.
+이 예제에서는 `admin` 값이 `Y`인 사용자 5명과 `N`인 사용자 5명이 생성됩니다.
 
-If necessary, you may include a closure as a sequence value. The closure will be invoked each time the sequence needs a new value:
+필요하다면, 시퀀스 값으로 클로저를 포함할 수도 있습니다. 시퀀스가 새로운 값이 필요할 때마다 해당 클로저가 호출됩니다:
 
 ```php
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -319,7 +319,7 @@ $users = User::factory()
     ->create();
 ```
 
-Within a sequence closure, you may access the `$index` or `$count` properties on the sequence instance that is injected into the closure. The `$index` property contains the number of iterations through the sequence that have occurred thus far, while the `$count` property contains the total number of times the sequence will be invoked:
+시퀀스 클로저 내부에서는 클로저에 주입된 시퀀스 인스턴스의 `$index` 또는 `$count` 속성에 접근할 수 있습니다. `$index` 속성은 지금까지 시퀀스를 반복한 횟수를, `$count` 속성은 시퀀스가 호출될 총 횟수를 나타냅니다:
 
 ```php
 $users = User::factory()
@@ -328,7 +328,7 @@ $users = User::factory()
     ->create();
 ```
 
-For convenience, sequences may also be applied using the `sequence` method, which simply invokes the `state` method internally. The `sequence` method accepts a closure or arrays of sequenced attributes:
+편의를 위해, 시퀀스는 `sequence` 메서드를 사용하여 적용할 수도 있습니다. 이 메서드는 내부적으로 단순히 `state` 메서드를 호출합니다. `sequence` 메서드는 클로저 또는 시퀀스 속성 배열을 인수로 받을 수 있습니다:
 
 ```php
 $users = User::factory()
@@ -340,13 +340,13 @@ $users = User::factory()
     ->create();
 ```
 
-<a name="factory-relationships"></a>
-## Factory Relationships
 
-<a name="has-many-relationships"></a>
-### Has Many Relationships
+## 팩토리 관계 {#factory-relationships}
 
-Next, let's explore building Eloquent model relationships using Laravel's fluent factory methods. First, let's assume our application has an `App\Models\User` model and an `App\Models\Post` model. Also, let's assume that the `User` model defines a `hasMany` relationship with `Post`. We can create a user that has three posts using the `has` method provided by the Laravel's factories. The `has` method accepts a factory instance:
+
+### Has Many Relationships {#has-many-relationships}
+
+다음으로, Laravel의 유연한 팩토리 메서드를 사용하여 Eloquent 모델 관계를 구축하는 방법을 살펴보겠습니다. 먼저, 애플리케이션에 `App\Models\User` 모델과 `App\Models\Post` 모델이 있다고 가정해봅시다. 또한, `User` 모델이 `Post`와 `hasMany` 관계를 정의하고 있다고 가정합니다. Laravel의 팩토리에서 제공하는 `has` 메서드를 사용하여 세 개의 게시글을 가진 사용자를 생성할 수 있습니다. `has` 메서드는 팩토리 인스턴스를 인수로 받습니다:
 
 ```php
 use App\Models\Post;
@@ -357,7 +357,7 @@ $user = User::factory()
     ->create();
 ```
 
-By convention, when passing a `Post` model to the `has` method, Laravel will assume that the `User` model must have a `posts` method that defines the relationship. If necessary, you may explicitly specify the name of the relationship that you would like to manipulate:
+관례상, `has` 메서드에 `Post` 모델을 전달하면, Laravel은 `User` 모델에 관계를 정의하는 `posts` 메서드가 있어야 한다고 가정합니다. 필요하다면, 조작하고자 하는 관계의 이름을 명시적으로 지정할 수도 있습니다:
 
 ```php
 $user = User::factory()
@@ -365,7 +365,7 @@ $user = User::factory()
     ->create();
 ```
 
-Of course, you may perform state manipulations on the related models. In addition, you may pass a closure-based state transformation if your state change requires access to the parent model:
+물론, 관련 모델에 대해 상태 조작을 수행할 수도 있습니다. 또한, 상태 변경 시 상위(부모) 모델에 접근해야 한다면 클로저 기반의 상태 변환을 전달할 수도 있습니다:
 
 ```php
 $user = User::factory()
@@ -379,10 +379,10 @@ $user = User::factory()
     ->create();
 ```
 
-<a name="has-many-relationships-using-magic-methods"></a>
-#### Using Magic Methods
 
-For convenience, you may use Laravel's magic factory relationship methods to build relationships. For example, the following example will use convention to determine that the related models should be created via a `posts` relationship method on the `User` model:
+#### 매직 메서드 사용하기 {#has-many-relationships-using-magic-methods}
+
+편의를 위해, 라라벨의 매직 팩토리 관계 메서드를 사용하여 관계를 생성할 수 있습니다. 예를 들어, 아래 예제는 관례에 따라 관련 모델이 `User` 모델의 `posts` 관계 메서드를 통해 생성되어야 함을 결정합니다:
 
 ```php
 $user = User::factory()
@@ -390,7 +390,7 @@ $user = User::factory()
     ->create();
 ```
 
-When using magic methods to create factory relationships, you may pass an array of attributes to override on the related models:
+매직 메서드를 사용하여 팩토리 관계를 생성할 때, 관련 모델에서 오버라이드할 속성의 배열을 전달할 수 있습니다:
 
 ```php
 $user = User::factory()
@@ -400,7 +400,7 @@ $user = User::factory()
     ->create();
 ```
 
-You may provide a closure-based state transformation if your state change requires access to the parent model:
+상태 변경에 부모 모델에 대한 접근이 필요한 경우, 클로저 기반의 상태 변환을 제공할 수 있습니다:
 
 ```php
 $user = User::factory()
@@ -410,10 +410,10 @@ $user = User::factory()
     ->create();
 ```
 
-<a name="belongs-to-relationships"></a>
-### Belongs To Relationships
 
-Now that we have explored how to build "has many" relationships using factories, let's explore the inverse of the relationship. The `for` method may be used to define the parent model that factory created models belong to. For example, we can create three `App\Models\Post` model instances that belong to a single user:
+### Belongs To Relationships {#belongs-to-relationships}
+
+이제 팩토리를 사용하여 "has many" 관계를 구축하는 방법을 살펴보았으니, 관계의 반대편을 살펴보겠습니다. `for` 메서드는 팩토리가 생성한 모델이 소속될 부모 모델을 정의하는 데 사용할 수 있습니다. 예를 들어, 하나의 사용자에 속하는 세 개의 `App\Models\Post` 모델 인스턴스를 생성할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -427,7 +427,7 @@ $posts = Post::factory()
     ->create();
 ```
 
-If you already have a parent model instance that should be associated with the models you are creating, you may pass the model instance to the `for` method:
+이미 생성된 부모 모델 인스턴스가 있고, 생성할 모델들과 연관시키고 싶다면 해당 모델 인스턴스를 `for` 메서드에 전달할 수 있습니다:
 
 ```php
 $user = User::factory()->create();
@@ -438,10 +438,10 @@ $posts = Post::factory()
     ->create();
 ```
 
-<a name="belongs-to-relationships-using-magic-methods"></a>
-#### Using Magic Methods
 
-For convenience, you may use Laravel's magic factory relationship methods to define "belongs to" relationships. For example, the following example will use convention to determine that the three posts should belong to the `user` relationship on the `Post` model:
+#### 매직 메서드 사용하기 {#belongs-to-relationships-using-magic-methods}
+
+편의를 위해, Laravel의 매직 팩토리 관계 메서드를 사용하여 "belongs to" 관계를 정의할 수 있습니다. 예를 들어, 아래 예제는 관례에 따라 세 개의 게시물이 `Post` 모델의 `user` 관계에 속해야 함을 결정합니다:
 
 ```php
 $posts = Post::factory()
@@ -452,10 +452,10 @@ $posts = Post::factory()
     ->create();
 ```
 
-<a name="many-to-many-relationships"></a>
-### Many to Many Relationships
 
-Like [has many relationships](#has-many-relationships), "many to many" relationships may be created using the `has` method:
+### 다대다 관계 {#many-to-many-relationships}
+
+[has many 관계](#has-many-relationships)와 마찬가지로, "다대다" 관계도 `has` 메서드를 사용하여 생성할 수 있습니다:
 
 ```php
 use App\Models\Role;
@@ -466,10 +466,10 @@ $user = User::factory()
     ->create();
 ```
 
-<a name="pivot-table-attributes"></a>
-#### Pivot Table Attributes
 
-If you need to define attributes that should be set on the pivot / intermediate table linking the models, you may use the `hasAttached` method. This method accepts an array of pivot table attribute names and values as its second argument:
+#### 피벗 테이블 속성 {#pivot-table-attributes}
+
+모델을 연결하는 피벗/중간 테이블에 설정해야 하는 속성을 정의해야 하는 경우, `hasAttached` 메서드를 사용할 수 있습니다. 이 메서드는 두 번째 인수로 피벗 테이블 속성 이름과 값의 배열을 받습니다:
 
 ```php
 use App\Models\Role;
@@ -483,7 +483,7 @@ $user = User::factory()
     ->create();
 ```
 
-You may provide a closure-based state transformation if your state change requires access to the related model:
+상태 변경에 관련 모델에 대한 접근이 필요한 경우, 클로저 기반의 상태 변환을 제공할 수 있습니다:
 
 ```php
 $user = User::factory()
@@ -498,7 +498,7 @@ $user = User::factory()
     ->create();
 ```
 
-If you already have model instances that you would like to be attached to the models you are creating, you may pass the model instances to the `hasAttached` method. In this example, the same three roles will be attached to all three users:
+이미 생성된 모델 인스턴스를 생성 중인 모델에 연결하고 싶다면, 해당 모델 인스턴스를 `hasAttached` 메서드에 전달할 수 있습니다. 이 예제에서는 동일한 세 개의 역할이 세 명의 사용자 모두에 연결됩니다:
 
 ```php
 $roles = Role::factory()->count(3)->create();
@@ -509,10 +509,10 @@ $user = User::factory()
     ->create();
 ```
 
-<a name="many-to-many-relationships-using-magic-methods"></a>
-#### Using Magic Methods
 
-For convenience, you may use Laravel's magic factory relationship methods to define many to many relationships. For example, the following example will use convention to determine that the related models should be created via a `roles` relationship method on the `User` model:
+#### 매직 메서드 사용하기 {#many-to-many-relationships-using-magic-methods}
+
+편의를 위해, 라라벨의 매직 팩토리 관계 메서드를 사용하여 다대다 관계를 정의할 수 있습니다. 예를 들어, 아래 예제는 컨벤션을 사용하여 관련 모델이 `User` 모델의 `roles` 관계 메서드를 통해 생성되어야 함을 결정합니다:
 
 ```php
 $user = User::factory()
@@ -522,10 +522,10 @@ $user = User::factory()
     ->create();
 ```
 
-<a name="polymorphic-relationships"></a>
-### Polymorphic Relationships
 
-[Polymorphic relationships](/laravel/12.x/eloquent-relationships#polymorphic-relationships) may also be created using factories. Polymorphic "morph many" relationships are created in the same way as typical "has many" relationships. For example, if an `App\Models\Post` model has a `morphMany` relationship with an `App\Models\Comment` model:
+### 다형성 관계 {#polymorphic-relationships}
+
+[다형성 관계](/docs/{{version}}/eloquent-relationships#polymorphic-relationships)도 팩토리를 사용하여 생성할 수 있습니다. 다형성 "morph many" 관계는 일반적인 "has many" 관계와 동일한 방식으로 생성됩니다. 예를 들어, `App\Models\Post` 모델이 `App\Models\Comment` 모델과 `morphMany` 관계를 가지고 있다면:
 
 ```php
 use App\Models\Post;
@@ -533,10 +533,10 @@ use App\Models\Post;
 $post = Post::factory()->hasComments(3)->create();
 ```
 
-<a name="morph-to-relationships"></a>
-#### Morph To Relationships
 
-Magic methods may not be used to create `morphTo` relationships. Instead, the `for` method must be used directly and the name of the relationship must be explicitly provided. For example, imagine that the `Comment` model has a `commentable` method that defines a `morphTo` relationship. In this situation, we may create three comments that belong to a single post by using the `for` method directly:
+#### Morph To Relationships {#morph-to-relationships}
+
+매직 메서드는 `morphTo` 관계를 생성하는 데 사용할 수 없습니다. 대신, `for` 메서드를 직접 사용해야 하며 관계의 이름을 명시적으로 지정해야 합니다. 예를 들어, `Comment` 모델에 `morphTo` 관계를 정의하는 `commentable` 메서드가 있다고 가정해봅시다. 이 경우, 아래와 같이 `for` 메서드를 직접 사용하여 하나의 게시물에 속하는 세 개의 댓글을 생성할 수 있습니다:
 
 ```php
 $comments = Comment::factory()->count(3)->for(
@@ -544,10 +544,10 @@ $comments = Comment::factory()->count(3)->for(
 )->create();
 ```
 
-<a name="polymorphic-many-to-many-relationships"></a>
-#### Polymorphic Many to Many Relationships
 
-Polymorphic "many to many" (`morphToMany` / `morphedByMany`) relationships may be created just like non-polymorphic "many to many" relationships:
+#### 다형성 다대다 관계 {#polymorphic-many-to-many-relationships}
+
+다형성 "다대다"(`morphToMany` / `morphedByMany`) 관계는 비다형성 "다대다" 관계와 마찬가지로 생성할 수 있습니다:
 
 ```php
 use App\Models\Tag;
@@ -561,7 +561,7 @@ $videos = Video::factory()
     ->create();
 ```
 
-Of course, the magic `has` method may also be used to create polymorphic "many to many" relationships:
+물론, 매직 `has` 메서드도 다형성 "다대다" 관계를 생성하는 데 사용할 수 있습니다:
 
 ```php
 $videos = Video::factory()
@@ -569,16 +569,16 @@ $videos = Video::factory()
     ->create();
 ```
 
-<a name="defining-relationships-within-factories"></a>
-### Defining Relationships Within Factories
 
-To define a relationship within your model factory, you will typically assign a new factory instance to the foreign key of the relationship. This is normally done for the "inverse" relationships such as `belongsTo` and `morphTo` relationships. For example, if you would like to create a new user when creating a post, you may do the following:
+### 팩토리 내에서 관계 정의하기 {#defining-relationships-within-factories}
+
+모델 팩토리 내에서 관계를 정의하려면, 일반적으로 관계의 외래 키에 새로운 팩토리 인스턴스를 할당합니다. 이는 주로 `belongsTo` 및 `morphTo`와 같은 "역방향" 관계에서 사용됩니다. 예를 들어, 게시글을 생성할 때 새로운 사용자를 함께 생성하고 싶다면 다음과 같이 할 수 있습니다:
 
 ```php
 use App\Models\User;
 
 /**
- * Define the model's default state.
+ * 모델의 기본 상태를 정의합니다.
  *
  * @return array<string, mixed>
  */
@@ -592,11 +592,11 @@ public function definition(): array
 }
 ```
 
-If the relationship's columns depend on the factory that defines it you may assign a closure to an attribute. The closure will receive the factory's evaluated attribute array:
+관계의 컬럼이 이를 정의하는 팩토리에 의존하는 경우, 속성에 클로저를 할당할 수 있습니다. 이 클로저는 팩토리에서 평가된 속성 배열을 인자로 받습니다:
 
 ```php
 /**
- * Define the model's default state.
+ * 모델의 기본 상태를 정의합니다.
  *
  * @return array<string, mixed>
  */
@@ -613,12 +613,12 @@ public function definition(): array
 }
 ```
 
-<a name="recycling-an-existing-model-for-relationships"></a>
-### Recycling an Existing Model for Relationships
 
-If you have models that share a common relationship with another model, you may use the `recycle` method to ensure a single instance of the related model is recycled for all of the relationships created by the factory.
+### 기존 모델을 관계에 재활용하기 {#recycling-an-existing-model-for-relationships}
 
-For example, imagine you have `Airline`, `Flight`, and `Ticket` models, where the ticket belongs to an airline and a flight, and the flight also belongs to an airline. When creating tickets, you will probably want the same airline for both the ticket and the flight, so you may pass an airline instance to the `recycle` method:
+여러 모델이 다른 모델과 공통된 관계를 공유하는 경우, `recycle` 메서드를 사용하여 팩토리가 생성하는 모든 관계에 대해 관련 모델의 단일 인스턴스가 재활용되도록 할 수 있습니다.
+
+예를 들어, `Airline`, `Flight`, `Ticket` 모델이 있고, 티켓은 항공사와 항공편에 속하며, 항공편도 항공사에 속한다고 가정해봅시다. 티켓을 생성할 때 티켓과 항공편 모두에 동일한 항공사를 사용하고 싶을 수 있으므로, `recycle` 메서드에 항공사 인스턴스를 전달할 수 있습니다:
 
 ```php
 Ticket::factory()
@@ -626,9 +626,9 @@ Ticket::factory()
     ->create();
 ```
 
-You may find the `recycle` method particularly useful if you have models belonging to a common user or team.
+`recycle` 메서드는 여러 모델이 공통된 사용자나 팀에 속하는 경우에 특히 유용합니다.
 
-The `recycle` method also accepts a collection of existing models. When a collection is provided to the `recycle` method, a random model from the collection will be chosen when the factory needs a model of that type:
+`recycle` 메서드는 기존 모델의 컬렉션도 인수로 받을 수 있습니다. 컬렉션이 `recycle` 메서드에 전달되면, 팩토리가 해당 타입의 모델이 필요할 때마다 컬렉션에서 무작위로 하나의 모델이 선택됩니다:
 
 ```php
 Ticket::factory()

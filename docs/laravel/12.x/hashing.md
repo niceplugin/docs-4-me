@@ -1,38 +1,38 @@
-# Hashing
+# 해싱
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-- [Basic Usage](#basic-usage)
-    - [Hashing Passwords](#hashing-passwords)
-    - [Verifying That a Password Matches a Hash](#verifying-that-a-password-matches-a-hash)
-    - [Determining if a Password Needs to be Rehashed](#determining-if-a-password-needs-to-be-rehashed)
-- [Hash Algorithm Verification](#hash-algorithm-verification)
 
-<a name="introduction"></a>
-## Introduction
 
-The Laravel `Hash` [facade](/laravel/12.x/facades) provides secure Bcrypt and Argon2 hashing for storing user passwords. If you are using one of the [Laravel application starter kits](/laravel/12.x/starter-kits), Bcrypt will be used for registration and authentication by default.
 
-Bcrypt is a great choice for hashing passwords because its "work factor" is adjustable, which means that the time it takes to generate a hash can be increased as hardware power increases. When hashing passwords, slow is good. The longer an algorithm takes to hash a password, the longer it takes malicious users to generate "rainbow tables" of all possible string hash values that may be used in brute force attacks against applications.
 
-<a name="configuration"></a>
-## Configuration
 
-By default, Laravel uses the `bcrypt` hashing driver when hashing data. However, several other hashing drivers are supported, including [argon](https://en.wikipedia.org/wiki/Argon2) and [argon2id](https://en.wikipedia.org/wiki/Argon2).
 
-You may specify your application's hashing driver using the `HASH_DRIVER` environment variable. But, if you want to customize all of Laravel's hashing driver options, you should publish the complete `hashing` configuration file using the `config:publish` Artisan command:
+
+
+
+## 소개 {#introduction}
+
+Laravel의 `Hash` [파사드](/docs/{{version}}/facades)는 사용자 비밀번호 저장을 위한 안전한 Bcrypt 및 Argon2 해싱을 제공합니다. [Laravel 애플리케이션 스타터 키트](/docs/{{version}}/starter-kits) 중 하나를 사용하고 있다면, 기본적으로 회원가입 및 인증에 Bcrypt가 사용됩니다.
+
+Bcrypt는 "작업 계수(work factor)"를 조정할 수 있기 때문에 비밀번호 해싱에 매우 적합한 선택입니다. 이는 하드웨어 성능이 향상됨에 따라 해시를 생성하는 데 걸리는 시간을 늘릴 수 있음을 의미합니다. 비밀번호를 해싱할 때는 느린 것이 좋습니다. 알고리즘이 비밀번호를 해싱하는 데 오래 걸릴수록, 악의적인 사용자가 모든 가능한 문자열 해시 값을 미리 계산해 두는 "레인보우 테이블"을 생성하는 데 더 많은 시간이 소요되어, 애플리케이션에 대한 무차별 대입 공격을 방지할 수 있습니다.
+
+
+## 설정 {#configuration}
+
+기본적으로 Laravel은 데이터를 해싱할 때 `bcrypt` 해싱 드라이버를 사용합니다. 그러나 [argon](https://en.wikipedia.org/wiki/Argon2) 및 [argon2id](https://en.wikipedia.org/wiki/Argon2)를 포함한 여러 다른 해싱 드라이버도 지원됩니다.
+
+애플리케이션의 해싱 드라이버는 `HASH_DRIVER` 환경 변수를 사용하여 지정할 수 있습니다. 하지만 Laravel의 모든 해싱 드라이버 옵션을 커스터마이즈하고 싶다면, `config:publish` Artisan 명령어를 사용하여 전체 `hashing` 설정 파일을 퍼블리시해야 합니다:
 
 ```shell
 php artisan config:publish hashing
 ```
 
-<a name="basic-usage"></a>
-## Basic Usage
 
-<a name="hashing-passwords"></a>
-### Hashing Passwords
+## 기본 사용법 {#basic-usage}
 
-You may hash a password by calling the `make` method on the `Hash` facade:
+
+### 비밀번호 해싱 {#hashing-passwords}
+
+`Hash` 파사드의 `make` 메서드를 호출하여 비밀번호를 해싱할 수 있습니다:
 
 ```php
 <?php
@@ -46,11 +46,11 @@ use Illuminate\Support\Facades\Hash;
 class PasswordController extends Controller
 {
     /**
-     * Update the password for the user.
+     * 사용자의 비밀번호를 업데이트합니다.
      */
     public function update(Request $request): RedirectResponse
     {
-        // Validate the new password length...
+        // 새 비밀번호의 길이를 검증합니다...
 
         $request->user()->fill([
             'password' => Hash::make($request->newPassword)
@@ -61,10 +61,10 @@ class PasswordController extends Controller
 }
 ```
 
-<a name="adjusting-the-bcrypt-work-factor"></a>
-#### Adjusting The Bcrypt Work Factor
 
-If you are using the Bcrypt algorithm, the `make` method allows you to manage the work factor of the algorithm using the `rounds` option; however, the default work factor managed by Laravel is acceptable for most applications:
+#### Bcrypt 작업 인자 조정하기 {#adjusting-the-bcrypt-work-factor}
+
+Bcrypt 알고리즘을 사용하는 경우, `make` 메서드를 통해 `rounds` 옵션을 사용하여 알고리즘의 작업 인자를 조정할 수 있습니다. 하지만 Laravel에서 관리하는 기본 작업 인자는 대부분의 애플리케이션에 적합합니다:
 
 ```php
 $hashed = Hash::make('password', [
@@ -72,10 +72,10 @@ $hashed = Hash::make('password', [
 ]);
 ```
 
-<a name="adjusting-the-argon2-work-factor"></a>
-#### Adjusting The Argon2 Work Factor
 
-If you are using the Argon2 algorithm, the `make` method allows you to manage the work factor of the algorithm using the `memory`, `time`, and `threads` options; however, the default values managed by Laravel are acceptable for most applications:
+#### Argon2 작업 계수 조정하기 {#adjusting-the-argon2-work-factor}
+
+Argon2 알고리즘을 사용하는 경우, `make` 메서드를 통해 `memory`, `time`, `threads` 옵션을 사용하여 알고리즘의 작업 계수를 관리할 수 있습니다. 하지만, Laravel에서 관리하는 기본값은 대부분의 애플리케이션에 적합합니다:
 
 ```php
 $hashed = Hash::make('password', [
@@ -86,23 +86,23 @@ $hashed = Hash::make('password', [
 ```
 
 > [!NOTE]
-> For more information on these options, please refer to the [official PHP documentation regarding Argon hashing](https://secure.php.net/manual/en/function.password-hash.php).
+> 이러한 옵션에 대한 자세한 내용은 [Argon 해싱에 관한 공식 PHP 문서](https://secure.php.net/manual/en/function.password-hash.php)를 참고하세요.
 
-<a name="verifying-that-a-password-matches-a-hash"></a>
-### Verifying That a Password Matches a Hash
 
-The `check` method provided by the `Hash` facade allows you to verify that a given plain-text string corresponds to a given hash:
+### 해시와 비밀번호가 일치하는지 확인하기 {#verifying-that-a-password-matches-a-hash}
+
+`Hash` 파사드에서 제공하는 `check` 메서드를 사용하면 주어진 평문 문자열이 특정 해시와 일치하는지 확인할 수 있습니다:
 
 ```php
 if (Hash::check('plain-text', $hashedPassword)) {
-    // The passwords match...
+    // 비밀번호가 일치합니다...
 }
 ```
 
-<a name="determining-if-a-password-needs-to-be-rehashed"></a>
-### Determining if a Password Needs to be Rehashed
 
-The `needsRehash` method provided by the `Hash` facade allows you to determine if the work factor used by the hasher has changed since the password was hashed. Some applications choose to perform this check during the application's authentication process:
+### 비밀번호가 다시 해시되어야 하는지 확인하기 {#determining-if-a-password-needs-to-be-rehashed}
+
+`Hash` 파사드에서 제공하는 `needsRehash` 메서드를 사용하면, 비밀번호가 해시된 이후 해셔에서 사용된 작업 계수가 변경되었는지 확인할 수 있습니다. 일부 애플리케이션에서는 이 확인을 인증 과정 중에 수행하기도 합니다:
 
 ```php
 if (Hash::needsRehash($hashed)) {
@@ -110,12 +110,12 @@ if (Hash::needsRehash($hashed)) {
 }
 ```
 
-<a name="hash-algorithm-verification"></a>
-## Hash Algorithm Verification
 
-To prevent hash algorithm manipulation, Laravel's `Hash::check` method will first verify the given hash was generated using the application's selected hashing algorithm. If the algorithms are different, a `RuntimeException` exception will be thrown.
+## 해시 알고리즘 검증 {#hash-algorithm-verification}
 
-This is the expected behavior for most applications, where the hashing algorithm is not expected to change and different algorithms can be an indication of a malicious attack. However, if you need to support multiple hashing algorithms within your application, such as when migrating from one algorithm to another, you can disable hash algorithm verification by setting the `HASH_VERIFY` environment variable to `false`:
+해시 알고리즘 조작을 방지하기 위해, Laravel의 `Hash::check` 메서드는 먼저 주어진 해시가 애플리케이션에서 선택한 해시 알고리즘으로 생성되었는지 확인합니다. 만약 알고리즘이 다르다면, `RuntimeException` 예외가 발생합니다.
+
+이는 대부분의 애플리케이션에서 기대되는 동작으로, 해시 알고리즘이 변경되지 않는 것이 일반적이며, 다른 알고리즘이 사용된 경우 악의적인 공격의 신호일 수 있습니다. 하지만, 한 알고리즘에서 다른 알고리즘으로 마이그레이션하는 등 애플리케이션에서 여러 해시 알고리즘을 지원해야 하는 경우, `HASH_VERIFY` 환경 변수를 `false`로 설정하여 해시 알고리즘 검증을 비활성화할 수 있습니다:
 
 ```ini
 HASH_VERIFY=false
