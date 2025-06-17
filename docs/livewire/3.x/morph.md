@@ -143,11 +143,11 @@ Livewire는 변형 알고리즘에 추가 단계로, 요소를 변경하기 전�
         <input wire:model="title">
     </div>
 
-    <!--[if BLOCK]><![endif]--> <!-- [tl! highlight] -->
+    <!--[if BLOCK]><![endif]--> <!-- [!code highlight] -->
     @if ($errors->has('title'))
         <div>Error: {{ $errors->first('title') }}</div>
     @endif
-    <!--[if ENDBLOCK]><![endif]--> <!-- [tl! highlight] -->
+    <!--[if ENDBLOCK]><![endif]--> <!-- [!code highlight] -->
 
     <div>
         <button>Save</button>
@@ -175,11 +175,11 @@ Livewire는 변형 알고리즘에 추가 단계로, 요소를 변경하기 전�
         <input wire:model="title">
     </div>
 
-    <div> <!-- [tl! highlight] -->
+    <div> <!-- [!code highlight] -->
         @if ($errors->has('title'))
             <div>{{ $errors->first('title') }}</div>
         @endif
-    </div> <!-- [tl! highlight] -->
+    </div> <!-- [!code highlight] -->
 
     <div>
         <button>Save</button>

@@ -18,7 +18,7 @@ class CreatePost extends Component
 
     public function save()
     {
-        $validated = $this->validate([ // [tl! highlight:3]
+        $validated = $this->validate([ // [!code highlight:3]
 			'title' => 'required|min:3',
 			'content' => 'required|min:3',
         ]);
@@ -66,10 +66,10 @@ use App\Models\Post;
 
 class CreatePost extends Component
 {
-    #[Validate('required|min:3')] // [tl! highlight]
+    #[Validate('required|min:3')] // [!code highlight]
 	public $title = '';
 
-    #[Validate('required|min:3')] // [tl! highlight]
+    #[Validate('required|min:3')] // [!code highlight]
     public $content = '';
 
     public function save()
@@ -296,7 +296,7 @@ use App\Models\Post;
 
 class CreatePost extends Component
 {
-    #[Validate] // [tl! highlight]
+    #[Validate] // [!code highlight]
 	public $title = '';
 
     public $content = '';
@@ -400,7 +400,7 @@ class CreatePost extends Component
 
     public $content = '';
 
-    protected function rules() // [tl! highlight:6]
+    protected function rules() // [!code highlight:6]
     {
         return [
             'title' => Rule::exists('posts', 'title'),
@@ -408,7 +408,7 @@ class CreatePost extends Component
         ];
     }
 
-    protected function messages() // [tl! highlight:6]
+    protected function messages() // [!code highlight:6]
     {
         return [
             'content.required' => 'The :attribute are missing.',
@@ -416,7 +416,7 @@ class CreatePost extends Component
         ];
     }
 
-    protected function validationAttributes() // [tl! highlight:6]
+    protected function validationAttributes() // [!code highlight:6]
     {
         return [
             'content' => 'description',
@@ -473,7 +473,7 @@ class UpdatePost extends Form
         return [
             'title' => [
                 'required',
-                Rule::unique('posts')->ignore($this->post), // [tl! highlight]
+                Rule::unique('posts')->ignore($this->post), // [!code highlight]
             ],
             'content' => 'required|min:5',
         ];
@@ -487,7 +487,7 @@ class UpdatePost extends Form
 
     public function update()
     {
-        $this->validate(); // [tl! highlight]
+        $this->validate(); // [!code highlight]
 
         $this->post->update($this->all());
 

@@ -270,7 +270,7 @@ use App\Models\Post;
 
 class SearchPosts extends Component
 {
-    #[Url] // [tl! highlight]
+    #[Url] // [!code highlight]
     public $search = '';
 
     public function render()

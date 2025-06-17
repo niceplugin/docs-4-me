@@ -16,7 +16,7 @@ Livewire의 `#[Isolate]` 클래스 속성을 사용하면 컴포넌트를 "격�
 use Livewire\Attributes\Isolate;
 use Livewire\Component;
 
-#[Isolate] // [tl! highlight]
+#[Isolate] // [!code highlight]
 class ShowPost extends Component
 {
     // ...
@@ -39,7 +39,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\Attributes\Lazy;
 
-#[Lazy(isolate: false)] // [tl! highlight]
+#[Lazy(isolate: false)] // [!code highlight]
 class Revenue extends Component
 {
     // ...

@@ -27,7 +27,7 @@ class ShowInvoice extends Component
 위 클래스의 `download()` 메서드를 사용자가 "Download Invoice" 버튼을 클릭할 때 실행하려면, `wire:click="download"`을 추가하면 됩니다:
 
 ```html
-<button type="button" wire:click="download"> <!-- [tl! highlight] -->
+<button type="button" wire:click="download"> <!-- [!code highlight] -->
     Download Invoice
 </button>
 ```

@@ -34,7 +34,7 @@ class CreatePost extends Component
 ```
 
 ```blade
-<form wire:submit="save"> <!-- [tl! highlight] -->
+<form wire:submit="save"> <!-- [!code highlight] -->
     <input type="text" wire:model="title">
 
     <textarea wire:model="content"></textarea>
@@ -81,13 +81,13 @@ Livewire 내부에서 Alpine을 사용하는 방법에 대해 더 알아보려�
 
 Livewire는 `wire:confirm`이라는 간단한 지시어를 제공하여 이를 쉽게 처리할 수 있습니다:
 
-```blade
+```blade {4}
 <button
     type="button"
     wire:click="delete"
     wire:confirm="이 게시물을 정말 삭제하시겠습니까?"
 >
-    게시물 삭제 <!-- [tl! highlight:-2,1] -->
+    게시물 삭제
 </button>
 ```
 
@@ -270,7 +270,7 @@ Livewire는 페이지 어디에서나 로딩 인디케이터를 쉽게 표시하
 
     <button type="submit">Save</button>
 
-    <span wire:loading>Saving...</span> <!-- [tl! highlight] -->
+    <span wire:loading>Saving...</span> <!-- [!code highlight] -->
 </form>
 ```
 
@@ -318,7 +318,7 @@ class ShowPosts extends Component
             <h1>{{ $post->title }}</h1>
             <span>{{ $post->content }}</span>
 
-            <button wire:click="delete({{ $post->id }})">Delete</button> <!-- [tl! highlight] -->
+            <button wire:click="delete({{ $post->id }})">Delete</button> <!-- [!code highlight] -->
         </div>
     @endforeach
 </div>
@@ -351,7 +351,7 @@ use App\Models\Post;
 
 class ShowPosts extends Component
 {
-    public function delete(Post $post) // [tl! highlight]
+    public function delete(Post $post) // [!code highlight]
     {
         $this->authorize('delete', $post);
 
@@ -382,7 +382,7 @@ use App\Repositories\PostRepository;
 
 class ShowPosts extends Component
 {
-    public function delete(PostRepository $posts, $postId) // [tl! highlight]
+    public function delete(PostRepository $posts, $postId) // [!code highlight]
     {
         $posts->deletePost($postId);
     }
@@ -403,7 +403,7 @@ class ShowPosts extends Component
             <h1>{{ $post->title }}</h1>
             <span>{{ $post->content }}</span>
 
-            <button wire:click="delete({{ $post->id }})">Delete</button> <!-- [tl! highlight] -->
+            <button wire:click="delete({{ $post->id }})">Delete</button> <!-- [!code highlight] -->
         </div>
     @endforeach
 </div>
@@ -580,7 +580,7 @@ class CreatePost extends Component
     {
         // ...
 
-        $this->js('onPostSaved'); // [tl! highlight]
+        $this->js('onPostSaved'); // [!code highlight]
     }
 }
 ```
@@ -699,7 +699,7 @@ class ShowPost extends Component
         $this->post = $post;
     }
 
-    #[Renderless] // [tl! highlight]
+    #[Renderless] // [!code highlight]
     public function incrementViewCount()
     {
         $this->post->incrementViewCount();
@@ -748,7 +748,7 @@ class ShowPost extends Component
     {
         $this->post->incrementViewCount();
 
-        $this->skipRender(); // [tl! highlight]
+        $this->skipRender(); // [!code highlight]
     }
 
     public function render()
@@ -833,7 +833,7 @@ class ShowPosts extends Component
     {
         $post = Post::find($id);
 
-        $this->authorize('delete', $post); // [tl! highlight]
+        $this->authorize('delete', $post); // [!code highlight]
 
         $post->delete();
     }
@@ -911,7 +911,7 @@ class BrowsePosts extends Component
 {
     public function deletePost($id)
     {
-        if (! Auth::user()->isAdmin) { // [tl! highlight:2]
+        if (! Auth::user()->isAdmin) { // [!code highlight:2]
             abort(403);
         }
 
@@ -955,10 +955,10 @@ class BrowsePosts extends Component
             abort(403);
         }
 
-        $this->delete($id); // [tl! highlight]
+        $this->delete($id); // [!code highlight]
     }
 
-    public function delete($postId)  // [tl! highlight:5]
+    public function delete($postId)  // [!code highlight:5]
     {
         $post = Post::find($postId);
 
@@ -1011,7 +1011,7 @@ class BrowsePosts extends Component
         $this->delete($id);
     }
 
-    protected function delete($postId) // [tl! highlight]
+    protected function delete($postId) // [!code highlight]
     {
         $post = Post::find($postId);
 
@@ -1050,7 +1050,7 @@ class CreatePost extends Component
 
     public $content;
 
-    #[Middleware(LogPostCreation::class)] // [tl! highlight]
+    #[Middleware(LogPostCreation::class)] // [!code highlight]
     public function save()
     {
         // Create the post...

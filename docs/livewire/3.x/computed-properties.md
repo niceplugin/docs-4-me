@@ -98,7 +98,7 @@ class ShowPosts extends Component
 
         Auth::user()->posts()->create(...);
 
-        unset($this->posts); // [tl! highlight]
+        unset($this->posts); // [!code highlight]
     }
 
     #[Computed]

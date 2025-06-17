@@ -22,7 +22,7 @@ class TodoList extends Component
 
     public function mount()
     {
-        $this->todos = Auth::user()->todos; // [tl! highlight]
+        $this->todos = Auth::user()->todos; // [!code highlight]
     }
 
     // ...
@@ -57,9 +57,9 @@ class UpdatePost extends Component
     {
         $this->post = $post;
 
-        $this->fill( // [tl! highlight]
-            $post->only('title', 'description'), // [tl! highlight]
-        ); // [tl! highlight]
+        $this->fill( // [!code highlight]
+            $post->only('title', 'description'), // [!code highlight]
+        ); // [!code highlight]
     }
 
     // ...
@@ -100,7 +100,7 @@ class TodoList extends Component
 
 ```blade
 <div>
-    <input type="text" wire:model="todo" placeholder="Todo..."> <!-- [tl! highlight] -->
+    <input type="text" wire:model="todo" placeholder="Todo..."> <!-- [!code highlight] -->
 
     <button wire:click="add">Add Todo</button>
 
@@ -139,7 +139,7 @@ class ManageTodos extends Component
     {
         $this->todos[] = $this->todo;
 
-        $this->reset('todo'); // [tl! highlight]
+        $this->reset('todo'); // [!code highlight]
     }
 
     // ...
@@ -172,7 +172,7 @@ class ManageTodos extends Component
 
     public function addTodo()
     {
-        $this->todos[] = $this->pull('todo'); // [tl! highlight]
+        $this->todos[] = $this->pull('todo'); // [!code highlight]
     }
 
     // ...
@@ -472,7 +472,7 @@ class UpdatePost extends Component
 
 ```blade
 <form wire:submit="update">
-    <input type="text" wire:model="id"> <!-- [tl! highlight] -->
+    <input type="text" wire:model="id"> <!-- [!code highlight] -->
     <input type="text" wire:model="title">
     <input type="text" wire:model="content">
 
@@ -496,7 +496,7 @@ public function update()
 {
     $post = Post::findOrFail($this->id);
 
-    $this->authorize('update', $post); // [tl! highlight]
+    $this->authorize('update', $post); // [!code highlight]
 
     $post->update(...);
 }
@@ -514,7 +514,7 @@ use Livewire\Component;
 
 class UpdatePost extends Component
 {
-    #[Locked] // [tl! highlight]
+    #[Locked] // [!code highlight]
     public $id;
 
     // ...
@@ -541,7 +541,7 @@ use App\Models\Post;
 
 class UpdatePost extends Component
 {
-    public Post $post; // [tl! highlight]
+    public Post $post; // [!code highlight]
     public $title;
     public $content;
 
@@ -643,7 +643,7 @@ class ShowTodos extends Component
     {
         $this->todos = Auth::user()
             ->todos()
-            ->select(['title', 'content']) // [tl! highlight]
+            ->select(['title', 'content']) // [!code highlight]
             ->get();
     }
 
@@ -675,7 +675,7 @@ use Livewire\Component;
 
 class ShowTodos extends Component
 {
-    #[Computed] // [tl! highlight]
+    #[Computed] // [!code highlight]
     public function todos()
     {
         return Auth::user()
@@ -725,7 +725,7 @@ class ShowTodos extends Component
             ->get();
     }
 
-    public function markAllComplete() // [tl! highlight:3]
+    public function markAllComplete() // [!code highlight:3]
     {
         $this->todos->each->complete();
     }

@@ -66,7 +66,7 @@ Livewire 개발자로서 사용할 수 있는 가장 강력한 기능 중 하나
     <input wire:model="content" type="text">
 
     <small>
-        글자 수: <span x-text="$wire.content.length"></span> <!-- [tl! highlight] -->
+        글자 수: <span x-text="$wire.content.length"></span> <!-- [!code highlight] -->
     </small>
 
     <button type="submit">저장</button>
@@ -83,7 +83,7 @@ Livewire 개발자로서 사용할 수 있는 가장 강력한 기능 중 하나
 <form wire:submit="save">
     <input wire:model="title" type="text">
 
-    <button type="button" x-on:click="$wire.title = ''">Clear</button> <!-- [tl! highlight] -->
+    <button type="button" x-on:click="$wire.title = ''">Clear</button> <!-- [!code highlight] -->
 
     <!-- ... -->
 
@@ -110,7 +110,7 @@ Alpine은 `$wire`에서 직접 메서드를 호출함으로써 Livewire의 모�
 
 ```html
 <form wire:submit="save">
-    <input wire:model="title" type="text" x-on:blur="$wire.save()">  <!-- [tl! highlight] -->
+    <input wire:model="title" type="text" x-on:blur="$wire.save()">  <!-- [!code highlight] -->
 
     <!-- ... -->
 
@@ -306,7 +306,7 @@ Livewire와 Alpine을 직접 만든 JavaScript 번들을 통해 페이지에 포
 <body>
     {{ $slot }}
 
-    @livewireScriptConfig <!-- [tl! highlight] -->
+    @livewireScriptConfig <!-- [!code highlight] -->
 </body>
 </html>
 ```

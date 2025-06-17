@@ -55,7 +55,7 @@ use App\Models\User;
 
 class ShowUsers extends Component
 {
-    #[Url] // [tl! highlight]
+    #[Url] // [!code highlight]
     public $search = '';
 
     public function render()
@@ -107,7 +107,7 @@ use Livewire\Component;
 class ShowUsers extends Component
 {
     #[Url]
-    public ?string $search; // [tl! highlight]
+    public ?string $search; // [!code highlight]
 
     // ...
 }

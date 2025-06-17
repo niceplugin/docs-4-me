@@ -23,7 +23,7 @@ class ShowPost extends Component
     <button wire:click="$set('showComments', true)">댓글 보기</button>
 
     @if ($showComments)
-        <div wire:transition> <!-- [tl! highlight] -->
+        <div wire:transition> <!-- [!code highlight] -->
             @foreach ($post->comments as $comment)
                 <!-- ... -->
             @endforeach

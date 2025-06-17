@@ -158,7 +158,7 @@ class UploadPhoto extends Component
 
 ```blade
 <form wire:submit="save">
-    @if ($photo) <!-- [tl! highlight:2] -->
+    @if ($photo) <!-- [!code highlight:2] -->
         <img src="{{ $photo->temporaryUrl() }}">
     @endif
 

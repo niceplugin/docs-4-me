@@ -69,21 +69,21 @@ Livewire에서는 검증이 필요한 프로퍼티 위에 `#[Validate]` 속성�
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Validate; // [tl! highlight]
+use Livewire\Attributes\Validate; // [!code highlight]
 use Livewire\Component;
 use App\Models\Post;
 
 class CreatePost extends Component
 {
-    #[Validate('required')] // [tl! highlight]
+    #[Validate('required')] // [!code highlight]
     public $title = '';
 
-    #[Validate('required')] // [tl! highlight]
+    #[Validate('required')] // [!code highlight]
     public $content = '';
 
     public function save()
     {
-        $this->validate(); // [tl! highlight]
+        $this->validate(); // [!code highlight]
 
         Post::create(
             $this->only(['title', 'content'])
@@ -105,12 +105,12 @@ Blade 템플릿도 수정하여 페이지에 유효성 검사 오류가 표시�
 <form wire:submit="save">
     <input type="text" wire:model="title">
     <div>
-        @error('title') <span class="error">{{ $message }}</span> @enderror <!-- [tl! highlight] -->
+        @error('title') <span class="error">{{ $message }}</span> @enderror <!-- [!code highlight] -->
     </div>
 
     <input type="text" wire:model="content">
     <div>
-        @error('content') <span class="error">{{ $message }}</span> @enderror <!-- [tl! highlight] -->
+        @error('content') <span class="error">{{ $message }}</span> @enderror <!-- [!code highlight] -->
     </div>
 
     <button type="submit">Save</button>
@@ -166,14 +166,14 @@ use App\Models\Post;
 
 class CreatePost extends Component
 {
-    public PostForm $form; // [tl! highlight]
+    public PostForm $form; // [!code highlight]
 
     public function save()
     {
         $this->validate();
 
         Post::create(
-            $this->form->only(['title', 'content']) // [tl! highlight]
+            $this->form->only(['title', 'content']) // [!code highlight]
         );
 
         return $this->redirect('/posts');
@@ -221,7 +221,7 @@ class PostForm extends Form
     #[Validate('required|min:5')]
     public $content = '';
 
-    public function store() // [tl! highlight:5]
+    public function store() // [!code highlight:5]
     {
         $this->validate();
 
@@ -239,7 +239,7 @@ class CreatePost extends Component
 
     public function save()
     {
-        $this->form->store(); // [tl! highlight]
+        $this->form->store(); // [!code highlight]
 
         return $this->redirect('/posts');
     }
@@ -363,7 +363,7 @@ class PostForm extends Form
 
         Post::create($this->only(['title', 'content']));
 
-        $this->reset(); // [tl! highlight]
+        $this->reset(); // [!code highlight]
     }
 }
 ```
@@ -406,7 +406,7 @@ class PostForm extends Form
         $this->validate();
 
         Post::create(
-            $this->pull() // [tl! highlight]
+            $this->pull() // [!code highlight]
         );
     }
 }
@@ -448,7 +448,7 @@ class PostForm extends Form
         return [
             'title' => [
                 'required',
-                Rule::unique('posts')->ignore($this->post), // [tl! highlight]
+                Rule::unique('posts')->ignore($this->post), // [!code highlight]
             ],
             'content' => 'required|min:5',
         ];
@@ -485,7 +485,7 @@ class PostForm extends Form
 {
     public ?Post $post;
 
-    #[Validate] // [tl! highlight]
+    #[Validate] // [!code highlight]
     public $title = '';
 
     public $content = '';
@@ -615,7 +615,7 @@ class UpdatePost extends Component
         $this->content = $post->content;
     }
 
-    public function updated($name, $value) // [tl! highlight:5]
+    public function updated($name, $value) // [!code highlight:5]
     {
         $this->post->update([
             $name => $value,
@@ -707,12 +707,12 @@ Livewire는 입력값이 서버 측 컴포넌트와 달라질 때 요소를 토�
 
 ```blade
 <form wire:submit="save">
-    <input type="text" wire:model="title"> <!-- [tl! highlight:3] -->
+    <input type="text" wire:model="title"> <!-- [!code highlight:3] -->
     <div>
         @error('title') <span class="error">{{ $message }}</span> @enderror
     </div>
 
-    <input type="text" wire:model="content"> <!-- [tl! highlight:3] -->
+    <input type="text" wire:model="content"> <!-- [!code highlight:3] -->
     <div>
         @error('content') <span class="error">{{ $message }}</span> @enderror
     </div>
@@ -725,9 +725,9 @@ Livewire는 입력값이 서버 측 컴포넌트와 달라질 때 요소를 토�
 
 ```blade
 <form wire:submit="save">
-    <x-input-text name="title" wire:model="title" /> <!-- [tl! highlight] -->
+    <x-input-text name="title" wire:model="title" /> <!-- [!code highlight] -->
 
-    <x-input-text name="content" wire:model="content" /> <!-- [tl! highlight] -->
+    <x-input-text name="content" wire:model="content" /> <!-- [!code highlight] -->
 
     <button type="submit">Save</button>
 </form>

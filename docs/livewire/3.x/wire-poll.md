@@ -26,7 +26,7 @@ class SubscriberCount extends Component
 ```
 
 ```blade
-<div wire:poll> <!-- [tl! highlight] -->
+<div wire:poll> <!-- [!code highlight] -->
     Subscribers: {{ $count }}
 </div>
 ```

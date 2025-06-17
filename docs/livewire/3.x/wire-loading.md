@@ -13,7 +13,7 @@ Livewire는 로딩 인디케이터를 제어하기 위한 간단하면서도 매
 
     <button type="submit">저장</button>
 
-    <div wire:loading> <!-- [tl! highlight:2] -->
+    <div wire:loading> <!-- [!code highlight:2] -->
         게시글 저장 중...
     </div>
 </form>
@@ -83,7 +83,7 @@ Livewire는 로딩 인디케이터를 제어하기 위한 간단하면서도 매
 
     <button type="button" wire:click="remove">Remove</button>
 
-    <div wire:loading wire:target="remove">  <!-- [tl! highlight:2] -->
+    <div wire:loading wire:target="remove">  <!-- [!code highlight:2] -->
         Removing post...
     </div>
 </form>
@@ -105,7 +105,7 @@ Livewire는 로딩 인디케이터를 제어하기 위한 간단하면서도 매
 
     <button type="button" wire:click="remove">Remove</button>
 
-    <div wire:loading wire:target="save, remove">  <!-- [tl! highlight:2] -->
+    <div wire:loading wire:target="save, remove">  <!-- [!code highlight:2] -->
         Updating post...
     </div>
 </form>
@@ -125,7 +125,7 @@ Livewire는 로딩 인디케이터를 제어하기 위한 간단하면서도 매
 
             <button wire:click="remove({{ $post->id }})">Remove</button>
 
-            <div wire:loading wire:target="remove({{ $post->id }})">  <!-- [tl! highlight:2] -->
+            <div wire:loading wire:target="remove({{ $post->id }})">  <!-- [!code highlight:2] -->
                 Removing post...
             </div>
         </div>
@@ -148,7 +148,7 @@ Livewire는 또한 `wire:target` 지시어에 속성 이름을 전달하여 특�
     <input type="text" wire:model.live="username">
     @error('username') <span>{{ $message }}</span> @enderror
 
-    <div wire:loading wire:target="username"> <!-- [tl! highlight:2] -->
+    <div wire:loading wire:target="username"> <!-- [!code highlight:2] -->
         사용자 이름 사용 가능 여부 확인 중...
     </div>
 

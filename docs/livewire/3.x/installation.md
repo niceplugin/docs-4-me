@@ -78,7 +78,7 @@ Livewire는 직접 업데이트 라우트를 등록할 수 있도록 허용하�
 ```php
 Livewire::setUpdateRoute(function ($handle) {
 	return Route::post('/custom/livewire/update', $handle)
-        ->middleware([...]); // [tl! highlight]
+        ->middleware([...]); // [!code highlight]
 });
 ```
 
@@ -132,7 +132,7 @@ Alpine.start()
 <body>
     {{ $slot }}
 
-    @livewireScriptConfig <!-- [tl! highlight] -->
+    @livewireScriptConfig <!-- [!code highlight] -->
 </body>
 </html>
 ```

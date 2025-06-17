@@ -30,7 +30,7 @@ class Dashboard extends Component
 <div>
     <h1>Dashboard</h1>
 
-    <livewire:todo-list /> <!-- [tl! highlight] -->
+    <livewire:todo-list /> <!-- [!code highlight] -->
 </div>
 ```
 
@@ -104,7 +104,7 @@ class TodoCount extends Component
 > [!tip] 더 간단하게 `mount()` 생략하기
 > 위 예시에서 `mount()` 메서드가 불필요한 보일러플레이트 코드처럼 느껴진다면, 프로퍼티와 파라미터 이름이 일치할 경우 생략할 수 있습니다:
 > ```php
-> public $todos; // [tl! highlight]
+> public $todos; // [!code highlight]
 > ```
 
 ### 정적 props 전달하기 {#passing-static-props}
@@ -193,7 +193,7 @@ use App\Models\Todo;
 
 class TodoCount extends Component
 {
-    #[Reactive] // [tl! highlight]
+    #[Reactive] // [!code highlight]
     public $todos;
 
     public function render()
@@ -250,7 +250,7 @@ class TodoList extends Component
 <div>
     <h1>Todos</h1>
 
-    <livewire:todo-input wire:model="todo" /> <!-- [tl! highlight] -->
+    <livewire:todo-input wire:model="todo" /> <!-- [!code highlight] -->
 
     <button wire:click="add">Add Todo</button>
 
@@ -276,7 +276,7 @@ use Livewire\Attributes\Modelable;
 
 class TodoInput extends Component
 {
-    #[Modelable] // [tl! highlight]
+    #[Modelable] // [!code highlight]
     public $value = '';
 
     public function render()
@@ -357,7 +357,7 @@ use Livewire\Attributes\On;
 
 class TodoList extends Component
 {
-    #[On('remove-todo')] // [tl! highlight]
+    #[On('remove-todo')] // [!code highlight]
     public function remove($todoId)
     {
         $todo = Todo::find($todoId);
@@ -392,7 +392,7 @@ class TodoItem extends Component
 
     public function remove()
     {
-        $this->dispatch('remove-todo', todoId: $this->todo->id); // [tl! highlight]
+        $this->dispatch('remove-todo', todoId: $this->todo->id); // [!code highlight]
     }
 
     public function render()

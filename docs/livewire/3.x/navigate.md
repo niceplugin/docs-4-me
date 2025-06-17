@@ -108,7 +108,7 @@ Livewire에서는 `@persist` 디렉티브를 사용하여 이를 구현할 수 �
             {{ $slot }}
         </main>
 
-        @persist('player') <!-- [tl! highlight:2] -->
+        @persist('player') <!-- [!code highlight:2] -->
             <audio src="{{ $episode->file }}" controls></audio>
         @endpersist
     </body>
@@ -151,7 +151,7 @@ Livewire에서는 `@persist` 디렉티브를 사용하여 이를 구현할 수 �
 
 ```html
 @persist('scrollbar')
-<div class="overflow-y-scroll" wire:scroll> <!-- [tl! highlight] -->
+<div class="overflow-y-scroll" wire:scroll> <!-- [!code highlight] -->
     <!-- ... -->
 </div>
 @endpersist
@@ -243,7 +243,7 @@ document.addEventListener('livewire:navigated', () => {
 
     <!-- Fathom Analytics -->
     @if (! config('app.debug'))
-        <script src="https://cdn.usefathom.com/script.js" data-site="ABCDEFG" data-spa="auto" defer></script> <!-- [tl! highlight] -->
+        <script src="https://cdn.usefathom.com/script.js" data-site="ABCDEFG" data-spa="auto" defer></script> <!-- [!code highlight] -->
     @endif
 </head>
 ```

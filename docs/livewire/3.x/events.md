@@ -17,7 +17,7 @@ class CreatePost extends Component
     {
 		// ...
 
-		$this->dispatch('post-created'); // [tl! highlight]
+		$this->dispatch('post-created'); // [!code highlight]
     }
 }
 ```
@@ -39,11 +39,11 @@ Livewire 컴포넌트에서 이벤트를 수신하려면, 해당 이벤트가 �
 
 ```php
 use Livewire\Component;
-use Livewire\Attributes\On; // [tl! highlight]
+use Livewire\Attributes\On; // [!code highlight]
 
 class Dashboard extends Component
 {
-	#[On('post-created')] // [tl! highlight]
+	#[On('post-created')] // [!code highlight]
     public function updatePostList($title)
     {
 		// ...
@@ -70,7 +70,7 @@ class UpdatePost extends Component
     {
         // ...
 
-        $this->dispatch("post-updated.{$post->id}"); // [tl! highlight]
+        $this->dispatch("post-updated.{$post->id}"); // [!code highlight]
     }
 }
 ```
@@ -80,13 +80,13 @@ class UpdatePost extends Component
 ```php
 use Livewire\Component;
 use App\Models\Post;
-use Livewire\Attributes\On; // [tl! highlight]
+use Livewire\Attributes\On; // [!code highlight]
 
 class ShowPost extends Component
 {
     public Post $post;
 
-	#[On('post-updated.{post.id}')] // [tl! highlight]
+	#[On('post-updated.{post.id}')] // [!code highlight]
     public function refreshPost()
     {
 		// ...
@@ -471,7 +471,7 @@ Laravel Echo가 설치 및 구성되어 있다고 가정하면, Livewire 컴포�
 
 namespace App\Livewire;
 
-use Livewire\Attributes\On; // [tl! highlight]
+use Livewire\Attributes\On; // [!code highlight]
 use Livewire\Component;
 
 class OrderTracker extends Component
@@ -495,7 +495,7 @@ class OrderTracker extends Component
 
 namespace App\Livewire;
 
-use Livewire\Attributes\On; // [tl! highlight]
+use Livewire\Attributes\On; // [!code highlight]
 use Livewire\Component;
 use App\Models\Order;
 

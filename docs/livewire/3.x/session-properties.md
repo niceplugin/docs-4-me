@@ -18,7 +18,7 @@ use App\Models\Post;
 
 class ShowPosts extends Component
 {
-    #[Session] // [tl! highlight]
+    #[Session] // [!code highlight]
     public $search;
 
     protected function posts()
@@ -58,7 +58,7 @@ use Livewire\Component;
 
 class ShowPosts extends Component
 {
-    #[Session(key: 'search')] // [tl! highlight]
+    #[Session(key: 'search')] // [!code highlight]
     public $search;
 
     // ...
@@ -80,7 +80,7 @@ class ShowPosts extends Component
 {
     public Author $author;
 
-    #[Session(key: 'search-{author.id}')] // [tl! highlight]
+    #[Session(key: 'search-{author.id}')] // [!code highlight]
     public $search;
 
     // ...

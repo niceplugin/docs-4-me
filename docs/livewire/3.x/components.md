@@ -62,7 +62,7 @@ class CreatePost extends Component
 {
 	public function render()
 	{
-		return <<<'HTML' // [tl! highlight:4]
+		return <<<'HTML' // [!code highlight:4]
 		<div>
 		    {{-- 여기에 Blade 템플릿을 작성하세요... --}}
 		</div>
@@ -206,7 +206,7 @@ Blade 반복문 내에 `wire:key` 속성이 없으면, 반복문이 변경될 �
 ```blade
 <div>
     @foreach ($posts as $post)
-        <div wire:key="{{ $post->id }}"> <!-- [tl! highlight] -->
+        <div wire:key="{{ $post->id }}"> <!-- [!code highlight] -->
             <!-- ... -->
         </div>
     @endforeach
@@ -235,7 +235,7 @@ Livewire의 가장 강력한 기능 중 하나는 "데이터 바인딩"입니다
 <form>
     <label for="title">Title:</label>
 
-    <input type="text" id="title" wire:model="title"> <!-- [tl! highlight] -->
+    <input type="text" id="title" wire:model="title"> <!-- [!code highlight] -->
 </form>
 ```
 
@@ -265,7 +265,7 @@ class CreatePost extends Component
 {
     public $title;
 
-    public function save() // [tl! highlight:8]
+    public function save() // [!code highlight:8]
     {
 		Post::create([
 			'title' => $this->title
@@ -285,7 +285,7 @@ class CreatePost extends Component
 다음으로, 컴포넌트의 Blade 뷰에서 `<form>` 요소에 `wire:submit` 디렉티브를 추가하여 `save` 액션을 호출해봅시다:
 
 ```blade
-<form wire:submit="save"> <!-- [tl! highlight] -->
+<form wire:submit="save"> <!-- [!code highlight] -->
     <label for="title">Title:</label>
 
     <input type="text" id="title" wire:model="title">
@@ -376,7 +376,7 @@ use Livewire\Component;
 
 class CreatePost extends Component
 {
-    public $title; // [tl! highlight]
+    public $title; // [!code highlight]
 
     // ...
 }
@@ -461,7 +461,7 @@ class CreatePost extends Component
 {
 	// ...
 
-	#[Layout('layouts.app')] // [tl! highlight]
+	#[Layout('layouts.app')] // [!code highlight]
 	public function render()
 	{
 	    return view('livewire.create-post');
@@ -479,7 +479,7 @@ namespace App\Livewire;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.app')] // [tl! highlight]
+#[Layout('layouts.app')] // [!code highlight]
 class CreatePost extends Component
 {
 	// ...
@@ -492,7 +492,7 @@ PHP 속성은 리터럴 값만 지원합니다. 동적 값을 전달해야 하�
 public function render()
 {
     return view('livewire.create-post')
-	     ->layout('layouts.app'); // [tl! highlight]
+	     ->layout('layouts.app'); // [!code highlight]
 }
 ```
 
@@ -512,7 +512,7 @@ Livewire가 이를 참조하도록 `->layout()` 대신 `->extends()`를 사용�
 public function render()
 {
     return view('livewire.show-posts')
-        ->extends('layouts.app'); // [tl! highlight]
+        ->extends('layouts.app'); // [!code highlight]
 }
 ```
 
@@ -523,7 +523,7 @@ public function render()
 {
     return view('livewire.show-posts')
         ->extends('layouts.app')
-        ->section('body'); // [tl! highlight]
+        ->section('body'); // [!code highlight]
 }
 ```
 
@@ -553,7 +553,7 @@ class CreatePost extends Component
 {
 	// ...
 
-	#[Title('Create Post')] // [tl! highlight]
+	#[Title('Create Post')] // [!code highlight]
 	public function render()
 	{
 	    return view('livewire.create-post');
@@ -573,7 +573,7 @@ namespace App\Livewire;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Create Post')] // [tl! highlight]
+#[Title('Create Post')] // [!code highlight]
 class CreatePost extends Component
 {
 	// ...
@@ -586,7 +586,7 @@ class CreatePost extends Component
 public function render()
 {
     return view('livewire.create-post')
-	     ->title('Create Post'); // [tl! highlight]
+	     ->title('Create Post'); // [!code highlight]
 }
 ```
 
@@ -598,7 +598,7 @@ public function render()
 <!-- resources/views/components/layouts/app.blade.php -->
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', $lang ?? app()->getLocale()) }}"> <!-- [tl! highlight] -->
+<html lang="{{ str_replace('_', '-', $lang ?? app()->getLocale()) }}"> <!-- [!code highlight] -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -614,7 +614,7 @@ public function render()
 그런 다음, 컴포넌트 뷰에서 루트 엘리먼트 바깥에 `<x-slot>` 요소를 정의합니다:
 
 ```blade
-<x-slot:lang>fr</x-slot> // 이 컴포넌트는 프랑스어로 표시됩니다 <!-- [tl! highlight] -->
+<x-slot:lang>fr</x-slot> // 이 컴포넌트는 프랑스어로 표시됩니다 <!-- [!code highlight] -->
 
 <div>
     // 프랑스어 콘텐츠가 여기에 들어갑니다...
@@ -650,7 +650,7 @@ class ShowPost extends Component
 {
     public Post $post;
 
-    public function mount($id) // [tl! highlight]
+    public function mount($id) // [!code highlight]
     {
         $this->post = Post::findOrFail($id);
     }
@@ -690,7 +690,7 @@ class ShowPost extends Component
 {
     public Post $post;
 
-    public function mount(Post $post) // [tl! highlight]
+    public function mount(Post $post) // [!code highlight]
     {
         $this->post = $post;
     }
@@ -716,7 +716,7 @@ use App\Models\Post;
 
 class ShowPost extends Component
 {
-    public Post $post; // [tl! highlight]
+    public Post $post; // [!code highlight]
 
     public function render()
     {

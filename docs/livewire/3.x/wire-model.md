@@ -30,13 +30,13 @@ class CreatePost extends Component
     <label>
         <span>Title</span>
 
-        <input type="text" wire:model="title"> <!-- [tl! highlight] -->
+        <input type="text" wire:model="title"> <!-- [!code highlight] -->
     </label>
 
     <label>
         <span>Content</span>
 
-        <textarea wire:model="content"></textarea> <!-- [tl! highlight] -->
+        <textarea wire:model="content"></textarea> <!-- [!code highlight] -->
     </label>
 
 	<button type="submit">Save</button>
@@ -243,7 +243,7 @@ Livewire를 사용하면 `<select>` 드롭다운을 간단하게 다룰 수 있�
 </select>
 
 <!-- 도시에 종속된 선택 메뉴... -->
-<select wire:model.live="selectedCity" wire:key="{{ $selectedState }}"> <!-- [tl! highlight] -->
+<select wire:model.live="selectedCity" wire:key="{{ $selectedState }}"> <!-- [!code highlight] -->
     @foreach (City::whereStateId($selectedState->id)->get() as $city)
         <option value="{{ $city->id }}">{{ $city->label }}</option>
     @endforeach

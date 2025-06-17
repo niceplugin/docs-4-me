@@ -62,7 +62,7 @@ use Livewire\Component;
 
 class ShowPosts extends Component
 {
-    use WithPagination, WithoutUrlPagination; // [tl! highlight]
+    use WithPagination, WithoutUrlPagination; // [!code highlight]
 
     // ...
 }

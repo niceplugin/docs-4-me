@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class ShowPost extends Component
 {
-	#[Locked] // [tl! highlight]
+	#[Locked] // [!code highlight]
     public $id;
 
     public function mount($postId)
@@ -32,7 +32,7 @@ class ShowPost extends Component
 > ```php
 > class ShowPost extends Component
 > {
->    public Post $post; // [tl! highlight]
+>    public Post $post; // [!code highlight]
 >
 >    public function mount($postId)
 >    {

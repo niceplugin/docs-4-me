@@ -77,7 +77,7 @@ public function delete($id)
 
     // 사용자가 게시글의 소유자가 아니라면,
     // AuthorizationException이 발생합니다...
-    $this->authorize('delete', $post); // [tl! highlight]
+    $this->authorize('delete', $post); // [!code highlight]
 
     $post->delete();
 }
@@ -183,7 +183,7 @@ use Livewire\Attributes\Locked;
 
 class ShowPost extends Component
 {
-    #[Locked] // [tl! highlight]
+    #[Locked] // [!code highlight]
     public $postId;
 
     public function mount($postId)
@@ -223,7 +223,7 @@ class ShowPost extends Component
     {
         $post = Post::find($this->postId);
 
-        $this->authorize('delete', $post); // [tl! highlight]
+        $this->authorize('delete', $post); // [!code highlight]
 
         $post->delete();
     }
@@ -246,7 +246,7 @@ Livewire 컴포넌트가 다음과 같이 라우트 수준의 [인증 미들웨�
 
 ```php
 Route::get('/post/{post}', App\Livewire\UpdatePost::class)
-    ->middleware('can:update,post'); // [tl! highlight]
+    ->middleware('can:update,post'); // [!code highlight]
 ```
 
 Livewire는 이후의 Livewire 네트워크 요청에도 해당 미들웨어가 다시 적용되도록 보장합니다. 이것을 Livewire의 코어에서는 "Persistent Middleware(지속적 미들웨어)"라고 부릅니다.
@@ -257,7 +257,7 @@ Livewire는 이후의 Livewire 네트워크 요청에도 해당 미들웨어가 
 
 ```php
 Route::get('/post/{post}', App\Livewire\UpdatePost::class)
-    ->middleware('can:update,post'); // [tl! highlight]
+    ->middleware('can:update,post'); // [!code highlight]
 ```
 
 ```php
@@ -336,7 +336,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Livewire::addPersistentMiddleware([ // [tl! highlight:2]
+        Livewire::addPersistentMiddleware([ // [!code highlight:2]
             App\Http\Middleware\EnsureUserHasRole::class,
         ]);
     }

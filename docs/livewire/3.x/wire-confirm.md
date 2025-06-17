@@ -5,13 +5,13 @@ Livewire는 `wire:click`, `wire:submit` 등과 함께 `wire:confirm`을 추가�
 
 아래는 "게시글 삭제" 버튼에 확인 대화상자를 추가하는 예시입니다:
 
-```blade
+```blade {4}
 <button
     type="button"
     wire:click="delete"
     wire:confirm="이 게시글을 정말 삭제하시겠습니까?"
 >
-    게시글 삭제 <!-- [tl! highlight:-2,1] -->
+    게시글 삭제
 </button>
 ```
 
@@ -23,13 +23,13 @@ Livewire는 `wire:click`, `wire:submit` 등과 함께 `wire:confirm`을 추가�
 
 Livewire는 `.prompt`라는 유용한 수식어를 제공합니다. 이 수식어를 `wire:confirm`에 적용하면, 사용자에게 입력을 요청하고 입력값이 제공된 문자열(대소문자 구분)과 일치할 때만 작업이 확인됩니다(`wire:confirm` 값 끝에 "|"(파이프) 문자로 지정).
 
-```blade
+```blade {4}
 <button
     type="button"
     wire:click="delete"
     wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE"
 >
-    Delete account <!-- [tl! highlight:-2,1] -->
+    Delete account
 </button>
 ```
 

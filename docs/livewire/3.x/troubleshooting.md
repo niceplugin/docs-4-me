@@ -22,7 +22,7 @@ Blade 템플릿에서 `@foreach`와 같은 반복문을 사용할 때는, 반복
 
 ```blade
 @foreach($posts as $post)
-    <div wire:key="{{ $post->id }}"> <!-- [tl! highlight] -->
+    <div wire:key="{{ $post->id }}"> <!-- [!code highlight] -->
         ...
     </div>
 @endforeach
@@ -34,7 +34,7 @@ Blade 템플릿에서 `@foreach`와 같은 반복문을 사용할 때는, 반복
 
 ```blade
 @foreach($posts as $post)
-    <livewire:show-post :$post :key="$post->id" /> <!-- [tl! highlight] -->
+    <livewire:show-post :$post :key="$post->id" /> <!-- [!code highlight] -->
 @endforeach
 ```
 
@@ -46,7 +46,7 @@ Livewire 컴포넌트가 `@foreach` 반복문 안에 깊게 중첩되어 있을 
 @foreach($posts as $post)
     <div wire:key="{{ $post->id }}">
         ...
-        <livewire:show-post :$post :key="$post->id" /> <!-- [tl! highlight] -->
+        <livewire:show-post :$post :key="$post->id" /> <!-- [!code highlight] -->
         ...
     </div>
 @endforeach
@@ -63,11 +63,11 @@ Livewire 컴포넌트가 `@foreach` 반복문 안에 깊게 중첩되어 있을 
 ```blade
 <div>
     @foreach($posts as $post)
-        <div wire:key="post-{{ $post->id }}">...</div> <!-- [tl! highlight] -->
+        <div wire:key="post-{{ $post->id }}">...</div> <!-- [!code highlight] -->
     @endforeach
 
     @foreach($authors as $author)
-        <div wire:key="author-{{ $author->id }}">...</div> <!-- [tl! highlight] -->
+        <div wire:key="author-{{ $author->id }}">...</div> <!-- [!code highlight] -->
     @endforeach
 </div>
 ```

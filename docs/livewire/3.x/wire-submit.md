@@ -35,7 +35,7 @@ class CreatePost extends Component
 ```
 
 ```blade
-<form wire:submit="save"> <!-- [tl! highlight] -->
+<form wire:submit="save"> <!-- [!code highlight] -->
     <input type="text" wire:model="title">
 
     <textarea wire:model="content"></textarea>

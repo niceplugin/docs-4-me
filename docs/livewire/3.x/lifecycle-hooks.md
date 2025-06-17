@@ -95,7 +95,7 @@ class ShowPost extends Component
 
     protected Post $post;
 
-    public function boot() // [tl! highlight:3]
+    public function boot() // [!code highlight:3]
     {
         $this->post = Post::find($this->postId);
     }
@@ -315,7 +315,7 @@ use Livewire\Component;
 
 class ShowPost extends Component
 {
-    public function mount() // [tl! highlight:3]
+    public function mount() // [!code highlight:3]
     {
         $this->post = Post::find($this->postId);
     }

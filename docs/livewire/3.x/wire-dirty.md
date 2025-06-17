@@ -23,7 +23,7 @@ Livewire를 사용하면 `wire:dirty` 지시어를 통해 페이지의 시각적
 
     <button type="submit">Update</button>
 
-    <div wire:dirty>저장되지 않은 변경 사항...</div> <!-- [tl! highlight] -->
+    <div wire:dirty>저장되지 않은 변경 사항...</div> <!-- [!code highlight] -->
 </form>
 ```
 
@@ -49,7 +49,7 @@ Livewire를 사용하면 `wire:dirty` 지시어를 통해 페이지의 시각적
 <form wire:submit="update">
     <input wire:model.blur="title">
 
-    <div wire:dirty wire:target="title">저장되지 않은 제목...</div> <!-- [tl! highlight] -->
+    <div wire:dirty wire:target="title">저장되지 않은 제목...</div> <!-- [!code highlight] -->
 
     <button type="submit">업데이트</button>
 </form>
