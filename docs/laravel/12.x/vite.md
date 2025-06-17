@@ -1,96 +1,96 @@
-# Asset Bundling (Vite)
+# 에셋 번들링 (Vite)
 
-- [Introduction](#introduction)
-- [Installation & Setup](#installation)
-  - [Installing Node](#installing-node)
-  - [Installing Vite and the Laravel Plugin](#installing-vite-and-laravel-plugin)
-  - [Configuring Vite](#configuring-vite)
-  - [Loading Your Scripts and Styles](#loading-your-scripts-and-styles)
-- [Running Vite](#running-vite)
-- [Working With JavaScript](#working-with-scripts)
-  - [Aliases](#aliases)
-  - [Vue](#vue)
-  - [React](#react)
-  - [Inertia](#inertia)
-  - [URL Processing](#url-processing)
-- [Working With Stylesheets](#working-with-stylesheets)
-- [Working With Blade and Routes](#working-with-blade-and-routes)
-  - [Processing Static Assets With Vite](#blade-processing-static-assets)
-  - [Refreshing on Save](#blade-refreshing-on-save)
-  - [Aliases](#blade-aliases)
-- [Asset Prefetching](#asset-prefetching)
-- [Custom Base URLs](#custom-base-urls)
-- [Environment Variables](#environment-variables)
-- [Disabling Vite in Tests](#disabling-vite-in-tests)
-- [Server-Side Rendering (SSR)](#ssr)
-- [Script and Style Tag Attributes](#script-and-style-attributes)
-  - [Content Security Policy (CSP) Nonce](#content-security-policy-csp-nonce)
-  - [Subresource Integrity (SRI)](#subresource-integrity-sri)
-  - [Arbitrary Attributes](#arbitrary-attributes)
-- [Advanced Customization](#advanced-customization)
-  - [Dev Server Cross-Origin Resource Sharing (CORS)](#cors)
-  - [Correcting Dev Server URLs](#correcting-dev-server-urls)
 
-<a name="introduction"></a>
-## Introduction
 
-[Vite](https://vitejs.dev) is a modern frontend build tool that provides an extremely fast development environment and bundles your code for production. When building applications with Laravel, you will typically use Vite to bundle your application's CSS and JavaScript files into production ready assets.
 
-Laravel integrates seamlessly with Vite by providing an official plugin and Blade directive to load your assets for development and production.
 
-> [!NOTE]
-> Are you running Laravel Mix? Vite has replaced Laravel Mix in new Laravel installations. For Mix documentation, please visit the [Laravel Mix](https://laravel-mix.com/) website. If you would like to switch to Vite, please see our [migration guide](https://github.com/laravel/vite-plugin/blob/main/UPGRADE.md#migrating-from-laravel-mix-to-vite).
 
-<a name="vite-or-mix"></a>
-#### Choosing Between Vite and Laravel Mix
 
-Before transitioning to Vite, new Laravel applications utilized [Mix](https://laravel-mix.com/), which is powered by [webpack](https://webpack.js.org/), when bundling assets. Vite focuses on providing a faster and more productive experience when building rich JavaScript applications. If you are developing a Single Page Application (SPA), including those developed with tools like [Inertia](https://inertiajs.com), Vite will be the perfect fit.
 
-Vite also works well with traditional server-side rendered applications with JavaScript "sprinkles", including those using [Livewire](https://livewire.laravel.com). However, it lacks some features that Laravel Mix supports, such as the ability to copy arbitrary assets into the build that are not referenced directly in your JavaScript application.
 
-<a name="migrating-back-to-mix"></a>
-#### Migrating Back to Mix
 
-Have you started a new Laravel application using our Vite scaffolding but need to move back to Laravel Mix and webpack? No problem. Please consult our [official guide on migrating from Vite to Mix](https://github.com/laravel/vite-plugin/blob/main/UPGRADE.md#migrating-from-vite-to-laravel-mix).
 
-<a name="installation"></a>
-## Installation & Setup
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 소개 {#introduction}
+
+[Vite](https://vitejs.dev)는 매우 빠른 개발 환경을 제공하고, 프로덕션용으로 코드를 번들링해주는 최신 프론트엔드 빌드 도구입니다. Laravel로 애플리케이션을 개발할 때, 일반적으로 Vite를 사용하여 애플리케이션의 CSS와 JavaScript 파일을 프로덕션에 적합한 에셋으로 번들링합니다.
+
+Laravel은 공식 플러그인과 Blade 지시어를 제공하여 개발 및 프로덕션 환경에서 에셋을 로드할 수 있도록 Vite와 완벽하게 통합됩니다.
 
 > [!NOTE]
-> The following documentation discusses how to manually install and configure the Laravel Vite plugin. However, Laravel's [starter kits](/laravel/12.x/starter-kits) already include all of this scaffolding and are the fastest way to get started with Laravel and Vite.
+> Laravel Mix를 사용하고 계신가요? Vite는 새로운 Laravel 설치에서 Laravel Mix를 대체하였습니다. Mix 문서는 [Laravel Mix](https://laravel-mix.com/) 웹사이트를 참고하세요. Vite로 전환하고 싶으시다면, [마이그레이션 가이드](https://github.com/laravel/vite-plugin/blob/main/UPGRADE.md#migrating-from-laravel-mix-to-vite)를 참고하세요.
 
-<a name="installing-node"></a>
-### Installing Node
 
-You must ensure that Node.js (16+) and NPM are installed before running Vite and the Laravel plugin:
+#### Vite와 Laravel Mix 중 선택하기 {#vite-or-mix}
+
+Vite로 전환하기 전까지, 새로운 Laravel 애플리케이션은 에셋 번들링 시 [webpack](https://webpack.js.org/) 기반의 [Mix](https://laravel-mix.com/)를 사용했습니다. Vite는 풍부한 JavaScript 애플리케이션을 구축할 때 더 빠르고 생산적인 경험을 제공하는 데 중점을 둡니다. [Inertia](https://inertiajs.com)와 같은 도구로 개발된 SPA(싱글 페이지 애플리케이션)를 개발한다면, Vite가 완벽한 선택이 될 것입니다.
+
+Vite는 [Livewire](https://livewire.laravel.com)와 같이 JavaScript "스프링클"이 포함된 전통적인 서버 사이드 렌더링 애플리케이션과도 잘 작동합니다. 하지만, Vite는 Laravel Mix가 지원하는 일부 기능, 예를 들어 JavaScript 애플리케이션에서 직접 참조하지 않는 임의의 에셋을 빌드에 복사하는 기능 등은 제공하지 않습니다.
+
+
+#### Mix로 다시 마이그레이션하기 {#migrating-back-to-mix}
+
+Vite 스캐폴딩을 사용하여 새로운 Laravel 애플리케이션을 시작했지만 Laravel Mix와 webpack으로 다시 이동해야 하나요? 문제 없습니다. [Vite에서 Mix로 마이그레이션하는 공식 가이드](https://github.com/laravel/vite-plugin/blob/main/UPGRADE.md#migrating-from-vite-to-laravel-mix)를 참고하세요.
+
+
+## 설치 및 설정 {#installation}
+
+> [!NOTE]
+> 다음 문서는 Laravel Vite 플러그인을 수동으로 설치하고 구성하는 방법에 대해 설명합니다. 하지만, Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 이 모든 기본 구조가 포함되어 있으며, Laravel과 Vite를 시작하는 가장 빠른 방법입니다.
+
+
+### Node 설치 {#installing-node}
+
+Vite와 Laravel 플러그인을 실행하기 전에 Node.js(16+)와 NPM이 설치되어 있어야 합니다:
 
 ```shell
 node -v
 npm -v
 ```
 
-You can easily install the latest version of Node and NPM using simple graphical installers from [the official Node website](https://nodejs.org/en/download/). Or, if you are using [Laravel Sail](/laravel/12.x/sail.html), you may invoke Node and NPM through Sail:
+최신 버전의 Node와 NPM은 [공식 Node 웹사이트](https://nodejs.org/en/download/)에서 제공하는 간단한 그래픽 설치 프로그램을 통해 쉽게 설치할 수 있습니다. 또는, [Laravel Sail](https://laravel.com/docs/{{version}}/sail)을 사용 중이라면 Sail을 통해 Node와 NPM을 실행할 수도 있습니다:
 
 ```shell
 ./vendor/bin/sail node -v
 ./vendor/bin/sail npm -v
 ```
 
-<a name="installing-vite-and-laravel-plugin"></a>
-### Installing Vite and the Laravel Plugin
 
-Within a fresh installation of Laravel, you will find a `package.json` file in the root of your application's directory structure. The default `package.json` file already includes everything you need to get started using Vite and the Laravel plugin. You may install your application's frontend dependencies via NPM:
+### Vite 및 Laravel 플러그인 설치 {#installing-vite-and-laravel-plugin}
+
+Laravel을 새로 설치하면 애플리케이션 디렉터리 구조의 루트에 `package.json` 파일이 있습니다. 기본 `package.json` 파일에는 Vite와 Laravel 플러그인을 사용하기 위해 필요한 모든 것이 이미 포함되어 있습니다. NPM을 통해 애플리케이션의 프론트엔드 의존성을 설치할 수 있습니다:
 
 ```shell
 npm install
 ```
 
-<a name="configuring-vite"></a>
-### Configuring Vite
 
-Vite is configured via a `vite.config.js` file in the root of your project. You are free to customize this file based on your needs, and you may also install any other plugins your application requires, such as `@vitejs/plugin-vue` or `@vitejs/plugin-react`.
+### Vite 설정하기 {#configuring-vite}
 
-The Laravel Vite plugin requires you to specify the entry points for your application. These may be JavaScript or CSS files, and include preprocessed languages such as TypeScript, JSX, TSX, and Sass.
+Vite는 프로젝트 루트에 위치한 `vite.config.js` 파일을 통해 설정됩니다. 이 파일은 필요에 따라 자유롭게 커스터마이즈할 수 있으며, `@vitejs/plugin-vue`나 `@vitejs/plugin-react`와 같이 애플리케이션에 필요한 다른 플러그인도 설치할 수 있습니다.
+
+Laravel Vite 플러그인은 애플리케이션의 엔트리 포인트를 지정해주어야 합니다. 이 엔트리 포인트는 JavaScript 또는 CSS 파일일 수 있으며, TypeScript, JSX, TSX, Sass와 같은 전처리 언어도 포함할 수 있습니다.
 
 ```js
 import { defineConfig } from 'vite';
@@ -106,7 +106,7 @@ export default defineConfig({
 });
 ```
 
-If you are building an SPA, including applications built using Inertia, Vite works best without CSS entry points:
+SPA를 빌드하는 경우, Inertia를 사용하는 애플리케이션을 포함하여, Vite는 CSS 엔트리 포인트 없이 동작할 때 가장 잘 작동합니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -115,30 +115,30 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel([
-            'resources/css/app.css', // [!code --]
+            'resources/css/app.css', // [tl! remove]
             'resources/js/app.js',
         ]),
     ],
 });
 ```
 
-Instead, you should import your CSS via JavaScript. Typically, this would be done in your application's `resources/js/app.js` file:
+대신, CSS는 JavaScript를 통해 임포트해야 합니다. 일반적으로, 이는 애플리케이션의 `resources/js/app.js` 파일에서 수행됩니다:
 
 ```js
 import './bootstrap';
-import '../css/app.css'; // [!code ++]
+import '../css/app.css'; // [tl! add]
 ```
 
-The Laravel plugin also supports multiple entry points and advanced configuration options such as [SSR entry points](#ssr).
+Laravel 플러그인은 또한 여러 개의 엔트리 포인트와 [SSR 엔트리 포인트](#ssr)와 같은 고급 설정 옵션도 지원합니다.
 
-<a name="working-with-a-secure-development-server"></a>
-#### Working With a Secure Development Server
 
-If your local development web server is serving your application via HTTPS, you may run into issues connecting to the Vite development server.
+#### 보안 개발 서버와 함께 작업하기 {#working-with-a-secure-development-server}
 
-If you are using [Laravel Herd](https://herd.laravel.com) and have secured the site or you are using [Laravel Valet](/laravel/12.x/valet) and have run the [secure command](/laravel/12.x/valet#securing-sites) against your application, the Laravel Vite plugin will automatically detect and use the generated TLS certificate for you.
+로컬 개발 웹 서버가 애플리케이션을 HTTPS로 제공하는 경우, Vite 개발 서버에 연결할 때 문제가 발생할 수 있습니다.
 
-If you secured the site using a host that does not match the application's directory name, you may manually specify the host in your application's `vite.config.js` file:
+[Laravel Herd](https://herd.laravel.com)를 사용하여 사이트를 보안 처리했거나, [Laravel Valet](/docs/{{version}}/valet)를 사용하고 애플리케이션에 대해 [secure 명령어](/docs/{{version}}/valet#securing-sites)를 실행한 경우, Laravel Vite 플러그인은 자동으로 생성된 TLS 인증서를 감지하여 사용합니다.
+
+사이트를 애플리케이션의 디렉터리 이름과 일치하지 않는 호스트로 보안 처리한 경우, 애플리케이션의 `vite.config.js` 파일에서 호스트를 수동으로 지정할 수 있습니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -148,39 +148,39 @@ export default defineConfig({
     plugins: [
         laravel({
             // ...
-            detectTls: 'my-app.test', // [!code ++]
+            detectTls: 'my-app.test', // [tl! add]
         }),
     ],
 });
 ```
 
-When using another web server, you should generate a trusted certificate and manually configure Vite to use the generated certificates:
+다른 웹 서버를 사용하는 경우, 신뢰할 수 있는 인증서를 생성하고 Vite가 생성된 인증서를 사용하도록 수동으로 설정해야 합니다:
 
 ```js
 // ...
-import fs from 'fs'; // [!code ++]
+import fs from 'fs'; // [tl! add]
 
-const host = 'my-app.test'; // [!code ++]
+const host = 'my-app.test'; // [tl! add]
 
 export default defineConfig({
     // ...
-    server: { // [!code ++]
-        host, // [!code ++]
-        hmr: { host }, // [!code ++]
-        https: { // [!code ++]
-            key: fs.readFileSync(`/path/to/${host}.key`), // [!code ++]
-            cert: fs.readFileSync(`/path/to/${host}.crt`), // [!code ++]
-        }, // [!code ++]
-    }, // [!code ++]
+    server: { // [tl! add]
+        host, // [tl! add]
+        hmr: { host }, // [tl! add]
+        https: { // [tl! add]
+            key: fs.readFileSync(`/path/to/${host}.key`), // [tl! add]
+            cert: fs.readFileSync(`/path/to/${host}.crt`), // [tl! add]
+        }, // [tl! add]
+    }, // [tl! add]
 });
 ```
 
-If you are unable to generate a trusted certificate for your system, you may install and configure the [@vitejs/plugin-basic-ssl plugin](https://github.com/vitejs/vite-plugin-basic-ssl). When using untrusted certificates, you will need to accept the certificate warning for Vite's development server in your browser by following the "Local" link in your console when running the `npm run dev` command.
+시스템에서 신뢰할 수 있는 인증서를 생성할 수 없는 경우, [@vitejs/plugin-basic-ssl 플러그인](https://github.com/vitejs/vite-plugin-basic-ssl)을 설치하고 설정할 수 있습니다. 신뢰되지 않는 인증서를 사용할 때는, `npm run dev` 명령어를 실행할 때 콘솔에 표시되는 "Local" 링크를 따라 브라우저에서 Vite 개발 서버의 인증서 경고를 수락해야 합니다.
 
-<a name="configuring-hmr-in-sail-on-wsl2"></a>
-#### Running the Development Server in Sail on WSL2
 
-When running the Vite development server within [Laravel Sail](/laravel/12.x/sail) on Windows Subsystem for Linux 2 (WSL2), you should add the following configuration to your `vite.config.js` file to ensure the browser can communicate with the development server:
+#### WSL2에서 Sail로 개발 서버 실행하기 {#configuring-hmr-in-sail-on-wsl2}
+
+Windows Subsystem for Linux 2 (WSL2)에서 [Laravel Sail](/docs/{{version}}/sail)를 사용하여 Vite 개발 서버를 실행할 때, 브라우저가 개발 서버와 통신할 수 있도록 `vite.config.js` 파일에 다음 설정을 추가해야 합니다:
 
 ```js
 // ...
@@ -195,12 +195,12 @@ export default defineConfig({
 });
 ```
 
-If your file changes are not being reflected in the browser while the development server is running, you may also need to configure Vite's [server.watch.usePolling option](https://vitejs.dev/config/server-options.html#server-watch).
+개발 서버가 실행 중임에도 파일 변경 사항이 브라우저에 반영되지 않는 경우, Vite의 [server.watch.usePolling 옵션](https://vitejs.dev/config/server-options.html#server-watch)도 추가로 설정해야 할 수 있습니다.
 
-<a name="loading-your-scripts-and-styles"></a>
-### Loading Your Scripts and Styles
 
-With your Vite entry points configured, you may now reference them in a `@vite()` Blade directive that you add to the `<head>` of your application's root template:
+### 스크립트와 스타일 불러오기 {#loading-your-scripts-and-styles}
+
+Vite 진입점을 설정했다면, 이제 애플리케이션의 루트 템플릿 `<head>`에 추가하는 `@vite()` Blade 지시문에서 이를 참조할 수 있습니다:
 
 ```blade
 <!DOCTYPE html>
@@ -211,7 +211,7 @@ With your Vite entry points configured, you may now reference them in a `@vite()
 </head>
 ```
 
-If you're importing your CSS via JavaScript, you only need to include the JavaScript entry point:
+CSS를 JavaScript를 통해 임포트하고 있다면, JavaScript 진입점만 포함하면 됩니다:
 
 ```blade
 <!DOCTYPE html>
@@ -222,23 +222,23 @@ If you're importing your CSS via JavaScript, you only need to include the JavaSc
 </head>
 ```
 
-The `@vite` directive will automatically detect the Vite development server and inject the Vite client to enable Hot Module Replacement. In build mode, the directive will load your compiled and versioned assets, including any imported CSS.
+`@vite` 지시문은 Vite 개발 서버를 자동으로 감지하고, 핫 모듈 교체(HMR)를 활성화하기 위해 Vite 클라이언트를 주입합니다. 빌드 모드에서는, 지시문이 컴파일되고 버전이 지정된 에셋(임포트된 CSS 포함)을 불러옵니다.
 
-If needed, you may also specify the build path of your compiled assets when invoking the `@vite` directive:
+필요하다면, `@vite` 지시문을 호출할 때 컴파일된 에셋의 빌드 경로를 지정할 수도 있습니다:
 
 ```blade
 <!doctype html>
 <head>
-    {{-- Given build path is relative to public path. --}}
+    {{-- 지정한 빌드 경로는 public 경로를 기준으로 합니다. --}}
 
     @vite('resources/js/app.js', 'vendor/courier/build')
 </head>
 ```
 
-<a name="inline-assets"></a>
-#### Inline Assets
 
-Sometimes it may be necessary to include the raw content of assets rather than linking to the versioned URL of the asset. For example, you may need to include asset content directly into your page when passing HTML content to a PDF generator. You may output the content of Vite assets using the `content` method provided by the `Vite` facade:
+#### 인라인 에셋 {#inline-assets}
+
+때때로 에셋의 버전이 지정된 URL을 링크하는 대신, 에셋의 원본 내용을 직접 포함해야 할 필요가 있습니다. 예를 들어, PDF 생성기에 HTML 콘텐츠를 전달할 때 에셋 내용을 페이지에 직접 포함해야 할 수 있습니다. `Vite` 파사드에서 제공하는 `content` 메서드를 사용하여 Vite 에셋의 내용을 출력할 수 있습니다:
 
 ```blade
 @use('Illuminate\Support\Facades\Vite')
@@ -256,30 +256,30 @@ Sometimes it may be necessary to include the raw content of assets rather than l
 </head>
 ```
 
-<a name="running-vite"></a>
-## Running Vite
 
-There are two ways you can run Vite. You may run the development server via the `dev` command, which is useful while developing locally. The development server will automatically detect changes to your files and instantly reflect them in any open browser windows.
+## Vite 실행하기 {#running-vite}
 
-Or, running the `build` command will version and bundle your application's assets and get them ready for you to deploy to production:
+Vite를 실행하는 방법에는 두 가지가 있습니다. 로컬에서 개발할 때 유용한 `dev` 명령어를 통해 개발 서버를 실행할 수 있습니다. 개발 서버는 파일의 변경 사항을 자동으로 감지하여, 열려 있는 모든 브라우저 창에 즉시 반영합니다.
+
+또는, `build` 명령어를 실행하면 애플리케이션의 에셋을 버전 관리하고 번들링하여 프로덕션 배포를 위해 준비할 수 있습니다:
 
 ```shell
-# Run the Vite development server...
+# Vite 개발 서버 실행...
 npm run dev
 
-# Build and version the assets for production...
+# 프로덕션용 에셋 빌드 및 버전 관리...
 npm run build
 ```
 
-If you are running the development server in [Sail](/laravel/12.x/sail) on WSL2, you may need some [additional configuration](#configuring-hmr-in-sail-on-wsl2) options.
+[WSL2](https://docs.microsoft.com/ko-kr/windows/wsl/)에서 [Sail](/docs/{{version}}/sail)로 개발 서버를 실행하는 경우, [추가 설정](#configuring-hmr-in-sail-on-wsl2)이 필요할 수 있습니다.
 
-<a name="working-with-scripts"></a>
-## Working With JavaScript
 
-<a name="aliases"></a>
-### Aliases
+## 자바스크립트와 함께 작업하기 {#working-with-scripts}
 
-By default, The Laravel plugin provides a common alias to help you hit the ground running and conveniently import your application's assets:
+
+### 별칭 {#aliases}
+
+기본적으로 Laravel 플러그인은 여러분이 빠르게 시작하고 애플리케이션의 에셋을 편리하게 임포트할 수 있도록 공통 별칭을 제공합니다:
 
 ```js
 {
@@ -287,7 +287,7 @@ By default, The Laravel plugin provides a common alias to help you hit the groun
 }
 ```
 
-You may overwrite the `'@'` alias by adding your own to the `vite.config.js` configuration file:
+`vite.config.js` 설정 파일에 직접 별칭을 추가하여 `'@'` 별칭을 덮어쓸 수 있습니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -305,16 +305,16 @@ export default defineConfig({
 });
 ```
 
-<a name="vue"></a>
-### Vue
 
-If you would like to build your frontend using the [Vue](https://vuejs.org/) framework, then you will also need to install the `@vitejs/plugin-vue` plugin:
+### Vue {#vue}
+
+프론트엔드를 [Vue](https://vuejs.org/) 프레임워크로 구축하고 싶다면, `@vitejs/plugin-vue` 플러그인도 설치해야 합니다:
 
 ```shell
 npm install --save-dev @vitejs/plugin-vue
 ```
 
-You may then include the plugin in your `vite.config.js` configuration file. There are a few additional options you will need when using the Vue plugin with Laravel:
+그런 다음 `vite.config.js` 설정 파일에 플러그인을 포함할 수 있습니다. Laravel에서 Vue 플러그인을 사용할 때는 몇 가지 추가 옵션이 필요합니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -327,17 +327,16 @@ export default defineConfig({
         vue({
             template: {
                 transformAssetUrls: {
-                    // The Vue plugin will re-write asset URLs, when referenced
-                    // in Single File Components, to point to the Laravel web
-                    // server. Setting this to `null` allows the Laravel plugin
-                    // to instead re-write asset URLs to point to the Vite
-                    // server instead.
+                    // Vue 플러그인은 싱글 파일 컴포넌트에서 참조된
+                    // 에셋 URL을 Laravel 웹 서버를 가리키도록 재작성합니다.
+                    // 이를 `null`로 설정하면 Laravel 플러그인이 대신
+                    // 에셋 URL을 Vite 서버를 가리키도록 재작성할 수 있습니다.
                     base: null,
 
-                    // The Vue plugin will parse absolute URLs and treat them
-                    // as absolute paths to files on disk. Setting this to
-                    // `false` will leave absolute URLs un-touched so they can
-                    // reference assets in the public directory as expected.
+                    // Vue 플러그인은 절대 URL을 파싱하여
+                    // 디스크의 파일에 대한 절대 경로로 처리합니다.
+                    // 이를 `false`로 설정하면 절대 URL을 그대로 두어
+                    // public 디렉터리의 에셋을 정상적으로 참조할 수 있습니다.
                     includeAbsolute: false,
                 },
             },
@@ -347,18 +346,19 @@ export default defineConfig({
 ```
 
 > [!NOTE]
-> Laravel's [starter kits](/laravel/12.x/starter-kits) already include the proper Laravel, Vue, and Vite configuration.These starter kits offer the fastest way to get started with Laravel, Vue, and Vite.
+> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Laravel, Vue, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, Vue, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
 
-<a name="react"></a>
-### React
 
-If you would like to build your frontend using the [React](https://reactjs.org/) framework, then you will also need to install the `@vitejs/plugin-react` plugin:
+
+### React {#react}
+
+프론트엔드를 [React](https://reactjs.org/) 프레임워크로 구축하고 싶다면, `@vitejs/plugin-react` 플러그인도 설치해야 합니다:
 
 ```shell
 npm install --save-dev @vitejs/plugin-react
 ```
 
-You may then include the plugin in your `vite.config.js` configuration file:
+그런 다음, `vite.config.js` 설정 파일에 플러그인을 포함할 수 있습니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -373,24 +373,24 @@ export default defineConfig({
 });
 ```
 
-You will need to ensure that any files containing JSX have a `.jsx` or `.tsx` extension, remembering to update your entry point, if required, as [shown above](#configuring-vite).
+JSX가 포함된 파일은 `.jsx` 또는 `.tsx` 확장자를 사용해야 하며, 필요하다면 [위에서 설명한 대로](#configuring-vite) 진입점도 업데이트해야 합니다.
 
-You will also need to include the additional `@viteReactRefresh` Blade directive alongside your existing `@vite` directive.
+또한 기존의 `@vite` 디렉티브와 함께 추가로 `@viteReactRefresh` Blade 디렉티브를 포함해야 합니다.
 
 ```blade
 @viteReactRefresh
 @vite('resources/js/app.jsx')
 ```
 
-The `@viteReactRefresh` directive must be called before the `@vite` directive.
+`@viteReactRefresh` 디렉티브는 반드시 `@vite` 디렉티브보다 먼저 호출되어야 합니다.
 
 > [!NOTE]
-> Laravel's [starter kits](/laravel/12.x/starter-kits) already include the proper Laravel, React, and Vite configuration.These starter kits offer the fastest way to get started with Laravel, React, and Vite.
+> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Laravel, React, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, React, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
 
-<a name="inertia"></a>
-### Inertia
 
-The Laravel Vite plugin provides a convenient `resolvePageComponent` function to help you resolve your Inertia page components. Below is an example of the helper in use with Vue 3; however, you may also utilize the function in other frameworks such as React:
+### Inertia {#inertia}
+
+Laravel Vite 플러그인은 Inertia 페이지 컴포넌트를 쉽게 해결할 수 있도록 `resolvePageComponent` 함수를 제공합니다. 아래는 Vue 3에서 이 헬퍼를 사용하는 예시이지만, React와 같은 다른 프레임워크에서도 이 함수를 사용할 수 있습니다:
 
 ```js
 import { createApp, h } from 'vue';
@@ -407,19 +407,19 @@ createInertiaApp({
 });
 ```
 
-If you are using Vite's code splitting feature with Inertia, we recommend configuring [asset prefetching](#asset-prefetching).
+Inertia와 함께 Vite의 코드 분할 기능을 사용하는 경우, [에셋 프리페칭](#asset-prefetching) 구성을 권장합니다.
 
 > [!NOTE]
-> Laravel's [starter kits](/laravel/12.x/starter-kits) already include the proper Laravel, Inertia, and Vite configuration.These starter kits offer the fastest way to get started with Laravel, Inertia, and Vite.
+> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Laravel, Inertia, Vite 구성이 포함되어 있습니다. 이 스타터 키트는 Laravel, Inertia, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
 
-<a name="url-processing"></a>
-### URL Processing
 
-When using Vite and referencing assets in your application's HTML, CSS, or JS, there are a couple of caveats to consider. First, if you reference assets with an absolute path, Vite will not include the asset in the build; therefore, you should ensure that the asset is available in your public directory. You should avoid using absolute paths when using a [dedicated CSS entrypoint](#configuring-vite) because, during development, browsers will try to load these paths from the Vite development server, where the CSS is hosted, rather than from your public directory.
+### URL 처리 {#url-processing}
 
-When referencing relative asset paths, you should remember that the paths are relative to the file where they are referenced. Any assets referenced via a relative path will be re-written, versioned, and bundled by Vite.
+Vite를 사용하여 애플리케이션의 HTML, CSS, 또는 JS에서 에셋을 참조할 때 몇 가지 주의해야 할 점이 있습니다. 먼저, 에셋을 절대 경로로 참조하면 Vite는 해당 에셋을 빌드에 포함하지 않습니다. 따라서 해당 에셋이 public 디렉터리에 존재하는지 반드시 확인해야 합니다. [별도의 CSS 엔트리포인트](#configuring-vite)를 사용할 때는 절대 경로 사용을 피해야 합니다. 개발 중에는 브라우저가 CSS가 호스팅되는 Vite 개발 서버에서 이러한 경로를 로드하려고 시도하기 때문이며, 이는 public 디렉터리에서 로드하는 것이 아닙니다.
 
-Consider the following project structure:
+상대 경로로 에셋을 참조할 때는 해당 경로가 참조되는 파일을 기준으로 상대적임을 기억해야 합니다. 상대 경로로 참조된 모든 에셋은 Vite에 의해 경로가 재작성되고, 버전이 부여되며, 번들링됩니다.
+
+다음은 프로젝트 구조 예시입니다:
 
 ```text
 public/
@@ -432,39 +432,39 @@ resources/
     abigail.png
 ```
 
-The following example demonstrates how Vite will treat relative and absolute URLs:
+다음 예시는 Vite가 상대 URL과 절대 URL을 어떻게 처리하는지 보여줍니다:
 
 ```html
-<!-- This asset is not handled by Vite and will not be included in the build -->
+<!-- 이 에셋은 Vite에 의해 처리되지 않으며 빌드에 포함되지 않습니다 -->
 <img src="/taylor.png">
 
-<!-- This asset will be re-written, versioned, and bundled by Vite -->
+<!-- 이 에셋은 Vite에 의해 경로가 재작성되고, 버전이 부여되며, 번들링됩니다 -->
 <img src="../../images/abigail.png">
 ```
 
-<a name="working-with-stylesheets"></a>
-## Working With Stylesheets
+
+## 스타일시트 작업하기 {#working-with-stylesheets}
 
 > [!NOTE]
-> Laravel's [starter kits](/laravel/12.x/starter-kits) already include the proper Tailwind and Vite configuration. Or, if you would like to use Tailwind and Laravel without using one of our starter kits, check out [Tailwind's installation guide for Laravel](https://tailwindcss.com/docs/guides/laravel).
+> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Tailwind와 Vite 설정이 포함되어 있습니다. 또는, 스타터 키트를 사용하지 않고 Tailwind와 Laravel을 함께 사용하고 싶다면 [Tailwind의 Laravel 설치 가이드](https://tailwindcss.com/docs/guides/laravel)를 참고하세요.
 
-All Laravel applications already include Tailwind and a properly configured `vite.config.js` file. So, you only need to start the Vite development server or run the `dev` Composer command, which will start both the Laravel and Vite development servers:
+모든 Laravel 애플리케이션에는 이미 Tailwind와 적절하게 구성된 `vite.config.js` 파일이 포함되어 있습니다. 따라서 Vite 개발 서버를 시작하거나, `dev` Composer 명령어를 실행하면 Laravel과 Vite 개발 서버가 모두 시작됩니다:
 
 ```shell
 composer run dev
 ```
 
-Your application's CSS may be placed within the `resources/css/app.css` file.
+애플리케이션의 CSS는 `resources/css/app.css` 파일에 위치할 수 있습니다.
 
-<a name="working-with-blade-and-routes"></a>
-## Working With Blade and Routes
 
-<a name="blade-processing-static-assets"></a>
-### Processing Static Assets With Vite
+## Blade 및 라우트 작업하기 {#working-with-blade-and-routes}
 
-When referencing assets in your JavaScript or CSS, Vite automatically processes and versions them. In addition, when building Blade based applications, Vite can also process and version static assets that you reference solely in Blade templates.
 
-However, in order to accomplish this, you need to make Vite aware of your assets by importing the static assets into the application's entry point. For example, if you want to process and version all images stored in `resources/images` and all fonts stored in `resources/fonts`, you should add the following in your application's `resources/js/app.js` entry point:
+### Vite로 정적 에셋 처리하기 {#blade-processing-static-assets}
+
+JavaScript나 CSS에서 에셋을 참조할 때, Vite는 자동으로 해당 에셋을 처리하고 버전 관리를 해줍니다. 또한, Blade 기반 애플리케이션을 빌드할 때, Vite는 Blade 템플릿에서만 참조되는 정적 에셋도 처리하고 버전 관리를 할 수 있습니다.
+
+하지만 이를 위해서는, 애플리케이션의 엔트리 포인트에 정적 에셋을 import하여 Vite가 해당 에셋을 인식할 수 있도록 해야 합니다. 예를 들어, `resources/images`에 저장된 모든 이미지와 `resources/fonts`에 저장된 모든 폰트를 처리하고 버전 관리하고 싶다면, 애플리케이션의 `resources/js/app.js` 엔트리 포인트에 다음과 같이 추가해야 합니다:
 
 ```js
 import.meta.glob([
@@ -473,16 +473,16 @@ import.meta.glob([
 ]);
 ```
 
-These assets will now be processed by Vite when running `npm run build`. You can then reference these assets in Blade templates using the `Vite::asset` method, which will return the versioned URL for a given asset:
+이제 이러한 에셋들은 `npm run build`를 실행할 때 Vite에 의해 처리됩니다. 이후 Blade 템플릿에서 `Vite::asset` 메서드를 사용하여 해당 에셋을 참조할 수 있으며, 이 메서드는 주어진 에셋의 버전이 적용된 URL을 반환합니다:
 
 ```blade
 <img src="{{ Vite::asset('resources/images/logo.png') }}">
 ```
 
-<a name="blade-refreshing-on-save"></a>
-### Refreshing on Save
 
-When your application is built using traditional server-side rendering with Blade, Vite can improve your development workflow by automatically refreshing the browser when you make changes to view files in your application. To get started, you can simply specify the `refresh` option as `true`.
+### 저장 시 새로고침 {#blade-refreshing-on-save}
+
+애플리케이션이 Blade를 사용한 전통적인 서버 사이드 렌더링으로 구축된 경우, Vite는 애플리케이션의 뷰 파일을 변경할 때 브라우저를 자동으로 새로고침하여 개발 워크플로우를 개선할 수 있습니다. 시작하려면, `refresh` 옵션을 `true`로 지정하면 됩니다.
 
 ```js
 import { defineConfig } from 'vite';
@@ -498,7 +498,7 @@ export default defineConfig({
 });
 ```
 
-When the `refresh` option is `true`, saving files in the following directories will trigger the browser to perform a full page refresh while you are running `npm run dev`:
+`refresh` 옵션이 `true`로 설정되어 있으면, 다음 디렉터리 내의 파일을 저장할 때 `npm run dev`를 실행 중인 브라우저에서 전체 페이지 새로고침이 트리거됩니다:
 
 - `app/Livewire/**`
 - `app/View/Components/**`
@@ -507,9 +507,9 @@ When the `refresh` option is `true`, saving files in the following directories w
 - `resources/views/**`
 - `routes/**`
 
-Watching the `routes/**` directory is useful if you are utilizing [Ziggy](https://github.com/tighten/ziggy) to generate route links within your application's frontend.
+`routes/**` 디렉터리를 감시하는 것은 애플리케이션의 프론트엔드에서 [Ziggy](https://github.com/tighten/ziggy)를 사용해 라우트 링크를 생성하는 경우에 유용합니다.
 
-If these default paths do not suit your needs, you can specify your own list of paths to watch:
+이 기본 경로들이 필요에 맞지 않는 경우, 감시할 경로 목록을 직접 지정할 수 있습니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -525,7 +525,7 @@ export default defineConfig({
 });
 ```
 
-Under the hood, the Laravel Vite plugin uses the [vite-plugin-full-reload](https://github.com/ElMassimo/vite-plugin-full-reload) package, which offers some advanced configuration options to fine-tune this feature's behavior. If you need this level of customization, you may provide a `config` definition:
+내부적으로, Laravel Vite 플러그인은 [vite-plugin-full-reload](https://github.com/ElMassimo/vite-plugin-full-reload) 패키지를 사용하며, 이 패키지는 이 기능의 동작을 세밀하게 조정할 수 있는 고급 설정 옵션을 제공합니다. 이러한 수준의 커스터마이징이 필요하다면, `config` 정의를 제공할 수 있습니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -544,14 +544,14 @@ export default defineConfig({
 });
 ```
 
-<a name="blade-aliases"></a>
-### Aliases
 
-It is common in JavaScript applications to [create aliases](#aliases) to regularly referenced directories. But, you may also create aliases to use in Blade by using the `macro` method on the `Illuminate\Support\Facades\Vite` class. Typically, "macros" should be defined within the `boot` method of a [service provider](/laravel/12.x/providers):
+### 별칭 {#blade-aliases}
+
+JavaScript 애플리케이션에서는 자주 참조하는 디렉터리에 [별칭을 생성](#aliases)하는 것이 일반적입니다. 하지만, Blade에서도 `Illuminate\Support\Facades\Vite` 클래스의 `macro` 메서드를 사용하여 별칭을 생성할 수 있습니다. 일반적으로 "매크로"는 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드 내에서 정의해야 합니다:
 
 ```php
 /**
- * Bootstrap any application services.
+ * 애플리케이션 서비스를 부트스트랩합니다.
  */
 public function boot(): void
 {
@@ -559,18 +559,18 @@ public function boot(): void
 }
 ```
 
-Once a macro has been defined, it can be invoked within your templates. For example, we can use the `image` macro defined above to reference an asset located at `resources/images/logo.png`:
+매크로가 정의되면, 템플릿 내에서 호출할 수 있습니다. 예를 들어, 위에서 정의한 `image` 매크로를 사용하여 `resources/images/logo.png`에 위치한 에셋을 참조할 수 있습니다:
 
 ```blade
 <img src="{{ Vite::image('logo.png') }}" alt="Laravel Logo">
 ```
 
-<a name="asset-prefetching"></a>
-## Asset Prefetching
 
-When building an SPA using Vite's code splitting feature, required assets are fetched on each page navigation. This behavior can lead to delayed UI rendering. If this is a problem for your frontend framework of choice, Laravel offers the ability to eagerly prefetch your application's JavaScript and CSS assets on initial page load.
+## 에셋 프리페칭 {#asset-prefetching}
 
-You can instruct Laravel to eagerly prefetch your assets by invoking the `Vite::prefetch` method in the `boot` method of a [service provider](/laravel/12.x/providers):
+Vite의 코드 분할 기능을 사용하여 SPA를 구축할 때, 필요한 에셋들은 각 페이지 이동 시마다 가져오게 됩니다. 이 동작은 UI 렌더링이 지연되는 원인이 될 수 있습니다. 만약 이 문제가 사용하는 프론트엔드 프레임워크에서 문제가 된다면, Laravel은 초기 페이지 로드 시 애플리케이션의 JavaScript와 CSS 에셋을 미리 프리페칭할 수 있는 기능을 제공합니다.
+
+에셋을 미리 프리페칭하도록 Laravel에 지시하려면, [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메소드에서 `Vite::prefetch` 메소드를 호출하면 됩니다:
 
 ```php
 <?php
@@ -583,7 +583,7 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * 애플리케이션 서비스를 등록합니다.
      */
     public function register(): void
     {
@@ -591,7 +591,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * 애플리케이션 서비스를 부트스트랩합니다.
      */
     public function boot(): void
     {
@@ -600,11 +600,11 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-In the example above, assets will be prefetched with a maximum of `3` concurrent downloads on each page load. You can modify the concurrency to suit your application's needs or specify no concurrency limit if the application should download all assets at once:
+위 예시에서, 에셋들은 각 페이지 로드마다 최대 `3`개의 동시 다운로드로 프리페칭됩니다. 애플리케이션의 필요에 따라 동시성(concurrency)을 조정하거나, 모든 에셋을 한 번에 다운로드하도록 동시성 제한을 지정하지 않을 수도 있습니다:
 
 ```php
 /**
- * Bootstrap any application services.
+ * 애플리케이션 서비스를 부트스트랩합니다.
  */
 public function boot(): void
 {
@@ -612,11 +612,11 @@ public function boot(): void
 }
 ```
 
-By default, prefetching will begin when the [page _load_ event](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) fires. If you would like to customize when prefetching begins, you may specify an event that Vite will listen for:
+기본적으로 프리페칭은 [page _load_ 이벤트](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event)가 발생할 때 시작됩니다. 프리페칭이 시작되는 시점을 커스터마이즈하고 싶다면, Vite가 리스닝할 이벤트를 지정할 수 있습니다:
 
 ```php
 /**
- * Bootstrap any application services.
+ * 애플리케이션 서비스를 부트스트랩합니다.
  */
 public function boot(): void
 {
@@ -624,7 +624,7 @@ public function boot(): void
 }
 ```
 
-Given the code above, prefetching will now begin when you manually dispatch the `vite:prefetch` event on the `window` object. For example, you could have prefetching begin three seconds after the page loads:
+위 코드에 따라, 이제 프리페칭은 `window` 객체에서 `vite:prefetch` 이벤트를 수동으로 디스패치할 때 시작됩니다. 예를 들어, 페이지가 로드된 후 3초 뒤에 프리페칭을 시작할 수도 있습니다:
 
 ```html
 <script>
@@ -634,44 +634,44 @@ Given the code above, prefetching will now begin when you manually dispatch the 
 </script>
 ```
 
-<a name="custom-base-urls"></a>
-## Custom Base URLs
 
-If your Vite compiled assets are deployed to a domain separate from your application, such as via a CDN, you must specify the `ASSET_URL` environment variable within your application's `.env` file:
+## 커스텀 기본 URL {#custom-base-urls}
+
+Vite로 컴파일된 에셋이 CDN과 같이 애플리케이션과 다른 도메인에 배포되는 경우, 애플리케이션의 `.env` 파일에 `ASSET_URL` 환경 변수를 지정해야 합니다:
 
 ```env
 ASSET_URL=https://cdn.example.com
 ```
 
-After configuring the asset URL, all re-written URLs to your assets will be prefixed with the configured value:
+에셋 URL을 설정하면, 에셋에 대한 모든 재작성된 URL 앞에 설정한 값이 접두사로 붙게 됩니다:
 
 ```text
 https://cdn.example.com/build/assets/app.9dce8d17.js
 ```
 
-Remember that [absolute URLs are not re-written by Vite](#url-processing), so they will not be prefixed.
+[절대 URL은 Vite에 의해 재작성되지 않으므로](#url-processing), 접두사가 붙지 않는다는 점을 기억하세요.
 
-<a name="environment-variables"></a>
-## Environment Variables
 
-You may inject environment variables into your JavaScript by prefixing them with `VITE_` in your application's `.env` file:
+## 환경 변수 {#environment-variables}
+
+애플리케이션의 `.env` 파일에서 환경 변수 앞에 `VITE_`를 붙여 JavaScript에 환경 변수를 주입할 수 있습니다:
 
 ```env
 VITE_SENTRY_DSN_PUBLIC=http://example.com
 ```
 
-You may access injected environment variables via the `import.meta.env` object:
+주입된 환경 변수는 `import.meta.env` 객체를 통해 접근할 수 있습니다:
 
 ```js
 import.meta.env.VITE_SENTRY_DSN_PUBLIC
 ```
 
-<a name="disabling-vite-in-tests"></a>
-## Disabling Vite in Tests
 
-Laravel's Vite integration will attempt to resolve your assets while running your tests, which requires you to either run the Vite development server or build your assets.
+## 테스트에서 Vite 비활성화하기 {#disabling-vite-in-tests}
 
-If you would prefer to mock Vite during testing, you may call the `withoutVite` method, which is available for any tests that extend Laravel's `TestCase` class:
+Laravel의 Vite 통합은 테스트를 실행하는 동안 에셋을 해석하려고 시도하므로, Vite 개발 서버를 실행하거나 에셋을 빌드해야 합니다.
+
+테스트 중에 Vite를 모킹하고 싶다면, Laravel의 `TestCase` 클래스를 확장한 모든 테스트에서 사용할 수 있는 `withoutVite` 메서드를 호출할 수 있습니다:
 
 ```php tab=Pest
 test('without vite example', function () {
@@ -695,7 +695,7 @@ class ExampleTest extends TestCase
 }
 ```
 
-If you would like to disable Vite for all tests, you may call the `withoutVite` method from the `setUp` method on your base `TestCase` class:
+모든 테스트에서 Vite를 비활성화하고 싶다면, 기본 `TestCase` 클래스의 `setUp` 메서드에서 `withoutVite` 메서드를 호출하면 됩니다:
 
 ```php
 <?php
@@ -715,10 +715,10 @@ abstract class TestCase extends BaseTestCase
 }
 ```
 
-<a name="ssr"></a>
-## Server-Side Rendering (SSR)
 
-The Laravel Vite plugin makes it painless to set up server-side rendering with Vite. To get started, create an SSR entry point at `resources/js/ssr.js` and specify the entry point by passing a configuration option to the Laravel plugin:
+## 서버 사이드 렌더링(SSR) {#ssr}
+
+Laravel Vite 플러그인은 Vite로 서버 사이드 렌더링을 손쉽게 설정할 수 있도록 도와줍니다. 시작하려면 `resources/js/ssr.js`에 SSR 엔트리 포인트를 생성하고, Laravel 플러그인에 설정 옵션을 전달하여 엔트리 포인트를 지정하세요:
 
 ```js
 import { defineConfig } from 'vite';
@@ -734,39 +734,39 @@ export default defineConfig({
 });
 ```
 
-To ensure you don't forget to rebuild the SSR entry point, we recommend augmenting the "build" script in your application's `package.json` to create your SSR build:
+SSR 엔트리 포인트를 재빌드하는 것을 잊지 않도록, 애플리케이션의 `package.json`에 있는 "build" 스크립트를 수정하여 SSR 빌드를 생성하는 것을 권장합니다:
 
 ```json
 "scripts": {
      "dev": "vite",
-     "build": "vite build" // [!code --]
-     "build": "vite build && vite build --ssr" // [!code ++]
+     "build": "vite build" // [tl! remove]
+     "build": "vite build && vite build --ssr" // [tl! add]
 }
 ```
 
-Then, to build and start the SSR server, you may run the following commands:
+그런 다음, SSR 서버를 빌드하고 시작하려면 다음 명령어를 실행하세요:
 
 ```shell
 npm run build
 node bootstrap/ssr/ssr.js
 ```
 
-If you are using [SSR with Inertia](https://inertiajs.com/server-side-rendering), you may instead use the `inertia:start-ssr` Artisan command to start the SSR server:
+[Inertia와 SSR](https://inertiajs.com/server-side-rendering)을 사용하는 경우, SSR 서버를 시작하기 위해 `inertia:start-ssr` Artisan 명령어를 대신 사용할 수 있습니다:
 
 ```shell
 php artisan inertia:start-ssr
 ```
 
 > [!NOTE]
-> Laravel's [starter kits](/laravel/12.x/starter-kits) already include the proper Laravel, Inertia SSR, and Vite configuration.These starter kits offer the fastest way to get started with Laravel, Inertia SSR, and Vite.
+> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Laravel, Inertia SSR, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, Inertia SSR, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
 
-<a name="script-and-style-attributes"></a>
-## Script and Style Tag Attributes
 
-<a name="content-security-policy-csp-nonce"></a>
-### Content Security Policy (CSP) Nonce
+## 스크립트 및 스타일 태그 속성 {#script-and-style-attributes}
 
-If you wish to include a [nonce attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce) on your script and style tags as part of your [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP), you may generate or specify a nonce using the `useCspNonce` method within a custom [middleware](/laravel/12.x/middleware):
+
+### 콘텐츠 보안 정책(CSP) Nonce {#content-security-policy-csp-nonce}
+
+스크립트 및 스타일 태그에 [nonce 속성](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce)을 [콘텐츠 보안 정책](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)의 일부로 포함하고 싶다면, 커스텀 [미들웨어](/docs/{{version}}/middleware) 내에서 `useCspNonce` 메서드를 사용하여 nonce를 생성하거나 지정할 수 있습니다:
 
 ```php
 <?php
@@ -781,7 +781,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AddContentSecurityPolicyHeaders
 {
     /**
-     * Handle an incoming request.
+     * 들어오는 요청을 처리합니다.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
@@ -796,47 +796,47 @@ class AddContentSecurityPolicyHeaders
 }
 ```
 
-After invoking the `useCspNonce` method, Laravel will automatically include the `nonce` attributes on all generated script and style tags.
+`useCspNonce` 메서드를 호출한 후에는, Laravel이 생성하는 모든 스크립트 및 스타일 태그에 자동으로 `nonce` 속성이 포함됩니다.
 
-If you need to specify the nonce elsewhere, including the [Ziggy `@route` directive](https://github.com/tighten/ziggy#using-routes-with-a-content-security-policy) included with Laravel's [starter kits](/laravel/12.x/starter-kits), you may retrieve it using the `cspNonce` method:
+다른 곳에서 nonce가 필요하다면, 예를 들어 Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에 포함된 [Ziggy `@route` 디렉티브](https://github.com/tighten/ziggy#using-routes-with-a-content-security-policy)에서도 `cspNonce` 메서드를 사용해 가져올 수 있습니다:
 
 ```blade
 @routes(nonce: Vite::cspNonce())
 ```
 
-If you already have a nonce that you would like to instruct Laravel to use, you may pass the nonce to the `useCspNonce` method:
+이미 사용하고자 하는 nonce가 있다면, 해당 nonce를 `useCspNonce` 메서드에 전달할 수 있습니다:
 
 ```php
 Vite::useCspNonce($nonce);
 ```
 
-<a name="subresource-integrity-sri"></a>
-### Subresource Integrity (SRI)
 
-If your Vite manifest includes `integrity` hashes for your assets, Laravel will automatically add the `integrity` attribute on any script and style tags it generates in order to enforce [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity). By default, Vite does not include the `integrity` hash in its manifest, but you may enable it by installing the [vite-plugin-manifest-sri](https://www.npmjs.com/package/vite-plugin-manifest-sri) NPM plugin:
+### 하위 리소스 무결성(SRI) {#subresource-integrity-sri}
+
+만약 Vite 매니페스트에 에셋의 `integrity` 해시가 포함되어 있다면, Laravel은 생성하는 모든 스크립트 및 스타일 태그에 자동으로 `integrity` 속성을 추가하여 [하위 리소스 무결성(Subresource Integrity)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity)을 적용합니다. 기본적으로 Vite는 매니페스트에 `integrity` 해시를 포함하지 않지만, [vite-plugin-manifest-sri](https://www.npmjs.com/package/vite-plugin-manifest-sri) NPM 플러그인을 설치하여 활성화할 수 있습니다:
 
 ```shell
 npm install --save-dev vite-plugin-manifest-sri
 ```
 
-You may then enable this plugin in your `vite.config.js` file:
+그런 다음, `vite.config.js` 파일에서 이 플러그인을 활성화할 수 있습니다:
 
 ```js
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import manifestSRI from 'vite-plugin-manifest-sri';// [!code ++]
+import manifestSRI from 'vite-plugin-manifest-sri';// [tl! add]
 
 export default defineConfig({
     plugins: [
         laravel({
             // ...
         }),
-        manifestSRI(),// [!code ++]
+        manifestSRI(),// [tl! add]
     ],
 });
 ```
 
-If required, you may also customize the manifest key where the integrity hash can be found:
+필요하다면, 무결성 해시가 저장될 매니페스트 키를 커스터마이즈할 수도 있습니다:
 
 ```php
 use Illuminate\Support\Facades\Vite;
@@ -844,24 +844,24 @@ use Illuminate\Support\Facades\Vite;
 Vite::useIntegrityKey('custom-integrity-key');
 ```
 
-If you would like to disable this auto-detection completely, you may pass `false` to the `useIntegrityKey` method:
+이 자동 감지를 완전히 비활성화하고 싶다면, `useIntegrityKey` 메서드에 `false`를 전달하면 됩니다:
 
 ```php
 Vite::useIntegrityKey(false);
 ```
 
-<a name="arbitrary-attributes"></a>
-### Arbitrary Attributes
 
-If you need to include additional attributes on your script and style tags, such as the [data-turbo-track](https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change) attribute, you may specify them via the `useScriptTagAttributes` and `useStyleTagAttributes` methods. Typically, this methods should be invoked from a [service provider](/laravel/12.x/providers):
+### 임의 속성 {#arbitrary-attributes}
+
+스크립트 및 스타일 태그에 [data-turbo-track](https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change) 속성과 같은 추가 속성을 포함해야 하는 경우, `useScriptTagAttributes` 및 `useStyleTagAttributes` 메서드를 통해 지정할 수 있습니다. 일반적으로 이 메서드들은 [서비스 프로바이더](/docs/{{version}}/providers)에서 호출해야 합니다:
 
 ```php
 use Illuminate\Support\Facades\Vite;
 
 Vite::useScriptTagAttributes([
-    'data-turbo-track' => 'reload', // Specify a value for the attribute...
-    'async' => true, // Specify an attribute without a value...
-    'integrity' => false, // Exclude an attribute that would otherwise be included...
+    'data-turbo-track' => 'reload', // 속성에 값을 지정...
+    'async' => true, // 값 없이 속성만 지정...
+    'integrity' => false, // 기본적으로 포함될 속성을 제외...
 ]);
 
 Vite::useStyleTagAttributes([
@@ -869,7 +869,7 @@ Vite::useStyleTagAttributes([
 ]);
 ```
 
-If you need to conditionally add attributes, you may pass a callback that will receive the asset source path, its URL, its manifest chunk, and the entire manifest:
+조건부로 속성을 추가해야 하는 경우, 에셋 소스 경로, URL, 매니페스트 청크, 전체 매니페스트를 인자로 받는 콜백을 전달할 수 있습니다:
 
 ```php
 use Illuminate\Support\Facades\Vite;
@@ -884,12 +884,12 @@ Vite::useStyleTagAttributes(fn (string $src, string $url, array|null $chunk, arr
 ```
 
 > [!WARNING]
-> The `$chunk` and `$manifest` arguments will be `null` while the Vite development server is running.
+> Vite 개발 서버가 실행 중일 때는 `$chunk` 및 `$manifest` 인자가 `null`이 됩니다.
 
-<a name="advanced-customization"></a>
-## Advanced Customization
 
-Out of the box, Laravel's Vite plugin uses sensible conventions that should work for the majority of applications; however, sometimes you may need to customize Vite's behavior. To enable additional customization options, we offer the following methods and options which can be used in place of the `@vite` Blade directive:
+## 고급 커스터마이징 {#advanced-customization}
+
+기본적으로 Laravel의 Vite 플러그인은 대부분의 애플리케이션에 적합한 합리적인 규칙을 사용합니다. 하지만 때로는 Vite의 동작을 커스터마이징해야 할 수도 있습니다. 추가 커스터마이징 옵션을 활성화하기 위해, `@vite` Blade 디렉티브 대신 사용할 수 있는 다음과 같은 메서드와 옵션을 제공합니다:
 
 ```blade
 <!doctype html>
@@ -897,18 +897,18 @@ Out of the box, Laravel's Vite plugin uses sensible conventions that should work
     {{-- ... --}}
 
     {{
-        Vite::useHotFile(storage_path('vite.hot')) // Customize the "hot" file...
-            ->useBuildDirectory('bundle') // Customize the build directory...
-            ->useManifestFilename('assets.json') // Customize the manifest filename...
-            ->withEntryPoints(['resources/js/app.js']) // Specify the entry points...
-            ->createAssetPathsUsing(function (string $path, ?bool $secure) { // Customize the backend path generation for built assets...
+        Vite::useHotFile(storage_path('vite.hot')) // "hot" 파일 커스터마이즈...
+            ->useBuildDirectory('bundle') // 빌드 디렉터리 커스터마이즈...
+            ->useManifestFilename('assets.json') // 매니페스트 파일명 커스터마이즈...
+            ->withEntryPoints(['resources/js/app.js']) // 엔트리 포인트 지정...
+            ->createAssetPathsUsing(function (string $path, ?bool $secure) { // 빌드된 에셋의 백엔드 경로 생성 커스터마이즈...
                 return "https://cdn.example.com/{$path}";
             })
     }}
 </head>
 ```
 
-Within the `vite.config.js` file, you should then specify the same configuration:
+`vite.config.js` 파일 내에서도 동일한 설정을 지정해야 합니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -917,36 +917,36 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            hotFile: 'storage/vite.hot', // Customize the "hot" file...
-            buildDirectory: 'bundle', // Customize the build directory...
-            input: ['resources/js/app.js'], // Specify the entry points...
+            hotFile: 'storage/vite.hot', // "hot" 파일 커스터마이즈...
+            buildDirectory: 'bundle', // 빌드 디렉터리 커스터마이즈...
+            input: ['resources/js/app.js'], // 엔트리 포인트 지정...
         }),
     ],
     build: {
-      manifest: 'assets.json', // Customize the manifest filename...
+      manifest: 'assets.json', // 매니페스트 파일명 커스터마이즈...
     },
 });
 ```
 
-<a name="cors"></a>
-### Dev Server Cross-Origin Resource Sharing (CORS)
 
-If you are experiencing Cross-Origin Resource Sharing (CORS) issues in the browser while fetching assets from the Vite dev server, you may need to grant your custom origin access to the dev server. Vite combined with the Laravel plugin allows the following origins without any additional configuration:
+### 개발 서버 교차 출처 리소스 공유(CORS) {#cors}
+
+브라우저에서 Vite 개발 서버로부터 에셋을 가져올 때 교차 출처 리소스 공유(CORS) 문제가 발생한다면, 커스텀 오리진에 개발 서버 접근 권한을 부여해야 할 수 있습니다. Vite와 Laravel 플러그인을 함께 사용할 경우, 추가 설정 없이 다음 오리진들이 허용됩니다:
 
 - `::1`
 - `127.0.0.1`
 - `localhost`
 - `*.test`
 - `*.localhost`
-- `APP_URL` in the project's `.env`
+- 프로젝트의 `.env` 파일에 있는 `APP_URL`
 
-The easiest way to allow a custom origin for your project is to ensure that your application's `APP_URL` environment variable matches the origin you are visiting in your browser. For example, if you visiting `https://my-app.laravel`, you should update your `.env` to match:
+프로젝트에 커스텀 오리진을 허용하는 가장 쉬운 방법은 애플리케이션의 `APP_URL` 환경 변수가 브라우저에서 방문하는 오리진과 일치하도록 설정하는 것입니다. 예를 들어, `https://my-app.laravel`에 접속하고 있다면, `.env` 파일을 다음과 같이 수정해야 합니다:
 
 ```env
 APP_URL=https://my-app.laravel
 ```
 
-If you need more fine-grained control over the origins, such as supporting multiple origins, you should utilize [Vite's comprehensive and flexible built-in CORS server configuration](https://vite.dev/config/server-options.html#server-cors). For example, you may specify multiple origins in the `server.cors.origin` configuration option in the project's `vite.config.js` file:
+여러 오리진을 지원하는 등 더 세밀한 오리진 제어가 필요하다면, [Vite의 포괄적이고 유연한 내장 CORS 서버 설정](https://vite.dev/config/server-options.html#server-cors)을 활용해야 합니다. 예를 들어, 프로젝트의 `vite.config.js` 파일에서 `server.cors.origin` 설정 옵션에 여러 오리진을 지정할 수 있습니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -959,18 +959,18 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {  // [!code ++]
-        cors: {  // [!code ++]
-            origin: [  // [!code ++]
-                'https://backend.laravel',  // [!code ++]
-                'http://admin.laravel:8566',  // [!code ++]
-            ],  // [!code ++]
-        },  // [!code ++]
-    },  // [!code ++]
+    server: {  // [tl! add]
+        cors: {  // [tl! add]
+            origin: [  // [tl! add]
+                'https://backend.laravel',  // [tl! add]
+                'http://admin.laravel:8566',  // [tl! add]
+            ],  // [tl! add]
+        },  // [tl! add]
+    },  // [tl! add]
 });
 ```
 
-You may also include regex patterns, which can be helpful if you would like to allow all origins for a given top-level domain, such as `*.laravel`:
+정규식 패턴도 포함할 수 있으며, 이는 예를 들어 `*.laravel`과 같은 특정 최상위 도메인에 대해 모든 오리진을 허용하고 싶을 때 유용합니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -983,31 +983,31 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {  // [!code ++]
-        cors: {  // [!code ++]
-            origin: [ // [!code ++]
-                // Supports: SCHEME://DOMAIN.laravel[:PORT] [tl! add]
+    server: {  // [tl! add]
+        cors: {  // [tl! add]
+            origin: [ // [tl! add]
+                // 지원: SCHEME://DOMAIN.laravel[:PORT] [tl! add]
                 /^https?:\/\/.*\.laravel(:\d+)?$/, //[tl! add]
-            ], // [!code ++]
-        }, // [!code ++]
-    }, // [!code ++]
+            ], // [tl! add]
+        }, // [tl! add]
+    }, // [tl! add]
 });
 ```
 
-<a name="correcting-dev-server-urls"></a>
-### Correcting Dev Server URLs
 
-Some plugins within the Vite ecosystem assume that URLs which begin with a forward-slash will always point to the Vite dev server. However, due to the nature of the Laravel integration, this is not the case.
+### 개발 서버 URL 수정하기 {#correcting-dev-server-urls}
 
-For example, the `vite-imagetools` plugin outputs URLs like the following while Vite is serving your assets:
+Vite 생태계 내의 일부 플러그인들은 슬래시(`/`)로 시작하는 URL이 항상 Vite 개발 서버를 가리킨다고 가정합니다. 하지만, Laravel 통합의 특성상 이는 사실이 아닙니다.
+
+예를 들어, `vite-imagetools` 플러그인은 Vite가 에셋을 제공할 때 다음과 같은 URL을 출력합니다:
 
 ```html
 <img src="/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520">
 ```
 
-The `vite-imagetools` plugin is expecting that the output URL will be intercepted by Vite and the plugin may then handle all URLs that start with `/@imagetools`. If you are using plugins that are expecting this behavior, you will need to manually correct the URLs. You can do this in your `vite.config.js` file by using the `transformOnServe` option.
+`vite-imagetools` 플러그인은 출력된 URL이 Vite에 의해 가로채지고, 플러그인이 `/@imagetools`로 시작하는 모든 URL을 처리할 수 있기를 기대합니다. 만약 이러한 동작을 기대하는 플러그인을 사용한다면, URL을 수동으로 수정해주어야 합니다. 이는 `vite.config.js` 파일에서 `transformOnServe` 옵션을 사용하여 할 수 있습니다.
 
-In this particular example, we will prepend the dev server URL to all occurrences of `/@imagetools` within the generated code:
+이 예시에서는, 생성된 코드 내의 모든 `/@imagetools` 앞에 개발 서버 URL을 추가합니다:
 
 ```js
 import { defineConfig } from 'vite';
@@ -1025,7 +1025,7 @@ export default defineConfig({
 });
 ```
 
-Now, while Vite is serving Assets, it will output URLs that point to the Vite dev server:
+이제 Vite가 에셋을 제공하는 동안, Vite 개발 서버를 가리키는 URL이 출력됩니다:
 
 ```html
 - <img src="/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520"><!-- [tl! remove] -->
