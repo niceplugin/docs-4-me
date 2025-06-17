@@ -42,4 +42,4 @@ class ShowInvoice extends Component
 
 ## 더 깊이 들어가기 {#going-deeper}
 
-`wire:click` 디렉티브는 Livewire에서 사용할 수 있는 다양한 이벤트 리스너 중 하나일 뿐입니다. 이 디렉티브(및 다른 이벤트 리스너)의 모든 기능에 대한 전체 문서는 [Livewire 액션 문서 페이지](/docs/actions)에서 확인할 수 있습니다.
+`wire:click` 디렉티브는 Livewire에서 사용할 수 있는 다양한 이벤트 리스너 중 하나일 뿐입니다. 이 디렉티브(및 다른 이벤트 리스너)의 모든 기능에 대한 전체 문서는 [Livewire 액션 문서 페이지](/livewire/3.x/actions)에서 확인할 수 있습니다.

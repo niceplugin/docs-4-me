@@ -142,7 +142,7 @@ Livewire의 이벤트 시스템은 애플리케이션 내부에서 JavaScript로
 
 위 코드는 해당 컴포넌트 내에서 발생하는 `post-created` 이벤트를 감지합니다. 만약 해당 컴포넌트가 페이지에 더 이상 존재하지 않는다면, 이벤트 리스너도 더 이상 동작하지 않습니다.
 
-[Livewire 컴포넌트에서 JavaScript 사용에 대해 더 알아보기 →](/docs/javascript#using-javascript-in-livewire-components)
+[Livewire 컴포넌트에서 JavaScript 사용에 대해 더 알아보기 →](/livewire/3.x/javascript#using-javascript-in-livewire-components)
 
 ### 컴포넌트 스크립트에서 이벤트 디스패치하기 {#dispatching-events-from-component-scripts}
 
@@ -204,7 +204,7 @@ public function handleNewPost($refreshPosts = false)
 @endscript
 ```
 
-[Livewire 컴포넌트에서 자바스크립트 사용에 대해 더 알아보기 →](/docs/javascript#using-javascript-in-livewire-components)
+[Livewire 컴포넌트에서 자바스크립트 사용에 대해 더 알아보기 →](/livewire/3.x/javascript#using-javascript-in-livewire-components)
 
 ### 전역 JavaScript에서 Livewire 이벤트 리스닝하기 {#listening-for-livewire-events-from-global-javascript}
 
@@ -290,7 +290,7 @@ Alpine을 사용하여 이벤트를 디스패치하는 방법에 대해 더 알�
 > <button wire:click="$parent.showCreatePostForm()">Create Post</button>
 > ```
 >
-> [$parent에 대해 더 알아보기](/docs/nesting#directly-accessing-the-parent-from-the-child).
+> [$parent에 대해 더 알아보기](/livewire/3.x/nesting#directly-accessing-the-parent-from-the-child).
 
 ## 다른 컴포넌트로 직접 디스패치하기 {#dispatching-directly-to-another-component}
 

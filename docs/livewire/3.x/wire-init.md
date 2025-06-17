@@ -9,4 +9,4 @@ Livewire는 컴포넌트가 렌더링되자마자 액션을 실행할 수 있도
 
 `loadPosts` 액션은 Livewire 컴포넌트가 페이지에 렌더링된 직후 즉시 실행됩니다.
 
-하지만 대부분의 경우, [`Livewire의 지연 로딩 기능`](/docs/lazy)을 사용하는 것이 `wire:init`을 사용하는 것보다 더 바람직합니다.
+하지만 대부분의 경우, [`Livewire의 지연 로딩 기능`](/livewire/3.x/lazy)을 사용하는 것이 `wire:init`을 사용하는 것보다 더 바람직합니다.

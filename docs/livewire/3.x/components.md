@@ -160,7 +160,7 @@ class CreatePost extends Component
 
 ### 뷰에 추가 데이터 공유하기 {#sharing-additional-data-with-the-view}
 
-뷰에서 프로퍼티에 접근하는 것 외에도, 컨트롤러에서 하듯이 `render()` 메서드에서 뷰로 데이터를 명시적으로 전달할 수 있습니다. 이는 추가 데이터를 먼저 프로퍼티로 저장하지 않고 전달하고 싶을 때 유용합니다. 프로퍼티는 [특정 성능 및 보안상의 영향](/docs/properties#security-concerns)이 있기 때문입니다.
+뷰에서 프로퍼티에 접근하는 것 외에도, 컨트롤러에서 하듯이 `render()` 메서드에서 뷰로 데이터를 명시적으로 전달할 수 있습니다. 이는 추가 데이터를 먼저 프로퍼티로 저장하지 않고 전달하고 싶을 때 유용합니다. 프로퍼티는 [특정 성능 및 보안상의 영향](/livewire/3.x/properties#security-concerns)이 있기 때문입니다.
 
 `render()` 메서드에서 뷰로 데이터를 전달하려면, 뷰 인스턴스의 `with()` 메서드를 사용할 수 있습니다. 예를 들어, 게시글 작성자의 이름을 뷰로 전달하고 싶다고 가정해봅시다. 이 경우, 게시글 작성자는 현재 인증된 사용자입니다:
 
@@ -242,10 +242,10 @@ Livewire의 가장 강력한 기능 중 하나는 "데이터 바인딩"입니다
 텍스트 입력값이 변경되면, 해당 값은 Livewire 컴포넌트의 `$title` 속성과 자동으로 동기화됩니다.
 
 > [!warning] "입력할 때마다 컴포넌트가 실시간으로 업데이트되지 않는 이유는 무엇인가요?"
-> 브라우저에서 이 코드를 시도해보고 제목이 자동으로 업데이트되지 않아 혼란스러웠다면, Livewire는 "액션"이 제출될 때(예: 제출 버튼을 누를 때)만 컴포넌트를 업데이트하기 때문입니다. 사용자가 입력 필드에 타이핑할 때마다 업데이트하지 않으므로 네트워크 요청이 줄고 성능이 향상됩니다. 사용자가 입력할 때마다 "실시간"으로 업데이트되길 원한다면 `wire:model.live`를 사용할 수 있습니다. [데이터 바인딩에 대해 더 알아보기](/docs/properties#data-binding).
+> 브라우저에서 이 코드를 시도해보고 제목이 자동으로 업데이트되지 않아 혼란스러웠다면, Livewire는 "액션"이 제출될 때(예: 제출 버튼을 누를 때)만 컴포넌트를 업데이트하기 때문입니다. 사용자가 입력 필드에 타이핑할 때마다 업데이트하지 않으므로 네트워크 요청이 줄고 성능이 향상됩니다. 사용자가 입력할 때마다 "실시간"으로 업데이트되길 원한다면 `wire:model.live`를 사용할 수 있습니다. [데이터 바인딩에 대해 더 알아보기](/livewire/3.x/properties#data-binding).
 
 
-Livewire 속성은 매우 강력하며 꼭 이해해야 할 중요한 개념입니다. 더 자세한 내용은 [Livewire 속성 문서](/docs/properties)를 참고하세요.
+Livewire 속성은 매우 강력하며 꼭 이해해야 할 중요한 개념입니다. 더 자세한 내용은 [Livewire 속성 문서](/livewire/3.x/properties)를 참고하세요.
 
 ## 액션 호출하기 {#calling-actions}
 
@@ -296,7 +296,7 @@ class CreatePost extends Component
 
 "Save" 버튼을 클릭하면, Livewire 컴포넌트의 `save()` 메서드가 실행되고 컴포넌트가 다시 렌더링됩니다.
 
-Livewire 액션에 대해 더 배우고 싶다면 [액션 문서](/docs/actions)를 참고하세요.
+Livewire 액션에 대해 더 배우고 싶다면 [액션 문서](/livewire/3.x/actions)를 참고하세요.
 
 ## 컴포넌트 렌더링 {#rendering-components}
 
@@ -363,7 +363,7 @@ class CreatePost extends Component
 
 이 예시에서 `$title` 속성은 "Initial Title" 값으로 초기화됩니다.
 
-`mount()` 메서드는 클래스 생성자와 비슷하다고 생각할 수 있습니다. 이 메서드는 컴포넌트가 처음 로드될 때 실행되며, 페이지 내에서 이후 요청에는 실행되지 않습니다. `mount()` 및 기타 유용한 라이프사이클 훅에 대해 더 알고 싶다면 [라이프사이클 문서](/docs/lifecycle-hooks)를 참고하세요.
+`mount()` 메서드는 클래스 생성자와 비슷하다고 생각할 수 있습니다. 이 메서드는 컴포넌트가 처음 로드될 때 실행되며, 페이지 내에서 이후 요청에는 실행되지 않습니다. `mount()` 및 기타 유용한 라이프사이클 훅에 대해 더 알고 싶다면 [라이프사이클 문서](/livewire/3.x/lifecycle-hooks)를 참고하세요.
 
 컴포넌트의 반복적인 코드를 줄이기 위해, `mount()` 메서드를 생략할 수도 있습니다. 이 경우 Livewire는 전달된 값과 이름이 일치하는 속성을 자동으로 컴포넌트에 설정해줍니다:
 
@@ -385,7 +385,7 @@ class CreatePost extends Component
 이는 사실상 `mount()` 메서드 안에서 `$title`을 할당하는 것과 동일합니다.
 
 > [!warning] 이 속성들은 기본적으로 반응형이 아닙니다
-> `$title` 속성은 페이지가 처음 로드된 이후에 외부의 `:title="$initialValue"` 값이 변경되어도 자동으로 업데이트되지 않습니다. 이는 Livewire를 사용할 때, 특히 Vue나 React와 같은 자바스크립트 프레임워크를 사용해본 개발자들이 이러한 "파라미터"가 해당 프레임워크의 "반응형 props"처럼 동작할 것이라고 가정할 때 흔히 혼동하는 부분입니다. 하지만 걱정하지 마세요, Livewire에서는 [props를 반응형으로 만들기](/docs/nesting#reactive-props)를 선택적으로 적용할 수 있습니다.
+> `$title` 속성은 페이지가 처음 로드된 이후에 외부의 `:title="$initialValue"` 값이 변경되어도 자동으로 업데이트되지 않습니다. 이는 Livewire를 사용할 때, 특히 Vue나 React와 같은 자바스크립트 프레임워크를 사용해본 개발자들이 이러한 "파라미터"가 해당 프레임워크의 "반응형 props"처럼 동작할 것이라고 가정할 때 흔히 혼동하는 부분입니다. 하지만 걱정하지 마세요, Livewire에서는 [props를 반응형으로 만들기](/livewire/3.x/nesting#reactive-props)를 선택적으로 적용할 수 있습니다.
 
 
 ## 전체 페이지 컴포넌트 {#full-page-components}
@@ -755,7 +755,7 @@ class ShowPost extends Component
 
 Livewire와 Alpine의 내장 유틸리티만으로는 Livewire 컴포넌트 내에서 원하는 목표를 달성하기에 충분하지 않은 경우가 많습니다.
 
-다행히도, Livewire는 맞춤형 자바스크립트와 상호작용할 수 있는 다양한 확장 지점과 유틸리티를 제공합니다. 자세한 내용은 [자바스크립트 문서 페이지](/docs/javascript)에서 확인할 수 있습니다. 하지만 지금은 Livewire 컴포넌트 내에서 직접 자바스크립트를 사용하는 몇 가지 유용한 방법을 소개하겠습니다.
+다행히도, Livewire는 맞춤형 자바스크립트와 상호작용할 수 있는 다양한 확장 지점과 유틸리티를 제공합니다. 자세한 내용은 [자바스크립트 문서 페이지](/livewire/3.x/javascript)에서 확인할 수 있습니다. 하지만 지금은 Livewire 컴포넌트 내에서 직접 자바스크립트를 사용하는 몇 가지 유용한 방법을 소개하겠습니다.
 
 ### 스크립트 실행 {#executing-scripts}
 
@@ -774,9 +774,9 @@ Livewire는 유용한 `@script` 디렉티브를 제공합니다. 이 디렉티�
 ```
 
 위 예시에서 `<script>` 내부에서 컴포넌트를 제어하기 위해 `$wire`라는 객체를 사용하고 있는 것을 볼 수 있습니다. Livewire는 모든 `@script` 내부에서 이 객체를 자동으로 사용할 수 있게 해줍니다. 만약 `$wire`에 익숙하지 않다면, 아래 문서에서 `$wire`에 대해 더 자세히 알아볼 수 있습니다:
-* [JavaScript에서 속성 접근하기](/docs/properties#accessing-properties-from-javascript)
-* [JS/Alpine에서 Livewire 액션 호출하기](/docs/actions#calling-actions-from-alpine)
-* [`$wire` 객체 레퍼런스](/docs/javascript#the-wire-object)
+* [JavaScript에서 속성 접근하기](/livewire/3.x/properties#accessing-properties-from-javascript)
+* [JS/Alpine에서 Livewire 액션 호출하기](/livewire/3.x/actions#calling-actions-from-alpine)
+* [`$wire` 객체 레퍼런스](/livewire/3.x/javascript#the-wire-object)
 
 ### 에셋 로딩 {#loading-assets}
 

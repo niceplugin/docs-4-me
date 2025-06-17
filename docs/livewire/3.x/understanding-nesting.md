@@ -4,7 +4,7 @@
 하지만 Livewire의 중첩 시스템은 다른 프레임워크와 다르게 설계되어 있기 때문에, 반드시 알아두어야 할 몇 가지 중요한 의미와 제약이 있습니다.
 
 > [!tip] 먼저 하이드레이션을 이해하세요
-> Livewire의 중첩 시스템을 더 배우기 전에, Livewire가 컴포넌트를 어떻게 하이드레이트하는지 완전히 이해하는 것이 도움이 됩니다. 자세한 내용은 [하이드레이션 문서](/docs/hydration)를 참고하세요.
+> Livewire의 중첩 시스템을 더 배우기 전에, Livewire가 컴포넌트를 어떻게 하이드레이트하는지 완전히 이해하는 것이 도움이 됩니다. 자세한 내용은 [하이드레이션 문서](/livewire/3.x/hydration)를 참고하세요.
 
 ## 모든 컴포넌트는 독립적인 섬입니다 {#every-component-is-an-island}
 
@@ -210,7 +210,7 @@ Livewire의 "아일랜드" 아키텍처는 애플리케이션에 긍정적이면
 
 예를 들어, 상위 `Posts` 컴포넌트에서 하위 `ShowPost` 컴포넌트로 속성을 전달하는 경우, 이 속성은 "반응형"이 되지 않습니다. 각 컴포넌트가 아일랜드이기 때문에, 상위 컴포넌트에서 `ShowPost`로 전달되는 속성의 값이 변경되어도, `ShowPost` 내부에서는 업데이트되지 않습니다.
 
-Livewire는 이러한 여러 문제를 극복했으며, [반응형 속성](/docs/nesting#reactive-props), [모델링 가능한 컴포넌트](/docs/nesting#binding-to-child-data-using-wiremodel), [ `$parent` 객체](/docs/nesting#directly-accessing-the-parent-from-the-child)와 같은 전용 API를 제공합니다.
+Livewire는 이러한 여러 문제를 극복했으며, [반응형 속성](/livewire/3.x/nesting#reactive-props), [모델링 가능한 컴포넌트](/livewire/3.x/nesting#binding-to-child-data-using-wiremodel), [ `$parent` 객체](/livewire/3.x/nesting#directly-accessing-the-parent-from-the-child)와 같은 전용 API를 제공합니다.
 
 중첩된 Livewire 컴포넌트가 어떻게 동작하는지에 대한 이 지식을 바탕으로, 애플리케이션 내에서 언제, 어떻게 컴포넌트를 중첩할지 더 현명하게 결정할 수 있습니다.
 

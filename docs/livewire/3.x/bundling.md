@@ -3,7 +3,7 @@ Livewire에서 모든 컴포넌트 업데이트는 네트워크 요청을 발생
 
 이로 인해 서버로의 네트워크 연결 수가 줄어들고, 서버 부하가 크게 감소할 수 있습니다.
 
-성능 향상 외에도, 이 방식은 여러 컴포넌트 간의 협업이 필요한 내부 기능([Reactive Properties](/docs/nesting#reactive-props), [Modelable Properties](/docs/nesting#binding-to-child-data-using-wiremodel) 등)을 사용할 수 있게 해줍니다.
+성능 향상 외에도, 이 방식은 여러 컴포넌트 간의 협업이 필요한 내부 기능([Reactive Properties](/livewire/3.x/nesting#reactive-props), [Modelable Properties](/livewire/3.x/nesting#binding-to-child-data-using-wiremodel) 등)을 사용할 수 있게 해줍니다.
 
 하지만 성능상의 이유로 이 번들링을 비활성화하고 싶을 때도 있습니다. 다음 페이지에서는 Livewire에서 이 동작을 커스터마이즈하는 다양한 방법을 설명합니다.
 

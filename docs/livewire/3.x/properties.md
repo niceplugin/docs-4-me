@@ -114,7 +114,7 @@ class TodoList extends Component
 
 위 예시에서, 텍스트 입력값은 "Add Todo" 버튼이 클릭될 때 서버의 `$todo` 속성과 동기화됩니다.
 
-이것은 `wire:model`의 기본적인 사용법에 불과합니다. 데이터 바인딩에 대해 더 깊이 알고 싶다면 [폼 관련 문서](/docs/forms)를 참고하세요.
+이것은 `wire:model`의 기본적인 사용법에 불과합니다. 데이터 바인딩에 대해 더 깊이 알고 싶다면 [폼 관련 문서](/livewire/3.x/forms)를 참고하세요.
 
 ## 속성 재설정 {#resetting-properties}
 
@@ -264,7 +264,7 @@ Livewire는 두 가지 강력한 메커니즘을 통해 애플리케이션에서
 * Wireables
 * Synthesizers
 
-Wireables는 대부분의 애플리케이션에서 간단하고 사용하기 쉬우므로, 아래에서 Wireables에 대해 살펴보겠습니다. 더 많은 유연성이 필요한 고급 사용자나 패키지 작성자라면 [Synthesizers를 사용하는 것이 좋습니다](/docs/synthesizers).
+Wireables는 대부분의 애플리케이션에서 간단하고 사용하기 쉬우므로, 아래에서 Wireables에 대해 살펴보겠습니다. 더 많은 유연성이 필요한 고급 사용자나 패키지 작성자라면 [Synthesizers를 사용하는 것이 좋습니다](/livewire/3.x/synthesizers).
 
 #### Wireables {#wireables}
 
@@ -336,7 +336,7 @@ class Customer implements Wireable
 
 이제 Livewire 컴포넌트에서 `Customer` 객체를 자유롭게 사용할 수 있으며, Livewire는 이 객체들을 JSON으로 변환하고 다시 PHP로 복원하는 방법을 알게 됩니다.
 
-앞서 언급했듯이, 더 전역적이고 강력하게 타입을 지원하고 싶다면, Livewire는 다양한 속성 타입을 처리하기 위한 고급 내부 메커니즘인 Synthesizer를 제공합니다. [Synthesizer에 대해 더 알아보기](/docs/synthesizers).
+앞서 언급했듯이, 더 전역적이고 강력하게 타입을 지원하고 싶다면, Livewire는 다양한 속성 타입을 처리하기 위한 고급 내부 메커니즘인 Synthesizer를 제공합니다. [Synthesizer에 대해 더 알아보기](/livewire/3.x/synthesizers).
 
 ## JavaScript에서 속성에 접근하기 {#accessing-properties-from-javascript}
 
@@ -525,7 +525,7 @@ class UpdatePost extends Component
 
 `#[Locked]`를 사용하면 이 속성이 컴포넌트 클래스 외부에서 조작되지 않았다고 가정할 수 있습니다.
 
-속성 잠금에 대한 자세한 내용은 [Locked 속성 문서](/docs/locked)를 참고하세요.
+속성 잠금에 대한 자세한 내용은 [Locked 속성 문서](/livewire/3.x/locked)를 참고하세요.
 
 #### Eloquent 모델과 잠금 {#eloquent-models-and-locking}
 
@@ -658,7 +658,7 @@ class ShowTodos extends Component
 
 Livewire가 이후 요청에서 이 속성의 JSON을 PHP로 _hydrate_ 할 때, select 제약 조건은 사라지게 됩니다.
 
-Eloquent 쿼리의 무결성을 보장하기 위해, 속성 대신 [계산된 속성](/docs/computed-properties)을 사용하는 것을 권장합니다.
+Eloquent 쿼리의 무결성을 보장하기 위해, 속성 대신 [계산된 속성](/livewire/3.x/computed-properties)을 사용하는 것을 권장합니다.
 
 계산된 속성은 컴포넌트 내에서 `#[Computed]` 어트리뷰트로 표시된 메서드입니다. 이들은 컴포넌트의 상태로 저장되지 않고, 필요할 때마다 동적으로 평가되는 동적 속성처럼 접근할 수 있습니다.
 
@@ -741,4 +741,4 @@ class ShowTodos extends Component
 
 그 이유는 계산된 속성이 성능상 이점이 있기 때문입니다. 한 요청 내에서 처음 사용된 이후 자동으로 캐시되므로, 컴포넌트 내에서 `$this->todos`를 여러 번 접근해도 실제 메서드는 한 번만 호출되어, 동일한 요청에서 비싼 쿼리가 여러 번 실행되는 것을 방지할 수 있습니다.
 
-자세한 내용은 [계산된 속성 문서](/docs/computed-properties)를 참고하세요.
+자세한 내용은 [계산된 속성 문서](/livewire/3.x/computed-properties)를 참고하세요.

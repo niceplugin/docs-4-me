@@ -4,7 +4,7 @@ Livewire는 부모 컴포넌트 내부에 추가적인 Livewire 컴포넌트를 
 > [!warning] Livewire 컴포넌트가 꼭 필요한지 확인하세요
 > 템플릿의 일부를 중첩된 Livewire 컴포넌트로 분리하기 전에, 해당 컴포넌트의 내용이 "실시간"이어야 하는지 자문해보세요. 만약 그렇지 않다면, 간단한 [Blade 컴포넌트](https://laravel.com/docs/blade#components)를 만드는 것을 권장합니다. Livewire의 동적 특성이나 성능상의 이점이 있는 경우에만 Livewire 컴포넌트를 생성하세요.
 
-중첩된 Livewire 컴포넌트의 성능, 사용상의 의미, 제약 사항에 대한 자세한 내용은 [Livewire 컴포넌트 중첩에 대한 심층 기술 분석](/docs/understanding-nesting)을 참고하세요.
+중첩된 Livewire 컴포넌트의 성능, 사용상의 의미, 제약 사항에 대한 자세한 내용은 [Livewire 컴포넌트 중첩에 대한 심층 기술 분석](/livewire/3.x/understanding-nesting)을 참고하세요.
 
 ## 컴포넌트 중첩하기 {#nesting-a-component}
 
@@ -34,9 +34,9 @@ class Dashboard extends Component
 </div>
 ```
 
-이 페이지가 처음 렌더링될 때, `Dashboard` 컴포넌트는 `<livewire:todo-list />`를 만나 해당 위치에 렌더링합니다. 이후 `Dashboard`로의 네트워크 요청에서는, 중첩된 `todo-list` 컴포넌트가 이제 페이지에서 독립적인 컴포넌트가 되었기 때문에 렌더링을 건너뜁니다. 중첩 및 렌더링의 기술적 개념에 대한 자세한 내용은 [중첩 컴포넌트가 "아일랜드"인 이유](/docs/understanding-nesting#every-component-is-an-island) 문서를 참고하세요.
+이 페이지가 처음 렌더링될 때, `Dashboard` 컴포넌트는 `<livewire:todo-list />`를 만나 해당 위치에 렌더링합니다. 이후 `Dashboard`로의 네트워크 요청에서는, 중첩된 `todo-list` 컴포넌트가 이제 페이지에서 독립적인 컴포넌트가 되었기 때문에 렌더링을 건너뜁니다. 중첩 및 렌더링의 기술적 개념에 대한 자세한 내용은 [중첩 컴포넌트가 "아일랜드"인 이유](/livewire/3.x/understanding-nesting#every-component-is-an-island) 문서를 참고하세요.
 
-컴포넌트 렌더링 구문에 대한 자세한 내용은 [컴포넌트 렌더링](/docs/components#rendering-components) 문서를 참고하세요.
+컴포넌트 렌더링 구문에 대한 자세한 내용은 [컴포넌트 렌더링](/livewire/3.x/components#rendering-components) 문서를 참고하세요.
 
 ## 자식 컴포넌트에 props 전달하기 {#passing-props-to-children}
 
@@ -164,7 +164,7 @@ PHP 변수를 컴포넌트에 전달할 때, 변수명과 prop 이름이 종종 
 
 Livewire를 처음 접하는 개발자들은 props가 기본적으로 "반응형"이라고 기대합니다. 즉, 부모 컴포넌트에서 자식 컴포넌트로 전달되는 prop의 값이 변경되면, 자식 컴포넌트도 자동으로 업데이트될 것이라고 생각합니다. 하지만 기본적으로 Livewire의 props는 반응형이 아닙니다.
 
-Livewire를 사용할 때, [모든 컴포넌트는 독립적인 섬입니다](/docs/understanding-nesting#every-component-is-an-island). 이는 부모에서 업데이트가 발생하고 네트워크 요청이 전송될 때, 오직 부모 컴포넌트의 상태만 서버로 전송되어 다시 렌더링된다는 의미입니다. 자식 컴포넌트의 상태는 전송되지 않습니다. 이러한 동작의 의도는 서버와 클라이언트 간에 오가는 데이터의 양을 최소화하여, 업데이트를 최대한 성능적으로 처리하기 위함입니다.
+Livewire를 사용할 때, [모든 컴포넌트는 독립적인 섬입니다](/livewire/3.x/understanding-nesting#every-component-is-an-island). 이는 부모에서 업데이트가 발생하고 네트워크 요청이 전송될 때, 오직 부모 컴포넌트의 상태만 서버로 전송되어 다시 렌더링된다는 의미입니다. 자식 컴포넌트의 상태는 전송되지 않습니다. 이러한 동작의 의도는 서버와 클라이언트 간에 오가는 데이터의 양을 최소화하여, 업데이트를 최대한 성능적으로 처리하기 위함입니다.
 
 하지만 prop이 반응형이길 원하거나 필요하다면, `#[Reactive]` 속성 파라미터를 사용하여 이 동작을 쉽게 활성화할 수 있습니다.
 
@@ -302,7 +302,7 @@ class TodoInput extends Component
 
 또 다른 강력한 부모-자식 컴포넌트 간 통신 기법은 Livewire의 이벤트 시스템입니다. 이 시스템을 사용하면 서버나 클라이언트에서 이벤트를 디스패치하고, 다른 컴포넌트가 이를 가로챌 수 있습니다.
 
-[Livewire 이벤트 시스템에 대한 전체 문서](/docs/events)에서 이벤트에 대해 더 자세히 다루고 있지만, 아래에서는 이벤트를 사용해 부모 컴포넌트의 업데이트를 트리거하는 간단한 예제를 살펴보겠습니다.
+[Livewire 이벤트 시스템에 대한 전체 문서](/livewire/3.x/events)에서 이벤트에 대해 더 자세히 다루고 있지만, 아래에서는 이벤트를 사용해 부모 컴포넌트의 업데이트를 트리거하는 간단한 예제를 살펴보겠습니다.
 
 `TodoList` 컴포넌트가 할 일 목록을 보여주고 삭제하는 기능을 가진다고 가정해봅시다:
 
@@ -614,7 +614,7 @@ Livewire는 내부적으로 컴포넌트에 무작위 문자열 키를 다음과
 'children' => ['lska'],
 ```
 
-Livewire는 이후 렌더링 시 이 목록을 참고하여, 자식 컴포넌트가 이전 요청에서 이미 렌더링되었는지 감지합니다. 이미 렌더링된 경우, 해당 컴포넌트는 건너뜁니다. 참고로, [중첩 컴포넌트는 각각 독립된 섬입니다](/docs/understanding-nesting#every-component-is-an-island). 하지만 자식 키가 목록에 없다면, 즉 아직 렌더링되지 않았다면, Livewire는 컴포넌트의 새 인스턴스를 생성하여 그 자리에 렌더링합니다.
+Livewire는 이후 렌더링 시 이 목록을 참고하여, 자식 컴포넌트가 이전 요청에서 이미 렌더링되었는지 감지합니다. 이미 렌더링된 경우, 해당 컴포넌트는 건너뜁니다. 참고로, [중첩 컴포넌트는 각각 독립된 섬입니다](/livewire/3.x/understanding-nesting#every-component-is-an-island). 하지만 자식 키가 목록에 없다면, 즉 아직 렌더링되지 않았다면, Livewire는 컴포넌트의 새 인스턴스를 생성하여 그 자리에 렌더링합니다.
 
 이러한 세부 동작은 대부분의 사용자에게는 알 필요 없는 백그라운드 동작입니다. 하지만 자식 컴포넌트에 키를 지정하는 개념은 자식 렌더링을 제어하는 강력한 도구입니다.
 

@@ -257,7 +257,7 @@ class UpdatePost extends Component
 
 Livewire 컴포넌트가 로드되는 페이지의 URL에 특정 쿼리 매개변수가 필요하다면, 테스트에서 `withQueryParams()` 메서드를 사용해 쿼리 매개변수를 수동으로 설정할 수 있습니다.
 
-아래는 [Livewire의 URL 기능](/docs/url)을 사용하여 현재 검색 쿼리를 쿼리 문자열에 저장하고 추적하는 기본적인 `SearchPosts` 컴포넌트입니다:
+아래는 [Livewire의 URL 기능](/livewire/3.x/url)을 사용하여 현재 검색 쿼리를 쿼리 문자열에 저장하고 추적하는 기본적인 `SearchPosts` 컴포넌트입니다:
 
 ```php
 <?php
@@ -442,7 +442,7 @@ $this->assertHasErrors(['title' => ['The title field is required.']]);
 
 ### Authorization {#authorization}
 
-Livewire 컴포넌트에서 신뢰할 수 없는 입력에 의존하는 동작을 승인하는 것은 [필수적](/docs/properties#authorizing-the-input)입니다. Livewire는 인증 또는 권한 부여 검사가 실패했는지 확인할 수 있도록 `assertUnauthorized()` 및 `assertForbidden()` 메서드를 제공합니다:
+Livewire 컴포넌트에서 신뢰할 수 없는 입력에 의존하는 동작을 승인하는 것은 [필수적](/livewire/3.x/properties#authorizing-the-input)입니다. Livewire는 인증 또는 권한 부여 검사가 실패했는지 확인할 수 있도록 `assertUnauthorized()` 및 `assertForbidden()` 메서드를 제공합니다:
 
 ```php
 <?php
@@ -633,7 +633,7 @@ Livewire는 훨씬 더 많은 테스트 유틸리티를 제공합니다. 아래�
 | `Livewire::test(CreatePost::class)`                      | `CreatePost` 컴포넌트를 테스트합니다 |
 | `Livewire::test(UpdatePost::class, ['post' => $post])`                      | `post` 파라미터와 함께 `UpdatePost` 컴포넌트를 테스트합니다 (`mount()` 메서드를 통해 전달받음) |
 | `Livewire::actingAs($user)`                      | 지정한 사용자를 세션의 인증된 사용자로 설정합니다 |
-| `Livewire::withQueryParams(['search' => '...'])`                      | 테스트의 `search` URL 쿼리 파라미터를 지정한 값(예: `?search=...`)으로 설정합니다. 주로 Livewire의 [`#[Url]` 속성](/docs/url)을 사용하는 프로퍼티와 관련하여 사용됩니다 |
+| `Livewire::withQueryParams(['search' => '...'])`                      | 테스트의 `search` URL 쿼리 파라미터를 지정한 값(예: `?search=...`)으로 설정합니다. 주로 Livewire의 [`#[Url]` 속성](/livewire/3.x/url)을 사용하는 프로퍼티와 관련하여 사용됩니다 |
 | `Livewire::withCookie('color', 'blue')`                      | 테스트의 `color` 쿠키를 지정한 값(`blue`)으로 설정합니다. |
 | `Livewire::withCookies(['color' => 'blue', 'name' => 'Taylor])`                      | 테스트의 `color`와 `name` 쿠키를 각각 지정한 값(`blue`, `Taylor`)으로 설정합니다. |
 | `Livewire::withHeaders(['X-COLOR' => 'blue', 'X-NAME' => 'Taylor])`                      | 테스트의 `X-COLOR`와 `X-NAME` 헤더를 각각 지정한 값(`blue`, `Taylor`)으로 설정합니다. |

@@ -293,7 +293,7 @@ php artisan livewire:configure-s3-upload-cleanup
 
 이제 파일이 업로드되는 동안 "업로드 중..." 메시지가 표시되고, 업로드가 완료되면 숨겨집니다.
 
-로딩 상태에 대한 더 자세한 내용은 [로딩 상태 문서](/docs/wire-loading)를 참고하세요.
+로딩 상태에 대한 더 자세한 내용은 [로딩 상태 문서](/livewire/3.x/wire-loading)를 참고하세요.
 
 ## 진행 표시기 {#progress-indicators}
 

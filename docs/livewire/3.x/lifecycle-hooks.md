@@ -71,9 +71,9 @@ class UpdatePost extends Component
 
 `mount()` 메서드는 Livewire를 사용할 때 매우 중요한 부분입니다. 아래 문서에서는 `mount()` 메서드를 활용하여 일반적으로 수행하는 작업에 대한 추가 예시를 제공합니다:
 
-* [속성 초기화하기](/docs/properties#initializing-properties)
-* [부모 컴포넌트로부터 데이터 받기](/docs/nesting#passing-props-to-children)
-* [라우트 파라미터 접근하기](/docs/components#accessing-route-parameters)
+* [속성 초기화하기](/livewire/3.x/properties#initializing-properties)
+* [부모 컴포넌트로부터 데이터 받기](/livewire/3.x/nesting#passing-props-to-children)
+* [라우트 파라미터 접근하기](/livewire/3.x/components#accessing-route-parameters)
 
 ## Boot {#boot}
 
@@ -107,12 +107,12 @@ class ShowPost extends Component
 이 기법을 사용하면 Livewire 컴포넌트에서 속성 초기화를 완전히 제어할 수 있습니다.
 
 > [!tip] 대부분의 경우, 계산된 속성을 대신 사용할 수 있습니다
-> 위에서 사용한 기법은 강력하지만, 이 경우에는 [Livewire의 계산된 속성](/docs/computed-properties)을 사용하는 것이 더 나은 경우가 많습니다.
+> 위에서 사용한 기법은 강력하지만, 이 경우에는 [Livewire의 계산된 속성](/livewire/3.x/computed-properties)을 사용하는 것이 더 나은 경우가 많습니다.
 
 > [!warning] 민감한 public 속성은 항상 잠그세요
 > 위 예시에서 볼 수 있듯이, `$postId` 속성에 `#[Locked]` 어트리뷰트를 사용하고 있습니다. 위와 같이 사용자가 클라이언트 측에서 `$postId` 속성을 조작하지 못하도록 보장하고 싶을 때는, 속성 값을 사용하기 전에 권한을 확인하거나, 속성에 `#[Locked]`를 추가하여 값이 절대 변경되지 않도록 하는 것이 중요합니다.
 >
-> 자세한 내용은 [Locked 속성에 대한 문서](/docs/locked)를 참고하세요.
+> 자세한 내용은 [Locked 속성에 대한 문서](/livewire/3.x/locked)를 참고하세요.
 
 
 ## 업데이트 {#update}
@@ -123,7 +123,7 @@ Livewire는 public 프로퍼티가 업데이트되기 전에 값을 검증하거
 
 아래는 `$postId` 프로퍼티의 수정을 방지하기 위해 `updating`을 사용하는 예시입니다.
 
-특히 이 예시의 경우 실제 애플리케이션에서는 위의 예시처럼 [`#[Locked]` 속성](/docs/locked)을 대신 사용하는 것이 좋다는 점에 유의하세요.
+특히 이 예시의 경우 실제 애플리케이션에서는 위의 예시처럼 [`#[Locked]` 속성](/livewire/3.x/locked)을 대신 사용하는 것이 좋다는 점에 유의하세요.
 
 ```php
 use Exception;
@@ -224,7 +224,7 @@ Hydrate와 dehydrate는 잘 알려지지 않았고 자주 사용되지 않는 �
 
 "dehydrate"와 "hydrate"라는 용어는 Livewire 컴포넌트가 클라이언트 측에서 JSON으로 직렬화되고, 이후 요청에서 다시 PHP 객체로 역직렬화되는 과정을 의미합니다.
 
-Livewire의 코드베이스와 문서 전반에서 이 과정을 "hydrate"와 "dehydrate"라고 자주 부릅니다. 이 용어에 대해 더 명확히 알고 싶다면 [하이드레이션 문서](/docs/hydration)를 참고하세요.
+Livewire의 코드베이스와 문서 전반에서 이 과정을 "hydrate"와 "dehydrate"라고 자주 부릅니다. 이 용어에 대해 더 명확히 알고 싶다면 [하이드레이션 문서](/livewire/3.x/hydration)를 참고하세요.
 
 다음은 Eloquent 모델 대신 커스텀 [데이터 전송 객체(DTO)](https://en.wikipedia.org/wiki/Data_transfer_object)를 사용하여 컴포넌트에 게시글 데이터를 저장하는 예시로, `mount()`, `hydrate()`, `dehydrate()`를 모두 사용하는 방법을 보여줍니다:
 
@@ -266,7 +266,7 @@ class ShowPost extends Component
 
 이제 컴포넌트 내부의 액션이나 다른 곳에서 원시 데이터 대신 `PostDto` 객체에 접근할 수 있습니다.
 
-위 예시는 주로 `hydrate()`와 `dehydrate()` 훅의 기능과 특성을 보여주기 위한 것입니다. 하지만 실제로는 이 목적을 위해 [Wireables 또는 Synthesizers](/docs/properties#supporting-custom-types)를 사용하는 것이 권장됩니다.
+위 예시는 주로 `hydrate()`와 `dehydrate()` 훅의 기능과 특성을 보여주기 위한 것입니다. 하지만 실제로는 이 목적을 위해 [Wireables 또는 Synthesizers](/livewire/3.x/properties#supporting-custom-types)를 사용하는 것이 권장됩니다.
 
 ## 렌더 {#render}
 

@@ -267,7 +267,7 @@ public function save()
 }
 ```
 
-폼 객체는 대부분의 대용량 데이터셋에 유용한 추상화이며, 이를 더욱 강력하게 만들어주는 다양한 추가 기능을 제공합니다. 더 자세한 내용은 [폼 객체 문서](/docs/forms#extracting-a-form-object)를 참고하세요.
+폼 객체는 대부분의 대용량 데이터셋에 유용한 추상화이며, 이를 더욱 강력하게 만들어주는 다양한 추가 기능을 제공합니다. 더 자세한 내용은 [폼 객체 문서](/livewire/3.x/forms#extracting-a-form-object)를 참고하세요.
 
 ## 실시간 검증 {#real-time-validation}
 
@@ -644,7 +644,7 @@ public function test_cant_create_post_without_title_and_content()
 }
 ```
 
-Livewire에서 제공하는 다른 테스트 유틸리티에 대한 자세한 내용은 [테스트 문서](/docs/testing)를 참고하세요.
+Livewire에서 제공하는 다른 테스트 유틸리티에 대한 자세한 내용은 [테스트 문서](/livewire/3.x/testing)를 참고하세요.
 
 ## 더 이상 사용되지 않는 `[#Rule]` 속성 {#deprecated-rule-attribute}
 

@@ -56,5 +56,5 @@ class CreatePost extends Component
 
 `wire:submit`은 Livewire가 제공하는 많은 이벤트 리스너 중 하나일 뿐입니다. 다음 두 페이지에서 애플리케이션에서 `wire:submit`을 사용하는 방법에 대한 더 완전한 문서를 확인할 수 있습니다:
 
-* [Livewire로 브라우저 이벤트에 응답하기](/docs/actions)
-* [Livewire에서 폼 생성하기](/docs/forms)
+* [Livewire로 브라우저 이벤트에 응답하기](/livewire/3.x/actions)
+* [Livewire에서 폼 생성하기](/livewire/3.x/forms)

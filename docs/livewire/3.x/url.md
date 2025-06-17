@@ -231,7 +231,7 @@ class ShowUsers extends Component
 
 ## 트레이트 훅 {#trait-hooks}
 
-Livewire는 쿼리 문자열에 대해서도 [훅](/docs/lifecycle-hooks)을 제공합니다.
+Livewire는 쿼리 문자열에 대해서도 [훅](/livewire/3.x/lifecycle-hooks)을 제공합니다.
 
 ```php
 trait WithSorting

@@ -73,7 +73,7 @@ Livewire 컴포넌트에서 AlpineJS를 사용해 컴포넌트 새로고침을 �
 <button type="button" x-on:click="$wire.$refresh()">...</button>
 ```
 
-Livewire 내부에서 Alpine을 사용하는 방법에 대해 더 알아보려면 [Alpine 사용 문서](/docs/alpine)를 참고하세요.
+Livewire 내부에서 Alpine을 사용하는 방법에 대해 더 알아보려면 [Alpine 사용 문서](/livewire/3.x/alpine)를 참고하세요.
 
 ## 작업 확인 {#confirming-an-action}
 
@@ -93,7 +93,7 @@ Livewire는 `wire:confirm`이라는 간단한 지시어를 제공하여 이를 �
 
 `wire:confirm`이 Livewire 액션이 포함된 요소에 추가되면, 사용자가 해당 액션을 실행하려고 할 때 제공된 메시지가 포함된 확인 대화상자가 표시됩니다. 사용자는 "확인"을 눌러 작업을 진행하거나, "취소"를 누르거나 ESC 키를 눌러 작업을 취소할 수 있습니다.
 
-자세한 내용은 [`wire:confirm` 문서 페이지](/docs/wire-confirm)를 방문하세요.
+자세한 내용은 [`wire:confirm` 문서 페이지](/livewire/3.x/wire-confirm)를 방문하세요.
 
 ## 이벤트 리스너 {#event-listeners}
 
@@ -274,7 +274,7 @@ Livewire는 페이지 어디에서나 로딩 인디케이터를 쉽게 표시하
 </form>
 ```
 
-`wire:loading`은 다양한 강력한 기능을 제공하는 유용한 기능입니다. [로딩에 대한 전체 문서를 참고하세요](/docs/wire-loading).
+`wire:loading`은 다양한 강력한 기능을 제공하는 유용한 기능입니다. [로딩에 대한 전체 문서를 참고하세요](/livewire/3.x/wire-loading).
 
 ## 파라미터 전달하기 {#passing-parameters}
 
@@ -335,10 +335,10 @@ ID가 2인 게시글의 경우, 위 Blade 템플릿의 "Delete" 버튼은 브라
 > [!warning] 액션 파라미터를 신뢰하지 마세요
 > 액션 파라미터는 HTTP 요청 입력값과 동일하게 취급해야 하며, 액션 파라미터 값은 신뢰해서는 안 됩니다. 데이터베이스에서 엔티티를 수정하기 전에 항상 소유권을 인증해야 합니다.
 >
-> 자세한 내용은 [보안 문제 및 모범 사례](/docs/actions#security-concerns) 문서를 참고하세요.
+> 자세한 내용은 [보안 문제 및 모범 사례](/livewire/3.x/actions#security-concerns) 문서를 참고하세요.
 
 
-추가로, 액션에 파라미터로 전달된 모델 ID에 따라 Eloquent 모델을 자동으로 주입받을 수도 있습니다. 이는 [라우트 모델 바인딩](/docs/components#using-route-model-binding)과 매우 유사합니다. 시작하려면, 액션 파라미터에 모델 클래스를 타입힌트하면 해당 모델이 데이터베이스에서 자동으로 조회되어 ID 대신 액션에 전달됩니다:
+추가로, 액션에 파라미터로 전달된 모델 ID에 따라 Eloquent 모델을 자동으로 주입받을 수도 있습니다. 이는 [라우트 모델 바인딩](/livewire/3.x/components#using-route-model-binding)과 매우 유사합니다. 시작하려면, 액션 파라미터에 모델 클래스를 타입힌트하면 해당 모델이 데이터베이스에서 자동으로 조회되어 ID 대신 액션에 전달됩니다:
 
 ```php
 <?php
@@ -415,7 +415,7 @@ class ShowPosts extends Component
 
 Livewire는 [Alpine](https://alpinejs.dev/)과 완벽하게 통합됩니다. 실제로 내부적으로 모든 Livewire 컴포넌트는 Alpine 컴포넌트이기도 합니다. 즉, 컴포넌트 내에서 Alpine을 최대한 활용하여 JavaScript 기반의 클라이언트 사이드 상호작용을 추가할 수 있습니다.
 
-이 조합을 더욱 강력하게 만들기 위해, Livewire는 Alpine에 매직 `$wire` 객체를 노출합니다. 이 객체는 PHP 컴포넌트의 JavaScript 표현으로 취급할 수 있습니다. [`$wire`를 통해 public 프로퍼티에 접근하고 변경하는 것](/docs/properties#accessing-properties-from-javascript) 외에도, 액션을 호출할 수 있습니다. `$wire` 객체에서 액션이 호출되면, 해당하는 PHP 메서드가 백엔드 Livewire 컴포넌트에서 실행됩니다:
+이 조합을 더욱 강력하게 만들기 위해, Livewire는 Alpine에 매직 `$wire` 객체를 노출합니다. 이 객체는 PHP 컴포넌트의 JavaScript 표현으로 취급할 수 있습니다. [`$wire`를 통해 public 프로퍼티에 접근하고 변경하는 것](/livewire/3.x/properties#accessing-properties-from-javascript) 외에도, 액션을 호출할 수 있습니다. `$wire` 객체에서 액션이 호출되면, 해당하는 PHP 메서드가 백엔드 Livewire 컴포넌트에서 실행됩니다:
 
 ```blade
 <button x-on:click="$wire.save()">Save Post</button>
@@ -935,7 +935,7 @@ class BrowsePosts extends Component
 
 Livewire 컴포넌트 내의 모든 public 메서드는 클라이언트에서 호출할 수 있습니다. `wire:click` 핸들러에서 참조하지 않은 메서드도 마찬가지입니다. 클라이언트 측에서 호출되어서는 안 되는 메서드를 사용자가 호출하지 못하도록 하려면 해당 메서드를 `protected` 또는 `private`로 지정해야 합니다. 이렇게 하면 해당 민감한 메서드의 가시성이 컴포넌트 클래스와 그 하위 클래스에만 제한되어, 클라이언트 측에서 호출할 수 없게 됩니다.
 
-이전에 논의했던 `BrowsePosts` 예제를 생각해봅시다. 이 예제에서는 사용자가 애플리케이션의 모든 게시글을 볼 수 있지만, 관리자만 게시글을 삭제할 수 있습니다. [항상 서버 측에서 권한을 확인하세요](/docs/actions#always-authorize-server-side) 섹션에서는 서버 측 권한 부여를 추가하여 액션을 안전하게 만들었습니다. 이제 실제 게시글 삭제 로직을 코드 단순화를 위해 별도의 메서드로 리팩터링한다고 가정해봅시다:
+이전에 논의했던 `BrowsePosts` 예제를 생각해봅시다. 이 예제에서는 사용자가 애플리케이션의 모든 게시글을 볼 수 있지만, 관리자만 게시글을 삭제할 수 있습니다. [항상 서버 측에서 권한을 확인하세요](/livewire/3.x/actions#always-authorize-server-side) 섹션에서는 서버 측 권한 부여를 추가하여 액션을 안전하게 만들었습니다. 이제 실제 게시글 삭제 로직을 코드 단순화를 위해 별도의 메서드로 리팩터링한다고 가정해봅시다:
 
 ```php
 // 경고: 이 코드는 이렇게 하면 안 된다는 예시입니다...

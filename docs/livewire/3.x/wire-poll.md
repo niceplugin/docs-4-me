@@ -1,5 +1,5 @@
 # wire:poll
-폴링(Polling)은 웹 애플리케이션에서 서버에 업데이트가 있는지 정기적으로 요청을 보내는(폴링하는) 기술입니다. 이는 [WebSockets](/docs/events#real-time-events-using-laravel-echo)와 같은 더 정교한 기술 없이도 페이지를 최신 상태로 유지할 수 있는 간단한 방법입니다.
+폴링(Polling)은 웹 애플리케이션에서 서버에 업데이트가 있는지 정기적으로 요청을 보내는(폴링하는) 기술입니다. 이는 [WebSockets](/livewire/3.x/events#real-time-events-using-laravel-echo)와 같은 더 정교한 기술 없이도 페이지를 최신 상태로 유지할 수 있는 간단한 방법입니다.
 ## 기본 사용법 {#basic-usage}
 
 Livewire에서 폴링을 사용하는 것은 요소에 `wire:poll`을 추가하는 것만큼 간단합니다.

@@ -39,13 +39,13 @@ Livewire 컴포넌트에서 맞춤 JavaScript를 실행하려면, `<script>` 요
 @endscript
 ```
 
-JavaScript 액션에 대해 더 알아보려면, [액션 문서](/docs/actions#javascript-actions)를 참고하세요.
+JavaScript 액션에 대해 더 알아보려면, [액션 문서](/livewire/3.x/actions#javascript-actions)를 참고하세요.
 
 ### 스크립트에서 `$wire` 사용하기 {#using-wire-from-scripts}
 
 자바스크립트에 `@script`를 사용할 때 또 다른 유용한 기능은 Livewire 컴포넌트의 `$wire` 객체에 자동으로 접근할 수 있다는 점입니다.
 
-아래는 간단한 `setInterval`을 사용하여 컴포넌트를 2초마다 새로고침하는 예시입니다. (이 작업은 [`wire:poll`](/docs/wire-poll)로도 쉽게 할 수 있지만, 이 방법이 개념을 설명하기에 간단합니다.)
+아래는 간단한 `setInterval`을 사용하여 컴포넌트를 2초마다 새로고침하는 예시입니다. (이 작업은 [`wire:poll`](/livewire/3.x/wire-poll)로도 쉽게 할 수 있지만, 이 방법이 개념을 설명하기에 간단합니다.)
 
 `$wire`에 대해 더 알고 싶다면 [`$wire` 문서](#the-wire-object)를 참고하세요.
 
@@ -170,7 +170,7 @@ let components = Livewire.all()
 
 ### 이벤트와 상호작용하기 {#interacting-with-events}
 
-개별 컴포넌트에서 PHP로 이벤트를 디스패치하고 리스닝하는 것 외에도, 전역 `Livewire` 객체를 사용하면 애플리케이션 어디에서나 [Livewire의 이벤트 시스템](/docs/events)과 상호작용할 수 있습니다:
+개별 컴포넌트에서 PHP로 이벤트를 디스패치하고 리스닝하는 것 외에도, 전역 `Livewire` 객체를 사용하면 애플리케이션 어디에서나 [Livewire의 이벤트 시스템](/livewire/3.x/events)과 상호작용할 수 있습니다:
 
 ```js
 // 이벤트를 리스닝 중인 모든 Livewire 컴포넌트에 디스패치...
@@ -390,7 +390,7 @@ let $wire = {
 }
 ```
 
-자세한 내용은 [Livewire 공식 문서의 JavaScript에서 속성 접근하기](/docs/properties#accessing-properties-from-javascript)에서 확인할 수 있습니다.
+자세한 내용은 [Livewire 공식 문서의 JavaScript에서 속성 접근하기](/livewire/3.x/properties#accessing-properties-from-javascript)에서 확인할 수 있습니다.
 
 ### `snapshot` 객체
 

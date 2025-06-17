@@ -86,7 +86,7 @@ class Counter extends Component
 
 > [!warning] Livewire 컴포넌트는 반드시 하나의 루트 엘리먼트가 있어야 합니다
 > Livewire가 제대로 동작하려면, 컴포넌트는 반드시 **하나**의 루트 엘리먼트만 가져야 합니다. 여러 개의 루트 엘리먼트가 감지되면 예외가 발생합니다. 예제처럼 `<div>` 엘리먼트를 사용하는 것이 권장됩니다. HTML 주석도 별도의 엘리먼트로 간주되므로 루트 엘리먼트 내부에 작성해야 합니다.
-> [전체 페이지 컴포넌트](/docs/components#full-page-components)를 렌더링할 때, 레이아웃 파일의 네임드 슬롯은 루트 엘리먼트 바깥에 둘 수 있습니다. 이들은 컴포넌트가 렌더링되기 전에 제거됩니다.
+> [전체 페이지 컴포넌트](/livewire/3.x/components#full-page-components)를 렌더링할 때, 레이아웃 파일의 네임드 슬롯은 루트 엘리먼트 바깥에 둘 수 있습니다. 이들은 컴포넌트가 렌더링되기 전에 제거됩니다.
 
 ## 컴포넌트에 대한 라우트 등록하기 {#register-a-route-for-the-component}
 

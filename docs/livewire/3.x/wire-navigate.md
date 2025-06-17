@@ -1,7 +1,7 @@
 # wire:navigate
 Livewire의 `wire:navigate` 기능은 페이지 네비게이션을 훨씬 더 빠르게 만들어, 사용자에게 SPA와 유사한 경험을 제공합니다.
 
-이 페이지는 `wire:navigate` 디렉티브에 대한 간단한 참고 자료입니다. 보다 완전한 문서는 [Livewire의 Navigate 기능 페이지](/docs/navigate)를 꼭 참고하세요.
+이 페이지는 `wire:navigate` 디렉티브에 대한 간단한 참고 자료입니다. 보다 완전한 문서는 [Livewire의 Navigate 기능 페이지](/livewire/3.x/navigate)를 꼭 참고하세요.
 
 아래는 내비게이션 바의 링크에 `wire:navigate`를 추가하는 간단한 예시입니다:
 
@@ -25,4 +25,4 @@ Livewire의 `wire:navigate` 기능은 페이지 네비게이션을 훨씬 더 �
 
 ## 더 깊이 들어가기 {#going-deeper}
 
-이 기능에 대한 더 완전한 문서를 보려면 [Livewire의 네비게이트 문서 페이지](/docs/navigate)를 방문하세요.
+이 기능에 대한 더 완전한 문서를 보려면 [Livewire의 네비게이트 문서 페이지](/livewire/3.x/navigate)를 방문하세요.

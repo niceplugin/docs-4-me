@@ -191,4 +191,4 @@ Livewire는 변형 알고리즘에 추가 단계로, 요소를 변경하기 전�
 
 #### 모핑 우회하기 {#bypassing-morphing}
 
-요소에 대해 모핑을 완전히 우회해야 하는 경우, [wire:replace](/docs/wire-replace)를 사용하여 Livewire가 기존 요소를 모핑하려고 시도하는 대신 해당 요소의 모든 자식을 교체하도록 지시할 수 있습니다.
+요소에 대해 모핑을 완전히 우회해야 하는 경우, [wire:replace](/livewire/3.x/wire-replace)를 사용하여 Livewire가 기존 요소를 모핑하려고 시도하는 대신 해당 요소의 모든 자식을 교체하도록 지시할 수 있습니다.

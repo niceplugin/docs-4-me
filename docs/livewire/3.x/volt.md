@@ -193,7 +193,7 @@ use function Livewire\Volt\{state};
 state(['count' => fn ($users) => count($users)]);
 ```
 
-`mount` 함수는 Livewire 컴포넌트의 "mount" [라이프사이클 훅](/docs/lifecycle-hooks)을 정의하는 데 사용할 수 있습니다. 컴포넌트에 제공된 파라미터는 이 메서드에 주입됩니다. mount 훅에서 필요한 다른 파라미터는 Laravel의 서비스 컨테이너에 의해 해결됩니다:
+`mount` 함수는 Livewire 컴포넌트의 "mount" [라이프사이클 훅](/livewire/3.x/lifecycle-hooks)을 정의하는 데 사용할 수 있습니다. 컴포넌트에 제공된 파라미터는 이 메서드에 주입됩니다. mount 훅에서 필요한 다른 파라미터는 Laravel의 서비스 컨테이너에 의해 해결됩니다:
 
 ```php
 use App\Services\UserCounter;
@@ -314,7 +314,7 @@ state(['id'])->locked();
 
 ### 반응형 속성 {#reactive-properties}
 
-중첩된 컴포넌트로 작업할 때, 부모 컴포넌트에서 자식 컴포넌트로 속성을 전달하고, 부모 컴포넌트가 해당 속성을 업데이트할 때 자식 컴포넌트가 [자동으로 업데이트](/docs/nesting#reactive-props)되기를 원할 수 있습니다.
+중첩된 컴포넌트로 작업할 때, 부모 컴포넌트에서 자식 컴포넌트로 속성을 전달하고, 부모 컴포넌트가 해당 속성을 업데이트할 때 자식 컴포넌트가 [자동으로 업데이트](/livewire/3.x/nesting#reactive-props)되기를 원할 수 있습니다.
 
 Volt를 사용하여 이를 달성하려면, 반응형으로 만들고자 하는 상태에 `reactive` 메서드를 체이닝하면 됩니다:
 
@@ -324,7 +324,7 @@ state(['todos'])->reactive();
 
 ### 모델링 가능한 속성 {#modelable-properties}
 
-반응형 속성을 사용하고 싶지 않은 경우, Livewire는 [모델링 가능한 기능](/docs/nesting#binding-to-child-data-using-wiremodel)을 제공합니다. 이 기능을 사용하면 부모 컴포넌트와 자식 컴포넌트 간에 `wire:model`을 직접 사용하여 상태를 공유할 수 있습니다.
+반응형 속성을 사용하고 싶지 않은 경우, Livewire는 [모델링 가능한 기능](/livewire/3.x/nesting#binding-to-child-data-using-wiremodel)을 제공합니다. 이 기능을 사용하면 부모 컴포넌트와 자식 컴포넌트 간에 `wire:model`을 직접 사용하여 상태를 공유할 수 있습니다.
 
 Volt를 사용하여 이를 구현하려면, 모델링 가능한 상태에 `modelable` 메서드를 체이닝하면 됩니다:
 
@@ -334,7 +334,7 @@ state(['form'])->modelable();
 
 ### 계산된 속성 {#computed-properties}
 
-Livewire는 [계산된 속성](/docs/computed-properties)도 정의할 수 있게 해주며, 이는 컴포넌트에서 필요한 정보를 지연해서 가져올 때 유용합니다. 계산된 속성의 결과는 각 Livewire 요청 생명주기 동안 "메모이즈"되거나, 메모리에 캐시됩니다.
+Livewire는 [계산된 속성](/livewire/3.x/computed-properties)도 정의할 수 있게 해주며, 이는 컴포넌트에서 필요한 정보를 지연해서 가져올 때 유용합니다. 계산된 속성의 결과는 각 Livewire 요청 생명주기 동안 "메모이즈"되거나, 메모리에 캐시됩니다.
 
 계산된 속성을 정의하려면 `computed` 함수를 사용할 수 있습니다. 변수의 이름이 계산된 속성의 이름을 결정합니다:
 
@@ -373,7 +373,7 @@ $count = computed(function () {
 
 ## 액션 {#actions}
 
-Livewire [액션](/docs/actions)은 페이지 상호작용을 감지하고 컴포넌트의 해당 메서드를 호출하여 컴포넌트를 다시 렌더링하는 편리한 방법을 제공합니다. 대부분의 경우, 액션은 사용자가 버튼을 클릭할 때 호출됩니다.
+Livewire [액션](/livewire/3.x/actions)은 페이지 상호작용을 감지하고 컴포넌트의 해당 메서드를 호출하여 컴포넌트를 다시 렌더링하는 편리한 방법을 제공합니다. 대부분의 경우, 액션은 사용자가 버튼을 클릭할 때 호출됩니다.
 
 Volt를 사용하여 Livewire 액션을 정의하려면, 클로저를 정의하기만 하면 됩니다. 클로저를 담고 있는 변수의 이름이 액션의 이름이 됩니다:
 
@@ -425,7 +425,7 @@ $delete = function (PostRepository $posts) {
 
 ### 렌더리스 액션 {#renderless-actions}
 
-경우에 따라, 컴포넌트가 렌더된 Blade 템플릿에 변화를 일으키지 않는 액션을 선언할 수 있습니다. 이런 경우, Livewire의 라이프사이클에서 [렌더링 단계 건너뛰기](/docs/actions#skipping-re-renders)를 통해 액션을 `action` 함수로 감싸고, 그 정의에 `renderless` 메서드를 체이닝하여 렌더링 단계를 생략할 수 있습니다:
+경우에 따라, 컴포넌트가 렌더된 Blade 템플릿에 변화를 일으키지 않는 액션을 선언할 수 있습니다. 이런 경우, Livewire의 라이프사이클에서 [렌더링 단계 건너뛰기](/livewire/3.x/actions#skipping-re-renders)를 통해 액션을 `action` 함수로 감싸고, 그 정의에 `renderless` 메서드를 체이닝하여 렌더링 단계를 생략할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{action};
@@ -435,7 +435,7 @@ $incrementViewCount = action(fn () => $this->viewCount++)->renderless();
 
 ### 보호된 헬퍼 {#protected-helpers}
 
-기본적으로 모든 Volt 액션은 "public"이며 클라이언트에서 호출할 수 있습니다. 만약 [액션 내부에서만 접근 가능한 함수](/docs/actions#keep-dangerous-methods-protected-or-private)를 만들고 싶다면, `protect` 함수를 사용할 수 있습니다:
+기본적으로 모든 Volt 액션은 "public"이며 클라이언트에서 호출할 수 있습니다. 만약 [액션 내부에서만 접근 가능한 함수](/livewire/3.x/actions#keep-dangerous-methods-protected-or-private)를 만들고 싶다면, `protect` 함수를 사용할 수 있습니다:
 
 ```php
 use App\Repositories\PostRepository;
@@ -458,7 +458,7 @@ $ensurePostCanBeDeleted = protect(function () {
 
 ## 폼 {#forms}
 
-Livewire의 [폼](/docs/forms)은 단일 클래스 내에서 폼 검증과 제출을 편리하게 처리할 수 있는 방법을 제공합니다. Volt 컴포넌트 내에서 Livewire 폼을 사용하려면 `form` 함수를 사용할 수 있습니다:
+Livewire의 [폼](/livewire/3.x/forms)은 단일 클래스 내에서 폼 검증과 제출을 편리하게 처리할 수 있는 방법을 제공합니다. Volt 컴포넌트 내에서 Livewire 폼을 사용하려면 `form` 함수를 사용할 수 있습니다:
 
 ```php
 <?php
@@ -500,7 +500,7 @@ $save = function () {
 
 ## 리스너 {#listeners}
 
-Livewire의 전역 [이벤트 시스템](/docs/events)은 컴포넌트 간의 통신을 가능하게 합니다. 한 페이지에 두 개의 Livewire 컴포넌트가 존재할 때, 이벤트와 리스너를 활용하여 서로 통신할 수 있습니다. Volt를 사용할 때는 `on` 함수를 사용하여 리스너를 정의할 수 있습니다:
+Livewire의 전역 [이벤트 시스템](/livewire/3.x/events)은 컴포넌트 간의 통신을 가능하게 합니다. 한 페이지에 두 개의 Livewire 컴포넌트가 존재할 때, 이벤트와 리스너를 활용하여 서로 통신할 수 있습니다. Volt를 사용할 때는 `on` 함수를 사용하여 리스너를 정의할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{on};
@@ -530,7 +530,7 @@ on(['event-{post.id}' => function () {
 
 ## 라이프사이클 훅 {#lifecycle-hooks}
 
-Livewire에는 컴포넌트의 라이프사이클 여러 지점에서 코드를 실행할 수 있는 다양한 [라이프사이클 훅](/docs/lifecycle-hooks)이 있습니다. Volt의 편리한 API를 사용하면, 해당 함수들을 통해 이러한 라이프사이클 훅을 정의할 수 있습니다:
+Livewire에는 컴포넌트의 라이프사이클 여러 지점에서 코드를 실행할 수 있는 다양한 [라이프사이클 훅](/livewire/3.x/lifecycle-hooks)이 있습니다. Volt의 편리한 API를 사용하면, 해당 함수들을 통해 이러한 라이프사이클 훅을 정의할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{boot, booted, ...};
@@ -548,7 +548,7 @@ updated(['count' => fn () => /* ... */]);
 
 ## 지연 로딩 플레이스홀더 {#lazy-loading-placeholders}
 
-Livewire 컴포넌트를 렌더링할 때, `lazy` 파라미터를 Livewire 컴포넌트에 전달하여 [로딩을 지연](/docs/lazy)시킬 수 있습니다. 기본적으로 Livewire는 컴포넌트가 로드될 위치에 `<div></div>` 태그를 DOM에 삽입합니다.
+Livewire 컴포넌트를 렌더링할 때, `lazy` 파라미터를 Livewire 컴포넌트에 전달하여 [로딩을 지연](/livewire/3.x/lazy)시킬 수 있습니다. 기본적으로 Livewire는 컴포넌트가 로드될 위치에 `<div></div>` 태그를 DOM에 삽입합니다.
 
 초기 페이지가 로드되는 동안 컴포넌트의 플레이스홀더에 표시되는 HTML을 커스터마이즈하고 싶다면, `placeholder` 함수를 사용할 수 있습니다:
 
@@ -560,7 +560,7 @@ placeholder('<div>Loading...</div>');
 
 ## 유효성 검사 {#validation}
 
-Livewire는 Laravel의 강력한 [유효성 검사 기능](/docs/validation)에 쉽게 접근할 수 있도록 해줍니다. Volt의 API를 사용하면 `rules` 함수를 통해 컴포넌트의 유효성 검사 규칙을 정의할 수 있습니다. 기존 Livewire 컴포넌트와 마찬가지로, 이 규칙들은 `validate` 메서드를 호출할 때 컴포넌트 데이터에 적용됩니다:
+Livewire는 Laravel의 강력한 [유효성 검사 기능](/livewire/3.x/validation)에 쉽게 접근할 수 있도록 해줍니다. Volt의 API를 사용하면 `rules` 함수를 통해 컴포넌트의 유효성 검사 규칙을 정의할 수 있습니다. 기존 Livewire 컴포넌트와 마찬가지로, 이 규칙들은 `validate` 메서드를 호출할 때 컴포넌트 데이터에 적용됩니다:
 
 ```php
 <?php
@@ -609,7 +609,7 @@ rules(['name' => 'required|min:6', 'email' => 'required|email'])
 
 ## 파일 업로드 {#file-uploads}
 
-Volt를 사용할 때, Livewire 덕분에 [파일 업로드 및 저장](/docs/uploads)이 훨씬 쉬워집니다. 기능형 Volt 컴포넌트에 `Livewire\WithFileUploads` 트레이트를 포함하려면, `usesFileUploads` 함수를 사용할 수 있습니다:
+Volt를 사용할 때, Livewire 덕분에 [파일 업로드 및 저장](/livewire/3.x/uploads)이 훨씬 쉬워집니다. 기능형 Volt 컴포넌트에 `Livewire\WithFileUploads` 트레이트를 포함하려면, `usesFileUploads` 함수를 사용할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{state, usesFileUploads};
@@ -629,7 +629,7 @@ $save = function () {
 
 ## URL 쿼리 파라미터 {#url-query-parameters}
 
-때때로 컴포넌트 상태가 변경될 때 [브라우저의 URL 쿼리 파라미터를 업데이트](/docs/url)하는 것이 유용할 수 있습니다. 이런 경우, `url` 메서드를 사용하여 Livewire가 컴포넌트 상태의 일부와 URL 쿼리 파라미터를 동기화하도록 지시할 수 있습니다:
+때때로 컴포넌트 상태가 변경될 때 [브라우저의 URL 쿼리 파라미터를 업데이트](/livewire/3.x/url)하는 것이 유용할 수 있습니다. 이런 경우, `url` 메서드를 사용하여 Livewire가 컴포넌트 상태의 일부와 URL 쿼리 파라미터를 동기화하도록 지시할 수 있습니다:
 
 ```php
 <?php
@@ -671,7 +671,7 @@ state(['page' => 1])->url(as: 'p', history: true, keep: true);
 
 ## 페이지네이션 {#pagination}
 
-Livewire와 Volt는 [페이지네이션](/docs/pagination)을 완벽하게 지원합니다. Livewire의 `Livewire\WithPagination` 트레이트를 기능형 Volt 컴포넌트에 포함하려면, `usesPagination` 함수를 사용할 수 있습니다:
+Livewire와 Volt는 [페이지네이션](/livewire/3.x/pagination)을 완벽하게 지원합니다. Livewire의 `Livewire\WithPagination` 트레이트를 기능형 Volt 컴포넌트에 포함하려면, `usesPagination` 함수를 사용할 수 있습니다:
 
 ```php
 <?php
@@ -805,7 +805,7 @@ it('increments the counter', function () {
 });
 ```
 
-Volt 컴포넌트를 테스트할 때는 표준 [Livewire 테스트 API](/docs/testing)에서 제공하는 모든 메서드를 사용할 수 있습니다.
+Volt 컴포넌트를 테스트할 때는 표준 [Livewire 테스트 API](/livewire/3.x/testing)에서 제공하는 모든 메서드를 사용할 수 있습니다.
 
 Volt 컴포넌트가 중첩되어 있다면, 테스트하려는 컴포넌트를 "점" 표기법으로 지정할 수 있습니다:
 

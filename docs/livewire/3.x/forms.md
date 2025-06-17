@@ -119,7 +119,7 @@ Blade 템플릿도 수정하여 페이지에 유효성 검사 오류가 표시�
 
 이제 사용자가 아무 필드도 입력하지 않고 폼을 제출하려고 하면, 어떤 필드를 입력해야 하는지 알려주는 유효성 검사 메시지가 표시됩니다.
 
-Livewire는 이 외에도 다양한 유효성 검사 기능을 제공합니다. 더 자세한 내용은 [유효성 검사 전용 문서 페이지](/docs/validation)를 참고하세요.
+Livewire는 이 외에도 다양한 유효성 검사 기능을 제공합니다. 더 자세한 내용은 [유효성 검사 전용 문서 페이지](/livewire/3.x/validation)를 참고하세요.
 
 ### 폼 객체 추출하기 {#extracting-a-form-object}
 
@@ -514,7 +514,7 @@ class PostForm extends Form
 }
 ```
 
-이제 [`wire:model.blur`](/docs/wire-model#updating-on-blur-event)과 같이 폼이 제출되기 전에 `$title` 속성이 업데이트되면, `$title`에 대한 검증이 실행됩니다.
+이제 [`wire:model.blur`](/livewire/3.x/wire-model#updating-on-blur-event)과 같이 폼이 제출되기 전에 `$title` 속성이 업데이트되면, `$title`에 대한 검증이 실행됩니다.
 
 ### 로딩 인디케이터 표시하기 {#showing-a-loading-indicator}
 
@@ -536,11 +536,11 @@ class PostForm extends Form
 
 이제 사용자가 "저장"을 누르면, 작은 인라인 스피너가 표시됩니다.
 
-Livewire의 `wire:loading` 기능은 이 외에도 다양한 기능을 제공합니다. 더 자세한 내용은 [로딩 문서](/docs/wire-loading)를 참고하세요.
+Livewire의 `wire:loading` 기능은 이 외에도 다양한 기능을 제공합니다. 더 자세한 내용은 [로딩 문서](/livewire/3.x/wire-loading)를 참고하세요.
 
 ## 실시간 업데이트 필드 {#live-updating-fields}
 
-기본적으로 Livewire는 폼이 제출될 때(또는 다른 [액션](/docs/actions)이 호출될 때)만 네트워크 요청을 보냅니다. 폼을 작성하는 도중에는 네트워크 요청이 발생하지 않습니다.
+기본적으로 Livewire는 폼이 제출될 때(또는 다른 [액션](/livewire/3.x/actions)이 호출될 때)만 네트워크 요청을 보냅니다. 폼을 작성하는 도중에는 네트워크 요청이 발생하지 않습니다.
 
 예를 들어, `CreatePost` 컴포넌트를 살펴봅시다. 사용자가 입력하는 동안 "title" 입력 필드가 백엔드의 `$title` 속성과 동기화되도록 하려면, `wire:model`에 `.live` 수식어를 다음과 같이 추가할 수 있습니다:
 
@@ -583,7 +583,7 @@ public $title = '';
 
 이제 사용자가 "title" 입력란에 세 글자만 입력하고 폼의 다음 입력란을 클릭하면, 해당 필드는 최소 다섯 글자를 입력해야 한다는 유효성 검사 메시지가 표시됩니다.
 
-더 자세한 내용은 [유효성 검사 문서 페이지](/docs/validation)를 참고하세요.
+더 자세한 내용은 [유효성 검사 문서 페이지](/livewire/3.x/validation)를 참고하세요.
 
 ## 실시간 폼 저장 {#real-time-form-saving}
 
@@ -649,7 +649,7 @@ class UpdatePost extends Component
 
 또한, 해당 속성에 `#[Validate]` 속성이 지정되어 있기 때문에, 속성이 업데이트되고 `updated()` 훅이 호출되기 전에 유효성 검사 규칙이 실행됩니다.
 
-"updated" 라이프사이클 훅과 다른 훅에 대해 더 알아보려면 [라이프사이클 훅 문서](/docs/lifecycle-hooks)를 참고하세요.
+"updated" 라이프사이클 훅과 다른 훅에 대해 더 알아보려면 [라이프사이클 훅 문서](/livewire/3.x/lifecycle-hooks)를 참고하세요.
 
 ## 변경 사항 표시 인디케이터 표시하기 {#showing-dirty-indicators}
 

@@ -277,7 +277,7 @@ public function render()
 
 ### 인라인 템플릿 사용하기 {#using-inline-templates}
 
-계산된 속성이 유용한 또 다른 시나리오는 컴포넌트에서 [인라인 템플릿](/docs/components#inline-components)을 사용할 때입니다.
+계산된 속성이 유용한 또 다른 시나리오는 컴포넌트에서 [인라인 템플릿](/livewire/3.x/components#inline-components)을 사용할 때입니다.
 
 아래는 인라인 컴포넌트의 예시로, `render()` 메서드 안에서 템플릿 문자열을 직접 반환하기 때문에 뷰에 데이터를 전달할 기회가 전혀 없습니다:
 

@@ -78,7 +78,7 @@ class Counter extends Component
 `memo` 부분은 컴포넌트를 식별하고 다시 생성하는 데 필요한 정보를 저장하며, `state` 부분은 컴포넌트의 모든 public 속성 값을 저장합니다.
 
 > [!info]
-> 위의 스냅샷은 Livewire에서 실제로 사용되는 스냅샷의 축약 버전입니다. 실제 애플리케이션에서는 스냅샷에 검증 오류, 자식 컴포넌트 목록, 로케일 등 훨씬 더 많은 정보가 포함됩니다. 스냅샷 객체에 대해 더 자세히 알고 싶다면 [스냅샷 스키마 문서](/docs/javascript#the-snapshot-object)를 참고하세요.
+> 위의 스냅샷은 Livewire에서 실제로 사용되는 스냅샷의 축약 버전입니다. 실제 애플리케이션에서는 스냅샷에 검증 오류, 자식 컴포넌트 목록, 로케일 등 훨씬 더 많은 정보가 포함됩니다. 스냅샷 객체에 대해 더 자세히 알고 싶다면 [스냅샷 스키마 문서](/livewire/3.x/javascript#the-snapshot-object)를 참고하세요.
 
 ### HTML에 스냅샷 포함하기 {#embedding-the-snapshot-in-the-html}
 
@@ -240,5 +240,5 @@ todos: [
 
 ### 사용자 지정 속성 타입 지원 {#supporting-custom-property-types}
 
-내부적으로 Livewire는 가장 일반적인 PHP 및 Laravel 타입에 대한 하이드레이션을 지원합니다. 그러나 지원되지 않는 타입을 지원하고 싶다면, [Synthesizers](/docs/synthesizers)를 사용할 수 있습니다. Synthesizers는 원시 타입이 아닌 속성 타입을 하이드레이션/디하이드레이션하기 위한 Livewire의 내부 메커니즘입니다.
+내부적으로 Livewire는 가장 일반적인 PHP 및 Laravel 타입에 대한 하이드레이션을 지원합니다. 그러나 지원되지 않는 타입을 지원하고 싶다면, [Synthesizers](/livewire/3.x/synthesizers)를 사용할 수 있습니다. Synthesizers는 원시 타입이 아닌 속성 타입을 하이드레이션/디하이드레이션하기 위한 Livewire의 내부 메커니즘입니다.
 
