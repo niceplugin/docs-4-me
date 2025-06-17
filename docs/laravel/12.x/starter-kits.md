@@ -45,7 +45,7 @@ npm install && npm run build
 composer run dev
 ```
 
-Laravel 개발 서버를 시작하면, 웹 브라우저에서 [http://localhost:8000](http://localhost:8000) 주소로 애플리케이션에 접속할 수 있습니다.
+Laravel 개발 서버를 시작하면, 웹 브라우저에서 `http://localhost:8000` 주소로 애플리케이션에 접속할 수 있습니다.
 
 
 ## 사용 가능한 스타터 키트 {#available-starter-kits}
