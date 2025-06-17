@@ -1,16 +1,16 @@
-Computed properties are a way to create "derived" properties in Livewire. Like accessors on an Eloquent model, computed properties allow you to access values and cache them for future access during the request.
+# 계산된 속성(Computed Properties)
+계산된 속성은 Livewire에서 "파생" 속성을 생성하는 방법입니다. Eloquent 모델의 접근자(accessor)처럼, 계산된 속성을 사용하면 값을 접근하고, 요청 중에 이후 접근을 위해 해당 값을 캐싱할 수 있습니다.
 
-Computed properties are particularly useful in combination with component's public properties.
+계산된 속성은 컴포넌트의 public 속성과 결합하여 사용할 때 특히 유용합니다.
 
-## Basic usage
+## 기본 사용법 {#basic-usage}
 
-To create a computed property, you can add the `#[Computed]` attribute above any method in your Livewire component. Once the attribute has been added to the method, you can access it like any other property.
+계산된 속성을 생성하려면 Livewire 컴포넌트의 메서드 위에 `#[Computed]` 어트리뷰트를 추가하면 됩니다. 어트리뷰트를 메서드에 추가하면, 다른 속성처럼 해당 값을 접근할 수 있습니다.
 
-> [!warning] Make sure you import attribute classes
-> Make sure you import any attribute classes. For example, the below `#[Computed]` attribute requires the following import `use Livewire\Attributes\Computed;`.
+> [!warning] 어트리뷰트 클래스 임포트 필수
+> 어트리뷰트 클래스를 반드시 임포트해야 합니다. 예를 들어, 아래의 `#[Computed]` 어트리뷰트를 사용하려면 `use Livewire\Attributes\Computed;`를 임포트해야 합니다.
 
-For example, here's a `ShowUser` component that uses a computed property named `user()` to access a `User` Eloquent model based on a property named `$userId`:
-
+예를 들어, 아래는 `user()`라는 계산된 속성을 사용하여 `$userId` 속성을 기반으로 `User` Eloquent 모델에 접근하는 `ShowUser` 컴포넌트입니다:
 ```php
 <?php
 
@@ -51,35 +51,35 @@ class ShowUser extends Component
 </div>
 ```
 
-Because the `#[Computed]` attribute has been added to the `user()` method, the value is accessible in other methods in the component and within the Blade template.
+`user()` 메서드에 `#[Computed]` 어트리뷰트가 추가되어 있기 때문에, 이 값은 컴포넌트의 다른 메서드나 Blade 템플릿 내에서 접근할 수 있습니다.
 
-> [!info] Must use `$this` in your template
-> Unlike normal properties, computed properties aren't directly available inside your component's template. Instead, you must access them on the `$this` object. For example, a computed property named `posts()` must be accessed via `$this->posts` inside your template.
+> [!info] 템플릿에서 반드시 `$this` 사용
+> 일반 속성과 달리, 계산된 속성은 컴포넌트의 템플릿에서 직접 사용할 수 없습니다. 대신, `$this` 객체를 통해 접근해야 합니다. 예를 들어, `posts()`라는 계산된 속성은 템플릿 내에서 반드시 `$this->posts`로 접근해야 합니다.
 
-> [!warning] Computed properties are not supported on `Livewire\Form` objects.
-> Trying to use a Computed property within a [Form](https://livewire.laravel.com/docs/forms) will result in an error when you attempt to access the property in blade using $form->property syntax.
+> [!warning] 계산된 속성은 `Livewire\Form` 객체에서 지원되지 않습니다.
+> [Form](https://livewire.laravel.com/docs/forms) 내에서 계산된 속성을 사용하려고 하면, blade에서 $form->property 문법으로 속성에 접근할 때 오류가 발생합니다.
 
-## Performance advantage
+## 성능 이점 {#performance-advantage}
 
-You may be asking yourself: why use computed properties at all? Why not just call the method directly?
+왜 굳이 계산된 속성(computed property)을 사용해야 할까요? 그냥 메서드를 직접 호출하면 안 될까요?
 
-Accessing a method as a computed property offers a performance advantage over calling a method. Internally, when a computed property is executed for the first time, Livewire caches the returned value. This way, any subsequent accesses in the request will return the cached value instead of executing multiple times.
+메서드를 계산된 속성으로 접근하면, 메서드를 직접 호출하는 것보다 성능상 이점이 있습니다. 내부적으로 계산된 속성이 처음 실행될 때 Livewire는 반환된 값을 캐싱합니다. 이렇게 하면, 같은 요청 내에서 이후에 접근할 때는 여러 번 실행하지 않고 캐시된 값을 반환합니다.
 
-This allows you to freely access a derived value and not worry about the performance implications.
+이 덕분에 파생된 값을 자유롭게 접근하면서 성능에 대해 걱정할 필요가 없습니다.
 
-> [!warning] Computed properties are only cached for a single request
-> It's a common misconception that Livewire caches computed properties for the entire lifespan of your Livewire component on a page. However, this isn't the case. Instead, Livewire only caches the result for the duration of a single component request. This means that if your computed property method contains an expensive database query, it will be executed every time your Livewire component performs an update.
+> [!warning] 계산된 속성은 한 번의 요청에만 캐시됩니다
+> Livewire가 계산된 속성을 페이지에서 Livewire 컴포넌트의 전체 수명 동안 캐시한다고 오해하는 경우가 많습니다. 하지만 실제로는 그렇지 않습니다. Livewire는 한 번의 컴포넌트 요청 동안에만 결과를 캐시합니다. 즉, 계산된 속성 메서드에 비용이 많이 드는 데이터베이스 쿼리가 있다면, Livewire 컴포넌트가 업데이트될 때마다 해당 쿼리가 매번 실행됩니다.
 
-### Busting the cache
+### 캐시 무효화하기 {#busting-the-cache}
 
-Consider the following problematic scenario:
-1) You access a computed property that depends on a certain property or database state
-2) The underlying property or database state changes
-3) The cached value for the property becomes stale and needs to be re-computed
+다음과 같은 문제가 발생할 수 있는 시나리오를 생각해봅시다:
+1) 특정 속성이나 데이터베이스 상태에 의존하는 계산된 속성에 접근합니다.
+2) 해당 속성이나 데이터베이스 상태가 변경됩니다.
+3) 속성에 대한 캐시된 값이 오래되어 다시 계산이 필요해집니다.
 
-To clear, or "bust", the stored cache, you can use PHP's `unset()` function.
+저장된 캐시를 지우거나 "무효화(bust)"하려면 PHP의 `unset()` 함수를 사용할 수 있습니다.
 
-Below is an example of an action called `createPost()` that, by creating a new post in the application, makes the `posts()` computed stale — meaning the computed property `posts()` needs to be re-computed to include the newly added post:
+아래는 `createPost()`라는 액션의 예시입니다. 이 액션은 애플리케이션에 새 게시물을 생성함으로써 `posts()` 계산된 속성을 오래된 상태로 만듭니다. 즉, 계산된 속성 `posts()`가 새로 추가된 게시물을 포함하도록 다시 계산되어야 합니다:
 
 ```php
 <?php
@@ -111,13 +111,13 @@ class ShowPosts extends Component
 }
 ```
 
-In the above component, the computed property is cached before a new post is created because the `createPost()` method accesses `$this->posts` before the new post is created. To ensure that `$this->posts` contains the most up-to-date contents when accessed inside the view, the cache is invalidated using `unset($this->posts)`.
+위 컴포넌트에서, 새 게시물이 생성되기 전에 `createPost()` 메서드가 `$this->posts`에 접근하기 때문에 계산된 속성이 캐시됩니다. 뷰에서 `$this->posts`를 접근할 때 가장 최신의 내용을 포함하도록 하려면, `unset($this->posts)`를 사용해 캐시를 무효화해야 합니다.
 
-### Caching between requests
+### 요청 간 캐싱 {#caching-between-requests}
 
-Sometimes you would like to cache the value of a computed property for the lifespan of a Livewire component, rather than it being cleared after every request. In these cases, you can use [Laravel's caching utilities](https://laravel.com/docs/cache#retrieve-store).
+때때로 Livewire 컴포넌트의 수명 동안 계산된 프로퍼티의 값을 캐싱하고 싶을 때가 있습니다. 이렇게 하면 매 요청마다 값이 초기화되지 않습니다. 이런 경우에는 [Laravel의 캐싱 유틸리티](https://laravel.com/docs/cache#retrieve-store)를 사용할 수 있습니다.
 
-Below is an example of a computed property named `user()`, where instead of executing the Eloquent query directly, we wrap the query in `Cache::remember()` to ensure that any future requests retrieve it from Laravel's cache instead of re-executing the query:
+아래는 `user()`라는 계산된 프로퍼티의 예시입니다. Eloquent 쿼리를 직접 실행하는 대신, 쿼리를 `Cache::remember()`로 감싸서 이후의 요청에서는 쿼리를 다시 실행하지 않고 Laravel의 캐시에서 값을 가져오도록 합니다:
 
 ```php
 <?php
@@ -135,7 +135,7 @@ class ShowUser extends Component
     public function user()
     {
         $key = 'user'.$this->getId();
-        $seconds = 3600; // 1 hour...
+        $seconds = 3600; // 1시간...
 
         return Cache::remember($key, $seconds, function () {
             return User::find($this->userId);
@@ -146,9 +146,9 @@ class ShowUser extends Component
 }
 ```
 
-Because each unique instance of a Livewire component has a unique ID, we can use `$this->getId()` to generate a unique cache key that will only be applied to future requests for this same component instance.
+각 Livewire 컴포넌트의 고유 인스턴스는 고유한 ID를 가지므로, `$this->getId()`를 사용해 이 컴포넌트 인스턴스에만 적용되는 고유한 캐시 키를 생성할 수 있습니다.
 
-But, as you may have noticed, most of this code is predictable and can easily be abstracted. Because of this, Livewire's `#[Computed]` attribute provides a helpful `persist` parameter. By applying `#[Computed(persist: true)]` to a method, you can achieve the same result without any extra code:
+하지만, 보시다시피 이 코드의 대부분은 예측 가능하며 쉽게 추상화할 수 있습니다. 그래서 Livewire의 `#[Computed]` 속성은 유용한 `persist` 파라미터를 제공합니다. 메서드에 `#[Computed(persist: true)]`를 적용하면, 추가 코드 없이 동일한 결과를 얻을 수 있습니다:
 
 ```php
 use Livewire\Attributes\Computed;
@@ -161,20 +161,20 @@ public function user()
 }
 ```
 
-In the example above, when `$this->user` is accessed from your component, it will continue to be cached for the duration of the Livewire component on the page. This means the actual Eloquent query will only be executed once.
+위 예시에서, 컴포넌트에서 `$this->user`에 접근하면 Livewire 컴포넌트가 페이지에 있는 동안 계속 캐싱됩니다. 즉, 실제 Eloquent 쿼리는 한 번만 실행됩니다.
 
-Livewire caches persisted values for 3600 seconds (one hour). You can override this default by passing an additional `seconds` parameter to the `#[Computed]` attribute:
+Livewire는 지속된 값을 3600초(1시간) 동안 캐싱합니다. 이 기본값은 `#[Computed]` 속성에 추가로 `seconds` 파라미터를 전달하여 변경할 수 있습니다:
 
 ```php
 #[Computed(persist: true, seconds: 7200)]
 ```
 
-> [!tip] Calling `unset()` will bust this cache
-> As previously discussed, you can clear a computed property's cache using PHP's `unset()` method. This also applies to computed properties using the `persist: true` parameter. When calling `unset()` on a cached computed property, Livewire will clear not only the computed property cache, but also the underlying cached value in Laravel's cache.
+> [!tip] `unset()`을 호출하면 이 캐시가 삭제됩니다
+> 앞서 설명한 것처럼, PHP의 `unset()` 메서드를 사용해 계산된 프로퍼티의 캐시를 지울 수 있습니다. 이 방법은 `persist: true` 파라미터를 사용하는 계산된 프로퍼티에도 적용됩니다. 캐싱된 계산 프로퍼티에 `unset()`을 호출하면, Livewire는 계산 프로퍼티 캐시뿐만 아니라 Laravel 캐시에 저장된 값도 함께 삭제합니다.
 
-## Caching across all components
+## 모든 컴포넌트에서 캐싱하기 {#caching-across-all-components}
 
-Instead of caching the value of a computed property for the duration of a single component's lifecycle, you can cache the value of a computed across all components in your application using the `cache: true` parameter provided by the `#[Computed]` attribute:
+단일 컴포넌트의 생명주기 동안 계산된 프로퍼티의 값을 캐싱하는 대신, `#[Computed]` 속성에서 제공하는 `cache: true` 파라미터를 사용하여 애플리케이션의 모든 컴포넌트에서 계산된 값의 캐시를 공유할 수 있습니다:
 
 ```php
 use Livewire\Attributes\Computed;
@@ -187,9 +187,9 @@ public function posts()
 }
 ```
 
-In the above example, until the cache expires or is busted, every instance of this component in your application will share the same cached value for `$this->posts`.
+위 예시에서, 캐시가 만료되거나 삭제되기 전까지 애플리케이션 내 이 컴포넌트의 모든 인스턴스는 `$this->posts`에 대해 동일한 캐시 값을 공유하게 됩니다.
 
-If you need to manually clear the cache for a computed property, you may set a custom cache key using the `key` parameter:
+계산된 프로퍼티의 캐시를 수동으로 삭제해야 하는 경우, `key` 파라미터를 사용하여 커스텀 캐시 키를 지정할 수 있습니다:
 
 ```php
 use Livewire\Attributes\Computed;
@@ -202,11 +202,11 @@ public function posts()
 }
 ```
 
-## When to use computed properties?
+## 계산된 속성을 언제 사용해야 하나요? {#when-to-use-computed-properties}
 
-In addition to offering performance advantages, there are a few other scenarios where computed properties are helpful.
+성능상의 이점 외에도, 계산된 속성이 유용한 몇 가지 다른 상황이 있습니다.
 
-Specifically, when passing data into your component's Blade template, there are a few occasions where a computed property is a better alternative. Below is an example of a simple component's `render()` method passing a collection of `posts` to a Blade template:
+특히, 컴포넌트의 Blade 템플릿에 데이터를 전달할 때, 계산된 속성이 더 나은 대안이 되는 경우가 있습니다. 아래는 간단한 컴포넌트의 `render()` 메서드가 `posts` 컬렉션을 Blade 템플릿에 전달하는 예시입니다:
 
 ```php
 public function render()
@@ -225,13 +225,13 @@ public function render()
 </div>
 ```
 
-Although this is sufficient for many use cases, here are three scenarios where a computed property would be a better alternative:
+이 방법이 많은 경우에 충분하지만, 계산된 속성이 더 나은 대안이 되는 세 가지 상황이 있습니다:
 
-### Conditionally accessing values
+### 조건부로 값에 접근하기 {#conditionally-accessing-values}
 
-If you are conditionally accessing a value that is computationally expensive to retrieve in your Blade template, you can reduce performance overhead using a computed property.
+Blade 템플릿에서 계산 비용이 많이 드는 값을 조건부로 접근해야 할 때, 계산된 속성(computed property)을 사용하면 성능 오버헤드를 줄일 수 있습니다.
 
-Consider the following template without a computed property:
+계산된 속성을 사용하지 않은 아래의 템플릿을 살펴보세요:
 
 ```blade
 <div>
@@ -243,9 +243,9 @@ Consider the following template without a computed property:
 </div>
 ```
 
-If a user is restricted from viewing posts, the database query to retrieve the posts has already been made, yet the posts are never used in the template.
+만약 사용자가 게시글을 볼 수 없도록 제한되어 있다면, 게시글을 가져오는 데이터베이스 쿼리는 이미 실행되었지만, 실제로 템플릿에서는 게시글이 사용되지 않습니다.
 
-Here's a version of the above scenario using a computed property instead:
+위의 상황을 계산된 속성을 사용하여 개선한 예시는 다음과 같습니다:
 
 ```php
 use Livewire\Attributes\Computed;
@@ -273,13 +273,13 @@ public function render()
 </div>
 ```
 
-Now, because we are providing the posts to the template using a computed property, we only execute the database query when the data is needed.
+이제 계산된 속성을 통해 템플릿에 게시글을 제공하므로, 데이터가 실제로 필요할 때만 데이터베이스 쿼리가 실행됩니다.
 
-### Using inline templates
+### 인라인 템플릿 사용하기 {#using-inline-templates}
 
-Another scenario when computed properties are helpful is using [inline templates](/docs/components#inline-components) in your component.
+계산된 속성이 유용한 또 다른 시나리오는 컴포넌트에서 [인라인 템플릿](/docs/components#inline-components)을 사용할 때입니다.
 
-Below is an example of an inline component where, because we are returning a template string directly inside `render()`, we never have an opportunity to pass data into the view:
+아래는 인라인 컴포넌트의 예시로, `render()` 메서드 안에서 템플릿 문자열을 직접 반환하기 때문에 뷰에 데이터를 전달할 기회가 전혀 없습니다:
 
 ```php
 <?php
@@ -309,15 +309,15 @@ class ShowPosts extends Component
 }
 ```
 
-In the above example, without a computed property, we would have no way to explicitly pass data into the Blade template.
+위 예시에서 계산된 속성이 없다면, Blade 템플릿에 데이터를 명시적으로 전달할 방법이 없습니다.
 
-### Omitting the render method
+### render 메서드 생략하기 {#omitting-the-render-method}
 
-In Livewire, another way to cut down on boilerplate in your components is by omitting the `render()` method entirely. When omitted, Livewire will use its own `render()` method returning the corresponding Blade view by convention.
+Livewire에서는 컴포넌트의 보일러플레이트 코드를 줄이는 또 다른 방법으로 `render()` 메서드를 아예 생략할 수 있습니다. 생략할 경우, Livewire는 관례에 따라 해당 Blade 뷰를 반환하는 자체 `render()` 메서드를 사용합니다.
 
-In these case, you obviously don't have a `render()` method from which you can pass data into a Blade view.
+이 경우에는 Blade 뷰로 데이터를 전달할 수 있는 `render()` 메서드가 당연히 존재하지 않습니다.
 
-Rather than re-introducing the `render()` method into your component, you can instead provide that data to the view via computed properties:
+컴포넌트에 `render()` 메서드를 다시 추가하는 대신, 계산된 속성(computed properties)을 통해 뷰에 데이터를 제공할 수 있습니다:
 
 ```php
 <?php

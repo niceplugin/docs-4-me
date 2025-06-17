@@ -1,11 +1,11 @@
-Because forms are the backbone of most web applications, Livewire provides loads of helpful utilities for building them. From handling simple input elements to complex things like real-time validation or file uploading, Livewire has simple, well-documented tools to make your life easier and delight your users.
+# 폼(Form)
+폼은 대부분의 웹 애플리케이션에서 핵심적인 역할을 하기 때문에, Livewire는 폼을 만들기 위한 다양한 유용한 도구들을 제공합니다. 간단한 입력 요소 처리부터 실시간 유효성 검사나 파일 업로드와 같은 복잡한 작업까지, Livewire는 여러분의 삶을 더 쉽게 하고 사용자에게 즐거움을 주는 간단하고 잘 문서화된 도구들을 제공합니다.
 
-Let's dive in.
+함께 살펴보겠습니다.
 
-## Submitting a form
+## 폼 제출하기 {#submitting-a-form}
 
-Let's start by looking at a very simple form in a `CreatePost` component. This form will have two simple text inputs and a submit button, as well as some code on the backend to manage the form's state and submission:
-
+`CreatePost` 컴포넌트에서 아주 간단한 폼을 살펴보겠습니다. 이 폼에는 두 개의 텍스트 입력창과 제출 버튼이 있으며, 폼의 상태와 제출을 관리하는 백엔드 코드도 포함되어 있습니다:
 ```php
 <?php
 
@@ -48,21 +48,21 @@ class CreatePost extends Component
 </form>
 ```
 
-As you can see, we are "binding" the public `$title` and `$content` properties in the form above using `wire:model`. This is one of the most commonly used and powerful features of Livewire.
+위에서 볼 수 있듯이, 우리는 `wire:model`을 사용하여 폼의 공개 속성인 `$title`과 `$content`를 "바인딩"하고 있습니다. 이것은 Livewire에서 가장 자주 사용되고 강력한 기능 중 하나입니다.
 
-In addition to binding `$title` and `$content`, we are using `wire:submit` to capture the `submit` event when the "Save" button is clicked and invoking the `save()` action. This action will persist the form input to the database.
+`$title`과 `$content`를 바인딩하는 것 외에도, `wire:submit`을 사용하여 "Save" 버튼이 클릭될 때 `submit` 이벤트를 감지하고 `save()` 액션을 호출합니다. 이 액션은 폼 입력값을 데이터베이스에 저장합니다.
 
-After the new post is created in the database, we redirect the user to the `ShowPosts` component page and show them a "flash" message that the new post was created.
+새 게시물이 데이터베이스에 생성된 후, 사용자는 `ShowPosts` 컴포넌트 페이지로 리디렉션되고, 새 게시물이 생성되었다는 "플래시" 메시지가 표시됩니다.
 
-### Adding validation
+### 유효성 검사 추가하기 {#adding-validation}
 
-To avoid storing incomplete or dangerous user input, most forms need some sort of input validation.
+불완전하거나 위험한 사용자 입력이 저장되는 것을 방지하기 위해 대부분의 폼에는 입력값 유효성 검사가 필요합니다.
 
-Livewire makes validating your forms as simple as adding `#[Validate]` attributes above the properties you want to be validated.
+Livewire에서는 검증이 필요한 프로퍼티 위에 `#[Validate]` 속성을 추가하는 것만으로 폼 유효성 검사가 매우 간단해집니다.
 
-Once a property has a `#[Validate]` attribute attached to it, the validation rule will be applied to the property's value any time it's updated server-side.
+프로퍼티에 `#[Validate]` 속성이 부착되면, 해당 프로퍼티의 값이 서버에서 업데이트될 때마다 유효성 검사 규칙이 적용됩니다.
 
-Let's add some basic validation rules to the `$title` and `$content` properties in our `CreatePost` component:
+`CreatePost` 컴포넌트의 `$title`과 `$content` 프로퍼티에 기본적인 유효성 검사 규칙을 추가해봅시다:
 
 ```php
 <?php
@@ -99,7 +99,7 @@ class CreatePost extends Component
 }
 ```
 
-We'll also modify our Blade template to show any validation errors on the page.
+Blade 템플릿도 수정하여 페이지에 유효성 검사 오류가 표시되도록 하겠습니다.
 
 ```blade
 <form wire:submit="save">
@@ -117,25 +117,25 @@ We'll also modify our Blade template to show any validation errors on the page.
 </form>
 ```
 
-Now, if the user tries to submit the form without filling in any of the fields, they will see validation messages telling them which fields are required before saving the post.
+이제 사용자가 아무 필드도 입력하지 않고 폼을 제출하려고 하면, 어떤 필드를 입력해야 하는지 알려주는 유효성 검사 메시지가 표시됩니다.
 
-Livewire has a lot more validation features to offer. For more information, visit our [dedicated documentation page on Validation](/docs/validation).
+Livewire는 이 외에도 다양한 유효성 검사 기능을 제공합니다. 더 자세한 내용은 [유효성 검사 전용 문서 페이지](/docs/validation)를 참고하세요.
 
-### Extracting a form object
+### 폼 객체 추출하기 {#extracting-a-form-object}
 
-If you are working with a large form and prefer to extract all of its properties, validation logic, etc., into a separate class, Livewire offers form objects.
+큰 폼을 다루고 있고, 모든 속성, 검증 로직 등을 별도의 클래스로 분리하고 싶다면, Livewire는 폼 객체를 제공합니다.
 
-Form objects allow you to re-use form logic across components and provide a nice way to keep your component class cleaner by grouping all form-related code into a separate class.
+폼 객체를 사용하면 폼 로직을 여러 컴포넌트에서 재사용할 수 있고, 모든 폼 관련 코드를 별도의 클래스로 묶어 컴포넌트 클래스를 더 깔끔하게 유지할 수 있습니다.
 
-You can either create a form class by hand or use the convenient artisan command:
+직접 폼 클래스를 만들 수도 있고, 편리한 artisan 명령어를 사용할 수도 있습니다:
 
 ```shell
 php artisan livewire:form PostForm
 ```
 
-The above command will create a file called `app/Livewire/Forms/PostForm.php`.
+위 명령어는 `app/Livewire/Forms/PostForm.php` 파일을 생성합니다.
 
-Let's rewrite the `CreatePost` component to use a `PostForm` class:
+이제 `CreatePost` 컴포넌트를 `PostForm` 클래스를 사용하도록 다시 작성해봅시다:
 
 ```php
 <?php
@@ -202,7 +202,7 @@ class CreatePost extends Component
 </form>
 ```
 
-If you'd like, you can also extract the post creation logic into the form object like so:
+원한다면, 게시글 생성 로직도 폼 객체로 추출할 수 있습니다:
 
 ```php
 <?php
@@ -230,7 +230,7 @@ class PostForm extends Form
 }
 ```
 
-Now you can call `$this->form->store()` from the component:
+이제 컴포넌트에서 `$this->form->store()`를 호출할 수 있습니다:
 
 ```php
 class CreatePost extends Component
@@ -248,9 +248,9 @@ class CreatePost extends Component
 }
 ```
 
-If you want to use this form object for both a create and update form, you can easily adapt it to handle both use cases.
+이 폼 객체를 생성 및 수정 폼 모두에 사용하고 싶다면, 두 경우 모두 처리할 수 있도록 쉽게 확장할 수 있습니다.
 
-Here's what it would look like to use this same form object for an `UpdatePost` component and fill it with initial data:
+아래는 같은 폼 객체를 `UpdatePost` 컴포넌트에서 사용하고, 초기 데이터를 채우는 예시입니다:
 
 ```php
 <?php
@@ -330,13 +330,13 @@ class PostForm extends Form
 }
 ```
 
-As you can see, we've added a `setPost()` method to the `PostForm` object to optionally allow for filling the form with existing data as well as storing the post on the form object for later use. We've also added an `update()` method for updating the existing post.
+보시다시피, `PostForm` 객체에 `setPost()` 메서드를 추가하여 기존 데이터를 폼에 채우거나, 폼 객체에 게시글을 저장해두고 나중에 사용할 수 있도록 했습니다. 또한 기존 게시글을 수정하는 `update()` 메서드도 추가했습니다.
 
-Form objects are not required when working with Livewire, but they do offer a nice abstraction for keeping your components free of repetitive boilerplate.
+폼 객체는 Livewire에서 필수는 아니지만, 반복적인 보일러플레이트 코드를 줄이고 컴포넌트를 더 깔끔하게 유지할 수 있는 좋은 추상화 방법을 제공합니다.
 
-### Resetting form fields
+### 폼 필드 리셋하기 {#resetting-form-fields}
 
-If you are using a form object, you may want to reset the form after it has been submitted. This can be done by calling the `reset()` method:
+폼 객체를 사용할 때, 폼이 제출된 후에 폼을 리셋하고 싶을 수 있습니다. 이는 `reset()` 메서드를 호출하여 할 수 있습니다:
 
 ```php
 <?php
@@ -368,19 +368,19 @@ class PostForm extends Form
 }
 ```
 
-You can also reset specific properties by passing the property names into the `reset()` method:
+`reset()` 메서드에 프로퍼티 이름을 전달하여 특정 프로퍼티만 리셋할 수도 있습니다:
 
 ```php
 $this->reset('title');
 
-// Or multiple at once...
+// 또는 여러 개를 한 번에...
 
 $this->reset(['title', 'content']);
 ```
 
-### Pulling form fields
+### 폼 필드 가져오기 {#pulling-form-fields}
 
-Alternatively, you can use the `pull()` method to both retrieve a form's properties and reset them in one operation.
+또한, `pull()` 메서드를 사용하여 폼의 속성을 한 번에 가져오고 초기화할 수 있습니다.
 
 ```php
 <?php
@@ -412,19 +412,19 @@ class PostForm extends Form
 }
 ```
 
-You can also pull specific properties by passing the property names into the `pull()` method:
+`pull()` 메서드에 속성 이름을 전달하여 특정 속성만 가져올 수도 있습니다:
 
 ```php
-// Return a value before resetting...
+// 값을 반환한 후 초기화합니다...
 $this->pull('title');
 
- // Return a key-value array of properties before resetting...
+ // 키-값 배열로 속성들을 반환한 후 초기화합니다...
 $this->pull(['title', 'content']);
 ```
 
-### Using Rule objects
+### Rule 객체 사용하기 {#using-rule-objects}
 
-If you have more sophisticated validation scenarios where Laravel's `Rule` objects are necessary, you can alternatively define a `rules()` method to declare your validation rules like so:
+더 복잡한 검증 시나리오에서 Laravel의 `Rule` 객체가 필요하다면, `rules()` 메서드를 정의하여 다음과 같이 검증 규칙을 선언할 수 있습니다:
 
 ```php
 <?php
@@ -467,9 +467,9 @@ class PostForm extends Form
 }
 ```
 
-When using a `rules()` method instead of `#[Validate]`, Livewire will only run the validation rules when you call `$this->validate()`, rather than every time a property is updated.
+`#[Validate]` 대신 `rules()` 메서드를 사용할 경우, Livewire는 속성이 업데이트될 때마다가 아니라 `$this->validate()`를 호출할 때만 검증 규칙을 실행합니다.
 
-If you are using real-time validation or any other scenario where you'd like Livewire to validate specific fields after every request, you can use `#[Validate]` without any provided rules like so:
+실시간 검증이나, 매 요청마다 특정 필드를 검증하고 싶은 경우에는 다음과 같이 규칙 없이 `#[Validate]`를 사용할 수 있습니다:
 
 ```php
 <?php
@@ -514,59 +514,59 @@ class PostForm extends Form
 }
 ```
 
-Now if the `$title` property is updated before the form is submitted—like when using [`wire:model.blur`](/docs/wire-model#updating-on-blur-event)—the validation for `$title` will be run.
+이제 [`wire:model.blur`](/docs/wire-model#updating-on-blur-event)과 같이 폼이 제출되기 전에 `$title` 속성이 업데이트되면, `$title`에 대한 검증이 실행됩니다.
 
-### Showing a loading indicator
+### 로딩 인디케이터 표시하기 {#showing-a-loading-indicator}
 
-By default, Livewire will automatically disable submit buttons and mark inputs as `readonly` while a form is being submitted, preventing the user from submitting the form again while the first submission is being handled.
+기본적으로 Livewire는 폼이 제출되는 동안 자동으로 제출 버튼을 비활성화하고 입력값을 `readonly`로 표시하여, 첫 번째 제출이 처리되는 동안 사용자가 폼을 다시 제출하지 못하도록 방지합니다.
 
-However, it can be difficult for users to detect this "loading" state without extra affordances in your application's UI.
+하지만 애플리케이션 UI에 추가적인 표시가 없다면 사용자가 이러한 "로딩" 상태를 인지하기 어려울 수 있습니다.
 
-Here's an example of adding a small loading spinner to the "Save" button via `wire:loading` so that a user understands that the form is being submitted:
+아래는 `wire:loading`을 사용하여 "저장" 버튼에 작은 로딩 스피너를 추가하는 예시입니다. 이를 통해 사용자는 폼이 제출 중임을 쉽게 알 수 있습니다:
 
 ```blade
 <button type="submit">
-    Save
+    저장
 
     <div wire:loading>
-        <svg>...</svg> <!-- SVG loading spinner -->
+        <svg>...</svg> <!-- SVG 로딩 스피너 -->
     </div>
 </button>
 ```
 
-Now, when a user presses "Save", a small, inline spinner will show up.
+이제 사용자가 "저장"을 누르면, 작은 인라인 스피너가 표시됩니다.
 
-Livewire's `wire:loading` feature has a lot more to offer. Visit the [Loading documentation to learn more.](/docs/wire-loading)
+Livewire의 `wire:loading` 기능은 이 외에도 다양한 기능을 제공합니다. 더 자세한 내용은 [로딩 문서](/docs/wire-loading)를 참고하세요.
 
-## Live-updating fields
+## 실시간 업데이트 필드 {#live-updating-fields}
 
-By default, Livewire only sends a network request when the form is submitted (or any other [action](/docs/actions) is called), not while the form is being filled out.
+기본적으로 Livewire는 폼이 제출될 때(또는 다른 [액션](/docs/actions)이 호출될 때)만 네트워크 요청을 보냅니다. 폼을 작성하는 도중에는 네트워크 요청이 발생하지 않습니다.
 
-Take the `CreatePost` component, for example. If you want to make sure the "title" input field is synchronized with the `$title` property on the backend as the user types, you may add the `.live` modifier to `wire:model` like so:
+예를 들어, `CreatePost` 컴포넌트를 살펴봅시다. 사용자가 입력하는 동안 "title" 입력 필드가 백엔드의 `$title` 속성과 동기화되도록 하려면, `wire:model`에 `.live` 수식어를 다음과 같이 추가할 수 있습니다:
 
 ```blade
 <input type="text" wire:model.live="title">
 ```
 
-Now, as a user types into this field, network requests will be sent to the server to update `$title`. This is useful for things like a real-time search, where a dataset is filtered as a user types into a search box.
+이제 사용자가 이 필드에 입력할 때마다 네트워크 요청이 서버로 전송되어 `$title`이 업데이트됩니다. 이는 사용자가 검색창에 입력할 때 데이터셋이 실시간으로 필터링되는 실시간 검색과 같은 기능에 유용합니다.
 
-## Only updating fields on _blur_
+## _blur_에서만 필드 업데이트하기 {#only-updating-fields-on-blur}
 
-For most cases, `wire:model.live` is fine for real-time form field updating; however, it can be overly network resource-intensive on text inputs.
+대부분의 경우, `wire:model.live`는 실시간 폼 필드 업데이트에 적합하지만, 텍스트 입력란에서는 네트워크 리소스를 과도하게 사용할 수 있습니다.
 
-If instead of sending network requests as a user types, you want to instead only send the request when a user "tabs" out of the text input (also referred to as "blurring" an input), you can use the `.blur` modifier instead:
+사용자가 입력할 때마다 네트워크 요청을 보내는 대신, 사용자가 텍스트 입력란에서 "탭"을 하거나(즉, 입력란이 "블러"될 때)만 요청을 보내고 싶다면, `.blur` 수식어를 사용할 수 있습니다:
 
 ```blade
 <input type="text" wire:model.blur="title" >
 ```
 
-Now the component class on the server won't be updated until the user presses tab or clicks away from the text input.
+이제 서버의 컴포넌트 클래스는 사용자가 탭을 누르거나 텍스트 입력란 밖을 클릭할 때까지 업데이트되지 않습니다.
 
-## Real-time validation
+## 실시간 유효성 검사 {#real-time-validation}
 
-Sometimes, you may want to show validation errors as the user fills out the form. This way, they are alerted early that something is wrong instead of having to wait until the entire form is filled out.
+때때로 사용자가 폼을 작성하는 동안 유효성 검사 오류를 바로 보여주고 싶을 때가 있습니다. 이렇게 하면 사용자는 전체 폼을 다 작성할 때까지 기다리지 않고도 잘못된 부분을 미리 알 수 있습니다.
 
-Livewire handles this sort of thing automatically. By using `.live` or `.blur` on `wire:model`, Livewire will send network requests as the user fills out the form. Each of those network requests will run the appropriate validation rules before updating each property. If validation fails, the property won't be updated on the server and a validation message will be shown to the user:
+Livewire는 이러한 기능을 자동으로 처리합니다. `wire:model`에 `.live` 또는 `.blur`를 사용하면, 사용자가 폼을 작성하는 동안 Livewire가 네트워크 요청을 보냅니다. 각 네트워크 요청마다 해당 속성을 업데이트하기 전에 적절한 유효성 검사 규칙이 실행됩니다. 유효성 검사에 실패하면, 해당 속성은 서버에 업데이트되지 않고 사용자에게 유효성 검사 메시지가 표시됩니다:
 
 ```blade
 <input type="text" wire:model.blur="title">
@@ -581,13 +581,13 @@ Livewire handles this sort of thing automatically. By using `.live` or `.blur` o
 public $title = '';
 ```
 
-Now, if the user only types three characters into the "title" input, then clicks on the next input in the form, a validation message will be shown to them indicating there is a five character minimum for that field.
+이제 사용자가 "title" 입력란에 세 글자만 입력하고 폼의 다음 입력란을 클릭하면, 해당 필드는 최소 다섯 글자를 입력해야 한다는 유효성 검사 메시지가 표시됩니다.
 
-For more information, check out the [validation documentation page](/docs/validation).
+더 자세한 내용은 [유효성 검사 문서 페이지](/docs/validation)를 참고하세요.
 
-## Real-time form saving
+## 실시간 폼 저장 {#real-time-form-saving}
 
-If you want to automatically save a form as the user fills it out rather than wait until the user clicks "submit", you can do so using Livewire's `updated()` hook:
+사용자가 "제출" 버튼을 클릭할 때까지 기다리지 않고, 입력하는 즉시 폼을 자동으로 저장하고 싶다면 Livewire의 `updated()` 훅을 사용할 수 있습니다:
 
 ```php
 <?php
@@ -643,67 +643,67 @@ class UpdatePost extends Component
 </form>
 ```
 
-In the above example, when a user completes a field (by clicking or tabbing to the next field), a network request is sent to update that property on the component. Immediately after the property is updated on the class, the `updated()` hook is called for that specific property name and its new value.
+위 예제에서 사용자가 필드를 완료(클릭하거나 탭하여 다음 필드로 이동)하면, 해당 속성을 컴포넌트에 업데이트하기 위한 네트워크 요청이 전송됩니다. 클래스의 속성이 즉시 업데이트된 후, 해당 속성 이름과 새로운 값으로 `updated()` 훅이 호출됩니다.
 
-We can use this hook to update only that specific field in the database.
+이 훅을 사용하여 데이터베이스에서 해당 필드만 업데이트할 수 있습니다.
 
-Additionally, because we have the `#[Validate]` attributes attached to those properties, the validation rules will be run before the property is updated and the `updated()` hook is called.
+또한, 해당 속성에 `#[Validate]` 속성이 지정되어 있기 때문에, 속성이 업데이트되고 `updated()` 훅이 호출되기 전에 유효성 검사 규칙이 실행됩니다.
 
-To learn more about the "updated" lifecycle hook and other hooks, [visit the lifecycle hooks documentation](/docs/lifecycle-hooks).
+"updated" 라이프사이클 훅과 다른 훅에 대해 더 알아보려면 [라이프사이클 훅 문서](/docs/lifecycle-hooks)를 참고하세요.
 
-## Showing dirty indicators
+## 변경 사항 표시 인디케이터 표시하기 {#showing-dirty-indicators}
 
-In the real-time saving scenario discussed above, it may be helpful to indicate to users when a field hasn't been persisted to the database yet.
+위에서 다룬 실시간 저장 시나리오에서는 사용자가 필드가 아직 데이터베이스에 저장되지 않았음을 알 수 있도록 표시해 주는 것이 도움이 될 수 있습니다.
 
-For example, if a user visits an `UpdatePost` page and starts modifying the title of the post in a text input, it may be unclear to them when the title is actually being updated in the database, especially if there is no "Save" button at the bottom of the form.
+예를 들어, 사용자가 `UpdatePost` 페이지를 방문하여 텍스트 입력란에서 게시물의 제목을 수정하기 시작할 때, 폼 하단에 "저장" 버튼이 없다면 제목이 실제로 언제 데이터베이스에 업데이트되는지 명확하지 않을 수 있습니다.
 
-Livewire provides the `wire:dirty` directive to allow you to toggle elements or modify classes when an input's value diverges from the server-side component:
+Livewire는 입력값이 서버 측 컴포넌트와 달라질 때 요소를 토글하거나 클래스를 변경할 수 있도록 `wire:dirty` 디렉티브를 제공합니다:
 
 ```blade
 <input type="text" wire:model.blur="title" wire:dirty.class="border-yellow">
 ```
 
-In the above example, when a user types into the input field, a yellow border will appear around the field. When the user tabs away, the network request is sent and the border will disappear; signaling to them that the input has been persisted and is no longer "dirty".
+위 예시에서 사용자가 입력 필드에 타이핑하면 해당 필드에 노란색 테두리가 나타납니다. 사용자가 탭으로 이동하면 네트워크 요청이 전송되고 테두리가 사라집니다. 이는 입력값이 저장되어 더 이상 "변경됨(dirty)" 상태가 아님을 사용자에게 알리는 신호입니다.
 
-If you want to toggle an entire element's visibility, you can do so by using `wire:dirty` in conjunction with `wire:target`. `wire:target` is used to specify which piece of data you want to watch for "dirtiness". In this case, the "title" field:
+전체 요소의 표시 여부를 토글하고 싶다면, `wire:dirty`를 `wire:target`과 함께 사용할 수 있습니다. `wire:target`은 "변경됨" 상태를 감지할 데이터를 지정하는 데 사용됩니다. 이 경우에는 "title" 필드입니다:
 
 ```blade
 <input type="text" wire:model="title">
 
-<div wire:dirty wire:target="title">Unsaved...</div>
+<div wire:dirty wire:target="title">저장되지 않음...</div>
 ```
 
-## Debouncing input
+## 입력 디바운싱 {#debouncing-input}
 
-When using `.live` on a text input, you may want more fine-grained control over how often a network request is sent. By default, a debounce of "250ms" is applied to the input; however, you can customize this using the `.debounce` modifier:
+텍스트 입력란에서 `.live`를 사용할 때, 네트워크 요청이 얼마나 자주 전송되는지 더 세밀하게 제어하고 싶을 수 있습니다. 기본적으로 입력에는 "250ms"의 디바운스가 적용되지만, `.debounce` 수식어를 사용하여 이를 커스터마이즈할 수 있습니다:
 
 ```blade
 <input type="text" wire:model.live.debounce.150ms="title" >
 ```
 
-Now that `.debounce.150ms` has been added to the field, a shorter debounce of "150ms" will be used when handling input updates for this field. In other words, as a user types, a network request will only be sent if the user stops typing for at least 150 milliseconds.
+이제 필드에 `.debounce.150ms`가 추가되어, 이 필드의 입력 업데이트를 처리할 때 더 짧은 "150ms" 디바운스가 사용됩니다. 즉, 사용자가 입력할 때 최소 150밀리초 동안 입력을 멈춰야 네트워크 요청이 전송됩니다.
 
-## Throttling input
+## 입력 제한(Throttling input) {#throttling-input}
 
-As stated previously, when an input debounce is applied to a field, a network request will not be sent until the user has stopped typing for a certain amount of time. This means if the user continues typing a long message, a network request won't be sent until the user is finished.
+앞서 언급했듯이, 입력 디바운스가 필드에 적용되면 사용자가 일정 시간 동안 입력을 멈출 때까지 네트워크 요청이 전송되지 않습니다. 즉, 사용자가 긴 메시지를 계속 입력하는 동안에는 사용이 끝날 때까지 네트워크 요청이 전송되지 않습니다.
 
-Sometimes this isn't the desired behavior, and you would rather send a request as the user types, not when they've finished or taken a break.
+하지만 때로는 이러한 동작이 원하는 방식이 아닐 수 있으며, 사용자가 입력을 마치거나 잠시 멈췄을 때가 아니라 입력하는 도중에도 네트워크 요청을 보내고 싶을 수 있습니다.
 
-In these cases, you can instead use `.throttle` to signify a time interval to send network requests:
+이런 경우에는 `.throttle`을 사용하여 네트워크 요청을 보낼 시간 간격을 지정할 수 있습니다:
 
 ```blade
 <input type="text" wire:model.live.throttle.150ms="title" >
 ```
 
-In the above example, as a user is typing continuously in the "title" field, a network request will be sent every 150 milliseconds until the user is finished.
+위 예시에서 사용자가 "title" 필드에 계속 입력하는 동안, 사용이 끝날 때까지 150밀리초마다 네트워크 요청이 전송됩니다.
 
-## Extracting input fields to Blade components
+## 입력 필드를 Blade 컴포넌트로 추출하기 {#extracting-input-fields-to-blade-components}
 
-Even in a small component such as the `CreatePost` example we've been discussing, we end up duplicating lots of form field boilerplate like validation messages and labels.
+우리가 지금까지 살펴본 `CreatePost` 예제와 같은 작은 컴포넌트에서도, 검증 메시지나 라벨 등과 같은 폼 필드의 반복적인 보일러플레이트 코드가 많이 중복되는 경우가 있습니다.
 
-It can be helpful to extract repetitive UI elements such as these into dedicated [Blade components](https://laravel.com/docs/blade#components) to be shared across your application.
+이러한 반복적인 UI 요소들을 전용 [Blade 컴포넌트](https://laravel.com/docs/blade#components)로 추출하여 애플리케이션 전반에서 공유하는 것이 도움이 될 수 있습니다.
 
-For example, below is the original Blade template from the `CreatePost` component. We will be extracting the following two text inputs into dedicated Blade components:
+예를 들어, 아래는 `CreatePost` 컴포넌트의 원래 Blade 템플릿입니다. 우리는 아래 두 개의 텍스트 입력 필드를 전용 Blade 컴포넌트로 추출할 것입니다:
 
 ```blade
 <form wire:submit="save">
@@ -721,7 +721,7 @@ For example, below is the original Blade template from the `CreatePost` componen
 </form>
 ```
 
-Here's what the template will look like after extracting a re-usable Blade component called `<x-input-text>`:
+아래는 재사용 가능한 Blade 컴포넌트 `<x-input-text>`로 추출한 후의 템플릿입니다:
 
 ```blade
 <form wire:submit="save">
@@ -733,7 +733,7 @@ Here's what the template will look like after extracting a re-usable Blade compo
 </form>
 ```
 
-Next, here's the source for the `x-input-text` component:
+다음은 `x-input-text` 컴포넌트의 소스입니다:
 
 ```blade
 <!-- resources/views/components/input-text.blade.php -->
@@ -747,30 +747,30 @@ Next, here's the source for the `x-input-text` component:
 </div>
 ```
 
-As you can see, we took the repetitive HTML and placed it inside a dedicated Blade component.
+보시다시피, 반복되는 HTML을 전용 Blade 컴포넌트 안에 넣었습니다.
 
-For the most part, the Blade component contains only the extracted HTML from the original component. However, we have added two things:
+대부분의 경우, Blade 컴포넌트는 원래 컴포넌트에서 추출한 HTML만을 포함합니다. 하지만 두 가지가 추가되었습니다:
 
-* The `@props` directive
-* The `{{ $attributes }}` statement on the input
+* `@props` 디렉티브
+* input에 있는 <span v-pre>`{{ $attributes }}`</span> 구문
 
-Let's discuss each of these additions:
+이 추가 사항들에 대해 살펴보겠습니다:
 
-By specifying `name` as a "prop" using `@props(['name'])` we are telling Blade: if an attribute called "name" is set on this component, take its value and make it available inside this component as `$name`.
+`@props(['name'])`를 사용하여 `name`을 "prop"으로 지정하면, Blade는 이 컴포넌트에 "name"이라는 속성이 설정되어 있으면 그 값을 `$name`으로 사용할 수 있도록 해줍니다.
 
-For other attributes that don't have an explicit purpose, we used the `{{ $attributes }}` statement. This is used for "attribute forwarding", or in other words, taking any HTML attributes written on the Blade component and forwarding them onto an element within the component.
+명시적으로 목적이 없는 다른 속성들은 <span v-pre>`{{ $attributes }}`</span> 구문을 사용했습니다. 이것은 "속성 전달(attribute forwarding)"을 위한 것으로, Blade 컴포넌트에 작성된 모든 HTML 속성을 컴포넌트 내부의 요소로 전달해줍니다.
 
-This ensures `wire:model="title"` and any other extra attributes such as `disabled`, `class="..."`, or `required` still get forwarded to the actual `<input>` element.
+이렇게 하면 `wire:model="title"`과 같은 속성이나, `disabled`, `class="..."`, `required` 등 추가 속성들도 실제 `<input>` 요소에 그대로 전달됩니다.
 
-### Custom form controls
+### 커스텀 폼 컨트롤 {#custom-form-controls}
 
-In the previous example, we "wrapped" an input element into a re-usable Blade component we can use as if it was a native HTML input element.
+이전 예제에서는 입력 요소(input element)를 재사용 가능한 Blade 컴포넌트로 "래핑"하여, 마치 네이티브 HTML 입력 요소처럼 사용할 수 있도록 했습니다.
 
-This pattern is very useful; however, there might be some cases where you want to create an entire input component from scratch (without an underlying native input element), but still be able to bind its value to Livewire properties using `wire:model`.
+이 패턴은 매우 유용하지만, 경우에 따라 네이티브 입력 요소 없이 완전히 새로운 입력 컴포넌트를 직접 만들고 싶을 수도 있습니다. 그럼에도 불구하고 `wire:model`을 사용해 Livewire 속성과 값을 바인딩할 수 있어야 합니다.
 
-For example, let's imagine you wanted to create an `<x-input-counter />` component that was a simple "counter" input written in Alpine.
+예를 들어, Alpine으로 작성된 간단한 "카운터" 입력 컴포넌트인 `<x-input-counter />`를 만들고 싶다고 가정해봅시다.
 
-Before we create a Blade component, let's first look at a simple, pure-Alpine, "counter" component for reference:
+Blade 컴포넌트를 만들기 전에, 참고용으로 순수 Alpine만으로 만든 간단한 "카운터" 컴포넌트를 먼저 살펴보겠습니다:
 
 ```blade
 <div x-data="{ count: 0 }">
@@ -782,19 +782,19 @@ Before we create a Blade component, let's first look at a simple, pure-Alpine, "
 </div>
 ```
 
-As you can see, the component above shows a number alongside two buttons to increment and decrement that number.
+위 컴포넌트는 숫자와 그 숫자를 증가/감소시키는 두 개의 버튼을 보여줍니다.
 
-Now, let's imagine we want to extract this component into a Blade component called `<x-input-counter />` that we would use within a component like so:
+이제 이 컴포넌트를 `<x-input-counter />`라는 Blade 컴포넌트로 추출해서, 다음과 같이 컴포넌트 내에서 사용하고 싶다고 가정해봅시다:
 
 ```blade
 <x-input-counter wire:model="quantity" />
 ```
 
-Creating this component is mostly simple. We take the HTML of the counter and place it inside a Blade component template like `resources/views/components/input-counter.blade.php`.
+이 컴포넌트를 만드는 것은 대부분 간단합니다. 카운터의 HTML을 `resources/views/components/input-counter.blade.php`와 같은 Blade 컴포넌트 템플릿에 넣으면 됩니다.
 
-However, making it work with `wire:model="quantity"` so that you can easily bind data from your Livewire component to the "count" inside this Alpine component needs one extra step.
+하지만, `wire:model="quantity"`와 함께 작동하여 Livewire 컴포넌트의 데이터를 Alpine 컴포넌트 내부의 "count"와 쉽게 바인딩하려면 한 가지 추가 단계가 필요합니다.
 
-Here's the source for the component:
+컴포넌트의 소스는 다음과 같습니다:
 
 ```blade
 <!-- resources/view/components/input-counter.blade.php -->
@@ -808,24 +808,24 @@ Here's the source for the component:
 </div>
 ```
 
-As you can see, the only different bit about this HTML is the `x-modelable="count"` and `{{ $attributes }}`.
+보시다시피, 이 HTML에서 달라진 점은 `x-modelable="count"`와 <span v-pre>`{{ $attributes }}`</span>뿐입니다.
 
-`x-modelable` is a utility in Alpine that tells Alpine to make a certain piece of data available for binding from outside. [The Alpine documentation has more information on this directive.](https://alpinejs.dev/directives/modelable)
+`x-modelable`은 Alpine에서 특정 데이터를 외부에서 바인딩할 수 있도록 해주는 유틸리티입니다. [Alpine 공식 문서에서 이 디렉티브에 대해 더 자세히 확인할 수 있습니다.](https://alpinejs.dev/directives/modelable)
 
-`{{ $attributes }}`, as we explored earlier, forwards any attributes passed into the Blade component from outside. In this case, the `wire:model` directive will be forwarded.
+<span v-pre>`{{ $attributes }}`</span>는 앞서 살펴본 것처럼, Blade 컴포넌트에 외부에서 전달된 모든 속성을 전달해줍니다. 이 경우, `wire:model` 디렉티브가 전달됩니다.
 
-Because of `{{ $attributes }}`, when the HTML is rendered in the browser, `wire:model="quantity"` will be rendered alongside `x-modelable="count"` on the root `<div>` of the Alpine component like so:
+<span v-pre>`{{ $attributes }}`</span> 덕분에, 브라우저에서 HTML이 렌더링될 때 `wire:model="quantity"`가 Alpine 컴포넌트의 루트 `<div>`에 `x-modelable="count"`와 함께 렌더링됩니다:
 
 ```blade
 <div x-data="{ count: 0 }" x-modelable="count" wire:model="quantity">
 ```
 
-`x-modelable="count"` tells Alpine to look for any `x-model` or `wire:model` statements and use "count" as the data to bind them to.
+`x-modelable="count"`는 Alpine에게 `x-model`이나 `wire:model` 구문을 찾아서 "count" 데이터에 바인딩하라고 지시합니다.
 
-Because `x-modelable` works for both `wire:model` and `x-model`, you can also use this Blade component interchangeably with Livewire and Alpine. Here’s an example of using this Blade component in a purely Alpine context:
+`x-modelable`은 `wire:model`과 `x-model` 모두에서 동작하기 때문에, 이 Blade 컴포넌트를 Livewire와 Alpine 모두에서 자유롭게 사용할 수 있습니다. 다음은 이 Blade 컴포넌트를 순수 Alpine 환경에서 사용하는 예시입니다:
 
 ```blade
 <x-input-counter x-model="quantity" />
 ```
 
-Creating custom input elements in your application is extremely powerful but requires a deeper understanding of the utilities Livewire and Alpine provide and how they interact with each other.
+애플리케이션에서 커스텀 입력 요소를 만드는 것은 매우 강력하지만, Livewire와 Alpine이 제공하는 유틸리티와 이들이 서로 어떻게 상호작용하는지에 대한 더 깊은 이해가 필요합니다.

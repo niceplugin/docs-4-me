@@ -1,20 +1,20 @@
-Components are the building blocks of your Livewire application. They combine state and behavior to create reusable pieces of UI for your front end. Here, we'll cover the basics of creating and rendering components.
+# 컴포넌트
+컴포넌트는 Livewire 애플리케이션의 기본 구성 요소입니다. 컴포넌트는 상태와 동작을 결합하여 프론트엔드에서 재사용 가능한 UI 조각을 만듭니다. 여기에서는 컴포넌트를 생성하고 렌더링하는 기본 사항을 다룹니다.
 
-## Creating components
+## 컴포넌트 생성하기 {#creating-components}
 
-A Livewire component is simply a PHP class that extends `Livewire\Component`. You can create component files by hand or use the following Artisan command:
-
+Livewire 컴포넌트는 단순히 `Livewire\Component`를 확장한 PHP 클래스입니다. 컴포넌트 파일을 직접 만들 수도 있고, 아래의 Artisan 명령어를 사용할 수도 있습니다:
 ```shell
 php artisan make:livewire CreatePost
 ```
 
-If you prefer kebab-cased names, you can use them as well:
+케밥 케이스(kebab-case) 이름을 선호한다면, 다음과 같이 사용할 수도 있습니다:
 
 ```shell
 php artisan make:livewire create-post
 ```
 
-After running this command, Livewire will create two new files in your application. The first will be the component's class: `app/Livewire/CreatePost.php`
+이 명령어를 실행하면, Livewire는 애플리케이션에 두 개의 새로운 파일을 생성합니다. 첫 번째는 컴포넌트 클래스 파일입니다: `app/Livewire/CreatePost.php`
 
 ```php
 <?php
@@ -32,7 +32,7 @@ class CreatePost extends Component
 }
 ```
 
-The second will be the component's Blade view: `resources/views/livewire/create-post.blade.php`
+두 번째는 컴포넌트의 Blade 뷰 파일입니다: `resources/views/livewire/create-post.blade.php`
 
 ```blade
 <div>
@@ -40,16 +40,16 @@ The second will be the component's Blade view: `resources/views/livewire/create-
 </div>
 ```
 
-You may use namespace syntax or dot-notation to create your components in sub-directories. For example, the following commands will create a `CreatePost` component in the `Posts` sub-directory:
+네임스페이스 문법이나 점 표기법(dot-notation)을 사용하여 하위 디렉터리에 컴포넌트를 생성할 수도 있습니다. 예를 들어, 아래 명령어들은 `Posts` 하위 디렉터리에 `CreatePost` 컴포넌트를 생성합니다:
 
 ```shell
 php artisan make:livewire Posts\\CreatePost
 php artisan make:livewire posts.create-post
 ```
 
-### Inline components
+### 인라인 컴포넌트 {#inline-components}
 
-If your component is fairly small, you may want to create an _inline_ component. Inline components are single-file Livewire components whose view template is contained directly in the `render()` method rather than a separate file:
+컴포넌트가 비교적 작다면 _인라인_ 컴포넌트를 생성할 수 있습니다. 인라인 컴포넌트는 뷰 템플릿이 별도의 파일이 아닌 `render()` 메서드 안에 직접 포함된 단일 파일 Livewire 컴포넌트입니다:
 
 ```php
 <?php
@@ -64,22 +64,22 @@ class CreatePost extends Component
 	{
 		return <<<'HTML' // [tl! highlight:4]
 		<div>
-		    {{-- Your Blade template goes here... --}}
+		    {{-- 여기에 Blade 템플릿을 작성하세요... --}}
 		</div>
 		HTML;
 	}
 }
 ```
 
-You can create inline components by adding the `--inline` flag to the `make:livewire` command:
+`make:livewire` 명령어에 `--inline` 플래그를 추가하여 인라인 컴포넌트를 생성할 수 있습니다:
 
 ```shell
 php artisan make:livewire CreatePost --inline
 ```
 
-### Omitting the render method
+### render 메서드 생략하기 {#omitting-the-render-method}
 
-To reduce boilerplate in your components, you can omit the `render()` method entirely and Livewire will use its own underlying `render()` method, which returns a view with the conventional name corresponding to your component:
+컴포넌트의 보일러플레이트 코드를 줄이기 위해, `render()` 메서드를 완전히 생략할 수 있습니다. 그러면 Livewire는 자체 내장 `render()` 메서드를 사용하여, 컴포넌트 이름에 맞는 관례적인 뷰를 반환합니다:
 
 ```php
 <?php
@@ -94,33 +94,33 @@ class CreatePost extends Component
 }
 ```
 
-If the component above is rendered on a page, Livewire will automatically determine it should be rendered using the `livewire.create-post` template.
+위의 컴포넌트가 페이지에서 렌더링될 경우, Livewire는 자동으로 `livewire.create-post` 템플릿을 사용해야 한다고 판단합니다.
 
-### Customizing component stubs
+### 컴포넌트 스텁 커스터마이징 {#customizing-component-stubs}
 
-You can customize the files (or _stubs_) Livewire uses to generate new components by running the following command:
+다음 명령어를 실행하여 Livewire가 새로운 컴포넌트를 생성할 때 사용하는 파일(또는 _스텁_)을 커스터마이징할 수 있습니다:
 
 ```shell
 php artisan livewire:stubs
 ```
 
-This will create seven new files in your application:
+이 명령어를 실행하면 애플리케이션에 일곱 개의 새로운 파일이 생성됩니다:
 
-* `stubs/livewire.stub` — used for generating new components
-* `stubs/livewire.attribute.stub` — used for generating attribute classes
-* `stubs/livewire.form.stub` — used for generating form classes
-* `stubs/livewire.inline.stub` — used for generating _inline_ components
-* `stubs/livewire.pest-test.stub` — used for generating Pest test files
-* `stubs/livewire.test.stub` — used for generating PHPUnit test files
-* `stubs/livewire.view.stub` — used for generating component views
+* `stubs/livewire.stub` — 새로운 컴포넌트 생성에 사용
+* `stubs/livewire.attribute.stub` — 어트리뷰트 클래스 생성에 사용
+* `stubs/livewire.form.stub` — 폼 클래스 생성에 사용
+* `stubs/livewire.inline.stub` — _인라인_ 컴포넌트 생성에 사용
+* `stubs/livewire.pest-test.stub` — Pest 테스트 파일 생성에 사용
+* `stubs/livewire.test.stub` — PHPUnit 테스트 파일 생성에 사용
+* `stubs/livewire.view.stub` — 컴포넌트 뷰 생성에 사용
 
-Even though these files live in your application, you can still use the `make:livewire` Artisan command and Livewire will automatically use your custom stubs when generating files.
+이 파일들이 애플리케이션 내에 존재하더라도, 여전히 `make:livewire` Artisan 명령어를 사용할 수 있으며, Livewire는 파일을 생성할 때 자동으로 커스텀 스텁을 사용합니다.
 
-## Setting properties
+## 속성 설정하기 {#setting-properties}
 
-Livewire components have properties that store data and can be easily accessed within the component's class and Blade view. This section discusses the basics of adding a property to a component and using it in your application.
+Livewire 컴포넌트는 데이터를 저장하는 속성을 가지고 있으며, 이 속성들은 컴포넌트의 클래스와 Blade 뷰 내에서 쉽게 접근할 수 있습니다. 이 섹션에서는 컴포넌트에 속성을 추가하고 애플리케이션에서 사용하는 기본 방법을 다룹니다.
 
-To add a property to a Livewire component, declare a public property in your component class. For example, let's create a `$title` property in the `CreatePost` component:
+Livewire 컴포넌트에 속성을 추가하려면, 컴포넌트 클래스에 public 속성을 선언하면 됩니다. 예를 들어, `CreatePost` 컴포넌트에 `$title` 속성을 만들어 보겠습니다:
 
 ```php
 <?php
@@ -140,9 +140,9 @@ class CreatePost extends Component
 }
 ```
 
-### Accessing properties in the view
+### 뷰에서 프로퍼티에 접근하기 {#accessing-properties-in-the-view}
 
-Component properties are automatically made available to the component's Blade view. You can reference it using standard Blade syntax. Here we'll display the value of the `$title` property:
+컴포넌트의 프로퍼티는 자동으로 해당 컴포넌트의 Blade 뷰에서 사용할 수 있습니다. 표준 Blade 문법을 사용하여 참조할 수 있습니다. 여기서는 `$title` 프로퍼티의 값을 표시합니다:
 
 ```blade
 <div>
@@ -150,7 +150,7 @@ Component properties are automatically made available to the component's Blade v
 </div>
 ```
 
-The rendered output of this component would be:
+이 컴포넌트가 렌더링되면 다음과 같은 출력이 생성됩니다:
 
 ```blade
 <div>
@@ -158,11 +158,11 @@ The rendered output of this component would be:
 </div>
 ```
 
-### Sharing additional data with the view
+### 뷰에 추가 데이터 공유하기 {#sharing-additional-data-with-the-view}
 
-In addition to accessing properties from the view, you can explicitly pass data to the view from the `render()` method, like you might typically do from a controller. This can be useful when you want to pass additional data without first storing it as a property—because properties have [specific performance and security implications](/docs/properties#security-concerns).
+뷰에서 프로퍼티에 접근하는 것 외에도, 컨트롤러에서 하듯이 `render()` 메서드에서 뷰로 데이터를 명시적으로 전달할 수 있습니다. 이는 추가 데이터를 먼저 프로퍼티로 저장하지 않고 전달하고 싶을 때 유용합니다. 프로퍼티는 [특정 성능 및 보안상의 영향](/docs/properties#security-concerns)이 있기 때문입니다.
 
-To pass data to the view in the `render()` method, you can use the `with()` method on the view instance. For example, let's say you want to pass the post author's name to the view. In this case, the post's author is the currently authenticated user:
+`render()` 메서드에서 뷰로 데이터를 전달하려면, 뷰 인스턴스의 `with()` 메서드를 사용할 수 있습니다. 예를 들어, 게시글 작성자의 이름을 뷰로 전달하고 싶다고 가정해봅시다. 이 경우, 게시글 작성자는 현재 인증된 사용자입니다:
 
 ```php
 <?php
@@ -185,7 +185,7 @@ class CreatePost extends Component
 }
 ```
 
-Now you may access the `$author` property from the component's Blade view:
+이제 컴포넌트의 Blade 뷰에서 `$author` 프로퍼티에 접근할 수 있습니다:
 
 ```blade
 <div>
@@ -195,13 +195,13 @@ Now you may access the `$author` property from the component's Blade view:
 </div>
 ```
 
-### Adding `wire:key` to `@foreach` loops
+### `@foreach` 루프에 `wire:key` 추가하기 {#adding-wirekey-to-foreach-loops}
 
-When looping through data in a Livewire template using `@foreach`, you must add a unique `wire:key` attribute to the root element rendered by the loop.
+Livewire 템플릿에서 `@foreach`를 사용해 데이터를 반복할 때, 반복문에서 렌더링되는 루트 엘리먼트에 고유한 `wire:key` 속성을 반드시 추가해야 합니다.
 
-Without a `wire:key` attribute present within a Blade loop, Livewire won't be able to properly match old elements to their new positions when the loop changes. This can cause many hard to diagnose issues in your application.
+Blade 반복문 내에 `wire:key` 속성이 없으면, 반복문이 변경될 때 Livewire가 이전 엘리먼트와 새로운 위치를 제대로 매칭할 수 없습니다. 이로 인해 애플리케이션에서 진단하기 어려운 다양한 문제가 발생할 수 있습니다.
 
-For example, if you are looping through an array of posts, you may set the `wire:key` attribute to the post's ID:
+예를 들어, 게시글 배열을 반복하는 경우, `wire:key` 속성을 게시글의 ID로 설정할 수 있습니다:
 
 ```blade
 <div>
@@ -213,7 +213,7 @@ For example, if you are looping through an array of posts, you may set the `wire
 </div>
 ```
 
-If you are looping through an array that is rendering Livewire components you may set the key as a component attribute `:key` or pass the key as a third argument when using the `@livewire` directive.
+Livewire 컴포넌트를 렌더링하는 배열을 반복하는 경우, 컴포넌트 속성 `:key`로 키를 설정하거나, `@livewire` 디렉티브를 사용할 때 세 번째 인자로 키를 전달할 수 있습니다.
 
 ```blade
 <div>
@@ -225,11 +225,11 @@ If you are looping through an array that is rendering Livewire components you ma
 </div>
 ```
 
-### Binding inputs to properties
+### 속성에 입력값 바인딩하기 {#binding-inputs-to-properties}
 
-One of Livewire's most powerful features is "data binding": the ability to automatically keep properties in-sync with form inputs on the page.
+Livewire의 가장 강력한 기능 중 하나는 "데이터 바인딩"입니다. 이는 페이지의 폼 입력값과 컴포넌트 속성을 자동으로 동기화하는 기능입니다.
 
-Let's bind the `$title` property from the `CreatePost` component to a text input using the `wire:model` directive:
+`CreatePost` 컴포넌트의 `$title` 속성을 `wire:model` 디렉티브를 사용해 텍스트 입력창에 바인딩해봅시다:
 
 ```blade
 <form>
@@ -239,19 +239,19 @@ Let's bind the `$title` property from the `CreatePost` component to a text input
 </form>
 ```
 
-Any changes made to the text input will be automatically synchronized with the `$title` property in your Livewire component.
+텍스트 입력값이 변경되면, 해당 값은 Livewire 컴포넌트의 `$title` 속성과 자동으로 동기화됩니다.
 
-> [!warning] "Why isn't my component live updating as I type?"
-> If you tried this in your browser and are confused why the title isn't automatically updating, it's because Livewire only updates a component when an "action" is submitted—like pressing a submit button—not when a user types into a field. This cuts down on network requests and improves performance. To enable "live" updating as a user types, you can use `wire:model.live` instead. [Learn more about data binding](/docs/properties#data-binding).
+> [!warning] "입력할 때마다 컴포넌트가 실시간으로 업데이트되지 않는 이유는 무엇인가요?"
+> 브라우저에서 이 코드를 시도해보고 제목이 자동으로 업데이트되지 않아 혼란스러웠다면, Livewire는 "액션"이 제출될 때(예: 제출 버튼을 누를 때)만 컴포넌트를 업데이트하기 때문입니다. 사용자가 입력 필드에 타이핑할 때마다 업데이트하지 않으므로 네트워크 요청이 줄고 성능이 향상됩니다. 사용자가 입력할 때마다 "실시간"으로 업데이트되길 원한다면 `wire:model.live`를 사용할 수 있습니다. [데이터 바인딩에 대해 더 알아보기](/docs/properties#data-binding).
 
 
-Livewire properties are extremely powerful and are an important concept to understand. For more information, check out the [Livewire properties documentation](/docs/properties).
+Livewire 속성은 매우 강력하며 꼭 이해해야 할 중요한 개념입니다. 더 자세한 내용은 [Livewire 속성 문서](/docs/properties)를 참고하세요.
 
-## Calling actions
+## 액션 호출하기 {#calling-actions}
 
-Actions are methods within your Livewire component that handle user interactions or perform specific tasks. They're often useful for responding to button clicks or form submissions on a page.
+액션은 Livewire 컴포넌트 내에서 사용자 상호작용을 처리하거나 특정 작업을 수행하는 메서드입니다. 주로 버튼 클릭이나 폼 제출과 같은 페이지 내 이벤트에 응답할 때 유용하게 사용됩니다.
 
-To learn more about actions, let's add a `save` action to the `CreatePost` component:
+액션에 대해 더 알아보기 위해, `CreatePost` 컴포넌트에 `save` 액션을 추가해보겠습니다:
 
 ```php
 <?php
@@ -282,7 +282,7 @@ class CreatePost extends Component
 }
 ```
 
-Next, let's call the `save` action from the component's Blade view by adding the `wire:submit` directive to the `<form>` element:
+다음으로, 컴포넌트의 Blade 뷰에서 `<form>` 요소에 `wire:submit` 디렉티브를 추가하여 `save` 액션을 호출해봅시다:
 
 ```blade
 <form wire:submit="save"> <!-- [tl! highlight] -->
@@ -294,52 +294,52 @@ Next, let's call the `save` action from the component's Blade view by adding the
 </form>
 ```
 
-When the "Save" button is clicked, the `save()` method in your Livewire component will be executed and your component will re-render.
+"Save" 버튼을 클릭하면, Livewire 컴포넌트의 `save()` 메서드가 실행되고 컴포넌트가 다시 렌더링됩니다.
 
-To keep learning about Livewire actions, visit the [actions documentation](/docs/actions).
+Livewire 액션에 대해 더 배우고 싶다면 [액션 문서](/docs/actions)를 참고하세요.
 
-## Rendering components
+## 컴포넌트 렌더링 {#rendering-components}
 
-There are two ways to render a Livewire component on a page:
+Livewire 컴포넌트를 페이지에 렌더링하는 방법은 두 가지가 있습니다:
 
-1. Include it within an existing Blade view
-2. Assign it directly to a route as a full-page component
+1. 기존 Blade 뷰 내에 포함하기
+2. 라우트에 직접 할당하여 전체 페이지 컴포넌트로 사용하기
 
-Let's cover the first way to render your component, as it's simpler than the second.
+두 번째 방법보다 더 간단한 첫 번째 방법부터 살펴보겠습니다.
 
-You can include a Livewire component in your Blade templates using the `<livewire:component-name />` syntax:
+Blade 템플릿에서 `<livewire:component-name />` 문법을 사용하여 Livewire 컴포넌트를 포함할 수 있습니다:
 
 ```blade
 <livewire:create-post />
 ```
 
-If the component class is nested deeper within the `app/Livewire/` directory, you may use the `.` character to indicate directory nesting. For example, if we assume a component is located at `app/Livewire/EditorPosts/CreatePost.php`, we may render it like so:
+컴포넌트 클래스가 `app/Livewire/` 디렉터리 내에 더 깊이 중첩되어 있다면, 디렉터리 중첩을 나타내기 위해 `.` 문자를 사용할 수 있습니다. 예를 들어, 컴포넌트가 `app/Livewire/EditorPosts/CreatePost.php`에 위치해 있다면 다음과 같이 렌더링할 수 있습니다:
 
 ```blade
 <livewire:editor-posts.create-post />
 ```
 
-> [!warning] You must use kebab-case
-> As you can see in the snippets above, you must use the _kebab-cased_ version of the component name. Using the _StudlyCase_ version of the name (`<livewire:CreatePost />`) is invalid and won't be recognized by Livewire.
+> [!warning] 반드시 케밥 케이스를 사용해야 합니다
+> 위의 예시에서 볼 수 있듯이, 컴포넌트 이름은 반드시 _케밥 케이스(kebab-case)_ 형태로 작성해야 합니다. _StudlyCase_ 형태(`<livewire:CreatePost />`)로 작성하면 Livewire에서 인식하지 못하므로 올바르지 않습니다.
 
 
-### Passing data into components
+### 컴포넌트에 데이터 전달하기 {#passing-data-into-components}
 
-To pass outside data into a Livewire component, you can use attributes on the component tag. This is useful when you want to initialize a component with specific data.
+Livewire 컴포넌트에 외부 데이터를 전달하려면, 컴포넌트 태그에 속성을 사용할 수 있습니다. 이는 특정 데이터로 컴포넌트를 초기화하고 싶을 때 유용합니다.
 
-To pass an initial value to the `$title` property of the `CreatePost` component, you can use the following syntax:
+`CreatePost` 컴포넌트의 `$title` 속성에 초기 값을 전달하려면, 다음과 같은 문법을 사용할 수 있습니다:
 
 ```blade
 <livewire:create-post title="Initial Title" />
 ```
 
-If you need to pass dynamic values or variables to a component, you can write PHP expressions in component attributes by prefixing the attribute with a colon:
+동적 값이나 변수를 컴포넌트에 전달해야 할 경우, 속성 앞에 콜론을 붙여 PHP 표현식을 쓸 수 있습니다:
 
 ```blade
 <livewire:create-post :title="$initialTitle" />
 ```
 
-Data passed into components is received through the `mount()` lifecycle hook as method parameters. In this case, to assign the `$title` parameter to a property, you would write a `mount()` method like the following:
+컴포넌트로 전달된 데이터는 `mount()` 라이프사이클 훅의 메서드 파라미터로 받아집니다. 이 경우, `$title` 파라미터를 속성에 할당하려면 다음과 같이 `mount()` 메서드를 작성할 수 있습니다:
 
 ```php
 <?php
@@ -361,11 +361,11 @@ class CreatePost extends Component
 }
 ```
 
-In this example, the `$title` property will be initialized with the value "Initial Title".
+이 예시에서 `$title` 속성은 "Initial Title" 값으로 초기화됩니다.
 
-You can think of the `mount()` method as a class constructor. It runs on the initial load of the component, but not on subsequent requests within a page. You can learn more about `mount()` and other helpful lifecycle hooks within the [lifecycle documentation](/docs/lifecycle-hooks).
+`mount()` 메서드는 클래스 생성자와 비슷하다고 생각할 수 있습니다. 이 메서드는 컴포넌트가 처음 로드될 때 실행되며, 페이지 내에서 이후 요청에는 실행되지 않습니다. `mount()` 및 기타 유용한 라이프사이클 훅에 대해 더 알고 싶다면 [라이프사이클 문서](/docs/lifecycle-hooks)를 참고하세요.
 
-To reduce boilerplate code in your components, you can alternatively omit the `mount()` method and Livewire will automatically set any properties on your component with names matching the passed in values:
+컴포넌트의 반복적인 코드를 줄이기 위해, `mount()` 메서드를 생략할 수도 있습니다. 이 경우 Livewire는 전달된 값과 이름이 일치하는 속성을 자동으로 컴포넌트에 설정해줍니다:
 
 ```php
 <?php
@@ -382,19 +382,19 @@ class CreatePost extends Component
 }
 ```
 
-This is effectively the same as assigning `$title` inside a `mount()` method.
+이는 사실상 `mount()` 메서드 안에서 `$title`을 할당하는 것과 동일합니다.
 
-> [!warning] These properties are not reactive by default
-> The `$title` property will not update automatically if the outer `:title="$initialValue"` changes after the initial page load. This is a common point of confusion when using Livewire, especially for developers who have used JavaScript frameworks like Vue or React and assume these "parameters" behave like "reactive props" in those frameworks. But, don't worry, Livewire allows you to opt-in to [making your props reactive](/docs/nesting#reactive-props).
+> [!warning] 이 속성들은 기본적으로 반응형이 아닙니다
+> `$title` 속성은 페이지가 처음 로드된 이후에 외부의 `:title="$initialValue"` 값이 변경되어도 자동으로 업데이트되지 않습니다. 이는 Livewire를 사용할 때, 특히 Vue나 React와 같은 자바스크립트 프레임워크를 사용해본 개발자들이 이러한 "파라미터"가 해당 프레임워크의 "반응형 props"처럼 동작할 것이라고 가정할 때 흔히 혼동하는 부분입니다. 하지만 걱정하지 마세요, Livewire에서는 [props를 반응형으로 만들기](/docs/nesting#reactive-props)를 선택적으로 적용할 수 있습니다.
 
 
-## Full-page components
+## 전체 페이지 컴포넌트 {#full-page-components}
 
-Livewire allows you to assign components directly to a route in your Laravel application. These are called "full-page components". You can use them to build standalone pages with logic and views, fully encapsulated within a Livewire component.
+Livewire는 라라벨 애플리케이션에서 컴포넌트를 라우트에 직접 할당할 수 있도록 지원합니다. 이러한 컴포넌트를 "전체 페이지 컴포넌트"라고 부릅니다. 이를 사용하면 로직과 뷰가 완전히 캡슐화된 독립적인 페이지를 Livewire 컴포넌트로 만들 수 있습니다.
 
-To create a full-page component, define a route in your `routes/web.php` file and use the `Route::get()` method to map the component directly to a specific URL. For example, let's imagine you want to render the `CreatePost` component at the dedicated route: `/posts/create`.
+전체 페이지 컴포넌트를 생성하려면, `routes/web.php` 파일에서 라우트를 정의하고 `Route::get()` 메서드를 사용해 컴포넌트를 특정 URL에 직접 매핑하면 됩니다. 예를 들어, `/posts/create` 경로에서 `CreatePost` 컴포넌트를 렌더링하고 싶다고 가정해봅시다.
 
-You can accomplish this by adding the following line to your `routes/web.php` file:
+아래와 같이 `routes/web.php` 파일에 코드를 추가하면 됩니다:
 
 ```php
 use App\Livewire\CreatePost;
@@ -402,21 +402,21 @@ use App\Livewire\CreatePost;
 Route::get('/posts/create', CreatePost::class);
 ```
 
-Now, when you visit the `/posts/create` path in your browser, the `CreatePost` component will be rendered as a full-page component.
+이제 브라우저에서 `/posts/create` 경로에 접속하면, `CreatePost` 컴포넌트가 전체 페이지 컴포넌트로 렌더링됩니다.
 
-### Layout files
+### 레이아웃 파일 {#layout-files}
 
-Remember that full-page components will use your application's layout, typically defined in the `resources/views/components/layouts/app.blade.php` file.
+전체 페이지 컴포넌트는 일반적으로 `resources/views/components/layouts/app.blade.php` 파일에 정의된 애플리케이션의 레이아웃을 사용합니다.
 
-You may create this file if it doesn't already exist by running the following command:
+아직 이 파일이 없다면, 다음 명령어를 실행하여 생성할 수 있습니다:
 
 ```shell
 php artisan livewire:layout
 ```
 
-This command will generate a file called `resources/views/components/layouts/app.blade.php`.
+이 명령어는 `resources/views/components/layouts/app.blade.php`라는 파일을 생성합니다.
 
-Ensure you have created a Blade file at this location and included a `{{ $slot }}` placeholder:
+이 위치에 Blade 파일을 만들고, <span v-pre>`{{ $slot }}`</span> 플레이스홀더를 포함했는지 확인하세요:
 
 ```blade
 <!-- resources/views/components/layouts/app.blade.php -->
@@ -435,19 +435,19 @@ Ensure you have created a Blade file at this location and included a `{{ $slot }
 </html>
 ```
 
-#### Global layout configuration
+#### 전역 레이아웃 설정 {#global-layout-configuration}
 
-To use a custom layout across all your components, you can set the `layout` key in `config/livewire.php` to the path of your custom layout, relative to `resources/views`. For example:
+모든 컴포넌트에서 커스텀 레이아웃을 사용하려면, `config/livewire.php` 파일의 `layout` 키에 커스텀 레이아웃의 경로를 `resources/views` 기준으로 설정하면 됩니다. 예를 들어:
 
 ```php
 'layout' => 'layouts.app',
 ```
 
-With the above configuration, Livewire will render full-page components inside the layout file: `resources/views/layouts/app.blade.php`.
+위와 같이 설정하면, Livewire는 전체 페이지 컴포넌트를 `resources/views/layouts/app.blade.php` 레이아웃 파일 안에 렌더링합니다.
 
-#### Per-component layout configuration
+#### 컴포넌트별 레이아웃 설정 {#per-component-layout-configuration}
 
-To use a different layout for a specific component, you can place Livewire's `#[Layout]` attribute above the component's `render()` method, passing it the relative view path of your custom layout:
+특정 컴포넌트에 대해 다른 레이아웃을 사용하려면, Livewire의 `#[Layout]` 속성을 컴포넌트의 `render()` 메서드 위에 배치하고, 커스텀 레이아웃의 상대 뷰 경로를 전달하면 됩니다:
 
 ```php
 <?php
@@ -469,7 +469,7 @@ class CreatePost extends Component
 }
 ```
 
-Or if you prefer, you can use this attribute above the class declaration:
+또는, 원한다면 이 속성을 클래스 선언 위에 사용할 수도 있습니다:
 
 ```php
 <?php
@@ -486,7 +486,7 @@ class CreatePost extends Component
 }
 ```
 
-PHP attributes only support literal values. If you need to pass a dynamic value, or prefer this alternative syntax, you can use the fluent `->layout()` method in the component's `render()` method:
+PHP 속성은 리터럴 값만 지원합니다. 동적 값을 전달해야 하거나, 이 대체 문법을 선호한다면, 컴포넌트의 `render()` 메서드에서 유창한 `->layout()` 메서드를 사용할 수 있습니다:
 
 ```php
 public function render()
@@ -496,9 +496,9 @@ public function render()
 }
 ```
 
-Alternatively, Livewire supports using traditional Blade layout files with `@extends`.
+또는, Livewire는 전통적인 Blade 레이아웃 파일을 `@extends`와 함께 사용하는 것도 지원합니다.
 
-Given the following layout file:
+다음과 같은 레이아웃 파일이 있다고 가정해봅시다:
 
 ```blade
 <body>
@@ -506,7 +506,7 @@ Given the following layout file:
 </body>
 ```
 
-You can configure Livewire to reference it using `->extends()` instead of `->layout()`:
+Livewire가 이를 참조하도록 `->layout()` 대신 `->extends()`를 사용할 수 있습니다:
 
 ```php
 public function render()
@@ -516,7 +516,7 @@ public function render()
 }
 ```
 
-If you need to configure the `@section` for the component to use, you can configure that as well with the `->section()` method:
+컴포넌트에서 사용할 `@section`을 설정해야 한다면, `->section()` 메서드로 설정할 수도 있습니다:
 
 ```php
 public function render()
@@ -527,11 +527,11 @@ public function render()
 }
 ```
 
-### Setting the page title
+### 페이지 제목 설정하기 {#setting-the-page-title}
 
-Assigning unique page titles to each page in your application is helpful for both users and search engines.
+애플리케이션의 각 페이지에 고유한 페이지 제목을 지정하는 것은 사용자와 검색 엔진 모두에게 유용합니다.
 
-To set a custom page title for a full-page component, first, make sure your layout file includes a dynamic title:
+전체 페이지 컴포넌트에 사용자 지정 페이지 제목을 설정하려면 먼저 레이아웃 파일에 동적 제목이 포함되어 있는지 확인하세요:
 
 ```blade
 <head>
@@ -539,7 +539,7 @@ To set a custom page title for a full-page component, first, make sure your layo
 </head>
 ```
 
-Next, above your Livewire component's `render()` method, add the `#[Title]` attribute and pass it your page title:
+다음으로, Livewire 컴포넌트의 `render()` 메서드 위에 `#[Title]` 속성을 추가하고 원하는 페이지 제목을 전달하세요:
 
 ```php
 <?php
@@ -561,9 +561,9 @@ class CreatePost extends Component
 }
 ```
 
-This will set the page title for the `CreatePost` Livewire component. In this example, the page title will be "Create Post" when the component is rendered.
+이렇게 하면 `CreatePost` Livewire 컴포넌트의 페이지 제목이 설정됩니다. 이 예시에서는 컴포넌트가 렌더링될 때 페이지 제목이 "Create Post"가 됩니다.
 
-If you prefer, you can use this attribute above the class declaration:
+원한다면 이 속성을 클래스 선언 위에 사용할 수도 있습니다:
 
 ```php
 <?php
@@ -580,7 +580,7 @@ class CreatePost extends Component
 }
 ```
 
-If you need to pass a dynamic title, such as a title that uses a component property, you can use the `->title()` fluent method in the component's `render()` method:
+컴포넌트 속성을 사용하는 등 동적인 제목을 전달해야 한다면, 컴포넌트의 `render()` 메서드에서 `->title()` 플루언트 메서드를 사용할 수 있습니다:
 
 ```php
 public function render()
@@ -590,9 +590,9 @@ public function render()
 }
 ```
 
-### Setting additional layout file slots
+### 추가 레이아웃 파일 슬롯 설정 {#setting-additional-layout-file-slots}
 
-If your [layout file](#layout-files) has any named slots in addition to `$slot`, you can set their content in your Blade view by defining `<x-slot>`s outside your root element. For example, if you want to be able to set the page language for each component individually, you can add a dynamic `$lang` slot into the opening HTML tag in your layout file:
+[레이아웃 파일](#layout-files)에 `$slot` 외에 이름이 지정된 슬롯이 있다면, Blade 뷰에서 루트 엘리먼트 바깥에 `<x-slot>`을 정의하여 해당 슬롯의 내용을 설정할 수 있습니다. 예를 들어, 각 컴포넌트별로 페이지 언어를 개별적으로 설정하고 싶다면, 레이아웃 파일의 HTML 태그에 동적 `$lang` 슬롯을 추가할 수 있습니다:
 
 ```blade
 <!-- resources/views/components/layouts/app.blade.php -->
@@ -611,22 +611,22 @@ If your [layout file](#layout-files) has any named slots in addition to `$slot`,
 </html>
 ```
 
-Then, in your component view, define an `<x-slot>` element outside the root element:
+그런 다음, 컴포넌트 뷰에서 루트 엘리먼트 바깥에 `<x-slot>` 요소를 정의합니다:
 
 ```blade
-<x-slot:lang>fr</x-slot> // This component is in French <!-- [tl! highlight] -->
+<x-slot:lang>fr</x-slot> // 이 컴포넌트는 프랑스어로 표시됩니다 <!-- [tl! highlight] -->
 
 <div>
-    // French content goes here...
+    // 프랑스어 콘텐츠가 여기에 들어갑니다...
 </div>
 ```
 
 
-### Accessing route parameters
+### 라우트 파라미터 접근하기 {#accessing-route-parameters}
 
-When working with full-page components, you may need to access route parameters within your Livewire component.
+전체 페이지 컴포넌트에서 작업할 때, Livewire 컴포넌트 내에서 라우트 파라미터에 접근해야 할 수 있습니다.
 
-To demonstrate, first, define a route with a parameter in your `routes/web.php` file:
+예시를 들어, 먼저 `routes/web.php` 파일에 파라미터가 있는 라우트를 정의합니다:
 
 ```php
 use App\Livewire\ShowPost;
@@ -634,9 +634,9 @@ use App\Livewire\ShowPost;
 Route::get('/posts/{id}', ShowPost::class);
 ```
 
-Here, we've defined a route with an `id` parameter which represents a post's ID.
+여기서, `id` 파라미터는 게시글의 ID를 나타냅니다.
 
-Next, update your Livewire component to accept the route parameter in the `mount()` method:
+다음으로, Livewire 컴포넌트의 `mount()` 메서드에서 라우트 파라미터를 받을 수 있도록 업데이트합니다:
 
 ```php
 <?php
@@ -662,13 +662,13 @@ class ShowPost extends Component
 }
 ```
 
-In this example, because the parameter name `$id` matches the route parameter `{id}`, if the `/posts/1` URL is visited, Livewire will pass the value of "1" as `$id`.
+이 예시에서, 파라미터 이름 `$id`가 라우트 파라미터 `{id}`와 일치하기 때문에, `/posts/1` URL에 접속하면 Livewire가 "1" 값을 `$id`로 전달합니다.
 
-### Using route model binding
+### 라우트 모델 바인딩 사용하기 {#using-route-model-binding}
 
-Laravel's route model binding allows you to automatically resolve Eloquent models from route parameters.
+Laravel의 라우트 모델 바인딩을 사용하면 라우트 파라미터에서 Eloquent 모델을 자동으로 주입받을 수 있습니다.
 
-After defining a route with a model parameter in your `routes/web.php` file:
+`routes/web.php` 파일에서 모델 파라미터가 포함된 라우트를 정의한 후:
 
 ```php
 use App\Livewire\ShowPost;
@@ -676,7 +676,7 @@ use App\Livewire\ShowPost;
 Route::get('/posts/{post}', ShowPost::class);
 ```
 
-You can now accept the route model parameter through the `mount()` method of your component:
+이제 컴포넌트의 `mount()` 메서드를 통해 라우트 모델 파라미터를 받을 수 있습니다:
 
 ```php
 <?php
@@ -702,9 +702,9 @@ class ShowPost extends Component
 }
 ```
 
-Livewire knows to use "route model binding" because the `Post` type-hint is prepended to the `$post` parameter in `mount()`.
+Livewire는 `mount()`의 `$post` 파라미터에 `Post` 타입힌트가 지정되어 있기 때문에 "라우트 모델 바인딩"을 사용해야 함을 인식합니다.
 
-Like before, you can reduce boilerplate by omitting the `mount()` method:
+이전과 마찬가지로, `mount()` 메서드를 생략하여 보일러플레이트 코드를 줄일 수 있습니다:
 
 ```php
 <?php
@@ -725,11 +725,11 @@ class ShowPost extends Component
 }
 ```
 
-The `$post` property will automatically be assigned to the model bound via the route's `{post}` parameter.
+`$post` 프로퍼티는 라우트의 `{post}` 파라미터를 통해 바인딩된 모델로 자동 할당됩니다.
 
-### Modifying the response
+### 응답 수정하기 {#modifying-the-response}
 
-In some scenarios, you might want to modify the response and set a custom response header. You can hook into the response object by calling the `response()` method on the view and use a closure to modify the response object:
+특정 상황에서는 응답을 수정하거나 커스텀 응답 헤더를 설정하고 싶을 수 있습니다. 뷰에서 `response()` 메서드를 호출하고 클로저를 사용하여 응답 객체를 수정할 수 있습니다:
 
 ```php
 <?php
@@ -751,17 +751,17 @@ class ShowPost extends Component
 }
 ```
 
-## Using JavaScript
+## 자바스크립트 사용하기 {#using-javascript}
 
-There are many instances where the built-in Livewire and Alpine utilities aren't enough to accomplish your goals inside your Livewire components.
+Livewire와 Alpine의 내장 유틸리티만으로는 Livewire 컴포넌트 내에서 원하는 목표를 달성하기에 충분하지 않은 경우가 많습니다.
 
-Fortunately, Livewire provides many useful extension points and utilities to interact with bespoke JavaScript. You can learn from the exhaustive reference on [the JavaScript documentation page](/docs/javascript). But for now, here are a few useful ways to use your own JavaScript inside your Livewire components.
+다행히도, Livewire는 맞춤형 자바스크립트와 상호작용할 수 있는 다양한 확장 지점과 유틸리티를 제공합니다. 자세한 내용은 [자바스크립트 문서 페이지](/docs/javascript)에서 확인할 수 있습니다. 하지만 지금은 Livewire 컴포넌트 내에서 직접 자바스크립트를 사용하는 몇 가지 유용한 방법을 소개하겠습니다.
 
-### Executing scripts
+### 스크립트 실행 {#executing-scripts}
 
-Livewire provides a helpful `@script` directive that, when wrapping a `<script>` element, will execute the given JavaScript when your component is initialized on the page.
+Livewire는 유용한 `@script` 디렉티브를 제공합니다. 이 디렉티브로 `<script>` 요소를 감싸면, 해당 JavaScript가 컴포넌트가 페이지에 초기화될 때 실행됩니다.
 
-Here is an example of a simple `@script` that uses JavaScript's `setInterval()` to refresh your component every two seconds:
+아래는 JavaScript의 `setInterval()`을 사용하여 컴포넌트를 2초마다 새로고침하는 간단한 `@script` 예시입니다:
 
 ```blade
 @script
@@ -773,18 +773,18 @@ Here is an example of a simple `@script` that uses JavaScript's `setInterval()` 
 @endscript
 ```
 
-You'll notice we are using an object called `$wire` inside the `<script>` to control the component. Livewire automatically makes this object available inside any `@script`s. If you're unfamiliar with `$wire`, you can learn more about `$wire` in the following documentation:
-* [Accessing properties from JavaScript](/docs/properties#accessing-properties-from-javascript)
-* [Calling Livewire actions from JS/Alpine](/docs/actions#calling-actions-from-alpine)
-* [The `$wire` object reference](/docs/javascript#the-wire-object)
+위 예시에서 `<script>` 내부에서 컴포넌트를 제어하기 위해 `$wire`라는 객체를 사용하고 있는 것을 볼 수 있습니다. Livewire는 모든 `@script` 내부에서 이 객체를 자동으로 사용할 수 있게 해줍니다. 만약 `$wire`에 익숙하지 않다면, 아래 문서에서 `$wire`에 대해 더 자세히 알아볼 수 있습니다:
+* [JavaScript에서 속성 접근하기](/docs/properties#accessing-properties-from-javascript)
+* [JS/Alpine에서 Livewire 액션 호출하기](/docs/actions#calling-actions-from-alpine)
+* [`$wire` 객체 레퍼런스](/docs/javascript#the-wire-object)
 
-### Loading assets
+### 에셋 로딩 {#loading-assets}
 
-In addition to one-off `@script`s, Livewire provides a helpful `@assets` utility to easily load any script/style dependencies on the page.
+일회성 `@script` 외에도, Livewire는 페이지에서 스크립트/스타일 의존성을 쉽게 로드할 수 있도록 유용한 `@assets` 유틸리티를 제공합니다.
 
-It also ensures that the provided assets are loaded only once per browser page, unlike `@script`, which executes every time a new instance of that Livewire component is initialized.
+또한, `@script`와 달리 Livewire 컴포넌트의 새 인스턴스가 초기화될 때마다 실행되는 것이 아니라, 제공된 에셋이 브라우저 페이지당 한 번만 로드되도록 보장합니다.
 
-Here is an example of using `@assets` to load a date picker library called [Pikaday](https://github.com/Pikaday/Pikaday) and initialize it inside your component using `@script`:
+다음은 `@assets`를 사용하여 [Pikaday](https://github.com/Pikaday/Pikaday)라는 날짜 선택기 라이브러리를 로드하고, `@script`를 사용해 컴포넌트 내부에서 초기화하는 예시입니다:
 
 ```blade
 <div>
@@ -803,5 +803,5 @@ Here is an example of using `@assets` to load a date picker library called [Pika
 @endscript
 ```
 
-> [!info] Using `@verbatim@script@endverbatim` and `@verbatim@assets@endverbatim` inside Blade components
-> If you are using [Blade components](https://laravel.com/docs/blade#components) to extract parts of your markup, you can use `@verbatim@script@endverbatim` and `@verbatim@assets@endverbatim` inside them as well; even if there are multiple Blade components inside the same Livewire component. However, `@verbatim@script@endverbatim` and `@verbatim@assets@endverbatim` are currently only supported in the context of a Livewire component, meaning if you use the given Blade component outside of Livewire entirely, those scripts and assets won't be loaded on the page.
+> [!info] Blade 컴포넌트 내부에서 `@verbatim@script@endverbatim` 및 `@verbatim@assets@endverbatim` 사용하기
+> [Blade 컴포넌트](https://laravel.com/docs/blade#components)로 마크업의 일부를 추출하는 경우, 해당 컴포넌트 내부에서도 `@verbatim@script@endverbatim` 및 `@verbatim@assets@endverbatim`를 사용할 수 있습니다. 동일한 Livewire 컴포넌트 내에 여러 Blade 컴포넌트가 있더라도 마찬가지입니다. 단, `@verbatim@script@endverbatim` 및 `@verbatim@assets@endverbatim`는 현재 Livewire 컴포넌트의 컨텍스트에서만 지원되므로, 해당 Blade 컴포넌트를 Livewire 외부에서 완전히 사용할 경우에는 해당 스크립트와 에셋이 페이지에 로드되지 않습니다.

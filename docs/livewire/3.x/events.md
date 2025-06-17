@@ -1,13 +1,13 @@
-Livewire offers a robust event system that you can use to communicate between different components on the page. Because it uses browser events under the hood, you can also use Livewire's event system to communicate with Alpine components or even plain, vanilla JavaScript.
+# 이벤트
+Livewire는 페이지의 서로 다른 컴포넌트 간에 통신할 수 있는 강력한 이벤트 시스템을 제공합니다. 내부적으로 브라우저 이벤트를 사용하기 때문에, Livewire의 이벤트 시스템을 통해 Alpine 컴포넌트나 일반 바닐라 자바스크립트와도 통신할 수 있습니다.
 
-To trigger an event, you may use the `dispatch()` method from anywhere inside your component and listen for that event from any other component on the page.
+이벤트를 트리거하려면 컴포넌트 내부 어디에서든 `dispatch()` 메서드를 사용할 수 있으며, 페이지의 다른 어떤 컴포넌트에서도 해당 이벤트를 청취할 수 있습니다.
 
-## Dispatching events
+## 이벤트 디스패치하기 {#dispatching-events}
 
-To dispatch an event from a Livewire component, you can call the `dispatch()` method, passing it the event name and any additional data you want to send along with the event.
+Livewire 컴포넌트에서 이벤트를 디스패치하려면, `dispatch()` 메서드를 호출하고 이벤트 이름과 함께 이벤트와 함께 전달할 추가 데이터를 인자로 넘기면 됩니다.
 
-Below is an example of dispatching a `post-created` event from a `CreatePost` component:
-
+아래는 `CreatePost` 컴포넌트에서 `post-created` 이벤트를 디스패치하는 예시입니다:
 ```php
 use Livewire\Component;
 
@@ -22,20 +22,20 @@ class CreatePost extends Component
 }
 ```
 
-In this example, when the `dispatch()` method is called, the `post-created` event will be dispatched, and every other component on the page that is listening for this event will be notified.
+이 예시에서 `dispatch()` 메서드가 호출되면, `post-created` 이벤트가 디스패치되고, 이 이벤트를 리스닝하고 있는 페이지의 모든 다른 컴포넌트가 알림을 받게 됩니다.
 
-You can pass additional data with the event by passing the data as the second parameter to the `dispatch()` method:
+이벤트와 함께 추가 데이터를 전달하려면, `dispatch()` 메서드의 두 번째 인자로 데이터를 넘기면 됩니다:
 
 ```php
 $this->dispatch('post-created', title: $post->title);
 ```
 
-## Listening for events
+## 이벤트 수신 대기 {#listening-for-events}
 
-To listen for an event in a Livewire component, add the `#[On]` attribute above the method you want to be called when a given event is dispatched:
+Livewire 컴포넌트에서 이벤트를 수신하려면, 해당 이벤트가 디스패치될 때 호출되길 원하는 메서드 위에 `#[On]` 속성을 추가하세요:
 
-> [!warning] Make sure you import attribute classes
-> Make sure you import any attribute classes. For example, the below `#[On()]` attributes requires the following import `use Livewire\Attributes\On;`.
+> [!warning] 속성 클래스 임포트 필수
+> 모든 속성 클래스를 반드시 임포트해야 합니다. 예를 들어, 아래의 `#[On()]` 속성을 사용하려면 `use Livewire\Attributes\On;`을 임포트해야 합니다.
 
 ```php
 use Livewire\Component;
@@ -51,15 +51,15 @@ class Dashboard extends Component
 }
 ```
 
-Now, when the `post-created` event is dispatched from `CreatePost`, a network request will be triggered and the `updatePostList()` action will be invoked.
+이제 `CreatePost`에서 `post-created` 이벤트가 디스패치되면 네트워크 요청이 발생하고, `updatePostList()` 액션이 호출됩니다.
 
-As you can see, additional data sent with the event will be provided to the action as its first argument.
+보시다시피, 이벤트와 함께 전달된 추가 데이터는 해당 액션의 첫 번째 인자로 제공됩니다.
 
-### Listening for dynamic event names
+### 동적 이벤트 이름 리스닝 {#listening-for-dynamic-event-names}
 
-Occasionally, you may want to dynamically generate event listener names at run-time using data from your component.
+때때로, 컴포넌트의 데이터를 사용하여 런타임에 이벤트 리스너 이름을 동적으로 생성하고 싶을 수 있습니다.
 
-For example, if you wanted to scope an event listener to a specific Eloquent model, you could append the model's ID to the event name when dispatching like so:
+예를 들어, 특정 Eloquent 모델에 이벤트 리스너의 범위를 지정하고 싶다면, 이벤트를 디스패치할 때 모델의 ID를 이벤트 이름에 추가할 수 있습니다:
 
 ```php
 use Livewire\Component;
@@ -75,7 +75,7 @@ class UpdatePost extends Component
 }
 ```
 
-And then listen for that specific model:
+그리고 그 특정 모델에 대해 리스닝할 수 있습니다:
 
 ```php
 use Livewire\Component;
@@ -94,11 +94,11 @@ class ShowPost extends Component
 }
 ```
 
-If the above `$post` model had an ID of `3`, the `refreshPost()` method would only be triggered by an event named: `post-updated.3`.
+위의 `$post` 모델의 ID가 `3`이라면, `refreshPost()` 메서드는 `post-updated.3`이라는 이름의 이벤트에 의해서만 트리거됩니다.
 
-### Listening for events from specific child components
+### 특정 자식 컴포넌트의 이벤트 리스닝 {#listening-for-events-from-specific-child-components}
 
-Livewire allows you to listen for events directly on individual child components in your Blade template like so:
+Livewire를 사용하면 Blade 템플릿에서 개별 자식 컴포넌트의 이벤트를 직접 리스닝할 수 있습니다:
 
 ```blade
 <div>
@@ -108,27 +108,27 @@ Livewire allows you to listen for events directly on individual child components
 </div>
 ```
 
-In the above scenario, if the `edit-post` child component dispatches a `saved` event, the parent's `$refresh` will be called and the parent will be refreshed.
+위 예시에서 `edit-post` 자식 컴포넌트가 `saved` 이벤트를 디스패치하면, 부모의 `$refresh`가 호출되어 부모가 새로고침됩니다.
 
-Instead of passing `$refresh`, you can pass any method you normally would to something like `wire:click`. Here's an example of calling a `close()` method that might do something like close a modal dialog:
+`$refresh`를 전달하는 대신, 평소 `wire:click` 등에 전달하는 메서드를 사용할 수도 있습니다. 예를 들어, 모달 다이얼로그를 닫는 `close()` 메서드를 호출하는 예시는 다음과 같습니다:
 
 ```blade
 <livewire:edit-post @saved="close">
 ```
 
-If the child dispatched parameters along with the request, for example `$this->dispatch('saved', postId: 1)`, you can forward those values to the parent method using the following syntax:
+만약 자식 컴포넌트가 파라미터와 함께 이벤트를 디스패치했다면, 예를 들어 `$this->dispatch('saved', postId: 1)`와 같이 했다면, 다음과 같은 문법으로 해당 값을 부모 메서드에 전달할 수 있습니다:
 
 ```blade
 <livewire:edit-post @saved="close($event.detail.postId)">
 ```
 
-## Using JavaScript to interact with events
+## 이벤트와 상호작용하기 위해 JavaScript 사용하기 {#using-javascript-to-interact-with-events}
 
-Livewire's event system becomes much more powerful when you interact with it from JavaScript inside your application. This unlocks the ability for any other JavaScript in your app to communicate with Livewire components on the page.
+Livewire의 이벤트 시스템은 애플리케이션 내부에서 JavaScript로 상호작용할 때 훨씬 더 강력해집니다. 이를 통해 애플리케이션의 다른 JavaScript가 페이지의 Livewire 컴포넌트와 통신할 수 있는 기능이 열립니다.
 
-### Listening for events inside component scripts
+### 컴포넌트 스크립트 내부에서 이벤트 리스닝하기 {#listening-for-events-inside-component-scripts}
 
-You can easily listen for the `post-created` event inside your component's template from a `@script` directive like so:
+아래와 같이 `@script` 지시문을 사용하여 컴포넌트의 템플릿 내부에서 `post-created` 이벤트를 쉽게 감지할 수 있습니다:
 
 ```html
 @script
@@ -140,13 +140,13 @@ You can easily listen for the `post-created` event inside your component's templ
 @endscript
 ```
 
-The above snippet would listen for the `post-created` from the component it's registered within. If the component is no longer on the page, the event listener will no longer be triggered.
+위 코드는 해당 컴포넌트 내에서 발생하는 `post-created` 이벤트를 감지합니다. 만약 해당 컴포넌트가 페이지에 더 이상 존재하지 않는다면, 이벤트 리스너도 더 이상 동작하지 않습니다.
 
-[Read more about using JavaScript inside your Livewire components →](/docs/javascript#using-javascript-in-livewire-components)
+[Livewire 컴포넌트에서 JavaScript 사용에 대해 더 알아보기 →](/docs/javascript#using-javascript-in-livewire-components)
 
-### Dispatching events from component scripts
+### 컴포넌트 스크립트에서 이벤트 디스패치하기 {#dispatching-events-from-component-scripts}
 
-Additionally, you can dispatch events from within a component's `@script` like so:
+또한, 컴포넌트의 `@script` 내부에서 다음과 같이 이벤트를 디스패치할 수 있습니다:
 
 ```html
 @script
@@ -156,15 +156,15 @@ Additionally, you can dispatch events from within a component's `@script` like s
 @endscript
 ```
 
-When the above `@script` is run, the `post-created` event will be dispatched to the component it's defined within.
+위의 `@script`가 실행되면, `post-created` 이벤트가 해당 컴포넌트에 디스패치됩니다.
 
-To dispatch the event only to the component where the script resides and not other components on the page (preventing the event from "bubbling" up), you can use `dispatchSelf()`:
+스크립트가 위치한 컴포넌트에만 이벤트를 디스패치하고, 페이지의 다른 컴포넌트에는 전달되지 않도록(이벤트가 "버블링"되는 것을 방지) 하려면 `dispatchSelf()`를 사용할 수 있습니다:
 
 ```js
 $wire.dispatchSelf('post-created');
 ```
 
-You can pass any additional parameters to the event by passing an object as a second argument to `dispatch()`:
+이벤트에 추가 파라미터를 전달하려면, `dispatch()`의 두 번째 인자로 객체를 넘기면 됩니다:
 
 ```html
 @script
@@ -174,9 +174,9 @@ You can pass any additional parameters to the event by passing an object as a se
 @endscript
 ```
 
-You can now access those event parameters from both your Livewire class and also other JavaScript event listeners.
+이제 이러한 이벤트 파라미터는 Livewire 클래스와 다른 자바스크립트 이벤트 리스너 모두에서 접근할 수 있습니다.
 
-Here's an example of receiving the `refreshPosts` parameter within a Livewire class:
+다음은 Livewire 클래스 내에서 `refreshPosts` 파라미터를 받는 예시입니다:
 
 ```php
 use Livewire\Attributes\On;
@@ -190,7 +190,7 @@ public function handleNewPost($refreshPosts = false)
 }
 ```
 
-You can also access the `refreshPosts` parameter from a JavaScript event listener from the event's `detail` property:
+또한 자바스크립트 이벤트 리스너에서 이벤트의 `detail` 속성을 통해 `refreshPosts` 파라미터에 접근할 수 있습니다:
 
 ```html
 @script
@@ -204,11 +204,11 @@ You can also access the `refreshPosts` parameter from a JavaScript event listene
 @endscript
 ```
 
-[Read more about using JavaScript inside your Livewire components →](/docs/javascript#using-javascript-in-livewire-components)
+[Livewire 컴포넌트에서 자바스크립트 사용에 대해 더 알아보기 →](/docs/javascript#using-javascript-in-livewire-components)
 
-### Listening for Livewire events from global JavaScript
+### 전역 JavaScript에서 Livewire 이벤트 리스닝하기 {#listening-for-livewire-events-from-global-javascript}
 
-Alternatively, you can listen for Livewire events globally using `Livewire.on` from any script in your application:
+또는 애플리케이션의 어떤 스크립트에서든 `Livewire.on`을 사용하여 Livewire 이벤트를 전역적으로 리스닝할 수 있습니다:
 
 ```html
 <script>
@@ -220,9 +220,9 @@ Alternatively, you can listen for Livewire events globally using `Livewire.on` f
 </script>
 ```
 
-The above snippet would listen for the `post-created` event dispatched from any component on the page.
+위의 코드는 페이지의 어떤 컴포넌트에서든 디스패치된 `post-created` 이벤트를 리스닝합니다.
 
-If you wish to remove this event listener for any reason, you can do so using the returned `cleanup` function:
+이벤트 리스너를 어떤 이유로든 제거하고 싶다면, 반환된 `cleanup` 함수를 사용하면 됩니다:
 
 ```html
 <script>
@@ -231,72 +231,72 @@ If you wish to remove this event listener for any reason, you can do so using th
             //
         });
 
-        // Calling "cleanup()" will un-register the above event listener...
+        // "cleanup()"을 호출하면 위의 이벤트 리스너가 해제됩니다...
         cleanup();
     });
 </script>
 ```
 
-## Events in Alpine
+## Alpine에서의 이벤트 {#events-in-alpine}
 
-Because Livewire events are plain browser events under the hood, you can use Alpine to listen for them or even dispatch them.
+Livewire 이벤트는 내부적으로 일반 브라우저 이벤트이기 때문에, Alpine을 사용하여 해당 이벤트를 수신하거나 직접 디스패치할 수 있습니다.
 
-### Listening for Livewire events in Alpine
+### Alpine에서 Livewire 이벤트 리스닝하기 {#listening-for-livewire-events-in-alpine}
 
-For example, we may easily listen for the `post-created` event using Alpine:
+예를 들어, Alpine을 사용하여 `post-created` 이벤트를 쉽게 리스닝할 수 있습니다:
 
 ```blade
 <div x-on:post-created="..."></div>
 ```
 
-The above snippet would listen for the `post-created` event from any Livewire components that are children of the HTML element that the `x-on` directive is assigned to.
+위의 코드는 `x-on` 디렉티브가 할당된 HTML 요소의 자식인 모든 Livewire 컴포넌트에서 발생하는 `post-created` 이벤트를 리스닝합니다.
 
-To listen for the event from any Livewire component on the page, you can add `.window` to the listener:
+페이지의 모든 Livewire 컴포넌트에서 발생하는 이벤트를 리스닝하려면, 리스너에 `.window`를 추가하면 됩니다:
 
 ```blade
 <div x-on:post-created.window="..."></div>
 ```
 
-If you want to access additional data that was sent with the event, you can do so using `$event.detail`:
+이벤트와 함께 전송된 추가 데이터를 접근하고 싶다면, `$event.detail`을 사용할 수 있습니다:
 
 ```blade
 <div x-on:post-created="notify('New post: ' + $event.detail.title)"></div>
 ```
 
-The Alpine documentation provides further information on [listening for events](https://alpinejs.dev/directives/on).
+Alpine 공식 문서에서 [이벤트 리스닝](https://alpinejs.dev/directives/on)에 대한 추가 정보를 확인할 수 있습니다.
 
-### Dispatching Livewire events from Alpine
+### Alpine에서 Livewire 이벤트 디스패치하기 {#dispatching-livewire-events-from-alpine}
 
-Any event dispatched from Alpine is capable of being intercepted by a Livewire component.
+Alpine에서 디스패치된 모든 이벤트는 Livewire 컴포넌트에서 가로챌 수 있습니다.
 
-For example, we may easily dispatch the `post-created` event from Alpine:
+예를 들어, Alpine에서 `post-created` 이벤트를 쉽게 디스패치할 수 있습니다:
 
 ```blade
 <button @click="$dispatch('post-created')">...</button>
 ```
 
-Like Livewire's `dispatch()` method, you can pass additional data along with the event by passing the data as the second parameter to the method:
+Livewire의 `dispatch()` 메서드처럼, 이벤트와 함께 추가 데이터를 두 번째 인자로 전달할 수 있습니다:
 
 ```blade
 <button @click="$dispatch('post-created', { title: 'Post Title' })">...</button>
 ```
 
-To learn more about dispatching events using Alpine, consult the [Alpine documentation](https://alpinejs.dev/magics/dispatch).
+Alpine을 사용하여 이벤트를 디스패치하는 방법에 대해 더 알고 싶다면 [Alpine 문서](https://alpinejs.dev/magics/dispatch)를 참고하세요.
 
-> [!tip] You might not need events
-> If you are using events to call behavior on a parent from a child, you can instead call the action directly from the child using `$parent` in your Blade template. For example:
+> [!tip] 이벤트가 필요하지 않을 수도 있습니다
+> 자식에서 부모의 동작을 호출하기 위해 이벤트를 사용하고 있다면, Blade 템플릿에서 `$parent`를 사용하여 자식에서 직접 액션을 호출할 수 있습니다. 예를 들어:
 >
 > ```blade
 > <button wire:click="$parent.showCreatePostForm()">Create Post</button>
 > ```
 >
-> [Learn more about $parent](/docs/nesting#directly-accessing-the-parent-from-the-child).
+> [$parent에 대해 더 알아보기](/docs/nesting#directly-accessing-the-parent-from-the-child).
 
-## Dispatching directly to another component
+## 다른 컴포넌트로 직접 디스패치하기 {#dispatching-directly-to-another-component}
 
-If you want to use events for communicating directly between two components on the page, you can use the `dispatch()->to()` modifier.
+페이지에 있는 두 컴포넌트 간에 직접적으로 이벤트로 소통하고 싶다면, `dispatch()->to()` 수식어를 사용할 수 있습니다.
 
-Below is an example of the `CreatePost` component dispatching the `post-created` event directly to the `Dashboard` component, skipping any other components listening for that specific event:
+아래는 `CreatePost` 컴포넌트가 `post-created` 이벤트를 `Dashboard` 컴포넌트로 직접 디스패치하여, 해당 이벤트를 듣고 있는 다른 컴포넌트들은 건너뛰는 예시입니다:
 
 ```php
 use Livewire\Component;
@@ -312,9 +312,9 @@ class CreatePost extends Component
 }
 ```
 
-## Dispatching a component event to itself
+## 컴포넌트 이벤트를 자기 자신에게 디스패치하기 {#dispatching-a-component-event-to-itself}
 
-Using the `dispatch()->self()` modifier, you can restrict an event to only being intercepted by the component it was triggered from:
+`dispatch()->self()` 수식어를 사용하면, 이벤트가 트리거된 컴포넌트에서만 해당 이벤트를 가로챌 수 있도록 제한할 수 있습니다:
 
 ```php
 use Livewire\Component;
@@ -330,9 +330,9 @@ class CreatePost extends Component
 }
 ```
 
-## Dispatching events from Blade templates
+## Blade 템플릿에서 이벤트 디스패치하기 {#dispatching-events-from-blade-templates}
 
-You can dispatch events directly from your Blade templates using the `$dispatch` JavaScript function. This is useful when you want to trigger an event from a user interaction, such as a button click:
+Blade 템플릿에서 `$dispatch` JavaScript 함수를 사용하여 직접 이벤트를 디스패치할 수 있습니다. 이는 버튼 클릭과 같은 사용자 상호작용에서 이벤트를 트리거하고 싶을 때 유용합니다:
 
 ```blade
 <button wire:click="$dispatch('show-post-modal', { id: {{ $post->id }} })">
@@ -340,9 +340,9 @@ You can dispatch events directly from your Blade templates using the `$dispatch`
 </button>
 ```
 
-In this example, when the button is clicked, the `show-post-modal` event will be dispatched with the specified data.
+이 예시에서 버튼이 클릭되면, 지정된 데이터와 함께 `show-post-modal` 이벤트가 디스패치됩니다.
 
-If you want to dispatch an event directly to another component you can use the `$dispatchTo()` JavaScript function:
+다른 컴포넌트로 직접 이벤트를 디스패치하고 싶다면 `$dispatchTo()` JavaScript 함수를 사용할 수 있습니다:
 
 ```blade
 <button wire:click="$dispatchTo('posts', 'show-post-modal', { id: {{ $post->id }} })">
@@ -350,11 +350,11 @@ If you want to dispatch an event directly to another component you can use the `
 </button>
 ```
 
-In this example, when the button is clicked, the `show-post-modal` event will be dispatched directly to the `Posts` component.
+이 예시에서 버튼이 클릭되면, `show-post-modal` 이벤트가 `Posts` 컴포넌트로 직접 디스패치됩니다.
 
-## Testing dispatched events
+## 디스패치된 이벤트 테스트하기 {#testing-dispatched-events}
 
-To test events dispatched by your component, use the `assertDispatched()` method in your Livewire test. This method checks that a specific event has been dispatched during the component's lifecycle:
+컴포넌트에서 디스패치된 이벤트를 테스트하려면 Livewire 테스트에서 `assertDispatched()` 메서드를 사용하세요. 이 메서드는 컴포넌트의 라이프사이클 동안 특정 이벤트가 디스패치되었는지 확인합니다:
 
 ```php
 <?php
@@ -378,11 +378,11 @@ class CreatePostTest extends TestCase
 }
 ```
 
-In this example, the test ensures that the `post-created` event is dispatched with the specified data when the `save()` method is called on the `CreatePost` component.
+이 예제에서는 `CreatePost` 컴포넌트에서 `save()` 메서드를 호출할 때 `post-created` 이벤트가 지정된 데이터와 함께 디스패치되는지 테스트합니다.
 
-### Testing Event Listeners
+### 이벤트 리스너 테스트하기 {#testing-event-listeners}
 
-To test event listeners, you can dispatch events from the test environment and assert that the expected actions are performed in response to the event:
+이벤트 리스너를 테스트하려면, 테스트 환경에서 이벤트를 디스패치하고 해당 이벤트에 대한 예상 동작이 수행되는지 검증할 수 있습니다:
 
 ```php
 <?php
@@ -407,18 +407,18 @@ class DashboardTest extends TestCase
 }
 ```
 
-In this example, the test dispatches the `post-created` event, then checks that the `Dashboard` component properly handles the event and displays the updated count.
+이 예제에서 테스트는 `post-created` 이벤트를 디스패치한 후, `Dashboard` 컴포넌트가 해당 이벤트를 올바르게 처리하고 업데이트된 개수를 표시하는지 확인합니다.
 
-## Real-time events using Laravel Echo
+## Laravel Echo를 사용한 실시간 이벤트 {#real-time-events-using-laravel-echo}
 
-Livewire pairs nicely with [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation) to provide real-time functionality on your web-pages using WebSockets.
+Livewire는 [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation)와 잘 연동되어 WebSocket을 사용한 웹 페이지의 실시간 기능을 제공합니다.
 
-> [!warning] Installing Laravel Echo is a prerequisite
-> This feature assumes you have installed Laravel Echo and the `window.Echo` object is globally available in your application. For more information on installing echo, check out the [Laravel Echo documentation](https://laravel.com/docs/broadcasting#client-side-installation).
+> [!warning] Laravel Echo 설치가 선행되어야 합니다
+> 이 기능을 사용하려면 Laravel Echo가 설치되어 있고, `window.Echo` 객체가 애플리케이션에서 전역으로 사용 가능해야 합니다. Echo 설치에 대한 자세한 내용은 [Laravel Echo 문서](https://laravel.com/docs/broadcasting#client-side-installation)를 참고하세요.
 
-### Listening for Echo events
+### Echo 이벤트 리스닝 {#listening-for-echo-events}
 
-Imagine you have an event in your Laravel application named `OrderShipped`:
+Laravel 애플리케이션에 `OrderShipped`라는 이벤트가 있다고 가정해봅시다:
 
 ```php
 <?php
@@ -445,7 +445,7 @@ class OrderShipped implements ShouldBroadcast
 }
 ```
 
-You might dispatch this event from another part of your application like so:
+애플리케이션의 다른 부분에서 이 이벤트를 다음과 같이 디스패치할 수 있습니다:
 
 ```php
 use App\Events\OrderShipped;
@@ -453,7 +453,7 @@ use App\Events\OrderShipped;
 OrderShipped::dispatch();
 ```
 
-If you were to listen for this event in JavaScript using only Laravel Echo, it would look something like this:
+만약 JavaScript에서 Laravel Echo만을 사용하여 이 이벤트를 리스닝한다면, 다음과 같이 작성할 수 있습니다:
 
 ```js
 Echo.channel('orders')
@@ -462,9 +462,9 @@ Echo.channel('orders')
     })
 ```
 
-Assuming you have Laravel Echo installed and configured, you can listen for this event from inside a Livewire component.
+Laravel Echo가 설치 및 구성되어 있다고 가정하면, Livewire 컴포넌트 내부에서도 이 이벤트를 리스닝할 수 있습니다.
 
-Below is an example of an `OrderTracker` component that is listening for the `OrderShipped` event in order to show users a visual indication of a new order:
+아래는 `OrderShipped` 이벤트를 리스닝하여 사용자에게 새 주문 알림을 시각적으로 표시하는 `OrderTracker` 컴포넌트의 예시입니다:
 
 ```php
 <?php
@@ -488,7 +488,7 @@ class OrderTracker extends Component
 }
 ```
 
-If you have Echo channels with variables embedded in them (such as an Order ID), you can define listeners via the `getListeners()` method instead of the `#[On]` attribute:
+만약 Echo 채널에 변수(예: 주문 ID)가 포함되어 있다면, `#[On]` 속성 대신 `getListeners()` 메서드를 통해 리스너를 정의할 수 있습니다:
 
 ```php
 <?php
@@ -521,7 +521,7 @@ class OrderTracker extends Component
 }
 ```
 
-Or, if you prefer, you can use the dynamic event name syntax:
+또는, 동적 이벤트 이름 문법을 사용할 수도 있습니다:
 
 ```php
 #[On('echo:orders.{order.id},OrderShipped')]
@@ -531,7 +531,7 @@ public function notifyNewOrder()
 }
 ```
 
-If you need to access the event payload, you can do so via the passed in `$event` parameter:
+이벤트 페이로드에 접근해야 한다면, 전달된 `$event` 파라미터를 통해 접근할 수 있습니다:
 
 ```php
 #[On('echo:orders.{order.id},OrderShipped')]
@@ -543,12 +543,12 @@ public function notifyNewOrder($event)
 }
 ```
 
-### Private & presence channels
+### 프라이빗 & 프레즌스 채널 {#private-presence-channels}
 
-You may also listen to events broadcast to private and presence channels:
+프라이빗 및 프레즌스 채널로 브로드캐스트된 이벤트도 수신할 수 있습니다:
 
 > [!info]
-> Before proceeding, ensure you have defined <a href="https://laravel.com/docs/master/broadcasting#defining-authorization-callbacks">Authentication Callbacks</a> for your broadcast channels.
+> 진행하기 전에, 브로드캐스트 채널에 대한 <a href="https://laravel.com/docs/master/broadcasting#defining-authorization-callbacks">인증 콜백</a>을 정의했는지 확인하세요.
 
 ```php
 <?php
@@ -564,13 +564,13 @@ class OrderTracker extends Component
     public function getListeners()
     {
         return [
-            // Public Channel
+            // 퍼블릭 채널
             "echo:orders,OrderShipped" => 'notifyNewOrder',
 
-            // Private Channel
+            // 프라이빗 채널
             "echo-private:orders,OrderShipped" => 'notifyNewOrder',
 
-            // Presence Channel
+            // 프레즌스 채널
             "echo-presence:orders,OrderShipped" => 'notifyNewOrder',
             "echo-presence:orders,here" => 'notifyNewOrder',
             "echo-presence:orders,joining" => 'notifyNewOrder',
