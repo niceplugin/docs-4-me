@@ -1,10 +1,10 @@
-> [!warning] Get comfortable with Livewire first
-> Before using Volt, we recommend getting familiar with standard, class-based Livewire usage. This will allow you to quickly transfer your knowledge of Livewire into writing components using Volt's functional API.
+# Volt (볼트)
+> > [!warning] 먼저 Livewire에 익숙해지세요
+> Volt를 사용하기 전에, 표준 클래스 기반 Livewire 사용법에 익숙해지는 것을 권장합니다. 이렇게 하면 Livewire에 대한 지식을 Volt의 함수형 API를 사용한 컴포넌트 작성으로 빠르게 이전할 수 있습니다.
 
-Volt is an elegantly crafted functional API for Livewire that supports single-file components, allowing a component's PHP logic and Blade templates to coexist in the same file. Behind the scenes, the functional API is compiled to Livewire class components and linked with the template present in the same file.
+Volt는 Livewire를 위한 우아하게 설계된 함수형 API로, 단일 파일 컴포넌트를 지원하여 컴포넌트의 PHP 로직과 Blade 템플릿이 동일한 파일에 공존할 수 있게 해줍니다. 내부적으로 함수형 API는 Livewire 클래스 컴포넌트로 컴파일되며, 동일한 파일에 있는 템플릿과 연결됩니다.
 
-A simple Volt component looks like the following:
-
+간단한 Volt 컴포넌트는 다음과 같습니다:
 ```php
 <?php
 
@@ -22,48 +22,48 @@ $increment = fn () => $this->count++;
 </div>
 ```
 
-## Installation
+## 설치 {#installation}
 
-To get started, install Volt into your project using the Composer package manager:
+시작하려면 Composer 패키지 관리자를 사용하여 Volt를 프로젝트에 설치하세요:
 
 ```bash
 composer require livewire/volt
 ```
 
-After installing Volt, you may execute the `volt:install` Artisan command, which will install Volt's service provider file into your application. This service provider specifies the mounted directories in which Volt will search for single file components:
+Volt를 설치한 후, `volt:install` Artisan 명령어를 실행할 수 있습니다. 이 명령어는 Volt의 서비스 프로바이더 파일을 애플리케이션에 설치합니다. 이 서비스 프로바이더는 Volt가 단일 파일 컴포넌트를 검색할 마운트된 디렉터리를 지정합니다:
 
 ```bash
 php artisan volt:install
 ```
 
-## Creating components
+## 컴포넌트 생성하기 {#creating-components}
 
-You may create a Volt component by placing a file with the `.blade.php` extension in any of your Volt mounted directories. By default, the `VoltServiceProvider` mounts the `resources/views/livewire` and `resources/views/pages` directories, but you may customize these directories in your Volt service provider's `boot` method.
+Volt 컴포넌트는 `.blade.php` 확장자를 가진 파일을 Volt가 마운트한 디렉터리 중 하나에 생성함으로써 만들 수 있습니다. 기본적으로 `VoltServiceProvider`는 `resources/views/livewire`와 `resources/views/pages` 디렉터리를 마운트하지만, Volt 서비스 프로바이더의 `boot` 메서드에서 이 디렉터리들을 커스터마이즈할 수 있습니다.
 
-For convenience, you may use the `make:volt` Artisan command to create a new Volt component:
+편의를 위해, 새로운 Volt 컴포넌트를 생성할 때 `make:volt` 아티즌 명령어를 사용할 수 있습니다:
 
 ```bash
 php artisan make:volt counter
 ```
 
-By adding the `--test` directive when generating a component, a corresponding test file will also be generated. If you want the associated test to use [Pest](https://pestphp.com/), you should use the `--pest` flag:
+컴포넌트를 생성할 때 `--test` 지시어를 추가하면, 해당 컴포넌트에 대한 테스트 파일도 함께 생성됩니다. 만약 [Pest](https://pestphp.com/)를 사용하여 테스트를 작성하고 싶다면, `--pest` 플래그를 사용하면 됩니다:
 
 ```bash
 php artisan make:volt counter --test --pest
 ```
 
 
-By adding the `--class` directive it will generate a class-based volt component.
+`--class` 지시어를 추가하면 클래스 기반의 volt 컴포넌트가 생성됩니다.
 
 ```bash
 php artisan make:volt counter --class
 ```
 
-## API style
+## API 스타일 {#api-style}
 
-By utilizing Volt's functional API, we can define a Livewire component's logic through imported `Livewire\Volt` functions. Volt then transforms and compiles the functional code into a conventional Livewire class, enabling us to leverage the extensive capabilities of Livewire with reduced boilerplate.
+Volt의 함수형 API를 활용하면, `Livewire\Volt` 함수들을 임포트하여 Livewire 컴포넌트의 로직을 정의할 수 있습니다. Volt는 이 함수형 코드를 기존의 Livewire 클래스 형태로 변환 및 컴파일하여, 더 적은 보일러플레이트로 Livewire의 강력한 기능을 활용할 수 있게 해줍니다.
 
-Volt's API automatically binds any closure it uses to the underlying component. So, at any time, actions, computed properties, or listeners can refer to the component using the `$this` variable:
+Volt의 API는 사용되는 모든 클로저를 자동으로 기본 컴포넌트에 바인딩합니다. 따라서 언제든지 액션, 계산된 속성, 또는 리스너에서 `$this` 변수를 사용해 컴포넌트를 참조할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{state};
@@ -75,9 +75,9 @@ $increment = fn () => $this->count++;
 // ...
 ```
 
-### Class-based Volt components
+### 클래스 기반 Volt 컴포넌트 {#class-based-volt-components}
 
-If you would like to enjoy the single-file component capabilities of Volt while still writing class-based components, we've got you covered. To get started, define an anonymous class that extends `Livewire\Volt\Component`. Within the class, you may utilize all of the features of Livewire using traditional Livewire syntax:
+Volt의 단일 파일 컴포넌트 기능을 누리면서도 클래스 기반 컴포넌트를 작성하고 싶다면, 걱정하지 마세요. 시작하려면 `Livewire\Volt\Component`를 확장하는 익명 클래스를 정의하세요. 클래스 내에서는 기존 Livewire 문법을 사용하여 Livewire의 모든 기능을 활용할 수 있습니다:
 
 ```blade
 <?php
@@ -99,9 +99,9 @@ new class extends Component {
 </div>
 ```
 
-#### Class attributes
+#### 클래스 속성 {#class-attributes}
 
-Just like typical Livewire components, Volt components support class attributes. When utilizing anonymous PHP classes, class attributes should be defined after the `new` keyword:
+일반적인 Livewire 컴포넌트와 마찬가지로, Volt 컴포넌트도 클래스 속성을 지원합니다. 익명 PHP 클래스를 사용할 때는 클래스 속성을 `new` 키워드 뒤에 정의해야 합니다:
 
 ```blade
 <?php
@@ -119,9 +119,9 @@ class extends Component
     // ...
 ```
 
-#### Providing additional view data
+#### 추가적인 뷰 데이터 제공 {#providing-additional-view-data}
 
-When using class-based Volt components, the rendered view is the template present in the same file. If you need to pass additional data to the view each time it is rendered, you may use the `with` method. This data will be passed to the view in addition to the component's public properties:
+클래스 기반 Volt 컴포넌트를 사용할 때, 렌더링되는 뷰는 동일 파일에 있는 템플릿입니다. 뷰가 렌더링될 때마다 추가 데이터를 전달해야 한다면, `with` 메서드를 사용할 수 있습니다. 이 데이터는 컴포넌트의 public 속성 외에 뷰로 전달됩니다:
 
 ```blade
 <?php
@@ -146,9 +146,9 @@ new class extends Component {
 </div>
 ```
 
-#### Modifying the view instance
+#### 뷰 인스턴스 수정하기 {#modifying-the-view-instance}
 
-Sometimes, you may wish to interact with the view instance directly, for example, to set the view's title using a translated string. To achieve this, you may define a `rendering` method on your component:
+때때로 뷰 인스턴스와 직접 상호작용하고 싶을 때가 있습니다. 예를 들어, 번역된 문자열을 사용하여 뷰의 제목을 설정하고 싶을 수 있습니다. 이를 위해 컴포넌트에 `rendering` 메서드를 정의할 수 있습니다:
 
 ```blade
 <?php
@@ -167,15 +167,15 @@ new class extends Component {
     // ...
 ```
 
-## Rendering and mounting components
+## 컴포넌트 렌더링 및 마운트 {#rendering-and-mounting-components}
 
-Just like a typical Livewire component, Volt components may be rendered using Livewire's tag syntax or the `@livewire` Blade directive:
+일반적인 Livewire 컴포넌트와 마찬가지로, Volt 컴포넌트도 Livewire의 태그 문법이나 `@livewire` Blade 디렉티브를 사용하여 렌더링할 수 있습니다:
 
 ```blade
 <livewire:user-index :users="$users" />
 ```
 
-To declare the component's accepted properties, you may use the `state` function:
+컴포넌트가 허용하는 프로퍼티를 선언하려면 `state` 함수를 사용할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{state};
@@ -185,7 +185,7 @@ state('users');
 // ...
 ```
 
-If necessary, you can intercept the properties passed to the component by providing a closure to the `state` function, allowing you to interact with and modify the given value:
+필요하다면, `state` 함수에 클로저를 전달하여 컴포넌트에 전달된 프로퍼티를 가로채고, 해당 값을 조작할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{state};
@@ -193,7 +193,7 @@ use function Livewire\Volt\{state};
 state(['count' => fn ($users) => count($users)]);
 ```
 
-The `mount` function may be used to define the "mount" [lifecycle hook](/docs/lifecycle-hooks) of the Livewire component. The parameters provided to the component will be injected into this method. Any other parameters required by the mount hook will be resolved by Laravel's service container:
+`mount` 함수는 Livewire 컴포넌트의 "mount" [라이프사이클 훅](/docs/lifecycle-hooks)을 정의하는 데 사용할 수 있습니다. 컴포넌트에 제공된 파라미터는 이 메서드에 주입됩니다. mount 훅에서 필요한 다른 파라미터는 Laravel의 서비스 컨테이너에 의해 해결됩니다:
 
 ```php
 use App\Services\UserCounter;
@@ -206,9 +206,9 @@ mount(function (UserCounter $counter, $users) {
 });
 ```
 
-### Full-page components
+### 전체 페이지 컴포넌트 {#full-page-components}
 
-Optionally, you may render a Volt component as a full page component by defining a Volt route in your application's `routes/web.php` file:
+선택적으로, 애플리케이션의 `routes/web.php` 파일에 Volt 라우트를 정의하여 Volt 컴포넌트를 전체 페이지 컴포넌트로 렌더링할 수 있습니다:
 
 ```php
 use Livewire\Volt\Volt;
@@ -216,7 +216,7 @@ use Livewire\Volt\Volt;
 Volt::route('/users', 'user-index');
 ```
 
-By default, the component will be rendered using the `components.layouts.app` layout. You may customize this layout file using the `layout` function:
+기본적으로, 컴포넌트는 `components.layouts.app` 레이아웃을 사용하여 렌더링됩니다. `layout` 함수를 사용하여 이 레이아웃 파일을 커스터마이즈할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{layout, state};
@@ -228,7 +228,7 @@ layout('components.layouts.admin');
 // ...
 ```
 
-You may also customize the title of the page using the `title` function:
+또한 `title` 함수를 사용하여 페이지의 제목을 커스터마이즈할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{layout, state, title};
@@ -242,7 +242,7 @@ title('Users');
 // ...
 ```
 
-If the title relies on component state or an external dependency, you may pass a closure to the `title` function instead:
+제목이 컴포넌트 상태나 외부 의존성에 따라 달라지는 경우, `title` 함수에 클로저를 전달할 수도 있습니다:
 
 ```php
 use function Livewire\Volt\{layout, state, title};
@@ -254,9 +254,9 @@ layout('components.layouts.admin');
 title(fn () => 'Users: ' . $this->users->count());
 ```
 
-## Properties
+## 속성 {#properties}
 
-Volt properties, like Livewire properties, are conveniently accessible in the view and persist between Livewire updates. You can define a property using the `state` function:
+Volt 속성은 Livewire 속성과 마찬가지로 뷰에서 편리하게 접근할 수 있으며, Livewire 업데이트 사이에도 지속됩니다. `state` 함수를 사용하여 속성을 정의할 수 있습니다:
 
 ```php
 <?php
@@ -272,7 +272,7 @@ state(['count' => 0]);
 </div>
 ```
 
-If the initial value of a state property relies on outside dependencies, such as database queries, models, or container services, its resolution should be encapsulated within a closure. This prevents the value from being resolved until it is absolutely necessary:
+state 속성의 초기값이 데이터베이스 쿼리, 모델, 컨테이너 서비스 등 외부 의존성에 따라 달라진다면, 해당 값을 클로저로 감싸서 정의해야 합니다. 이렇게 하면 실제로 필요할 때까지 값이 계산되지 않습니다:
 
 ```php
 use App\Models\User;
@@ -281,7 +281,7 @@ use function Livewire\Volt\{state};
 state(['count' => fn () => User::count()]);
 ```
 
-If the initial value of a state property is being injected via [Laravel Folio's](https://github.com/laravel/folio) route model binding, it should also be encapsulated within a closure:
+state 속성의 초기값이 [Laravel Folio](https://github.com/laravel/folio)의 라우트 모델 바인딩을 통해 주입되는 경우에도, 클로저로 감싸서 정의해야 합니다:
 
 ```php
 use App\Models\User;
@@ -290,7 +290,7 @@ use function Livewire\Volt\{state};
 state(['user' => fn () => $user]);
 ```
 
-Of course, properties may also be declared without explicitly specifying their initial value. In such cases, their initial value will be `null` or will be set based on the properties passed into the component when it is rendered:
+물론, 속성의 초기값을 명시적으로 지정하지 않고 선언할 수도 있습니다. 이 경우 초기값은 `null`이 되거나, 컴포넌트가 렌더링될 때 전달된 속성 값에 따라 설정됩니다:
 
 ```php
 use function Livewire\Volt\{mount, state};
@@ -304,39 +304,39 @@ mount(function ($users) {
 });
 ```
 
-### Locked properties
+### 잠긴 속성 {#locked-properties}
 
-Livewire offers the ability to safeguard properties by enabling you to "lock" them, thereby preventing any modifications from occurring on the client-side. To achieve this using Volt, simply chain the `locked` method on the state you wish to protect:
+Livewire는 속성을 "잠금" 처리하여 클라이언트 측에서 수정이 발생하지 않도록 보호할 수 있는 기능을 제공합니다. Volt를 사용하여 이를 구현하려면, 보호하려는 상태에 `locked` 메서드를 체이닝하면 됩니다:
 
 ```php
 state(['id'])->locked();
 ```
 
-### Reactive properties
+### 반응형 속성 {#reactive-properties}
 
-When working with nested components, you may find yourself in a situation where you need to pass a property from a parent component to a child component, and have the child component [automatically update](/docs/nesting#reactive-props) when the parent component updates the property.
+중첩된 컴포넌트로 작업할 때, 부모 컴포넌트에서 자식 컴포넌트로 속성을 전달하고, 부모 컴포넌트가 해당 속성을 업데이트할 때 자식 컴포넌트가 [자동으로 업데이트](/docs/nesting#reactive-props)되기를 원할 수 있습니다.
 
-To achieve this using Volt, you may chain the `reactive` method on the state you wish to be reactive:
+Volt를 사용하여 이를 달성하려면, 반응형으로 만들고자 하는 상태에 `reactive` 메서드를 체이닝하면 됩니다:
 
 ```php
 state(['todos'])->reactive();
 ```
 
-### Modelable properties
+### 모델링 가능한 속성 {#modelable-properties}
 
-In cases where you don't want to make use of reactive properties, Livewire provides a [modelable feature](/docs/nesting#binding-to-child-data-using-wiremodel) where you may share state between parent component and child component using `wire:model` directly on a child component.
+반응형 속성을 사용하고 싶지 않은 경우, Livewire는 [모델링 가능한 기능](/docs/nesting#binding-to-child-data-using-wiremodel)을 제공합니다. 이 기능을 사용하면 부모 컴포넌트와 자식 컴포넌트 간에 `wire:model`을 직접 사용하여 상태를 공유할 수 있습니다.
 
-To achieve this using Volt, simply chain the `modelable` method on the state you wish to be modelable:
+Volt를 사용하여 이를 구현하려면, 모델링 가능한 상태에 `modelable` 메서드를 체이닝하면 됩니다:
 
 ```php
 state(['form'])->modelable();
 ```
 
-### Computed properties
+### 계산된 속성 {#computed-properties}
 
-Livewire also allows you to define [computed properties](/docs/computed-properties), which can be useful for lazily fetching information needed by your component. Computed property results are "memoized", or cached in memory, for an individual Livewire request lifecycle.
+Livewire는 [계산된 속성](/docs/computed-properties)도 정의할 수 있게 해주며, 이는 컴포넌트에서 필요한 정보를 지연해서 가져올 때 유용합니다. 계산된 속성의 결과는 각 Livewire 요청 생명주기 동안 "메모이즈"되거나, 메모리에 캐시됩니다.
 
-To define a computed property, you may use the `computed` function. The name of the variable will determine the name of the computed property:
+계산된 속성을 정의하려면 `computed` 함수를 사용할 수 있습니다. 변수의 이름이 계산된 속성의 이름을 결정합니다:
 
 ```php
 <?php
@@ -355,7 +355,7 @@ $count = computed(function () {
 </div>
 ```
 
-You may persist the computed property's value in your application's cache by chaining the `persist` method onto the computed property definition:
+계산된 속성의 값을 애플리케이션의 캐시에 영구적으로 저장하려면, 계산된 속성 정의에 `persist` 메서드를 체이닝하면 됩니다:
 
 ```php
 $count = computed(function () {
@@ -363,7 +363,7 @@ $count = computed(function () {
 })->persist();
 ```
 
-By default, Livewire caches the computed property's value for 3600 seconds. You may customize this value by providing the desired number of seconds to the `persist` method:
+기본적으로 Livewire는 계산된 속성의 값을 3600초 동안 캐시합니다. `persist` 메서드에 원하는 초 단위를 전달하여 이 값을 커스터마이즈할 수 있습니다:
 
 ```php
 $count = computed(function () {
@@ -371,11 +371,11 @@ $count = computed(function () {
 })->persist(seconds: 10);
 ```
 
-## Actions
+## 액션 {#actions}
 
-Livewire [actions](/docs/actions) provide a convenient way to listen to page interactions and invoke a corresponding method on your component, resulting in the re-rendering of the component. Often, actions are invoked in response to the user clicking a button.
+Livewire [액션](/docs/actions)은 페이지 상호작용을 감지하고 컴포넌트의 해당 메서드를 호출하여 컴포넌트를 다시 렌더링하는 편리한 방법을 제공합니다. 대부분의 경우, 액션은 사용자가 버튼을 클릭할 때 호출됩니다.
 
-To define a Livewire action using Volt, you simply need to define a closure. The name of the variable containing the closure will determine the name of the action:
+Volt를 사용하여 Livewire 액션을 정의하려면, 클로저를 정의하기만 하면 됩니다. 클로저를 담고 있는 변수의 이름이 액션의 이름이 됩니다:
 
 ```php
 <?php
@@ -394,7 +394,7 @@ $increment = fn () => $this->count++;
 </div>
 ```
 
-Within the closure, the `$this` variable is bound to the underlying Livewire component, giving you the ability to access other methods on the component just as you would in a typical Livewire component:
+클로저 내부에서 `$this` 변수는 기본 Livewire 컴포넌트에 바인딩되어, 일반적인 Livewire 컴포넌트에서처럼 컴포넌트의 다른 메서드에 접근할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{state};
@@ -408,7 +408,7 @@ $increment = function () {
 };
 ```
 
-Your action may also receive arguments or dependencies from Laravel's service container:
+액션은 Laravel의 서비스 컨테이너에서 인자나 의존성을 받을 수도 있습니다:
 
 ```php
 use App\Repositories\PostRepository;
@@ -423,9 +423,9 @@ $delete = function (PostRepository $posts) {
 };
 ```
 
-### Renderless actions
+### 렌더리스 액션 {#renderless-actions}
 
-In some cases, your component might declare an action that does not perform any operations that would cause the component's rendered Blade template to change. If that's the case, you can [skip the rendering phase](/docs/actions#skipping-re-renders) of Livewire's lifecycle by encapsulating the action within the `action` function and chaining the `renderless` method onto its definition:
+경우에 따라, 컴포넌트가 렌더된 Blade 템플릿에 변화를 일으키지 않는 액션을 선언할 수 있습니다. 이런 경우, Livewire의 라이프사이클에서 [렌더링 단계 건너뛰기](/docs/actions#skipping-re-renders)를 통해 액션을 `action` 함수로 감싸고, 그 정의에 `renderless` 메서드를 체이닝하여 렌더링 단계를 생략할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{action};
@@ -433,9 +433,9 @@ use function Livewire\Volt\{action};
 $incrementViewCount = action(fn () => $this->viewCount++)->renderless();
 ```
 
-### Protected helpers
+### 보호된 헬퍼 {#protected-helpers}
 
-By default, all Volt actions are "public" and may be invoked by the client. If you wish to create a function that is [only accessible from within your actions](/docs/actions#keep-dangerous-methods-protected-or-private), you may use the `protect` function:
+기본적으로 모든 Volt 액션은 "public"이며 클라이언트에서 호출할 수 있습니다. 만약 [액션 내부에서만 접근 가능한 함수](/docs/actions#keep-dangerous-methods-protected-or-private)를 만들고 싶다면, `protect` 함수를 사용할 수 있습니다:
 
 ```php
 use App\Repositories\PostRepository;
@@ -456,9 +456,9 @@ $ensurePostCanBeDeleted = protect(function () {
 });
 ```
 
-## Forms
+## 폼 {#forms}
 
-Livewire's [forms](/docs/forms) provide a convenient way to deal with form validation and submission within a single class. To use a Livewire form within a Volt component, you may utilize the `form` function:
+Livewire의 [폼](/docs/forms)은 단일 클래스 내에서 폼 검증과 제출을 편리하게 처리할 수 있는 방법을 제공합니다. Volt 컴포넌트 내에서 Livewire 폼을 사용하려면 `form` 함수를 사용할 수 있습니다:
 
 ```php
 <?php
@@ -484,9 +484,9 @@ $save = function () {
 </form>
 ```
 
-As you can see, the `form` function accepts the name of a Livewire form class. Once defined, the form can be accessed via the `$this->form` property within your component.
+보시다시피, `form` 함수는 Livewire 폼 클래스의 이름을 인자로 받습니다. 정의된 후에는 컴포넌트 내에서 `$this->form` 프로퍼티를 통해 폼에 접근할 수 있습니다.
 
-If you want to use a different property name for your form, you can pass the name as the second argument to the `form` function:
+폼에 대해 다른 프로퍼티 이름을 사용하고 싶다면, 두 번째 인자로 이름을 `form` 함수에 전달할 수 있습니다:
 
 ```php
 form(PostForm::class, 'postForm');
@@ -498,9 +498,9 @@ $save = function () {
 };
 ```
 
-## Listeners
+## 리스너 {#listeners}
 
-Livewire's global [event system](/docs/events) enables communication between components. If two Livewire components exist on a page, they can communicate by utilizing events and listeners. When using Volt, listeners can be defined using the `on` function:
+Livewire의 전역 [이벤트 시스템](/docs/events)은 컴포넌트 간의 통신을 가능하게 합니다. 한 페이지에 두 개의 Livewire 컴포넌트가 존재할 때, 이벤트와 리스너를 활용하여 서로 통신할 수 있습니다. Volt를 사용할 때는 `on` 함수를 사용하여 리스너를 정의할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{on};
@@ -510,17 +510,17 @@ on(['eventName' => function () {
 }]);
 ```
 
-If you need to assign dynamic names to event listeners, such as those based on the authenticated user or data passed to the component, you can pass a closure to the `on` function. This closure can receive any component parameter, as well as additional dependencies which will be resolved via Laravel's service container:
+인증된 사용자나 컴포넌트에 전달된 데이터에 따라 동적으로 이벤트 리스너의 이름을 지정해야 하는 경우, 클로저를 `on` 함수에 전달할 수 있습니다. 이 클로저는 컴포넌트 파라미터와 추가적인 의존성을 받을 수 있으며, 이 의존성들은 Laravel의 서비스 컨테이너를 통해 해결됩니다:
 
 ```php
 on(fn ($post) => [
     'event-'.$post->id => function () {
         //
-    }),
+    }]),
 ]);
 ```
 
-For convenience, component data may also be referenced when defining listeners using "dot" notation:
+편의를 위해, 리스너를 정의할 때 컴포넌트 데이터를 "dot" 표기법으로 참조할 수도 있습니다:
 
 ```php
 on(['event-{post.id}' => function () {
@@ -528,9 +528,9 @@ on(['event-{post.id}' => function () {
 }]);
 ```
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-Livewire has a variety of [lifecycle hooks](/docs/lifecycle-hooks) that may be used to execute code at various points in a component's lifecycle. Using Volt's convenient API, you can define these lifecycle hooks using their corresponding functions:
+Livewire에는 컴포넌트의 라이프사이클 여러 지점에서 코드를 실행할 수 있는 다양한 [라이프사이클 훅](/docs/lifecycle-hooks)이 있습니다. Volt의 편리한 API를 사용하면, 해당 함수들을 통해 이러한 라이프사이클 훅을 정의할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{boot, booted, ...};
@@ -546,11 +546,11 @@ updating(['count' => fn () => /* ... */]);
 updated(['count' => fn () => /* ... */]);
 ```
 
-## Lazy loading placeholders
+## 지연 로딩 플레이스홀더 {#lazy-loading-placeholders}
 
-When rendering Livewire components, you may pass the `lazy` parameter to a Livewire component to [defer its loading](/docs/lazy) until the initial page is fully loaded. By default, Livewire inserts `<div></div>` tags into the DOM where the component will be loaded.
+Livewire 컴포넌트를 렌더링할 때, `lazy` 파라미터를 Livewire 컴포넌트에 전달하여 [로딩을 지연](/docs/lazy)시킬 수 있습니다. 기본적으로 Livewire는 컴포넌트가 로드될 위치에 `<div></div>` 태그를 DOM에 삽입합니다.
 
-If you would like to customize the HTML that is displayed within the component's placeholder while the initial page is loaded, you may use the `placeholder` function:
+초기 페이지가 로드되는 동안 컴포넌트의 플레이스홀더에 표시되는 HTML을 커스터마이즈하고 싶다면, `placeholder` 함수를 사용할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{placeholder};
@@ -558,9 +558,9 @@ use function Livewire\Volt\{placeholder};
 placeholder('<div>Loading...</div>');
 ```
 
-## Validation
+## 유효성 검사 {#validation}
 
-Livewire offers easy access to Laravel's powerful [validation features](/docs/validation). Using Volt's API, you may define your component's validation rules using the `rules` function. Like traditional Livewire components, these rules will be applied to your component data when you invoke the `validate` method:
+Livewire는 Laravel의 강력한 [유효성 검사 기능](/docs/validation)에 쉽게 접근할 수 있도록 해줍니다. Volt의 API를 사용하면 `rules` 함수를 통해 컴포넌트의 유효성 검사 규칙을 정의할 수 있습니다. 기존 Livewire 컴포넌트와 마찬가지로, 이 규칙들은 `validate` 메서드를 호출할 때 컴포넌트 데이터에 적용됩니다:
 
 ```php
 <?php
@@ -582,7 +582,7 @@ $submit = function () {
 </form>
 ```
 
-If you need to define rules dynamically, such as rules based on the authenticated user or a information from your database, you can provide a closure to the `rules` function:
+인증된 사용자나 데이터베이스의 정보 등 동적으로 규칙을 정의해야 할 경우, `rules` 함수에 클로저를 전달할 수 있습니다:
 
 ```php
 rules(fn () => [
@@ -591,25 +591,25 @@ rules(fn () => [
 ]);
 ```
 
-### Error messages and attributes
+### 오류 메시지 및 속성 {#error-messages-and-attributes}
 
-To modify the validation messages or attributes used during validation, you can chain the `messages` and `attributes` methods onto your `rules` definition:
+유효성 검사 중에 사용되는 메시지나 속성을 수정하려면, `rules` 정의에 `messages` 및 `attributes` 메서드를 체이닝하여 사용할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{rules};
 
 rules(['name' => 'required|min:6', 'email' => 'required|email'])
     ->messages([
-        'email.required' => 'The :attribute may not be empty.',
-        'email.email' => 'The :attribute format is invalid.',
+        'email.required' => ':attribute 항목은 비워둘 수 없습니다.',
+        'email.email' => ':attribute 형식이 올바르지 않습니다.',
     ])->attributes([
-        'email' => 'email address',
+        'email' => '이메일 주소',
     ]);
 ```
 
-## File uploads
+## 파일 업로드 {#file-uploads}
 
-When using Volt, [uploading and storing files](/docs/uploads) is much easier thanks to Livewire. To include the `Livewire\WithFileUploads` trait on your functional Volt component, you may use the `usesFileUploads` function:
+Volt를 사용할 때, Livewire 덕분에 [파일 업로드 및 저장](/docs/uploads)이 훨씬 쉬워집니다. 기능형 Volt 컴포넌트에 `Livewire\WithFileUploads` 트레이트를 포함하려면, `usesFileUploads` 함수를 사용할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{state, usesFileUploads};
@@ -627,9 +627,9 @@ $save = function () {
 };
 ```
 
-## URL query parameters
+## URL 쿼리 파라미터 {#url-query-parameters}
 
-Sometimes it's useful to [update the browser's URL query parameters](/docs/url) when your component state changes. In these cases, you can use the `url` method to instruct Livewire to sync the URL query parameters with a piece of component state:
+때때로 컴포넌트 상태가 변경될 때 [브라우저의 URL 쿼리 파라미터를 업데이트](/docs/url)하는 것이 유용할 수 있습니다. 이런 경우, `url` 메서드를 사용하여 Livewire가 컴포넌트 상태의 일부와 URL 쿼리 파라미터를 동기화하도록 지시할 수 있습니다:
 
 ```php
 <?php
@@ -646,9 +646,9 @@ $posts = computed(function () {
 ?>
 
 <div>
-    <input wire:model.live="search" type="search" placeholder="Search posts by title...">
+    <input wire:model.live="search" type="search" placeholder="제목으로 게시글 검색...">
 
-    <h1>Search Results:</h1>
+    <h1>검색 결과:</h1>
 
     <ul>
         @foreach($this->posts as $post)
@@ -658,7 +658,7 @@ $posts = computed(function () {
 </div>
 ```
 
-Additional URL query parameters options supported by Livewire, such as URL query parameters aliases, may also be provided to the `url` method:
+Livewire에서 지원하는 추가 URL 쿼리 파라미터 옵션(예: 쿼리 파라미터 별칭 등)도 `url` 메서드에 전달할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -669,9 +669,9 @@ state(['page' => 1])->url(as: 'p', history: true, keep: true);
 // ...
 ```
 
-## Pagination
+## 페이지네이션 {#pagination}
 
-Livewire and Volt also have complete support for [pagination](/docs/pagination). To include Livewire's `Livewire\WithPagination` trait on your functional Volt component, you may use the `usesPagination` function:
+Livewire와 Volt는 [페이지네이션](/docs/pagination)을 완벽하게 지원합니다. Livewire의 `Livewire\WithPagination` 트레이트를 기능형 Volt 컴포넌트에 포함하려면, `usesPagination` 함수를 사용할 수 있습니다:
 
 ```php
 <?php
@@ -693,15 +693,15 @@ with(fn () => ['posts' => Post::paginate(10)]);
 </div>
 ```
 
-Like Laravel, Livewire's default pagination view uses Tailwind classes for styling. If you use Bootstrap in your application, you can enable the Bootstrap pagination theme by specifying your desired theme when invoking the `usesPagination` function:
+Laravel과 마찬가지로, Livewire의 기본 페이지네이션 뷰는 Tailwind 클래스를 사용하여 스타일링됩니다. 애플리케이션에서 Bootstrap을 사용하는 경우, `usesPagination` 함수를 호출할 때 원하는 테마를 지정하여 Bootstrap 페이지네이션 테마를 활성화할 수 있습니다:
 
 ```php
 usesPagination(theme: 'bootstrap');
 ```
 
-## Custom traits and interfaces
+## 커스텀 트레이트 및 인터페이스 {#custom-traits-and-interfaces}
 
-To include any arbitrary trait or interface on your functional Volt component, you may use the `uses` function:
+기능성 Volt 컴포넌트에 임의의 트레이트나 인터페이스를 포함하려면 `uses` 함수를 사용할 수 있습니다:
 
 ```php
 use function Livewire\Volt\{uses};
@@ -712,15 +712,15 @@ use App\Concerns\WithSorting;
 uses([Sorting::class, WithSorting::class]);
 ```
 
-## Anonymous components
+## 익명 컴포넌트 {#anonymous-components}
 
-Sometimes, you may want to convert a small portion of a page into a Volt component without extracting it into a separate file. For example, imagine a Laravel route that returns the following view:
+때때로, 페이지의 작은 부분을 별도의 파일로 추출하지 않고 Volt 컴포넌트로 변환하고 싶을 때가 있습니다. 예를 들어, 다음과 같은 뷰를 반환하는 Laravel 라우트를 상상해보세요:
 
 ```php
 Route::get('/counter', fn () => view('pages/counter.blade.php'));
 ```
 
-The view's content is a typical Blade template, including layout definitions and slots. However, by wrapping a portion of the view within the `@volt` Blade directive, we can convert that piece of the view into a fully-functional Volt component:
+이 뷰의 내용은 레이아웃 정의와 슬롯을 포함한 일반적인 Blade 템플릿입니다. 하지만 뷰의 일부를 `@volt` Blade 지시문으로 감싸면, 해당 부분을 완전히 동작하는 Volt 컴포넌트로 변환할 수 있습니다:
 
 ```php
 <?php
@@ -747,9 +747,9 @@ $increment = fn () => $this->count++;
 </x-app-layout>
 ```
 
-#### Passing data to anonymous components
+#### 익명 컴포넌트에 데이터 전달하기 {#passing-data-to-anonymous-components}
 
-When rendering a view that contains an anonymous component, all of the data given to the view will also be available to the anonymous Volt component:
+익명 컴포넌트를 포함하는 뷰를 렌더링할 때, 뷰에 전달된 모든 데이터는 익명 Volt 컴포넌트에서도 사용할 수 있습니다:
 
 ```php
 use App\Models\User;
@@ -759,7 +759,7 @@ Route::get('/counter', fn () => view('users.counter', [
 ]));
 ```
 
-Of course, you may declare this data as "state" on your Volt component. When initializing state from data proxied to the component by the view, you only need to declare the name of the state variable. Volt will automatically hydrate the state's default value using the proxied view data:
+물론, 이 데이터를 Volt 컴포넌트의 "state"로 선언할 수도 있습니다. 뷰에서 컴포넌트로 프록시된 데이터로 상태를 초기화할 때는 상태 변수의 이름만 선언하면 됩니다. Volt는 프록시된 뷰 데이터를 사용하여 상태의 기본값을 자동으로 할당합니다:
 
 ```php
 <?php
@@ -769,7 +769,7 @@ use function Livewire\Volt\{state};
 state('count');
 
 $increment = function () {
-    // Store the new count value in the database...
+    // 새로운 count 값을 데이터베이스에 저장...
 
     $this->count++;
 };
@@ -778,7 +778,7 @@ $increment = function () {
 
 <x-app-layout>
     <x-slot name="header">
-        Initial value: {{ $count }}
+        초기 값: {{ $count }}
     </x-slot>
 
     @volt('counter')
@@ -790,9 +790,9 @@ $increment = function () {
 </x-app-layout>
 ```
 
-## Testing components
+## 컴포넌트 테스트하기 {#testing-components}
 
-To begin testing a Volt component, you may invoke the `Volt::test` method, providing the name of the component:
+Volt 컴포넌트 테스트를 시작하려면, `Volt::test` 메서드에 컴포넌트의 이름을 전달하여 호출할 수 있습니다:
 
 ```php
 use Livewire\Volt\Volt;
@@ -805,15 +805,15 @@ it('increments the counter', function () {
 });
 ```
 
-When testing a Volt component, you may utilize all of the methods provided by the standard [Livewire testing API](/docs/testing).
+Volt 컴포넌트를 테스트할 때는 표준 [Livewire 테스트 API](/docs/testing)에서 제공하는 모든 메서드를 사용할 수 있습니다.
 
-If your Volt component is nested, you may use "dot" notation to specify the component that you wish to test:
+Volt 컴포넌트가 중첩되어 있다면, 테스트하려는 컴포넌트를 "점" 표기법으로 지정할 수 있습니다:
 
 ```php
 Volt::test('users.stats')
 ```
 
-When testing a page that contains an anonymous Volt component, you may use the `assertSeeVolt` method to assert that the component is rendered:
+익명 Volt 컴포넌트가 포함된 페이지를 테스트할 때는, 해당 컴포넌트가 렌더링되었는지 `assertSeeVolt` 메서드로 확인할 수 있습니다:
 
 ```php
 $this->get('/users')

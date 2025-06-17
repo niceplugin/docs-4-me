@@ -1,7 +1,7 @@
+# wire:current
+`wire:current` 지시어를 사용하면 페이지에서 현재 활성화된 링크를 쉽게 감지하고 스타일을 지정할 수 있습니다.
 
-The `wire:current` directive allows you to easily detect and style currently active links on a page.
-
-Here's a simple example of adding `wire:current` to links in a navbar so that the currently active link has a stronger font weight:
+다음은 네비게이션 바의 링크에 `wire:current`를 추가하여 현재 활성화된 링크에 더 강한 글꼴 두께를 적용하는 간단한 예시입니다:
 
 ```blade
 <nav>
@@ -11,19 +11,19 @@ Here's a simple example of adding `wire:current` to links in a navbar so that th
 </nav>
 ```
 
-Now when a user visits `/posts`, the "Posts" link will have a stronger font treatment than the other links.
+이제 사용자가 `/posts`를 방문하면 "Posts" 링크가 다른 링크보다 더 두드러진 글꼴 스타일로 표시됩니다.
 
-You should note that `wire:current` works out of the box with `wire:navigate` links and page changes.
+`wire:current`는 `wire:navigate` 링크 및 페이지 변경과 함께 별도의 설정 없이 바로 작동한다는 점에 유의하세요.
 
-## Exact matching
+## 정확히 일치시키기 {#exact-matching}
 
-By default, `wire:current` uses a partial matching strategy, meaning it will be applied if the link and current page share the beginning portion of the Url's path.
+기본적으로 `wire:current`는 부분 일치 전략을 사용합니다. 즉, 링크와 현재 페이지의 URL 경로가 시작 부분에서 일치하면 적용됩니다.
 
-For example, if the link is `/posts`, and the current page is `/posts/1`, the `wire:current` directive will be applied.
+예를 들어, 링크가 `/posts`이고 현재 페이지가 `/posts/1`인 경우, `wire:current` 지시문이 적용됩니다.
 
-If you wish to use exact matching, you can add the `.exact` modifier to the directive.
+정확히 일치시키고 싶다면, 지시문에 `.exact` 수식어를 추가할 수 있습니다.
 
-Here's an example where you might want to use exact matching to prevent the "Dashboard" link from being highlighted when the user visits `/posts`:
+아래는 사용자가 `/posts`를 방문할 때 "Dashboard" 링크가 강조 표시되지 않도록 정확히 일치시키는 예시입니다:
 
 ```blade
 <nav>
@@ -31,11 +31,11 @@ Here's an example where you might want to use exact matching to prevent the "Das
 </nav>
 ```
 
-## Strict matching
+## 엄격한 일치 {#strict-matching}
 
-By default, `wire:current` will remove trailing slashes (`/`) from its comparison.
+기본적으로 `wire:current`는 비교 시 끝에 있는 슬래시(`/`)를 제거합니다.
 
-If you'd like to disable this behavior and force a stract path string comparison, you can append the `.strict` modifier:
+이 동작을 비활성화하고 경로 문자열을 엄격하게 비교하고 싶다면, `.strict` 수식어를 추가할 수 있습니다:
 
 ```blade
 <nav>
@@ -43,9 +43,9 @@ If you'd like to disable this behavior and force a stract path string comparison
 </nav>
 ```
 
-## Troubleshooting
+## 문제 해결 {#troubleshooting}
 
-If `wire:current` is not detecting the current link correctly, ensure the following:
+`wire:current`가 현재 링크를 올바르게 감지하지 못하는 경우, 다음 사항을 확인하세요:
 
-* You have at least one Livewire component on the page, or have hardcoded `@livewireScripts` in your layout
-* You have a `href` attribute on the link.
+* 페이지에 적어도 하나의 Livewire 컴포넌트가 있거나, 레이아웃에 `@livewireScripts`를 하드코딩했는지 확인하세요.
+* 링크에 `href` 속성이 있는지 확인하세요.

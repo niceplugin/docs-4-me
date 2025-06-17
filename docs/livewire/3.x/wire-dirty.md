@@ -1,19 +1,19 @@
+# wire:dirty
+전통적인 HTML 페이지에서 폼은 사용자가 "제출" 버튼을 눌렀을 때만 제출됩니다.
 
-In a traditional HTML page containing a form, the form is only ever submitted when the user presses the "Submit" button.
+하지만 Livewire는 전통적인 폼 제출 방식보다 훨씬 더 많은 기능을 제공합니다. 폼 입력값을 실시간으로 검증하거나, 사용자가 입력할 때마다 폼을 저장할 수도 있습니다.
 
-However, Livewire is capable of much more than traditional form submissions. You can validate form inputs in real-time or even save the form as a user types.
+이러한 "실시간" 업데이트 시나리오에서는, 폼 또는 폼의 일부가 변경되었지만 아직 데이터베이스에 저장되지 않았음을 사용자에게 알리는 것이 도움이 될 수 있습니다.
 
-In these "real-time" update scenarios, it can be helpful to signal to your users when a form or subset of a form has been changed, but hasn't been saved to the database.
+폼에 저장되지 않은 입력값이 있을 때, 해당 폼은 "더럽다(dirty)"고 간주됩니다. 네트워크 요청이 발생하여 서버 상태와 클라이언트 측 상태가 동기화될 때에만 "깨끗하다(clean)"고 간주됩니다.
 
-When a form contains un-saved input, that form is considered "dirty". It only becomes "clean" when a network request has been triggered to synchronize the server state with the client-side state.
+## 기본 사용법 {#basic-usage}
 
-## Basic usage
+Livewire를 사용하면 `wire:dirty` 지시어를 통해 페이지의 시각적 요소를 쉽게 토글할 수 있습니다.
 
-Livewire allows you to easily toggle visual elements on the page using the `wire:dirty` directive.
+요소에 `wire:dirty`를 추가하면, 클라이언트 측 상태가 서버 측 상태와 달라질 때만 해당 요소를 표시하도록 Livewire에 지시하는 것입니다.
 
-By adding `wire:dirty` to an element, you are instructing Livewire to only show the element when the client-side state diverges from the server-side state.
-
-To demonstrate, here is an example of an `UpdatePost` form containing a visual "Unsaved changes..." indication that signals to the user that the form contains input that has not been saved:
+예를 들어, 아래는 입력값이 저장되지 않았음을 사용자에게 알리는 "저장되지 않은 변경 사항..." 표시가 포함된 `UpdatePost` 폼의 예시입니다:
 
 ```blade
 <form wire:submit="update">
@@ -23,43 +23,43 @@ To demonstrate, here is an example of an `UpdatePost` form containing a visual "
 
     <button type="submit">Update</button>
 
-    <div wire:dirty>Unsaved changes...</div> <!-- [tl! highlight] -->
+    <div wire:dirty>저장되지 않은 변경 사항...</div> <!-- [tl! highlight] -->
 </form>
 ```
 
-Because `wire:dirty` has been added to the "Unsaved changes..." message, the message will be hidden by default. Livewire will automatically display the message when the user starts modifying the form inputs.
+"저장되지 않은 변경 사항..." 메시지에 `wire:dirty`가 추가되어 있기 때문에, 이 메시지는 기본적으로 숨겨집니다. 사용자가 폼 입력을 수정하기 시작하면 Livewire가 자동으로 메시지를 표시합니다.
 
-When the user submits the form, the message will disappear again, since the server / client data is back in sync.
+사용자가 폼을 제출하면 서버와 클라이언트의 데이터가 다시 동기화되므로 메시지는 다시 사라집니다.
 
-### Removing elements
+### 요소 제거하기 {#removing-elements}
 
-By adding the `.remove` modifier to `wire:dirty`, you can instead show an element by default and only hide it when the component has "dirty" state:
+`wire:dirty`에 `.remove` 수식어를 추가하면, 기본적으로 요소를 표시하고 컴포넌트가 "dirty" 상태일 때만 해당 요소를 숨길 수 있습니다:
 
 ```blade
-<div wire:dirty.remove>The data is in-sync...</div>
+<div wire:dirty.remove>데이터가 동기화되었습니다...</div>
 ```
 
-## Targeting property updates
+## 속성 업데이트 타겟팅 {#targeting-property-updates}
 
-Imagine you are using `wire:model.blur` to update a property on the server immediately after a user leaves an input field. In this scenario, you can provide a "dirty" indication for only that property by adding `wire:target` to the element that contains the `wire:dirty` directive.
+사용자가 입력 필드를 벗어날 때 즉시 서버의 속성을 업데이트하기 위해 `wire:model.blur`을 사용하는 상황을 상상해보세요. 이 경우, `wire:dirty` 지시어가 포함된 요소에 `wire:target`을 추가하여 해당 속성에만 "변경됨" 표시를 제공할 수 있습니다.
 
-Here is an example of only showing a dirty indication when the title property has been changed:
+다음은 title 속성이 변경되었을 때만 변경됨 표시를 보여주는 예시입니다:
 
 ```blade
 <form wire:submit="update">
     <input wire:model.blur="title">
 
-    <div wire:dirty wire:target="title">Unsaved title...</div> <!-- [tl! highlight] -->
+    <div wire:dirty wire:target="title">저장되지 않은 제목...</div> <!-- [tl! highlight] -->
 
-    <button type="submit">Update</button>
+    <button type="submit">업데이트</button>
 </form>
 ```
 
-## Toggling classes
+## 클래스 토글하기 {#toggling-classes}
 
-Often, instead of toggling entire elements, you may want to toggle individual CSS classes on an input when its state is "dirty".
+전체 요소를 토글하는 대신, 입력값의 상태가 "dirty"일 때 개별 CSS 클래스를 토글하고 싶을 때가 많습니다.
 
-Below is an example where a user types into an input field and the border becomes yellow, indicating an "unsaved" state. Then, when the user tabs away from the field, the border is removed, indicating that the state has been saved on the server:
+아래는 사용자가 입력 필드에 타이핑하면 테두리가 노란색으로 바뀌어 "저장되지 않음" 상태를 나타내고, 사용자가 필드에서 탭으로 벗어나면 테두리가 사라져 서버에 상태가 저장되었음을 나타내는 예시입니다:
 
 ```blade
 <input wire:model.blur="title" wire:dirty.class="border-yellow-500">

@@ -1,9 +1,9 @@
-Livewire allows you to store component properties in the URL's query string. For example, you may want a `$search` property in your component to be included in the URL: `https://example.com/users?search=bob`. This is particularly useful for things like filtering, sorting, and pagination, as it allows users to share and bookmark specific states of a page.
+# URL 쿼리 파라미터
+Livewire는 컴포넌트 속성을 URL의 쿼리 문자열에 저장할 수 있도록 해줍니다. 예를 들어, 컴포넌트의 `$search` 속성을 URL에 포함시키고 싶을 수 있습니다: `https://example.com/users?search=bob`. 이는 필터링, 정렬, 페이지네이션과 같은 기능에 특히 유용하며, 사용자가 페이지의 특정 상태를 공유하거나 북마크할 수 있게 해줍니다.
 
-## Basic usage
+## 기본 사용법 {#basic-usage}
 
-Below is a `ShowUsers` component that allows you to search users by their name via a simple text input:
-
+아래는 사용자의 이름으로 검색할 수 있는 간단한 텍스트 입력 필드를 제공하는 `ShowUsers` 컴포넌트입니다:
 ```php
 <?php
 
@@ -38,11 +38,11 @@ class ShowUsers extends Component
 </div>
 ```
 
-As you can see, because the text input uses `wire:model.live="search"`, as a user types into the field, network requests will be sent to update the `$search` property and show a filtered set of users on the page.
+보시다시피, 텍스트 입력 필드에 `wire:model.live="search"`를 사용했기 때문에 사용자가 입력할 때마다 네트워크 요청이 전송되어 `$search` 속성이 업데이트되고, 페이지에 필터링된 사용자 목록이 표시됩니다.
 
-However, if the visitor refreshes the page, the search value and results will be lost.
+하지만 방문자가 페이지를 새로고침하면 검색 값과 결과가 사라집니다.
 
-To preserve the search value across page loads so that a visitor can refresh the page or share the URL, we can store the search value in the URL's query string by adding the `#[Url]` attribute above the `$search` property like so:
+방문자가 페이지를 새로고침하거나 URL을 공유해도 검색 값을 유지하려면, `$search` 속성 위에 `#[Url]` 속성을 추가하여 검색 값을 URL의 쿼리 문자열에 저장할 수 있습니다:
 
 ```php
 <?php
@@ -67,19 +67,19 @@ class ShowUsers extends Component
 }
 ```
 
-Now, if a user types "bob" into the search field, the URL bar in the browser will show:
+이제 사용자가 검색 필드에 "bob"을 입력하면, 브라우저의 URL 표시줄에 다음과 같이 나타납니다:
 
 ```
 https://example.com/users?search=bob
 ```
 
-If they now load this URL from a new browser window, "bob" will be filled in the search field, and the user results will be filtered accordingly.
+이제 이 URL을 새로운 브라우저 창에서 불러오면, 검색 필드에 "bob"이 자동으로 입력되고, 사용자 결과도 이에 맞게 필터링됩니다.
 
-## Initializing properties from the URL
+## URL에서 속성 초기화하기 {#initializing-properties-from-the-url}
 
-As you saw in the previous example, when a property uses `#[Url]`, not only does it store its updated value in the query string of the URL, it also references any existing query string values on page load.
+이전 예제에서 본 것처럼, 속성에 `#[Url]`을 사용하면 해당 속성의 값이 변경될 때마다 URL의 쿼리 문자열에 저장될 뿐만 아니라, 페이지가 로드될 때 기존 쿼리 문자열 값도 참조합니다.
 
-For example, if a user visits the URL `https://example.com/users?search=bob`, Livewire will set the initial value of `$search` to "bob".
+예를 들어, 사용자가 `https://example.com/users?search=bob` URL에 방문하면 Livewire는 `$search`의 초기 값을 "bob"으로 설정합니다.
 
 ```php
 use Livewire\Attributes\Url;
@@ -88,17 +88,17 @@ use Livewire\Component;
 class ShowUsers extends Component
 {
     #[Url]
-    public $search = ''; // Will be set to "bob"...
+    public $search = ''; // "bob"으로 설정됩니다...
 
     // ...
 }
 ```
 
-### Nullable properties
+### Nullable properties {#nullable-properties}
 
-By default, if a page is loaded with an empty query string entry like `?search=`, Livewire will treat that value as an empty string. In many cases, this is expected, however there are times when you want `?search=` to be treated as `null`.
+기본적으로, 페이지가 `?search=`와 같이 비어 있는 쿼리 문자열 항목으로 로드되면 Livewire는 해당 값을 빈 문자열로 처리합니다. 대부분의 경우 이는 예상된 동작이지만, 때로는 `?search=`가 `null`로 처리되길 원할 때도 있습니다.
 
-In these cases, you can use a nullable typehint like so:
+이런 경우에는 다음과 같이 nullable 타입힌트를 사용할 수 있습니다:
 
 ```php
 use Livewire\Attributes\Url;
@@ -113,15 +113,15 @@ class ShowUsers extends Component
 }
 ```
 
-Because `?` is present in the above typehint, Livewire will see `?search=` and set `$search` to `null` instead of an empty string.
+위 타입힌트에 `?`가 있기 때문에, Livewire는 `?search=`를 보고 `$search`를 빈 문자열이 아닌 `null`로 설정합니다.
 
-This works the other way around as well, if you set `$this->search = null` in your application, it will be represented in the query string as `?search=`.
+반대로, 애플리케이션에서 `$this->search = null`로 설정하면 쿼리 문자열에서 `?search=`로 표현됩니다.
 
-## Using an alias
+## 별칭 사용하기 {#using-an-alias}
 
-Livewire gives you full control over what name displays in the URL's query string. For example, you may have a `$search` property but want to either obfuscate the actual property name or shorten it to `q`.
+Livewire는 URL의 쿼리 문자열에 표시되는 이름을 완전히 제어할 수 있도록 해줍니다. 예를 들어, `$search` 속성이 있지만 실제 속성 이름을 숨기거나 `q`로 짧게 만들고 싶을 수 있습니다.
 
-You can specify a query string alias by providing the `as` parameter to the `#[Url]` attribute:
+`#[Url]` 속성에 `as` 파라미터를 제공하여 쿼리 문자열 별칭을 지정할 수 있습니다:
 
 ```php
 use Livewire\Attributes\Url;
@@ -136,13 +136,13 @@ class ShowUsers extends Component
 }
 ```
 
-Now, when a user types "bob" into the search field, the URL will show: `https://example.com/users?q=bob` instead of `?search=bob`.
+이제 사용자가 검색 필드에 "bob"을 입력하면, URL은 `?search=bob` 대신 `https://example.com/users?q=bob`로 표시됩니다.
 
-## Excluding certain values
+## 특정 값 제외하기 {#excluding-certain-values}
 
-By default, Livewire will only put an entry in the query string when it's value has changed from what it was at initialization. Most of the time, this is the desired behavior, however, there are certain scenarios where you may want more control over which value Livewire excludes from the query string. In these cases you can use the `except` parameter.
+기본적으로 Livewire는 값이 초기화 시점에서 변경된 경우에만 쿼리 문자열에 항목을 추가합니다. 대부분의 경우 이러한 동작이 원하는 방식이지만, 어떤 상황에서는 Livewire가 쿼리 문자열에서 제외할 값을 더 세밀하게 제어하고 싶을 수 있습니다. 이런 경우에는 `except` 파라미터를 사용할 수 있습니다.
 
-For example, in the component below, the initial value of `$search` is modified in `mount()`. To ensure the browser will only ever exclude `search` from the query string if the `search` value is an empty string, the `except` parameter has been added to `#[Url]`:
+예를 들어, 아래 컴포넌트에서는 `$search`의 초기값이 `mount()`에서 변경됩니다. 브라우저가 오직 `search` 값이 빈 문자열일 때만 쿼리 문자열에서 `search`를 제외하도록 하려면, `#[Url]`에 `except` 파라미터를 추가하면 됩니다:
 
 ```php
 use Livewire\Attributes\Url;
@@ -161,13 +161,13 @@ class ShowUsers extends Component
 }
 ```
 
-Without `except` in the above example, Livewire would remove the `search` entry from the query string any time the value of `search` is equal to the initial value of `auth()->user()->username`. Instead, because `except: ''` has been used, Livewire will preserve all query string values except when `search` is an empty string.
+위 예시에서 `except`를 사용하지 않으면, Livewire는 `search` 값이 초기값인 `auth()->user()->username`과 같을 때마다 쿼리 문자열에서 `search` 항목을 제거합니다. 반면, `except: ''`를 사용하면, Livewire는 `search`가 빈 문자열일 때만 쿼리 문자열에서 값을 제외하고, 그 외의 모든 쿼리 문자열 값은 유지합니다.
 
-## Display on page load
+## 페이지 로드 시 표시 {#display-on-page-load}
 
-By default, Livewire will only display a value in the query string after the value has been changed on the page. For example, if the default value for `$search` is an empty string: `""`, when the actual search input is empty, no value will appear in the URL.
+기본적으로 Livewire는 값이 페이지에서 변경된 후에만 쿼리 문자열에 값을 표시합니다. 예를 들어, `$search`의 기본값이 빈 문자열 `""`인 경우, 실제 검색 입력이 비어 있으면 URL에 아무 값도 나타나지 않습니다.
 
-If you want the `?search` entry to always be included in the query string, even when the value is empty, you can provide the `keep` parameter to the `#[Url]` attribute:
+값이 비어 있어도 항상 `?search` 항목이 쿼리 문자열에 포함되도록 하려면, `#[Url]` 속성에 `keep` 파라미터를 추가할 수 있습니다:
 
 ```php
 use Livewire\Attributes\Url;
@@ -182,15 +182,15 @@ class ShowUsers extends Component
 }
 ```
 
-Now, when the page loads, the URL will be changed to the following: `https://example.com/users?search=`
+이제 페이지가 로드될 때, URL은 다음과 같이 변경됩니다: `https://example.com/users?search=`
 
-## Storing in history
+## 히스토리에 저장하기 {#storing-in-history}
 
-By default, Livewire uses [`history.replaceState()`](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState) to modify the URL instead of [`history.pushState()`](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState). This means that when Livewire updates the query string, it modifies the current entry in the browser's history state instead of adding a new one.
+기본적으로 Livewire는 URL을 수정할 때 [`history.pushState()`](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) 대신 [`history.replaceState()`](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState)를 사용합니다. 즉, Livewire가 쿼리 문자열을 업데이트할 때 브라우저의 히스토리 상태에서 현재 항목을 수정하며, 새로운 항목을 추가하지 않습니다.
 
-Because Livewire "replaces" the current history, pressing the "back" button in the browser will go to the previous page rather than the previous `?search=` value.
+Livewire가 현재 히스토리를 "대체"하기 때문에, 브라우저의 "뒤로 가기" 버튼을 누르면 이전 `?search=` 값이 아니라 이전 페이지로 이동하게 됩니다.
 
-To force Livewire to use `history.pushState` when updating the URL, you can provide the `history` parameter to the `#[Url]` attribute:
+URL을 업데이트할 때 Livewire가 `history.pushState`를 사용하도록 강제하려면, `#[Url]` 속성에 `history` 파라미터를 제공하면 됩니다:
 
 ```php
 use Livewire\Attributes\Url;
@@ -205,11 +205,11 @@ class ShowUsers extends Component
 }
 ```
 
-In the example above, when a user changes the search value from "bob" to "frank" and then clicks the browser's back button, the search value (and the URL) will be set back to "bob" instead of navigating to the previously visited page.
+위 예시에서 사용자가 검색 값을 "bob"에서 "frank"로 변경한 후 브라우저의 뒤로 가기 버튼을 클릭하면, 검색 값(및 URL)이 이전에 방문한 페이지로 이동하는 대신 "bob"으로 다시 설정됩니다.
 
-## Using the queryString method
+## queryString 메서드 사용하기 {#using-the-querystring-method}
 
-The query string can also be defined as a method on the component. This can be useful if some properties have dynamic options.
+쿼리 문자열은 컴포넌트의 메서드로도 정의할 수 있습니다. 일부 속성에 동적 옵션이 필요한 경우에 유용할 수 있습니다.
 
 ```php
 use Livewire\Component;
@@ -229,9 +229,9 @@ class ShowUsers extends Component
 }
 ```
 
-## Trait hooks
+## 트레이트 훅 {#trait-hooks}
 
-Livewire offers [hooks](/docs/lifecycle-hooks) for query strings as well.
+Livewire는 쿼리 문자열에 대해서도 [훅](/docs/lifecycle-hooks)을 제공합니다.
 
 ```php
 trait WithSorting
