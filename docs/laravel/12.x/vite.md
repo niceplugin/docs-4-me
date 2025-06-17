@@ -187,11 +187,11 @@ Windows Subsystem for Linux 2 (WSL2)에서 [Laravel Sail](/laravel/12.x/sail)를
 
 export default defineConfig({
     // ...
-    server: { // [tl! add:start]
+    server: { // [!code ++:5]
         hmr: {
             host: 'localhost',
         },
-    }, // [tl! add:end]
+    },
 });
 ```
 
@@ -706,12 +706,12 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    protected function setUp(): void// [tl! add:start]
+    protected function setUp(): void// [!code ++:6]
     {
         parent::setUp();
 
         $this->withoutVite();
-    }// [tl! add:end]
+    }
 }
 ```
 
@@ -824,14 +824,14 @@ npm install --save-dev vite-plugin-manifest-sri
 ```js
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import manifestSRI from 'vite-plugin-manifest-sri';// [tl! add]
+import manifestSRI from 'vite-plugin-manifest-sri';// [!code ++]
 
 export default defineConfig({
     plugins: [
         laravel({
             // ...
         }),
-        manifestSRI(),// [tl! add]
+        manifestSRI(),// [!code ++]
     ],
 });
 ```
@@ -986,8 +986,8 @@ export default defineConfig({
     server: {  // [!code ++]
         cors: {  // [!code ++]
             origin: [ // [!code ++]
-                // 지원: SCHEME://DOMAIN.laravel[:PORT] [tl! add]
-                /^https?:\/\/.*\.laravel(:\d+)?$/, //[tl! add]
+                // 지원: SCHEME://DOMAIN.laravel[:PORT] [!code ++]
+                /^https?:\/\/.*\.laravel(:\d+)?$/, //[!code ++]
             ], // [!code ++]
         }, // [!code ++]
     }, // [!code ++]
@@ -1028,6 +1028,6 @@ export default defineConfig({
 이제 Vite가 에셋을 제공하는 동안, Vite 개발 서버를 가리키는 URL이 출력됩니다:
 
 ```html
-- <img src="/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520"><!-- [tl! remove] -->
-+ <img src="http://[::1]:5173/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520"><!-- [tl! add] -->
+- <img src="/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520"><!-- [!code --] -->
++ <img src="http://[::1]:5173/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520"><!-- [!code ++] -->
 ```
