@@ -1,24 +1,24 @@
-Livewire allows you to _teleport_ part of your template to another part of the DOM on the page entirely.
+# 텔레포트
+Livewire는 템플릿의 일부를 페이지의 DOM 내 완전히 다른 위치로 _텔레포트_ 할 수 있게 해줍니다.
 
-This is useful for things like nested dialogs. When nesting one dialog inside of another, the z-index of the parent modal is applied to the nested modal. This can cause problems with styling backdrops and overlays. To avoid this problem, you can use Livewire's `@teleport` directive to render each nested modal as siblings in the rendered DOM.
+이 기능은 중첩된 다이얼로그와 같은 상황에서 유용합니다. 하나의 다이얼로그 안에 또 다른 다이얼로그를 중첩할 때, 부모 모달의 z-index가 중첩된 모달에도 적용됩니다. 이로 인해 배경 및 오버레이 스타일링에 문제가 발생할 수 있습니다. 이러한 문제를 피하기 위해 Livewire의 `@teleport` 지시어를 사용하여 각 중첩 모달을 렌더링된 DOM에서 형제 요소로 렌더링할 수 있습니다.
 
-This functionality is powered by [Alpine's `x-teleport` directive](https://alpinejs.dev/directives/teleport).
+이 기능은 [Alpine의 `x-teleport` 지시어](https://alpinejs.dev/directives/teleport)로 구현됩니다.
 
-## Basic usage
+## 기본 사용법 {#basic-usage}
 
-To _teleport_ a portion of your template to another part of the DOM, you can wrap it in Livewire's `@teleport` directive.
+템플릿의 일부를 DOM의 다른 위치로 _텔레포트_ 하려면, Livewire의 `@teleport` 지시문으로 감싸면 됩니다.
 
-Below is an example of using `@teleport` to render a modal dialog's contents at the end of the `<body>` element on the page:
-
+아래는 `@teleport`를 사용하여 모달 다이얼로그의 내용을 페이지의 `<body>` 요소 끝에 렌더링하는 예시입니다:
 ```blade
 <div>
     <!-- Modal -->
     <div x-data="{ open: false }">
-        <button @click="open = ! open">Toggle Modal</button>
+        <button @click="open = ! open">모달 토글</button>
 
         @teleport('body')
             <div x-show="open">
-                Modal contents...
+                모달 내용...
             </div>
         @endteleport
     </div>
@@ -26,24 +26,24 @@ Below is an example of using `@teleport` to render a modal dialog's contents at 
 ```
 
 > [!info]
-> The `@teleport` selector can be any string you would normally pass into something like `document.querySelector()`.
+> `@teleport` 선택자는 일반적으로 `document.querySelector()`에 전달할 수 있는 아무 문자열이나 사용할 수 있습니다.
 >
-> You can learn more about `document.querySelector()` by consulting its [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector).
+> `document.querySelector()`에 대해 더 알고 싶다면 [MDN 문서](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)를 참고하세요.
 
-Now, when the above Livewire template is rendered on the page, the _contents_ portion of the modal will be rendered at the end of `<body>`:
+이제 위의 Livewire 템플릿이 페이지에 렌더링되면, 모달의 _내용_ 부분이 `<body>`의 끝에 렌더링됩니다:
 
 ```html
 <body>
     <!-- ... -->
 
     <div x-show="open">
-        Modal contents...
+        모달 내용...
     </div>
 </body>
 ```
 
-> [!warning] You must teleport outside the component
-> Livewire only supports teleporting HTML outside your components. For example, teleporting a modal to the `<body>` tag is fine, but teleporting it to another element within your component will not work.
+> [!warning] 반드시 컴포넌트 외부로 텔레포트해야 합니다
+> Livewire는 HTML을 컴포넌트 외부로만 텔레포트하는 것을 지원합니다. 예를 들어, 모달을 `<body>` 태그로 텔레포트하는 것은 괜찮지만, 컴포넌트 내부의 다른 요소로 텔레포트하는 것은 동작하지 않습니다.
 
-> [!warning] Teleporting only works with a single root element
-> Make sure you only include a single root element inside your `@teleport` statement.
+> [!warning] 텔레포트는 단일 루트 요소만 지원합니다
+> `@teleport` 구문 안에는 반드시 하나의 루트 요소만 포함해야 합니다.

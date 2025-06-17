@@ -1,13 +1,13 @@
+# 세션 속성
+Livewire는 `#[Session]` 속성을 사용하여 페이지 새로고침/변경 시 속성 값을 쉽게 유지할 수 있도록 해줍니다.
 
-Livewire makes it easy to persist property values across page refreshes/changes using the `#[Session]` attribute.
+컴포넌트의 속성에 `#[Session]`을 추가하면, 해당 속성의 값이 변경될 때마다 Livewire가 그 값을 세션에 저장합니다. 이렇게 하면 페이지를 새로고침해도 Livewire가 세션에서 최신 값을 가져와 컴포넌트에 사용할 수 있습니다.
 
-By adding `#[Session]` to a property in your component, Livewire will store that property's value in the session every time it changes. This way, when a page is refreshed, Livewire will fetch the latest value from the session and use it in your component.
+`#[Session]` 속성은 [`#[Url]`](/docs/url) 속성과 유사합니다. 두 속성 모두 비슷한 상황에서 유용하게 사용할 수 있습니다. 주요 차이점은 `#[Session]`은 URL의 쿼리 문자열을 수정하지 않고 값을 유지한다는 점입니다. 이는 상황에 따라 바람직할 수도, 아닐 수도 있습니다.
 
-The `#[Session]` attribute is analogous to the [`#[Url]`](/docs/url) attribute. They are both useful in similar scenarios. The primary difference being `#[Session]` persists values without modifying the URL's query string, which is sometimes desired; sometimes not.
+## 기본 사용법 {#basic-usage}
 
-## Basic usage
-
-Here's a `ShowPosts` component that allows users to filter visible posts by a string stored in a `$search` property:
+아래는 사용자가 `$search` 속성에 저장된 문자열로 게시글을 필터링할 수 있는 `ShowPosts` 컴포넌트입니다:
 
 ```php
 <?php
@@ -37,18 +37,18 @@ class ShowPosts extends Component
 }
 ```
 
-Because the `#[Session]` attribute has been added to the `$search` property, after a user enters a search value, they can refresh the page and the search value will be persisted. Every time `$search` is updated, its new value will be stored in the user's session and used across page loads.
+`$search` 속성에 `#[Session]` 속성이 추가되어 있기 때문에, 사용자가 검색 값을 입력한 후 페이지를 새로고침해도 검색 값이 유지됩니다. `$search`가 업데이트될 때마다 새로운 값이 사용자의 세션에 저장되며, 페이지를 다시 불러와도 해당 값이 사용됩니다.
 
-> [!warning] Performance implications
-> Because Laravel sessions are loaded into memory during every request, you can slow down the performance of your entire application for a given user by storing too much in a user's session.
+> [!warning] 성능에 미치는 영향
+> Laravel 세션은 모든 요청마다 메모리에 로드되기 때문에, 사용자의 세션에 너무 많은 데이터를 저장하면 해당 사용자의 전체 애플리케이션 성능이 저하될 수 있습니다.
 
-## Setting a custom key
+## 커스텀 키 설정하기 {#setting-a-custom-key}
 
-When using `[#Session]`, Livewire will store the property value in the session using a dynamically generated key that consists of the component name combined with the property name.
+`[#Session]`을 사용할 때, Livewire는 컴포넌트 이름과 속성 이름을 조합하여 동적으로 생성된 키를 사용해 세션에 속성 값을 저장합니다.
 
-This ensures that properties across component instances will use the same session value. It also ensures properties of the same name from different components won't conflict.
+이렇게 하면 컴포넌트 인스턴스 간에 동일한 속성은 같은 세션 값을 사용하게 되며, 서로 다른 컴포넌트의 동일한 이름의 속성끼리 충돌하지 않게 됩니다.
 
-If you want full control over what session key Livewire uses for a given property, you can pass the `key:` parameter:
+특정 속성에 대해 Livewire가 사용할 세션 키를 완전히 제어하고 싶다면, `key:` 파라미터를 전달할 수 있습니다:
 
 ```php
 <?php
@@ -65,9 +65,9 @@ class ShowPosts extends Component
 }
 ```
 
-When Livewire stores and retrieves the value of the `$search` property, it will use the given key: "search".
+Livewire가 `$search` 속성의 값을 저장하거나 불러올 때, 지정한 키인 "search"를 사용하게 됩니다.
 
-Additionally, if you want to generate the key dynamically from other properties in your component, you can do so using the following curly brace notation:
+또한, 컴포넌트 내의 다른 속성 값으로부터 동적으로 키를 생성하고 싶다면, 아래와 같이 중괄호 표기법을 사용할 수 있습니다:
 
 ```php
 <?php
@@ -87,4 +87,4 @@ class ShowPosts extends Component
 }
 ```
 
-In the above example, if the `$author` model's id is "4", the session key will become: `search-4`
+위 예시에서 `$author` 모델의 id가 "4"라면, 세션 키는 `search-4`가 됩니다.

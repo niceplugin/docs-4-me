@@ -1,32 +1,32 @@
-In real-time applications, it can be helpful to provide a visual indication that the user's device is no longer connected to the internet.
+# 오프라인 상태
+실시간 애플리케이션에서는 사용자의 기기가 더 이상 인터넷에 연결되어 있지 않다는 시각적 표시를 제공하는 것이 도움이 될 수 있습니다.
 
-Livewire provides the `wire:offline` directive for such cases.
+이러한 경우를 위해 Livewire는 `wire:offline` 지시어를 제공합니다.
 
-By adding `wire:offline` to an element inside a Livewire component, it will be hidden by default and become visible when the user loses connection:
-
+Livewire 컴포넌트 내부의 요소에 `wire:offline`을 추가하면, 해당 요소는 기본적으로 숨겨지며 사용자가 연결을 잃었을 때 표시됩니다:
 ```blade
 <div wire:offline>
-    This device is currently offline.
+    이 기기는 현재 오프라인 상태입니다.
 </div>
 ```
 
-## Toggling classes
+## 클래스 토글링 {#toggling-classes}
 
-Adding the `class` modifier allows you to add a class to an element when the user loses their connection. The class will be removed again, once the user is back online:
+`class` 수정자를 추가하면 사용자가 연결을 잃었을 때 요소에 클래스를 추가할 수 있습니다. 사용자가 다시 온라인이 되면 해당 클래스는 다시 제거됩니다:
 
 ```blade
 <div wire:offline.class="bg-red-300">
 ```
 
-Or, using the `.remove` modifier, you can remove a class when a user loses their connection. In this example, the `bg-green-300` class will be removed from the `<div>` while the user has lost their connection:
+또는 `.remove` 수정자를 사용하여 사용자가 연결을 잃었을 때 클래스를 제거할 수 있습니다. 이 예시에서는 사용자가 연결을 잃었을 때 `<div>`에서 `bg-green-300` 클래스가 제거됩니다:
 
 ```blade
 <div class="bg-green-300" wire:offline.class.remove="bg-green-300">
 ```
 
-## Toggling attributes
+## 속성 토글링 {#toggling-attributes}
 
-The `.attr` modifier allows you to add an attribute to an element when the user loses their connection. In this example, the "Save" button will be disabled while the user has lost their connection:
+`.attr` 수정자를 사용하면 사용자가 연결을 잃었을 때 요소에 속성을 추가할 수 있습니다. 이 예시에서는 사용자가 연결을 잃었을 때 "저장" 버튼이 비활성화됩니다:
 
 ```blade
 <button wire:offline.attr="disabled">Save</button>

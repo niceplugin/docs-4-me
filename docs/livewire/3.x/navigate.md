@@ -1,13 +1,13 @@
+# 네비게이트
+많은 현대 웹 애플리케이션은 "싱글 페이지 애플리케이션(SPA)"으로 구축됩니다. 이러한 애플리케이션에서는 각 페이지가 렌더링될 때마다 전체 브라우저 페이지를 새로고침할 필요가 없어, 매 요청마다 JavaScript와 CSS 에셋을 다시 다운로드하는 오버헤드를 피할 수 있습니다.
 
-Many modern web applications are built as "single page applications" (SPAs). In these applications, each page rendered by the application no longer requires a full browser page reload, avoiding the overhead of re-downloading JavaScript and CSS assets on every request.
+*싱글 페이지 애플리케이션*의 대안은 *멀티 페이지 애플리케이션*입니다. 이러한 애플리케이션에서는 사용자가 링크를 클릭할 때마다 완전히 새로운 HTML 페이지가 브라우저에서 요청되고 렌더링됩니다.
 
-The alternative to a *single page application* is a *multi-page application*. In these applications, every time a user clicks a link, an entirely new HTML page is requested and rendered in the browser.
+대부분의 PHP 애플리케이션은 전통적으로 멀티 페이지 애플리케이션이었지만, Livewire는 애플리케이션의 링크에 간단한 속성인 `wire:navigate`를 추가함으로써 싱글 페이지 애플리케이션 경험을 제공합니다.
 
-While most PHP applications have traditionally been multi-page applications, Livewire offers a single page application experience via a simple attribute you can add to links in your application: `wire:navigate`.
+## 기본 사용법 {#basic-usage}
 
-## Basic usage
-
-Let's explore an example of using `wire:navigate`. Below is a typical Laravel routes file (`routes/web.php`) with three Livewire components defined as routes:
+`wire:navigate` 사용 예제를 살펴보겠습니다. 아래는 세 개의 Livewire 컴포넌트가 라우트로 정의된 일반적인 Laravel 라우트 파일(`routes/web.php`)입니다:
 
 ```php
 use App\Livewire\Dashboard;
@@ -21,7 +21,7 @@ Route::get('/posts', ShowPosts::class);
 Route::get('/users', ShowUsers::class);
 ```
 
-By adding `wire:navigate` to each link in a navigation menu on each page, Livewire will prevent the standard handling of the link click and replace it with its own, faster version:
+각 페이지의 내비게이션 메뉴에 있는 각 링크에 `wire:navigate`를 추가하면, Livewire가 링크 클릭의 기본 동작을 방지하고 자체적으로 더 빠른 방식으로 처리합니다:
 
 ```blade
 <nav>
@@ -31,56 +31,56 @@ By adding `wire:navigate` to each link in a navigation menu on each page, Livewi
 </nav>
 ```
 
-Below is a breakdown of what happens when a `wire:navigate` link is clicked:
+아래는 `wire:navigate` 링크를 클릭했을 때 일어나는 일의 단계별 설명입니다:
 
-* User clicks a link
-* Livewire prevents the browser from visiting the new page
-* Instead, Livewire requests the page in the background and shows a loading bar at the top of the page
-* When the HTML for the new page has been received, Livewire replaces the current page's URL, `<title>` tag and `<body>` contents with the elements from the new page
+* 사용자가 링크를 클릭합니다
+* Livewire가 브라우저가 새 페이지로 이동하는 것을 방지합니다
+* 대신, Livewire가 백그라운드에서 페이지를 요청하고 페이지 상단에 로딩 바를 표시합니다
+* 새 페이지의 HTML을 받으면, Livewire가 현재 페이지의 URL, `<title>` 태그, `<body>` 내용을 새 페이지의 요소로 교체합니다
 
-This technique results in much faster page load times — often twice as fast — and makes the application "feel" like a JavaScript powered single page application.
+이 기법을 사용하면 페이지 로드 속도가 훨씬 빨라지며(보통 두 배 이상), 애플리케이션이 자바스크립트 기반의 싱글 페이지 애플리케이션처럼 "느껴집니다".
 
-## Redirects
+## 리디렉션 {#redirects}
 
-When one of your Livewire components redirects users to another URL within your application, you can also instruct Livewire to use its `wire:navigate` functionality to load the new page. To accomplish this, provide the `navigate` argument to the `redirect()` method:
+Livewire 컴포넌트 중 하나가 사용자를 애플리케이션 내의 다른 URL로 리디렉션할 때, Livewire의 `wire:navigate` 기능을 사용하여 새 페이지를 로드하도록 지시할 수도 있습니다. 이를 위해 `redirect()` 메서드에 `navigate` 인자를 전달하면 됩니다:
 
 ```php
 return $this->redirect('/posts', navigate: true);
 ```
 
-Now, instead of a full page request being used to redirect the user to the new URL, Livewire will replace the contents and URL of the current page with the new one.
+이제 사용자를 새 URL로 리디렉션할 때 전체 페이지 요청이 발생하는 대신, Livewire가 현재 페이지의 내용과 URL을 새 페이지로 교체합니다.
 
-## Prefetching links
+## 링크 미리 가져오기 {#prefetching-links}
 
-By default, Livewire includes a gentle strategy to _prefetch_ pages before a user clicks on a link:
+기본적으로 Livewire는 사용자가 링크를 클릭하기 전에 페이지를 _미리 가져오는_ 부드러운 전략을 포함하고 있습니다:
 
-* A user presses down on their mouse button
-* Livewire starts requesting the page
-* They lift up on the mouse button to complete the _click_
-* Livewire finishes the request and navigates to the new page
+* 사용자가 마우스 버튼을 누릅니다
+* Livewire가 페이지 요청을 시작합니다
+* 사용자가 마우스 버튼을 떼어 _클릭_을 완료합니다
+* Livewire가 요청을 마치고 새 페이지로 이동합니다
 
-Surprisingly, the time between a user pressing down and lifting up on the mouse button is often enough time to load half or even an entire page from the server.
+놀랍게도, 사용자가 마우스 버튼을 누르고 떼는 사이의 시간만으로도 서버에서 페이지의 절반 또는 전체를 불러오는 데 충분한 경우가 많습니다.
 
-If you want an even more aggressive approach to prefetching, you may use the `.hover` modifier on a link:
+더 적극적인 미리 가져오기를 원한다면, 링크에 `.hover` 수식어를 사용할 수 있습니다:
 
 ```blade
 <a href="/posts" wire:navigate.hover>Posts</a>
 ```
 
-The `.hover` modifier will instruct Livewire to prefetch the page after a user has hovered over the link for `60` milliseconds.
+`.hover` 수식어는 사용자가 링크 위에 `60` 밀리초 동안 마우스를 올려두면 Livewire가 해당 페이지를 미리 가져오도록 지시합니다.
 
-> [!warning] Prefetching on hover increases server usage
-> Because not all users will click a link they hover over, adding `.hover` will request pages that may not be needed, though Livewire attempts to mitigate some of this overhead by waiting `60` milliseconds before prefetching the page.
+> [!warning] hover 시 미리 가져오기는 서버 사용량을 증가시킵니다
+> 모든 사용자가 마우스를 올린 링크를 클릭하는 것은 아니기 때문에, `.hover`를 추가하면 필요하지 않은 페이지도 요청하게 됩니다. Livewire는 페이지를 미리 가져오기 전에 `60` 밀리초를 대기하여 이러한 오버헤드를 일부 완화하려고 시도합니다.
 
-## Persisting elements across page visits
+## 페이지 방문 간 요소 유지하기 {#persisting-elements-across-page-visits}
 
-Sometimes, there are parts of a user interface that you need to persist between page loads, such as audio or video players. For example, in a podcasting application, a user may want to keep listening to an episode as they browse other pages.
+때때로 오디오나 비디오 플레이어와 같이 페이지가 새로고침되어도 사용자 인터페이스의 일부를 유지해야 할 때가 있습니다. 예를 들어, 팟캐스트 애플리케이션에서 사용자가 다른 페이지를 탐색하면서도 에피소드를 계속 듣고 싶어할 수 있습니다.
 
-You can achieve this in Livewire with the `@persist` directive.
+Livewire에서는 `@persist` 디렉티브를 사용하여 이를 구현할 수 있습니다.
 
-By wrapping an element with `@persist` and providing it with a name, when a new page is requested using `wire:navigate`, Livewire will look for an element on the new page that has a matching `@persist`. Instead of replacing the element like normal, Livewire will use the existing DOM element from the previous page in the new page, preserving any state within the element.
+요소를 `@persist`로 감싸고 이름을 지정하면, `wire:navigate`를 사용해 새 페이지를 요청할 때 Livewire는 새 페이지에서 동일한 `@persist` 이름을 가진 요소를 찾습니다. 일반적으로 요소를 교체하는 대신, Livewire는 이전 페이지의 기존 DOM 요소를 새 페이지에서 재사용하여 해당 요소 내의 상태를 보존합니다.
 
-Here is an example of an `<audio>` player element being persisted across pages using `@persist`:
+다음은 `@persist`를 사용하여 여러 페이지에서 `<audio>` 플레이어 요소를 유지하는 예시입니다:
 
 ```blade
 @persist('player')
@@ -88,9 +88,9 @@ Here is an example of an `<audio>` player element being persisted across pages u
 @endpersist
 ```
 
-If the above HTML appears on both pages — the current page, and the next one — the original element will be re-used on the new page. In the case of an audio player, the audio playback won't be interrupted when navigating from one page to another.
+위의 HTML이 현재 페이지와 다음 페이지 모두에 나타난다면, 원래의 요소가 새 페이지에서 재사용됩니다. 오디오 플레이어의 경우, 한 페이지에서 다른 페이지로 이동해도 오디오 재생이 중단되지 않습니다.
 
-Please be aware that the persisted element must be placed outside your Livewire components. A common practice is to position the persisted element in your main layout, such as `resources/views/components/layouts/app.blade.php`.
+유지되는 요소는 반드시 Livewire 컴포넌트 외부에 배치해야 한다는 점에 유의하세요. 일반적으로 유지되는 요소는 메인 레이아웃(예: `resources/views/components/layouts/app.blade.php`)에 위치시키는 것이 좋습니다.
 
 ```html
 <!-- resources/views/components/layouts/app.blade.php -->
@@ -115,9 +115,9 @@ Please be aware that the persisted element must be placed outside your Livewire 
 </html>
 ```
 
-### Highlighting active links
+### 활성 링크 하이라이트하기 {#highlighting-active-links}
 
-You might be used to highlighting the currently active page link in a navbar using server-side Blade like so:
+서버 사이드 Blade를 사용하여 네비게이션 바에서 현재 활성화된 페이지 링크를 하이라이트하는 데 익숙할 수 있습니다:
 
 ```blade
 <nav>
@@ -127,9 +127,9 @@ You might be used to highlighting the currently active page link in a navbar usi
 </nav>
 ```
 
-However, this will not work inside persisted elements as they are re-used between page loads. Instead, you should use Livewire's `wire:current` directive to highlight the currently active link.
+하지만, 이 방식은 페이지가 로드될 때마다 재사용되는 persisted 요소 안에서는 동작하지 않습니다. 대신, 현재 활성화된 링크를 하이라이트하려면 Livewire의 `wire:current` 디렉티브를 사용해야 합니다.
 
-Simply pass any CSS classes you want to apply to the currently active link to `wire:current`:
+`wire:current`에 현재 활성화된 링크에 적용하고 싶은 CSS 클래스를 전달하기만 하면 됩니다:
 
 ```blade
 <nav>
@@ -139,15 +139,15 @@ Simply pass any CSS classes you want to apply to the currently active link to `w
 </nav>
 ```
 
-Now, when the `/posts` page is visited, the "Posts" link will have a stronger font treatment than the other links.
+이제 `/posts` 페이지를 방문하면, "Posts" 링크가 다른 링크보다 더 강한 폰트 스타일로 표시됩니다.
 
-Read more in the [`wire:current` documentation](/docs/wire-current).
+자세한 내용은 [`wire:current` 문서](/docs/wire-current)에서 확인하세요.
 
-### Preserving scroll position
+### 스크롤 위치 유지 {#preserving-scroll-position}
 
-By default, Livewire will preserve the scroll position of a page when navigating back and forth between pages. However, sometimes you may want to preserve the scroll position of an individual element you are persisting between page loads.
+기본적으로 Livewire는 페이지 간 앞뒤로 이동할 때 페이지의 스크롤 위치를 유지합니다. 그러나 때로는 페이지 로드 간에 유지되는 개별 요소의 스크롤 위치를 보존하고 싶을 수 있습니다.
 
-To do this, you must add `wire:scroll` to the element containing a scrollbar like so:
+이렇게 하려면, 스크롤바가 있는 요소에 `wire:scroll`을 다음과 같이 추가해야 합니다:
 
 ```html
 @persist('scrollbar')
@@ -157,69 +157,69 @@ To do this, you must add `wire:scroll` to the element containing a scrollbar lik
 @endpersist
 ```
 
-## JavaScript hooks
+## 자바스크립트 훅 {#javascript-hooks}
 
-Each page navigation triggers three lifecycle hooks:
+각 페이지 네비게이션은 세 가지 라이프사이클 훅을 트리거합니다:
 
 * `livewire:navigate`
 * `livewire:navigating`
 * `livewire:navigated`
 
-It's important to note that these three hooks events are dispatched on navigations of all types. This includes manual navigation using `Livewire.navigate()`, redirecting with navigation enabled, and back and forward button presses in the browser.
+이 세 가지 훅 이벤트는 모든 종류의 네비게이션에서 디스패치된다는 점이 중요합니다. 여기에는 `Livewire.navigate()`를 사용한 수동 네비게이션, 네비게이션이 활성화된 리디렉션, 브라우저의 뒤로/앞으로 버튼 클릭 등이 포함됩니다.
 
-Here's an example of registering listeners for each of these events:
+다음은 각 이벤트에 대한 리스너를 등록하는 예시입니다:
 
 ```js
 document.addEventListener('livewire:navigate', (event) => {
-    // Triggers when a navigation is triggered.
+    // 네비게이션이 트리거될 때 실행됩니다.
 
-    // Can be "cancelled" (prevent the navigate from actually being performed):
+    // "취소"할 수 있습니다(실제로 네비게이션이 수행되지 않도록 방지):
     event.preventDefault()
 
-    // Contains helpful context about the navigation trigger:
+    // 네비게이션 트리거에 대한 유용한 컨텍스트가 포함되어 있습니다:
     let context = event.detail
 
-    // A URL object of the intended destination of the navigation...
+    // 네비게이션의 목적지에 대한 URL 객체...
     context.url
 
-    // A boolean [true/false] indicating whether or not this navigation
-    // was triggered by a back/forward (history state) navigation...
+    // 이 네비게이션이 뒤로/앞으로(히스토리 상태) 네비게이션에 의해
+    // 트리거되었는지 여부를 나타내는 불리언 값 [true/false]...
     context.history
 
-    // A boolean [true/false] indicating whether or not there is
-    // cached version of this page to be used instead of
-    // fetching a new one via a network round-trip...
+    // 이 페이지의 캐시된 버전을
+    // 네트워크 왕복 없이 사용할 수 있는지
+    // 여부를 나타내는 불리언 값 [true/false]...
     context.cached
 })
 
 document.addEventListener('livewire:navigating', () => {
-    // Triggered when new HTML is about to swapped onto the page...
+    // 새로운 HTML이 페이지에 삽입되려고 할 때 발생합니다...
 
-    // This is a good place to mutate any HTML before the page
-    // is navigated away from...
+    // 여기는 페이지에서 다른 곳으로 이동하기 전에
+    // HTML을 변경하기에 좋은 곳입니다...
 })
 
 document.addEventListener('livewire:navigated', () => {
-    // Triggered as the final step of any page navigation...
+    // 모든 페이지 네비게이션의 마지막 단계에서 트리거됩니다...
 
-    // Also triggered on page-load instead of "DOMContentLoaded"...
+    // "DOMContentLoaded" 대신 페이지 로드 시에도 트리거됩니다...
 })
 ```
 
-> [!warning] Event listeners will persist across pages
+> [!warning] 이벤트 리스너는 페이지를 넘어 지속됩니다
 >
-> When you attach an event listener to the document it will not be removed when you navigate to a different page. This can lead to unexpected behaviour if you need code to run only after navigating to a specific page, or if you add the same event listener on every page. If you do not remove your event listener it may cause exceptions on other pages when it's looking for elements that do not exist, or you may end up with the event listener executing multiple times per navigation.
+> 문서에 이벤트 리스너를 추가하면 다른 페이지로 이동해도 제거되지 않습니다. 특정 페이지로 이동한 후에만 코드가 실행되어야 하거나, 모든 페이지에서 동일한 이벤트 리스너를 추가하는 경우 예기치 않은 동작이 발생할 수 있습니다. 이벤트 리스너를 제거하지 않으면 존재하지 않는 요소를 찾으려 할 때 다른 페이지에서 예외가 발생하거나, 네비게이션마다 이벤트 리스너가 여러 번 실행될 수 있습니다.
 >
-> An easy method to remove an event listener after it runs is to pass the option `{once: true}` as a third parameter to the `addEventListener` function.
+> 이벤트 리스너가 실행된 후 제거하는 쉬운 방법은 `addEventListener` 함수의 세 번째 인자로 `{once: true}` 옵션을 전달하는 것입니다.
 > ```js
 > document.addEventListener('livewire:navigated', () => {
 >     // ...
 > }, { once: true })
 > ```
 
-## Manually visiting a new page
+## 새 페이지로 수동 이동하기 {#manually-visiting-a-new-page}
 
-In addition to `wire:navigate`, you can manually call the `Livewire.navigate()` method to trigger a visit to a new page using JavaScript:
+`wire:navigate` 외에도, JavaScript를 사용하여 `Livewire.navigate()` 메서드를 직접 호출해 새 페이지로 이동할 수 있습니다:
 
 ```html
 <script>
@@ -229,13 +229,13 @@ In addition to `wire:navigate`, you can manually call the `Livewire.navigate()` 
 </script>
 ```
 
-## Using with analytics software
+## 분석 소프트웨어와 함께 사용하기 {#using-with-analytics-software}
 
-When navigating pages using `wire:navigate` in your app, any `<script>` tags in the `<head>` only evaluate when the page is initially loaded.
+앱에서 `wire:navigate`를 사용하여 페이지를 이동할 때, `<head>`에 있는 모든 `<script>` 태그는 페이지가 처음 로드될 때만 실행됩니다.
 
-This creates a problem for analytics software such as [Fathom Analytics](https://usefathom.com/). These tools rely on a `<script>` snippet being evaluated on every single page change, not just the first.
+이로 인해 [Fathom Analytics](https://usefathom.com/)와 같은 분석 소프트웨어에 문제가 발생할 수 있습니다. 이러한 도구들은 모든 페이지 변경 시마다 `<script>` 스니펫이 실행되기를 기대하지만, 최초 로드 시에만 실행됩니다.
 
-Tools like [Google Analytics](https://marketingplatform.google.com/about/analytics/) are smart enough to handle this automatically, however, when using Fathom Analytics, you must add `data-spa="auto"` to your script tag to ensure each page visit is tracked properly:
+[Google Analytics](https://marketingplatform.google.com/about/analytics/)와 같은 도구는 이를 자동으로 처리할 만큼 똑똑하지만, Fathom Analytics를 사용할 때는 각 페이지 방문이 제대로 추적되도록 스크립트 태그에 `data-spa="auto"`를 추가해야 합니다:
 
 ```blade
 <head>
@@ -248,21 +248,21 @@ Tools like [Google Analytics](https://marketingplatform.google.com/about/analyti
 </head>
 ```
 
-## Script evaluation
+## 스크립트 평가 {#script-evaluation}
 
-When navigating to a new page using `wire:navigate`, it _feels_ like the browser has changed pages; however, from the browser's perspective, you are technically still on the original page.
+`wire:navigate`를 사용하여 새 페이지로 이동할 때, 브라우저가 페이지를 변경한 것처럼 _느껴지지만_, 실제로는 브라우저 관점에서는 여전히 원래 페이지에 머물러 있습니다.
 
-Because of this, styles and scripts are executed normally on the first page, but on subsequent pages, you may have to tweak the way you normally write JavaScript.
+이로 인해 첫 번째 페이지에서는 스타일과 스크립트가 정상적으로 실행되지만, 이후 페이지에서는 일반적으로 작성하던 JavaScript 방식을 약간 수정해야 할 수도 있습니다.
 
-Here are a few caveats and scenarios you should be aware of when using `wire:navigate`.
+`wire:navigate`를 사용할 때 알아두어야 할 몇 가지 주의사항과 시나리오가 있습니다.
 
-### Don't rely on `DOMContentLoaded`
+### `DOMContentLoaded`에 의존하지 마세요 {#dont-rely-on-domcontentloaded}
 
-It's common practice to place JavaScript inside a `DOMContentLoaded` event listener so that the code you want to run only executes after the page has fully loaded.
+JavaScript를 `DOMContentLoaded` 이벤트 리스너 안에 두는 것은 일반적인 관행입니다. 이렇게 하면 실행하고자 하는 코드가 페이지가 완전히 로드된 후에만 실행됩니다.
 
-When using `wire:navigate`, `DOMContentLoaded` is only fired on the first page visit, not subsequent visits.
+`wire:navigate`를 사용할 때, `DOMContentLoaded`는 첫 번째 페이지 방문 시에만 발생하고, 이후 방문에서는 발생하지 않습니다.
 
-To run code on every page visit, swap every instance of `DOMContentLoaded` with `livewire:navigated`:
+모든 페이지 방문 시 코드를 실행하려면, 모든 `DOMContentLoaded`를 `livewire:navigated`로 교체하세요:
 
 ```js
 document.addEventListener('DOMContentLoaded', () => { // [tl! remove]
@@ -271,71 +271,71 @@ document.addEventListener('livewire:navigated', () => { // [tl! add]
 })
 ```
 
-Now, any code placed inside this listener will be run on the initial page visit, and also after Livewire has finished navigating to subsequent pages.
+이제 이 리스너 안에 둔 코드는 초기 페이지 방문 시뿐만 아니라, Livewire가 이후 페이지로 이동을 마친 후에도 실행됩니다.
 
-Listening to this event is useful for things like initializing third-party libraries.
+이 이벤트를 리스닝하는 것은 서드파티 라이브러리 초기화와 같은 작업에 유용합니다.
 
-### Scripts in `<head>` are loaded once
+### `<head>`의 스크립트는 한 번만 로드됩니다 {#scripts-in-head-are-loaded-once}
 
-If two pages include the same `<script>` tag in the `<head>`, that script will only be run on the initial page visit and not on subsequent page visits.
+두 페이지가 `<head>`에 동일한 `<script>` 태그를 포함하고 있다면, 해당 스크립트는 최초 페이지 방문 시에만 실행되고 이후 페이지 방문 시에는 실행되지 않습니다.
 
 ```blade
-<!-- Page one -->
+<!-- 첫 번째 페이지 -->
 <head>
     <script src="/app.js"></script>
 </head>
 
-<!-- Page two -->
+<!-- 두 번째 페이지 -->
 <head>
     <script src="/app.js"></script>
 </head>
 ```
 
-### New `<head>` scripts are evaluated
+### 새로운 `<head>` 스크립트가 실행됩니다 {#new-head-scripts-are-evaluated}
 
-If a subsequent page includes a new `<script>` tag in the `<head>` that was not present in the `<head>` of the initial page visit, Livewire will run the new `<script>` tag.
+이후 페이지에 처음 방문한 페이지의 `<head>`에 없던 새로운 `<script>` 태그가 포함되어 있다면, Livewire는 그 새로운 `<script>` 태그를 실행합니다.
 
-In the below example, _page two_ includes a new JavaScript library for a third-party tool. When the user navigates to _page two_, that library will be evaluated.
+아래 예시에서 _페이지 2_는 서드파티 도구를 위한 새로운 자바스크립트 라이브러리를 포함하고 있습니다. 사용자가 _페이지 2_로 이동하면, 해당 라이브러리가 실행됩니다.
 
 ```blade
-<!-- Page one -->
+<!-- 페이지 1 -->
 <head>
     <script src="/app.js"></script>
 </head>
 
-<!-- Page two -->
+<!-- 페이지 2 -->
 <head>
     <script src="/app.js"></script>
     <script src="/third-party.js"></script>
 </head>
 ```
 
-> [!info] Head assets are blocking
-> If you are navigating to a new page that contains an asset like `<script src="...">` in the head tag. That asset will be fetched and processed before the navigation is complete and the new page is swapped in. This might be surprising behavior, but it ensures any scripts that depend on those assets will have immediate access to them.
+> [!info] Head 에셋은 블로킹됩니다
+> `<head>` 태그에 `<script src="...">`와 같은 에셋이 포함된 새 페이지로 이동할 경우, 해당 에셋은 네비게이션이 완료되고 새 페이지가 교체되기 전에 먼저 가져와지고 처리됩니다. 이 동작은 다소 의외일 수 있지만, 해당 에셋에 의존하는 스크립트가 즉시 접근할 수 있도록 보장합니다.
 
-### Reloading when assets change
+### 에셋이 변경될 때 새로고침 {#reloading-when-assets-change}
 
-It's common practice to include a version hash in an application's main JavaScript file name. This ensures that after deploying a new version of your application, users will receive the fresh JavaScript asset, and not an old version served from the browser's cache.
+애플리케이션의 메인 JavaScript 파일 이름에 버전 해시를 포함하는 것은 일반적인 관행입니다. 이렇게 하면 애플리케이션의 새 버전을 배포한 후 사용자가 브라우저 캐시에서 제공되는 오래된 버전이 아닌 최신 JavaScript 에셋을 받게 됩니다.
 
-But, now that you are using `wire:navigate` and each page visit is no longer a fresh browser page load, your users may still be receiving stale JavaScript after deployments.
+하지만 이제 `wire:navigate`를 사용하고 각 페이지 방문이 더 이상 새로운 브라우저 페이지 로드가 아니기 때문에, 배포 후에도 사용자가 여전히 오래된 JavaScript를 받을 수 있습니다.
 
-To prevent this, you may add `data-navigate-track` to a `<script>` tag in `<head>`:
+이를 방지하려면 `<head>`의 `<script>` 태그에 `data-navigate-track`을 추가할 수 있습니다:
 
 ```blade
-<!-- Page one -->
+<!-- 첫 번째 페이지 -->
 <head>
     <script src="/app.js?id=123" data-navigate-track></script>
 </head>
 
-<!-- Page two -->
+<!-- 두 번째 페이지 -->
 <head>
     <script src="/app.js?id=456" data-navigate-track></script>
 </head>
 ```
 
-When a user visits _page two_, Livewire will detect a fresh JavaScript asset and trigger a full browser page reload.
+사용자가 _두 번째 페이지_ 를 방문하면, Livewire는 새로운 JavaScript 에셋을 감지하고 전체 브라우저 페이지 새로고침을 트리거합니다.
 
-If you are using [Laravel's Vite plug-in](https://laravel.com/docs/vite#loading-your-scripts-and-styles) to bundle and serve your assets, Livewire adds `data-navigate-track` to the rendered HTML asset tags automatically. You can continue referencing your assets and scripts like normal:
+[Laravel의 Vite 플러그인](https://laravel.com/docs/vite#loading-your-scripts-and-styles)을 사용하여 에셋을 번들링하고 제공하는 경우, Livewire는 렌더링된 HTML 에셋 태그에 `data-navigate-track`을 자동으로 추가합니다. 기존과 동일하게 에셋과 스크립트를 참조할 수 있습니다:
 
 ```blade
 <head>
@@ -343,44 +343,44 @@ If you are using [Laravel's Vite plug-in](https://laravel.com/docs/vite#loading-
 </head>
 ```
 
-Livewire will automatically inject `data-navigate-track` onto the rendered HTML tags.
+Livewire는 렌더링된 HTML 태그에 `data-navigate-track`을 자동으로 주입합니다.
 
-> [!warning] Only query string changes are tracked
-> Livewire will only reload a page if a `[data-navigate-track]` element's query string (`?id="456"`) changes, not the URI itself (`/app.js`).
+> [!warning] 쿼리 문자열 변경만 추적됩니다
+> Livewire는 `[data-navigate-track]` 요소의 쿼리 문자열(`?id="456"`)이 변경될 때만 페이지를 새로고침하며, URI 자체(`/app.js`)가 변경되는 것은 추적하지 않습니다.
 
-### Scripts in the `<body>` are re-evaluated
+### `<body>` 내의 스크립트는 다시 실행됩니다 {#scripts-in-the-body-are-re-evaluated}
 
-Because Livewire replaces the entire contents of the `<body>` on every new page, all `<script>` tags on the new page will be run:
+Livewire는 새로운 페이지마다 `<body>`의 전체 내용을 교체하기 때문에, 새로운 페이지의 모든 `<script>` 태그가 실행됩니다:
 
 ```blade
-<!-- Page one -->
+<!-- 첫 번째 페이지 -->
 <body>
     <script>
-        console.log('Runs on page one')
+        console.log('첫 번째 페이지에서 실행됨')
     </script>
 </body>
 
-<!-- Page two -->
+<!-- 두 번째 페이지 -->
 <body>
     <script>
-        console.log('Runs on page two')
+        console.log('두 번째 페이지에서 실행됨')
     </script>
 </body>
 ```
 
-If you have a `<script>` tag in the body that you only want to be run once, you can add the `data-navigate-once` attribute to the `<script>` tag and Livewire will only run it on the initial page visit:
+만약 `<body>` 내의 `<script>` 태그가 한 번만 실행되길 원한다면, `<script>` 태그에 `data-navigate-once` 속성을 추가하면 Livewire가 최초 페이지 방문 시에만 실행합니다:
 
 ```blade
 <script data-navigate-once>
-    console.log('Runs only on page one')
+    console.log('첫 번째 페이지에서만 실행됨')
 </script>
 ```
 
-## Customizing the progress bar
+## 진행률 표시줄 사용자화 {#customizing-the-progress-bar}
 
-When a page takes longer than 150ms to load, Livewire will show a progress bar at the top of the page.
+페이지 로드에 150ms 이상 걸릴 경우, Livewire는 페이지 상단에 진행률 표시줄을 표시합니다.
 
-You can customize the color of this bar or disable it all together inside Livewire's config file (`config/livewire.php`):
+이 표시줄의 색상을 사용자화하거나, 표시줄 자체를 비활성화하려면 Livewire 설정 파일(`config/livewire.php`)에서 다음과 같이 설정할 수 있습니다:
 
 ```php
 'navigate' => [
