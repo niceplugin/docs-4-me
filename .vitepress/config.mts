@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { sidebar_laravel } from './configs/sidebar/laravel'
 import { livewire } from './configs/sidebar/livewire'
+import { sidebar_filament } from './configs/sidebar/filament'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -24,6 +25,7 @@ export default defineConfig({
       { text: '홈', link: '/' },
       { text: 'Laravel 12.x', link: '/laravel/12.x/installation', activeMatch: '/laravel/' },
       { text: 'Livewire 3.x', link: '/livewire/3.x/quickstart', activeMatch: '/livewire/' },
+      { text: 'Filament 3.x', link: '/filament/3.x/panels/installation', activeMatch: '/filament/' },
     ],
 
     outline: {
@@ -53,6 +55,7 @@ export default defineConfig({
     sidebar: {
       ...sidebar_laravel,
       ...livewire,
+      ...sidebar_filament,
     },
   },
 
