@@ -97,7 +97,7 @@ Livewire를 기존 Laravel Breeze(Blade + Alpine 버전)에 설치하는 경우,
 ```js
 import './bootstrap';
 
-import Alpine from 'alpinejs'; // [tl! remove:4]
+import Alpine from 'alpinejs'; // [!code --:5]
 
 window.Alpine = Alpine;
 
@@ -110,7 +110,7 @@ Livewire 2 버전 이하에서는 Alpine이 기본적으로 포함되어 있지 
 
 ```html
     ...
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> <!-- [tl! remove] -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> <!-- [!code --] -->
 </head>
 ```
 
@@ -128,7 +128,7 @@ Uncaught Alpine: no element provided to x-anchor
 
 ```html
     ...
-    <script defer src="https://unpkg.com/@alpinejs/ui@3.13.7-beta.0/dist/cdn.min.js"></script> <!-- [tl! add] -->
+    <script defer src="https://unpkg.com/@alpinejs/ui@3.13.7-beta.0/dist/cdn.min.js"></script> <!-- [!code ++] -->
 </head>
 ```
 

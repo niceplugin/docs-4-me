@@ -265,8 +265,8 @@ JavaScript를 `DOMContentLoaded` 이벤트 리스너 안에 두는 것은 일반
 모든 페이지 방문 시 코드를 실행하려면, 모든 `DOMContentLoaded`를 `livewire:navigated`로 교체하세요:
 
 ```js
-document.addEventListener('DOMContentLoaded', () => { // [tl! remove]
-document.addEventListener('livewire:navigated', () => { // [tl! add]
+document.addEventListener('DOMContentLoaded', () => { // [!code --]
+document.addEventListener('livewire:navigated', () => { // [!code ++]
     // ...
 })
 ```

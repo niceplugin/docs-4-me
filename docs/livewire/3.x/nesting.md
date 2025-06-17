@@ -132,9 +132,9 @@ class TodoCount extends Component
 PHP 변수를 컴포넌트에 전달할 때, 변수명과 prop 이름이 종종 동일합니다. 이름을 두 번 작성하는 것을 피하기 위해, Livewire에서는 변수 앞에 콜론을 붙이는 것만으로도 사용할 수 있습니다:
 
 ```blade
-<livewire:todo-count :todos="$todos" /> <!-- [tl! remove] -->
+<livewire:todo-count :todos="$todos" /> <!-- [!code --] -->
 
-<livewire:todo-count :$todos /> <!-- [tl! add] -->
+<livewire:todo-count :$todos /> <!-- [!code ++] -->
 ```
 
 ## 반복문에서 자식 컴포넌트 렌더링하기 {#rendering-children-in-a-loop}

@@ -612,8 +612,8 @@ class AppServiceProvider extends ServiceProvider
 ```json
 {
     "type": "model",
-    "class": "App\Models\Post", // [tl! remove]
-    "class": "post", // [tl! add]
+    "class": "App\Models\Post", // [!code --]
+    "class": "post", // [!code ++]
     "key": 1,
     "relationships": []
 }
