@@ -78,9 +78,9 @@ php artisan octane:install
 services:
   laravel.test:
     environment:
-      SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=frankenphp --host=0.0.0.0 --admin-port=2019 --port='${APP_PORT:-80}'" # [tl! add]
-      XDG_CONFIG_HOME:  /var/www/html/config # [tl! add]
-      XDG_DATA_HOME:  /var/www/html/data # [tl! add]
+      SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=frankenphp --host=0.0.0.0 --admin-port=2019 --port='${APP_PORT:-80}'" # [!code ++]
+      XDG_CONFIG_HOME:  /var/www/html/config # [!code ++]
+      XDG_DATA_HOME:  /var/www/html/data # [!code ++]
 ```
 
 HTTPS, HTTP/2, HTTP/3를 활성화하려면, 대신 다음과 같이 수정하세요:
@@ -91,12 +91,12 @@ services:
     ports:
         - '${APP_PORT:-80}:80'
         - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
-        - '443:443' # [tl! add]
-        - '443:443/udp' # [tl! add]
+        - '443:443' # [!code ++]
+        - '443:443/udp' # [!code ++]
     environment:
-      SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --host=localhost --port=443 --admin-port=2019 --https" # [tl! add]
-      XDG_CONFIG_HOME:  /var/www/html/config # [tl! add]
-      XDG_DATA_HOME:  /var/www/html/data # [tl! add]
+      SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --host=localhost --port=443 --admin-port=2019 --https" # [!code ++]
+      XDG_CONFIG_HOME:  /var/www/html/config # [!code ++]
+      XDG_DATA_HOME:  /var/www/html/data # [!code ++]
 ```
 
 일반적으로 FrankenPHP Sail 애플리케이션에는 `https://localhost`로 접속해야 하며, `https://127.0.0.1`을 사용하려면 추가 구성이 필요하므로 [권장되지 않습니다](https://frankenphp.dev/docs/known-issues/#using-https127001-with-docker).
@@ -170,7 +170,7 @@ FrankenPHP를 Docker와 함께 실행하는 방법에 대한 자세한 내용은
 services:
   laravel.test:
     environment:
-      SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=roadrunner --host=0.0.0.0 --rpc-port=6001 --port='${APP_PORT:-80}'" # [tl! add]
+      SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=roadrunner --host=0.0.0.0 --rpc-port=6001 --port='${APP_PORT:-80}'" # [!code ++]
 ```
 
 마지막으로, `rr` 바이너리가 실행 가능하도록 설정하고 Sail 이미지를 빌드하세요:
@@ -215,7 +215,7 @@ Open Swoole과 함께 Laravel Octane을 사용하면 Swoole이 제공하는 동�
 services:
   laravel.test:
     environment:
-      SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=swoole --host=0.0.0.0 --port='${APP_PORT:-80}'" # [tl! add]
+      SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=swoole --host=0.0.0.0 --port='${APP_PORT:-80}'" # [!code ++]
 ```
 
 마지막으로, Sail 이미지를 빌드하세요:
