@@ -98,7 +98,7 @@ npm install && npm run build
 composer run dev
 ```
 
-개발 서버를 시작하면, 웹 브라우저에서 [http://localhost:8000](http://localhost:8000) 주소로 애플리케이션에 접속할 수 있습니다. 이제 [Laravel 생태계의 다음 단계](#next-steps)를 시작할 준비가 되었습니다. 물론, [데이터베이스를 설정](#databases-and-migrations)하는 것도 고려할 수 있습니다.
+개발 서버를 시작하면, 웹 브라우저에서 `http://localhost:8000` 주소로 애플리케이션에 접속할 수 있습니다. 이제 [Laravel 생태계의 다음 단계](#next-steps)를 시작할 준비가 되었습니다. 물론, [데이터베이스를 설정](#databases-and-migrations)하는 것도 고려할 수 있습니다.
 
 > [!NOTE]
 > Laravel 애플리케이션 개발을 빠르게 시작하고 싶다면, [스타터 키트](/laravel/12.x/starter-kits) 중 하나를 사용하는 것을 고려해보세요. Laravel의 스타터 키트는 새로운 애플리케이션에 백엔드와 프론트엔드 인증 스캐폴딩을 제공합니다.

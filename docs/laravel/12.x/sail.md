@@ -384,7 +384,7 @@ MAIL_PORT=1025
 MAIL_ENCRYPTION=null
 ```
 
-Sail이 실행 중일 때, Mailpit 웹 인터페이스는 다음 주소에서 접근할 수 있습니다: http://localhost:8025
+Sail이 실행 중일 때, Mailpit 웹 인터페이스는 다음 주소에서 접근할 수 있습니다: `http://localhost:8025`
 
 
 ## 컨테이너 CLI {#sail-container-cli}
