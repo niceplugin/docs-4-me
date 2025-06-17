@@ -133,7 +133,7 @@ Livewire는 로딩 인디케이터를 제어하기 위한 간단하면서도 매
 </div>
 ```
 
-`wire:target="remove"`에 `{{ $post->id }}`를 전달하지 않으면, 페이지의 어떤 버튼이 클릭되더라도 "Removing post..." 메시지가 표시됩니다.
+`wire:target="remove"`에 <span v-pre>`{{ $post->id }}`</span>를 전달하지 않으면, 페이지의 어떤 버튼이 클릭되더라도 "Removing post..." 메시지가 표시됩니다.
 
 하지만 각 `wire:target` 인스턴스에 고유한 파라미터를 전달하면, Livewire는 해당 파라미터가 "remove" 액션에 전달될 때만 로딩 메시지를 표시합니다.
 
