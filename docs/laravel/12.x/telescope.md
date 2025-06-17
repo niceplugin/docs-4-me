@@ -1,54 +1,54 @@
 # Laravel Telescope
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-    - [Local Only Installation](#local-only-installation)
-    - [Configuration](#configuration)
-    - [Data Pruning](#data-pruning)
-    - [Dashboard Authorization](#dashboard-authorization)
-- [Upgrading Telescope](#upgrading-telescope)
-- [Filtering](#filtering)
-    - [Entries](#filtering-entries)
-    - [Batches](#filtering-batches)
-- [Tagging](#tagging)
-- [Available Watchers](#available-watchers)
-    - [Batch Watcher](#batch-watcher)
-    - [Cache Watcher](#cache-watcher)
-    - [Command Watcher](#command-watcher)
-    - [Dump Watcher](#dump-watcher)
-    - [Event Watcher](#event-watcher)
-    - [Exception Watcher](#exception-watcher)
-    - [Gate Watcher](#gate-watcher)
-    - [HTTP Client Watcher](#http-client-watcher)
-    - [Job Watcher](#job-watcher)
-    - [Log Watcher](#log-watcher)
-    - [Mail Watcher](#mail-watcher)
-    - [Model Watcher](#model-watcher)
-    - [Notification Watcher](#notification-watcher)
-    - [Query Watcher](#query-watcher)
-    - [Redis Watcher](#redis-watcher)
-    - [Request Watcher](#request-watcher)
-    - [Schedule Watcher](#schedule-watcher)
-    - [View Watcher](#view-watcher)
-- [Displaying User Avatars](#displaying-user-avatars)
 
-<a name="introduction"></a>
-## Introduction
 
-[Laravel Telescope](https://github.com/laravel/telescope) makes a wonderful companion to your local Laravel development environment. Telescope provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps, and more.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 소개 {#introduction}
+
+[Laravel Telescope](https://github.com/laravel/telescope)는 여러분의 로컬 Laravel 개발 환경에 훌륭한 동반자가 되어줍니다. Telescope는 애플리케이션으로 들어오는 요청, 예외, 로그 항목, 데이터베이스 쿼리, 큐 작업, 메일, 알림, 캐시 작업, 예약된 작업, 변수 덤프 등 다양한 정보를 제공합니다.
 
 <img src="https://laravel.com/img/docs/telescope-example.png">
 
-<a name="installation"></a>
-## Installation
 
-You may use the Composer package manager to install Telescope into your Laravel project:
+## 설치 {#installation}
+
+Composer 패키지 관리자를 사용하여 Laravel 프로젝트에 Telescope를 설치할 수 있습니다:
 
 ```shell
 composer require laravel/telescope
 ```
 
-After installing Telescope, publish its assets and migrations using the `telescope:install` Artisan command. After installing Telescope, you should also run the `migrate` command in order to create the tables needed to store Telescope's data:
+Telescope를 설치한 후, `telescope:install` Artisan 명령어를 사용하여 자산과 마이그레이션을 게시하세요. Telescope 설치 후에는 Telescope의 데이터를 저장하는 데 필요한 테이블을 생성하기 위해 `migrate` 명령어도 실행해야 합니다:
 
 ```shell
 php artisan telescope:install
@@ -56,12 +56,12 @@ php artisan telescope:install
 php artisan migrate
 ```
 
-Finally, you may access the Telescope dashboard via the `/telescope` route.
+마지막으로, `/telescope` 경로를 통해 Telescope 대시보드에 접근할 수 있습니다.
 
-<a name="local-only-installation"></a>
-### Local Only Installation
 
-If you plan to only use Telescope to assist your local development, you may install Telescope using the `--dev` flag:
+### 로컬 전용 설치 {#local-only-installation}
+
+Telescope를 오직 로컬 개발에만 사용할 계획이라면, `--dev` 플래그를 사용하여 Telescope를 설치할 수 있습니다:
 
 ```shell
 composer require laravel/telescope --dev
@@ -71,7 +71,7 @@ php artisan telescope:install
 php artisan migrate
 ```
 
-After running `telescope:install`, you should remove the `TelescopeServiceProvider` service provider registration from your application's `bootstrap/providers.php` configuration file. Instead, manually register Telescope's service providers in the `register` method of your `App\Providers\AppServiceProvider` class. We will ensure the current environment is `local` before registering the providers:
+`telescope:install` 명령을 실행한 후에는, 애플리케이션의 `bootstrap/providers.php` 설정 파일에서 `TelescopeServiceProvider` 서비스 프로바이더 등록을 제거해야 합니다. 대신, `App\Providers\AppServiceProvider` 클래스의 `register` 메서드에서 Telescope의 서비스 프로바이더를 수동으로 등록하세요. 프로바이더를 등록하기 전에 현재 환경이 `local`인지 확인합니다:
 
 ```php
 /**
@@ -86,7 +86,7 @@ public function register(): void
 }
 ```
 
-Finally, you should also prevent the Telescope package from being [auto-discovered](/laravel/12.x/packages#package-discovery) by adding the following to your `composer.json` file:
+마지막으로, 아래와 같이 `composer.json` 파일에 추가하여 Telescope 패키지가 [자동 검색](/laravel/12.x/packages#package-discovery)되지 않도록 해야 합니다:
 
 ```json
 "extra": {
@@ -98,21 +98,21 @@ Finally, you should also prevent the Telescope package from being [auto-discover
 },
 ```
 
-<a name="configuration"></a>
-### Configuration
 
-After publishing Telescope's assets, its primary configuration file will be located at `config/telescope.php`. This configuration file allows you to configure your [watcher options](#available-watchers). Each configuration option includes a description of its purpose, so be sure to thoroughly explore this file.
+### 설정 {#configuration}
 
-If desired, you may disable Telescope's data collection entirely using the `enabled` configuration option:
+Telescope의 에셋을 퍼블리시한 후, 주요 설정 파일은 `config/telescope.php`에 위치하게 됩니다. 이 설정 파일을 통해 [워처 옵션](#available-watchers)을 구성할 수 있습니다. 각 설정 옵션에는 그 목적에 대한 설명이 포함되어 있으니, 이 파일을 꼼꼼히 살펴보시기 바랍니다.
+
+원한다면, `enabled` 설정 옵션을 사용하여 Telescope의 데이터 수집을 완전히 비활성화할 수 있습니다:
 
 ```php
 'enabled' => env('TELESCOPE_ENABLED', true),
 ```
 
-<a name="data-pruning"></a>
-### Data Pruning
 
-Without pruning, the `telescope_entries` table can accumulate records very quickly. To mitigate this, you should [schedule](/laravel/12.x/scheduling) the `telescope:prune` Artisan command to run daily:
+### 데이터 정리 {#data-pruning}
+
+정리를 하지 않으면 `telescope_entries` 테이블에 레코드가 매우 빠르게 쌓일 수 있습니다. 이를 방지하기 위해 [스케줄링](/laravel/12.x/scheduling)을 통해 `telescope:prune` Artisan 명령어를 매일 실행하도록 설정해야 합니다:
 
 ```php
 use Illuminate\Support\Facades\Schedule;
@@ -120,7 +120,7 @@ use Illuminate\Support\Facades\Schedule;
 Schedule::command('telescope:prune')->daily();
 ```
 
-By default, all entries older than 24 hours will be pruned. You may use the `hours` option when calling the command to determine how long to retain Telescope data. For example, the following command will delete all records created over 48 hours ago:
+기본적으로 24시간이 지난 모든 항목이 정리됩니다. 명령어를 호출할 때 `hours` 옵션을 사용하여 Telescope 데이터를 얼마나 오래 보관할지 지정할 수 있습니다. 예를 들어, 아래 명령어는 48시간이 지난 모든 레코드를 삭제합니다:
 
 ```php
 use Illuminate\Support\Facades\Schedule;
@@ -128,18 +128,18 @@ use Illuminate\Support\Facades\Schedule;
 Schedule::command('telescope:prune --hours=48')->daily();
 ```
 
-<a name="dashboard-authorization"></a>
-### Dashboard Authorization
 
-The Telescope dashboard may be accessed via the `/telescope` route. By default, you will only be able to access this dashboard in the `local` environment. Within your `app/Providers/TelescopeServiceProvider.php` file, there is an [authorization gate](/laravel/12.x/authorization#gates) definition. This authorization gate controls access to Telescope in **non-local** environments. You are free to modify this gate as needed to restrict access to your Telescope installation:
+### 대시보드 권한 부여 {#dashboard-authorization}
+
+Telescope 대시보드는 `/telescope` 경로를 통해 접근할 수 있습니다. 기본적으로, 이 대시보드는 `local` 환경에서만 접근할 수 있습니다. `app/Providers/TelescopeServiceProvider.php` 파일 내에는 [인증 게이트](/laravel/12.x/authorization#gates) 정의가 있습니다. 이 인증 게이트는 **비로컬** 환경에서 Telescope에 대한 접근을 제어합니다. 필요에 따라 이 게이트를 수정하여 Telescope 설치에 대한 접근을 제한할 수 있습니다:
 
 ```php
 use App\Models\User;
 
 /**
- * Register the Telescope gate.
+ * Telescope 게이트를 등록합니다.
  *
- * This gate determines who can access Telescope in non-local environments.
+ * 이 게이트는 비로컬 환경에서 누가 Telescope에 접근할 수 있는지 결정합니다.
  */
 protected function gate(): void
 {
@@ -152,20 +152,20 @@ protected function gate(): void
 ```
 
 > [!WARNING]
-> You should ensure you change your `APP_ENV` environment variable to `production` in your production environment. Otherwise, your Telescope installation will be publicly available.
+> 운영 환경에서는 반드시 `APP_ENV` 환경 변수를 `production`으로 변경해야 합니다. 그렇지 않으면 Telescope 설치가 외부에 공개될 수 있습니다.
 
-<a name="upgrading-telescope"></a>
-## Upgrading Telescope
 
-When upgrading to a new major version of Telescope, it's important that you carefully review [the upgrade guide](https://github.com/laravel/telescope/blob/master/UPGRADE.md).
+## Telescope 업그레이드 {#upgrading-telescope}
 
-In addition, when upgrading to any new Telescope version, you should re-publish Telescope's assets:
+Telescope의 새로운 메이저 버전으로 업그레이드할 때는 [업그레이드 가이드](https://github.com/laravel/telescope/blob/master/UPGRADE.md)를 꼼꼼히 확인하는 것이 중요합니다.
+
+또한, 새로운 Telescope 버전으로 업그레이드할 때마다 Telescope의 에셋을 다시 퍼블리시해야 합니다:
 
 ```shell
 php artisan telescope:publish
 ```
 
-To keep the assets up-to-date and avoid issues in future updates, you may add the `vendor:publish --tag=laravel-assets` command to the `post-update-cmd` scripts in your application's `composer.json` file:
+에셋을 최신 상태로 유지하고 향후 업데이트 시 문제를 방지하려면, 애플리케이션의 `composer.json` 파일 내 `post-update-cmd` 스크립트에 `vendor:publish --tag=laravel-assets` 명령어를 추가할 수 있습니다:
 
 ```json
 {
@@ -177,20 +177,20 @@ To keep the assets up-to-date and avoid issues in future updates, you may add th
 }
 ```
 
-<a name="filtering"></a>
-## Filtering
 
-<a name="filtering-entries"></a>
-### Entries
+## 필터링 {#filtering}
 
-You may filter the data that is recorded by Telescope via the `filter` closure that is defined in your `App\Providers\TelescopeServiceProvider` class. By default, this closure records all data in the `local` environment and exceptions, failed jobs, scheduled tasks, and data with monitored tags in all other environments:
+
+### 엔트리 {#filtering-entries}
+
+Telescope에 기록되는 데이터를 `App\Providers\TelescopeServiceProvider` 클래스에 정의된 `filter` 클로저를 통해 필터링할 수 있습니다. 기본적으로 이 클로저는 `local` 환경에서는 모든 데이터를 기록하며, 그 외의 환경에서는 예외, 실패한 작업, 예약된 작업, 모니터링 태그가 있는 데이터만 기록합니다:
 
 ```php
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 
 /**
- * Register any application services.
+ * 애플리케이션 서비스를 등록합니다.
  */
 public function register(): void
 {
@@ -210,10 +210,10 @@ public function register(): void
 }
 ```
 
-<a name="filtering-batches"></a>
-### Batches
 
-While the `filter` closure filters data for individual entries, you may use the `filterBatch` method to register a closure that filters all data for a given request or console command. If the closure returns `true`, all of the entries are recorded by Telescope:
+### 배치 {#filtering-batches}
+
+`filter` 클로저가 개별 항목의 데이터를 필터링하는 반면, `filterBatch` 메서드를 사용하여 주어진 요청 또는 콘솔 명령에 대한 모든 데이터를 필터링하는 클로저를 등록할 수 있습니다. 클로저가 `true`를 반환하면, 해당 요청의 모든 항목이 Telescope에 기록됩니다:
 
 ```php
 use Illuminate\Support\Collection;
@@ -221,7 +221,7 @@ use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 
 /**
- * Register any application services.
+ * 애플리케이션 서비스를 등록합니다.
  */
 public function register(): void
 {
@@ -243,17 +243,17 @@ public function register(): void
 }
 ```
 
-<a name="tagging"></a>
-## Tagging
 
-Telescope allows you to search entries by "tag". Often, tags are Eloquent model class names or authenticated user IDs which Telescope automatically adds to entries. Occasionally, you may want to attach your own custom tags to entries. To accomplish this, you may use the `Telescope::tag` method. The `tag` method accepts a closure which should return an array of tags. The tags returned by the closure will be merged with any tags Telescope would automatically attach to the entry. Typically, you should call the `tag` method within the `register` method of your `App\Providers\TelescopeServiceProvider` class:
+## 태깅 {#tagging}
+
+Telescope는 "태그"를 통해 엔트리를 검색할 수 있습니다. 보통 태그는 Eloquent 모델 클래스 이름이나 인증된 사용자 ID로, Telescope가 엔트리에 자동으로 추가합니다. 때로는 직접 커스텀 태그를 엔트리에 추가하고 싶을 때가 있습니다. 이를 위해 `Telescope::tag` 메서드를 사용할 수 있습니다. `tag` 메서드는 클로저를 인자로 받으며, 이 클로저는 태그 배열을 반환해야 합니다. 클로저에서 반환된 태그는 Telescope가 자동으로 엔트리에 추가하는 태그와 병합됩니다. 일반적으로 `App\Providers\TelescopeServiceProvider` 클래스의 `register` 메서드 내에서 `tag` 메서드를 호출하면 됩니다:
 
 ```php
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 
 /**
- * Register any application services.
+ * 애플리케이션 서비스를 등록합니다.
  */
 public function register(): void
 {
@@ -267,10 +267,10 @@ public function register(): void
 }
 ```
 
-<a name="available-watchers"></a>
-## Available Watchers
 
-Telescope "watchers" gather application data when a request or console command is executed. You may customize the list of watchers that you would like to enable within your `config/telescope.php` configuration file:
+## 사용 가능한 워처 {#available-watchers}
+
+Telescope의 "워처"는 요청이나 콘솔 명령이 실행될 때 애플리케이션 데이터를 수집합니다. `config/telescope.php` 설정 파일에서 활성화할 워처 목록을 커스터마이즈할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -280,7 +280,7 @@ Telescope "watchers" gather application data when a request or console command i
 ],
 ```
 
-Some watchers also allow you to provide additional customization options:
+일부 워처는 추가적인 커스터마이즈 옵션을 제공하기도 합니다:
 
 ```php
 'watchers' => [
@@ -292,20 +292,20 @@ Some watchers also allow you to provide additional customization options:
 ],
 ```
 
-<a name="batch-watcher"></a>
-### Batch Watcher
 
-The batch watcher records information about queued [batches](/laravel/12.x/queues#job-batching), including the job and connection information.
+### 배치 워처 {#batch-watcher}
 
-<a name="cache-watcher"></a>
-### Cache Watcher
+배치 워처는 큐에 등록된 [배치](/laravel/12.x/queues#job-batching)에 대한 정보와 작업 및 연결 정보를 기록합니다.
 
-The cache watcher records data when a cache key is hit, missed, updated and forgotten.
 
-<a name="command-watcher"></a>
-### Command Watcher
+### 캐시 워처 {#cache-watcher}
 
-The command watcher records the arguments, options, exit code, and output whenever an Artisan command is executed. If you would like to exclude certain commands from being recorded by the watcher, you may specify the command in the `ignore` option within your `config/telescope.php` file:
+캐시 워처는 캐시 키가 히트(hit), 미스(miss), 업데이트, 삭제(forgotten)될 때 데이터를 기록합니다.
+
+
+### 커맨드 워처 {#command-watcher}
+
+커맨드 워처는 아티즌(Artisan) 커맨드가 실행될 때마다 인자, 옵션, 종료 코드, 출력을 기록합니다. 특정 커맨드가 워처에 의해 기록되지 않도록 제외하고 싶다면, `config/telescope.php` 파일의 `ignore` 옵션에 해당 커맨드를 지정할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -317,25 +317,25 @@ The command watcher records the arguments, options, exit code, and output whenev
 ],
 ```
 
-<a name="dump-watcher"></a>
-### Dump Watcher
 
-The dump watcher records and displays your variable dumps in Telescope. When using Laravel, variables may be dumped using the global `dump` function. The dump watcher tab must be open in a browser for the dump to be recorded, otherwise, the dumps will be ignored by the watcher.
+### Dump Watcher {#dump-watcher}
 
-<a name="event-watcher"></a>
-### Event Watcher
+Dump Watcher는 Telescope에서 변수 덤프를 기록하고 표시합니다. Laravel을 사용할 때는 전역 `dump` 함수를 사용하여 변수를 덤프할 수 있습니다. 덤프가 기록되려면 브라우저에서 dump watcher 탭이 열려 있어야 하며, 그렇지 않으면 watcher가 덤프를 무시합니다.
 
-The event watcher records the payload, listeners, and broadcast data for any [events](/laravel/12.x/events) dispatched by your application. The Laravel framework's internal events are ignored by the Event watcher.
 
-<a name="exception-watcher"></a>
-### Exception Watcher
+### 이벤트 워처 {#event-watcher}
 
-The exception watcher records the data and stack trace for any reportable exceptions that are thrown by your application.
+이벤트 워처는 애플리케이션에서 디스패치된 [이벤트](/laravel/12.x/events)의 페이로드, 리스너, 브로드캐스트 데이터를 기록합니다. Laravel 프레임워크의 내부 이벤트는 이벤트 워처에 의해 무시됩니다.
 
-<a name="gate-watcher"></a>
-### Gate Watcher
 
-The gate watcher records the data and result of [gate and policy](/laravel/12.x/authorization) checks by your application. If you would like to exclude certain abilities from being recorded by the watcher, you may specify those in the `ignore_abilities` option in your `config/telescope.php` file:
+### 예외 감시자 {#exception-watcher}
+
+예외 감시자는 애플리케이션에서 발생하는 보고 가능한 예외의 데이터와 스택 트레이스를 기록합니다.
+
+
+### 게이트 워처 {#gate-watcher}
+
+게이트 워처는 애플리케이션에서 [게이트와 정책](/laravel/12.x/authorization) 검사의 데이터와 결과를 기록합니다. 특정 권한을 워처에서 기록하지 않으려면, `config/telescope.php` 파일의 `ignore_abilities` 옵션에 해당 권한을 지정할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -347,22 +347,22 @@ The gate watcher records the data and result of [gate and policy](/laravel/12.x/
 ],
 ```
 
-<a name="http-client-watcher"></a>
-### HTTP Client Watcher
 
-The HTTP client watcher records outgoing [HTTP client requests](/laravel/12.x/http-client) made by your application.
+### HTTP 클라이언트 워처 {#http-client-watcher}
 
-<a name="job-watcher"></a>
-### Job Watcher
+HTTP 클라이언트 워처는 애플리케이션에서 발생하는 [HTTP 클라이언트 요청](/laravel/12.x/http-client)을 기록합니다.
 
-The job watcher records the data and status of any [jobs](/laravel/12.x/queues) dispatched by your application.
 
-<a name="log-watcher"></a>
-### Log Watcher
+### 작업 감시자 {#job-watcher}
 
-The log watcher records the [log data](/laravel/12.x/logging) for any logs written by your application.
+작업 감시자는 애플리케이션에서 디스패치된 [작업](/laravel/12.x/queues)의 데이터와 상태를 기록합니다.
 
-By default, Telescope will only record logs at the `error` level and above. However, you can modify the `level` option in your application's `config/telescope.php` configuration file to modify this behavior:
+
+### 로그 워처 {#log-watcher}
+
+로그 워처는 애플리케이션에서 작성된 [로그 데이터](/laravel/12.x/logging)를 기록합니다.
+
+기본적으로 Telescope는 `error` 레벨 이상의 로그만 기록합니다. 하지만, 애플리케이션의 `config/telescope.php` 설정 파일에서 `level` 옵션을 수정하여 이 동작을 변경할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -375,15 +375,15 @@ By default, Telescope will only record logs at the `error` level and above. Howe
 ],
 ```
 
-<a name="mail-watcher"></a>
-### Mail Watcher
 
-The mail watcher allows you to view an in-browser preview of [emails](/laravel/12.x/mail) sent by your application along with their associated data. You may also download the email as an `.eml` file.
+### 메일 워처 {#mail-watcher}
 
-<a name="model-watcher"></a>
-### Model Watcher
+메일 워처를 사용하면 애플리케이션에서 전송된 [이메일](/laravel/12.x/mail)의 브라우저 내 미리보기를 관련 데이터와 함께 확인할 수 있습니다. 또한 이메일을 `.eml` 파일로 다운로드할 수도 있습니다.
 
-The model watcher records model changes whenever an Eloquent [model event](/laravel/12.x/eloquent#events) is dispatched. You may specify which model events should be recorded via the watcher's `events` option:
+
+### 모델 워처 {#model-watcher}
+
+모델 워처는 Eloquent [모델 이벤트](/laravel/12.x/eloquent#events)가 디스패치될 때마다 모델의 변경 사항을 기록합니다. 워처의 `events` 옵션을 통해 어떤 모델 이벤트를 기록할지 지정할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -395,7 +395,7 @@ The model watcher records model changes whenever an Eloquent [model event](/lara
 ],
 ```
 
-If you would like to record the number of models hydrated during a given request, enable the `hydrations` option:
+특정 요청 중에 하이드레이션된 모델의 개수를 기록하고 싶다면, `hydrations` 옵션을 활성화하세요:
 
 ```php
 'watchers' => [
@@ -408,15 +408,15 @@ If you would like to record the number of models hydrated during a given request
 ],
 ```
 
-<a name="notification-watcher"></a>
-### Notification Watcher
 
-The notification watcher records all [notifications](/laravel/12.x/notifications) sent by your application. If the notification triggers an email and you have the mail watcher enabled, the email will also be available for preview on the mail watcher screen.
+### 알림 감시자 {#notification-watcher}
 
-<a name="query-watcher"></a>
-### Query Watcher
+알림 감시자는 애플리케이션에서 전송된 모든 [알림](/laravel/12.x/notifications)을 기록합니다. 만약 알림이 이메일을 트리거하고 메일 감시자가 활성화되어 있다면, 해당 이메일도 메일 감시자 화면에서 미리 볼 수 있습니다.
 
-The query watcher records the raw SQL, bindings, and execution time for all queries that are executed by your application. The watcher also tags any queries slower than 100 milliseconds as `slow`. You may customize the slow query threshold using the watcher's `slow` option:
+
+### 쿼리 워처 {#query-watcher}
+
+쿼리 워처는 애플리케이션에서 실행되는 모든 쿼리에 대해 원시 SQL, 바인딩, 실행 시간을 기록합니다. 또한 100밀리초보다 느린 쿼리에는 `slow` 태그를 추가합니다. 워처의 `slow` 옵션을 사용하여 느린 쿼리 임계값을 커스터마이즈할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -428,15 +428,15 @@ The query watcher records the raw SQL, bindings, and execution time for all quer
 ],
 ```
 
-<a name="redis-watcher"></a>
-### Redis Watcher
 
-The Redis watcher records all [Redis](/laravel/12.x/redis) commands executed by your application. If you are using Redis for caching, cache commands will also be recorded by the Redis watcher.
+### Redis 감시자 {#redis-watcher}
 
-<a name="request-watcher"></a>
-### Request Watcher
+Redis 감시자는 애플리케이션에서 실행된 모든 [Redis](/laravel/12.x/redis) 명령어를 기록합니다. Redis를 캐싱에 사용하고 있다면, 캐시 명령어 또한 Redis 감시자에 의해 기록됩니다.
 
-The request watcher records the request, headers, session, and response data associated with any requests handled by the application. You may limit your recorded response data via the `size_limit` (in kilobytes) option:
+
+### 요청 감시자 {#request-watcher}
+
+요청 감시자는 애플리케이션에서 처리된 모든 요청과 관련된 요청, 헤더, 세션, 응답 데이터를 기록합니다. `size_limit`(킬로바이트 단위) 옵션을 통해 기록되는 응답 데이터의 크기를 제한할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -448,27 +448,27 @@ The request watcher records the request, headers, session, and response data ass
 ],
 ```
 
-<a name="schedule-watcher"></a>
-### Schedule Watcher
 
-The schedule watcher records the command and output of any [scheduled tasks](/laravel/12.x/scheduling) run by your application.
+### 스케줄 감시자 {#schedule-watcher}
 
-<a name="view-watcher"></a>
-### View Watcher
+스케줄 감시자는 애플리케이션에서 실행되는 [스케줄된 작업](/laravel/12.x/scheduling)의 명령어와 출력을 기록합니다.
 
-The view watcher records the [view](/laravel/12.x/views) name, path, data, and "composers" used when rendering views.
 
-<a name="displaying-user-avatars"></a>
-## Displaying User Avatars
+### 뷰 워처 {#view-watcher}
 
-The Telescope dashboard displays the user avatar for the user that was authenticated when a given entry was saved. By default, Telescope will retrieve avatars using the Gravatar web service. However, you may customize the avatar URL by registering a callback in your `App\Providers\TelescopeServiceProvider` class. The callback will receive the user's ID and email address and should return the user's avatar image URL:
+뷰 워처는 뷰를 렌더링할 때 사용된 [뷰](/laravel/12.x/views) 이름, 경로, 데이터, 그리고 "컴포저"를 기록합니다.
+
+
+## 사용자 아바타 표시 {#displaying-user-avatars}
+
+Telescope 대시보드는 각 항목이 저장될 때 인증된 사용자의 아바타를 표시합니다. 기본적으로 Telescope는 Gravatar 웹 서비스를 사용하여 아바타를 가져옵니다. 그러나 `App\Providers\TelescopeServiceProvider` 클래스에서 콜백을 등록하여 아바타 URL을 커스터마이즈할 수 있습니다. 이 콜백은 사용자의 ID와 이메일 주소를 인자로 받아 사용자의 아바타 이미지 URL을 반환해야 합니다:
 
 ```php
 use App\Models\User;
 use Laravel\Telescope\Telescope;
 
 /**
- * Register any application services.
+ * 애플리케이션 서비스를 등록합니다.
  */
 public function register(): void
 {

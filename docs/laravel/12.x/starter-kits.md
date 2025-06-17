@@ -1,43 +1,43 @@
-# Starter Kits
+# 스타터 킷
 
-- [Introduction](#introduction)
-- [Creating an Application Using a Starter Kit](#creating-an-application)
-- [Available Starter Kits](#available-starter-kits)
-    - [React](#react)
-    - [Vue](#vue)
-    - [Livewire](#livewire)
-- [Starter Kit Customization](#starter-kit-customization)
-    - [React](#react-customization)
-    - [Vue](#vue-customization)
-    - [Livewire](#livewire-customization)
-- [WorkOS AuthKit Authentication](#workos)
-- [Inertia SSR](#inertia-ssr)
-- [Community Maintained Starter Kits](#community-maintained-starter-kits)
-- [Frequently Asked Questions](#faqs)
 
-<a name="introduction"></a>
-## Introduction
 
-To give you a head start building your new Laravel application, we are happy to offer [application starter kits](https://laravel.com/starter-kits). These starter kits give you a head start on building your next Laravel application, and include the routes, controllers, and views you need to register and authenticate your application's users.
 
-While you are welcome to use these starter kits, they are not required. You are free to build your own application from the ground up by simply installing a fresh copy of Laravel. Either way, we know you will build something great!
 
-<a name="creating-an-application"></a>
-## Creating an Application Using a Starter Kit
 
-To create a new Laravel application using one of our starter kits, you should first [install PHP and the Laravel CLI tool](/laravel/12.x/installation#installing-php). If you already have PHP and Composer installed, you may install the Laravel installer CLI tool via Composer:
+
+
+
+
+
+
+
+
+
+
+
+## 소개 {#introduction}
+
+새로운 Laravel 애플리케이션 개발을 빠르게 시작할 수 있도록, 저희는 [애플리케이션 스타터 키트](https://laravel.com/starter-kits)를 제공합니다. 이 스타터 키트들은 여러분이 다음 Laravel 애플리케이션을 빠르게 구축할 수 있도록 도와주며, 사용자 등록과 인증에 필요한 라우트, 컨트롤러, 뷰를 포함하고 있습니다.
+
+이 스타터 키트들을 자유롭게 사용할 수 있지만, 반드시 사용해야 하는 것은 아닙니다. Laravel의 새 복사본을 설치하여 처음부터 직접 애플리케이션을 구축해도 무방합니다. 어떤 방식을 선택하든, 여러분이 멋진 결과물을 만들어낼 것이라 믿습니다!
+
+
+## 스타터 키트를 사용하여 애플리케이션 생성하기 {#creating-an-application}
+
+Laravel의 스타터 키트 중 하나를 사용하여 새로운 Laravel 애플리케이션을 생성하려면, 먼저 [PHP와 Laravel CLI 도구를 설치](/laravel/12.x/installation#installing-php)해야 합니다. 이미 PHP와 Composer가 설치되어 있다면, Composer를 통해 Laravel 인스톨러 CLI 도구를 설치할 수 있습니다:
 
 ```shell
 composer global require laravel/installer
 ```
 
-Then, create a new Laravel application using the Laravel installer CLI. The Laravel installer will prompt you to select your preferred starter kit:
+그런 다음, Laravel 인스톨러 CLI를 사용하여 새로운 Laravel 애플리케이션을 생성합니다. Laravel 인스톨러는 선호하는 스타터 키트를 선택하라는 안내를 제공합니다:
 
 ```shell
 laravel new my-app
 ```
 
-After creating your Laravel application, you only need to install its frontend dependencies via NPM and start the Laravel development server:
+Laravel 애플리케이션을 생성한 후에는, NPM을 통해 프론트엔드 의존성을 설치하고 Laravel 개발 서버를 시작하면 됩니다:
 
 ```shell
 cd my-app
@@ -45,65 +45,65 @@ npm install && npm run build
 composer run dev
 ```
 
-Once you have started the Laravel development server, your application will be accessible in your web browser at [http://localhost:8000](http://localhost:8000).
+Laravel 개발 서버를 시작하면, 웹 브라우저에서 [http://localhost:8000](http://localhost:8000) 주소로 애플리케이션에 접속할 수 있습니다.
 
-<a name="available-starter-kits"></a>
-## Available Starter Kits
 
-<a name="react"></a>
-### React
+## 사용 가능한 스타터 키트 {#available-starter-kits}
 
-Our React starter kit provides a robust, modern starting point for building Laravel applications with a React frontend using [Inertia](https://inertiajs.com).
 
-Inertia allows you to build modern, single-page React applications using classic server-side routing and controllers. This lets you enjoy the frontend power of React combined with the incredible backend productivity of Laravel and lightning-fast Vite compilation.
+### React {#react}
 
-The React starter kit utilizes React 19, TypeScript, Tailwind, and the [shadcn/ui](https://ui.shadcn.com) component library.
+React 스타터 키트는 [Inertia](https://inertiajs.com)를 활용하여 React 프론트엔드와 함께 Laravel 애플리케이션을 구축할 수 있는 견고하고 현대적인 시작점을 제공합니다.
 
-<a name="vue"></a>
-### Vue
+Inertia를 사용하면 고전적인 서버 사이드 라우팅과 컨트롤러를 이용해 현대적인 싱글 페이지 React 애플리케이션을 만들 수 있습니다. 이를 통해 React의 강력한 프론트엔드 기능과 Laravel의 뛰어난 백엔드 생산성, 그리고 번개처럼 빠른 Vite 컴파일을 동시에 누릴 수 있습니다.
 
-Our Vue starter kit provides a great starting point for building Laravel applications with a Vue frontend using [Inertia](https://inertiajs.com).
+React 스타터 키트는 React 19, TypeScript, Tailwind, 그리고 [shadcn/ui](https://ui.shadcn.com) 컴포넌트 라이브러리를 사용합니다.
 
-Inertia allows you to build modern, single-page Vue applications using classic server-side routing and controllers. This lets you enjoy the frontend power of Vue combined with the incredible backend productivity of Laravel and lightning-fast Vite compilation.
 
-The Vue starter kit utilizes the Vue Composition API, TypeScript, Tailwind, and the [shadcn-vue](https://www.shadcn-vue.com/) component library.
+### Vue {#vue}
 
-<a name="livewire"></a>
-### Livewire
+Vue 스타터 키트는 [Inertia](https://inertiajs.com)를 활용하여 Vue 프론트엔드와 함께 Laravel 애플리케이션을 구축할 수 있는 훌륭한 시작점을 제공합니다.
 
-Our Livewire starter kit provides the perfect starting point for building Laravel applications with a [Laravel Livewire](https://livewire.laravel.com) frontend.
+Inertia를 사용하면 고전적인 서버 사이드 라우팅과 컨트롤러를 이용해 현대적인 싱글 페이지 Vue 애플리케이션을 만들 수 있습니다. 이를 통해 Vue의 강력한 프론트엔드 기능과 Laravel의 뛰어난 백엔드 생산성, 그리고 번개처럼 빠른 Vite 컴파일을 동시에 누릴 수 있습니다.
 
-Livewire is a powerful way of building dynamic, reactive, frontend UIs using just PHP. It's a great fit for teams that primarily use Blade templates and are looking for a simpler alternative to JavaScript-driven SPA frameworks like React and Vue.
+Vue 스타터 키트는 Vue Composition API, TypeScript, Tailwind, 그리고 [shadcn-vue](https://www.shadcn-vue.com/) 컴포넌트 라이브러리를 사용합니다.
 
-The Livewire starter kit utilizes Livewire, Tailwind, and the [Flux UI](https://fluxui.dev) component library.
 
-<a name="starter-kit-customization"></a>
-## Starter Kit Customization
+### Livewire {#livewire}
 
-<a name="react-customization"></a>
-### React
+Livewire 스타터 키트는 [Laravel Livewire](https://livewire.laravel.com) 프론트엔드를 사용하여 Laravel 애플리케이션을 구축할 수 있는 완벽한 시작점을 제공합니다.
 
-Our React starter kit is built with Inertia 2, React 19, Tailwind 4, and [shadcn/ui](https://ui.shadcn.com). As with all of our starter kits, all of the backend and frontend code exists within your application to allow for full customization.
+Livewire는 PHP만으로 동적이고 반응형인 프론트엔드 UI를 구축할 수 있는 강력한 방법입니다. Blade 템플릿을 주로 사용하는 팀이나 React, Vue와 같은 자바스크립트 기반 SPA 프레임워크보다 더 간단한 대안을 찾는 팀에 적합합니다.
 
-The majority of the frontend code is located in the `resources/js` directory. You are free to modify any of the code to customize the appearance and behavior of your application:
+Livewire 스타터 키트는 Livewire, Tailwind, 그리고 [Flux UI](https://fluxui.dev) 컴포넌트 라이브러리를 사용합니다.
+
+
+## 스타터 키트 커스터마이징 {#starter-kit-customization}
+
+
+### React {#react-customization}
+
+React 스타터 키트는 Inertia 2, React 19, Tailwind 4, 그리고 [shadcn/ui](https://ui.shadcn.com)로 구성되어 있습니다. 모든 스타터 키트와 마찬가지로, 백엔드와 프론트엔드의 모든 코드는 여러분의 애플리케이션 내에 존재하므로 완전한 커스터마이징이 가능합니다.
+
+프론트엔드 코드의 대부분은 `resources/js` 디렉터리에 위치해 있습니다. 애플리케이션의 외관과 동작을 원하는 대로 수정할 수 있습니다:
 
 ```text
 resources/js/
-├── components/    # Reusable React components
-├── hooks/         # React hooks
-├── layouts/       # Application layouts
-├── lib/           # Utility functions and configuration
-├── pages/         # Page components
-└── types/         # TypeScript definitions
+├── components/    # 재사용 가능한 React 컴포넌트
+├── hooks/         # React 훅
+├── layouts/       # 애플리케이션 레이아웃
+├── lib/           # 유틸리티 함수 및 설정
+├── pages/         # 페이지 컴포넌트
+└── types/         # TypeScript 정의
 ```
 
-To publish additional shadcn components, first [find the component you want to publish](https://ui.shadcn.com). Then, publish the component using `npx`:
+추가적인 shadcn 컴포넌트를 퍼블리시하려면, 먼저 [퍼블리시할 컴포넌트를 찾으세요](https://ui.shadcn.com). 그런 다음, `npx`를 사용해 컴포넌트를 퍼블리시합니다:
 
 ```shell
 npx shadcn@latest add switch
 ```
 
-In this example, the command will publish the Switch component to `resources/js/components/ui/switch.tsx`. Once the component has been published, you can use it in any of your pages:
+이 예시에서는 Switch 컴포넌트가 `resources/js/components/ui/switch.tsx` 경로에 퍼블리시됩니다. 컴포넌트가 퍼블리시된 후에는, 원하는 페이지 어디에서든 해당 컴포넌트를 사용할 수 있습니다.
 
 ```jsx
 import { Switch } from "@/components/ui/switch"
@@ -119,62 +119,62 @@ const MyPage = () => {
 export default MyPage;
 ```
 
-<a name="react-available-layouts"></a>
-#### Available Layouts
 
-The React starter kit includes two different primary layouts for you to choose from: a "sidebar" layout and a "header" layout. The sidebar layout is the default, but you can switch to the header layout by modifying the layout that is imported at the top of your application's `resources/js/layouts/app-layout.tsx` file:
+#### 사용 가능한 레이아웃 {#react-available-layouts}
 
-```js
-import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout'; // [tl! remove]
-import AppLayoutTemplate from '@/layouts/app/app-header-layout'; // [tl! add]
-```
-
-<a name="react-sidebar-variants"></a>
-#### Sidebar Variants
-
-The sidebar layout includes three different variants: the default sidebar variant, the "inset" variant, and the "floating" variant. You may choose the variant you like best by modifying the `resources/js/components/app-sidebar.tsx` component:
-
-```text
-<Sidebar collapsible="icon" variant="sidebar"> [tl! remove]
-<Sidebar collapsible="icon" variant="inset"> [tl! add]
-```
-
-<a name="react-authentication-page-layout-variants"></a>
-#### Authentication Page Layout Variants
-
-The authentication pages included with the React starter kit, such as the login page and registration page, also offer three different layout variants: "simple", "card", and "split".
-
-To change your authentication layout, modify the layout that is imported at the top of your application's `resources/js/layouts/auth-layout.tsx` file:
+React 스타터 키트에는 "사이드바" 레이아웃과 "헤더" 레이아웃, 두 가지 주요 레이아웃이 포함되어 있습니다. 기본값은 사이드바 레이아웃이지만, 애플리케이션의 `resources/js/layouts/app-layout.tsx` 파일 상단에서 임포트하는 레이아웃을 변경하여 헤더 레이아웃으로 전환할 수 있습니다:
 
 ```js
-import AuthLayoutTemplate from '@/layouts/auth/auth-simple-layout'; // [tl! remove]
-import AuthLayoutTemplate from '@/layouts/auth/auth-split-layout'; // [tl! add]
+import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout'; // [!code --]
+import AppLayoutTemplate from '@/layouts/app/app-header-layout'; // [!code ++]
 ```
 
-<a name="vue-customization"></a>
-### Vue
 
-Our Vue starter kit is built with Inertia 2, Vue 3 Composition API, Tailwind, and [shadcn-vue](https://www.shadcn-vue.com/). As with all of our starter kits, all of the backend and frontend code exists within your application to allow for full customization.
+#### 사이드바 변형 {#react-sidebar-variants}
 
-The majority of the frontend code is located in the `resources/js` directory. You are free to modify any of the code to customize the appearance and behavior of your application:
+사이드바 레이아웃에는 기본 사이드바, "inset" 변형, "floating" 변형 등 세 가지 변형이 포함되어 있습니다. 원하는 변형을 선택하려면 `resources/js/components/app-sidebar.tsx` 컴포넌트에서 다음과 같이 수정하면 됩니다:
+
+```tsx
+<Sidebar collapsible="icon" variant="sidebar"> // [!code --]
+<Sidebar collapsible="icon" variant="inset"> // [!code ++]
+```
+
+
+#### 인증 페이지 레이아웃 변형 {#react-authentication-page-layout-variants}
+
+React 스타터 키트에 포함된 로그인 페이지, 회원가입 페이지 등 인증 페이지 역시 "simple", "card", "split" 세 가지 레이아웃 변형을 제공합니다.
+
+인증 레이아웃을 변경하려면, 애플리케이션의 `resources/js/layouts/auth-layout.tsx` 파일 상단에서 임포트하는 레이아웃을 수정하면 됩니다:
+
+```js
+import AuthLayoutTemplate from '@/layouts/auth/auth-simple-layout'; // [!code --]
+import AuthLayoutTemplate from '@/layouts/auth/auth-split-layout'; // [!code ++]
+```
+
+
+### Vue {#vue-customization}
+
+Vue 스타터 키트는 Inertia 2, Vue 3 Composition API, Tailwind, 그리고 [shadcn-vue](https://www.shadcn-vue.com/)로 구성되어 있습니다. 모든 스타터 키트와 마찬가지로, 백엔드와 프론트엔드의 모든 코드는 여러분의 애플리케이션 내에 존재하므로 완전한 커스터마이징이 가능합니다.
+
+프론트엔드 코드의 대부분은 `resources/js` 디렉터리에 위치해 있습니다. 애플리케이션의 외관과 동작을 원하는 대로 자유롭게 수정할 수 있습니다:
 
 ```text
 resources/js/
-├── components/    # Reusable Vue components
-├── composables/   # Vue composables / hooks
-├── layouts/       # Application layouts
-├── lib/           # Utility functions and configuration
-├── pages/         # Page components
-└── types/         # TypeScript definitions
+├── components/    # 재사용 가능한 Vue 컴포넌트
+├── composables/   # Vue 컴포저블 / 훅
+├── layouts/       # 애플리케이션 레이아웃
+├── lib/           # 유틸리티 함수 및 설정
+├── pages/         # 페이지 컴포넌트
+└── types/         # TypeScript 정의
 ```
 
-To publish additional shadcn-vue components, first [find the component you want to publish](https://www.shadcn-vue.com). Then, publish the component using `npx`:
+추가적인 shadcn-vue 컴포넌트를 퍼블리시하려면, 먼저 [퍼블리시할 컴포넌트를 찾으세요](https://www.shadcn-vue.com). 그런 다음, `npx`를 사용해 컴포넌트를 퍼블리시합니다:
 
 ```shell
 npx shadcn-vue@latest add switch
 ```
 
-In this example, the command will publish the Switch component to `resources/js/components/ui/Switch.vue`. Once the component has been published, you can use it in any of your pages:
+이 예시에서는 Switch 컴포넌트가 `resources/js/components/ui/Switch.vue` 경로에 퍼블리시됩니다. 컴포넌트가 퍼블리시된 후에는, 원하는 페이지 어디에서든 해당 컴포넌트를 사용할 수 있습니다.
 
 ```vue
 <script setup lang="ts">
@@ -188,65 +188,65 @@ import { Switch } from '@/Components/ui/switch'
 </template>
 ```
 
-<a name="vue-available-layouts"></a>
-#### Available Layouts
 
-The Vue starter kit includes two different primary layouts for you to choose from: a "sidebar" layout and a "header" layout. The sidebar layout is the default, but you can switch to the header layout by modifying the layout that is imported at the top of your application's `resources/js/layouts/AppLayout.vue` file:
+#### 사용 가능한 레이아웃 {#vue-available-layouts}
 
-```js
-import AppLayout from '@/layouts/app/AppSidebarLayout.vue'; // [tl! remove]
-import AppLayout from '@/layouts/app/AppHeaderLayout.vue'; // [tl! add]
-```
-
-<a name="vue-sidebar-variants"></a>
-#### Sidebar Variants
-
-The sidebar layout includes three different variants: the default sidebar variant, the "inset" variant, and the "floating" variant. You may choose the variant you like best by modifying the `resources/js/components/AppSidebar.vue` component:
-
-```text
-<Sidebar collapsible="icon" variant="sidebar"> [tl! remove]
-<Sidebar collapsible="icon" variant="inset"> [tl! add]
-```
-
-<a name="vue-authentication-page-layout-variants"></a>
-#### Authentication Page Layout Variants
-
-The authentication pages included with the Vue starter kit, such as the login page and registration page, also offer three different layout variants: "simple", "card", and "split".
-
-To change your authentication layout, modify the layout that is imported at the top of your application's `resources/js/layouts/AuthLayout.vue` file:
+Vue 스타터 키트에는 "사이드바" 레이아웃과 "헤더" 레이아웃, 두 가지 주요 레이아웃이 포함되어 있습니다. 기본값은 사이드바 레이아웃이지만, 애플리케이션의 `resources/js/layouts/AppLayout.vue` 파일 상단에서 임포트하는 레이아웃을 변경하여 헤더 레이아웃으로 전환할 수 있습니다.
 
 ```js
-import AuthLayout from '@/layouts/auth/AuthSimpleLayout.vue'; // [tl! remove]
-import AuthLayout from '@/layouts/auth/AuthSplitLayout.vue'; // [tl! add]
+import AppLayout from '@/layouts/app/AppSidebarLayout.vue'; // [!code --]
+import AppLayout from '@/layouts/app/AppHeaderLayout.vue'; // [!code ++]
 ```
 
-<a name="livewire-customization"></a>
-### Livewire
 
-Our Livewire starter kit is built with Livewire 3, Tailwind, and [Flux UI](https://fluxui.dev/). As with all of our starter kits, all of the backend and frontend code exists within your application to allow for full customization.
+#### 사이드바 변형 {#vue-sidebar-variants}
 
-#### Livewire and Volt
+사이드바 레이아웃에는 기본 사이드바, "inset" 변형, "floating" 변형 등 세 가지 변형이 포함되어 있습니다. 원하는 변형을 선택하려면 `resources/js/components/AppSidebar.vue` 컴포넌트에서 해당 옵션을 수정하면 됩니다.
 
-The majority of the frontend code is located in the `resources/views` directory. You are free to modify any of the code to customize the appearance and behavior of your application:
+```vue
+<Sidebar collapsible="icon" variant="sidebar"> // [!code --]
+<Sidebar collapsible="icon" variant="inset"> // [!code ++]
+```
+
+
+#### 인증 페이지 레이아웃 변형 {#vue-authentication-page-layout-variants}
+
+Vue 스타터 키트에 포함된 로그인 페이지, 회원가입 페이지 등 인증 페이지 역시 "simple", "card", "split" 세 가지 레이아웃 변형을 제공합니다.
+
+인증 레이아웃을 변경하려면, 애플리케이션의 `resources/js/layouts/AuthLayout.vue` 파일 상단에서 임포트하는 레이아웃을 수정하면 됩니다.
+
+```js
+import AuthLayout from '@/layouts/auth/AuthSimpleLayout.vue'; // [!code --]
+import AuthLayout from '@/layouts/auth/AuthSplitLayout.vue'; // [!code ++]
+```
+
+
+### Livewire {#livewire-customization}
+
+Livewire 스타터 키트는 Livewire 3, Tailwind, 그리고 [Flux UI](https://fluxui.dev/)로 구성되어 있습니다. 모든 스타터 키트와 마찬가지로, 백엔드와 프론트엔드의 모든 코드는 여러분의 애플리케이션 내에 존재하므로 완전한 커스터마이징이 가능합니다.
+
+#### Livewire와 Volt
+
+프론트엔드 코드의 대부분은 `resources/views` 디렉터리에 위치해 있습니다. 애플리케이션의 외관과 동작을 원하는 대로 자유롭게 수정할 수 있습니다:
 
 ```text
 resources/views
-├── components            # Reusable Livewire components
-├── flux                  # Customized Flux components
-├── livewire              # Livewire pages
-├── partials              # Reusable Blade partials
-├── dashboard.blade.php   # Authenticated user dashboard
-├── welcome.blade.php     # Guest user welcome page
+├── components            # 재사용 가능한 Livewire 컴포넌트
+├── flux                  # 커스터마이즈된 Flux 컴포넌트
+├── livewire              # Livewire 페이지
+├── partials              # 재사용 가능한 Blade 파셜
+├── dashboard.blade.php   # 인증된 사용자 대시보드
+├── welcome.blade.php     # 비회원 사용자 환영 페이지
 ```
 
-#### Traditional Livewire Components
+#### 전통적인 Livewire 컴포넌트
 
-The frontend code is located in the `resouces/views` directory, while the `app/Livewire` directory contains the corresponding backend logic for the Livewire components.
+프론트엔드 코드는 `resources/views` 디렉터리에 위치하며, `app/Livewire` 디렉터리에는 Livewire 컴포넌트의 백엔드 로직이 들어 있습니다.
 
-<a name="livewire-available-layouts"></a>
-#### Available Layouts
 
-The Livewire starter kit includes two different primary layouts for you to choose from: a "sidebar" layout and a "header" layout. The sidebar layout is the default, but you can switch to the header layout by modifying the layout that is used by your application's `resources/views/components/layouts/app.blade.php` file. In addition, you should add the `container` attribute to the main Flux component:
+#### 사용 가능한 레이아웃 {#livewire-available-layouts}
+
+Livewire 스타터 키트에는 "사이드바" 레이아웃과 "헤더" 레이아웃, 두 가지 주요 레이아웃이 포함되어 있습니다. 기본값은 사이드바 레이아웃이지만, 애플리케이션의 `resources/views/components/layouts/app.blade.php` 파일에서 사용되는 레이아웃을 변경하여 헤더 레이아웃으로 전환할 수 있습니다. 또한, 메인 Flux 컴포넌트에 `container` 속성을 추가해야 합니다.
 
 ```blade
 <x-layouts.app.header>
@@ -256,12 +256,12 @@ The Livewire starter kit includes two different primary layouts for you to choos
 </x-layouts.app.header>
 ```
 
-<a name="livewire-authentication-page-layout-variants"></a>
-#### Authentication Page Layout Variants
 
-The authentication pages included with the Livewire starter kit, such as the login page and registration page, also offer three different layout variants: "simple", "card", and "split".
+#### 인증 페이지 레이아웃 변형 {#livewire-authentication-page-layout-variants}
 
-To change your authentication layout, modify the layout that is used by your application's `resources/views/components/layouts/auth.blade.php` file:
+Livewire 스타터 키트에 포함된 로그인 페이지, 회원가입 페이지 등 인증 페이지 역시 "simple", "card", "split" 세 가지 레이아웃 변형을 제공합니다.
+
+인증 레이아웃을 변경하려면, 애플리케이션의 `resources/views/components/layouts/auth.blade.php` 파일에서 사용되는 레이아웃을 수정하면 됩니다.
 
 ```blade
 <x-layouts.auth.split>
@@ -269,27 +269,27 @@ To change your authentication layout, modify the layout that is used by your app
 </x-layouts.auth.split>
 ```
 
-<a name="workos"></a>
-## WorkOS AuthKit Authentication
 
-By default, the React, Vue, and Livewire starter kits all utilize Laravel's built-in authentication system to offer login, registration, password reset, email verification, and more. In addition, we also offer a [WorkOS AuthKit](https://authkit.com) powered variant of each starter kit that offers:
+## WorkOS AuthKit 인증 {#workos}
+
+기본적으로 React, Vue, Livewire 스타터 키트는 모두 Laravel의 내장 인증 시스템을 사용하여 로그인, 회원가입, 비밀번호 재설정, 이메일 인증 등 다양한 기능을 제공합니다. 추가로, 각 스타터 키트에는 [WorkOS AuthKit](https://authkit.com) 기반의 변형도 제공되며, 이 변형에서는 다음과 같은 기능을 사용할 수 있습니다:
 
 <div class="content-list" markdown="1">
 
-- Social authentication (Google, Microsoft, GitHub, and Apple)
-- Passkey authentication
-- Email based "Magic Auth"
+- 소셜 인증 (Google, Microsoft, GitHub, Apple)
+- 패스키 인증
+- 이메일 기반 "매직 인증"
 - SSO
 
 </div>
 
-Using WorkOS as your authentication provider [requires a WorkOS account](https://workos.com). WorkOS offers free authentication for applications up to 1 million monthly active users.
+WorkOS를 인증 제공자로 사용하려면 [WorkOS 계정](https://workos.com)이 필요합니다. WorkOS는 월간 활성 사용자 100만 명까지 무료 인증을 제공합니다.
 
-To use WorkOS AuthKit as your application's authentication provider, select the WorkOS option when creating your new starter kit powered application via `laravel new`.
+WorkOS AuthKit을 애플리케이션의 인증 제공자로 사용하려면, `laravel new` 명령어로 새로운 스타터 키트 기반 애플리케이션을 생성할 때 WorkOS 옵션을 선택하면 됩니다.
 
-### Configuring Your WorkOS Starter Kit
+### WorkOS 스타터 키트 설정하기
 
-After creating a new application using a WorkOS powered starter kit, you should set the `WORKOS_CLIENT_ID`, `WORKOS_API_KEY`, and `WORKOS_REDIRECT_URL` environment variables in your application's `.env` file. These variables should match the values provided to you in the WorkOS dashboard for your application:
+WorkOS 기반 스타터 키트로 새로운 애플리케이션을 생성한 후에는, 애플리케이션의 `.env` 파일에 `WORKOS_CLIENT_ID`, `WORKOS_API_KEY`, `WORKOS_REDIRECT_URL` 환경 변수를 설정해야 합니다. 이 변수들은 WorkOS 대시보드에서 애플리케이션에 대해 제공받은 값과 일치해야 합니다:
 
 ```ini
 WORKOS_CLIENT_ID=your-client-id
@@ -297,59 +297,59 @@ WORKOS_API_KEY=your-api-key
 WORKOS_REDIRECT_URL="${APP_URL}/authenticate"
 ```
 
-Additionally, you should configure the application homepage URL in your WorkOS dashboard. This URL is where users will be redirected after they log out of your application.
+또한, WorkOS 대시보드에서 애플리케이션의 홈페이지 URL도 설정해야 합니다. 이 URL은 사용자가 애플리케이션에서 로그아웃한 후 리디렉션될 주소입니다.
 
-<a name="configuring-authkit-authentication-methods"></a>
-#### Configuring AuthKit Authentication Methods
 
-When using a WorkOS powered starter kit, we recommend that you disable "Email + Password" authentication within your application's WorkOS AuthKit configuration settings, allowing users to only authenticate via social authentication providers, passkeys, "Magic Auth", and SSO. This allows your application to totally avoid handling user passwords.
+#### AuthKit 인증 방식 설정하기 {#configuring-authkit-authentication-methods}
 
-<a name="configuring-authkit-session-timeouts"></a>
-#### Configuring AuthKit Session Timeouts
+WorkOS 기반 스타터 키트를 사용할 때는, 애플리케이션의 WorkOS AuthKit 설정에서 "이메일 + 비밀번호" 인증을 비활성화하는 것을 권장합니다. 이렇게 하면 사용자는 소셜 인증 제공자, 패스키, "매직 인증", SSO만을 통해 인증할 수 있습니다. 이 방식은 애플리케이션이 사용자 비밀번호를 직접 다루지 않도록 하여 보안을 강화할 수 있습니다.
 
-In addition, we recommend that you configure your WorkOS AuthKit session inactivity timeout to match your Laravel application's configured session timeout threshold, which is typically two hours.
 
-<a name="inertia-ssr"></a>
-### Inertia SSR
+#### AuthKit 세션 타임아웃 설정하기 {#configuring-authkit-session-timeouts}
 
-The React and Vue starter kits are compatible with Inertia's [server-side rendering](https://inertiajs.com/server-side-rendering) capabilities. To build an Inertia SSR compatible bundle for your application, run the `build:ssr` command:
+또한, WorkOS AuthKit의 세션 비활성화 타임아웃을 Laravel 애플리케이션에서 설정한 세션 타임아웃 임계값(일반적으로 2시간)과 일치하도록 설정하는 것을 권장합니다.
+
+
+### Inertia SSR {#inertia-ssr}
+
+React와 Vue 스타터 키트는 Inertia의 [서버 사이드 렌더링(SSR)](https://inertiajs.com/server-side-rendering) 기능과 호환됩니다. 애플리케이션에 대해 Inertia SSR 호환 번들을 빌드하려면, 다음과 같이 `build:ssr` 명령어를 실행하세요:
 
 ```shell
 npm run build:ssr
 ```
 
-For convenience, a `composer dev:ssr` command is also available. This command will start the Laravel development server and Inertia SSR server after building an SSR compatible bundle for your application, allowing you to test your application locally using Inertia's server-side rendering engine:
+편의를 위해 `composer dev:ssr` 명령어도 제공됩니다. 이 명령어는 SSR 호환 번들을 빌드한 후, Laravel 개발 서버와 Inertia SSR 서버를 함께 시작하여 Inertia의 서버 사이드 렌더링 엔진을 사용해 로컬에서 애플리케이션을 테스트할 수 있도록 해줍니다:
 
 ```shell
 composer dev:ssr
 ```
 
-<a name="community-maintained-starter-kits"></a>
-### Community Maintained Starter Kits
 
-When creating a new Laravel application using the Laravel installer, you may provide any community maintained starter kit available on Packagist to the `--using` flag:
+### 커뮤니티 유지 스타터 키트 {#community-maintained-starter-kits}
+
+Laravel 설치기를 사용해 새로운 Laravel 애플리케이션을 생성할 때, Packagist에 등록된 커뮤니티 유지 스타터 키트를 `--using` 플래그에 지정하여 사용할 수 있습니다:
 
 ```shell
 laravel new my-app --using=example/starter-kit
 ```
 
-<a name="creating-starter-kits"></a>
-#### Creating Starter Kits
 
-To ensure your starter kit is available to others, you will need to publish it to [Packagist](https://packagist.org). Your starter kit should define its required environment variables in its `.env.example` file, and any necessary post-installation commands should be listed in the `post-create-project-cmd` array of the starter kit's `composer.json` file.
+#### 스타터 키트 만들기 {#creating-starter-kits}
 
-<a name="faqs"></a>
-### Frequently Asked Questions
+다른 사람들이 사용할 수 있도록 스타터 키트를 제공하려면, [Packagist](https://packagist.org)에 배포해야 합니다. 스타터 키트는 필요한 환경 변수를 `.env.example` 파일에 정의해야 하며, 설치 후 실행해야 하는 명령어는 스타터 키트의 `composer.json` 파일 내 `post-create-project-cmd` 배열에 명시해야 합니다.
 
-<a name="faq-upgrade"></a>
-#### How do I upgrade?
 
-Every starter kit gives you a solid starting point for your next application. With full ownership of the code, you can tweak, customize, and build your application exactly as you envision. However, there is no need to update the starter kit itself.
+### 자주 묻는 질문 {#faqs}
 
-<a name="faq-enable-email-verification"></a>
-#### How do I enable email verification?
 
-Email verification can be added by uncommenting the `MustVerifyEmail` import in your `App/Models/User.php` model and ensuring the model implements the `MustVerifyEmail` interface:
+#### 어떻게 업그레이드하나요? {#faq-upgrade}
+
+모든 스타터 키트는 새로운 애플리케이션을 위한 견고한 시작점을 제공합니다. 코드에 대한 완전한 소유권이 있으므로, 원하는 대로 수정하고 커스터마이즈하며 애플리케이션을 구축할 수 있습니다. 하지만 스타터 키트 자체를 별도로 업데이트할 필요는 없습니다.
+
+
+#### 이메일 인증을 활성화하려면 어떻게 하나요? {#faq-enable-email-verification}
+
+이메일 인증을 추가하려면, `App/Models/User.php` 모델에서 `MustVerifyEmail` 임포트를 주석 해제하고, 해당 모델이 `MustVerifyEmail` 인터페이스를 구현하도록 해야 합니다:
 
 ```php
 <?php
@@ -365,7 +365,7 @@ class User extends Authenticatable implements MustVerifyEmail
 }
 ```
 
-After registration, users will receive a verification email. To restrict access to certain routes until the user's email address is verified, add the `verified` middleware to the routes:
+회원가입 후, 사용자는 인증 이메일을 받게 됩니다. 사용자의 이메일이 인증될 때까지 특정 라우트에 접근을 제한하려면, 해당 라우트에 `verified` 미들웨어를 추가하세요:
 
 ```php
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -376,15 +376,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 ```
 
 > [!NOTE]
-> Email verification is not required when using the [WorkOS](#workos) variant of the starter kits.
+> [WorkOS](#workos) 변형 스타터 키트를 사용하는 경우에는 이메일 인증이 필요하지 않습니다.
 
-<a name="faq-modify-email-template"></a>
-#### How do I modify the default email template?
 
-You may want to customize the default email template to better align with your application's branding. To modify this template, you should publish the email views to your application with the following command:
+#### 기본 이메일 템플릿을 어떻게 수정하나요? {#faq-modify-email-template}
+
+애플리케이션의 브랜딩에 맞게 기본 이메일 템플릿을 커스터마이즈하고 싶을 수 있습니다. 이 템플릿을 수정하려면, 다음 명령어로 이메일 뷰 파일을 애플리케이션에 퍼블리시하세요:
 
 ```
 php artisan vendor:publish --tag=laravel-mail
 ```
 
-This will generate several files in `resources/views/vendor/mail`. You can modify any of these files as well as the `resources/views/vendor/mail/themes/default.css` file to change the look and appearance of the default email template.
+이 명령어를 실행하면 `resources/views/vendor/mail` 디렉터리에 여러 파일이 생성됩니다. 이 파일들과 `resources/views/vendor/mail/themes/default.css` 파일을 수정하여 기본 이메일 템플릿의 디자인과 스타일을 변경할 수 있습니다.

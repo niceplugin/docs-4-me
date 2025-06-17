@@ -1,71 +1,71 @@
-# Mail
+# 메일
 
-- [Introduction](#introduction)
-    - [Configuration](#configuration)
-    - [Driver Prerequisites](#driver-prerequisites)
-    - [Failover Configuration](#failover-configuration)
-    - [Round Robin Configuration](#round-robin-configuration)
-- [Generating Mailables](#generating-mailables)
-- [Writing Mailables](#writing-mailables)
-    - [Configuring the Sender](#configuring-the-sender)
-    - [Configuring the View](#configuring-the-view)
-    - [View Data](#view-data)
-    - [Attachments](#attachments)
-    - [Inline Attachments](#inline-attachments)
-    - [Attachable Objects](#attachable-objects)
-    - [Headers](#headers)
-    - [Tags and Metadata](#tags-and-metadata)
-    - [Customizing the Symfony Message](#customizing-the-symfony-message)
-- [Markdown Mailables](#markdown-mailables)
-    - [Generating Markdown Mailables](#generating-markdown-mailables)
-    - [Writing Markdown Messages](#writing-markdown-messages)
-    - [Customizing the Components](#customizing-the-components)
-- [Sending Mail](#sending-mail)
-    - [Queueing Mail](#queueing-mail)
-- [Rendering Mailables](#rendering-mailables)
-    - [Previewing Mailables in the Browser](#previewing-mailables-in-the-browser)
-- [Localizing Mailables](#localizing-mailables)
-- [Testing](#testing-mailables)
-    - [Testing Mailable Content](#testing-mailable-content)
-    - [Testing Mailable Sending](#testing-mailable-sending)
-- [Mail and Local Development](#mail-and-local-development)
-- [Events](#events)
-- [Custom Transports](#custom-transports)
-    - [Additional Symfony Transports](#additional-symfony-transports)
 
-<a name="introduction"></a>
-## Introduction
 
-Sending email doesn't have to be complicated. Laravel provides a clean, simple email API powered by the popular [Symfony Mailer](https://symfony.com/doc/current/mailer.html) component. Laravel and Symfony Mailer provide drivers for sending email via SMTP, Mailgun, Postmark, Resend, Amazon SES, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice.
 
-<a name="configuration"></a>
-### Configuration
 
-Laravel's email services may be configured via your application's `config/mail.php` configuration file. Each mailer configured within this file may have its own unique configuration and even its own unique "transport", allowing your application to use different email services to send certain email messages. For example, your application might use Postmark to send transactional emails while using Amazon SES to send bulk emails.
 
-Within your `mail` configuration file, you will find a `mailers` configuration array. This array contains a sample configuration entry for each of the major mail drivers / transports supported by Laravel, while the `default` configuration value determines which mailer will be used by default when your application needs to send an email message.
 
-<a name="driver-prerequisites"></a>
-### Driver / Transport Prerequisites
 
-The API based drivers such as Mailgun, Postmark, Resend, and MailerSend are often simpler and faster than sending mail via SMTP servers. Whenever possible, we recommend that you use one of these drivers.
 
-<a name="mailgun-driver"></a>
-#### Mailgun Driver
 
-To use the Mailgun driver, install Symfony's Mailgun Mailer transport via Composer:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 소개 {#introduction}
+
+이메일 전송은 복잡할 필요가 없습니다. Laravel은 인기 있는 [Symfony Mailer](https://symfony.com/doc/current/mailer.html) 컴포넌트를 기반으로 한 깔끔하고 간단한 이메일 API를 제공합니다. Laravel과 Symfony Mailer는 SMTP, Mailgun, Postmark, Resend, Amazon SES, 그리고 `sendmail`을 통한 이메일 전송 드라이버를 제공하므로, 로컬 또는 클라우드 기반 서비스 중 원하는 방식을 통해 빠르게 메일 전송을 시작할 수 있습니다.
+
+
+### 설정 {#configuration}
+
+Laravel의 이메일 서비스는 애플리케이션의 `config/mail.php` 설정 파일을 통해 구성할 수 있습니다. 이 파일에 설정된 각 메일러는 고유한 설정과 "트랜스포트"를 가질 수 있어, 애플리케이션이 특정 이메일 메시지를 보낼 때 서로 다른 이메일 서비스를 사용할 수 있습니다. 예를 들어, 애플리케이션에서 거래 관련 이메일은 Postmark를 사용하고, 대량 이메일은 Amazon SES를 사용할 수 있습니다.
+
+`mail` 설정 파일 내에는 `mailers` 설정 배열이 있습니다. 이 배열에는 Laravel이 지원하는 주요 메일 드라이버/트랜스포트에 대한 샘플 설정 항목이 포함되어 있으며, `default` 설정 값은 애플리케이션에서 이메일 메시지를 보낼 때 기본적으로 사용할 메일러를 결정합니다.
+
+
+### 드라이버 / 전송 사전 준비 사항 {#driver-prerequisites}
+
+Mailgun, Postmark, Resend, MailerSend과 같은 API 기반 드라이버는 SMTP 서버를 통해 메일을 전송하는 것보다 더 간단하고 빠른 경우가 많습니다. 가능하다면 이러한 드라이버 중 하나를 사용하는 것을 권장합니다.
+
+
+#### Mailgun 드라이버 {#mailgun-driver}
+
+Mailgun 드라이버를 사용하려면 Composer를 통해 Symfony의 Mailgun Mailer 전송 패키지를 설치해야 합니다:
 
 ```shell
 composer require symfony/mailgun-mailer symfony/http-client
 ```
 
-Next, you will need to make two changes in your application's `config/mail.php` configuration file. First, set your default mailer to `mailgun`:
+그 다음, 애플리케이션의 `config/mail.php` 설정 파일에서 두 가지를 변경해야 합니다. 먼저, 기본 메일러를 `mailgun`으로 설정합니다:
 
 ```php
 'default' => env('MAIL_MAILER', 'mailgun'),
 ```
 
-Second, add the following configuration array to your array of `mailers`:
+그리고 `mailers` 배열에 다음 설정 배열을 추가합니다:
 
 ```php
 'mailgun' => [
@@ -76,7 +76,7 @@ Second, add the following configuration array to your array of `mailers`:
 ],
 ```
 
-After configuring your application's default mailer, add the following options to your `config/services.php` configuration file:
+애플리케이션의 기본 메일러를 설정한 후, `config/services.php` 설정 파일에 다음 옵션을 추가합니다:
 
 ```php
 'mailgun' => [
@@ -87,7 +87,7 @@ After configuring your application's default mailer, add the following options t
 ],
 ```
 
-If you are not using the United States [Mailgun region](https://documentation.mailgun.com/en/latest/api-intro.html#mailgun-regions), you may define your region's endpoint in the `services` configuration file:
+만약 미국 [Mailgun 리전](https://documentation.mailgun.com/en/latest/api-intro.html#mailgun-regions)을 사용하지 않는 경우, `services` 설정 파일에서 해당 리전의 엔드포인트를 지정할 수 있습니다:
 
 ```php
 'mailgun' => [
@@ -98,16 +98,16 @@ If you are not using the United States [Mailgun region](https://documentation.ma
 ],
 ```
 
-<a name="postmark-driver"></a>
-#### Postmark Driver
 
-To use the [Postmark](https://postmarkapp.com/) driver, install Symfony's Postmark Mailer transport via Composer:
+#### Postmark 드라이버 {#postmark-driver}
+
+[Postmark](https://postmarkapp.com/) 드라이버를 사용하려면 Composer를 통해 Symfony의 Postmark Mailer 전송 패키지를 설치해야 합니다:
 
 ```shell
 composer require symfony/postmark-mailer symfony/http-client
 ```
 
-Next, set the `default` option in your application's `config/mail.php` configuration file to `postmark`. After configuring your application's default mailer, ensure that your `config/services.php` configuration file contains the following options:
+그 다음, 애플리케이션의 `config/mail.php` 설정 파일에서 `default` 옵션을 `postmark`로 설정하세요. 기본 메일러를 설정한 후, `config/services.php` 설정 파일에 다음 옵션이 포함되어 있는지 확인합니다:
 
 ```php
 'postmark' => [
@@ -115,7 +115,7 @@ Next, set the `default` option in your application's `config/mail.php` configura
 ],
 ```
 
-If you would like to specify the Postmark message stream that should be used by a given mailer, you may add the `message_stream_id` configuration option to the mailer's configuration array. This configuration array can be found in your application's `config/mail.php` configuration file:
+특정 메일러에서 사용할 Postmark 메시지 스트림을 지정하고 싶다면, 해당 메일러의 설정 배열에 `message_stream_id` 옵션을 추가할 수 있습니다. 이 설정 배열은 애플리케이션의 `config/mail.php` 파일에서 찾을 수 있습니다:
 
 ```php
 'postmark' => [
@@ -127,18 +127,18 @@ If you would like to specify the Postmark message stream that should be used by 
 ],
 ```
 
-This way you are also able to set up multiple Postmark mailers with different message streams.
+이 방법을 사용하면 서로 다른 메시지 스트림을 가진 여러 개의 Postmark 메일러를 설정할 수도 있습니다.
 
-<a name="resend-driver"></a>
-#### Resend Driver
 
-To use the [Resend](https://resend.com/) driver, install Resend's PHP SDK via Composer:
+#### Resend 드라이버 {#resend-driver}
+
+[Resend](https://resend.com/) 드라이버를 사용하려면 Composer를 통해 Resend의 PHP SDK를 설치해야 합니다:
 
 ```shell
 composer require resend/resend-php
 ```
 
-Next, set the `default` option in your application's `config/mail.php` configuration file to `resend`. After configuring your application's default mailer, ensure that your `config/services.php` configuration file contains the following options:
+그 다음, 애플리케이션의 `config/mail.php` 설정 파일에서 `default` 옵션을 `resend`로 지정하세요. 기본 메일러를 설정한 후, `config/services.php` 설정 파일에 다음 옵션이 포함되어 있는지 확인하세요:
 
 ```php
 'resend' => [
@@ -146,16 +146,16 @@ Next, set the `default` option in your application's `config/mail.php` configura
 ],
 ```
 
-<a name="ses-driver"></a>
-#### SES Driver
 
-To use the Amazon SES driver you must first install the Amazon AWS SDK for PHP. You may install this library via the Composer package manager:
+#### SES 드라이버 {#ses-driver}
+
+Amazon SES 드라이버를 사용하려면 먼저 Amazon AWS SDK for PHP를 설치해야 합니다. 이 라이브러리는 Composer 패키지 매니저를 통해 설치할 수 있습니다:
 
 ```shell
 composer require aws/aws-sdk-php
 ```
 
-Next, set the `default` option in your `config/mail.php` configuration file to `ses` and verify that your `config/services.php` configuration file contains the following options:
+다음으로, `config/mail.php` 설정 파일의 `default` 옵션을 `ses`로 설정하고, `config/services.php` 설정 파일에 아래와 같은 옵션이 포함되어 있는지 확인하세요:
 
 ```php
 'ses' => [
@@ -165,7 +165,7 @@ Next, set the `default` option in your `config/mail.php` configuration file to `
 ],
 ```
 
-To utilize AWS [temporary credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html) via a session token, you may add a `token` key to your application's SES configuration:
+세션 토큰을 통한 AWS [임시 자격 증명](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html)을 사용하려면, SES 설정에 `token` 키를 추가할 수 있습니다:
 
 ```php
 'ses' => [
@@ -176,11 +176,11 @@ To utilize AWS [temporary credentials](https://docs.aws.amazon.com/IAM/latest/Us
 ],
 ```
 
-To interact with SES's [subscription management features](https://docs.aws.amazon.com/ses/latest/dg/sending-email-subscription-management.html), you may return the `X-Ses-List-Management-Options` header in the array returned by the [headers](#headers) method of a mail message:
+SES의 [구독 관리 기능](https://docs.aws.amazon.com/ses/latest/dg/sending-email-subscription-management.html)을 사용하려면, 메일 메시지의 [headers](#headers) 메서드에서 반환되는 배열에 `X-Ses-List-Management-Options` 헤더를 추가할 수 있습니다:
 
 ```php
 /**
- * Get the message headers.
+ * 메시지 헤더를 반환합니다.
  */
 public function headers(): Headers
 {
@@ -192,7 +192,7 @@ public function headers(): Headers
 }
 ```
 
-If you would like to define [additional options](https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-sesv2-2019-09-27.html#sendemail) that Laravel should pass to the AWS SDK's `SendEmail` method when sending an email, you may define an `options` array within your `ses` configuration:
+이메일을 보낼 때 Laravel이 AWS SDK의 `SendEmail` 메서드에 전달해야 하는 [추가 옵션](https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-sesv2-2019-09-27.html#sendemail)을 정의하고 싶다면, `ses` 설정 내에 `options` 배열을 정의할 수 있습니다:
 
 ```php
 'ses' => [
@@ -208,16 +208,16 @@ If you would like to define [additional options](https://docs.aws.amazon.com/aws
 ],
 ```
 
-<a name="mailersend-driver"></a>
-#### MailerSend Driver
 
-[MailerSend](https://www.mailersend.com/), a transactional email and SMS service, maintains their own API based mail driver for Laravel. The package containing the driver may be installed via the Composer package manager:
+#### MailerSend 드라이버 {#mailersend-driver}
+
+[MailerSend](https://www.mailersend.com/)는 트랜잭션 이메일 및 SMS 서비스를 제공하며, Laravel을 위한 자체 API 기반 메일 드라이버를 제공합니다. 이 드라이버가 포함된 패키지는 Composer 패키지 매니저를 통해 설치할 수 있습니다:
 
 ```shell
 composer require mailersend/laravel-driver
 ```
 
-Once the package is installed, add the `MAILERSEND_API_KEY` environment variable to your application's `.env` file. In addition, the `MAIL_MAILER` environment variable should be defined as `mailersend`:
+패키지 설치 후, `MAILERSEND_API_KEY` 환경 변수를 애플리케이션의 `.env` 파일에 추가하세요. 또한, `MAIL_MAILER` 환경 변수는 `mailersend`로 지정해야 합니다:
 
 ```ini
 MAIL_MAILER=mailersend
@@ -227,7 +227,7 @@ MAIL_FROM_NAME="App Name"
 MAILERSEND_API_KEY=your-api-key
 ```
 
-Finally, add MailerSend to the `mailers` array in your application's `config/mail.php` configuration file:
+마지막으로, 애플리케이션의 `config/mail.php` 설정 파일의 `mailers` 배열에 MailerSend를 추가하세요:
 
 ```php
 'mailersend' => [
@@ -235,14 +235,14 @@ Finally, add MailerSend to the `mailers` array in your application's `config/mai
 ],
 ```
 
-To learn more about MailerSend, including how to use hosted templates, consult the [MailerSend driver documentation](https://github.com/mailersend/mailersend-laravel-driver#usage).
+MailerSend에 대해 더 자세히 알아보고, 호스팅된 템플릿 사용 방법 등 추가 정보가 필요하다면 [MailerSend 드라이버 문서](https://github.com/mailersend/mailersend-laravel-driver#usage)를 참고하세요.
 
-<a name="failover-configuration"></a>
-### Failover Configuration
 
-Sometimes, an external service you have configured to send your application's mail may be down. In these cases, it can be useful to define one or more backup mail delivery configurations that will be used in case your primary delivery driver is down.
+### 장애 조치(Failover) 구성 {#failover-configuration}
 
-To accomplish this, you should define a mailer within your application's `mail` configuration file that uses the `failover` transport. The configuration array for your application's `failover` mailer should contain an array of `mailers` that reference the order in which configured mailers should be chosen for delivery:
+외부 서비스를 통해 애플리케이션의 메일을 전송하도록 설정했을 때, 해당 외부 서비스가 다운될 수 있습니다. 이런 경우를 대비해, 기본 메일 전송 드라이버가 동작하지 않을 때 사용할 하나 이상의 백업 메일 전송 구성을 정의하는 것이 유용할 수 있습니다.
+
+이를 위해, 애플리케이션의 `mail` 설정 파일에서 `failover` 전송 방식을 사용하는 메일러를 정의해야 합니다. 애플리케이션의 `failover` 메일러 설정 배열에는 메일 전송 시 선택될 메일러의 순서를 지정하는 `mailers` 배열이 포함되어야 합니다:
 
 ```php
 'mailers' => [
@@ -259,16 +259,16 @@ To accomplish this, you should define a mailer within your application's `mail` 
 ],
 ```
 
-Once your failover mailer has been defined, you should set this mailer as the default mailer used by your application by specifying its name as the value of the `default` configuration key within your application's `mail` configuration file:
+장애 조치 메일러를 정의한 후에는, 애플리케이션에서 기본적으로 사용할 메일러로 이 메일러를 지정해야 합니다. 이를 위해 애플리케이션의 `mail` 설정 파일에서 `default` 설정 키의 값으로 해당 메일러의 이름을 지정하면 됩니다:
 
 ```php
 'default' => env('MAIL_MAILER', 'failover'),
 ```
 
-<a name="round-robin-configuration"></a>
-### Round Robin Configuration
 
-The `roundrobin` transport allows you to distribute your mailing workload across multiple mailers. To get started, define a mailer within your application's `mail` configuration file that uses the `roundrobin` transport. The configuration array for your application's `roundrobin` mailer should contain an array of `mailers` that reference which configured mailers should be used for delivery:
+### 라운드 로빈(Round Robin) 설정 {#round-robin-configuration}
+
+`roundrobin` 전송 방식은 여러 메일러에 걸쳐 메일 발송 작업을 분산할 수 있도록 해줍니다. 시작하려면, 애플리케이션의 `mail` 설정 파일에서 `roundrobin` 전송 방식을 사용하는 메일러를 정의하세요. 애플리케이션의 `roundrobin` 메일러 설정 배열에는 메일 발송에 사용할 메일러들을 참조하는 `mailers` 배열이 포함되어야 합니다.
 
 ```php
 'mailers' => [
@@ -284,44 +284,44 @@ The `roundrobin` transport allows you to distribute your mailing workload across
 ],
 ```
 
-Once your round robin mailer has been defined, you should set this mailer as the default mailer used by your application by specifying its name as the value of the `default` configuration key within your application's `mail` configuration file:
+라운드 로빈 메일러를 정의한 후에는, 애플리케이션에서 기본적으로 사용할 메일러로 이 메일러를 지정해야 합니다. 이를 위해 애플리케이션의 `mail` 설정 파일에서 `default` 설정 키의 값으로 해당 메일러의 이름을 지정하세요.
 
 ```php
 'default' => env('MAIL_MAILER', 'roundrobin'),
 ```
 
-The round robin transport selects a random mailer from the list of configured mailers and then switches to the next available mailer for each subsequent email. In contrast to `failover` transport, which helps to achieve *[high availability](https://en.wikipedia.org/wiki/High_availability)*, the `roundrobin` transport provides *[load balancing](https://en.wikipedia.org/wiki/Load_balancing_(computing))*.
+라운드 로빈 전송 방식은 설정된 메일러 목록 중에서 무작위로 하나를 선택한 뒤, 이후의 각 이메일 발송 시마다 다음 사용 가능한 메일러로 전환합니다. 이는 *[고가용성(high availability)](https://en.wikipedia.org/wiki/High_availability)*을 달성하는 데 도움을 주는 `failover` 전송 방식과 달리, *[로드 밸런싱(load balancing)](https://en.wikipedia.org/wiki/Load_balancing_(computing))*을 제공합니다.
 
-<a name="generating-mailables"></a>
-## Generating Mailables
 
-When building Laravel applications, each type of email sent by your application is represented as a "mailable" class. These classes are stored in the `app/Mail` directory. Don't worry if you don't see this directory in your application, since it will be generated for you when you create your first mailable class using the `make:mail` Artisan command:
+## 메일러블 생성하기 {#generating-mailables}
+
+Laravel 애플리케이션을 개발할 때, 애플리케이션에서 전송하는 각 이메일 유형은 "메일러블(mailable)" 클래스에 의해 표현됩니다. 이 클래스들은 `app/Mail` 디렉터리에 저장됩니다. 만약 이 디렉터리가 애플리케이션에 없다면 걱정하지 마세요. `make:mail` 아티즌(Artisan) 명령어를 사용해 첫 번째 메일러블 클래스를 생성할 때 자동으로 만들어집니다:
 
 ```shell
 php artisan make:mail OrderShipped
 ```
 
-<a name="writing-mailables"></a>
-## Writing Mailables
 
-Once you have generated a mailable class, open it up so we can explore its contents. Mailable class configuration is done in several methods, including the `envelope`, `content`, and `attachments` methods.
+## 메일러블 작성하기 {#writing-mailables}
 
-The `envelope` method returns an `Illuminate\Mail\Mailables\Envelope` object that defines the subject and, sometimes, the recipients of the message. The `content` method returns an `Illuminate\Mail\Mailables\Content` object that defines the [Blade template](/laravel/12.x/blade) that will be used to generate the message content.
+메일러블 클래스를 생성했다면, 해당 파일을 열어 내용을 살펴봅시다. 메일러블 클래스의 설정은 `envelope`, `content`, `attachments` 메서드 등에서 이루어집니다.
 
-<a name="configuring-the-sender"></a>
-### Configuring the Sender
+`envelope` 메서드는 메일의 제목과 때로는 수신자를 정의하는 `Illuminate\Mail\Mailables\Envelope` 객체를 반환합니다. `content` 메서드는 메시지 내용을 생성하는 데 사용될 [Blade 템플릿](/laravel/12.x/blade)을 정의하는 `Illuminate\Mail\Mailables\Content` 객체를 반환합니다.
 
-<a name="using-the-envelope"></a>
-#### Using the Envelope
 
-First, let's explore configuring the sender of the email. Or, in other words, who the email is going to be "from". There are two ways to configure the sender. First, you may specify the "from" address on your message's envelope:
+### 발신자 구성하기 {#configuring-the-sender}
+
+
+#### Envelope 사용하기 {#using-the-envelope}
+
+먼저, 이메일의 발신자를 설정하는 방법을 살펴보겠습니다. 즉, 이메일이 "누구로부터" 발송되는지 지정하는 방법입니다. 발신자를 설정하는 방법에는 두 가지가 있습니다. 첫 번째로, 메시지의 envelope에서 "from" 주소를 지정할 수 있습니다:
 
 ```php
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 
 /**
- * Get the message envelope.
+ * 메시지 envelope을 반환합니다.
  */
 public function envelope(): Envelope
 {
@@ -332,7 +332,7 @@ public function envelope(): Envelope
 }
 ```
 
-If you would like, you may also specify a `replyTo` address:
+원한다면, `replyTo` 주소도 지정할 수 있습니다:
 
 ```php
 return new Envelope(
@@ -344,10 +344,10 @@ return new Envelope(
 );
 ```
 
-<a name="using-a-global-from-address"></a>
-#### Using a Global `from` Address
 
-However, if your application uses the same "from" address for all of its emails, it can become cumbersome to add it to each mailable class you generate. Instead, you may specify a global "from" address in your `config/mail.php` configuration file. This address will be used if no other "from" address is specified within the mailable class:
+#### 전역 `from` 주소 사용하기 {#using-a-global-from-address}
+
+하지만 애플리케이션에서 모든 이메일에 동일한 "from" 주소를 사용하는 경우, 생성하는 각 mailable 클래스에 이를 추가하는 것은 번거로울 수 있습니다. 대신, `config/mail.php` 설정 파일에서 전역 "from" 주소를 지정할 수 있습니다. mailable 클래스 내에서 별도의 "from" 주소를 지정하지 않으면 이 주소가 사용됩니다:
 
 ```php
 'from' => [
@@ -356,20 +356,20 @@ However, if your application uses the same "from" address for all of its emails,
 ],
 ```
 
-In addition, you may define a global "reply_to" address within your `config/mail.php` configuration file:
+또한, `config/mail.php` 설정 파일에서 전역 "reply_to" 주소도 정의할 수 있습니다:
 
 ```php
 'reply_to' => ['address' => 'example@example.com', 'name' => 'App Name'],
 ```
 
-<a name="configuring-the-view"></a>
-### Configuring the View
 
-Within a mailable class's `content` method, you may define the `view`, or which template should be used when rendering the email's contents. Since each email typically uses a [Blade template](/laravel/12.x/blade) to render its contents, you have the full power and convenience of the Blade templating engine when building your email's HTML:
+### 뷰 설정하기 {#configuring-the-view}
+
+메일러블 클래스의 `content` 메서드 내에서 이메일 내용을 렌더링할 때 사용할 `view`(템플릿)를 정의할 수 있습니다. 각 이메일은 일반적으로 [Blade 템플릿](/laravel/12.x/blade)을 사용하여 내용을 렌더링하므로, 이메일의 HTML을 작성할 때 Blade 템플릿 엔진의 모든 기능과 편리함을 활용할 수 있습니다:
 
 ```php
 /**
- * Get the message content definition.
+ * 메시지 내용 정의를 반환합니다.
  */
 public function content(): Content
 {
@@ -380,16 +380,16 @@ public function content(): Content
 ```
 
 > [!NOTE]
-> You may wish to create a `resources/views/emails` directory to house all of your email templates; however, you are free to place them wherever you wish within your `resources/views` directory.
+> 모든 이메일 템플릿을 보관하기 위해 `resources/views/emails` 디렉터리를 생성하는 것이 좋습니다. 하지만, 이메일 템플릿은 `resources/views` 디렉터리 내 원하는 위치에 자유롭게 배치할 수 있습니다.
 
-<a name="plain-text-emails"></a>
-#### Plain Text Emails
 
-If you would like to define a plain-text version of your email, you may specify the plain-text template when creating the message's `Content` definition. Like the `view` parameter, the `text` parameter should be a template name which will be used to render the contents of the email. You are free to define both an HTML and plain-text version of your message:
+#### 일반 텍스트 이메일 {#plain-text-emails}
+
+이메일의 일반 텍스트 버전을 정의하고 싶다면, 메시지의 Content 정의를 생성할 때 plain-text 템플릿을 지정할 수 있습니다. view 파라미터와 마찬가지로, text 파라미터에는 이메일 내용을 렌더링할 때 사용할 템플릿 이름을 지정하면 됩니다. 메시지의 HTML 버전과 일반 텍스트 버전을 모두 자유롭게 정의할 수 있습니다:
 
 ```php
 /**
- * Get the message content definition.
+ * 메시지 콘텐츠 정의를 반환합니다.
  */
 public function content(): Content
 {
@@ -400,7 +400,7 @@ public function content(): Content
 }
 ```
 
-For clarity, the `html` parameter may be used as an alias of the `view` parameter:
+더 명확하게 하기 위해, html 파라미터를 view 파라미터의 별칭으로 사용할 수도 있습니다:
 
 ```php
 return new Content(
@@ -409,13 +409,13 @@ return new Content(
 );
 ```
 
-<a name="view-data"></a>
-### View Data
 
-<a name="via-public-properties"></a>
-#### Via Public Properties
+### 뷰 데이터 {#view-data}
 
-Typically, you will want to pass some data to your view that you can utilize when rendering the email's HTML. There are two ways you may make data available to your view. First, any public property defined on your mailable class will automatically be made available to the view. So, for example, you may pass data into your mailable class's constructor and set that data to public properties defined on the class:
+
+#### 퍼블릭 프로퍼티를 통한 데이터 전달 {#via-public-properties}
+
+일반적으로 이메일의 HTML을 렌더링할 때 사용할 수 있는 데이터를 뷰에 전달하고 싶을 것입니다. 뷰에서 데이터를 사용할 수 있게 만드는 방법은 두 가지가 있습니다. 첫 번째로, mailable 클래스에 정의된 모든 public 프로퍼티는 자동으로 뷰에서 사용할 수 있게 됩니다. 예를 들어, mailable 클래스의 생성자에서 데이터를 받아 해당 데이터를 클래스에 정의된 public 프로퍼티에 할당할 수 있습니다:
 
 ```php
 <?php
@@ -433,14 +433,14 @@ class OrderShipped extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * 새로운 메시지 인스턴스를 생성합니다.
      */
     public function __construct(
         public Order $order,
     ) {}
 
     /**
-     * Get the message content definition.
+     * 메시지 콘텐츠 정의를 반환합니다.
      */
     public function content(): Content
     {
@@ -451,18 +451,18 @@ class OrderShipped extends Mailable
 }
 ```
 
-Once the data has been set to a public property, it will automatically be available in your view, so you may access it like you would access any other data in your Blade templates:
+데이터가 public 프로퍼티에 할당되면, 해당 데이터는 자동으로 뷰에서 사용할 수 있게 되므로, Blade 템플릿에서 다른 데이터와 마찬가지로 접근할 수 있습니다:
 
 ```blade
 <div>
-    Price: {{ $order->price }}
+    가격: {{ $order->price }}
 </div>
 ```
 
-<a name="via-the-with-parameter"></a>
-#### Via the `with` Parameter:
 
-If you would like to customize the format of your email's data before it is sent to the template, you may manually pass your data to the view via the `Content` definition's `with` parameter. Typically, you will still pass data via the mailable class's constructor; however, you should set this data to `protected` or `private` properties so the data is not automatically made available to the template:
+#### `with` 파라미터를 통한 데이터 전달 {#via-the-with-parameter}
+
+이메일의 데이터 형식을 템플릿에 전달하기 전에 커스터마이즈하고 싶다면, `Content` 정의의 `with` 파라미터를 통해 데이터를 뷰에 직접 전달할 수 있습니다. 일반적으로는 mailable 클래스의 생성자를 통해 데이터를 전달하지만, 이 데이터를 템플릿에 자동으로 노출하지 않으려면 `protected` 또는 `private` 속성에 저장해야 합니다.
 
 ```php
 <?php
@@ -480,14 +480,14 @@ class OrderShipped extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * 새로운 메시지 인스턴스 생성
      */
     public function __construct(
         protected Order $order,
     ) {}
 
     /**
-     * Get the message content definition.
+     * 메시지 콘텐츠 정의 반환
      */
     public function content(): Content
     {
@@ -502,7 +502,7 @@ class OrderShipped extends Mailable
 }
 ```
 
-Once the data has been passed to the `with` method, it will automatically be available in your view, so you may access it like you would access any other data in your Blade templates:
+이렇게 데이터를 `with` 메서드로 전달하면, 해당 데이터는 뷰에서 자동으로 사용할 수 있게 되며, Blade 템플릿에서 다른 데이터와 동일하게 접근할 수 있습니다.
 
 ```blade
 <div>
@@ -510,16 +510,16 @@ Once the data has been passed to the `with` method, it will automatically be ava
 </div>
 ```
 
-<a name="attachments"></a>
-### Attachments
 
-To add attachments to an email, you will add attachments to the array returned by the message's `attachments` method. First, you may add an attachment by providing a file path to the `fromPath` method provided by the `Attachment` class:
+### 첨부 파일 {#attachments}
+
+이메일에 첨부 파일을 추가하려면, 메시지의 attachments 메서드에서 반환하는 배열에 첨부 파일을 추가하면 됩니다. 먼저, Attachment 클래스에서 제공하는 fromPath 메서드에 파일 경로를 전달하여 첨부 파일을 추가할 수 있습니다:
 
 ```php
 use Illuminate\Mail\Mailables\Attachment;
 
 /**
- * Get the attachments for the message.
+ * 메시지에 첨부할 파일을 반환합니다.
  *
  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
  */
@@ -531,11 +531,11 @@ public function attachments(): array
 }
 ```
 
-When attaching files to a message, you may also specify the display name and / or MIME type for the attachment using the `as` and `withMime` methods:
+메시지에 파일을 첨부할 때, as 및 withMime 메서드를 사용하여 첨부 파일의 표시 이름이나 MIME 타입을 지정할 수도 있습니다:
 
 ```php
 /**
- * Get the attachments for the message.
+ * 메시지에 첨부할 파일을 반환합니다.
  *
  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
  */
@@ -549,14 +549,14 @@ public function attachments(): array
 }
 ```
 
-<a name="attaching-files-from-disk"></a>
-#### Attaching Files From Disk
 
-If you have stored a file on one of your [filesystem disks](/laravel/12.x/filesystem), you may attach it to the email using the `fromStorage` attachment method:
+#### 디스크에서 파일 첨부하기 {#attaching-files-from-disk}
+
+[파일 시스템 디스크](/laravel/12.x/filesystem)에 파일을 저장한 경우, `fromStorage` 첨부 메서드를 사용하여 이메일에 파일을 첨부할 수 있습니다:
 
 ```php
 /**
- * Get the attachments for the message.
+ * 메시지에 첨부할 파일을 반환합니다.
  *
  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
  */
@@ -568,11 +568,11 @@ public function attachments(): array
 }
 ```
 
-Of course, you may also specify the attachment's name and MIME type:
+물론, 첨부 파일의 이름과 MIME 타입도 지정할 수 있습니다:
 
 ```php
 /**
- * Get the attachments for the message.
+ * 메시지에 첨부할 파일을 반환합니다.
  *
  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
  */
@@ -586,11 +586,11 @@ public function attachments(): array
 }
 ```
 
-The `fromStorageDisk` method may be used if you need to specify a storage disk other than your default disk:
+기본 디스크가 아닌 다른 저장소 디스크를 지정해야 하는 경우에는 `fromStorageDisk` 메서드를 사용할 수 있습니다:
 
 ```php
 /**
- * Get the attachments for the message.
+ * 메시지에 첨부할 파일을 반환합니다.
  *
  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
  */
@@ -604,14 +604,14 @@ public function attachments(): array
 }
 ```
 
-<a name="raw-data-attachments"></a>
-#### Raw Data Attachments
 
-The `fromData` attachment method may be used to attach a raw string of bytes as an attachment. For example, you might use this method if you have generated a PDF in memory and want to attach it to the email without writing it to disk. The `fromData` method accepts a closure which resolves the raw data bytes as well as the name that the attachment should be assigned:
+#### 원시 데이터 첨부 {#raw-data-attachments}
+
+`fromData` 첨부 메서드는 바이트의 원시 문자열을 첨부 파일로 첨부할 때 사용할 수 있습니다. 예를 들어, 메모리에서 PDF를 생성한 후 디스크에 저장하지 않고 이메일에 첨부하고 싶을 때 이 메서드를 사용할 수 있습니다. `fromData` 메서드는 원시 데이터 바이트를 반환하는 클로저와 첨부 파일에 할당할 이름을 인자로 받습니다:
 
 ```php
 /**
- * Get the attachments for the message.
+ * 메시지에 첨부할 파일들을 반환합니다.
  *
  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
  */
@@ -624,41 +624,41 @@ public function attachments(): array
 }
 ```
 
-<a name="inline-attachments"></a>
-### Inline Attachments
 
-Embedding inline images into your emails is typically cumbersome; however, Laravel provides a convenient way to attach images to your emails. To embed an inline image, use the `embed` method on the `$message` variable within your email template. Laravel automatically makes the `$message` variable available to all of your email templates, so you don't need to worry about passing it in manually:
+### 인라인 첨부파일 {#inline-attachments}
+
+이메일에 인라인 이미지를 삽입하는 것은 일반적으로 번거로운 작업이지만, Laravel은 이미지를 이메일에 첨부하는 편리한 방법을 제공합니다. 인라인 이미지를 삽입하려면 이메일 템플릿 내에서 `$message` 변수의 `embed` 메서드를 사용하면 됩니다. Laravel은 모든 이메일 템플릿에서 `$message` 변수를 자동으로 사용할 수 있도록 해주기 때문에, 직접 전달할 필요가 없습니다:
 
 ```blade
 <body>
-    Here is an image:
+    여기에 이미지가 있습니다:
 
     <img src="{{ $message->embed($pathToImage) }}">
 </body>
 ```
 
 > [!WARNING]
-> The `$message` variable is not available in plain-text message templates since plain-text messages do not utilize inline attachments.
+> `$message` 변수는 일반 텍스트 메시지 템플릿에서는 사용할 수 없습니다. 일반 텍스트 메시지는 인라인 첨부파일을 지원하지 않기 때문입니다.
 
-<a name="embedding-raw-data-attachments"></a>
-#### Embedding Raw Data Attachments
 
-If you already have a raw image data string you wish to embed into an email template, you may call the `embedData` method on the `$message` variable. When calling the `embedData` method, you will need to provide a filename that should be assigned to the embedded image:
+#### 원시 데이터 첨부 파일 임베딩 {#embedding-raw-data-attachments}
+
+이미 이메일 템플릿에 임베드하고 싶은 원시 이미지 데이터 문자열이 있다면, `$message` 변수에서 `embedData` 메서드를 호출하면 됩니다. `embedData` 메서드를 호출할 때는 임베드할 이미지에 할당할 파일명을 함께 전달해야 합니다:
 
 ```blade
 <body>
-    Here is an image from raw data:
+    원시 데이터로부터 가져온 이미지입니다:
 
     <img src="{{ $message->embedData($data, 'example-image.jpg') }}">
 </body>
 ```
 
-<a name="attachable-objects"></a>
-### Attachable Objects
 
-While attaching files to messages via simple string paths is often sufficient, in many cases the attachable entities within your application are represented by classes. For example, if your application is attaching a photo to a message, your application may also have a `Photo` model that represents that photo. When that is the case, wouldn't it be convenient to simply pass the `Photo` model to the `attach` method? Attachable objects allow you to do just that.
+### 첨부 가능한 객체 {#attachable-objects}
 
-To get started, implement the `Illuminate\Contracts\Mail\Attachable` interface on the object that will be attachable to messages. This interface dictates that your class defines a `toMailAttachment` method that returns an `Illuminate\Mail\Attachment` instance:
+파일을 메시지에 첨부할 때 단순히 문자열 경로를 사용하는 것으로 충분한 경우가 많지만, 실제로는 애플리케이션 내에서 첨부할 엔티티가 클래스로 표현되는 경우가 많습니다. 예를 들어, 애플리케이션에서 사진을 메시지에 첨부한다면, 해당 사진을 나타내는 `Photo` 모델이 있을 수 있습니다. 이런 경우, `attach` 메서드에 `Photo` 모델을 바로 전달할 수 있다면 훨씬 편리하지 않을까요? 첨부 가능한 객체(Attachable Objects)는 바로 이런 기능을 제공합니다.
+
+먼저, 메시지에 첨부할 객체에 `Illuminate\Contracts\Mail\Attachable` 인터페이스를 구현하세요. 이 인터페이스는 클래스에 `toMailAttachment` 메서드를 정의하도록 요구하며, 이 메서드는 `Illuminate\Mail\Attachment` 인스턴스를 반환해야 합니다:
 
 ```php
 <?php
@@ -672,7 +672,7 @@ use Illuminate\Mail\Attachment;
 class Photo extends Model implements Attachable
 {
     /**
-     * Get the attachable representation of the model.
+     * 모델의 첨부 파일 표현을 반환합니다.
      */
     public function toMailAttachment(): Attachment
     {
@@ -681,11 +681,11 @@ class Photo extends Model implements Attachable
 }
 ```
 
-Once you have defined your attachable object, you may return an instance of that object from the `attachments` method when building an email message:
+첨부 가능한 객체를 정의했다면, 이메일 메시지를 생성할 때 `attachments` 메서드에서 해당 객체의 인스턴스를 반환할 수 있습니다:
 
 ```php
 /**
- * Get the attachments for the message.
+ * 메시지에 첨부할 파일을 반환합니다.
  *
  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
  */
@@ -695,23 +695,23 @@ public function attachments(): array
 }
 ```
 
-Of course, attachment data may be stored on a remote file storage service such as Amazon S3. So, Laravel also allows you to generate attachment instances from data that is stored on one of your application's [filesystem disks](/laravel/12.x/filesystem):
+물론, 첨부 파일 데이터가 Amazon S3와 같은 원격 파일 저장소 서비스에 저장되어 있을 수도 있습니다. 이 경우, Laravel은 애플리케이션의 [파일시스템 디스크](/laravel/12.x/filesystem)에 저장된 데이터를 기반으로 첨부 파일 인스턴스를 생성할 수 있도록 지원합니다:
 
 ```php
-// Create an attachment from a file on your default disk...
+// 기본 디스크에 있는 파일로부터 첨부 파일 생성...
 return Attachment::fromStorage($this->path);
 
-// Create an attachment from a file on a specific disk...
+// 특정 디스크에 있는 파일로부터 첨부 파일 생성...
 return Attachment::fromStorageDisk('backblaze', $this->path);
 ```
 
-In addition, you may create attachment instances via data that you have in memory. To accomplish this, provide a closure to the `fromData` method. The closure should return the raw data that represents the attachment:
+또한, 메모리에 있는 데이터를 이용해 첨부 파일 인스턴스를 생성할 수도 있습니다. 이를 위해 `fromData` 메서드에 클로저를 전달하면 됩니다. 이 클로저는 첨부 파일을 나타내는 원시 데이터를 반환해야 합니다:
 
 ```php
 return Attachment::fromData(fn () => $this->content, 'Photo Name');
 ```
 
-Laravel also provides additional methods that you may use to customize your attachments. For example, you may use the `as` and `withMime` methods to customize the file's name and MIME type:
+Laravel은 첨부 파일을 커스터마이즈할 수 있는 추가 메서드도 제공합니다. 예를 들어, `as`와 `withMime` 메서드를 사용해 파일 이름과 MIME 타입을 지정할 수 있습니다:
 
 ```php
 return Attachment::fromPath('/path/to/file')
@@ -719,18 +719,18 @@ return Attachment::fromPath('/path/to/file')
     ->withMime('image/jpeg');
 ```
 
-<a name="headers"></a>
-### Headers
 
-Sometimes you may need to attach additional headers to the outgoing message. For instance, you may need to set a custom `Message-Id` or other arbitrary text headers.
+### 헤더 {#headers}
 
-To accomplish this, define a `headers` method on your mailable. The `headers` method should return an `Illuminate\Mail\Mailables\Headers` instance. This class accepts `messageId`, `references`, and `text` parameters. Of course, you may provide only the parameters you need for your particular message:
+때때로 발신 메시지에 추가 헤더를 첨부해야 할 수도 있습니다. 예를 들어, 커스텀 `Message-Id`나 기타 임의의 텍스트 헤더를 설정해야 할 수 있습니다.
+
+이를 위해, mailable 클래스에 `headers` 메서드를 정의하면 됩니다. `headers` 메서드는 `Illuminate\Mail\Mailables\Headers` 인스턴스를 반환해야 합니다. 이 클래스는 `messageId`, `references`, `text` 파라미터를 받습니다. 물론, 필요한 파라미터만 선택적으로 제공할 수 있습니다:
 
 ```php
 use Illuminate\Mail\Mailables\Headers;
 
 /**
- * Get the message headers.
+ * 메시지 헤더를 반환합니다.
  */
 public function headers(): Headers
 {
@@ -744,16 +744,16 @@ public function headers(): Headers
 }
 ```
 
-<a name="tags-and-metadata"></a>
-### Tags and Metadata
 
-Some third-party email providers such as Mailgun and Postmark support message "tags" and "metadata", which may be used to group and track emails sent by your application. You may add tags and metadata to an email message via your `Envelope` definition:
+### 태그와 메타데이터 {#tags-and-metadata}
+
+Mailgun, Postmark와 같은 일부 서드파티 이메일 제공업체는 메시지 "태그"와 "메타데이터"를 지원합니다. 이를 통해 애플리케이션에서 발송한 이메일을 그룹화하거나 추적할 수 있습니다. 이메일 메시지에 태그와 메타데이터를 추가하려면 `Envelope` 정의에서 다음과 같이 설정할 수 있습니다:
 
 ```php
 use Illuminate\Mail\Mailables\Envelope;
 
 /**
- * Get the message envelope.
+ * 메시지 봉투(Envelope)를 반환합니다.
  *
  * @return \Illuminate\Mail\Mailables\Envelope
  */
@@ -769,21 +769,21 @@ public function envelope(): Envelope
 }
 ```
 
-If your application is using the Mailgun driver, you may consult Mailgun's documentation for more information on [tags](https://documentation.mailgun.com/docs/mailgun/user-manual/tracking-messages/#tagging) and [metadata](https://documentation.mailgun.com/docs/mailgun/user-manual/tracking-messages/#attaching-data-to-messages). Likewise, the Postmark documentation may also be consulted for more information on their support for [tags](https://postmarkapp.com/blog/tags-support-for-smtp) and [metadata](https://postmarkapp.com/support/article/1125-custom-metadata-faq).
+애플리케이션에서 Mailgun 드라이버를 사용 중이라면, [태그](https://documentation.mailgun.com/docs/mailgun/user-manual/tracking-messages/#tagging)와 [메타데이터](https://documentation.mailgun.com/docs/mailgun/user-manual/tracking-messages/#attaching-data-to-messages)에 대한 자세한 내용은 Mailgun 공식 문서를 참고하세요. 마찬가지로, Postmark의 [태그](https://postmarkapp.com/blog/tags-support-for-smtp) 및 [메타데이터](https://postmarkapp.com/support/article/1125-custom-metadata-faq) 지원에 대한 자세한 내용도 공식 문서를 참고할 수 있습니다.
 
-If your application is using Amazon SES to send emails, you should use the `metadata` method to attach [SES "tags"](https://docs.aws.amazon.com/ses/latest/APIReference/API_MessageTag.html) to the message.
+만약 Amazon SES를 사용하여 이메일을 발송한다면, 메시지에 [SES "태그"](https://docs.aws.amazon.com/ses/latest/APIReference/API_MessageTag.html)를 추가하려면 `metadata` 메서드를 사용해야 합니다.
 
-<a name="customizing-the-symfony-message"></a>
-### Customizing the Symfony Message
 
-Laravel's mail capabilities are powered by Symfony Mailer. Laravel allows you to register custom callbacks that will be invoked with the Symfony Message instance before sending the message. This gives you an opportunity to deeply customize the message before it is sent. To accomplish this, define a `using` parameter on your `Envelope` definition:
+### Symfony 메시지 커스터마이징 {#customizing-the-symfony-message}
+
+Laravel의 메일 기능은 Symfony Mailer를 기반으로 동작합니다. Laravel에서는 메시지를 전송하기 전에 Symfony Message 인스턴스와 함께 호출되는 커스텀 콜백을 등록할 수 있습니다. 이를 통해 메시지가 전송되기 전에 깊이 있게 커스터마이징할 수 있습니다. 이를 위해 `Envelope` 정의에서 `using` 파라미터를 지정하면 됩니다:
 
 ```php
 use Illuminate\Mail\Mailables\Envelope;
 use Symfony\Component\Mime\Email;
 
 /**
- * Get the message envelope.
+ * 메시지 봉투(envelope)를 반환합니다.
  */
 public function envelope(): Envelope
 {
@@ -798,27 +798,27 @@ public function envelope(): Envelope
 }
 ```
 
-<a name="markdown-mailables"></a>
-## Markdown Mailables
 
-Markdown mailable messages allow you to take advantage of the pre-built templates and components of [mail notifications](/laravel/12.x/notifications#mail-notifications) in your mailables. Since the messages are written in Markdown, Laravel is able to render beautiful, responsive HTML templates for the messages while also automatically generating a plain-text counterpart.
+## 마크다운 메일러블 {#markdown-mailables}
 
-<a name="generating-markdown-mailables"></a>
-### Generating Markdown Mailables
+마크다운 메일러블 메시지를 사용하면, 메일러블에서 [메일 알림](/laravel/12.x/notifications#mail-notifications)의 미리 만들어진 템플릿과 컴포넌트를 활용할 수 있습니다. 메시지가 마크다운으로 작성되기 때문에, Laravel은 메시지에 대해 아름답고 반응형인 HTML 템플릿을 렌더링할 수 있으며, 동시에 자동으로 일반 텍스트 버전도 생성합니다.
 
-To generate a mailable with a corresponding Markdown template, you may use the `--markdown` option of the `make:mail` Artisan command:
+
+### 마크다운 메일러블 생성하기 {#generating-markdown-mailables}
+
+마크다운 템플릿이 포함된 메일러블을 생성하려면, `make:mail` 아티즌 명령어의 `--markdown` 옵션을 사용할 수 있습니다:
 
 ```shell
 php artisan make:mail OrderShipped --markdown=mail.orders.shipped
 ```
 
-Then, when configuring the mailable `Content` definition within its `content` method, use the `markdown` parameter instead of the `view` parameter:
+그런 다음, 메일러블의 `content` 메서드에서 `Content` 정의를 설정할 때 `view` 파라미터 대신 `markdown` 파라미터를 사용하세요:
 
 ```php
 use Illuminate\Mail\Mailables\Content;
 
 /**
- * Get the message content definition.
+ * 메시지 콘텐츠 정의를 반환합니다.
  */
 public function content(): Content
 {
@@ -831,55 +831,55 @@ public function content(): Content
 }
 ```
 
-<a name="writing-markdown-messages"></a>
-### Writing Markdown Messages
 
-Markdown mailables use a combination of Blade components and Markdown syntax which allow you to easily construct mail messages while leveraging Laravel's pre-built email UI components:
+### 마크다운 메시지 작성 {#writing-markdown-messages}
+
+마크다운 메일러블은 Blade 컴포넌트와 마크다운 문법을 조합하여 사용합니다. 이를 통해 Laravel에서 미리 제공하는 이메일 UI 컴포넌트를 활용하면서도 손쉽게 메일 메시지를 작성할 수 있습니다:
 
 ```blade
 <x-mail::message>
-# Order Shipped
+# 주문이 발송되었습니다
 
-Your order has been shipped!
+고객님의 주문이 발송되었습니다!
 
 <x-mail::button :url="$url">
-View Order
+주문 확인하기
 </x-mail::button>
 
-Thanks,<br>
+감사합니다.<br>
 {{ config('app.name') }}
 </x-mail::message>
 ```
 
 > [!NOTE]
-> Do not use excess indentation when writing Markdown emails. Per Markdown standards, Markdown parsers will render indented content as code blocks.
+> 마크다운 이메일을 작성할 때 불필요한 들여쓰기를 사용하지 마세요. 마크다운 표준에 따라, 마크다운 파서는 들여쓰기된 내용을 코드 블록으로 렌더링합니다.
 
-<a name="button-component"></a>
-#### Button Component
 
-The button component renders a centered button link. The component accepts two arguments, a `url` and an optional `color`. Supported colors are `primary`, `success`, and `error`. You may add as many button components to a message as you wish:
+#### 버튼 컴포넌트 {#button-component}
+
+버튼 컴포넌트는 중앙에 정렬된 버튼 링크를 렌더링합니다. 이 컴포넌트는 두 개의 인자를 받으며, `url`과 선택적으로 `color`를 지정할 수 있습니다. 지원되는 색상은 `primary`, `success`, `error`입니다. 메시지에 원하는 만큼 버튼 컴포넌트를 추가할 수 있습니다:
 
 ```blade
 <x-mail::button :url="$url" color="success">
-View Order
+주문 보기
 </x-mail::button>
 ```
 
-<a name="panel-component"></a>
-#### Panel Component
 
-The panel component renders the given block of text in a panel that has a slightly different background color than the rest of the message. This allows you to draw attention to a given block of text:
+#### 패널 컴포넌트 {#panel-component}
+
+패널 컴포넌트는 지정된 텍스트 블록을 메시지의 나머지 부분과 약간 다른 배경색을 가진 패널에 렌더링합니다. 이를 통해 특정 텍스트 블록에 주목할 수 있습니다:
 
 ```blade
 <x-mail::panel>
-This is the panel content.
+이곳이 패널의 내용입니다.
 </x-mail::panel>
 ```
 
-<a name="table-component"></a>
-#### Table Component
 
-The table component allows you to transform a Markdown table into an HTML table. The component accepts the Markdown table as its content. Table column alignment is supported using the default Markdown table alignment syntax:
+#### 테이블 컴포넌트 {#table-component}
+
+테이블 컴포넌트는 마크다운 테이블을 HTML 테이블로 변환할 수 있도록 해줍니다. 이 컴포넌트는 마크다운 테이블을 콘텐츠로 받아들입니다. 테이블 열 정렬은 기본 마크다운 테이블 정렬 문법을 사용하여 지원됩니다:
 
 ```blade
 <x-mail::table>
@@ -890,30 +890,30 @@ The table component allows you to transform a Markdown table into an HTML table.
 </x-mail::table>
 ```
 
-<a name="customizing-the-components"></a>
-### Customizing the Components
 
-You may export all of the Markdown mail components to your own application for customization. To export the components, use the `vendor:publish` Artisan command to publish the `laravel-mail` asset tag:
+### 컴포넌트 커스터마이징 {#customizing-the-components}
+
+모든 Markdown 메일 컴포넌트를 직접 커스터마이징할 수 있도록 애플리케이션으로 내보낼 수 있습니다. 컴포넌트를 내보내려면 `vendor:publish` Artisan 명령어를 사용하여 `laravel-mail` 에셋 태그를 퍼블리시하세요:
 
 ```shell
 php artisan vendor:publish --tag=laravel-mail
 ```
 
-This command will publish the Markdown mail components to the `resources/views/vendor/mail` directory. The `mail` directory will contain an `html` and a `text` directory, each containing their respective representations of every available component. You are free to customize these components however you like.
+이 명령어를 실행하면 Markdown 메일 컴포넌트가 `resources/views/vendor/mail` 디렉터리에 퍼블리시됩니다. `mail` 디렉터리에는 각각의 컴포넌트에 대한 `html`과 `text` 디렉터리가 포함되어 있습니다. 각 디렉터리에는 해당 컴포넌트의 HTML 및 텍스트 버전이 들어 있습니다. 이 컴포넌트들은 자유롭게 원하는 대로 커스터마이징할 수 있습니다.
 
-<a name="customizing-the-css"></a>
-#### Customizing the CSS
 
-After exporting the components, the `resources/views/vendor/mail/html/themes` directory will contain a `default.css` file. You may customize the CSS in this file and your styles will automatically be converted to inline CSS styles within the HTML representations of your Markdown mail messages.
+#### CSS 커스터마이징 {#customizing-the-css}
 
-If you would like to build an entirely new theme for Laravel's Markdown components, you may place a CSS file within the `html/themes` directory. After naming and saving your CSS file, update the `theme` option of your application's `config/mail.php` configuration file to match the name of your new theme.
+컴포넌트를 내보낸 후에는 `resources/views/vendor/mail/html/themes` 디렉터리에 `default.css` 파일이 생성됩니다. 이 파일의 CSS를 자유롭게 수정할 수 있으며, 작성한 스타일은 자동으로 HTML 형태의 Markdown 메일 메시지에 인라인 CSS 스타일로 변환되어 적용됩니다.
 
-To customize the theme for an individual mailable, you may set the `$theme` property of the mailable class to the name of the theme that should be used when sending that mailable.
+Laravel의 Markdown 컴포넌트에 대해 완전히 새로운 테마를 만들고 싶다면, `html/themes` 디렉터리에 CSS 파일을 추가하면 됩니다. CSS 파일의 이름을 정하고 저장한 후, 애플리케이션의 `config/mail.php` 설정 파일에서 `theme` 옵션을 새 테마의 이름으로 변경해주면 됩니다.
 
-<a name="sending-mail"></a>
-## Sending Mail
+개별 Mailable에 대해 테마를 커스터마이징하고 싶다면, 해당 Mailable 클래스의 `$theme` 프로퍼티를 사용하고자 하는 테마 이름으로 설정하면 됩니다.
 
-To send a message, use the `to` method on the `Mail` [facade](/laravel/12.x/facades). The `to` method accepts an email address, a user instance, or a collection of users. If you pass an object or collection of objects, the mailer will automatically use their `email` and `name` properties when determining the email's recipients, so make sure these attributes are available on your objects. Once you have specified your recipients, you may pass an instance of your mailable class to the `send` method:
+
+## 메일 보내기 {#sending-mail}
+
+메시지를 보내려면 `Mail` [파사드](/laravel/12.x/facades)의 `to` 메서드를 사용하세요. `to` 메서드는 이메일 주소, 사용자 인스턴스, 또는 사용자 컬렉션을 인자로 받을 수 있습니다. 객체나 객체의 컬렉션을 전달하면, 메일러는 해당 객체의 `email`과 `name` 속성을 자동으로 사용하여 이메일 수신자를 결정하므로, 이 속성들이 객체에 반드시 존재해야 합니다. 수신자를 지정한 후에는, `send` 메서드에 메일 클래스의 인스턴스를 전달하면 됩니다:
 
 ```php
 <?php
@@ -929,13 +929,13 @@ use Illuminate\Support\Facades\Mail;
 class OrderShipmentController extends Controller
 {
     /**
-     * Ship the given order.
+     * 주어진 주문을 배송합니다.
      */
     public function store(Request $request): RedirectResponse
     {
         $order = Order::findOrFail($request->order_id);
 
-        // Ship the order...
+        // 주문을 배송 처리...
 
         Mail::to($request->user())->send(new OrderShipped($order));
 
@@ -944,7 +944,7 @@ class OrderShipmentController extends Controller
 }
 ```
 
-You are not limited to just specifying the "to" recipients when sending a message. You are free to set "to", "cc", and "bcc" recipients by chaining their respective methods together:
+메시지를 보낼 때 "to" 수신자만 지정할 필요는 없습니다. "to", "cc", "bcc" 수신자를 각각의 메서드를 체이닝하여 자유롭게 설정할 수 있습니다:
 
 ```php
 Mail::to($request->user())
@@ -953,10 +953,10 @@ Mail::to($request->user())
     ->send(new OrderShipped($order));
 ```
 
-<a name="looping-over-recipients"></a>
-#### Looping Over Recipients
 
-Occasionally, you may need to send a mailable to a list of recipients by iterating over an array of recipients / email addresses. However, since the `to` method appends email addresses to the mailable's list of recipients, each iteration through the loop will send another email to every previous recipient. Therefore, you should always re-create the mailable instance for each recipient:
+#### 수신자 반복 처리 {#looping-over-recipients}
+
+때때로, 수신자 또는 이메일 주소 배열을 반복하여 메일을 여러 명에게 보내야 할 때가 있습니다. 하지만 `to` 메서드는 메일 객체의 수신자 목록에 이메일 주소를 추가하기 때문에, 반복문을 돌 때마다 이전 수신자 모두에게 또다시 메일이 전송됩니다. 따라서, 각 수신자마다 메일 객체를 새로 생성해야 합니다:
 
 ```php
 foreach (['taylor@example.com', 'dries@example.com'] as $recipient) {
@@ -964,10 +964,10 @@ foreach (['taylor@example.com', 'dries@example.com'] as $recipient) {
 }
 ```
 
-<a name="sending-mail-via-a-specific-mailer"></a>
-#### Sending Mail via a Specific Mailer
 
-By default, Laravel will send email using the mailer configured as the `default` mailer in your application's `mail` configuration file. However, you may use the `mailer` method to send a message using a specific mailer configuration:
+#### 특정 메일러를 통해 메일 보내기 {#sending-mail-via-a-specific-mailer}
+
+기본적으로 Laravel은 애플리케이션의 `mail` 설정 파일에서 `default`로 지정된 메일러를 사용하여 이메일을 전송합니다. 그러나 `mailer` 메서드를 사용하면 특정 메일러 설정을 통해 메시지를 보낼 수 있습니다:
 
 ```php
 Mail::mailer('postmark')
@@ -975,13 +975,13 @@ Mail::mailer('postmark')
     ->send(new OrderShipped($order));
 ```
 
-<a name="queueing-mail"></a>
-### Queueing Mail
 
-<a name="queueing-a-mail-message"></a>
-#### Queueing a Mail Message
+### 메일 큐잉 {#queueing-mail}
 
-Since sending email messages can negatively impact the response time of your application, many developers choose to queue email messages for background sending. Laravel makes this easy using its built-in [unified queue API](/laravel/12.x/queues). To queue a mail message, use the `queue` method on the `Mail` facade after specifying the message's recipients:
+
+#### 메일 메시지 큐잉 {#queueing-a-mail-message}
+
+이메일 메시지 전송은 애플리케이션의 응답 속도에 부정적인 영향을 줄 수 있기 때문에, 많은 개발자들이 이메일 메시지를 백그라운드에서 전송하도록 큐에 넣는 방식을 선택합니다. Laravel은 내장된 [통합 큐 API](/laravel/12.x/queues)를 통해 이 작업을 쉽게 처리할 수 있습니다. 메일 메시지를 큐에 넣으려면, 메시지의 수신자를 지정한 후 `Mail` 파사드의 `queue` 메서드를 사용하면 됩니다:
 
 ```php
 Mail::to($request->user())
@@ -990,12 +990,12 @@ Mail::to($request->user())
     ->queue(new OrderShipped($order));
 ```
 
-This method will automatically take care of pushing a job onto the queue so the message is sent in the background. You will need to [configure your queues](/laravel/12.x/queues) before using this feature.
+이 메서드는 메시지가 백그라운드에서 전송될 수 있도록 자동으로 작업을 큐에 추가합니다. 이 기능을 사용하기 전에 [큐를 설정](/laravel/12.x/queues)해야 합니다.
 
-<a name="delayed-message-queueing"></a>
-#### Delayed Message Queueing
 
-If you wish to delay the delivery of a queued email message, you may use the `later` method. As its first argument, the `later` method accepts a `DateTime` instance indicating when the message should be sent:
+#### 지연된 메시지 큐잉 {#delayed-message-queueing}
+
+큐에 저장된 이메일 메시지의 발송을 지연시키고 싶다면, `later` 메서드를 사용할 수 있습니다. `later` 메서드는 첫 번째 인자로 메시지를 언제 보낼지 지정하는 `DateTime` 인스턴스를 받습니다:
 
 ```php
 Mail::to($request->user())
@@ -1004,10 +1004,10 @@ Mail::to($request->user())
     ->later(now()->addMinutes(10), new OrderShipped($order));
 ```
 
-<a name="pushing-to-specific-queues"></a>
-#### Pushing to Specific Queues
 
-Since all mailable classes generated using the `make:mail` command make use of the `Illuminate\Bus\Queueable` trait, you may call the `onQueue` and `onConnection` methods on any mailable class instance, allowing you to specify the connection and queue name for the message:
+#### 특정 큐에 푸시하기 {#pushing-to-specific-queues}
+
+`make:mail` 명령어로 생성된 모든 메일러블 클래스는 `Illuminate\Bus\Queueable` 트레이트를 사용하므로, 어떤 메일러블 클래스 인스턴스에서도 `onQueue`와 `onConnection` 메서드를 호출할 수 있습니다. 이를 통해 메시지에 사용할 연결(connection)과 큐(queue) 이름을 지정할 수 있습니다.
 
 ```php
 $message = (new OrderShipped($order))
@@ -1020,10 +1020,10 @@ Mail::to($request->user())
     ->queue($message);
 ```
 
-<a name="queueing-by-default"></a>
-#### Queueing by Default
 
-If you have mailable classes that you want to always be queued, you may implement the `ShouldQueue` contract on the class. Now, even if you call the `send` method when mailing, the mailable will still be queued since it implements the contract:
+#### 기본적으로 큐잉하기 {#queueing-by-default}
+
+항상 큐에 넣고 싶은 메일 클래스가 있다면, 해당 클래스에 `ShouldQueue` 계약을 구현하면 됩니다. 이제 메일을 보낼 때 `send` 메서드를 호출하더라도, 이 계약을 구현했기 때문에 해당 메일은 큐에 자동으로 등록됩니다:
 
 ```php
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -1034,12 +1034,12 @@ class OrderShipped extends Mailable implements ShouldQueue
 }
 ```
 
-<a name="queued-mailables-and-database-transactions"></a>
-#### Queued Mailables and Database Transactions
 
-When queued mailables are dispatched within database transactions, they may be processed by the queue before the database transaction has committed. When this happens, any updates you have made to models or database records during the database transaction may not yet be reflected in the database. In addition, any models or database records created within the transaction may not exist in the database. If your mailable depends on these models, unexpected errors can occur when the job that sends the queued mailable is processed.
+#### 큐잉된 메일러블과 데이터베이스 트랜잭션 {#queued-mailables-and-database-transactions}
 
-If your queue connection's `after_commit` configuration option is set to `false`, you may still indicate that a particular queued mailable should be dispatched after all open database transactions have been committed by calling the `afterCommit` method when sending the mail message:
+큐잉된 메일러블이 데이터베이스 트랜잭션 내에서 디스패치될 때, 큐가 데이터베이스 트랜잭션이 커밋되기 전에 해당 작업을 처리할 수 있습니다. 이 경우, 트랜잭션 중에 모델이나 데이터베이스 레코드에 대해 수행한 업데이트가 아직 데이터베이스에 반영되지 않았을 수 있습니다. 또한, 트랜잭션 내에서 생성된 모델이나 레코드가 데이터베이스에 존재하지 않을 수도 있습니다. 만약 메일러블이 이러한 모델에 의존한다면, 큐잉된 메일러블을 전송하는 작업이 처리될 때 예기치 않은 오류가 발생할 수 있습니다.
+
+큐 연결의 `after_commit` 설정 옵션이 `false`로 되어 있더라도, 메일 메시지를 전송할 때 `afterCommit` 메서드를 호출하여 특정 큐잉된 메일러블이 모든 열린 데이터베이스 트랜잭션이 커밋된 후에 디스패치되도록 지정할 수 있습니다:
 
 ```php
 Mail::to($request->user())->send(
@@ -1047,7 +1047,7 @@ Mail::to($request->user())->send(
 );
 ```
 
-Alternatively, you may call the `afterCommit` method from your mailable's constructor:
+또는, 메일러블의 생성자에서 `afterCommit` 메서드를 호출할 수도 있습니다:
 
 ```php
 <?php
@@ -1064,7 +1064,7 @@ class OrderShipped extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * 새로운 메시지 인스턴스를 생성합니다.
      */
     public function __construct()
     {
@@ -1074,12 +1074,12 @@ class OrderShipped extends Mailable implements ShouldQueue
 ```
 
 > [!NOTE]
-> To learn more about working around these issues, please review the documentation regarding [queued jobs and database transactions](/laravel/12.x/queues#jobs-and-database-transactions).
+> 이러한 문제를 우회하는 방법에 대해 더 자세히 알아보려면 [큐잉된 작업과 데이터베이스 트랜잭션](/laravel/12.x/queues#jobs-and-database-transactions) 문서를 참고하세요.
 
-<a name="rendering-mailables"></a>
-## Rendering Mailables
 
-Sometimes you may wish to capture the HTML content of a mailable without sending it. To accomplish this, you may call the `render` method of the mailable. This method will return the evaluated HTML content of the mailable as a string:
+## 메일러블 렌더링 {#rendering-mailables}
+
+가끔 메일을 실제로 보내지 않고, 메일러블의 HTML 내용을 캡처하고 싶을 때가 있습니다. 이를 위해 메일러블의 `render` 메서드를 호출할 수 있습니다. 이 메서드는 메일러블의 평가된 HTML 내용을 문자열로 반환합니다:
 
 ```php
 use App\Mail\InvoicePaid;
@@ -1090,10 +1090,10 @@ $invoice = Invoice::find(1);
 return (new InvoicePaid($invoice))->render();
 ```
 
-<a name="previewing-mailables-in-the-browser"></a>
-### Previewing Mailables in the Browser
 
-When designing a mailable's template, it is convenient to quickly preview the rendered mailable in your browser like a typical Blade template. For this reason, Laravel allows you to return any mailable directly from a route closure or controller. When a mailable is returned, it will be rendered and displayed in the browser, allowing you to quickly preview its design without needing to send it to an actual email address:
+### 브라우저에서 Mailable 미리보기 {#previewing-mailables-in-the-browser}
+
+Mailable의 템플릿을 디자인할 때, 일반적인 Blade 템플릿처럼 렌더링된 mailable을 브라우저에서 빠르게 미리보는 것이 편리합니다. 이를 위해 Laravel은 라우트 클로저나 컨트롤러에서 mailable을 직접 반환할 수 있도록 지원합니다. mailable을 반환하면, 해당 mailable이 렌더링되어 브라우저에 표시되므로 실제 이메일 주소로 전송하지 않고도 디자인을 빠르게 미리볼 수 있습니다:
 
 ```php
 Route::get('/mailable', function () {
@@ -1103,12 +1103,12 @@ Route::get('/mailable', function () {
 });
 ```
 
-<a name="localizing-mailables"></a>
-## Localizing Mailables
 
-Laravel allows you to send mailables in a locale other than the request's current locale, and will even remember this locale if the mail is queued.
+## 메일러블의 지역화 {#localizing-mailables}
 
-To accomplish this, the `Mail` facade offers a `locale` method to set the desired language. The application will change into this locale when the mailable's template is being evaluated and then revert back to the previous locale when evaluation is complete:
+Laravel은 메일러블을 현재 요청의 로케일과 다른 언어로 보낼 수 있도록 지원하며, 메일이 큐에 저장되더라도 이 로케일을 기억합니다.
+
+이를 위해 `Mail` 파사드는 원하는 언어를 설정할 수 있는 `locale` 메서드를 제공합니다. 애플리케이션은 메일러블의 템플릿이 평가되는 동안 해당 로케일로 변경되었다가, 평가가 끝나면 이전 로케일로 되돌아갑니다:
 
 ```php
 Mail::to($request->user())->locale('es')->send(
@@ -1116,10 +1116,10 @@ Mail::to($request->user())->locale('es')->send(
 );
 ```
 
-<a name="user-preferred-locales"></a>
-### User Preferred Locales
 
-Sometimes, applications store each user's preferred locale. By implementing the `HasLocalePreference` contract on one or more of your models, you may instruct Laravel to use this stored locale when sending mail:
+### 사용자 선호 로케일 {#user-preferred-locales}
+
+때때로 애플리케이션은 각 사용자의 선호 로케일을 저장합니다. 모델 중 하나 이상에 `HasLocalePreference` 계약을 구현하면, Laravel이 메일을 보낼 때 이 저장된 로케일을 사용하도록 지시할 수 있습니다:
 
 ```php
 use Illuminate\Contracts\Translation\HasLocalePreference;
@@ -1127,7 +1127,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 class User extends Model implements HasLocalePreference
 {
     /**
-     * Get the user's preferred locale.
+     * 사용자의 선호 로케일을 반환합니다.
      */
     public function preferredLocale(): string
     {
@@ -1136,27 +1136,27 @@ class User extends Model implements HasLocalePreference
 }
 ```
 
-Once you have implemented the interface, Laravel will automatically use the preferred locale when sending mailables and notifications to the model. Therefore, there is no need to call the `locale` method when using this interface:
+이 인터페이스를 구현하면, Laravel은 해당 모델에 메일러블이나 알림을 보낼 때 자동으로 선호 로케일을 사용합니다. 따라서 이 인터페이스를 사용할 때는 `locale` 메서드를 따로 호출할 필요가 없습니다:
 
 ```php
 Mail::to($request->user())->send(new OrderShipped($order));
 ```
 
-<a name="testing-mailables"></a>
-## Testing
 
-<a name="testing-mailable-content"></a>
-### Testing Mailable Content
+## 테스트 {#testing-mailables}
 
-Laravel provides a variety of methods for inspecting your mailable's structure. In addition, Laravel provides several convenient methods for testing that your mailable contains the content that you expect. These methods are: `assertSeeInHtml`, `assertDontSeeInHtml`, `assertSeeInOrderInHtml`, `assertSeeInText`, `assertDontSeeInText`, `assertSeeInOrderInText`, `assertHasAttachment`, `assertHasAttachedData`, `assertHasAttachmentFromStorage`, and `assertHasAttachmentFromStorageDisk`.
 
-As you might expect, the "HTML" assertions assert that the HTML version of your mailable contains a given string, while the "text" assertions assert that the plain-text version of your mailable contains a given string:
+### 메일러블(Mailable) 내용 테스트 {#testing-mailable-content}
 
-```php tab=Pest
+Laravel은 메일러블의 구조를 검사할 수 있는 다양한 메서드를 제공합니다. 또한, 메일러블에 기대하는 내용이 포함되어 있는지 테스트할 수 있는 여러 편리한 메서드도 제공합니다. 이러한 메서드에는 `assertSeeInHtml`, `assertDontSeeInHtml`, `assertSeeInOrderInHtml`, `assertSeeInText`, `assertDontSeeInText`, `assertSeeInOrderInText`, `assertHasAttachment`, `assertHasAttachedData`, `assertHasAttachmentFromStorage`, `assertHasAttachmentFromStorageDisk`가 있습니다.
+
+예상할 수 있듯이, "HTML" 관련 어서션은 메일러블의 HTML 버전에 특정 문자열이 포함되어 있는지 확인하고, "text" 관련 어서션은 메일러블의 일반 텍스트 버전에 특정 문자열이 포함되어 있는지 확인합니다.
+::: code-group
+```php [Pest]
 use App\Mail\InvoicePaid;
 use App\Models\User;
 
-test('mailable content', function () {
+test('메일러블 내용 테스트', function () {
     $user = User::factory()->create();
 
     $mailable = new InvoicePaid($user);
@@ -1185,7 +1185,7 @@ test('mailable content', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Mail\InvoicePaid;
 use App\Models\User;
 
@@ -1218,15 +1218,15 @@ public function test_mailable_content(): void
     $mailable->assertHasAttachmentFromStorageDisk('s3', '/path/to/file', 'name.pdf', ['mime' => 'application/pdf']);
 }
 ```
+:::
 
-<a name="testing-mailable-sending"></a>
-### Testing Mailable Sending
+### 메일러블 전송 테스트 {#testing-mailable-sending}
 
-We suggest testing the content of your mailables separately from your tests that assert that a given mailable was "sent" to a specific user. Typically, the content of mailables is not relevant to the code you are testing, and it is sufficient to simply assert that Laravel was instructed to send a given mailable.
+특정 메일러블이 특정 사용자에게 "전송"되었는지 검증하는 테스트와는 별도로, 메일러블의 내용을 개별적으로 테스트하는 것을 권장합니다. 일반적으로 메일러블의 내용은 테스트하려는 코드와 직접적인 관련이 없으므로, Laravel이 특정 메일러블을 전송하도록 지시했는지만 검증하면 충분합니다.
 
-You may use the `Mail` facade's `fake` method to prevent mail from being sent. After calling the `Mail` facade's `fake` method, you may then assert that mailables were instructed to be sent to users and even inspect the data the mailables received:
-
-```php tab=Pest
+메일이 실제로 전송되지 않도록 하려면 `Mail` 파사드의 `fake` 메서드를 사용할 수 있습니다. `Mail::fake()`를 호출한 후에는, 메일러블이 사용자에게 전송되었는지, 그리고 메일러블이 받은 데이터를 검사할 수 있습니다.
+::: code-group
+```php [Pest]
 <?php
 
 use App\Mail\OrderShipped;
@@ -1235,32 +1235,32 @@ use Illuminate\Support\Facades\Mail;
 test('orders can be shipped', function () {
     Mail::fake();
 
-    // Perform order shipping...
+    // 주문 배송 처리...
 
-    // Assert that no mailables were sent...
+    // 메일러블이 전혀 전송되지 않았는지 확인...
     Mail::assertNothingSent();
 
-    // Assert that a mailable was sent...
+    // 메일러블이 전송되었는지 확인...
     Mail::assertSent(OrderShipped::class);
 
-    // Assert a mailable was sent twice...
+    // 메일러블이 두 번 전송되었는지 확인...
     Mail::assertSent(OrderShipped::class, 2);
 
-    // Assert a mailable was sent to an email address...
+    // 특정 이메일 주소로 메일러블이 전송되었는지 확인...
     Mail::assertSent(OrderShipped::class, 'example@laravel.com');
 
-    // Assert a mailable was sent to multiple email addresses...
+    // 여러 이메일 주소로 메일러블이 전송되었는지 확인...
     Mail::assertSent(OrderShipped::class, ['example@laravel.com', '...']);
 
-    // Assert a mailable was not sent...
+    // 특정 메일러블이 전송되지 않았는지 확인...
     Mail::assertNotSent(AnotherMailable::class);
 
-    // Assert 3 total mailables were sent...
+    // 총 3개의 메일러블이 전송되었는지 확인...
     Mail::assertSentCount(3);
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -1275,33 +1275,33 @@ class ExampleTest extends TestCase
     {
         Mail::fake();
 
-        // Perform order shipping...
+        // 주문 배송 처리...
 
-        // Assert that no mailables were sent...
+        // 메일러블이 전혀 전송되지 않았는지 확인...
         Mail::assertNothingSent();
 
-        // Assert that a mailable was sent...
+        // 메일러블이 전송되었는지 확인...
         Mail::assertSent(OrderShipped::class);
 
-        // Assert a mailable was sent twice...
+        // 메일러블이 두 번 전송되었는지 확인...
         Mail::assertSent(OrderShipped::class, 2);
 
-        // Assert a mailable was sent to an email address...
+        // 특정 이메일 주소로 메일러블이 전송되었는지 확인...
         Mail::assertSent(OrderShipped::class, 'example@laravel.com');
 
-        // Assert a mailable was sent to multiple email addresses...
+        // 여러 이메일 주소로 메일러블이 전송되었는지 확인...
         Mail::assertSent(OrderShipped::class, ['example@laravel.com', '...']);
 
-        // Assert a mailable was not sent...
+        // 특정 메일러블이 전송되지 않았는지 확인...
         Mail::assertNotSent(AnotherMailable::class);
 
-        // Assert 3 total mailables were sent...
+        // 총 3개의 메일러블이 전송되었는지 확인...
         Mail::assertSentCount(3);
     }
 }
 ```
-
-If you are queueing mailables for delivery in the background, you should use the `assertQueued` method instead of `assertSent`:
+:::
+만약 메일러블을 백그라운드에서 큐잉하여 전송한다면, `assertSent` 대신 `assertQueued` 메서드를 사용해야 합니다.
 
 ```php
 Mail::assertQueued(OrderShipped::class);
@@ -1310,7 +1310,7 @@ Mail::assertNothingQueued();
 Mail::assertQueuedCount(3);
 ```
 
-You may pass a closure to the `assertSent`, `assertNotSent`, `assertQueued`, or `assertNotQueued` methods in order to assert that a mailable was sent that passes a given "truth test". If at least one mailable was sent that passes the given truth test then the assertion will be successful:
+`assertSent`, `assertNotSent`, `assertQueued`, `assertNotQueued` 메서드에 클로저를 전달하여, 특정 "진리 테스트"를 통과하는 메일러블이 전송되었는지 검증할 수 있습니다. 해당 조건을 만족하는 메일러블이 하나라도 전송되었다면, 검증은 성공합니다.
 
 ```php
 Mail::assertSent(function (OrderShipped $mail) use ($order) {
@@ -1318,7 +1318,7 @@ Mail::assertSent(function (OrderShipped $mail) use ($order) {
 });
 ```
 
-When calling the `Mail` facade's assertion methods, the mailable instance accepted by the provided closure exposes helpful methods for examining the mailable:
+`Mail` 파사드의 검증 메서드에 전달된 클로저에서, 메일러블 인스턴스는 메일러블을 검사할 수 있는 다양한 유용한 메서드를 제공합니다.
 
 ```php
 Mail::assertSent(OrderShipped::class, function (OrderShipped $mail) use ($user) {
@@ -1331,7 +1331,7 @@ Mail::assertSent(OrderShipped::class, function (OrderShipped $mail) use ($user) 
 });
 ```
 
-The mailable instance also includes several helpful methods for examining the attachments on a mailable:
+메일러블 인스턴스는 첨부파일을 검사할 수 있는 여러 유용한 메서드도 포함하고 있습니다.
 
 ```php
 use Illuminate\Mail\Mailables\Attachment;
@@ -1357,7 +1357,7 @@ Mail::assertSent(OrderShipped::class, function (OrderShipped $mail) use ($pdfDat
 });
 ```
 
-You may have noticed that there are two methods for asserting that mail was not sent: `assertNotSent` and `assertNotQueued`. Sometimes you may wish to assert that no mail was sent **or** queued. To accomplish this, you may use the `assertNothingOutgoing` and `assertNotOutgoing` methods:
+메일이 전송되지 않았는지 검증하는 방법에는 `assertNotSent`와 `assertNotQueued` 두 가지가 있습니다. 때로는 메일이 전송 **또는** 큐잉되지 않았는지 모두 확인하고 싶을 수 있습니다. 이럴 때는 `assertNothingOutgoing`과 `assertNotOutgoing` 메서드를 사용할 수 있습니다.
 
 ```php
 Mail::assertNothingOutgoing();
@@ -1367,33 +1367,33 @@ Mail::assertNotOutgoing(function (OrderShipped $mail) use ($order) {
 });
 ```
 
-<a name="mail-and-local-development"></a>
-## Mail and Local Development
 
-When developing an application that sends email, you probably don't want to actually send emails to live email addresses. Laravel provides several ways to "disable" the actual sending of emails during local development.
+## 메일과 로컬 개발 {#mail-and-local-development}
 
-<a name="log-driver"></a>
-#### Log Driver
+이메일을 보내는 애플리케이션을 개발할 때 실제 이메일 주소로 메일이 전송되는 것을 원하지 않을 수 있습니다. Laravel은 로컬 개발 중에 실제로 이메일이 전송되지 않도록 "비활성화"할 수 있는 여러 가지 방법을 제공합니다.
 
-Instead of sending your emails, the `log` mail driver will write all email messages to your log files for inspection. Typically, this driver would only be used during local development. For more information on configuring your application per environment, check out the [configuration documentation](/laravel/12.x/configuration#environment-configuration).
 
-<a name="mailtrap"></a>
-#### HELO / Mailtrap / Mailpit
+#### 로그 드라이버 {#log-driver}
 
-Alternatively, you may use a service like [HELO](https://usehelo.com) or [Mailtrap](https://mailtrap.io) and the `smtp` driver to send your email messages to a "dummy" mailbox where you may view them in a true email client. This approach has the benefit of allowing you to actually inspect the final emails in Mailtrap's message viewer.
+`log` 메일 드라이버는 실제로 이메일을 전송하는 대신, 모든 이메일 메시지를 로그 파일에 기록하여 확인할 수 있도록 합니다. 일반적으로 이 드라이버는 로컬 개발 환경에서만 사용됩니다. 환경별로 애플리케이션을 설정하는 방법에 대한 자세한 내용은 [설정 문서](/laravel/12.x/configuration#environment-configuration)를 참고하세요.
 
-If you are using [Laravel Sail](/laravel/12.x/sail), you may preview your messages using [Mailpit](https://github.com/axllent/mailpit). When Sail is running, you may access the Mailpit interface at: `http://localhost:8025`.
 
-<a name="using-a-global-to-address"></a>
-#### Using a Global `to` Address
+#### HELO / Mailtrap / Mailpit {#mailtrap}
 
-Finally, you may specify a global "to" address by invoking the `alwaysTo` method offered by the `Mail` facade. Typically, this method should be called from the `boot` method of one of your application's service providers:
+또는 [HELO](https://usehelo.com)나 [Mailtrap](https://mailtrap.io)와 같은 서비스를 사용하고, `smtp` 드라이버를 통해 이메일 메시지를 "더미" 메일박스로 전송할 수 있습니다. 이렇게 하면 실제 이메일 클라이언트에서 메시지를 확인할 수 있으며, Mailtrap의 메시지 뷰어에서 최종 이메일을 직접 점검할 수 있다는 장점이 있습니다.
+
+[Laravel Sail](/laravel/12.x/sail)을 사용 중이라면, [Mailpit](https://github.com/axllent/mailpit)을 통해 메시지를 미리 볼 수 있습니다. Sail이 실행 중일 때는 `http://localhost:8025`에서 Mailpit 인터페이스에 접속할 수 있습니다.
+
+
+#### 전역 `to` 주소 사용하기 {#using-a-global-to-address}
+
+마지막으로, `Mail` 파사드에서 제공하는 `alwaysTo` 메서드를 호출하여 전역 "to" 주소를 지정할 수 있습니다. 일반적으로 이 메서드는 애플리케이션의 서비스 프로바이더 중 하나의 `boot` 메서드에서 호출해야 합니다:
 
 ```php
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Bootstrap any application services.
+ * 애플리케이션 서비스를 부트스트랩합니다.
  */
 public function boot(): void
 {
@@ -1403,10 +1403,10 @@ public function boot(): void
 }
 ```
 
-<a name="events"></a>
-## Events
 
-Laravel dispatches two events while sending mail messages. The `MessageSending` event is dispatched prior to a message being sent, while the `MessageSent` event is dispatched after a message has been sent. Remember, these events are dispatched when the mail is being *sent*, not when it is queued. You may create [event listeners](/laravel/12.x/events) for these events within your application:
+## 이벤트 {#events}
+
+Laravel은 메일 메시지를 전송하는 동안 두 가지 이벤트를 발생시킵니다. `MessageSending` 이벤트는 메시지가 전송되기 전에 발생하며, `MessageSent` 이벤트는 메시지가 전송된 후에 발생합니다. 이 이벤트들은 메일이 *전송*될 때 발생한다는 점을 기억하세요. 큐에 등록될 때가 아니라는 점에 유의해야 합니다. 애플리케이션 내에서 이러한 이벤트에 대한 [이벤트 리스너](/laravel/12.x/events)를 생성할 수 있습니다:
 
 ```php
 use Illuminate\Mail\Events\MessageSending;
@@ -1415,7 +1415,7 @@ use Illuminate\Mail\Events\MessageSending;
 class LogMessage
 {
     /**
-     * Handle the event.
+     * 이벤트를 처리합니다.
      */
     public function handle(MessageSending $event): void
     {
@@ -1424,10 +1424,10 @@ class LogMessage
 }
 ```
 
-<a name="custom-transports"></a>
-## Custom Transports
 
-Laravel includes a variety of mail transports; however, you may wish to write your own transports to deliver email via other services that Laravel does not support out of the box. To get started, define a class that extends the `Symfony\Component\Mailer\Transport\AbstractTransport` class. Then, implement the `doSend` and `__toString()` methods on your transport:
+## 커스텀 트랜스포트 {#custom-transports}
+
+Laravel은 다양한 메일 트랜스포트를 기본으로 제공하지만, Laravel에서 기본적으로 지원하지 않는 다른 서비스로 이메일을 전송하고 싶을 때 직접 트랜스포트를 작성할 수 있습니다. 시작하려면, `Symfony\Component\Mailer\Transport\AbstractTransport` 클래스를 확장하는 클래스를 정의하세요. 그리고 해당 트랜스포트에서 `doSend`와 `__toString()` 메서드를 구현하면 됩니다.
 
 ```php
 use MailchimpTransactional\ApiClient;
@@ -1439,7 +1439,7 @@ use Symfony\Component\Mime\MessageConverter;
 class MailchimpTransport extends AbstractTransport
 {
     /**
-     * Create a new Mailchimp transport instance.
+     * 새로운 Mailchimp 트랜스포트 인스턴스를 생성합니다.
      */
     public function __construct(
         protected ApiClient $client,
@@ -1465,7 +1465,7 @@ class MailchimpTransport extends AbstractTransport
     }
 
     /**
-     * Get the string representation of the transport.
+     * 트랜스포트의 문자열 표현을 반환합니다.
      */
     public function __toString(): string
     {
@@ -1474,14 +1474,14 @@ class MailchimpTransport extends AbstractTransport
 }
 ```
 
-Once you've defined your custom transport, you may register it via the `extend` method provided by the `Mail` facade. Typically, this should be done within the `boot` method of your application's `AppServiceProvider` service provider. A `$config` argument will be passed to the closure provided to the `extend` method. This argument will contain the configuration array defined for the mailer in the application's `config/mail.php` configuration file:
+커스텀 트랜스포트를 정의했다면, `Mail` 파사드에서 제공하는 `extend` 메서드를 통해 등록할 수 있습니다. 일반적으로 이 작업은 애플리케이션의 `AppServiceProvider` 서비스 프로바이더의 `boot` 메서드 내에서 수행합니다. `extend` 메서드에 전달되는 클로저에는 `$config` 인자가 전달되며, 이 인자에는 애플리케이션의 `config/mail.php` 설정 파일에 정의된 메일러 설정 배열이 담겨 있습니다.
 
 ```php
 use App\Mail\MailchimpTransport;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Bootstrap any application services.
+ * 애플리케이션 서비스를 부트스트랩합니다.
  */
 public function boot(): void
 {
@@ -1491,7 +1491,7 @@ public function boot(): void
 }
 ```
 
-Once your custom transport has been defined and registered, you may create a mailer definition within your application's `config/mail.php` configuration file that utilizes the new transport:
+커스텀 트랜스포트를 정의하고 등록한 후에는, 애플리케이션의 `config/mail.php` 설정 파일에서 새로운 트랜스포트를 사용하는 메일러 정의를 추가할 수 있습니다.
 
 ```php
 'mailchimp' => [
@@ -1500,16 +1500,16 @@ Once your custom transport has been defined and registered, you may create a mai
 ],
 ```
 
-<a name="additional-symfony-transports"></a>
-### Additional Symfony Transports
 
-Laravel includes support for some existing Symfony maintained mail transports like Mailgun and Postmark. However, you may wish to extend Laravel with support for additional Symfony maintained transports. You can do so by requiring the necessary Symfony mailer via Composer and registering the transport with Laravel. For example, you may install and register the "Brevo" (formerly "Sendinblue") Symfony mailer:
+### 추가 Symfony 전송 방식 {#additional-symfony-transports}
+
+Laravel은 Mailgun, Postmark와 같은 기존 Symfony에서 관리하는 메일 전송 방식을 기본적으로 지원합니다. 그러나, 추가적으로 Symfony에서 관리하는 다른 전송 방식을 Laravel에 확장하여 사용할 수도 있습니다. 이를 위해서는 Composer를 통해 필요한 Symfony 메일러 패키지를 설치하고, Laravel에 해당 전송 방식을 등록하면 됩니다. 예를 들어, "Brevo"(이전 명칭: "Sendinblue") Symfony 메일러를 설치하고 등록하는 방법은 다음과 같습니다:
 
 ```shell
 composer require symfony/brevo-mailer symfony/http-client
 ```
 
-Once the Brevo mailer package has been installed, you may add an entry for your Brevo API credentials to your application's `services` configuration file:
+Brevo 메일러 패키지를 설치한 후, 애플리케이션의 `services` 설정 파일에 Brevo API 자격 증명을 추가합니다:
 
 ```php
 'brevo' => [
@@ -1517,7 +1517,7 @@ Once the Brevo mailer package has been installed, you may add an entry for your 
 ],
 ```
 
-Next, you may use the `Mail` facade's `extend` method to register the transport with Laravel. Typically, this should be done within the `boot` method of a service provider:
+다음으로, `Mail` 파사드의 `extend` 메서드를 사용하여 Laravel에 전송 방식을 등록할 수 있습니다. 일반적으로 이 작업은 서비스 프로바이더의 `boot` 메서드 내에서 수행합니다:
 
 ```php
 use Illuminate\Support\Facades\Mail;
@@ -1525,7 +1525,7 @@ use Symfony\Component\Mailer\Bridge\Brevo\Transport\BrevoTransportFactory;
 use Symfony\Component\Mailer\Transport\Dsn;
 
 /**
- * Bootstrap any application services.
+ * 애플리케이션 서비스를 부트스트랩합니다.
  */
 public function boot(): void
 {
@@ -1541,7 +1541,7 @@ public function boot(): void
 }
 ```
 
-Once your transport has been registered, you may create a mailer definition within your application's config/mail.php configuration file that utilizes the new transport:
+전송 방식이 등록되면, 애플리케이션의 config/mail.php 설정 파일에 새로운 전송 방식을 사용하는 메일러 정의를 추가할 수 있습니다:
 
 ```php
 'brevo' => [

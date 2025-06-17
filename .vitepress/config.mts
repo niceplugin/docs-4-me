@@ -6,13 +6,13 @@ import { sidebar_laravel } from './configs/sidebar/laravel'
 export default defineConfig({
   lang: 'ko-KR',
   srcDir: 'docs',
-  title: 'Docs 4 Me',
+  title: 'Docs 4 Me . kr',
   description: '나를 위한 문서 한글화 사이트',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/niceplugin/docs-4-me' }
-    ],
+    // socialLinks: [
+    //   { icon: 'github', link: 'https://github.com/niceplugin/docs-4-me' }
+    // ],
 
     // editLink: {
     //   pattern: 'https://github.com/niceplugin/docs-4-me/edit/main/docs/:path',
@@ -21,7 +21,7 @@ export default defineConfig({
 
     nav: [
       { text: '홈', link: '/' },
-      { text: '라라벨 12.x', link: '/laravel/12.x/installation' }
+      { text: '라라벨 12.x', link: '/laravel/12.x/installation', activeMatch: '/laravel/' }
     ],
 
     outline: {
@@ -51,10 +51,6 @@ export default defineConfig({
     sidebar: {
       ...sidebar_laravel,
     },
-
-    socialLinks: [
-      // { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
   },
   markdown: {
     config(md) {

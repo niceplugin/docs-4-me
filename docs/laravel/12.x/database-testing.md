@@ -1,22 +1,22 @@
-# Database Testing
+# 데이터베이스 테스트
 
-- [Introduction](#introduction)
-    - [Resetting the Database After Each Test](#resetting-the-database-after-each-test)
-- [Model Factories](#model-factories)
-- [Running Seeders](#running-seeders)
-- [Available Assertions](#available-assertions)
 
-<a name="introduction"></a>
-## Introduction
 
-Laravel provides a variety of helpful tools and assertions to make it easier to test your database driven applications. In addition, Laravel model factories and seeders make it painless to create test database records using your application's Eloquent models and relationships. We'll discuss all of these powerful features in the following documentation.
 
-<a name="resetting-the-database-after-each-test"></a>
-### Resetting the Database After Each Test
 
-Before proceeding much further, let's discuss how to reset your database after each of your tests so that data from a previous test does not interfere with subsequent tests. Laravel's included `Illuminate\Foundation\Testing\RefreshDatabase` trait will take care of this for you. Simply use the trait on your test class:
 
-```php tab=Pest
+
+
+## 소개 {#introduction}
+
+Laravel은 데이터베이스 기반 애플리케이션을 더 쉽게 테스트할 수 있도록 다양한 유용한 도구와 어설션을 제공합니다. 또한, Laravel의 모델 팩토리와 시더를 사용하면 애플리케이션의 Eloquent 모델과 관계를 활용하여 테스트용 데이터베이스 레코드를 손쉽게 생성할 수 있습니다. 이 문서에서는 이러한 강력한 기능들에 대해 모두 다룰 예정입니다.
+
+
+### 각 테스트 후 데이터베이스 초기화 {#resetting-the-database-after-each-test}
+
+더 진행하기 전에, 각 테스트 후에 데이터베이스를 어떻게 초기화하여 이전 테스트의 데이터가 이후 테스트에 영향을 주지 않도록 하는지에 대해 알아보겠습니다. 라라벨에 포함된 `Illuminate\Foundation\Testing\RefreshDatabase` 트레이트가 이 작업을 처리해줍니다. 테스트 클래스에서 이 트레이트를 사용하기만 하면 됩니다:
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -30,7 +30,7 @@ test('basic example', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -43,7 +43,7 @@ class ExampleTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic functional test example.
+     * 기본 기능 테스트 예시.
      */
     public function test_basic_example(): void
     {
@@ -53,19 +53,19 @@ class ExampleTest extends TestCase
     }
 }
 ```
+:::
+`Illuminate\Foundation\Testing\RefreshDatabase` 트레이트는 데이터베이스 스키마가 최신 상태라면 마이그레이션을 실행하지 않습니다. 대신, 데이터베이스 트랜잭션 내에서 테스트를 실행합니다. 따라서 이 트레이트를 사용하지 않는 테스트 케이스에서 추가된 레코드는 데이터베이스에 남아 있을 수 있습니다.
 
-The `Illuminate\Foundation\Testing\RefreshDatabase` trait does not migrate your database if your schema is up to date. Instead, it will only execute the test within a database transaction. Therefore, any records added to the database by test cases that do not use this trait may still exist in the database.
+데이터베이스를 완전히 초기화하고 싶다면, `Illuminate\Foundation\Testing\DatabaseMigrations` 또는 `Illuminate\Foundation\Testing\DatabaseTruncation` 트레이트를 대신 사용할 수 있습니다. 하지만 이 두 옵션은 `RefreshDatabase` 트레이트보다 훨씬 느립니다.
 
-If you would like to totally reset the database, you may use the `Illuminate\Foundation\Testing\DatabaseMigrations` or `Illuminate\Foundation\Testing\DatabaseTruncation` traits instead. However, both of these options are significantly slower than the `RefreshDatabase` trait.
 
-<a name="model-factories"></a>
-## Model Factories
+## 모델 팩토리 {#model-factories}
 
-When testing, you may need to insert a few records into your database before executing your test. Instead of manually specifying the value of each column when you create this test data, Laravel allows you to define a set of default attributes for each of your [Eloquent models](/laravel/12.x/eloquent) using [model factories](/laravel/12.x/eloquent-factories).
+테스트를 할 때, 테스트를 실행하기 전에 데이터베이스에 몇 개의 레코드를 삽입해야 할 수도 있습니다. 이 테스트 데이터를 생성할 때 각 컬럼의 값을 수동으로 지정하는 대신, Laravel은 [모델 팩토리](/laravel/12.x/eloquent-factories)를 사용하여 각 [Eloquent 모델](/laravel/12.x/eloquent)에 대한 기본 속성 집합을 정의할 수 있도록 해줍니다.
 
-To learn more about creating and utilizing model factories to create models, please consult the complete [model factory documentation](/laravel/12.x/eloquent-factories). Once you have defined a model factory, you may utilize the factory within your test to create models:
-
-```php tab=Pest
+모델을 생성하기 위해 모델 팩토리를 생성하고 활용하는 방법에 대해 더 자세히 알고 싶다면, 전체 [모델 팩토리 문서](/laravel/12.x/eloquent-factories)를 참고하세요. 모델 팩토리를 정의한 후에는 테스트 내에서 팩토리를 사용하여 모델을 생성할 수 있습니다:
+::: code-group
+```php [Pest]
 use App\Models\User;
 
 test('models can be instantiated', function () {
@@ -75,7 +75,7 @@ test('models can be instantiated', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Models\User;
 
 public function test_models_can_be_instantiated(): void
@@ -85,13 +85,13 @@ public function test_models_can_be_instantiated(): void
     // ...
 }
 ```
+:::
 
-<a name="running-seeders"></a>
-## Running Seeders
+## 시더 실행하기 {#running-seeders}
 
-If you would like to use [database seeders](/laravel/12.x/seeding) to populate your database during a feature test, you may invoke the `seed` method. By default, the `seed` method will execute the `DatabaseSeeder`, which should execute all of your other seeders. Alternatively, you pass a specific seeder class name to the `seed` method:
-
-```php tab=Pest
+기능 테스트 중에 [데이터베이스 시더](/laravel/12.x/seeding)를 사용하여 데이터베이스를 채우고 싶다면, `seed` 메서드를 호출하면 됩니다. 기본적으로 `seed` 메서드는 `DatabaseSeeder`를 실행하며, 이 시더는 다른 모든 시더들을 실행해야 합니다. 또는, `seed` 메서드에 특정 시더 클래스 이름을 전달할 수도 있습니다:
+::: code-group
+```php [Pest]
 <?php
 
 use Database\Seeders\OrderStatusSeeder;
@@ -101,15 +101,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
 test('orders can be created', function () {
-    // Run the DatabaseSeeder...
+    // DatabaseSeeder 실행...
     $this->seed();
 
-    // Run a specific seeder...
+    // 특정 시더 실행...
     $this->seed(OrderStatusSeeder::class);
 
     // ...
 
-    // Run an array of specific seeders...
+    // 여러 특정 시더 배열로 실행...
     $this->seed([
         OrderStatusSeeder::class,
         TransactionStatusSeeder::class,
@@ -118,7 +118,7 @@ test('orders can be created', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -133,19 +133,19 @@ class ExampleTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Test creating a new order.
+     * 새로운 주문 생성 테스트.
      */
     public function test_orders_can_be_created(): void
     {
-        // Run the DatabaseSeeder...
+        // DatabaseSeeder 실행...
         $this->seed();
 
-        // Run a specific seeder...
+        // 특정 시더 실행...
         $this->seed(OrderStatusSeeder::class);
 
         // ...
 
-        // Run an array of specific seeders...
+        // 여러 특정 시더 배열로 실행...
         $this->seed([
             OrderStatusSeeder::class,
             TransactionStatusSeeder::class,
@@ -154,8 +154,8 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
-Alternatively, you may instruct Laravel to automatically seed the database before each test that uses the `RefreshDatabase` trait. You may accomplish this by defining a `$seed` property on your base test class:
+:::
+또는, `RefreshDatabase` 트레이트를 사용하는 각 테스트 전에 Laravel이 자동으로 데이터베이스를 시딩하도록 지시할 수도 있습니다. 이를 위해 기본 테스트 클래스에 `$seed` 프로퍼티를 정의하면 됩니다:
 
 ```php
 <?php
@@ -167,7 +167,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     /**
-     * Indicates whether the default seeder should run before each test.
+     * 각 테스트 전에 기본 시더를 실행할지 여부를 지정합니다.
      *
      * @var bool
      */
@@ -175,46 +175,46 @@ abstract class TestCase extends BaseTestCase
 }
 ```
 
-When the `$seed` property is `true`, the test will run the `Database\Seeders\DatabaseSeeder` class before each test that uses the `RefreshDatabase` trait. However, you may specify a specific seeder that should be executed by defining a `$seeder` property on your test class:
+`$seed` 프로퍼티가 `true`로 설정되어 있으면, `RefreshDatabase` 트레이트를 사용하는 각 테스트 전에 `Database\Seeders\DatabaseSeeder` 클래스가 실행됩니다. 하지만, 테스트 클래스에 `$seeder` 프로퍼티를 정의하여 실행할 특정 시더를 지정할 수도 있습니다:
 
 ```php
 use Database\Seeders\OrderStatusSeeder;
 
 /**
- * Run a specific seeder before each test.
+ * 각 테스트 전에 특정 시더 실행.
  *
  * @var string
  */
 protected $seeder = OrderStatusSeeder::class;
 ```
 
-<a name="available-assertions"></a>
-## Available Assertions
 
-Laravel provides several database assertions for your [Pest](https://pestphp.com) or [PHPUnit](https://phpunit.de) feature tests. We'll discuss each of these assertions below.
+## 사용 가능한 어서션 {#available-assertions}
 
-<a name="assert-database-count"></a>
-#### assertDatabaseCount
+Laravel은 [Pest](https://pestphp.com) 또는 [PHPUnit](https://phpunit.de) 기능 테스트를 위한 여러 데이터베이스 어서션을 제공합니다. 아래에서 각 어서션에 대해 설명하겠습니다.
 
-Assert that a table in the database contains the given number of records:
+
+#### assertDatabaseCount {#assert-database-count}
+
+데이터베이스의 테이블에 주어진 개수의 레코드가 존재하는지 단언합니다:
 
 ```php
 $this->assertDatabaseCount('users', 5);
 ```
 
-<a name="assert-database-empty"></a>
-#### assertDatabaseEmpty
 
-Assert that a table in the database contains no records:
+#### assertDatabaseEmpty {#assert-database-empty}
+
+데이터베이스의 테이블에 레코드가 하나도 없는지 단언합니다:
 
 ```php
 $this->assertDatabaseEmpty('users');
 ```
 
-<a name="assert-database-has"></a>
-#### assertDatabaseHas
 
-Assert that a table in the database contains records matching the given key / value query constraints:
+#### assertDatabaseHas {#assert-database-has}
+
+데이터베이스의 테이블에 주어진 키 / 값 쿼리 제약 조건과 일치하는 레코드가 존재하는지 단언합니다:
 
 ```php
 $this->assertDatabaseHas('users', [
@@ -222,10 +222,10 @@ $this->assertDatabaseHas('users', [
 ]);
 ```
 
-<a name="assert-database-missing"></a>
-#### assertDatabaseMissing
 
-Assert that a table in the database does not contain records matching the given key / value query constraints:
+#### assertDatabaseMissing {#assert-database-missing}
+
+데이터베이스의 테이블에 주어진 키 / 값 쿼리 제약 조건과 일치하는 레코드가 없는지 단언합니다:
 
 ```php
 $this->assertDatabaseMissing('users', [
@@ -233,28 +233,28 @@ $this->assertDatabaseMissing('users', [
 ]);
 ```
 
-<a name="assert-deleted"></a>
-#### assertSoftDeleted
 
-The `assertSoftDeleted` method may be used to assert a given Eloquent model has been "soft deleted":
+#### assertSoftDeleted {#assert-deleted}
+
+`assertSoftDeleted` 메서드는 주어진 Eloquent 모델이 "소프트 삭제"되었는지 확인하는 데 사용할 수 있습니다:
 
 ```php
 $this->assertSoftDeleted($user);
 ```
 
-<a name="assert-not-deleted"></a>
-#### assertNotSoftDeleted
 
-The `assertNotSoftDeleted` method may be used to assert a given Eloquent model hasn't been "soft deleted":
+#### assertNotSoftDeleted {#assert-not-deleted}
+
+`assertNotSoftDeleted` 메서드는 주어진 Eloquent 모델이 "소프트 삭제"되지 않았음을 확인하는 데 사용할 수 있습니다:
 
 ```php
 $this->assertNotSoftDeleted($user);
 ```
 
-<a name="assert-model-exists"></a>
-#### assertModelExists
 
-Assert that a given model exists in the database:
+#### assertModelExists {#assert-model-exists}
+
+주어진 모델이 데이터베이스에 존재하는지 단언합니다:
 
 ```php
 use App\Models\User;
@@ -264,10 +264,10 @@ $user = User::factory()->create();
 $this->assertModelExists($user);
 ```
 
-<a name="assert-model-missing"></a>
-#### assertModelMissing
 
-Assert that a given model does not exist in the database:
+#### assertModelMissing {#assert-model-missing}
+
+주어진 모델이 데이터베이스에 존재하지 않음을 단언합니다:
 
 ```php
 use App\Models\User;
@@ -279,13 +279,13 @@ $user->delete();
 $this->assertModelMissing($user);
 ```
 
-<a name="expects-database-query-count"></a>
-#### expectsDatabaseQueryCount
 
-The `expectsDatabaseQueryCount` method may be invoked at the beginning of your test to specify the total number of database queries that you expect to be run during the test. If the actual number of executed queries does not exactly match this expectation, the test will fail:
+#### expectsDatabaseQueryCount {#expects-database-query-count}
+
+`expectsDatabaseQueryCount` 메서드는 테스트가 실행되는 동안 예상되는 전체 데이터베이스 쿼리 수를 지정하기 위해 테스트의 시작 부분에서 호출할 수 있습니다. 실제로 실행된 쿼리 수가 이 기대치와 정확히 일치하지 않으면 테스트는 실패합니다:
 
 ```php
 $this->expectsDatabaseQueryCount(5);
 
-// Test...
+// 테스트...
 ```

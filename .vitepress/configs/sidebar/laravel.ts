@@ -6,8 +6,8 @@ export const sidebar_laravel = {
         collapsed: true,
         items: [
           { text: '릴리즈 노트', link: '/laravel/12.x/releases' },
-          { text: '업그레이드 가이드', link: '/laravel/12.x/upgrade' },
-          { text: '기여 가이드', link: '/laravel/12.x/contributions' },
+          { text: '업그레이드 가이드', link: 'https://laravel.com/docs/12.x/upgrade' },
+          { text: '기여 가이드', link: 'https://laravel.com/docs/12.x/contributions' },
         ]
       },
       {
@@ -26,7 +26,7 @@ export const sidebar_laravel = {
         text: '아키텍처 개념',
         collapsed: true,
         items: [
-          { text: '요청 생명주기', link: '/laravel/12.x/lifecycle' },
+          { text: '요청 라이프사이클', link: '/laravel/12.x/lifecycle' },
           { text: '서비스 컨테이너', link: '/laravel/12.x/container' },
           { text: '서비스 프로바이더', link: '/laravel/12.x/providers' },
           { text: '파사드 (Facades)', link: '/laravel/12.x/facades' },
