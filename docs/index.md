@@ -7,9 +7,12 @@ hero:
   text: 😍😎🤩
   tagline: 웹 개발 관련 문서 한글화 사이트
 features:
-  - title: 라라벨
+  - title: Laravel
     details: 웹 애플리케이션을 더 빠르고 쉽게 만들 수 있도록 돕는 PHP 기반 오픈 소스 웹 프레임워크
     link: /laravel/12.x/installation
+  - title: Livewire
+    details: JavaScript 없이도 동적인 웹 인터페이스를 만들 수 있게 해주는 Laravel 전용 라이브러리
+    link: /livewire/3.x/quickstart
 ---
 
 <!--

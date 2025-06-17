@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { sidebar_laravel } from './configs/sidebar/laravel'
+import { livewire } from './configs/sidebar/livewire'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -21,7 +22,8 @@ export default defineConfig({
 
     nav: [
       { text: '홈', link: '/' },
-      { text: '라라벨 12.x', link: '/laravel/12.x/installation', activeMatch: '/laravel/' }
+      { text: 'Laravel 12.x', link: '/laravel/12.x/installation', activeMatch: '/laravel/' },
+      { text: 'Livewire 3.x', link: '/livewire/3.x/quickstart', activeMatch: '/livewire/' },
     ],
 
     outline: {
@@ -50,8 +52,10 @@ export default defineConfig({
 
     sidebar: {
       ...sidebar_laravel,
+      ...livewire,
     },
   },
+
   markdown: {
     config(md) {
       md.use(groupIconMdPlugin)

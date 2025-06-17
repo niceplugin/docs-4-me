@@ -3,7 +3,7 @@ export const sidebar_laravel = {
     items: [
       {
         text: '서문',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '릴리즈 노트', link: '/laravel/12.x/releases' },
           { text: '업그레이드 가이드', link: 'https://laravel.com/docs/12.x/upgrade' },
@@ -12,7 +12,7 @@ export const sidebar_laravel = {
       },
       {
         text: '시작하기',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '설치', link: '/laravel/12.x/installation' },
           { text: '환경설정', link: '/laravel/12.x/configuration' },
@@ -24,7 +24,7 @@ export const sidebar_laravel = {
       },
       {
         text: '아키텍처 개념',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '요청 라이프사이클', link: '/laravel/12.x/lifecycle' },
           { text: '서비스 컨테이너', link: '/laravel/12.x/container' },
@@ -34,7 +34,7 @@ export const sidebar_laravel = {
       },
       {
         text: '기본',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '라우팅', link: '/laravel/12.x/routing' },
           { text: '미들웨어', link: '/laravel/12.x/middleware' },
@@ -54,7 +54,7 @@ export const sidebar_laravel = {
       },
       {
         text: '더 깊이 파보기',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: 'Artisan 콘솔', link: '/laravel/12.x/artisan' },
           { text: '브로드캐스팅', link: '/laravel/12.x/broadcasting' },
@@ -80,7 +80,7 @@ export const sidebar_laravel = {
       },
       {
         text: '보안',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '인증 (Authentication)', link: '/laravel/12.x/authentication' },
           { text: '권한 관리 (Authorization)', link: '/laravel/12.x/authorization' },
@@ -92,7 +92,7 @@ export const sidebar_laravel = {
       },
       {
         text: '데이터베이스',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '시작하기', link: '/laravel/12.x/database' },
           { text: '쿼리 빌더', link: '/laravel/12.x/queries' },
@@ -105,7 +105,7 @@ export const sidebar_laravel = {
       },
       {
         text: 'Eloquent ORM (엘로퀀트)',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '시작하기', link: '/laravel/12.x/eloquent' },
           { text: '관계 (Relationships)', link: '/laravel/12.x/eloquent-relationships' },
@@ -118,7 +118,7 @@ export const sidebar_laravel = {
       },
       {
         text: '테스트',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '시작하기', link: '/laravel/12.x/testing' },
           { text: 'HTTP 테스트', link: '/laravel/12.x/http-tests' },
@@ -130,7 +130,7 @@ export const sidebar_laravel = {
       },
       {
         text: '패키지',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: 'Cashier (Stripe)', link: '/laravel/12.x/billing' },
           { text: 'Cashier (Paddle)', link: '/laravel/12.x/cashier-paddle' },
