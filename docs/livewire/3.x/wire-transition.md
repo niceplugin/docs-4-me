@@ -1,9 +1,9 @@
+# wire:transition
+## 기본 사용법 {#basic-usage}
 
-## Basic usage
+Livewire에서 콘텐츠를 표시하거나 숨기는 것은 `@if`와 같은 Blade의 조건부 지시문을 사용하는 것만큼 간단합니다. 사용자 경험을 향상시키기 위해 Livewire는 조건부 요소가 페이지에 부드럽게 나타나고 사라지도록 해주는 `wire:transition` 지시문을 제공합니다.
 
-Showing or hiding content in Livewire is as simple as using one of Blade's conditional directives like `@if`. To enhance this experience for your users, Livewire provides a `wire:transition` directive that allows you to transition conditional elements smoothly in and out of the page.
-
-For example, below is a `ShowPost` component with the ability to toggle viewing comments on and off:
+예를 들어, 아래는 댓글 보기 토글 기능이 있는 `ShowPost` 컴포넌트입니다:
 
 ```php
 use App\Models\Post;
@@ -20,7 +20,7 @@ class ShowPost extends Component
 <div>
     <!-- ... -->
 
-    <button wire:click="$set('showComments', true)">Show comments</button>
+    <button wire:click="$set('showComments', true)">댓글 보기</button>
 
     @if ($showComments)
         <div wire:transition> <!-- [tl! highlight] -->
@@ -31,14 +31,14 @@ class ShowPost extends Component
     @endif
 </div>
 ```
-Because `wire:transition` has been added to the `<div>` containing the post's comments, when the "Show comments" button is pressed, `$showComments` will be set to `true` and the comments will "fade" onto the page instead of abruptly appearing.
+`wire:transition`이 게시글의 댓글을 감싸는 `<div>`에 추가되어 있기 때문에, "댓글 보기" 버튼을 누르면 `$showComments`가 `true`로 설정되고 댓글이 갑자기 나타나는 대신 페이지에 "서서히" 나타나게 됩니다.
 
-## Limitations
+## 제한 사항 {#limitations}
 
-Currently, `wire:transition` is only supported on a single element inside a Blade conditional like `@if`. It will not work as expected when used in a list of sibling elements. For example, the following will NOT work properly:
+현재 `wire:transition`은 `@if`와 같은 Blade 조건문 내부의 단일 요소에서만 지원됩니다. 형제 요소들의 목록에 사용하면 예상대로 동작하지 않습니다. 예를 들어, 아래와 같은 코드는 제대로 동작하지 않습니다:
 
 ```blade
-<!-- Warning: The following is code that will not work properly -->
+<!-- 경고: 아래 코드는 제대로 동작하지 않습니다 -->
 <ul>
     @foreach ($post->comments as $comment)
         <li wire:transition wire:key="{{ $comment->id }}">{{ $comment->content }}</li>
@@ -46,15 +46,15 @@ Currently, `wire:transition` is only supported on a single element inside a Blad
 </ul>
 ```
 
-If one of the above comment `<li>` elements were to get removed, you would expect Livewire to transition it out. However, because of hurdles with Livewire's underlying "morph" mechanism, this will not be the case. There is currently no way to transition dynamic lists in Livewire using `wire:transition`.
+위의 댓글 `<li>` 요소 중 하나가 제거될 경우, Livewire가 해당 요소를 트랜지션 효과로 사라지게 할 것이라 기대할 수 있습니다. 하지만 Livewire의 내부 "morph" 메커니즘의 한계로 인해, 실제로는 그렇지 않습니다. 현재 Livewire에서는 `wire:transition`을 사용하여 동적 리스트에 트랜지션을 적용하는 방법이 없습니다.
 
-## Default transition style
+## 기본 전환 스타일 {#default-transition-style}
 
-By default, Livewire applies both an opacity and a scale CSS transition to elements with `wire:transition`. Here's a visual preview:
+기본적으로 Livewire는 `wire:transition`이 적용된 요소에 불투명도(opacity)와 크기(scale) CSS 전환을 모두 적용합니다. 아래는 시각적 미리보기입니다:
 
 <div x-data="{ show: false }" x-cloak class="border border-gray-700 rounded-xl p-6 w-full flex justify-between">
     <a href="#" x-on:click.prevent="show = ! show" class="py-2.5 outline-none">
-        Preview transition <span x-text="show ? 'out' : 'in →'">in</span>
+        전환 미리보기 <span x-text="show ? 'out' : 'in →'">in</span>
     </a>
     <div class="hey">
         <div
@@ -71,35 +71,35 @@ By default, Livewire applies both an opacity and a scale CSS transition to eleme
     </div>
 </div>
 
-The above transition uses the following values for transitioning by default:
+위 전환은 기본적으로 다음과 같은 값으로 전환이 이루어집니다:
 
-Transition in | Transition out
+전환 In | 전환 Out
 --- | ---
 `duration: 150ms` | `duration: 75ms`
 `opacity: [0 - 100]` | `opacity: [100 - 0]`
 `transform: scale([0.95 - 1])` | `transform: scale([1 - 0.95])`
 
-## Customizing transitions
+## 전환 커스터마이징 {#customizing-transitions}
 
-To customize the CSS Livewire internally uses when transitioning, you can use any combination of the available modifiers:
+Livewire가 내부적으로 전환 시 사용하는 CSS를 커스터마이징하려면, 아래의 다양한 모디파이어 조합을 사용할 수 있습니다:
 
-Modifier | Description
+모디파이어 | 설명
 --- | ---
-`.in` | Only transition the element "in"
-`.out` | Only transition the element "out"
-`.duration.[?]ms` | Customize the transition duration in milliseconds
-`.duration.[?]s` | Customize the transition duration in seconds
-`.delay.[?]ms` | Customize the transition delay in milliseconds
-`.delay.[?]s` | Customize the transition delay in seconds
-`.opacity` | Only apply the opacity transition
-`.scale` | Only apply the scale transition
-`.origin.[top\|bottom\|left\|right]` | Customize the scale "origin" used
+`.in` | 요소가 "들어올 때"만 전환
+`.out` | 요소가 "나갈 때"만 전환
+`.duration.[?]ms` | 전환 지속 시간을 밀리초 단위로 지정
+`.duration.[?]s` | 전환 지속 시간을 초 단위로 지정
+`.delay.[?]ms` | 전환 지연 시간을 밀리초 단위로 지정
+`.delay.[?]s` | 전환 지연 시간을 초 단위로 지정
+`.opacity` | 오직 투명도(opacity) 전환만 적용
+`.scale` | 오직 크기(scale) 전환만 적용
+`.origin.[top\|bottom\|left\|right]` | 사용할 scale "origin"을 지정
 
-Below is a list of various transition combinations that may help to better visualize these customizations:
+아래는 이러한 커스터마이징을 시각적으로 이해하는 데 도움이 될 다양한 전환 조합 예시입니다:
 
-**Fade-only transition**
+**페이드 전용 전환**
 
-By default, Livewire both fades and scales the element when transitioning. You can disable scaling and only fade by adding the `.opacity` modifier. This is useful for things like transitioning a full-page overlay, where adding a scale doesn't make sense.
+기본적으로 Livewire는 전환 시 요소에 페이드와 스케일을 모두 적용합니다. `.opacity` 모디파이어를 추가하면 스케일을 비활성화하고 페이드만 적용할 수 있습니다. 이는 전체 페이지 오버레이처럼 스케일 효과가 어울리지 않는 경우에 유용합니다.
 
 ```html
 <div wire:transition.opacity>
@@ -107,7 +107,7 @@ By default, Livewire both fades and scales the element when transitioning. You c
 
 <div x-data="{ show: false }" x-cloak class="border border-gray-700 rounded-xl p-6 w-full flex justify-between">
     <a href="#" x-on:click.prevent="show = ! show" class="py-2.5 outline-none">
-        Preview transition <span x-text="show ? 'out' : 'in →'">in</span>
+        전환 미리보기 <span x-text="show ? 'out' : 'in →'">in</span>
     </a>
     <div class="hey">
         <div
@@ -124,9 +124,9 @@ By default, Livewire both fades and scales the element when transitioning. You c
     </div>
 </div>
 
-**Fade-out transition**
+**페이드-아웃 전환**
 
-A common transition technique is to show an element immediately when transitioning in, and fade its opacity when transitioning out. You'll notice this effect on most native MacOS dropdowns and menus. Therefore it's commonly applied on the web to dropdowns, popovers, and menus.
+자주 사용되는 전환 기법 중 하나는, 요소가 나타날 때는 즉시 보이게 하고, 사라질 때는 투명도를 서서히 줄여 페이드 아웃하는 것입니다. 이 효과는 대부분의 MacOS 기본 드롭다운 및 메뉴에서 볼 수 있습니다. 그래서 웹에서도 드롭다운, 팝오버, 메뉴 등에 자주 적용됩니다.
 
 ```html
 <div wire:transition.out.opacity.duration.200ms>
@@ -134,7 +134,7 @@ A common transition technique is to show an element immediately when transitioni
 
 <div x-data="{ show: false }" x-cloak class="border border-gray-700 rounded-xl p-6 w-full flex justify-between">
     <a href="#" x-on:click.prevent="show = ! show" class="py-2.5 outline-none">
-        Preview transition <span x-text="show ? 'out' : 'in →'">in</span>
+        전환 미리보기 <span x-text="show ? 'out' : 'in →'">in</span>
     </a>
     <div class="hey">
         <div
@@ -151,9 +151,9 @@ A common transition technique is to show an element immediately when transitioni
     </div>
 </div>
 
-**Origin-top transition**
+**origin-top 전환**
 
-When using Livewire to transition an element such as a dropdown menu, it makes sense to scale in from the top of the menu as the origin, rather than center (Livewire's default). This way the menu feels visually anchored to the element that triggered it.
+Livewire로 드롭다운 메뉴와 같은 요소를 전환할 때, 기본값인 중앙이 아닌 메뉴의 상단을 origin으로 하여 스케일 인하는 것이 자연스럽습니다. 이렇게 하면 메뉴가 트리거한 요소에 시각적으로 고정된 느낌을 줍니다.
 
 ```html
 <div wire:transition.scale.origin.top>
@@ -161,7 +161,7 @@ When using Livewire to transition an element such as a dropdown menu, it makes s
 
 <div x-data="{ show: false }" x-cloak class="border border-gray-700 rounded-xl p-6 w-full flex justify-between">
     <a href="#" x-on:click.prevent="show = ! show" class="py-2.5 outline-none">
-        Preview transition <span x-text="show ? 'out' : 'in →'">in</span>
+        전환 미리보기 <span x-text="show ? 'out' : 'in →'">in</span>
     </a>
     <div class="hey">
         <div
@@ -178,6 +178,6 @@ When using Livewire to transition an element such as a dropdown menu, it makes s
     </div>
 </div>
 
-> [!tip] Livewire uses Alpine transitions behind the scenes
-> When using `wire:transition` on an element, Livewire is internally applying Alpine's `x-transition` directive. Therefore you can use most if not all syntaxes you would normally use with `x-transition`. Check out [Alpine's transition documentation](https://alpinejs.dev/directives/transition) for all its capabilities.
+> [!tip] Livewire는 내부적으로 Alpine 전환을 사용합니다
+> 요소에 `wire:transition`을 사용할 때, Livewire는 내부적으로 Alpine의 `x-transition` 디렉티브를 적용합니다. 따라서 `x-transition`에서 사용할 수 있는 대부분의 문법을 그대로 사용할 수 있습니다. 모든 기능은 [Alpine의 전환 문서](https://alpinejs.dev/directives/transition)를 참고하세요.
 

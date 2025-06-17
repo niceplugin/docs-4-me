@@ -1,45 +1,45 @@
+# wire:loading
+로딩 인디케이터는 좋은 사용자 인터페이스를 만드는 데 중요한 요소입니다. 로딩 인디케이터는 서버에 요청이 진행 중일 때 사용자에게 시각적인 피드백을 제공하여, 사용자가 어떤 프로세스가 완료되기를 기다리고 있음을 알 수 있게 해줍니다.
 
-Loading indicators are an important part of crafting good user interfaces. They give users visual feedback when a request is being made to the server, so they know they are waiting for a process to complete.
+## 기본 사용법 {#basic-usage}
 
-## Basic usage
+Livewire는 로딩 인디케이터를 제어하기 위한 간단하면서도 매우 강력한 문법인 `wire:loading`을 제공합니다. 어떤 요소에든 `wire:loading`을 추가하면 해당 요소는 기본적으로 숨겨지며(CSS의 `display: none` 사용), 서버로 요청이 전송될 때 표시됩니다.
 
-Livewire provides a simple yet extremely powerful syntax for controlling loading indicators: `wire:loading`. Adding `wire:loading` to any element will hide it by default (using `display: none` in CSS) and show it when a request is sent to the server.
-
-Below is a basic example of a `CreatePost` component's form with `wire:loading` being used to toggle a loading message:
+아래는 `wire:loading`을 사용하여 로딩 메시지를 토글하는 `CreatePost` 컴포넌트의 폼 기본 예시입니다:
 
 ```blade
 <form wire:submit="save">
     <!-- ... -->
 
-    <button type="submit">Save</button>
+    <button type="submit">저장</button>
 
     <div wire:loading> <!-- [tl! highlight:2] -->
-        Saving post...
+        게시글 저장 중...
     </div>
 </form>
 ```
 
-When a user presses "Save", the "Saving post..." message will appear below the button while the "save" action is being executed. The message will disappear when the response is received from the server and processed by Livewire.
+사용자가 "저장" 버튼을 누르면, "게시글 저장 중..." 메시지가 버튼 아래에 표시되며 "save" 액션이 실행되는 동안 나타납니다. 서버로부터 응답을 받고 Livewire가 처리하면 메시지는 사라집니다.
 
-### Removing elements
+### 요소 제거하기 {#removing-elements}
 
-Alternatively, you can append `.remove` for the inverse effect, showing an element by default and hiding it during requests to the server:
+반대로, `.remove`를 추가하여 기본적으로 요소를 표시하고 서버에 요청하는 동안 숨길 수 있습니다:
 
 ```blade
 <div wire:loading.remove>...</div>
 ```
 
-## Toggling classes
+## 클래스 토글하기 {#toggling-classes}
 
-In addition to toggling the visibility of entire elements, it's often useful to change the styling of an existing element by toggling CSS classes on and off during requests to the server. This technique can be used for things like changing background colors, lowering opacity, triggering spinning animations, and more.
+전체 요소의 표시 여부를 토글하는 것 외에도, 서버에 요청하는 동안 기존 요소의 CSS 클래스를 토글하여 스타일을 변경하는 것이 종종 유용합니다. 이 기법은 배경색 변경, 불투명도 낮추기, 회전 애니메이션 트리거 등 다양한 용도로 사용할 수 있습니다.
 
-Below is a simple example of using the [Tailwind](https://tailwindcss.com/) class `opacity-50` to make the "Save" button fainter while the form is being submitted:
+아래는 [Tailwind](https://tailwindcss.com/)의 `opacity-50` 클래스를 사용하여 폼이 제출되는 동안 "Save" 버튼을 더 흐리게 만드는 간단한 예시입니다:
 
 ```blade
 <button wire:loading.class="opacity-50">Save</button>
 ```
 
-Like toggling an element, you can perform the inverse class operation by appending `.remove` to the `wire:loading` directive. In the example below, the button's `bg-blue-500` class will be removed when the "Save" button is pressed:
+요소를 토글하는 것과 마찬가지로, `wire:loading` 디렉티브에 `.remove`를 추가하여 반대로 클래스를 제거할 수도 있습니다. 아래 예시에서는 "Save" 버튼을 누르면 버튼의 `bg-blue-500` 클래스가 제거됩니다:
 
 ```blade
 <button class="bg-blue-500" wire:loading.class.remove="bg-blue-500">
@@ -47,11 +47,11 @@ Like toggling an element, you can perform the inverse class operation by appendi
 </button>
 ```
 
-## Toggling attributes
+## 속성 토글하기 {#toggling-attributes}
 
-By default, when a form is submitted, Livewire will automatically disable the submit button and add the `readonly` attribute to each input element while the form is being processed.
+기본적으로 폼이 제출되면, Livewire는 폼이 처리되는 동안 자동으로 제출 버튼을 비활성화하고 각 입력 요소에 `readonly` 속성을 추가합니다.
 
-However, in addition to this default behavior, Livewire offers the `.attr` modifier to allow you to toggle other attributes on an element or toggle attributes on elements that are outside of forms:
+하지만 이러한 기본 동작 외에도, Livewire는 `.attr` 수식어를 제공하여 요소의 다른 속성을 토글하거나 폼 외부의 요소에 속성을 토글할 수 있도록 합니다:
 
 ```blade
 <button
@@ -63,17 +63,17 @@ However, in addition to this default behavior, Livewire offers the `.attr` modif
 </button>
 ```
 
-Because the button above isn't a submit button, it won't be disabled by Livewire's default form handling behavior when pressed. Instead, we manually added `wire:loading.attr="disabled"` to achieve this behavior.
+위 버튼은 제출 버튼이 아니기 때문에, 눌렀을 때 Livewire의 기본 폼 처리 동작에 의해 비활성화되지 않습니다. 대신, 우리가 직접 `wire:loading.attr="disabled"`를 추가하여 이 동작을 구현했습니다.
 
-## Targeting specific actions
+## 특정 액션 지정하기 {#targeting-specific-actions}
 
-By default, `wire:loading` will be triggered whenever a component makes a request to the server.
+기본적으로 `wire:loading`은 컴포넌트가 서버에 요청을 보낼 때마다 트리거됩니다.
 
-However, in components with multiple elements that can trigger server requests, you should scope your loading indicators down to individual actions.
+하지만 여러 요소가 서버 요청을 트리거할 수 있는 컴포넌트에서는 로딩 인디케이터를 개별 액션에 한정하는 것이 좋습니다.
 
-For example, consider the following "Save post" form. In addition to a "Save" button that submits the form, there might also be a "Remove" button that executes a "remove" action on the component.
+예를 들어, 아래의 "게시글 저장" 폼을 살펴보세요. 폼을 제출하는 "저장" 버튼 외에도, 컴포넌트에서 "remove" 액션을 실행하는 "삭제" 버튼이 있을 수 있습니다.
 
-By adding `wire:target` to the following `wire:loading` element, you can instruct Livewire to only show the loading message when the "Remove" button is clicked:
+아래의 `wire:loading` 요소에 `wire:target`을 추가하면, Livewire가 "삭제" 버튼이 클릭될 때만 로딩 메시지를 표시하도록 할 수 있습니다:
 
 ```blade
 <form wire:submit="save">
@@ -89,11 +89,11 @@ By adding `wire:target` to the following `wire:loading` element, you can instruc
 </form>
 ```
 
-When the above "Remove" button is pressed, the "Removing post..." message will be displayed to the user. However, the message will not be displayed when the "Save" button is pressed.
+위의 "Remove" 버튼을 누르면 "Removing post..." 메시지가 사용자에게 표시됩니다. 하지만 "Save" 버튼을 눌렀을 때는 이 메시지가 표시되지 않습니다.
 
-### Targeting multiple actions
+### 여러 액션 타겟팅하기 {#targeting-multiple-actions}
 
-You may find yourself in a situation where you would like `wire:loading` to react to some, but not all, actions on a page. In these cases you can pass multiple actions into `wire:target` separated by a comma. For example:
+페이지에서 모든 액션이 아닌 일부 액션에만 `wire:loading`이 반응하도록 하고 싶을 때가 있을 수 있습니다. 이런 경우에는 `wire:target`에 여러 액션을 쉼표로 구분하여 전달할 수 있습니다. 예를 들어:
 
 ```blade
 <form wire:submit="save">
@@ -111,11 +111,11 @@ You may find yourself in a situation where you would like `wire:loading` to reac
 </form>
 ```
 
-The loading indicator ("Updating post...") will now only be shown when the "Remove" or "Save" button are pressed, and not when the `$title` field is being sent to the server.
+이제 로딩 인디케이터("Updating post...")는 "Remove" 또는 "Save" 버튼이 눌렸을 때만 표시되고, `$title` 필드가 서버로 전송될 때는 표시되지 않습니다.
 
-### Targeting action parameters
+### 액션 파라미터 타겟팅 {#targeting-action-parameters}
 
-In situations where the same action is triggered with different parameters from multiple places on a page, you can further scope `wire:target` to a specific action by passing in additional parameters. For example, consider the following scenario where a "Remove" button exists for each post on the page:
+페이지의 여러 위치에서 동일한 액션이 서로 다른 파라미터로 트리거되는 상황에서는, 추가 파라미터를 전달하여 `wire:target`의 범위를 특정 액션으로 더 좁힐 수 있습니다. 예를 들어, 페이지의 각 게시글마다 "Remove" 버튼이 있는 다음과 같은 상황을 생각해봅시다:
 
 ```blade
 <div>
@@ -133,15 +133,15 @@ In situations where the same action is triggered with different parameters from 
 </div>
 ```
 
-Without passing `{{ $post->id }}` to `wire:target="remove"`, the "Removing post..." message would show when any of the buttons on the page are clicked.
+`wire:target="remove"`에 `{{ $post->id }}`를 전달하지 않으면, 페이지의 어떤 버튼이 클릭되더라도 "Removing post..." 메시지가 표시됩니다.
 
-However, because we are passing in unique parameters to each instance of `wire:target`, Livewire will only show the loading message when the matching parameters are passed to the "remove" action.
+하지만 각 `wire:target` 인스턴스에 고유한 파라미터를 전달하면, Livewire는 해당 파라미터가 "remove" 액션에 전달될 때만 로딩 메시지를 표시합니다.
 
-### Targeting property updates
+### 속성 업데이트 타겟팅 {#targeting-property-updates}
 
-Livewire also allows you to target specific component property updates by passing the property's name to the `wire:target` directive.
+Livewire는 또한 `wire:target` 지시어에 속성 이름을 전달하여 특정 컴포넌트 속성 업데이트만 타겟팅할 수 있습니다.
 
-Consider the following example where a form input named `username` uses `wire:model.live` for real-time validation as a user types:
+아래 예시에서는 `username`이라는 폼 입력이 `wire:model.live`를 사용하여 사용자가 입력할 때 실시간으로 유효성 검사를 수행합니다:
 
 ```blade
 <form wire:submit="save">
@@ -149,36 +149,36 @@ Consider the following example where a form input named `username` uses `wire:mo
     @error('username') <span>{{ $message }}</span> @enderror
 
     <div wire:loading wire:target="username"> <!-- [tl! highlight:2] -->
-        Checking availability of username...
+        사용자 이름 사용 가능 여부 확인 중...
     </div>
 
     <!-- ... -->
 </form>
 ```
 
-The "Checking availability..." message will show when the server is updated with the new username as the user types into the input field.
+"사용자 이름 사용 가능 여부 확인 중..." 메시지는 사용자가 입력 필드에 값을 입력할 때 서버에 새로운 사용자 이름이 업데이트되는 동안 표시됩니다.
 
-### Excluding specific loading targets
+### 특정 로딩 타겟 제외하기 {#excluding-specific-loading-targets}
 
-Sometimes you may wish to display a loading indicator for every Livewire request _except_ a specific property or action. In these cases you can use the `wire:target.except` modifier like so:
+때때로 모든 Livewire 요청에 대해 로딩 인디케이터를 표시하고 싶지만, 특정 프로퍼티나 액션만은 _제외_ 하고 싶을 수 있습니다. 이런 경우에는 `wire:target.except` 수식어를 다음과 같이 사용할 수 있습니다:
 
 ```blade
 <div wire:loading wire:target.except="download">...</div>
 ```
 
-The above loading indicator will now be shown for every Livewire update request on the component _except_ the "download" action.
+위의 로딩 인디케이터는 컴포넌트에서 "download" 액션을 제외한 모든 Livewire 업데이트 요청에 대해 표시됩니다.
 
-## Customizing CSS display property
+## CSS display 속성 커스터마이징 {#customizing-css-display-property}
 
-When `wire:loading` is added to an element, Livewire updates the CSS `display` property of the element to show and hide the element. By default, Livewire uses `none` to hide and `inline-block` to show.
+`wire:loading`이 요소에 추가되면, Livewire는 해당 요소의 CSS `display` 속성을 업데이트하여 요소를 표시하거나 숨깁니다. 기본적으로 Livewire는 숨길 때 `none`, 표시할 때는 `inline-block`을 사용합니다.
 
-If you are toggling an element that uses a display value other than `inline-block`, like `flex` in the following example, you can append `.flex` to `wire:loading`:
+만약 아래 예시처럼 `inline-block`이 아닌 다른 display 값을 사용하는 요소(예: `flex`)를 토글하려면, `wire:loading`에 `.flex`를 추가할 수 있습니다:
 
 ```blade
 <div class="flex" wire:loading.flex>...</div>
 ```
 
-Below is the complete list of available display values:
+아래는 사용 가능한 display 값의 전체 목록입니다:
 
 ```blade
 <div wire:loading.inline-flex>...</div>
@@ -189,19 +189,19 @@ Below is the complete list of available display values:
 <div wire:loading.grid>...</div>
 ```
 
-## Delaying a loading indicator
+## 로딩 인디케이터 지연시키기 {#delaying-a-loading-indicator}
 
-On fast connections, updates often happen so quickly that loading indicators only flash briefly on the screen before being removed. In these cases, the indicator is more of a distraction than a helpful affordance.
+빠른 인터넷 연결에서는 업데이트가 너무 빨리 일어나기 때문에 로딩 인디케이터가 화면에 잠깐 깜빡였다가 바로 사라지는 경우가 많습니다. 이런 경우 인디케이터는 도움이 되기보다는 오히려 산만하게 느껴질 수 있습니다.
 
-For this reason, Livewire provides a `.delay` modifier to delay the showing of an indicator. For example, if you add `wire:loading.delay` to an element like so:
+이런 이유로, Livewire는 인디케이터 표시를 지연시키는 `.delay` 수식어를 제공합니다. 예를 들어, 아래와 같이 요소에 `wire:loading.delay`를 추가하면:
 
 ```blade
 <div wire:loading.delay>...</div>
 ```
 
-The above element will only appear if the request takes over 200 milliseconds. The user will never see the indicator if the request completes before then.
+위 요소는 요청이 200밀리초를 초과할 때만 나타납니다. 요청이 그 전에 완료되면 사용자는 인디케이터를 볼 수 없습니다.
 
-To customize the amount of time to delay the loading indicator, you can use one of Livewire's helpful interval aliases:
+로딩 인디케이터의 지연 시간을 커스터마이즈하려면, Livewire에서 제공하는 다양한 간격 별칭을 사용할 수 있습니다:
 
 ```blade
 <div wire:loading.delay.shortest>...</div> <!-- 50ms -->

@@ -1,11 +1,11 @@
+# wire:text
+`wire:text`는 컴포넌트의 프로퍼티나 표현식을 기반으로 요소의 텍스트 내용을 동적으로 업데이트하는 디렉티브입니다. Blade의 `{{ }}` 문법을 사용하는 것과 달리, `wire:text`는 컴포넌트를 다시 렌더링하기 위한 네트워크 왕복 없이 내용을 업데이트합니다.
 
-`wire:text` is a directive that dynamically updates an element's text content based on a component property or expression. Unlike using Blade's `{{ }}` syntax, `wire:text` updates the content without requiring a network roundtrip to re-render the component.
+Alpine의 `x-text` 디렉티브에 익숙하다면, 두 디렉티브는 본질적으로 동일합니다.
 
-If you are familiar with Alpine's `x-text` directive, the two are essentially the same.
+## 기본 사용법 {#basic-usage}
 
-## Basic usage
-
-Here's an example of using `wire:text` to optimistically show updates to a Livewire property without waiting for a network roundtrip.
+다음은 `wire:text`를 사용하여 네트워크 왕복을 기다리지 않고 Livewire 속성의 업데이트를 낙관적으로 표시하는 예시입니다.
 
 ```php
 use Livewire\Component;
@@ -33,12 +33,12 @@ class ShowPost extends Component
 
 ```blade
 <div>
-    <button x-on:click="$wire.likes++" wire:click="like">❤️ Like</button>
+    <button x-on:click="$wire.likes++" wire:click="like">❤️ 좋아요</button>
 
-    Likes: <span wire:text="likes"></span>
+    좋아요: <span wire:text="likes"></span>
 </div>
 ```
 
-When the button is clicked, `$wire.likes++` immediately updates the displayed count through `wire:text`, while `wire:click="like"` persists the change to the database in the background.
+버튼을 클릭하면 `$wire.likes++`가 `wire:text`를 통해 표시된 개수를 즉시 업데이트하고, `wire:click="like"`는 백그라운드에서 데이터베이스에 변경 사항을 반영합니다.
 
-This pattern makes `wire:text` perfect for building optimistic UIs in Livewire.
+이 패턴 덕분에 `wire:text`는 Livewire에서 낙관적 UI를 구축하는 데 완벽하게 사용할 수 있습니다.

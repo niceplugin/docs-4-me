@@ -1,14 +1,14 @@
+# wire:offline
+특정 상황에서는 사용자가 현재 인터넷에 연결되어 있는지 여부를 아는 것이 도움이 될 수 있습니다.
 
-In certain circumstances it can be helpful for your users to know if they are currently connected to the internet.
+예를 들어, Livewire로 블로깅 플랫폼을 구축했다면, 사용자가 오프라인 상태일 때 이를 알림으로써 Livewire가 데이터베이스에 저장하지 못하는 상황에서 블로그 글을 작성하지 않도록 할 수 있습니다.
 
-If for example, you have built a blogging platform on Livewire, you may want to notify your users in some way if they are offline so that they don't draft an entire blog post without the ability for Livewire to save it to the database.
+Livewire는 `wire:offline` 지시어를 제공하여 이 작업을 매우 간단하게 만듭니다. Livewire 컴포넌트의 요소에 `wire:offline`을 추가하면, 해당 요소는 기본적으로 숨겨지며 Livewire가 네트워크 연결이 끊겼음을 감지했을 때만 표시됩니다. 네트워크 연결이 복구되면 다시 사라집니다.
 
-Livewire make this trivial by providing the `wire:offline` directive. By attaching `wire:offline` to an element in your Livewire component, it will be hidden by default and only be displayed when Livewire detects the network connection has been interrupted and is unavailable. It will then disappear again when the network has regained connection.
-
-For example:
+예시:
 
 ```blade
 <p class="alert alert-warning" wire:offline>
-    Whoops, your device has lost connection. The web page you are viewing is offline.
+    오ops, 기기의 연결이 끊어졌습니다. 현재 보고 있는 웹 페이지는 오프라인 상태입니다.
 </p>
 ```
