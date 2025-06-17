@@ -17,8 +17,8 @@ Laravel은 이벤트, 작업(jobs), 그리고 기타 파사드(facade)를 모킹
 ## 객체 모킹 {#mocking-objects}
 
 Laravel의 [서비스 컨테이너](/laravel/12.x/container)를 통해 애플리케이션에 주입될 객체를 모킹할 때는, 모킹된 인스턴스를 `instance` 바인딩으로 컨테이너에 바인딩해야 합니다. 이렇게 하면 컨테이너는 객체를 직접 생성하는 대신, 여러분이 모킹한 인스턴스를 사용하게 됩니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use App\Service;
 use Mockery;
 use Mockery\MockInterface;
@@ -33,7 +33,7 @@ test('something can be mocked', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Service;
 use Mockery;
 use Mockery\MockInterface;
@@ -48,7 +48,7 @@ public function test_something_can_be_mocked(): void
     );
 }
 ```
-
+:::
 이를 더 편리하게 하기 위해, Laravel의 기본 테스트 케이스 클래스에서 제공하는 `mock` 메서드를 사용할 수 있습니다. 예를 들어, 아래의 예시는 위의 예제와 동일한 동작을 합니다:
 
 ```php
@@ -112,8 +112,8 @@ class UserController extends Controller
 ```
 
 `expects` 메서드를 사용하여 `Cache` 파사드 호출을 모킹할 수 있습니다. 이 메서드는 [Mockery](https://github.com/padraic/mockery) 모크 인스턴스를 반환합니다. 파사드는 실제로 Laravel [서비스 컨테이너](/laravel/12.x/container)에 의해 해석되고 관리되기 때문에, 일반적인 정적 클래스보다 훨씬 더 테스트가 용이합니다. 예를 들어, `Cache` 파사드의 `get` 메서드 호출을 모킹해보겠습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Support\Facades\Cache;
@@ -129,7 +129,7 @@ test('get index', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -151,7 +151,7 @@ class UserControllerTest extends TestCase
     }
 }
 ```
-
+:::
 > [!WARNING]
 > `Request` 파사드는 모킹하지 않아야 합니다. 대신, 테스트를 실행할 때 원하는 입력값을 [HTTP 테스트 메서드](/laravel/12.x/http-tests)인 `get`이나 `post`에 전달하세요. 마찬가지로, `Config` 파사드를 모킹하는 대신 테스트에서 `Config::set` 메서드를 호출하세요.
 
@@ -159,8 +159,8 @@ class UserControllerTest extends TestCase
 ### Facade Spies {#facade-spies}
 
 Facade에 대해 [spy](http://docs.mockery.io/en/latest/reference/spies.html)를 사용하고 싶다면, 해당 facade에서 `spy` 메서드를 호출하면 됩니다. Spy는 mock과 유사하지만, spy는 테스트 중인 코드와의 모든 상호작용을 기록하여 코드 실행 후에 어설션을 할 수 있도록 해줍니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Support\Facades\Cache;
@@ -176,7 +176,7 @@ test('값이 캐시에 저장된다', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use Illuminate\Support\Facades\Cache;
 
 public function test_values_are_be_stored_in_cache(): void
@@ -190,13 +190,13 @@ public function test_values_are_be_stored_in_cache(): void
     Cache::shouldHaveReceived('put')->with('name', 'Taylor', 10);
 }
 ```
-
+:::
 
 ## 시간과 상호작용하기 {#interacting-with-time}
 
 테스트를 할 때, `now`나 `Illuminate\Support\Carbon::now()`와 같은 헬퍼가 반환하는 시간을 수정해야 할 때가 있습니다. 다행히도, Laravel의 기본 기능 테스트 클래스에는 현재 시간을 조작할 수 있는 헬퍼들이 포함되어 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('시간을 조작할 수 있다', function () {
     // 미래로 이동...
     $this->travel(5)->milliseconds();
@@ -218,7 +218,7 @@ test('시간을 조작할 수 있다', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 public function test_time_can_be_manipulated(): void
 {
     // 미래로 이동...
@@ -240,7 +240,7 @@ public function test_time_can_be_manipulated(): void
     $this->travelBack();
 }
 ```
-
+:::
 여러 시간 이동 메서드에 클로저를 전달할 수도 있습니다. 이 클로저는 지정된 시간에 시간이 멈춘 상태로 호출됩니다. 클로저가 실행된 후에는 시간이 정상적으로 다시 흐릅니다:
 
 ```php
@@ -270,8 +270,8 @@ $this->freezeSecond(function (Carbon $time) {
 ```
 
 예상할 수 있듯이, 위에서 설명한 모든 메서드는 주로 시간에 민감한 애플리케이션 동작을 테스트할 때 유용합니다. 예를 들어, 토론 포럼에서 비활성 게시글을 잠그는 경우 등이 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use App\Models\Thread;
 
 test('포럼 스레드는 1주일간 활동이 없으면 잠긴다', function () {
@@ -283,7 +283,7 @@ test('포럼 스레드는 1주일간 활동이 없으면 잠긴다', function ()
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Models\Thread;
 
 public function test_forum_threads_lock_after_one_week_of_inactivity()
@@ -295,3 +295,4 @@ public function test_forum_threads_lock_after_one_week_of_inactivity()
     $this->assertTrue($thread->isLockedByInactivity());
 }
 ```
+:::

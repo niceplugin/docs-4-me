@@ -727,8 +727,8 @@ class InteractionMiddleware
 테스트에서 예지(Precognition) 요청을 하고 싶다면, Laravel의 `TestCase`에는 `withPrecognition` 헬퍼가 포함되어 있어 `Precognition` 요청 헤더를 추가할 수 있습니다.
 
 또한, 예지 요청이 성공적으로 처리되었는지(예: 유효성 검사 오류가 반환되지 않았는지) 확인하고 싶다면, 응답에서 `assertSuccessfulPrecognition` 메서드를 사용할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 it('precognition으로 회원가입 폼을 검증한다', function () {
     $response = $this->withPrecognition()
         ->post('/register', [
@@ -741,7 +741,7 @@ it('precognition으로 회원가입 폼을 검증한다', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 public function test_it_validates_registration_form_with_precognition()
 {
     $response = $this->withPrecognition()
@@ -753,3 +753,4 @@ public function test_it_validates_registration_form_with_precognition()
     $this->assertSame(0, User::count());
 }
 ```
+:::

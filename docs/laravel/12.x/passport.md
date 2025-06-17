@@ -1324,8 +1324,8 @@ Passport는 액세스 토큰과 리프레시 토큰을 발급할 때 이벤트�
 ## 테스트 {#testing}
 
 Passport의 `actingAs` 메서드는 현재 인증된 사용자와 해당 사용자의 스코프를 지정하는 데 사용할 수 있습니다. `actingAs` 메서드의 첫 번째 인자는 사용자 인스턴스이고, 두 번째 인자는 사용자 토큰에 부여할 스코프의 배열입니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use App\Models\User;
 use Laravel\Passport\Passport;
 
@@ -1341,7 +1341,7 @@ test('orders can be created', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Models\User;
 use Laravel\Passport\Passport;
 
@@ -1357,10 +1357,10 @@ public function test_orders_can_be_created(): void
     $response->assertStatus(201);
 }
 ```
-
+:::
 Passport의 `actingAsClient` 메서드는 현재 인증된 클라이언트와 해당 클라이언트의 스코프를 지정하는 데 사용할 수 있습니다. `actingAsClient` 메서드의 첫 번째 인자는 클라이언트 인스턴스이고, 두 번째 인자는 클라이언트 토큰에 부여할 스코프의 배열입니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use Laravel\Passport\Client;
 use Laravel\Passport\Passport;
 
@@ -1376,7 +1376,7 @@ test('servers can be retrieved', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use Laravel\Passport\Client;
 use Laravel\Passport\Passport;
 
@@ -1392,3 +1392,4 @@ public function test_servers_can_be_retrieved(): void
     $response->assertStatus(200);
 }
 ```
+:::

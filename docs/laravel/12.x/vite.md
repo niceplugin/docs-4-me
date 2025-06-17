@@ -672,8 +672,8 @@ import.meta.env.VITE_SENTRY_DSN_PUBLIC
 Laravel의 Vite 통합은 테스트를 실행하는 동안 에셋을 해석하려고 시도하므로, Vite 개발 서버를 실행하거나 에셋을 빌드해야 합니다.
 
 테스트 중에 Vite를 모킹하고 싶다면, Laravel의 `TestCase` 클래스를 확장한 모든 테스트에서 사용할 수 있는 `withoutVite` 메서드를 호출할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('without vite example', function () {
     $this->withoutVite();
 
@@ -681,7 +681,7 @@ test('without vite example', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -694,7 +694,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 모든 테스트에서 Vite를 비활성화하고 싶다면, 기본 `TestCase` 클래스의 `setUp` 메서드에서 `withoutVite` 메서드를 호출하면 됩니다:
 
 ```php

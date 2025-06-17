@@ -399,18 +399,18 @@ Route::post('/chat', function () {
 ### 스트림 응답 사용하기 {#consuming-streamed-responses}
 
 스트림 응답은 Laravel의 `stream` npm 패키지를 사용하여 소비할 수 있습니다. 이 패키지는 Laravel의 응답 및 이벤트 스트림과 상호작용할 수 있는 편리한 API를 제공합니다. 시작하려면 `@laravel/stream-react` 또는 `@laravel/stream-vue` 패키지를 설치하세요:
-
-```shell tab=React
+::: code-group
+```shell [React]
 npm install @laravel/stream-react
 ```
 
-```shell tab=Vue
+```shell [Vue]
 npm install @laravel/stream-vue
 ```
-
+:::
 이후, `useStream`을 사용하여 이벤트 스트림을 소비할 수 있습니다. 스트림 URL을 전달하면, 이 훅은 Laravel 애플리케이션에서 콘텐츠가 반환될 때마다 `data`를 자동으로 이어붙여 업데이트합니다:
-
-```tsx tab=React
+::: code-group
+```tsx [React]
 import { useStream } from "@laravel/stream-react";
 
 function App() {
@@ -433,7 +433,7 @@ function App() {
 }
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useStream } from "@laravel/stream-vue";
 
@@ -455,15 +455,15 @@ const sendMessage = () => {
     </div>
 </template>
 ```
-
+:::
 `send`를 통해 데이터를 스트림으로 다시 보낼 때, 새로운 데이터를 보내기 전에 스트림에 대한 활성 연결이 취소됩니다. 모든 요청은 JSON `POST` 요청으로 전송됩니다.
 
 > [!WARNING]
 > `useStream` 훅이 애플리케이션에 `POST` 요청을 보내므로, 유효한 CSRF 토큰이 필요합니다. CSRF 토큰을 제공하는 가장 쉬운 방법은 [애플리케이션 레이아웃의 `head`에 `meta` 태그로 포함하는 것](/laravel/12.x/csrf#csrf-x-csrf-token)입니다.
 
 `useStream`에 전달하는 두 번째 인자는 스트림 소비 동작을 커스터마이즈할 수 있는 옵션 객체입니다. 이 객체의 기본값은 아래와 같습니다:
-
-```tsx tab=React
+::: code-group
+```tsx [React]
 import { useStream } from "@laravel/stream-react";
 
 function App() {
@@ -483,7 +483,7 @@ function App() {
 }
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useStream } from "@laravel/stream-vue";
 
@@ -504,12 +504,12 @@ const { data } = useStream("chat", {
     <div>{{ data }}</div>
 </template>
 ```
-
+:::
 `onResponse`는 스트림에서 초기 응답이 성공적으로 반환된 후 호출되며, 원시 [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) 객체가 콜백에 전달됩니다. `onData`는 각 청크가 수신될 때마다 호출되며, 현재 청크가 콜백에 전달됩니다. `onFinish`는 스트림이 종료되거나 fetch/read 과정에서 에러가 발생할 때 호출됩니다.
 
 기본적으로, 초기화 시 스트림에 요청이 전송되지 않습니다. `initialInput` 옵션을 사용하여 스트림에 초기 페이로드를 전달할 수 있습니다:
-
-```tsx tab=React
+::: code-group
+```tsx [React]
 import { useStream } from "@laravel/stream-react";
 
 function App() {
@@ -523,7 +523,7 @@ function App() {
 }
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useStream } from "@laravel/stream-vue";
 
@@ -538,10 +538,10 @@ const { data } = useStream("chat", {
     <div>{{ data }}</div>
 </template>
 ```
-
+:::
 스트림을 수동으로 취소하려면, 훅에서 반환된 `cancel` 메서드를 사용할 수 있습니다:
-
-```tsx tab=React
+::: code-group
+```tsx [React]
 import { useStream } from "@laravel/stream-react";
 
 function App() {
@@ -556,7 +556,7 @@ function App() {
 }
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useStream } from "@laravel/stream-vue";
 
@@ -570,10 +570,10 @@ const { data, cancel } = useStream("chat");
     </div>
 </template>
 ```
-
+:::
 `useStream` 훅이 사용될 때마다 스트림을 식별하기 위한 랜덤 `id`가 생성됩니다. 이 값은 각 요청의 `X-STREAM-ID` 헤더로 서버에 전송됩니다. 여러 컴포넌트에서 동일한 스트림을 사용할 때, 직접 `id`를 지정하여 스트림을 읽고 쓸 수 있습니다:
-
-```tsx tab=React
+::: code-group
+```tsx [React]
 // App.tsx
 import { useStream } from "@laravel/stream-react";
 
@@ -603,7 +603,7 @@ function StreamStatus({ id }) {
 }
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <!-- App.vue -->
 <script setup lang="ts">
 import { useStream } from "@laravel/stream-vue";
@@ -637,7 +637,7 @@ const { isFetching, isStreaming } = useStream("chat", { id: props.id });
     </div>
 </template>
 ```
-
+:::
 
 ### 스트리밍 JSON 응답 {#streamed-json-responses}
 
@@ -654,8 +654,8 @@ Route::get('/users.json', function () {
 ```
 
 `useJsonStream` 훅은 [`useStream` 훅](#consuming-streamed-responses)과 동일하지만, 스트리밍이 끝난 후 데이터를 JSON으로 파싱하려고 시도한다는 점이 다릅니다:
-
-```tsx tab=React
+::: code-group
+```tsx [React]
 import { useJsonStream } from "@laravel/stream-react";
 
 type User = {
@@ -688,7 +688,7 @@ function App() {
 }
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useJsonStream } from "@laravel/stream-vue";
 
@@ -718,7 +718,7 @@ const loadUsers = () => {
     </div>
 </template>
 ```
-
+:::
 
 ### 이벤트 스트림 (SSE) {#event-streams}
 
@@ -751,18 +751,18 @@ yield new StreamedEvent(
 #### 이벤트 스트림 소비하기 {#consuming-event-streams}
 
 이벤트 스트림은 Laravel의 `stream` npm 패키지를 사용하여 소비할 수 있습니다. 이 패키지는 Laravel 이벤트 스트림과 상호작용할 수 있는 편리한 API를 제공합니다. 먼저, `@laravel/stream-react` 또는 `@laravel/stream-vue` 패키지를 설치하세요:
-
-```shell tab=React
+::: code-group
+```shell [React]
 npm install @laravel/stream-react
 ```
 
-```shell tab=Vue
+```shell [Vue]
 npm install @laravel/stream-vue
 ```
-
+:::
 그 다음, `useEventStream`을 사용하여 이벤트 스트림을 소비할 수 있습니다. 스트림 URL을 전달하면, 이 훅은 Laravel 애플리케이션에서 메시지가 반환될 때마다 `message`를 자동으로 이어붙여 업데이트합니다:
-
-```jsx tab=React
+::: code-group
+```jsx [React]
 import { useEventStream } from "@laravel/stream-react";
 
 function App() {
@@ -772,7 +772,7 @@ function App() {
 }
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEventStream } from "@laravel/stream-vue";
 
@@ -783,10 +783,10 @@ const { message } = useEventStream("/chat");
   <div>{{ message }}</div>
 </template>
 ```
-
+:::
 `useEventStream`의 두 번째 인자는 옵션 객체로, 스트림 소비 동작을 커스터마이즈할 수 있습니다. 이 객체의 기본값은 아래와 같습니다:
-
-```jsx tab=React
+::: code-group
+```jsx [React]
 import { useEventStream } from "@laravel/stream-react";
 
 function App() {
@@ -809,7 +809,7 @@ function App() {
 }
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEventStream } from "@laravel/stream-vue";
 
@@ -829,7 +829,7 @@ const { message } = useEventStream("/chat", {
 });
 </script>
 ```
-
+:::
 이벤트 스트림은 또한 애플리케이션의 프론트엔드에서 [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) 객체를 통해 수동으로 소비할 수도 있습니다. `eventStream` 메서드는 스트림이 완료되면 자동으로 `</stream>` 업데이트를 이벤트 스트림에 전송합니다:
 
 ```js

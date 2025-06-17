@@ -15,8 +15,8 @@ Laravel은 데이터베이스 기반 애플리케이션을 더 쉽게 테스트�
 ### 각 테스트 후 데이터베이스 초기화 {#resetting-the-database-after-each-test}
 
 더 진행하기 전에, 각 테스트 후에 데이터베이스를 어떻게 초기화하여 이전 테스트의 데이터가 이후 테스트에 영향을 주지 않도록 하는지에 대해 알아보겠습니다. 라라벨에 포함된 `Illuminate\Foundation\Testing\RefreshDatabase` 트레이트가 이 작업을 처리해줍니다. 테스트 클래스에서 이 트레이트를 사용하기만 하면 됩니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -30,7 +30,7 @@ test('basic example', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -53,7 +53,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 `Illuminate\Foundation\Testing\RefreshDatabase` 트레이트는 데이터베이스 스키마가 최신 상태라면 마이그레이션을 실행하지 않습니다. 대신, 데이터베이스 트랜잭션 내에서 테스트를 실행합니다. 따라서 이 트레이트를 사용하지 않는 테스트 케이스에서 추가된 레코드는 데이터베이스에 남아 있을 수 있습니다.
 
 데이터베이스를 완전히 초기화하고 싶다면, `Illuminate\Foundation\Testing\DatabaseMigrations` 또는 `Illuminate\Foundation\Testing\DatabaseTruncation` 트레이트를 대신 사용할 수 있습니다. 하지만 이 두 옵션은 `RefreshDatabase` 트레이트보다 훨씬 느립니다.
@@ -64,8 +64,8 @@ class ExampleTest extends TestCase
 테스트를 할 때, 테스트를 실행하기 전에 데이터베이스에 몇 개의 레코드를 삽입해야 할 수도 있습니다. 이 테스트 데이터를 생성할 때 각 컬럼의 값을 수동으로 지정하는 대신, Laravel은 [모델 팩토리](/laravel/12.x/eloquent-factories)를 사용하여 각 [Eloquent 모델](/laravel/12.x/eloquent)에 대한 기본 속성 집합을 정의할 수 있도록 해줍니다.
 
 모델을 생성하기 위해 모델 팩토리를 생성하고 활용하는 방법에 대해 더 자세히 알고 싶다면, 전체 [모델 팩토리 문서](/laravel/12.x/eloquent-factories)를 참고하세요. 모델 팩토리를 정의한 후에는 테스트 내에서 팩토리를 사용하여 모델을 생성할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use App\Models\User;
 
 test('models can be instantiated', function () {
@@ -75,7 +75,7 @@ test('models can be instantiated', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Models\User;
 
 public function test_models_can_be_instantiated(): void
@@ -85,13 +85,13 @@ public function test_models_can_be_instantiated(): void
     // ...
 }
 ```
-
+:::
 
 ## 시더 실행하기 {#running-seeders}
 
 기능 테스트 중에 [데이터베이스 시더](/laravel/12.x/seeding)를 사용하여 데이터베이스를 채우고 싶다면, `seed` 메서드를 호출하면 됩니다. 기본적으로 `seed` 메서드는 `DatabaseSeeder`를 실행하며, 이 시더는 다른 모든 시더들을 실행해야 합니다. 또는, `seed` 메서드에 특정 시더 클래스 이름을 전달할 수도 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Database\Seeders\OrderStatusSeeder;
@@ -118,7 +118,7 @@ test('orders can be created', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -154,7 +154,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 또는, `RefreshDatabase` 트레이트를 사용하는 각 테스트 전에 Laravel이 자동으로 데이터베이스를 시딩하도록 지시할 수도 있습니다. 이를 위해 기본 테스트 클래스에 `$seed` 프로퍼티를 정의하면 됩니다:
 
 ```php

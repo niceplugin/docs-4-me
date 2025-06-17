@@ -3124,8 +3124,8 @@ defer()->forget('reportMetrics');
 #### 테스트에서 지연 함수 비활성화 {#disabling-deferred-functions-in-tests}
 
 테스트를 작성할 때, 지연(Deferred) 함수를 비활성화하는 것이 유용할 수 있습니다. 테스트 내에서 `withoutDefer`를 호출하면 Laravel이 모든 지연 함수를 즉시 실행하도록 할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('without defer', function () {
     $this->withoutDefer();
 
@@ -3133,7 +3133,7 @@ test('without defer', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -3146,7 +3146,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 테스트 케이스 내의 모든 테스트에서 지연 함수를 비활성화하고 싶다면, 기본 `TestCase` 클래스의 `setUp` 메서드에서 `withoutDefer` 메서드를 호출하면 됩니다:
 
 ```php
@@ -3327,8 +3327,8 @@ while ($waiting) {
 ```
 
 일반적으로 이 코드를 테스트하면 _최소_ 1초가 소요됩니다. 다행히도, `Sleep` 클래스는 "sleep"을 가짜로 처리할 수 있어 테스트 속도를 빠르게 유지할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 it('waits until ready', function () {
     Sleep::fake();
 
@@ -3336,7 +3336,7 @@ it('waits until ready', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 public function test_it_waits_until_ready()
 {
     Sleep::fake();
@@ -3344,12 +3344,12 @@ public function test_it_waits_until_ready()
     // ...
 }
 ```
-
+:::
 `Sleep` 클래스를 가짜로 처리하면 실제로 실행이 일시 중지되지 않아 테스트가 훨씬 빨라집니다.
 
 `Sleep` 클래스를 가짜로 처리한 후에는, 실제로 "sleep"이 발생했어야 하는지에 대한 검증도 할 수 있습니다. 예를 들어, 실행이 세 번 일시 중지되고, 각 일시 중지마다 1초씩 증가하는 코드를 테스트한다고 가정해봅시다. `assertSequence` 메서드를 사용하면, 코드가 올바른 시간만큼 "sleep"했는지 빠르게 검증할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 it('checks if ready three times', function () {
     Sleep::fake();
 
@@ -3363,7 +3363,7 @@ it('checks if ready three times', function () {
 }
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 public function test_it_checks_if_ready_three_times()
 {
     Sleep::fake();
@@ -3377,7 +3377,7 @@ public function test_it_checks_if_ready_three_times()
     ]);
 }
 ```
-
+:::
 물론, `Sleep` 클래스는 테스트 시 사용할 수 있는 다양한 검증 메서드를 제공합니다:
 
 ```php

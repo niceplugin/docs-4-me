@@ -2405,8 +2405,8 @@ public function boot(): void
 잡을 디스패치하는 코드를 테스트할 때, 해당 잡이 실제로 실행되지 않도록 Laravel에 지시하고 싶을 수 있습니다. 잡의 코드는 직접적으로, 그리고 디스패치하는 코드와는 별도로 테스트할 수 있기 때문입니다. 물론, 잡 자체를 테스트하려면 테스트에서 잡 인스턴스를 생성하고 `handle` 메서드를 직접 호출하면 됩니다.
 
 큐에 잡이 실제로 푸시되는 것을 방지하려면 `Queue` 파사드의 `fake` 메서드를 사용할 수 있습니다. `Queue` 파사드의 `fake` 메서드를 호출한 후에는, 애플리케이션이 잡을 큐에 푸시하려고 시도했는지 단언할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use App\Jobs\AnotherJob;
@@ -2439,7 +2439,7 @@ test('orders can be shipped', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -2478,7 +2478,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 `assertPushed` 또는 `assertNotPushed` 메서드에 클로저를 전달하여, 주어진 "진리 테스트"를 통과하는 잡이 푸시되었는지 단언할 수 있습니다. 주어진 진리 테스트를 통과하는 잡이 하나라도 푸시되었다면, 해당 단언은 성공합니다:
 
 ```php
@@ -2491,8 +2491,8 @@ Queue::assertPushed(function (ShipOrder $job) use ($order) {
 ### 일부 작업만 페이크 처리하기 {#faking-a-subset-of-jobs}
 
 특정 작업만 페이크 처리하고 나머지 작업은 정상적으로 실행되도록 하려면, 페이크 처리할 작업의 클래스 이름을 `fake` 메서드에 전달하면 됩니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('orders can be shipped', function () {
     Queue::fake([
         ShipOrder::class,
@@ -2505,7 +2505,7 @@ test('orders can be shipped', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 public function test_orders_can_be_shipped(): void
 {
     Queue::fake([
@@ -2518,7 +2518,7 @@ public function test_orders_can_be_shipped(): void
     Queue::assertPushed(ShipOrder::class, 2);
 }
 ```
-
+:::
 특정 작업을 제외한 모든 작업을 페이크 처리하고 싶다면, `except` 메서드를 사용할 수 있습니다:
 
 ```php

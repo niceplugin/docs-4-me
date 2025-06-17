@@ -213,8 +213,8 @@ npm install --save-dev laravel-echo pusher-js
 ```
 
 Echo가 설치되면, 애플리케이션의 JavaScript에서 새로운 Echo 인스턴스를 생성할 준비가 된 것입니다. 이 작업은 Laravel 프레임워크에 포함된 `resources/js/bootstrap.js` 파일 하단에 추가하는 것이 좋습니다.
-
-```js tab=JavaScript
+::: code-group
+```js [JavaScript]
 import Echo from 'laravel-echo';
 
 import Pusher from 'pusher-js';
@@ -231,7 +231,7 @@ window.Echo = new Echo({
 });
 ```
 
-```js tab=React
+```js [React]
 import { configureEcho } from "@laravel/echo-react";
 
 configureEcho({
@@ -245,7 +245,7 @@ configureEcho({
 });
 ```
 
-```js tab=Vue
+```js [Vue]
 import { configureEcho } from "@laravel/echo-vue";
 
 configureEcho({
@@ -258,7 +258,7 @@ configureEcho({
     // enabledTransports: ['ws', 'wss'],
 });
 ```
-
+:::
 다음으로, 애플리케이션의 에셋을 컴파일해야 합니다.
 
 ```shell
@@ -285,8 +285,8 @@ npm install --save-dev laravel-echo pusher-js
 ```
 
 Echo가 설치되면, 애플리케이션의 `resources/js/bootstrap.js` 파일에서 새로운 Echo 인스턴스를 생성할 준비가 된 것입니다:
-
-```js tab=JavaScript
+::: code-group
+```js [JavaScript]
 import Echo from 'laravel-echo';
 
 import Pusher from 'pusher-js';
@@ -300,7 +300,7 @@ window.Echo = new Echo({
 });
 ```
 
-```js tab=React
+```js [React]
 import { configureEcho } from "@laravel/echo-react";
 
 configureEcho({
@@ -315,7 +315,7 @@ configureEcho({
 });
 ```
 
-```js tab=Vue
+```js [Vue]
 import { configureEcho } from "@laravel/echo-vue";
 
 configureEcho({
@@ -329,7 +329,7 @@ configureEcho({
     // enabledTransports: ["ws", "wss"],
 });
 ```
-
+:::
 다음으로, 애플리케이션의 `.env` 파일에 Pusher 환경 변수에 적절한 값을 정의해야 합니다. 만약 이 변수들이 `.env` 파일에 없다면, 아래와 같이 추가해 주세요:
 
 ```ini
@@ -400,8 +400,8 @@ npm install --save-dev laravel-echo pusher-js
 **계속 진행하기 전에, Ably 애플리케이션 설정에서 Pusher 프로토콜 지원을 활성화해야 합니다. 이 기능은 Ably 애플리케이션의 설정 대시보드 내 "Protocol Adapter Settings"에서 활성화할 수 있습니다.**
 
 Echo가 설치되면, 애플리케이션의 `resources/js/bootstrap.js` 파일에서 새로운 Echo 인스턴스를 생성할 준비가 된 것입니다:
-
-```js tab=JavaScript
+::: code-group
+```js [JavaScript]
 import Echo from 'laravel-echo';
 
 import Pusher from 'pusher-js';
@@ -417,7 +417,7 @@ window.Echo = new Echo({
 });
 ```
 
-```js tab=React
+```js [React]
 import { configureEcho } from "@laravel/echo-react";
 
 configureEcho({
@@ -430,7 +430,7 @@ configureEcho({
 });
 ```
 
-```js tab=Vue
+```js [Vue]
 import { configureEcho } from "@laravel/echo-vue";
 
 configureEcho({
@@ -442,7 +442,7 @@ configureEcho({
     // encrypted: true,
 });
 ```
-
+:::
 Ably Echo 설정에서 `VITE_ABLY_PUBLIC_KEY` 환경 변수를 참조하는 것을 볼 수 있습니다. 이 변수의 값은 Ably 공개 키여야 하며, 공개 키는 Ably 키에서 `:` 문자 앞에 위치한 부분입니다.
 
 Echo 설정을 필요에 맞게 조정한 후, 애플리케이션의 에셋을 컴파일할 수 있습니다:
@@ -558,8 +558,8 @@ Broadcast::channel('orders.{orderId}', function (User $user, int $orderId) {
 #### 이벤트 브로드캐스트 수신 대기 {#listening-for-event-broadcasts}
 
 이제 남은 것은 JavaScript 애플리케이션에서 이벤트를 수신 대기하는 것뿐입니다. 이를 위해 [Laravel Echo](#client-side-installation)를 사용할 수 있습니다. Laravel Echo는 React와 Vue를 위한 내장 훅을 제공하므로 쉽게 시작할 수 있으며, 기본적으로 이벤트의 모든 public 속성이 브로드캐스트 이벤트에 포함됩니다:
-
-```js tab=React
+::: code-group
+```js [React]
 import { useEcho } from "@laravel/echo-react";
 
 useEcho(
@@ -571,7 +571,7 @@ useEcho(
 );
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEcho } from "@laravel/echo-vue";
 
@@ -584,7 +584,7 @@ useEcho(
 );
 </script>
 ```
-
+:::
 
 ## 브로드캐스트 이벤트 정의하기 {#defining-broadcast-events}
 
@@ -1118,8 +1118,8 @@ Echo.channel('orders')
 ### React 또는 Vue 사용하기 {#using-react-or-vue}
 
 Laravel Echo는 이벤트를 손쉽게 수신할 수 있도록 React와 Vue용 훅을 제공합니다. 시작하려면, 비공개 이벤트를 수신하는 데 사용되는 `useEcho` 훅을 호출하세요. `useEcho` 훅은 컴포넌트가 언마운트될 때 자동으로 채널에서 나가게 됩니다:
-
-```js tab=React
+::: code-group
+```js [React]
 import { useEcho } from "@laravel/echo-react";
 
 useEcho(
@@ -1131,7 +1131,7 @@ useEcho(
 );
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEcho } from "@laravel/echo-vue";
 
@@ -1144,7 +1144,7 @@ useEcho(
 );
 </script>
 ```
-
+:::
 여러 이벤트를 수신하려면 `useEcho`에 이벤트 배열을 전달하면 됩니다:
 
 ```js
@@ -1178,8 +1178,8 @@ useEcho<OrderData>(`orders.${orderId}`, "OrderShipmentStatusUpdated", (e) => {
 ```
 
 `useEcho` 훅은 컴포넌트가 언마운트될 때 자동으로 채널에서 나가지만, 반환된 함수를 이용해 필요에 따라 프로그래밍적으로 채널 수신을 중지하거나 다시 시작할 수 있습니다:
-
-```js tab=React
+::: code-group
+```js [React]
 import { useEcho } from "@laravel/echo-react";
 
 const { leaveChannel, leave, stopListening, listen } = useEcho(
@@ -1203,7 +1203,7 @@ leaveChannel();
 leave();
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEcho } from "@laravel/echo-vue";
 
@@ -1228,13 +1228,13 @@ leaveChannel();
 leave();
 </script>
 ```
-
+:::
 
 #### 퍼블릭 채널에 연결하기 {#react-vue-connecting-to-public-channels}
 
 퍼블릭 채널에 연결하려면 `useEchoPublic` 훅을 사용할 수 있습니다:
-
-```js tab=React
+::: code-group
+```js [React]
 import { useEchoPublic } from "@laravel/echo-react";
 
 useEchoPublic("posts", "PostPublished", (e) => {
@@ -1242,7 +1242,7 @@ useEchoPublic("posts", "PostPublished", (e) => {
 });
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEchoPublic } from "@laravel/echo-vue";
 
@@ -1251,13 +1251,13 @@ useEchoPublic("posts", "PostPublished", (e) => {
 });
 </script>
 ```
-
+:::
 
 #### Presence 채널에 연결하기 {#react-vue-connecting-to-presence-channels}
 
 Presence 채널에 연결하려면 `useEchoPresence` 훅을 사용할 수 있습니다:
-
-```js tab=React
+::: code-group
+```js [React]
 import { useEchoPresence } from "@laravel/echo-react";
 
 useEchoPresence("posts", "PostPublished", (e) => {
@@ -1265,7 +1265,7 @@ useEchoPresence("posts", "PostPublished", (e) => {
 });
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEchoPresence } from "@laravel/echo-vue";
 
@@ -1274,7 +1274,7 @@ useEchoPresence("posts", "PostPublished", (e) => {
 });
 </script>
 ```
-
+:::
 
 ## 프레즌스 채널 {#presence-channels}
 
@@ -1552,8 +1552,8 @@ Echo.private(`App.Models.User.${this.user.id}`)
 #### React 또는 Vue에서 사용하기 {#model-broadcasts-with-react-or-vue}
 
 React 또는 Vue를 사용하는 경우, Laravel Echo에 포함된 useEchoModel 훅을 사용하여 모델 브로드캐스트를 손쉽게 수신할 수 있습니다:
-
-```js tab=React
+::: code-group
+```js [React]
 import { useEchoModel } from "@laravel/echo-react";
 
 useEchoModel("App.Models.User", userId, ["UserUpdated"], (e) => {
@@ -1561,7 +1561,7 @@ useEchoModel("App.Models.User", userId, ["UserUpdated"], (e) => {
 });
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEchoModel } from "@laravel/echo-vue";
 
@@ -1570,7 +1570,7 @@ useEchoModel("App.Models.User", userId, ["UserUpdated"], (e) => {
 });
 </script>
 ```
-
+:::
 또한, 모델 이벤트 페이로드 데이터의 형태를 지정하여 더 높은 타입 안정성과 편리한 편집 기능을 제공할 수 있습니다:
 
 ```ts
@@ -1595,15 +1595,15 @@ useEchoModel<User, "App.Models.User">("App.Models.User", userId, ["UserUpdated"]
 때때로 Laravel 애플리케이션을 거치지 않고, 연결된 다른 클라이언트에게 이벤트를 브로드캐스트하고 싶을 때가 있습니다. 예를 들어, 누군가 메시지를 입력 중임을 다른 사용자에게 알리는 "입력 중" 알림과 같은 기능에 유용합니다.
 
 클라이언트 이벤트를 브로드캐스트하려면 Echo의 `whisper` 메서드를 사용할 수 있습니다:
-
-```js tab=JavaScript
+::: code-group
+```js [JavaScript]
 Echo.private(`chat.${roomId}`)
     .whisper('typing', {
         name: this.user.name
     });
 ```
 
-```js tab=React
+```js [React]
 import { useEcho } from "@laravel/echo-react";
 
 const { channel } = useEcho(`chat.${roomId}`, ['update'], (e) => {
@@ -1613,7 +1613,7 @@ const { channel } = useEcho(`chat.${roomId}`, ['update'], (e) => {
 channel().whisper('typing', { name: user.name });
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEcho } from "@laravel/echo-vue";
 
@@ -1624,17 +1624,17 @@ const { channel } = useEcho(`chat.${roomId}`, ['update'], (e) => {
 channel().whisper('typing', { name: user.name });
 </script>
 ```
-
+:::
 클라이언트 이벤트를 수신하려면 `listenForWhisper` 메서드를 사용할 수 있습니다:
-
-```js tab=JavaScript
+::: code-group
+```js [JavaScript]
 Echo.private(`chat.${roomId}`)
     .listenForWhisper('typing', (e) => {
         console.log(e.name);
     });
 ```
 
-```js tab=React
+```js [React]
 import { useEcho } from "@laravel/echo-react";
 
 const { channel } = useEcho(`chat.${roomId}`, ['update'], (e) => {
@@ -1646,7 +1646,7 @@ channel().listenForWhisper('typing', (e) => {
 });
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEcho } from "@laravel/echo-vue";
 
@@ -1659,22 +1659,22 @@ channel().listenForWhisper('typing', (e) => {
 });
 </script>
 ```
-
+:::
 
 ## 알림 {#notifications}
 
 이벤트 브로드캐스팅과 [알림](/laravel/12.x/notifications)을 결합하면, 자바스크립트 애플리케이션이 페이지를 새로고침하지 않고도 실시간으로 새로운 알림을 받을 수 있습니다. 시작하기 전에 [브로드캐스트 알림 채널](/laravel/12.x/notifications#broadcast-notifications) 사용에 대한 문서를 먼저 읽어보시기 바랍니다.
 
 알림이 브로드캐스트 채널을 사용하도록 설정되었다면, Echo의 `notification` 메서드를 사용하여 브로드캐스트 이벤트를 수신할 수 있습니다. 이때 채널 이름은 알림을 받는 엔티티의 클래스 이름과 일치해야 합니다:
-
-```js tab=JavaScript
+::: code-group
+```js [JavaScript]
 Echo.private(`App.Models.User.${userId}`)
     .notification((notification) => {
         console.log(notification.type);
     });
 ```
 
-```js tab=React
+```js [React]
 import { useEchoModel } from "@laravel/echo-react";
 
 const { channel } = useEchoModel('App.Models.User', userId);
@@ -1684,7 +1684,7 @@ channel().notification((notification) => {
 });
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEchoModel } from "@laravel/echo-vue";
 
@@ -1695,5 +1695,5 @@ channel().notification((notification) => {
 });
 </script>
 ```
-
+:::
 이 예시에서는 `broadcast` 채널을 통해 `App\Models\User` 인스턴스에 전송된 모든 알림이 콜백 함수로 전달됩니다. `App.Models.User.{id}` 채널에 대한 채널 인증 콜백은 애플리케이션의 `routes/channels.php` 파일에 포함되어 있습니다.

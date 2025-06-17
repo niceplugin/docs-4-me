@@ -421,8 +421,8 @@ Route::get('/import', function () {
 ```
 
 이 라우트를 테스트할 때, `Process` 파사드의 `fake` 메서드를 인자 없이 호출하면 모든 프로세스 호출에 대해 Laravel이 성공적인 페이크 결과를 반환하도록 할 수 있습니다. 또한, 특정 프로세스가 "실행"되었는지 [어설션](#available-assertions)도 할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Process\PendingProcess;
@@ -445,7 +445,7 @@ test('process is invoked', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -474,7 +474,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 앞서 설명한 것처럼, `Process` 파사드의 `fake` 메서드를 호출하면 Laravel은 항상 출력 없이 성공적인 프로세스 결과를 반환합니다. 하지만, `Process` 파사드의 `result` 메서드를 사용하면 페이크 프로세스의 출력과 종료 코드를 쉽게 지정할 수 있습니다:
 
 ```php

@@ -769,8 +769,8 @@ class AppServiceProvider extends ServiceProvider
 이벤트를 디스패치하는 코드를 테스트할 때, 해당 이벤트의 리스너가 실제로 실행되지 않도록 Laravel에 지시하고 싶을 수 있습니다. 리스너의 코드는 직접적으로, 그리고 이벤트를 디스패치하는 코드와는 별도로 테스트할 수 있기 때문입니다. 물론, 리스너 자체를 테스트하려면 테스트에서 리스너 인스턴스를 생성하고 `handle` 메서드를 직접 호출하면 됩니다.
 
 `Event` 파사드의 `fake` 메서드를 사용하면, 리스너의 실행을 막고, 테스트할 코드를 실행한 뒤, `assertDispatched`, `assertNotDispatched`, `assertNothingDispatched` 메서드를 통해 어떤 이벤트가 디스패치되었는지 검증할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use App\Events\OrderFailedToShip;
@@ -796,7 +796,7 @@ test('orders can be shipped', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -831,7 +831,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 `assertDispatched` 또는 `assertNotDispatched` 메서드에 클로저를 전달하여, 특정 "진리 테스트"를 통과하는 이벤트가 디스패치되었는지 검증할 수 있습니다. 주어진 진리 테스트를 통과하는 이벤트가 하나라도 디스패치되었다면, 해당 검증은 성공합니다:
 
 ```php
@@ -856,8 +856,8 @@ Event::assertListening(
 ### 특정 이벤트만 페이크하기 {#faking-a-subset-of-events}
 
 특정 이벤트에 대한 이벤트 리스너만 페이크하고 싶다면, 해당 이벤트들을 `fake` 또는 `fakeFor` 메서드에 전달할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('orders can be processed', function () {
     Event::fake([
         OrderCreated::class,
@@ -874,7 +874,7 @@ test('orders can be processed', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 /**
  * 주문 처리 테스트.
  */
@@ -894,7 +894,7 @@ public function test_orders_can_be_processed(): void
     ]);
 }
 ```
-
+:::
 특정 이벤트를 제외한 모든 이벤트를 페이크하고 싶다면, `except` 메서드를 사용할 수 있습니다:
 
 ```php
@@ -907,8 +907,8 @@ Event::fake()->except([
 ### Scoped Event Fakes {#scoped-event-fakes}
 
 테스트의 일부 구간에서만 이벤트 리스너를 페이크하고 싶다면, `fakeFor` 메서드를 사용할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use App\Events\OrderCreated;
@@ -931,7 +931,7 @@ test('orders can be processed', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -963,3 +963,4 @@ class ExampleTest extends TestCase
     }
 }
 ```
+:::

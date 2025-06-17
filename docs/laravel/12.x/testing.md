@@ -50,8 +50,8 @@ php artisan make:test UserTest --unit
 > 테스트 스텁은 [스텁 커스터마이징](/laravel/12.x/artisan#stub-customization)을 통해 커스터마이즈할 수 있습니다.
 
 테스트가 생성되면, Pest 또는 PHPUnit을 사용하여 일반적으로 테스트를 정의할 수 있습니다. 테스트를 실행하려면 터미널에서 `vendor/bin/pest`, `vendor/bin/phpunit`, 또는 `php artisan test` 명령어를 실행하세요:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('basic', function () {
@@ -59,7 +59,7 @@ test('basic', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Unit;
@@ -77,7 +77,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 > [!WARNING]
 > 테스트 클래스 내에 직접 `setUp` / `tearDown` 메서드를 정의하는 경우, 반드시 부모 클래스의 `parent::setUp()` / `parent::tearDown()` 메서드를 각각 호출해야 합니다. 일반적으로, 자신의 `setUp` 메서드 시작 부분에 `parent::setUp()`을, `tearDown` 메서드 끝 부분에 `parent::tearDown()`을 호출해야 합니다.
 
@@ -85,15 +85,15 @@ class ExampleTest extends TestCase
 ## 테스트 실행하기 {#running-tests}
 
 앞서 언급했듯이, 테스트를 작성한 후에는 `pest` 또는 `phpunit`을 사용하여 테스트를 실행할 수 있습니다:
-
-```shell tab=Pest
+::: code-group
+```shell [Pest]
 ./vendor/bin/pest
 ```
 
-```shell tab=PHPUnit
+```shell [PHPUnit]
 ./vendor/bin/phpunit
 ```
-
+:::
 `pest` 또는 `phpunit` 명령어 외에도, Artisan의 `test` 명령어를 사용하여 테스트를 실행할 수 있습니다. Artisan 테스트 러너는 개발과 디버깅을 쉽게 할 수 있도록 자세한 테스트 리포트를 제공합니다:
 
 ```shell

@@ -156,8 +156,8 @@ php artisan dusk:make LoginTest
 #### 데이터베이스 마이그레이션 사용하기 {#reset-migrations}
 
 `DatabaseMigrations` 트레이트는 각 테스트 전에 데이터베이스 마이그레이션을 실행합니다. 하지만, 각 테스트마다 데이터베이스 테이블을 삭제하고 다시 생성하는 것은 테이블을 잘라내는(truncate) 것보다 일반적으로 더 느립니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -168,7 +168,7 @@ uses(DatabaseMigrations::class);
 //
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Browser;
@@ -184,7 +184,7 @@ class ExampleTest extends DuskTestCase
     //
 }
 ```
-
+:::
 > [!WARNING]
 > Dusk 테스트를 실행할 때 SQLite 인메모리 데이터베이스는 사용할 수 없습니다. 브라우저가 자체 프로세스 내에서 실행되기 때문에, 다른 프로세스의 인메모리 데이터베이스에 접근할 수 없습니다.
 
@@ -192,8 +192,8 @@ class ExampleTest extends DuskTestCase
 #### 데이터베이스 잘라내기(Truncation) 사용하기 {#reset-truncation}
 
 `DatabaseTruncation` 트레이트는 첫 번째 테스트에서 데이터베이스를 마이그레이션하여 데이터베이스 테이블이 올바르게 생성되었는지 확인합니다. 그러나 이후 테스트에서는 데이터베이스의 테이블이 단순히 잘라내기(truncate)되어, 모든 데이터베이스 마이그레이션을 다시 실행하는 것보다 속도가 빨라집니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTruncation;
@@ -204,7 +204,7 @@ uses(DatabaseTruncation::class);
 //
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Browser;
@@ -221,7 +221,7 @@ class ExampleTest extends DuskTestCase
     //
 }
 ```
-
+:::
 기본적으로 이 트레이트는 `migrations` 테이블을 제외한 모든 테이블을 잘라냅니다. 잘라낼 테이블을 커스터마이즈하고 싶다면, 테스트 클래스에 `$tablesToTruncate` 프로퍼티를 정의할 수 있습니다:
 
 > [!NOTE]
@@ -349,8 +349,8 @@ protected function driver(): RemoteWebDriver
 ### 브라우저 생성하기 {#creating-browsers}
 
 시작하려면, 애플리케이션에 로그인할 수 있는지 확인하는 테스트를 작성해봅시다. 테스트를 생성한 후, 로그인 페이지로 이동하고, 자격 증명을 입력한 다음 "Login" 버튼을 클릭하도록 수정할 수 있습니다. 브라우저 인스턴스를 생성하려면 Dusk 테스트 내에서 `browse` 메서드를 호출하면 됩니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use App\Models\User;
@@ -374,7 +374,7 @@ test('basic example', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Browser;
@@ -407,7 +407,7 @@ class ExampleTest extends DuskTestCase
     }
 }
 ```
-
+:::
 위의 예제에서 볼 수 있듯이, `browse` 메서드는 클로저를 인자로 받습니다. 브라우저 인스턴스는 Dusk에 의해 이 클로저로 자동으로 전달되며, 애플리케이션과 상호작용하고 어설션을 수행하는 데 사용되는 주요 객체입니다.
 
 
@@ -2182,8 +2182,8 @@ Dusk는 [Vue 컴포넌트](https://vuejs.org) 데이터의 상태에 대한 어�
     });
 ```
 다음과 같이 Vue 컴포넌트의 상태를 어서트할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('vue', function () {
     $this->browse(function (Browser $browser) {
         $browser->visit('/')
@@ -2192,7 +2192,7 @@ test('vue', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 /**
  * 기본적인 Vue 테스트 예시입니다.
  */
@@ -2204,7 +2204,7 @@ public function test_vue(): void
     });
 }
 ```
-
+:::
 
 #### assertVueIsNot {#assert-vue-is-not}
 
@@ -2466,8 +2466,8 @@ class DatePicker extends BaseComponent
 ### 컴포넌트 사용하기 {#using-components}
 
 컴포넌트가 정의되면, 어떤 테스트에서도 날짜 선택기에서 쉽게 날짜를 선택할 수 있습니다. 그리고 날짜를 선택하는 데 필요한 로직이 변경되더라도, 컴포넌트만 업데이트하면 됩니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -2487,7 +2487,7 @@ test('기본 예제', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Browser;
@@ -2514,7 +2514,7 @@ class ExampleTest extends DuskTestCase
     }
 }
 ```
-
+:::
 `component` 메서드는 주어진 컴포넌트에 범위가 지정된 브라우저 인스턴스를 반환하는 데 사용할 수 있습니다:
 
 ```php

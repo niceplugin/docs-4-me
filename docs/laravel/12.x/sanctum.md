@@ -477,8 +477,8 @@ $user->tokens()->where('id', $tokenId)->delete();
 ## 테스트 {#testing}
 
 테스트를 진행할 때, `Sanctum::actingAs` 메서드를 사용하여 사용자를 인증하고 해당 토큰에 부여할 권한(abilities)을 지정할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 
@@ -494,7 +494,7 @@ test('task list can be retrieved', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 
@@ -510,7 +510,7 @@ public function test_task_list_can_be_retrieved(): void
     $response->assertOk();
 }
 ```
-
+:::
 토큰에 모든 권한을 부여하고 싶다면, `actingAs` 메서드에 전달하는 권한 목록에 `*`를 포함하면 됩니다:
 
 ```php

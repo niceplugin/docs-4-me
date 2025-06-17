@@ -773,8 +773,8 @@ Storage::deleteDirectory($directory);
 ## 테스트 {#testing}
 
 `Storage` 파사드의 `fake` 메서드를 사용하면 가짜 디스크를 손쉽게 생성할 수 있습니다. 이 기능은 `Illuminate\Http\UploadedFile` 클래스의 파일 생성 유틸리티와 결합하여 파일 업로드 테스트를 매우 간단하게 만들어줍니다. 예를 들어:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Http\UploadedFile;
@@ -804,7 +804,7 @@ test('앨범을 업로드할 수 있다', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -840,7 +840,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 기본적으로 `fake` 메서드는 임시 디렉터리 내의 모든 파일을 삭제합니다. 만약 이 파일들을 유지하고 싶다면, "persistentFake" 메서드를 대신 사용할 수 있습니다. 파일 업로드 테스트에 대한 더 자세한 내용은 [HTTP 테스트 문서의 파일 업로드 관련 정보](/laravel/12.x/http-tests#testing-file-uploads)를 참고하세요.
 
 > [!WARNING]

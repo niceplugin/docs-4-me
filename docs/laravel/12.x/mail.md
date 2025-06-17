@@ -1151,8 +1151,8 @@ Mail::to($request->user())->send(new OrderShipped($order));
 Laravel은 메일러블의 구조를 검사할 수 있는 다양한 메서드를 제공합니다. 또한, 메일러블에 기대하는 내용이 포함되어 있는지 테스트할 수 있는 여러 편리한 메서드도 제공합니다. 이러한 메서드에는 `assertSeeInHtml`, `assertDontSeeInHtml`, `assertSeeInOrderInHtml`, `assertSeeInText`, `assertDontSeeInText`, `assertSeeInOrderInText`, `assertHasAttachment`, `assertHasAttachedData`, `assertHasAttachmentFromStorage`, `assertHasAttachmentFromStorageDisk`가 있습니다.
 
 예상할 수 있듯이, "HTML" 관련 어서션은 메일러블의 HTML 버전에 특정 문자열이 포함되어 있는지 확인하고, "text" 관련 어서션은 메일러블의 일반 텍스트 버전에 특정 문자열이 포함되어 있는지 확인합니다.
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use App\Mail\InvoicePaid;
 use App\Models\User;
 
@@ -1185,7 +1185,7 @@ test('메일러블 내용 테스트', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Mail\InvoicePaid;
 use App\Models\User;
 
@@ -1218,15 +1218,15 @@ public function test_mailable_content(): void
     $mailable->assertHasAttachmentFromStorageDisk('s3', '/path/to/file', 'name.pdf', ['mime' => 'application/pdf']);
 }
 ```
-
+:::
 
 ### 메일러블 전송 테스트 {#testing-mailable-sending}
 
 특정 메일러블이 특정 사용자에게 "전송"되었는지 검증하는 테스트와는 별도로, 메일러블의 내용을 개별적으로 테스트하는 것을 권장합니다. 일반적으로 메일러블의 내용은 테스트하려는 코드와 직접적인 관련이 없으므로, Laravel이 특정 메일러블을 전송하도록 지시했는지만 검증하면 충분합니다.
 
 메일이 실제로 전송되지 않도록 하려면 `Mail` 파사드의 `fake` 메서드를 사용할 수 있습니다. `Mail::fake()`를 호출한 후에는, 메일러블이 사용자에게 전송되었는지, 그리고 메일러블이 받은 데이터를 검사할 수 있습니다.
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use App\Mail\OrderShipped;
@@ -1260,7 +1260,7 @@ test('orders can be shipped', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -1300,7 +1300,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 만약 메일러블을 백그라운드에서 큐잉하여 전송한다면, `assertSent` 대신 `assertQueued` 메서드를 사용해야 합니다.
 
 ```php

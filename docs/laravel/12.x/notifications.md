@@ -1098,8 +1098,8 @@ Echo.private('App.Models.User.' + userId)
 #### React 또는 Vue 사용하기 {#using-react-or-vue}
 
 Laravel Echo는 알림을 손쉽게 수신할 수 있도록 React와 Vue용 훅을 제공합니다. 시작하려면, 알림을 수신하는 데 사용되는 useEchoNotification 훅을 호출하세요. useEchoNotification 훅은 컴포넌트가 언마운트될 때 자동으로 채널을 떠납니다:
-
-```js tab=React
+::: code-group
+```js [React]
 import { useEchoNotification } from "@laravel/echo-react";
 
 useEchoNotification(
@@ -1110,7 +1110,7 @@ useEchoNotification(
 );
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEchoNotification } from "@laravel/echo-vue";
 
@@ -1122,10 +1122,10 @@ useEchoNotification(
 );
 </script>
 ```
-
+:::
 기본적으로 이 훅은 모든 알림을 수신합니다. 특정 알림 타입만 수신하고 싶다면, useEchoNotification에 문자열 또는 타입의 배열을 세 번째 인자로 전달할 수 있습니다:
-
-```js tab=React
+::: code-group
+```js [React]
 import { useEchoNotification } from "@laravel/echo-react";
 
 useEchoNotification(
@@ -1137,7 +1137,7 @@ useEchoNotification(
 );
 ```
 
-```vue tab=Vue
+```vue [Vue]
 <script setup lang="ts">
 import { useEchoNotification } from "@laravel/echo-vue";
 
@@ -1150,7 +1150,7 @@ useEchoNotification(
 );
 </script>
 ```
-
+:::
 또한 알림 페이로드 데이터의 형태를 지정하여 더 높은 타입 안정성과 편리한 편집 기능을 제공할 수 있습니다:
 
 ```ts
@@ -1635,8 +1635,8 @@ $user->notify(new InvoicePaid($invoice));
 `Notification` 파사드의 `fake` 메서드를 사용하면 실제로 알림이 전송되는 것을 방지할 수 있습니다. 일반적으로 알림 전송은 실제로 테스트하려는 코드와는 관련이 없습니다. 대부분의 경우, Laravel이 특정 알림을 전송하도록 지시받았는지만 검증하면 충분합니다.
 
 `Notification` 파사드의 `fake` 메서드를 호출한 후, 알림이 사용자에게 전송되었는지, 그리고 알림이 받은 데이터까지도 검증할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use App\Notifications\OrderShipped;
@@ -1665,7 +1665,7 @@ test('orders can be shipped', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -1700,7 +1700,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 `assertSentTo` 또는 `assertNotSentTo` 메서드에 클로저를 전달하여, 특정 "진위 테스트"를 통과하는 알림이 전송되었는지 검증할 수 있습니다. 주어진 진위 테스트를 통과하는 알림이 하나라도 전송되었다면, 해당 검증은 성공합니다:
 
 ```php

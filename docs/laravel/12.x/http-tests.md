@@ -21,8 +21,8 @@
 ## 소개 {#introduction}
 
 Laravel은 애플리케이션에 HTTP 요청을 보내고 응답을 검사할 수 있는 매우 유연한 API를 제공합니다. 예를 들어, 아래에 정의된 기능 테스트를 살펴보세요:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('the application returns a successful response', function () {
@@ -32,7 +32,7 @@ test('the application returns a successful response', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -52,7 +52,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 `get` 메서드는 애플리케이션에 `GET` 요청을 보내며, `assertStatus` 메서드는 반환된 응답이 지정된 HTTP 상태 코드를 가져야 함을 단언합니다. 이 간단한 단언 외에도, Laravel은 응답 헤더, 내용, JSON 구조 등 다양한 항목을 검사할 수 있는 여러 단언 메서드를 제공합니다.
 
 
@@ -61,8 +61,8 @@ class ExampleTest extends TestCase
 애플리케이션에 요청을 보내기 위해 테스트 내에서 `get`, `post`, `put`, `patch`, 또는 `delete` 메서드를 호출할 수 있습니다. 이 메서드들은 실제로 "진짜" HTTP 요청을 애플리케이션에 보내는 것이 아니라, 전체 네트워크 요청을 내부적으로 시뮬레이션합니다.
 
 테스트 요청 메서드는 `Illuminate\Http\Response` 인스턴스를 반환하는 대신, `Illuminate\Testing\TestResponse` 인스턴스를 반환합니다. 이 인스턴스는 애플리케이션의 응답을 검사할 수 있는 [다양한 유용한 어서션](#available-assertions)을 제공합니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('기본 요청', function () {
@@ -72,7 +72,7 @@ test('기본 요청', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -92,7 +92,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 일반적으로 각 테스트는 애플리케이션에 한 번만 요청을 보내야 합니다. 하나의 테스트 메서드 내에서 여러 번 요청을 실행하면 예기치 않은 동작이 발생할 수 있습니다.
 
 > [!NOTE]
@@ -102,8 +102,8 @@ class ExampleTest extends TestCase
 ### 요청 헤더 커스터마이징 {#customizing-request-headers}
 
 `withHeaders` 메서드를 사용하여 애플리케이션에 요청이 전송되기 전에 요청의 헤더를 커스터마이징할 수 있습니다. 이 메서드를 통해 원하는 커스텀 헤더를 요청에 추가할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('헤더와 상호작용', function () {
@@ -115,7 +115,7 @@ test('헤더와 상호작용', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -137,13 +137,13 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 
 ### Cookies {#cookies}
 
 요청을 보내기 전에 `withCookie` 또는 `withCookies` 메서드를 사용하여 쿠키 값을 설정할 수 있습니다. `withCookie` 메서드는 쿠키 이름과 값을 두 개의 인수로 받으며, `withCookies` 메서드는 이름/값 쌍의 배열을 인수로 받습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('interacting with cookies', function () {
@@ -158,7 +158,7 @@ test('interacting with cookies', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -180,13 +180,13 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 
 ### 세션 / 인증 {#session-and-authentication}
 
 라라벨은 HTTP 테스트 중 세션과 상호작용할 수 있는 여러 헬퍼를 제공합니다. 먼저, `withSession` 메서드를 사용하여 세션 데이터를 주어진 배열로 설정할 수 있습니다. 이는 애플리케이션에 요청을 보내기 전에 세션에 데이터를 미리 로드할 때 유용합니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('세션과 상호작용', function () {
@@ -196,7 +196,7 @@ test('세션과 상호작용', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -213,10 +213,10 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 라라벨의 세션은 일반적으로 현재 인증된 사용자의 상태를 유지하는 데 사용됩니다. 따라서 `actingAs` 헬퍼 메서드는 주어진 사용자를 현재 사용자로 인증하는 간단한 방법을 제공합니다. 예를 들어, [모델 팩토리](/laravel/12.x/eloquent-factories)를 사용하여 사용자를 생성하고 인증할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use App\Models\User;
@@ -232,7 +232,7 @@ test('인증이 필요한 동작', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -254,7 +254,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 또한 `actingAs` 메서드의 두 번째 인수로 가드 이름을 전달하여 어떤 가드를 사용해 주어진 사용자를 인증할지 지정할 수 있습니다. `actingAs` 메서드에 제공된 가드는 테스트가 진행되는 동안 기본 가드가 됩니다:
 
 ```php
@@ -265,8 +265,8 @@ $this->actingAs($user, 'web')
 ### 디버깅 응답 {#debugging-responses}
 
 애플리케이션에 테스트 요청을 보낸 후, `dump`, `dumpHeaders`, `dumpSession` 메서드를 사용하여 응답 내용을 확인하고 디버깅할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('basic test', function () {
@@ -280,7 +280,7 @@ test('basic test', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -304,10 +304,10 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 또는, `dd`, `ddHeaders`, `ddBody`, `ddJson`, `ddSession` 메서드를 사용하여 응답에 대한 정보를 출력하고 실행을 중단할 수도 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('basic test', function () {
@@ -321,7 +321,7 @@ test('basic test', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -345,13 +345,13 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 
 ### 예외 처리 {#exception-handling}
 
 때때로 애플리케이션이 특정 예외를 발생시키는지 테스트해야 할 때가 있습니다. 이를 위해 `Exceptions` 파사드를 통해 예외 핸들러를 "가짜"로 만들 수 있습니다. 예외 핸들러를 가짜로 만든 후에는 `assertReported` 및 `assertNotReported` 메서드를 사용하여 요청 중에 발생한 예외에 대해 어설션을 할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use App\Exceptions\InvalidOrderException;
@@ -372,7 +372,7 @@ test('exception is thrown', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -402,7 +402,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 `assertNotReported` 및 `assertNothingReported` 메서드는 요청 중에 특정 예외가 발생하지 않았거나, 아무 예외도 발생하지 않았는지 어설션할 때 사용할 수 있습니다:
 
 ```php
@@ -451,8 +451,8 @@ $this->assertDoesntThrow(fn () => (new ProcessOrder)->execute());
 ## JSON API 테스트 {#testing-json-apis}
 
 Laravel은 JSON API와 그 응답을 테스트하기 위한 여러 헬퍼도 제공합니다. 예를 들어, `json`, `getJson`, `postJson`, `putJson`, `patchJson`, `deleteJson`, `optionsJson` 메서드를 사용하여 다양한 HTTP 메서드로 JSON 요청을 보낼 수 있습니다. 또한 이 메서드들에 데이터를 헤더와 함께 쉽게 전달할 수 있습니다. 시작을 위해, `/api/user`에 `POST` 요청을 보내고 예상한 JSON 데이터가 반환되었는지 확인하는 테스트를 작성해봅시다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('making an api request', function () {
@@ -466,7 +466,7 @@ test('making an api request', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -490,17 +490,17 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 또한, JSON 응답 데이터는 응답 객체에서 배열 변수처럼 접근할 수 있으므로, JSON 응답 내에 반환된 개별 값을 쉽게 확인할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 expect($response['created'])->toBeTrue();
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 $this->assertTrue($response['created']);
 ```
-
+:::
 > [!NOTE]
 > `assertJson` 메서드는 응답을 배열로 변환하여, 주어진 배열이 애플리케이션에서 반환된 JSON 응답 내에 존재하는지 확인합니다. 따라서 JSON 응답에 다른 속성이 더 있더라도, 주어진 조각이 포함되어 있으면 이 테스트는 통과합니다.
 
@@ -508,8 +508,8 @@ $this->assertTrue($response['created']);
 #### 정확한 JSON 일치 단언 {#verifying-exact-match}
 
 앞서 언급했듯이, `assertJson` 메서드는 JSON 응답 내에 특정 JSON 조각이 존재하는지 단언하는 데 사용할 수 있습니다. 만약 주어진 배열이 애플리케이션에서 반환된 JSON과 **정확히 일치**하는지 확인하고 싶다면, `assertExactJson` 메서드를 사용해야 합니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('정확한 json 일치 단언', function () {
@@ -523,7 +523,7 @@ test('정확한 json 일치 단언', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -547,13 +547,13 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 
 #### JSON 경로에 대한 단언 {#verifying-json-paths}
 
 지정된 경로에 JSON 응답이 주어진 데이터를 포함하고 있는지 확인하려면 `assertJsonPath` 메서드를 사용해야 합니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('json 경로 값 단언', function () {
@@ -565,7 +565,7 @@ test('json 경로 값 단언', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -587,7 +587,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 `assertJsonPath` 메서드는 클로저도 허용하며, 이를 통해 단언이 통과해야 하는지 동적으로 판단할 수 있습니다:
 
 ```php
@@ -598,8 +598,8 @@ $response->assertJsonPath('team.owner.name', fn (string $name) => strlen($name) 
 ### 유연한 JSON 테스트 {#fluent-json-testing}
 
 Laravel은 애플리케이션의 JSON 응답을 유연하게 테스트할 수 있는 아름다운 방법도 제공합니다. 시작하려면, `assertJson` 메서드에 클로저를 전달하세요. 이 클로저는 `Illuminate\Testing\Fluent\AssertableJson` 인스턴스와 함께 호출되며, 이를 사용해 애플리케이션에서 반환된 JSON에 대해 다양한 단언을 할 수 있습니다. `where` 메서드는 JSON의 특정 속성에 대해 단언할 때 사용하고, `missing` 메서드는 JSON에서 특정 속성이 없는지 단언할 때 사용할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use Illuminate\Testing\Fluent\AssertableJson;
 
 test('fluent json', function () {
@@ -617,7 +617,7 @@ test('fluent json', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use Illuminate\Testing\Fluent\AssertableJson;
 
 /**
@@ -638,7 +638,7 @@ public function test_fluent_json(): void
         );
 }
 ```
-
+:::
 #### `etc` 메서드 이해하기
 
 위의 예제에서, 우리는 assertion 체인의 끝에 `etc` 메서드를 호출한 것을 볼 수 있습니다. 이 메서드는 JSON 객체에 다른 속성이 존재할 수 있음을 Laravel에 알립니다. 만약 `etc` 메서드를 사용하지 않으면, assertion을 하지 않은 다른 속성이 JSON 객체에 존재할 경우 테스트가 실패하게 됩니다.
@@ -781,8 +781,8 @@ $response->assertJson(fn (AssertableJson $json) =>
 ## 파일 업로드 테스트 {#testing-file-uploads}
 
 `Illuminate\Http\UploadedFile` 클래스는 테스트를 위해 더미 파일이나 이미지를 생성할 수 있는 `fake` 메서드를 제공합니다. 이 메서드는 `Storage` 파사드의 `fake` 메서드와 결합하여 파일 업로드 테스트를 매우 간단하게 만들어줍니다. 예를 들어, 이 두 기능을 조합하여 아바타 업로드 폼을 손쉽게 테스트할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Http\UploadedFile;
@@ -801,7 +801,7 @@ test('avatars can be uploaded', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -826,7 +826,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 특정 파일이 존재하지 않는다는 것을 검증하고 싶다면, `Storage` 파사드에서 제공하는 `assertMissing` 메서드를 사용할 수 있습니다:
 
 ```php
@@ -864,8 +864,8 @@ UploadedFile::fake()->create(
 ## 뷰 테스트하기 {#testing-views}
 
 Laravel은 애플리케이션에 대한 모의 HTTP 요청을 만들지 않고도 뷰를 렌더링할 수 있도록 지원합니다. 이를 위해 테스트 내에서 `view` 메서드를 호출할 수 있습니다. `view` 메서드는 뷰 이름과 선택적으로 데이터 배열을 인수로 받습니다. 이 메서드는 `Illuminate\Testing\TestView` 인스턴스를 반환하며, 이 인스턴스는 뷰의 내용을 편리하게 검증할 수 있는 여러 메서드를 제공합니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 test('a welcome view can be rendered', function () {
@@ -875,7 +875,7 @@ test('a welcome view can be rendered', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -892,7 +892,7 @@ class ExampleTest extends TestCase
     }
 }
 ```
-
+:::
 `TestView` 클래스는 다음과 같은 검증 메서드를 제공합니다: `assertSee`, `assertSeeInOrder`, `assertSeeText`, `assertSeeTextInOrder`, `assertDontSee`, 그리고 `assertDontSeeText`.
 
 필요하다면, `TestView` 인스턴스를 문자열로 캐스팅하여 렌더링된 뷰의 원본 내용을 얻을 수 있습니다:
@@ -1881,15 +1881,15 @@ $response->assertViewHas('user', function (User $user) {
 ```
 
 또한, 뷰 데이터는 응답에서 배열 변수처럼 접근할 수 있으므로, 편리하게 데이터를 검사할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 expect($response['name'])->toBe('Taylor');
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 $this->assertEquals('Taylor', $response['name']);
 ```
-
+:::
 
 #### assertViewHasAll {#assert-view-has-all}
 

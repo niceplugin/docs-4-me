@@ -14,14 +14,14 @@ HTTP 테스트를 간소화하는 것 외에도, Laravel은 애플리케이션�
 ## 성공 / 실패 기대값 {#success-failure-expectations}
 
 먼저, 아티즌(Artisan) 명령어의 종료 코드에 대한 어설션을 어떻게 작성하는지 살펴보겠습니다. 이를 위해 테스트에서 `artisan` 메서드를 사용해 아티즌 명령어를 실행한 뒤, `assertExitCode` 메서드를 사용해 명령어가 특정 종료 코드로 완료되었는지 검증할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('console command', function () {
     $this->artisan('inspire')->assertExitCode(0);
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 /**
  * 콘솔 명령어 테스트.
  */
@@ -30,7 +30,7 @@ public function test_console_command(): void
     $this->artisan('inspire')->assertExitCode(0);
 }
 ```
-
+:::
 `assertNotExitCode` 메서드를 사용하면 명령어가 특정 종료 코드로 종료되지 않았는지 검증할 수 있습니다:
 
 ```php
@@ -65,8 +65,8 @@ Artisan::command('question', function () {
 ```
 
 다음과 같은 테스트로 이 명령어를 테스트할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('console command', function () {
     $this->artisan('question')
         ->expectsQuestion('What is your name?', 'Taylor Otwell')
@@ -77,7 +77,7 @@ test('console command', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 /**
  * 콘솔 명령어 테스트.
  */
@@ -91,10 +91,10 @@ public function test_console_command(): void
         ->assertExitCode(0);
 }
 ```
-
+:::
 [Laravel Prompts](/laravel/12.x/prompts)에서 제공하는 `search` 또는 `multisearch` 기능을 사용하는 경우, `expectsSearch` 어설션을 사용하여 사용자의 입력, 검색 결과, 선택을 모킹할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('console command', function () {
     $this->artisan('example')
         ->expectsSearch('What is your name?', search: 'Tay', answers: [
@@ -106,7 +106,7 @@ test('console command', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 /**
  * 콘솔 명령어 테스트.
  */
@@ -121,10 +121,10 @@ public function test_console_command(): void
         ->assertExitCode(0);
 }
 ```
-
+:::
 또한, `doesntExpectOutput` 메서드를 사용하여 콘솔 명령어가 어떠한 출력도 생성하지 않는지 검증할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('console command', function () {
     $this->artisan('example')
         ->doesntExpectOutput()
@@ -132,7 +132,7 @@ test('console command', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 /**
  * 콘솔 명령어 테스트.
  */
@@ -143,10 +143,10 @@ public function test_console_command(): void
         ->assertExitCode(0);
 }
 ```
-
+:::
 `expectsOutputToContain` 및 `doesntExpectOutputToContain` 메서드는 출력의 일부에 대해 어설션을 할 때 사용할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 test('console command', function () {
     $this->artisan('example')
         ->expectsOutputToContain('Taylor')
@@ -154,7 +154,7 @@ test('console command', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 /**
  * 콘솔 명령어 테스트.
  */
@@ -165,7 +165,7 @@ public function test_console_command(): void
         ->assertExitCode(0);
 }
 ```
-
+:::
 
 #### 확인 기대값 {#confirmation-expectations}
 
@@ -197,8 +197,8 @@ $this->artisan('users:all')
 ## 콘솔 이벤트 {#console-events}
 
 기본적으로, `Illuminate\Console\Events\CommandStarting`와 `Illuminate\Console\Events\CommandFinished` 이벤트는 애플리케이션의 테스트를 실행하는 동안 디스패치되지 않습니다. 하지만, 테스트 클래스에 `Illuminate\Foundation\Testing\WithConsoleEvents` 트레이트를 추가하면 해당 이벤트를 활성화할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 <?php
 
 use Illuminate\Foundation\Testing\WithConsoleEvents;
@@ -208,7 +208,7 @@ uses(WithConsoleEvents::class);
 // ...
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 <?php
 
 namespace Tests\Feature;
@@ -223,3 +223,4 @@ class ConsoleEventTest extends TestCase
     // ...
 }
 ```
+:::

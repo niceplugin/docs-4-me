@@ -941,8 +941,8 @@ Feature::define('purchase-button', fn () => Arr::random([
 ```
 
 테스트에서 기능의 반환 값을 수정하려면, 테스트의 시작 부분에서 기능을 다시 정의하면 됩니다. 다음 테스트는 서비스 프로바이더에 여전히 `Arr::random()` 구현이 남아 있더라도 항상 통과합니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use Laravel\Pennant\Feature;
 
 test('it can control feature values', function () {
@@ -952,7 +952,7 @@ test('it can control feature values', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use Laravel\Pennant\Feature;
 
 public function test_it_can_control_feature_values()
@@ -962,10 +962,10 @@ public function test_it_can_control_feature_values()
     $this->assertSame('seafoam-green', Feature::value('purchase-button'));
 }
 ```
-
+:::
 클래스 기반 기능에도 동일한 접근 방식을 사용할 수 있습니다:
-
-```php tab=Pest
+::: code-group
+```php [Pest]
 use Laravel\Pennant\Feature;
 
 test('it can control feature values', function () {
@@ -975,7 +975,7 @@ test('it can control feature values', function () {
 });
 ```
 
-```php tab=PHPUnit
+```php [PHPUnit]
 use App\Features\NewApi;
 use Laravel\Pennant\Feature;
 
@@ -986,7 +986,7 @@ public function test_it_can_control_feature_values()
     $this->assertTrue(Feature::value(NewApi::class));
 }
 ```
-
+:::
 기능이 `Lottery` 인스턴스를 반환하는 경우, 몇 가지 유용한 [테스트 헬퍼](/laravel/12.x/helpers#testing-lotteries)를 사용할 수 있습니다.
 
 
