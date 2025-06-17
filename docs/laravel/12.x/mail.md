@@ -838,18 +838,18 @@ public function content(): Content
 
 ```blade
 <x-mail::message>
-```
-
 # 주문이 발송되었습니다
 
 고객님의 주문이 발송되었습니다!
+
 <x-mail::button :url="$url">
 주문 확인하기
-
 </x-mail::button>
+
 감사합니다.<br>
 {{ config('app.name') }}
 </x-mail::message>
+```
 
 > [!NOTE]
 > 마크다운 이메일을 작성할 때 불필요한 들여쓰기를 사용하지 마세요. 마크다운 표준에 따라, 마크다운 파서는 들여쓰기된 내용을 코드 블록으로 렌더링합니다.

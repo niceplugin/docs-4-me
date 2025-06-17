@@ -2162,7 +2162,7 @@ $browser->assertAuthenticatedAs($user);
 #### assertVue {#assert-vue}
 
 Dusk는 [Vue 컴포넌트](https://vuejs.org) 데이터의 상태에 대한 어서션도 할 수 있습니다. 예를 들어, 애플리케이션에 다음과 같은 Vue 컴포넌트가 있다고 가정해봅시다:
-
+```html
     // HTML...
 
     <profile dusk="profile-component"></profile>
@@ -2180,7 +2180,7 @@ Dusk는 [Vue 컴포넌트](https://vuejs.org) 데이터의 상태에 대한 어�
             };
         }
     });
-
+```
 다음과 같이 Vue 컴포넌트의 상태를 어서트할 수 있습니다:
 
 ```php tab=Pest
