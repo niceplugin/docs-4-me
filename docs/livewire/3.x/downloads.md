@@ -28,7 +28,7 @@ class ShowInvoice extends Component
 
     public function download()
     {
-        return response()->download( // [!code highlight:2]
+        return response()->download( // [!code highlight:3]
             $this->invoice->file_path, 'invoice.pdf'
         );
     }

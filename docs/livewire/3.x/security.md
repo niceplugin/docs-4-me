@@ -336,7 +336,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Livewire::addPersistentMiddleware([ // [!code highlight:2]
+        Livewire::addPersistentMiddleware([ // [!code highlight:3]
             App\Http\Middleware\EnsureUserHasRole::class,
         ]);
     }

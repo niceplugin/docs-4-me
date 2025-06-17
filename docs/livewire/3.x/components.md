@@ -62,7 +62,7 @@ class CreatePost extends Component
 {
 	public function render()
 	{
-		return <<<'HTML' // [!code highlight:4]
+		return <<<'HTML' // [!code highlight:5]
 		<div>
 		    {{-- 여기에 Blade 템플릿을 작성하세요... --}}
 		</div>
@@ -265,7 +265,7 @@ class CreatePost extends Component
 {
     public $title;
 
-    public function save() // [!code highlight:8]
+    public function save() // [!code highlight:9]
     {
 		Post::create([
 			'title' => $this->title

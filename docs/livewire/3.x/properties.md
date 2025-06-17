@@ -725,7 +725,7 @@ class ShowTodos extends Component
             ->get();
     }
 
-    public function markAllComplete() // [!code highlight:3]
+    public function markAllComplete() // [!code highlight:4]
     {
         $this->todos->each->complete();
     }

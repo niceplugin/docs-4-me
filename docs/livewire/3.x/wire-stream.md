@@ -17,7 +17,7 @@ class CountDown extends Component
     {
         while ($this->start >= 0) {
             // 현재 카운트를 브라우저로 스트리밍합니다...
-            $this->stream(  // [!code highlight:4]
+            $this->stream(  // [!code highlight:5]
                 to: 'count',
                 content: $this->start,
                 replace: true,

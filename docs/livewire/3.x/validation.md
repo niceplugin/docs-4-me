@@ -18,7 +18,7 @@ class CreatePost extends Component
 
     public function save()
     {
-        $validated = $this->validate([ // [!code highlight:3]
+        $validated = $this->validate([ // [!code highlight:4]
 			'title' => 'required|min:3',
 			'content' => 'required|min:3',
         ]);
@@ -400,7 +400,7 @@ class CreatePost extends Component
 
     public $content = '';
 
-    protected function rules() // [!code highlight:6]
+    protected function rules() // [!code highlight:7]
     {
         return [
             'title' => Rule::exists('posts', 'title'),
@@ -408,7 +408,7 @@ class CreatePost extends Component
         ];
     }
 
-    protected function messages() // [!code highlight:6]
+    protected function messages() // [!code highlight:7]
     {
         return [
             'content.required' => 'The :attribute are missing.',
@@ -416,7 +416,7 @@ class CreatePost extends Component
         ];
     }
 
-    protected function validationAttributes() // [!code highlight:6]
+    protected function validationAttributes() // [!code highlight:7]
     {
         return [
             'content' => 'description',

@@ -82,7 +82,7 @@ class CreatePost extends Component
     {
         // ...
 
-        $this->js("alert('Post saved!')"); // [!code highlight:6]
+        $this->js("alert('Post saved!')"); // [!code highlight:7]
     }
 }
 ```

@@ -108,7 +108,7 @@ Livewire에서는 `@persist` 디렉티브를 사용하여 이를 구현할 수 �
             {{ $slot }}
         </main>
 
-        @persist('player') <!-- [!code highlight:2] -->
+        @persist('player') <!-- [!code highlight:3] -->
             <audio src="{{ $episode->file }}" controls></audio>
         @endpersist
     </body>

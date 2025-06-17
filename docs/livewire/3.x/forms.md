@@ -221,7 +221,7 @@ class PostForm extends Form
     #[Validate('required|min:5')]
     public $content = '';
 
-    public function store() // [!code highlight:5]
+    public function store() // [!code highlight:6]
     {
         $this->validate();
 
@@ -615,7 +615,7 @@ class UpdatePost extends Component
         $this->content = $post->content;
     }
 
-    public function updated($name, $value) // [!code highlight:5]
+    public function updated($name, $value) // [!code highlight:6]
     {
         $this->post->update([
             $name => $value,
@@ -707,12 +707,12 @@ Livewire는 입력값이 서버 측 컴포넌트와 달라질 때 요소를 토�
 
 ```blade
 <form wire:submit="save">
-    <input type="text" wire:model="title"> <!-- [!code highlight:3] -->
+    <input type="text" wire:model="title"> <!-- [!code highlight:4] -->
     <div>
         @error('title') <span class="error">{{ $message }}</span> @enderror
     </div>
 
-    <input type="text" wire:model="content"> <!-- [!code highlight:3] -->
+    <input type="text" wire:model="content"> <!-- [!code highlight:4] -->
     <div>
         @error('content') <span class="error">{{ $message }}</span> @enderror
     </div>

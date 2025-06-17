@@ -911,7 +911,7 @@ class BrowsePosts extends Component
 {
     public function deletePost($id)
     {
-        if (! Auth::user()->isAdmin) { // [!code highlight:2]
+        if (! Auth::user()->isAdmin) { // [!code highlight:3]
             abort(403);
         }
 
@@ -958,7 +958,7 @@ class BrowsePosts extends Component
         $this->delete($id); // [!code highlight]
     }
 
-    public function delete($postId)  // [!code highlight:5]
+    public function delete($postId)  // [!code highlight:6]
     {
         $post = Post::find($postId);
 
