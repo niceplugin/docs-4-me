@@ -35,7 +35,7 @@ export const sidebar_filament = {
           { text: "Themes", link: "/filament/3.x/panels/themes" },
           { text: "Plugin development", link: "/filament/3.x/panels/plugins" },
           { text: "Testing", link: "/filament/3.x/panels/testing" },
-          { text: "Upgrading from v2.x", link: "/filament/3.x/panels/upgrade-guide" },
+          { text: "Upgrading from v2.x", link: "https://filamentphp.com/docs/3.x/panels/upgrade-guide" },
         ]
       },
       {
@@ -82,7 +82,7 @@ export const sidebar_filament = {
           { text: "Advanced", link: "/filament/3.x/tables/advanced" },
           { text: "Adding a table to a Livewire component", link: "/filament/3.x/tables/adding-a-table-to-a-livewire-component" },
           { text: "Testing", link: "/filament/3.x/tables/testing" },
-          { text: "Upgrading from v2.x", link: "/filament/3.x/tables/upgrade-guide" },
+          { text: "Upgrading from v2.x", link: "https://filamentphp.com/docs/3.x/tables/upgrade-guide" },
         ]
       },
       {
@@ -137,7 +137,7 @@ export const sidebar_filament = {
           { text: "Advanced forms", link: "/filament/3.x/forms/advanced" },
           { text: "Adding a form to a Livewire component", link: "/filament/3.x/forms/adding-a-form-to-a-livewire-component" },
           { text: "Testing", link: "/filament/3.x/forms/testing" },
-          { text: "Upgrading from v2.x", link: "/filament/3.x/forms/upgrade-guide" },
+          { text: "Upgrading from v2.x", link: "https://filamentphp.com/docs/3.x/forms/upgrade-guide" },
         ]
       },
       {
@@ -206,7 +206,7 @@ export const sidebar_filament = {
           },
           { text: "Advanced actions", link: "/filament/3.x/actions/advanced" },
           { text: "Testing", link: "/filament/3.x/actions/testing" },
-          { text: "Upgrading from v2.x", link: "/filament/3.x/actions/upgrade-guide" },
+          { text: "Upgrading from v2.x", link: "https://filamentphp.com/docs/3.x/actions/upgrade-guide" },
         ]
       },
       {
@@ -219,7 +219,7 @@ export const sidebar_filament = {
           { text: "Broadcast notifications", link: "/filament/3.x/notifications/broadcast-notifications" },
           { text: "Customizing notifications", link: "/filament/3.x/notifications/customizing-notifications" },
           { text: "Testing", link: "/filament/3.x/notifications/testing" },
-          { text: "Upgrading from v2.x", link: "/filament/3.x/notifications/upgrade-guide" },
+          { text: "Upgrading from v2.x", link: "https://filamentphp.com/docs/3.x/notifications/upgrade-guide" },
         ]
       },
       {
@@ -279,7 +279,7 @@ export const sidebar_filament = {
             ]
           },
           { text: "Stubs", link: "/filament/3.x/support/stubs" },
-          { text: "Support & Help", link: "/filament/3.x/support/support" }
+          { text: "Support & Help", link: "https://filamentphp.com/docs/3.x/support/support" }
         ]
       },
     ]
