@@ -17,7 +17,7 @@
 
 물론, 라우트나 컨트롤러에서 전체 HTML 문서 문자열을 직접 반환하는 것은 실용적이지 않습니다. 다행히도, 뷰(View)는 모든 HTML을 별도의 파일에 저장할 수 있는 편리한 방법을 제공합니다.
 
-뷰는 컨트롤러/애플리케이션 로직과 프레젠테이션 로직을 분리하며, `resources/views` 디렉터리에 저장됩니다. Laravel을 사용할 때, 뷰 템플릿은 주로 [Blade 템플릿 언어](/docs/{{version}}/blade)를 사용하여 작성합니다. 간단한 뷰는 다음과 같이 생겼을 수 있습니다:
+뷰는 컨트롤러/애플리케이션 로직과 프레젠테이션 로직을 분리하며, `resources/views` 디렉터리에 저장됩니다. Laravel을 사용할 때, 뷰 템플릿은 주로 [Blade 템플릿 언어](/laravel/12.x/blade)를 사용하여 작성합니다. 간단한 뷰는 다음과 같이 생겼을 수 있습니다:
 
 ```blade
 <!-- resources/views/greeting.blade.php에 저장된 뷰 -->
@@ -38,14 +38,14 @@ Route::get('/', function () {
 ```
 
 > [!NOTE]
-> Blade 템플릿 작성 방법에 대해 더 알고 싶으신가요? 시작하려면 [Blade 문서](/docs/{{version}}/blade)를 참고하세요.
+> Blade 템플릿 작성 방법에 대해 더 알고 싶으신가요? 시작하려면 [Blade 문서](/laravel/12.x/blade)를 참고하세요.
 
 
 ### React / Vue에서 뷰 작성하기 {#writing-views-in-react-or-vue}
 
 많은 개발자들이 PHP의 Blade를 사용해 프론트엔드 템플릿을 작성하는 대신, React나 Vue를 사용해 템플릿을 작성하는 것을 선호하기 시작했습니다. Laravel은 [Inertia](https://inertiajs.com/)라는 라이브러리를 통해 이러한 작업을 매우 쉽게 만들어줍니다. Inertia를 사용하면 복잡한 SPA를 직접 구축하지 않고도 React 또는 Vue 프론트엔드를 Laravel 백엔드와 간편하게 연결할 수 있습니다.
 
-[React 및 Vue 애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)는 Inertia를 활용한 새로운 Laravel 애플리케이션을 시작할 때 훌륭한 출발점을 제공합니다.
+[React 및 Vue 애플리케이션 스타터 키트](/laravel/12.x/starter-kits)는 Inertia를 활용한 새로운 Laravel 애플리케이션을 시작할 때 훌륭한 출발점을 제공합니다.
 
 
 ## 뷰 생성 및 렌더링 {#creating-and-rendering-views}
@@ -56,7 +56,7 @@ Route::get('/', function () {
 php artisan make:view greeting
 ```
 
-`.blade.php` 확장자는 해당 파일이 [Blade 템플릿](/docs/{{version}}/blade)임을 프레임워크에 알립니다. Blade 템플릿은 HTML과 함께 값을 쉽게 출력하고, "if" 문을 만들거나, 데이터를 반복하는 등 다양한 Blade 지시문을 포함할 수 있습니다.
+`.blade.php` 확장자는 해당 파일이 [Blade 템플릿](/laravel/12.x/blade)임을 프레임워크에 알립니다. Blade 템플릿은 HTML과 함께 값을 쉽게 출력하고, "if" 문을 만들거나, 데이터를 반복하는 등 다양한 Blade 지시문을 포함할 수 있습니다.
 
 뷰를 생성한 후에는, 애플리케이션의 라우트나 컨트롤러에서 전역 `view` 헬퍼를 사용하여 뷰를 반환할 수 있습니다:
 
@@ -74,7 +74,7 @@ use Illuminate\Support\Facades\View;
 return View::make('greeting', ['name' => 'James']);
 ```
 
-위 예시에서 볼 수 있듯이, `view` 헬퍼의 첫 번째 인자는 `resources/views` 디렉터리 내 뷰 파일의 이름과 일치합니다. 두 번째 인자는 뷰에서 사용할 수 있도록 전달되는 데이터 배열입니다. 이 예시에서는 `name` 변수를 전달하고 있으며, 이는 [Blade 문법](/docs/{{version}}/blade)을 사용해 뷰에서 표시됩니다.
+위 예시에서 볼 수 있듯이, `view` 헬퍼의 첫 번째 인자는 `resources/views` 디렉터리 내 뷰 파일의 이름과 일치합니다. 두 번째 인자는 뷰에서 사용할 수 있도록 전달되는 데이터 배열입니다. 이 예시에서는 `name` 변수를 전달하고 있으며, 이는 [Blade 문법](/laravel/12.x/blade)을 사용해 뷰에서 표시됩니다.
 
 
 ### 중첩된 뷰 디렉터리 {#nested-view-directories}
@@ -168,7 +168,7 @@ class AppServiceProvider extends ServiceProvider
 
 뷰 컴포저(View Composer)는 뷰가 렌더링될 때 호출되는 콜백 또는 클래스 메서드입니다. 만약 특정 뷰가 렌더링될 때마다 항상 바인딩되어야 하는 데이터가 있다면, 뷰 컴포저를 사용해 해당 로직을 한 곳에 정리할 수 있습니다. 뷰 컴포저는 동일한 뷰가 여러 라우트나 컨트롤러에서 반환되며, 항상 특정 데이터를 필요로 할 때 특히 유용합니다.
 
-일반적으로 뷰 컴포저는 애플리케이션의 [서비스 프로바이더](/docs/{{version}}/providers) 중 하나에 등록합니다. 이 예제에서는 `App\Providers\AppServiceProvider`에 해당 로직이 포함된다고 가정하겠습니다.
+일반적으로 뷰 컴포저는 애플리케이션의 [서비스 프로바이더](/laravel/12.x/providers) 중 하나에 등록합니다. 이 예제에서는 `App\Providers\AppServiceProvider`에 해당 로직이 포함된다고 가정하겠습니다.
 
 뷰 컴포저를 등록하기 위해 `View` 파사드의 `composer` 메서드를 사용합니다. Laravel은 클래스 기반 뷰 컴포저를 위한 기본 디렉터리를 제공하지 않으므로, 원하는 방식으로 자유롭게 구성할 수 있습니다. 예를 들어, 모든 뷰 컴포저를 보관할 `app/View/Composers` 디렉터리를 생성할 수 있습니다.
 
@@ -241,7 +241,7 @@ class ProfileComposer
 }
 ```
 
-보시다시피, 모든 뷰 컴포저는 [서비스 컨테이너](/docs/{{version}}/container)를 통해 해석되므로, 컴포저의 생성자에서 필요한 의존성을 타입힌트로 지정할 수 있습니다.
+보시다시피, 모든 뷰 컴포저는 [서비스 컨테이너](/laravel/12.x/container)를 통해 해석되므로, 컴포저의 생성자에서 필요한 의존성을 타입힌트로 지정할 수 있습니다.
 
 
 #### 여러 뷰에 Composer 연결하기 {#attaching-a-composer-to-multiple-views}

@@ -15,7 +15,7 @@
 
 [Redis](https://redis.io)는 오픈 소스의 고급 키-값 저장소입니다. 키에 [문자열](https://redis.io/docs/data-types/strings/), [해시](https://redis.io/docs/data-types/hashes/), [리스트](https://redis.io/docs/data-types/lists/), [셋](https://redis.io/docs/data-types/sets/), [정렬된 셋](https://redis.io/docs/data-types/sorted-sets/) 등 다양한 데이터 구조를 저장할 수 있기 때문에 종종 데이터 구조 서버라고도 불립니다.
 
-Laravel에서 Redis를 사용하기 전에, PECL을 통해 [PhpRedis](https://github.com/phpredis/phpredis) PHP 확장 프로그램을 설치하여 사용하는 것을 권장합니다. 이 확장 프로그램은 "유저랜드" PHP 패키지에 비해 설치가 더 복잡하지만, Redis를 많이 사용하는 애플리케이션에서는 더 나은 성능을 제공할 수 있습니다. [Laravel Sail](/docs/{{version}}/sail)을 사용 중이라면, 이 확장 프로그램이 이미 애플리케이션의 Docker 컨테이너에 설치되어 있습니다.
+Laravel에서 Redis를 사용하기 전에, PECL을 통해 [PhpRedis](https://github.com/phpredis/phpredis) PHP 확장 프로그램을 설치하여 사용하는 것을 권장합니다. 이 확장 프로그램은 "유저랜드" PHP 패키지에 비해 설치가 더 복잡하지만, Redis를 많이 사용하는 애플리케이션에서는 더 나은 성능을 제공할 수 있습니다. [Laravel Sail](/laravel/12.x/sail)을 사용 중이라면, 이 확장 프로그램이 이미 애플리케이션의 Docker 컨테이너에 설치되어 있습니다.
 
 PhpRedis 확장 프로그램을 설치할 수 없는 경우, Composer를 통해 `predis/predis` 패키지를 설치할 수 있습니다. Predis는 PHP로만 작성된 Redis 클라이언트로, 추가 확장 프로그램이 필요하지 않습니다:
 
@@ -248,7 +248,7 @@ PhpRedis 확장 프로그램은 다양한 직렬화 및 압축 알고리즘을 �
 
 ## Redis와 상호작용하기 {#interacting-with-redis}
 
-여러분은 `Redis` [파사드](/docs/{{version}}/facades)의 다양한 메서드를 호출하여 Redis와 상호작용할 수 있습니다. `Redis` 파사드는 동적 메서드를 지원하므로, 파사드에서 어떤 [Redis 명령어](https://redis.io/commands)든 호출할 수 있으며 해당 명령어가 직접 Redis로 전달됩니다. 이 예제에서는 `Redis` 파사드의 `get` 메서드를 호출하여 Redis의 `GET` 명령어를 실행합니다:
+여러분은 `Redis` [파사드](/laravel/12.x/facades)의 다양한 메서드를 호출하여 Redis와 상호작용할 수 있습니다. `Redis` 파사드는 동적 메서드를 지원하므로, 파사드에서 어떤 [Redis 명령어](https://redis.io/commands)든 호출할 수 있으며 해당 명령어가 직접 Redis로 전달됩니다. 이 예제에서는 `Redis` 파사드의 `get` 메서드를 호출하여 Redis의 `GET` 명령어를 실행합니다:
 
 ```php
 <?php
@@ -365,7 +365,7 @@ Facades\Redis::pipeline(function (Redis $pipe) {
 
 Laravel은 Redis의 `publish` 및 `subscribe` 명령어에 대한 편리한 인터페이스를 제공합니다. 이 Redis 명령어들은 특정 "채널"에서 메시지를 수신 대기할 수 있게 해줍니다. 다른 애플리케이션이나 심지어 다른 프로그래밍 언어를 사용하여 채널에 메시지를 발행할 수 있으므로, 애플리케이션과 프로세스 간의 손쉬운 통신이 가능합니다.
 
-먼저, `subscribe` 메서드를 사용하여 채널 리스너를 설정해봅시다. `subscribe` 메서드 호출은 장시간 실행되는 프로세스를 시작하므로, 이 메서드 호출을 [Artisan 커맨드](/docs/{{version}}/artisan) 내에 배치하겠습니다:
+먼저, `subscribe` 메서드를 사용하여 채널 리스너를 설정해봅시다. `subscribe` 메서드 호출은 장시간 실행되는 프로세스를 시작하므로, 이 메서드 호출을 [Artisan 커맨드](/laravel/12.x/artisan) 내에 배치하겠습니다:
 
 ```php
 <?php

@@ -306,7 +306,7 @@ php artisan make:mail OrderShipped
 
 메일러블 클래스를 생성했다면, 해당 파일을 열어 내용을 살펴봅시다. 메일러블 클래스의 설정은 `envelope`, `content`, `attachments` 메서드 등에서 이루어집니다.
 
-`envelope` 메서드는 메일의 제목과 때로는 수신자를 정의하는 `Illuminate\Mail\Mailables\Envelope` 객체를 반환합니다. `content` 메서드는 메시지 내용을 생성하는 데 사용될 [Blade 템플릿](/docs/{{version}}/blade)을 정의하는 `Illuminate\Mail\Mailables\Content` 객체를 반환합니다.
+`envelope` 메서드는 메일의 제목과 때로는 수신자를 정의하는 `Illuminate\Mail\Mailables\Envelope` 객체를 반환합니다. `content` 메서드는 메시지 내용을 생성하는 데 사용될 [Blade 템플릿](/laravel/12.x/blade)을 정의하는 `Illuminate\Mail\Mailables\Content` 객체를 반환합니다.
 
 
 ### 발신자 구성하기 {#configuring-the-sender}
@@ -365,7 +365,7 @@ return new Envelope(
 
 ### 뷰 설정하기 {#configuring-the-view}
 
-메일러블 클래스의 `content` 메서드 내에서 이메일 내용을 렌더링할 때 사용할 `view`(템플릿)를 정의할 수 있습니다. 각 이메일은 일반적으로 [Blade 템플릿](/docs/{{version}}/blade)을 사용하여 내용을 렌더링하므로, 이메일의 HTML을 작성할 때 Blade 템플릿 엔진의 모든 기능과 편리함을 활용할 수 있습니다:
+메일러블 클래스의 `content` 메서드 내에서 이메일 내용을 렌더링할 때 사용할 `view`(템플릿)를 정의할 수 있습니다. 각 이메일은 일반적으로 [Blade 템플릿](/laravel/12.x/blade)을 사용하여 내용을 렌더링하므로, 이메일의 HTML을 작성할 때 Blade 템플릿 엔진의 모든 기능과 편리함을 활용할 수 있습니다:
 
 ```php
 /**
@@ -552,7 +552,7 @@ public function attachments(): array
 
 #### 디스크에서 파일 첨부하기 {#attaching-files-from-disk}
 
-[파일 시스템 디스크](/docs/{{version}}/filesystem)에 파일을 저장한 경우, `fromStorage` 첨부 메서드를 사용하여 이메일에 파일을 첨부할 수 있습니다:
+[파일 시스템 디스크](/laravel/12.x/filesystem)에 파일을 저장한 경우, `fromStorage` 첨부 메서드를 사용하여 이메일에 파일을 첨부할 수 있습니다:
 
 ```php
 /**
@@ -695,7 +695,7 @@ public function attachments(): array
 }
 ```
 
-물론, 첨부 파일 데이터가 Amazon S3와 같은 원격 파일 저장소 서비스에 저장되어 있을 수도 있습니다. 이 경우, Laravel은 애플리케이션의 [파일시스템 디스크](/docs/{{version}}/filesystem)에 저장된 데이터를 기반으로 첨부 파일 인스턴스를 생성할 수 있도록 지원합니다:
+물론, 첨부 파일 데이터가 Amazon S3와 같은 원격 파일 저장소 서비스에 저장되어 있을 수도 있습니다. 이 경우, Laravel은 애플리케이션의 [파일시스템 디스크](/laravel/12.x/filesystem)에 저장된 데이터를 기반으로 첨부 파일 인스턴스를 생성할 수 있도록 지원합니다:
 
 ```php
 // 기본 디스크에 있는 파일로부터 첨부 파일 생성...
@@ -801,7 +801,7 @@ public function envelope(): Envelope
 
 ## 마크다운 메일러블 {#markdown-mailables}
 
-마크다운 메일러블 메시지를 사용하면, 메일러블에서 [메일 알림](/docs/{{version}}/notifications#mail-notifications)의 미리 만들어진 템플릿과 컴포넌트를 활용할 수 있습니다. 메시지가 마크다운으로 작성되기 때문에, Laravel은 메시지에 대해 아름답고 반응형인 HTML 템플릿을 렌더링할 수 있으며, 동시에 자동으로 일반 텍스트 버전도 생성합니다.
+마크다운 메일러블 메시지를 사용하면, 메일러블에서 [메일 알림](/laravel/12.x/notifications#mail-notifications)의 미리 만들어진 템플릿과 컴포넌트를 활용할 수 있습니다. 메시지가 마크다운으로 작성되기 때문에, Laravel은 메시지에 대해 아름답고 반응형인 HTML 템플릿을 렌더링할 수 있으며, 동시에 자동으로 일반 텍스트 버전도 생성합니다.
 
 
 ### 마크다운 메일러블 생성하기 {#generating-markdown-mailables}
@@ -913,7 +913,7 @@ Laravel의 Markdown 컴포넌트에 대해 완전히 새로운 테마를 만들�
 
 ## 메일 보내기 {#sending-mail}
 
-메시지를 보내려면 `Mail` [파사드](/docs/{{version}}/facades)의 `to` 메서드를 사용하세요. `to` 메서드는 이메일 주소, 사용자 인스턴스, 또는 사용자 컬렉션을 인자로 받을 수 있습니다. 객체나 객체의 컬렉션을 전달하면, 메일러는 해당 객체의 `email`과 `name` 속성을 자동으로 사용하여 이메일 수신자를 결정하므로, 이 속성들이 객체에 반드시 존재해야 합니다. 수신자를 지정한 후에는, `send` 메서드에 메일 클래스의 인스턴스를 전달하면 됩니다:
+메시지를 보내려면 `Mail` [파사드](/laravel/12.x/facades)의 `to` 메서드를 사용하세요. `to` 메서드는 이메일 주소, 사용자 인스턴스, 또는 사용자 컬렉션을 인자로 받을 수 있습니다. 객체나 객체의 컬렉션을 전달하면, 메일러는 해당 객체의 `email`과 `name` 속성을 자동으로 사용하여 이메일 수신자를 결정하므로, 이 속성들이 객체에 반드시 존재해야 합니다. 수신자를 지정한 후에는, `send` 메서드에 메일 클래스의 인스턴스를 전달하면 됩니다:
 
 ```php
 <?php
@@ -981,7 +981,7 @@ Mail::mailer('postmark')
 
 #### 메일 메시지 큐잉 {#queueing-a-mail-message}
 
-이메일 메시지 전송은 애플리케이션의 응답 속도에 부정적인 영향을 줄 수 있기 때문에, 많은 개발자들이 이메일 메시지를 백그라운드에서 전송하도록 큐에 넣는 방식을 선택합니다. Laravel은 내장된 [통합 큐 API](/docs/{{version}}/queues)를 통해 이 작업을 쉽게 처리할 수 있습니다. 메일 메시지를 큐에 넣으려면, 메시지의 수신자를 지정한 후 `Mail` 파사드의 `queue` 메서드를 사용하면 됩니다:
+이메일 메시지 전송은 애플리케이션의 응답 속도에 부정적인 영향을 줄 수 있기 때문에, 많은 개발자들이 이메일 메시지를 백그라운드에서 전송하도록 큐에 넣는 방식을 선택합니다. Laravel은 내장된 [통합 큐 API](/laravel/12.x/queues)를 통해 이 작업을 쉽게 처리할 수 있습니다. 메일 메시지를 큐에 넣으려면, 메시지의 수신자를 지정한 후 `Mail` 파사드의 `queue` 메서드를 사용하면 됩니다:
 
 ```php
 Mail::to($request->user())
@@ -990,7 +990,7 @@ Mail::to($request->user())
     ->queue(new OrderShipped($order));
 ```
 
-이 메서드는 메시지가 백그라운드에서 전송될 수 있도록 자동으로 작업을 큐에 추가합니다. 이 기능을 사용하기 전에 [큐를 설정](/docs/{{version}}/queues)해야 합니다.
+이 메서드는 메시지가 백그라운드에서 전송될 수 있도록 자동으로 작업을 큐에 추가합니다. 이 기능을 사용하기 전에 [큐를 설정](/laravel/12.x/queues)해야 합니다.
 
 
 #### 지연된 메시지 큐잉 {#delayed-message-queueing}
@@ -1074,7 +1074,7 @@ class OrderShipped extends Mailable implements ShouldQueue
 ```
 
 > [!NOTE]
-> 이러한 문제를 우회하는 방법에 대해 더 자세히 알아보려면 [큐잉된 작업과 데이터베이스 트랜잭션](/docs/{{version}}/queues#jobs-and-database-transactions) 문서를 참고하세요.
+> 이러한 문제를 우회하는 방법에 대해 더 자세히 알아보려면 [큐잉된 작업과 데이터베이스 트랜잭션](/laravel/12.x/queues#jobs-and-database-transactions) 문서를 참고하세요.
 
 
 ## 메일러블 렌더링 {#rendering-mailables}
@@ -1375,14 +1375,14 @@ Mail::assertNotOutgoing(function (OrderShipped $mail) use ($order) {
 
 #### 로그 드라이버 {#log-driver}
 
-`log` 메일 드라이버는 실제로 이메일을 전송하는 대신, 모든 이메일 메시지를 로그 파일에 기록하여 확인할 수 있도록 합니다. 일반적으로 이 드라이버는 로컬 개발 환경에서만 사용됩니다. 환경별로 애플리케이션을 설정하는 방법에 대한 자세한 내용은 [설정 문서](/docs/{{version}}/configuration#environment-configuration)를 참고하세요.
+`log` 메일 드라이버는 실제로 이메일을 전송하는 대신, 모든 이메일 메시지를 로그 파일에 기록하여 확인할 수 있도록 합니다. 일반적으로 이 드라이버는 로컬 개발 환경에서만 사용됩니다. 환경별로 애플리케이션을 설정하는 방법에 대한 자세한 내용은 [설정 문서](/laravel/12.x/configuration#environment-configuration)를 참고하세요.
 
 
 #### HELO / Mailtrap / Mailpit {#mailtrap}
 
 또는 [HELO](https://usehelo.com)나 [Mailtrap](https://mailtrap.io)와 같은 서비스를 사용하고, `smtp` 드라이버를 통해 이메일 메시지를 "더미" 메일박스로 전송할 수 있습니다. 이렇게 하면 실제 이메일 클라이언트에서 메시지를 확인할 수 있으며, Mailtrap의 메시지 뷰어에서 최종 이메일을 직접 점검할 수 있다는 장점이 있습니다.
 
-[Laravel Sail](/docs/{{version}}/sail)을 사용 중이라면, [Mailpit](https://github.com/axllent/mailpit)을 통해 메시지를 미리 볼 수 있습니다. Sail이 실행 중일 때는 `http://localhost:8025`에서 Mailpit 인터페이스에 접속할 수 있습니다.
+[Laravel Sail](/laravel/12.x/sail)을 사용 중이라면, [Mailpit](https://github.com/axllent/mailpit)을 통해 메시지를 미리 볼 수 있습니다. Sail이 실행 중일 때는 `http://localhost:8025`에서 Mailpit 인터페이스에 접속할 수 있습니다.
 
 
 #### 전역 `to` 주소 사용하기 {#using-a-global-to-address}
@@ -1406,7 +1406,7 @@ public function boot(): void
 
 ## 이벤트 {#events}
 
-Laravel은 메일 메시지를 전송하는 동안 두 가지 이벤트를 발생시킵니다. `MessageSending` 이벤트는 메시지가 전송되기 전에 발생하며, `MessageSent` 이벤트는 메시지가 전송된 후에 발생합니다. 이 이벤트들은 메일이 *전송*될 때 발생한다는 점을 기억하세요. 큐에 등록될 때가 아니라는 점에 유의해야 합니다. 애플리케이션 내에서 이러한 이벤트에 대한 [이벤트 리스너](/docs/{{version}}/events)를 생성할 수 있습니다:
+Laravel은 메일 메시지를 전송하는 동안 두 가지 이벤트를 발생시킵니다. `MessageSending` 이벤트는 메시지가 전송되기 전에 발생하며, `MessageSent` 이벤트는 메시지가 전송된 후에 발생합니다. 이 이벤트들은 메일이 *전송*될 때 발생한다는 점을 기억하세요. 큐에 등록될 때가 아니라는 점에 유의해야 합니다. 애플리케이션 내에서 이러한 이벤트에 대한 [이벤트 리스너](/laravel/12.x/events)를 생성할 수 있습니다:
 
 ```php
 use Illuminate\Mail\Events\MessageSending;

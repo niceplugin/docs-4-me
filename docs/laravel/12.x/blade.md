@@ -51,7 +51,7 @@
 
 Blade는 Laravel에 기본 포함된 간단하면서도 강력한 템플릿 엔진입니다. 일부 PHP 템플릿 엔진과 달리, Blade는 템플릿 내에서 순수 PHP 코드를 사용하는 것을 제한하지 않습니다. 실제로 모든 Blade 템플릿은 순수 PHP 코드로 컴파일되어 수정될 때까지 캐시되므로, Blade는 애플리케이션에 사실상 추가적인 오버헤드를 발생시키지 않습니다. Blade 템플릿 파일은 `.blade.php` 확장자를 사용하며, 일반적으로 `resources/views` 디렉터리에 저장됩니다.
 
-Blade 뷰는 라우트나 컨트롤러에서 전역 `view` 헬퍼를 사용해 반환할 수 있습니다. 물론, [뷰](/docs/{{version}}/views) 문서에서 언급한 것처럼, `view` 헬퍼의 두 번째 인자를 통해 Blade 뷰로 데이터를 전달할 수 있습니다.
+Blade 뷰는 라우트나 컨트롤러에서 전역 `view` 헬퍼를 사용해 반환할 수 있습니다. 물론, [뷰](/laravel/12.x/views) 문서에서 언급한 것처럼, `view` 헬퍼의 두 번째 인자를 통해 Blade 뷰로 데이터를 전달할 수 있습니다.
 
 ```php
 Route::get('/', function () {
@@ -236,7 +236,7 @@ Hello, @{{ name }}.
 
 #### 인증 디렉티브 {#authentication-directives}
 
-`@auth`와 `@guest` 디렉티브를 사용하면 현재 사용자가 [인증](/docs/{{version}}/authentication)되었는지 또는 게스트인지 빠르게 확인할 수 있습니다:
+`@auth`와 `@guest` 디렉티브를 사용하면 현재 사용자가 [인증](/laravel/12.x/authentication)되었는지 또는 게스트인지 빠르게 확인할 수 있습니다:
 
 ```blade
 @auth
@@ -311,7 +311,7 @@ Hello, @{{ name }}.
 
 #### 세션 디렉티브 {#session-directives}
 
-`@session` 디렉티브는 [세션](/docs/{{version}}/session) 값이 존재하는지 확인할 때 사용할 수 있습니다. 세션 값이 존재하면, `@session`과 `@endsession` 디렉티브 사이의 템플릿 내용이 실행됩니다. `@session` 디렉티브 내부에서는 `$value` 변수를 사용해 세션 값을 출력할 수 있습니다:
+`@session` 디렉티브는 [세션](/laravel/12.x/session) 값이 존재하는지 확인할 때 사용할 수 있습니다. 세션 값이 존재하면, `@session`과 `@endsession` 디렉티브 사이의 템플릿 내용이 실행됩니다. `@session` 디렉티브 내부에서는 `$value` 변수를 사용해 세션 값을 출력할 수 있습니다:
 
 ```blade
 @session('status')
@@ -979,7 +979,7 @@ return function (array $data) {
 
 #### 추가 의존성 {#additional-dependencies}
 
-만약 컴포넌트가 Laravel의 [서비스 컨테이너](/docs/{{version}}/container)에서 의존성을 필요로 한다면, 해당 의존성을 컴포넌트의 데이터 속성들보다 먼저 나열하면 컨테이너가 자동으로 주입해줍니다:
+만약 컴포넌트가 Laravel의 [서비스 컨테이너](/laravel/12.x/container)에서 의존성을 필요로 한다면, 해당 의존성을 컴포넌트의 데이터 속성들보다 먼저 나열하면 컨테이너가 자동으로 주입해줍니다:
 
 ```php
 use App\Services\AlertCreator;
@@ -1538,7 +1538,7 @@ Blade는 컴포넌트 이름을 파스칼 케이스로 변환하여 해당 컴�
 
 앞서 설명한 것처럼, 익명 컴포넌트는 일반적으로 `resources/views/components` 디렉터리에 Blade 템플릿을 추가하여 정의합니다. 하지만 기본 경로 외에 다른 익명 컴포넌트 경로를 Laravel에 등록하고 싶을 때도 있습니다.
 
-`anonymousComponentPath` 메서드는 익명 컴포넌트가 위치한 "경로"를 첫 번째 인자로 받고, 컴포넌트가 속할 선택적 "네임스페이스"를 두 번째 인자로 받습니다. 일반적으로 이 메서드는 애플리케이션의 [서비스 프로바이더](/docs/{{version}}/providers) 중 하나의 `boot` 메서드에서 호출해야 합니다.
+`anonymousComponentPath` 메서드는 익명 컴포넌트가 위치한 "경로"를 첫 번째 인자로 받고, 컴포넌트가 속할 선택적 "네임스페이스"를 두 번째 인자로 받습니다. 일반적으로 이 메서드는 애플리케이션의 [서비스 프로바이더](/laravel/12.x/providers) 중 하나의 `boot` 메서드에서 호출해야 합니다.
 
 ```php
 /**
@@ -1710,7 +1710,7 @@ Route::get('/tasks', function () {
 
 ### CSRF 필드 {#csrf-field}
 
-애플리케이션에서 HTML 폼을 정의할 때마다, 폼 안에 숨겨진 CSRF 토큰 필드를 포함해야 합니다. 이렇게 하면 [CSRF 보호](/docs/{{version}}/csrf) 미들웨어가 요청을 검증할 수 있습니다. 토큰 필드는 `@csrf` Blade 디렉티브를 사용해 생성할 수 있습니다:
+애플리케이션에서 HTML 폼을 정의할 때마다, 폼 안에 숨겨진 CSRF 토큰 필드를 포함해야 합니다. 이렇게 하면 [CSRF 보호](/laravel/12.x/csrf) 미들웨어가 요청을 검증할 수 있습니다. 토큰 필드는 `@csrf` Blade 디렉티브를 사용해 생성할 수 있습니다:
 
 ```blade
 <form method="POST" action="/profile">
@@ -1736,7 +1736,7 @@ HTML 폼은 `PUT`, `PATCH`, 또는 `DELETE` 요청을 직접 보낼 수 없기 �
 
 ### 유효성 검사 에러 {#validation-errors}
 
-`@error` 디렉티브는 주어진 속성에 대해 [유효성 검사 에러 메시지](/docs/{{version}}/validation#quick-displaying-the-validation-errors)가 존재하는지 빠르게 확인할 수 있도록 해줍니다. `@error` 디렉티브 내부에서는 `$message` 변수를 출력하여 에러 메시지를 표시할 수 있습니다:
+`@error` 디렉티브는 주어진 속성에 대해 [유효성 검사 에러 메시지](/laravel/12.x/validation#quick-displaying-the-validation-errors)가 존재하는지 빠르게 확인할 수 있도록 해줍니다. `@error` 디렉티브 내부에서는 `$message` 변수를 출력하여 에러 메시지를 표시할 수 있습니다:
 
 ```blade
 <!-- /resources/views/post/create.blade.php -->
@@ -1768,7 +1768,7 @@ HTML 폼은 `PUT`, `PATCH`, 또는 `DELETE` 요청을 직접 보낼 수 없기 �
 />
 ```
 
-여러 개의 폼이 있는 페이지에서 [특정 에러 백의 이름](/docs/{{version}}/validation#named-error-bags)을 두 번째 인자로 `@error` 디렉티브에 전달하여 해당 에러 백의 유효성 검사 에러 메시지를 가져올 수 있습니다:
+여러 개의 폼이 있는 페이지에서 [특정 에러 백의 이름](/laravel/12.x/validation#named-error-bags)을 두 번째 인자로 `@error` 디렉티브에 전달하여 해당 에러 백의 유효성 검사 에러 메시지를 가져올 수 있습니다:
 
 ```blade
 <!-- /resources/views/auth.blade.php -->
@@ -1832,7 +1832,7 @@ Blade에서는 이름이 지정된 스택에 내용을 추가(push)할 수 있�
 
 ## 서비스 주입 {#service-injection}
 
-`@inject` 디렉티브는 Laravel [서비스 컨테이너](/docs/{{version}}/container)에서 서비스를 가져올 때 사용할 수 있습니다. `@inject`에 전달되는 첫 번째 인자는 서비스가 할당될 변수의 이름이고, 두 번째 인자는 주입하고자 하는 서비스의 클래스 또는 인터페이스 이름입니다.
+`@inject` 디렉티브는 Laravel [서비스 컨테이너](/laravel/12.x/container)에서 서비스를 가져올 때 사용할 수 있습니다. `@inject`에 전달되는 첫 번째 인자는 서비스가 할당될 변수의 이름이고, 두 번째 인자는 주입하고자 하는 서비스의 클래스 또는 인터페이스 이름입니다.
 
 ```blade
 @inject('metrics', 'App\Services\MetricsService')

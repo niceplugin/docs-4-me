@@ -29,12 +29,12 @@
 
 마이그레이션은 데이터베이스의 버전 관리를 가능하게 하여, 팀이 애플리케이션의 데이터베이스 스키마 정의를 함께 정의하고 공유할 수 있도록 해줍니다. 만약 소스 컨트롤에서 변경 사항을 받아온 후, 동료에게 로컬 데이터베이스 스키마에 수동으로 컬럼을 추가하라고 요청한 적이 있다면, 바로 그 문제가 데이터베이스 마이그레이션이 해결하는 문제입니다.
 
-Laravel의 `Schema` [파사드](/docs/{{version}}/facades)는 Laravel이 지원하는 모든 데이터베이스 시스템에서 테이블을 생성하고 조작할 수 있도록 데이터베이스에 독립적인 지원을 제공합니다. 일반적으로 마이그레이션은 이 파사드를 사용하여 데이터베이스 테이블과 컬럼을 생성하고 수정합니다.
+Laravel의 `Schema` [파사드](/laravel/12.x/facades)는 Laravel이 지원하는 모든 데이터베이스 시스템에서 테이블을 생성하고 조작할 수 있도록 데이터베이스에 독립적인 지원을 제공합니다. 일반적으로 마이그레이션은 이 파사드를 사용하여 데이터베이스 테이블과 컬럼을 생성하고 수정합니다.
 
 
 ## 마이그레이션 생성하기 {#generating-migrations}
 
-`make:migration` [Artisan 명령어](/docs/{{version}}/artisan)를 사용하여 데이터베이스 마이그레이션을 생성할 수 있습니다. 새로 생성된 마이그레이션은 `database/migrations` 디렉터리에 저장됩니다. 각 마이그레이션 파일명에는 타임스탬프가 포함되어 있어 Laravel이 마이그레이션의 순서를 결정할 수 있습니다:
+`make:migration` [Artisan 명령어](/laravel/12.x/artisan)를 사용하여 데이터베이스 마이그레이션을 생성할 수 있습니다. 새로 생성된 마이그레이션은 `database/migrations` 디렉터리에 저장됩니다. 각 마이그레이션 파일명에는 타임스탬프가 포함되어 있어 Laravel이 마이그레이션의 순서를 결정할 수 있습니다:
 
 ```shell
 php artisan make:migration create_flights_table
@@ -45,7 +45,7 @@ Laravel은 마이그레이션의 이름을 사용하여 테이블 이름과 해�
 생성된 마이그레이션의 경로를 직접 지정하고 싶다면, `make:migration` 명령어를 실행할 때 `--path` 옵션을 사용할 수 있습니다. 지정한 경로는 애플리케이션의 기본 경로를 기준으로 상대 경로여야 합니다.
 
 > [!NOTE]
-> 마이그레이션 스텁은 [스텁 커스터마이징](/docs/{{version}}/artisan#stub-customization)을 통해 사용자 정의할 수 있습니다.
+> 마이그레이션 스텁은 [스텁 커스터마이징](/laravel/12.x/artisan#stub-customization)을 통해 사용자 정의할 수 있습니다.
 
 
 ### 마이그레이션 스쿼싱 {#squashing-migrations}
@@ -257,7 +257,7 @@ php artisan migrate:fresh
 php artisan migrate:fresh --seed
 ```
 
-기본적으로 `migrate:fresh` 명령어는 기본 데이터베이스 연결에서만 테이블을 삭제합니다. 하지만 `--database` 옵션을 사용하여 마이그레이션할 데이터베이스 연결을 지정할 수 있습니다. 데이터베이스 연결 이름은 애플리케이션의 `database` [설정 파일](/docs/{{version}}/configuration)에 정의된 연결과 일치해야 합니다:
+기본적으로 `migrate:fresh` 명령어는 기본 데이터베이스 연결에서만 테이블을 삭제합니다. 하지만 `--database` 옵션을 사용하여 마이그레이션할 데이터베이스 연결을 지정할 수 있습니다. 데이터베이스 연결 이름은 애플리케이션의 `database` [설정 파일](/laravel/12.x/configuration)에 정의된 연결과 일치해야 합니다:
 
 ```shell
 php artisan migrate:fresh --database=admin
@@ -580,7 +580,7 @@ Schema::table('users', function (Blueprint $table) {
 </div>
 
 
-#### `bigIncrements()` {.collection-method .first-collection-method} {#column-method-bigIncrements}
+#### `bigIncrements()` {#column-method-bigIncrements}
 
 `bigIncrements` 메서드는 자동 증가하는 `UNSIGNED BIGINT`(기본 키)와 동일한 컬럼을 생성합니다:
 
@@ -589,7 +589,7 @@ $table->bigIncrements('id');
 ```
 
 
-#### `bigInteger()` {.collection-method} {#column-method-bigInteger}
+#### `bigInteger()` {#column-method-bigInteger}
 
 `bigInteger` 메서드는 `BIGINT`에 해당하는 컬럼을 생성합니다:
 
@@ -598,7 +598,7 @@ $table->bigInteger('votes');
 ```
 
 
-#### `binary()` {.collection-method} {#column-method-binary}
+#### `binary()` {#column-method-binary}
 
 `binary` 메서드는 `BLOB`에 해당하는 컬럼을 생성합니다:
 
@@ -615,7 +615,7 @@ $table->binary('data', length: 16, fixed: true); // BINARY(16)
 ```
 
 
-#### `boolean()` {.collection-method} {#column-method-boolean}
+#### `boolean()` {#column-method-boolean}
 
 `boolean` 메서드는 `BOOLEAN`에 해당하는 컬럼을 생성합니다:
 
@@ -624,7 +624,7 @@ $table->boolean('confirmed');
 ```
 
 
-#### `char()` {.collection-method} {#column-method-char}
+#### `char()` {#column-method-char}
 
 `char` 메서드는 주어진 길이의 `CHAR`에 해당하는 컬럼을 생성합니다:
 
@@ -633,7 +633,7 @@ $table->char('name', length: 100);
 ```
 
 
-#### `dateTimeTz()` {.collection-method} {#column-method-dateTimeTz}
+#### `dateTimeTz()` {#column-method-dateTimeTz}
 
 `dateTimeTz` 메서드는 선택적인 소수 초 정밀도를 가진 `DATETIME`(타임존 포함)과 동등한 컬럼을 생성합니다:
 
@@ -642,7 +642,7 @@ $table->dateTimeTz('created_at', precision: 0);
 ```
 
 
-#### `dateTime()` {.collection-method} {#column-method-dateTime}
+#### `dateTime()` {#column-method-dateTime}
 
 `dateTime` 메서드는 선택적인 소수 초 정밀도를 가진 `DATETIME`에 해당하는 컬럼을 생성합니다:
 
@@ -651,7 +651,7 @@ $table->dateTime('created_at', precision: 0);
 ```
 
 
-#### `date()` {.collection-method} {#column-method-date}
+#### `date()` {#column-method-date}
 
 `date` 메서드는 `DATE`에 해당하는 컬럼을 생성합니다:
 
@@ -660,7 +660,7 @@ $table->date('created_at');
 ```
 
 
-#### `decimal()` {.collection-method} {#column-method-decimal}
+#### `decimal()` {#column-method-decimal}
 
 `decimal` 메서드는 지정한 정밀도(전체 자릿수)와 소수점 이하 자릿수로 `DECIMAL`에 해당하는 컬럼을 생성합니다:
 
@@ -669,7 +669,7 @@ $table->decimal('amount', total: 8, places: 2);
 ```
 
 
-#### `double()` {.collection-method} {#column-method-double}
+#### `double()` {#column-method-double}
 
 `double` 메서드는 `DOUBLE`에 해당하는 컬럼을 생성합니다:
 
@@ -678,7 +678,7 @@ $table->double('amount');
 ```
 
 
-#### `enum()` {.collection-method} {#column-method-enum}
+#### `enum()` {#column-method-enum}
 
 `enum` 메서드는 주어진 유효한 값들로 `ENUM`에 해당하는 컬럼을 생성합니다:
 
@@ -687,7 +687,7 @@ $table->enum('difficulty', ['easy', 'hard']);
 ```
 
 
-#### `float()` {.collection-method} {#column-method-float}
+#### `float()` {#column-method-float}
 
 `float` 메서드는 주어진 정밀도로 `FLOAT`에 해당하는 컬럼을 생성합니다:
 
@@ -696,7 +696,7 @@ $table->float('amount', precision: 53);
 ```
 
 
-#### `foreignId()` {.collection-method} {#column-method-foreignId}
+#### `foreignId()` {#column-method-foreignId}
 
 `foreignId` 메서드는 `UNSIGNED BIGINT`에 해당하는 컬럼을 생성합니다:
 
@@ -705,7 +705,7 @@ $table->foreignId('user_id');
 ```
 
 
-#### `foreignIdFor()` {.collection-method} {#column-method-foreignIdFor}
+#### `foreignIdFor()` {#column-method-foreignIdFor}
 
 `foreignIdFor` 메서드는 주어진 모델 클래스에 대해 `{column}_id`에 해당하는 컬럼을 추가합니다. 컬럼 타입은 모델의 키 타입에 따라 `UNSIGNED BIGINT`, `CHAR(36)`, 또는 `CHAR(26)`이 됩니다:
 
@@ -714,7 +714,7 @@ $table->foreignIdFor(User::class);
 ```
 
 
-#### `foreignUlid()` {.collection-method} {#column-method-foreignUlid}
+#### `foreignUlid()` {#column-method-foreignUlid}
 
 `foreignUlid` 메서드는 `ULID`에 해당하는 컬럼을 생성합니다:
 
@@ -723,7 +723,7 @@ $table->foreignUlid('user_id');
 ```
 
 
-#### `foreignUuid()` {.collection-method} {#column-method-foreignUuid}
+#### `foreignUuid()` {#column-method-foreignUuid}
 
 `foreignUuid` 메서드는 `UUID`에 해당하는 컬럼을 생성합니다:
 
@@ -732,7 +732,7 @@ $table->foreignUuid('user_id');
 ```
 
 
-#### `geography()` {.collection-method} {#column-method-geography}
+#### `geography()` {#column-method-geography}
 
 `geography` 메서드는 주어진 공간 타입과 SRID(공간 참조 시스템 식별자)를 사용하여 `GEOGRAPHY`에 해당하는 컬럼을 생성합니다:
 
@@ -744,7 +744,7 @@ $table->geography('coordinates', subtype: 'point', srid: 4326);
 > 공간 타입 지원 여부는 데이터베이스 드라이버에 따라 다릅니다. 사용 중인 데이터베이스의 문서를 참고하세요. 만약 애플리케이션이 PostgreSQL 데이터베이스를 사용한다면, `geography` 메서드를 사용하기 전에 반드시 [PostGIS](https://postgis.net) 확장 기능을 설치해야 합니다.
 
 
-#### `geometry()` {.collection-method} {#column-method-geometry}
+#### `geometry()` {#column-method-geometry}
 
 `geometry` 메서드는 지정된 공간 타입과 SRID(공간 참조 시스템 식별자)를 가진 `GEOMETRY`에 해당하는 컬럼을 생성합니다:
 
@@ -756,7 +756,7 @@ $table->geometry('positions', subtype: 'point', srid: 0);
 > 공간 타입 지원 여부는 데이터베이스 드라이버에 따라 다릅니다. 자세한 내용은 사용 중인 데이터베이스의 문서를 참고하세요. 만약 애플리케이션이 PostgreSQL 데이터베이스를 사용한다면, `geometry` 메서드를 사용하기 전에 반드시 [PostGIS](https://postgis.net) 확장 기능을 설치해야 합니다.
 
 
-#### `id()` {.collection-method} {#column-method-id}
+#### `id()` {#column-method-id}
 
 `id` 메서드는 `bigIncrements` 메서드의 별칭입니다. 기본적으로 이 메서드는 `id` 컬럼을 생성하지만, 컬럼에 다른 이름을 지정하고 싶다면 컬럼 이름을 인자로 전달할 수 있습니다:
 
@@ -765,7 +765,7 @@ $table->id();
 ```
 
 
-#### `increments()` {.collection-method} {#column-method-increments}
+#### `increments()` {#column-method-increments}
 
 `increments` 메서드는 자동 증가하는 `UNSIGNED INTEGER` 타입의 컬럼을 기본 키로 생성합니다:
 
@@ -774,7 +774,7 @@ $table->increments('id');
 ```
 
 
-#### `integer()` {.collection-method} {#column-method-integer}
+#### `integer()` {#column-method-integer}
 
 `integer` 메서드는 `INTEGER`에 해당하는 컬럼을 생성합니다:
 
@@ -783,7 +783,7 @@ $table->integer('votes');
 ```
 
 
-#### `ipAddress()` {.collection-method} {#column-method-ipAddress}
+#### `ipAddress()` {#column-method-ipAddress}
 
 `ipAddress` 메서드는 `VARCHAR`와 동등한 컬럼을 생성합니다:
 
@@ -794,7 +794,7 @@ $table->ipAddress('visitor');
 PostgreSQL을 사용할 때는 `INET` 컬럼이 생성됩니다.
 
 
-#### `json()` {.collection-method} {#column-method-json}
+#### `json()` {#column-method-json}
 
 `json` 메서드는 `JSON`에 해당하는 컬럼을 생성합니다:
 
@@ -805,7 +805,7 @@ $table->json('options');
 SQLite를 사용할 경우, `TEXT` 컬럼이 생성됩니다.
 
 
-#### `jsonb()` {.collection-method} {#column-method-jsonb}
+#### `jsonb()` {#column-method-jsonb}
 
 `jsonb` 메서드는 `JSONB`에 해당하는 컬럼을 생성합니다:
 
@@ -816,7 +816,7 @@ $table->jsonb('options');
 SQLite를 사용할 때는 `TEXT` 컬럼이 생성됩니다.
 
 
-#### `longText()` {.collection-method} {#column-method-longText}
+#### `longText()` {#column-method-longText}
 
 `longText` 메서드는 `LONGTEXT`에 해당하는 컬럼을 생성합니다:
 
@@ -831,7 +831,7 @@ $table->longText('data')->charset('binary'); // LONGBLOB
 ```
 
 
-#### `macAddress()` {.collection-method} {#column-method-macAddress}
+#### `macAddress()` {#column-method-macAddress}
 
 `macAddress` 메서드는 MAC 주소를 저장하기 위한 컬럼을 생성합니다. PostgreSQL과 같은 일부 데이터베이스 시스템은 이 데이터 타입을 위한 전용 컬럼 타입을 제공합니다. 다른 데이터베이스 시스템에서는 문자열과 동등한 컬럼을 사용합니다:
 
@@ -840,7 +840,7 @@ $table->macAddress('device');
 ```
 
 
-#### `mediumIncrements()` {.collection-method} {#column-method-mediumIncrements}
+#### `mediumIncrements()` {#column-method-mediumIncrements}
 
 `mediumIncrements` 메서드는 자동 증가하는 `UNSIGNED MEDIUMINT`에 해당하는 컬럼을 기본 키로 생성합니다:
 
@@ -849,7 +849,7 @@ $table->mediumIncrements('id');
 ```
 
 
-#### `mediumInteger()` {.collection-method} {#column-method-mediumInteger}
+#### `mediumInteger()` {#column-method-mediumInteger}
 
 `mediumInteger` 메서드는 `MEDIUMINT`에 해당하는 컬럼을 생성합니다:
 
@@ -858,7 +858,7 @@ $table->mediumInteger('votes');
 ```
 
 
-#### `mediumText()` {.collection-method} {#column-method-mediumText}
+#### `mediumText()` {#column-method-mediumText}
 
 `mediumText` 메서드는 `MEDIUMTEXT`에 해당하는 컬럼을 생성합니다:
 
@@ -873,18 +873,18 @@ $table->mediumText('data')->charset('binary'); // MEDIUMBLOB
 ```
 
 
-#### `morphs()` {.collection-method} {#column-method-morphs}
+#### `morphs()` {#column-method-morphs}
 
 `morphs` 메서드는 `{column}_id`에 해당하는 컬럼과 `{column}_type` `VARCHAR`에 해당하는 컬럼을 추가해주는 편의 메서드입니다. `{column}_id`의 컬럼 타입은 모델의 키 타입에 따라 `UNSIGNED BIGINT`, `CHAR(36)`, 또는 `CHAR(26)`이 됩니다.
 
-이 메서드는 다형성 [Eloquent 관계](/docs/{{version}}/eloquent-relationships)에 필요한 컬럼을 정의할 때 사용하도록 설계되었습니다. 아래 예시에서는 `taggable_id`와 `taggable_type` 컬럼이 생성됩니다:
+이 메서드는 다형성 [Eloquent 관계](/laravel/12.x/eloquent-relationships)에 필요한 컬럼을 정의할 때 사용하도록 설계되었습니다. 아래 예시에서는 `taggable_id`와 `taggable_type` 컬럼이 생성됩니다:
 
 ```php
 $table->morphs('taggable');
 ```
 
 
-#### `nullableMorphs()` {.collection-method} {#column-method-nullableMorphs}
+#### `nullableMorphs()` {#column-method-nullableMorphs}
 
 이 메서드는 [morphs](#column-method-morphs) 메서드와 유사하지만, 생성되는 컬럼들이 "nullable"로 설정됩니다:
 
@@ -893,7 +893,7 @@ $table->nullableMorphs('taggable');
 ```
 
 
-#### `nullableUlidMorphs()` {.collection-method} {#column-method-nullableUlidMorphs}
+#### `nullableUlidMorphs()` {#column-method-nullableUlidMorphs}
 
 이 메서드는 [ulidMorphs](#column-method-ulidMorphs) 메서드와 유사하지만, 생성되는 컬럼들이 "nullable"로 설정됩니다:
 
@@ -902,7 +902,7 @@ $table->nullableUlidMorphs('taggable');
 ```
 
 
-#### `nullableUuidMorphs()` {.collection-method} {#column-method-nullableUuidMorphs}
+#### `nullableUuidMorphs()` {#column-method-nullableUuidMorphs}
 
 이 메서드는 [uuidMorphs](#column-method-uuidMorphs) 메서드와 유사하지만, 생성되는 컬럼들이 "nullable"로 설정된다는 점이 다릅니다:
 
@@ -911,16 +911,16 @@ $table->nullableUuidMorphs('taggable');
 ```
 
 
-#### `rememberToken()` {.collection-method} {#column-method-rememberToken}
+#### `rememberToken()` {#column-method-rememberToken}
 
-`rememberToken` 메서드는 현재 "로그인 유지" [인증 토큰](/docs/{{version}}/authentication#remembering-users)를 저장하기 위한 nullable, `VARCHAR(100)`에 해당하는 컬럼을 생성합니다:
+`rememberToken` 메서드는 현재 "로그인 유지" [인증 토큰](/laravel/12.x/authentication#remembering-users)를 저장하기 위한 nullable, `VARCHAR(100)`에 해당하는 컬럼을 생성합니다:
 
 ```php
 $table->rememberToken();
 ```
 
 
-#### `set()` {.collection-method} {#column-method-set}
+#### `set()` {#column-method-set}
 
 `set` 메서드는 주어진 유효 값 목록으로 `SET`에 해당하는 컬럼을 생성합니다:
 
@@ -929,7 +929,7 @@ $table->set('flavors', ['strawberry', 'vanilla']);
 ```
 
 
-#### `smallIncrements()` {.collection-method} {#column-method-smallIncrements}
+#### `smallIncrements()` {#column-method-smallIncrements}
 
 `smallIncrements` 메서드는 자동 증가하는 `UNSIGNED SMALLINT`에 해당하는 컬럼을 기본 키로 생성합니다:
 
@@ -938,7 +938,7 @@ $table->smallIncrements('id');
 ```
 
 
-#### `smallInteger()` {.collection-method} {#column-method-smallInteger}
+#### `smallInteger()` {#column-method-smallInteger}
 
 `smallInteger` 메서드는 `SMALLINT`에 해당하는 컬럼을 생성합니다:
 
@@ -947,7 +947,7 @@ $table->smallInteger('votes');
 ```
 
 
-#### `softDeletesTz()` {.collection-method} {#column-method-softDeletesTz}
+#### `softDeletesTz()` {#column-method-softDeletesTz}
 
 `softDeletesTz` 메서드는 선택적으로 소수 초 정밀도를 지정할 수 있는 nullable `deleted_at` `TIMESTAMP`(타임존 포함) 컬럼을 추가합니다. 이 컬럼은 Eloquent의 "소프트 삭제" 기능에 필요한 `deleted_at` 타임스탬프를 저장하는 데 사용됩니다:
 
@@ -956,7 +956,7 @@ $table->softDeletesTz('deleted_at', precision: 0);
 ```
 
 
-#### `softDeletes()` {.collection-method} {#column-method-softDeletes}
+#### `softDeletes()` {#column-method-softDeletes}
 
 `softDeletes` 메서드는 선택적으로 소수 초 정밀도를 지정할 수 있는 nullable `deleted_at` `TIMESTAMP` 컬럼을 추가합니다. 이 컬럼은 Eloquent의 "소프트 삭제" 기능에 필요한 `deleted_at` 타임스탬프를 저장하는 용도로 사용됩니다:
 
@@ -965,7 +965,7 @@ $table->softDeletes('deleted_at', precision: 0);
 ```
 
 
-#### `string()` {.collection-method} {#column-method-string}
+#### `string()` {#column-method-string}
 
 `string` 메서드는 주어진 길이의 `VARCHAR`와 동일한 컬럼을 생성합니다:
 
@@ -974,7 +974,7 @@ $table->string('name', length: 100);
 ```
 
 
-#### `text()` {.collection-method} {#column-method-text}
+#### `text()` {#column-method-text}
 
 `text` 메서드는 `TEXT`에 해당하는 컬럼을 생성합니다:
 
@@ -989,7 +989,7 @@ $table->text('data')->charset('binary'); // BLOB
 ```
 
 
-#### `timeTz()` {.collection-method} {#column-method-timeTz}
+#### `timeTz()` {#column-method-timeTz}
 
 `timeTz` 메서드는 선택적인 소수 초 정밀도를 가진 `TIME`(타임존 포함)과 동등한 컬럼을 생성합니다:
 
@@ -998,7 +998,7 @@ $table->timeTz('sunrise', precision: 0);
 ```
 
 
-#### `time()` {.collection-method} {#column-method-time}
+#### `time()` {#column-method-time}
 
 `time` 메서드는 선택적인 소수 초 정밀도를 가진 `TIME`에 해당하는 컬럼을 생성합니다:
 
@@ -1007,7 +1007,7 @@ $table->time('sunrise', precision: 0);
 ```
 
 
-#### `timestampTz()` {.collection-method} {#column-method-timestampTz}
+#### `timestampTz()` {#column-method-timestampTz}
 
 `timestampTz` 메서드는 선택적인 소수 초 정밀도를 가진 `TIMESTAMP`(타임존 포함)과 동등한 컬럼을 생성합니다:
 
@@ -1016,7 +1016,7 @@ $table->timestampTz('added_at', precision: 0);
 ```
 
 
-#### `timestamp()` {.collection-method} {#column-method-timestamp}
+#### `timestamp()` {#column-method-timestamp}
 
 `timestamp` 메서드는 선택적인 소수 초 정밀도를 가진 `TIMESTAMP`에 해당하는 컬럼을 생성합니다:
 
@@ -1025,7 +1025,7 @@ $table->timestamp('added_at', precision: 0);
 ```
 
 
-#### `timestampsTz()` {.collection-method} {#column-method-timestampsTz}
+#### `timestampsTz()` {#column-method-timestampsTz}
 
 `timestampsTz` 메서드는 선택적으로 소수 초 정밀도를 지정할 수 있는 `created_at` 및 `updated_at` `TIMESTAMP`(타임존 포함) 동등 컬럼을 생성합니다:
 
@@ -1034,7 +1034,7 @@ $table->timestampsTz(precision: 0);
 ```
 
 
-#### `timestamps()` {.collection-method} {#column-method-timestamps}
+#### `timestamps()` {#column-method-timestamps}
 
 `timestamps` 메서드는 선택적으로 소수 초 정밀도를 지정할 수 있는 `created_at` 및 `updated_at` `TIMESTAMP`에 해당하는 컬럼을 생성합니다:
 
@@ -1043,7 +1043,7 @@ $table->timestamps(precision: 0);
 ```
 
 
-#### `tinyIncrements()` {.collection-method} {#column-method-tinyIncrements}
+#### `tinyIncrements()` {#column-method-tinyIncrements}
 
 `tinyIncrements` 메서드는 자동 증가하는 `UNSIGNED TINYINT`에 해당하는 컬럼을 기본 키로 생성합니다:
 
@@ -1052,7 +1052,7 @@ $table->tinyIncrements('id');
 ```
 
 
-#### `tinyInteger()` {.collection-method} {#column-method-tinyInteger}
+#### `tinyInteger()` {#column-method-tinyInteger}
 
 `tinyInteger` 메서드는 `TINYINT`에 해당하는 컬럼을 생성합니다:
 
@@ -1061,7 +1061,7 @@ $table->tinyInteger('votes');
 ```
 
 
-#### `tinyText()` {.collection-method} {#column-method-tinyText}
+#### `tinyText()` {#column-method-tinyText}
 
 `tinyText` 메서드는 `TINYTEXT`에 해당하는 컬럼을 생성합니다:
 
@@ -1076,7 +1076,7 @@ $table->tinyText('data')->charset('binary'); // TINYBLOB
 ```
 
 
-#### `unsignedBigInteger()` {.collection-method} {#column-method-unsignedBigInteger}
+#### `unsignedBigInteger()` {#column-method-unsignedBigInteger}
 
 `unsignedBigInteger` 메서드는 `UNSIGNED BIGINT`에 해당하는 컬럼을 생성합니다:
 
@@ -1085,7 +1085,7 @@ $table->unsignedBigInteger('votes');
 ```
 
 
-#### `unsignedInteger()` {.collection-method} {#column-method-unsignedInteger}
+#### `unsignedInteger()` {#column-method-unsignedInteger}
 
 `unsignedInteger` 메서드는 `UNSIGNED INTEGER`에 해당하는 컬럼을 생성합니다:
 
@@ -1094,7 +1094,7 @@ $table->unsignedInteger('votes');
 ```
 
 
-#### `unsignedMediumInteger()` {.collection-method} {#column-method-unsignedMediumInteger}
+#### `unsignedMediumInteger()` {#column-method-unsignedMediumInteger}
 
 `unsignedMediumInteger` 메서드는 `UNSIGNED MEDIUMINT`에 해당하는 컬럼을 생성합니다:
 
@@ -1103,7 +1103,7 @@ $table->unsignedMediumInteger('votes');
 ```
 
 
-#### `unsignedSmallInteger()` {.collection-method} {#column-method-unsignedSmallInteger}
+#### `unsignedSmallInteger()` {#column-method-unsignedSmallInteger}
 
 `unsignedSmallInteger` 메서드는 `UNSIGNED SMALLINT`에 해당하는 컬럼을 생성합니다:
 
@@ -1112,7 +1112,7 @@ $table->unsignedSmallInteger('votes');
 ```
 
 
-#### `unsignedTinyInteger()` {.collection-method} {#column-method-unsignedTinyInteger}
+#### `unsignedTinyInteger()` {#column-method-unsignedTinyInteger}
 
 `unsignedTinyInteger` 메서드는 `UNSIGNED TINYINT`에 해당하는 컬럼을 생성합니다:
 
@@ -1121,29 +1121,29 @@ $table->unsignedTinyInteger('votes');
 ```
 
 
-#### `ulidMorphs()` {.collection-method} {#column-method-ulidMorphs}
+#### `ulidMorphs()` {#column-method-ulidMorphs}
 
 `ulidMorphs` 메서드는 `{column}_id`에 해당하는 `CHAR(26)` 컬럼과 `{column}_type`에 해당하는 `VARCHAR` 컬럼을 추가하는 편의 메서드입니다.
 
-이 메서드는 ULID 식별자를 사용하는 다형성 [Eloquent 관계](/docs/{{version}}/eloquent-relationships)에 필요한 컬럼을 정의할 때 사용하도록 설계되었습니다. 아래 예시에서는 `taggable_id`와 `taggable_type` 컬럼이 생성됩니다:
+이 메서드는 ULID 식별자를 사용하는 다형성 [Eloquent 관계](/laravel/12.x/eloquent-relationships)에 필요한 컬럼을 정의할 때 사용하도록 설계되었습니다. 아래 예시에서는 `taggable_id`와 `taggable_type` 컬럼이 생성됩니다:
 
 ```php
 $table->ulidMorphs('taggable');
 ```
 
 
-#### `uuidMorphs()` {.collection-method} {#column-method-uuidMorphs}
+#### `uuidMorphs()` {#column-method-uuidMorphs}
 
 `uuidMorphs` 메서드는 `{column}_id`에 해당하는 `CHAR(36)` 컬럼과 `{column}_type`에 해당하는 `VARCHAR` 컬럼을 추가하는 편의 메서드입니다.
 
-이 메서드는 UUID 식별자를 사용하는 다형성 [Eloquent 관계](/docs/{{version}}/eloquent-relationships)에 필요한 컬럼을 정의할 때 사용됩니다. 아래 예시에서는 `taggable_id`와 `taggable_type` 컬럼이 생성됩니다:
+이 메서드는 UUID 식별자를 사용하는 다형성 [Eloquent 관계](/laravel/12.x/eloquent-relationships)에 필요한 컬럼을 정의할 때 사용됩니다. 아래 예시에서는 `taggable_id`와 `taggable_type` 컬럼이 생성됩니다:
 
 ```php
 $table->uuidMorphs('taggable');
 ```
 
 
-#### `ulid()` {.collection-method} {#column-method-ulid}
+#### `ulid()` {#column-method-ulid}
 
 `ulid` 메서드는 `ULID`에 해당하는 컬럼을 생성합니다:
 
@@ -1152,7 +1152,7 @@ $table->ulid('id');
 ```
 
 
-#### `uuid()` {.collection-method} {#column-method-uuid}
+#### `uuid()` {#column-method-uuid}
 
 `uuid` 메서드는 `UUID`에 해당하는 컬럼을 생성합니다:
 
@@ -1161,7 +1161,7 @@ $table->uuid('id');
 ```
 
 
-#### `vector()` {.collection-method} {#column-method-vector}
+#### `vector()` {#column-method-vector}
 
 `vector` 메서드는 `vector`에 해당하는 컬럼을 생성합니다:
 
@@ -1170,7 +1170,7 @@ $table->vector('embedding', dimensions: 100);
 ```
 
 
-#### `year()` {.collection-method} {#column-method-year}
+#### `year()` {#column-method-year}
 
 `year` 메서드는 `YEAR`에 해당하는 컬럼을 생성합니다:
 
@@ -1527,12 +1527,12 @@ Schema::withoutForeignKeyConstraints(function () {
 ```
 
 > [!WARNING]
-> SQLite는 기본적으로 외래 키 제약 조건을 비활성화합니다. SQLite를 사용할 때는 마이그레이션에서 외래 키를 생성하기 전에 데이터베이스 설정에서 [외래 키 지원을 활성화](/docs/{{version}}/database#configuration)했는지 반드시 확인하세요.
+> SQLite는 기본적으로 외래 키 제약 조건을 비활성화합니다. SQLite를 사용할 때는 마이그레이션에서 외래 키를 생성하기 전에 데이터베이스 설정에서 [외래 키 지원을 활성화](/laravel/12.x/database#configuration)했는지 반드시 확인하세요.
 
 
 ## 이벤트 {#events}
 
-편의를 위해, 각 마이그레이션 작업은 [이벤트](/docs/{{version}}/events)를 디스패치합니다. 아래의 모든 이벤트는 기본 `Illuminate\Database\Events\MigrationEvent` 클래스를 확장합니다:
+편의를 위해, 각 마이그레이션 작업은 [이벤트](/laravel/12.x/events)를 디스패치합니다. 아래의 모든 이벤트는 기본 `Illuminate\Database\Events\MigrationEvent` 클래스를 확장합니다:
 
 <div class="overflow-auto">
 

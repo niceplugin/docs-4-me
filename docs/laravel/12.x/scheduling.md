@@ -67,7 +67,7 @@ php artisan schedule:list
 
 ### 아티즌 명령어 스케줄링 {#scheduling-artisan-commands}
 
-클로저를 스케줄링하는 것 외에도, [아티즌 명령어](/docs/{{version}}/artisan)와 시스템 명령어도 스케줄링할 수 있습니다. 예를 들어, `command` 메서드를 사용하여 명령어의 이름이나 클래스명을 통해 아티즌 명령어를 스케줄링할 수 있습니다.
+클로저를 스케줄링하는 것 외에도, [아티즌 명령어](/laravel/12.x/artisan)와 시스템 명령어도 스케줄링할 수 있습니다. 예를 들어, `command` 메서드를 사용하여 명령어의 이름이나 클래스명을 통해 아티즌 명령어를 스케줄링할 수 있습니다.
 
 아티즌 명령어를 클래스명으로 스케줄링할 때는, 명령어가 실행될 때 전달되어야 하는 추가 커맨드라인 인자를 배열로 전달할 수 있습니다:
 
@@ -102,7 +102,7 @@ Artisan::command('emails:send {user} {--force}', function ($user) {
 
 ### 큐 작업 스케줄링 {#scheduling-queued-jobs}
 
-`job` 메서드는 [큐 작업](/docs/{{version}}/queues)을 스케줄링하는 데 사용할 수 있습니다. 이 메서드는 큐 작업을 큐에 넣기 위해 클로저를 정의하는 `call` 메서드를 사용하지 않고도, 큐 작업을 간편하게 스케줄링할 수 있는 방법을 제공합니다.
+`job` 메서드는 [큐 작업](/laravel/12.x/queues)을 스케줄링하는 데 사용할 수 있습니다. 이 메서드는 큐 작업을 큐에 넣기 위해 클로저를 정의하는 `call` 메서드를 사용하지 않고도, 큐 작업을 간편하게 스케줄링할 수 있는 방법을 제공합니다.
 
 ```php
 use App\Jobs\Heartbeat;
@@ -290,7 +290,7 @@ Schedule::command('emails:send')->daily()->skip(function () {
 
 #### 환경 제약 {#environment-constraints}
 
-`environments` 메서드는 지정된 환경(즉, `APP_ENV` [환경 변수](/docs/{{version}}/configuration#environment-configuration)로 정의된)에만 작업을 실행하도록 사용할 수 있습니다:
+`environments` 메서드는 지정된 환경(즉, `APP_ENV` [환경 변수](/laravel/12.x/configuration#environment-configuration)로 정의된)에만 작업을 실행하도록 사용할 수 있습니다:
 
 ```php
 Schedule::command('emails:send')
@@ -333,7 +333,7 @@ use Illuminate\Support\Facades\Schedule;
 Schedule::command('emails:send')->withoutOverlapping();
 ```
 
-이 예시에서 `emails:send` [Artisan 명령어](/docs/{{version}}/artisan)는 이미 실행 중이지 않은 경우에만 매 분마다 실행됩니다. `withoutOverlapping` 메서드는 실행 시간이 크게 달라질 수 있는 작업에 특히 유용하며, 작업이 정확히 얼마나 걸릴지 예측할 수 없을 때 중복 실행을 방지해줍니다.
+이 예시에서 `emails:send` [Artisan 명령어](/laravel/12.x/artisan)는 이미 실행 중이지 않은 경우에만 매 분마다 실행됩니다. `withoutOverlapping` 메서드는 실행 시간이 크게 달라질 수 있는 작업에 특히 유용하며, 작업이 정확히 얼마나 걸릴지 예측할 수 없을 때 중복 실행을 방지해줍니다.
 
 필요하다면, "중복 방지" 잠금이 만료되기까지 몇 분이 지나야 하는지 지정할 수 있습니다. 기본적으로 이 잠금은 24시간 후에 만료됩니다.
 
@@ -341,7 +341,7 @@ Schedule::command('emails:send')->withoutOverlapping();
 Schedule::command('emails:send')->withoutOverlapping(10);
 ```
 
-내부적으로 `withoutOverlapping` 메서드는 애플리케이션의 [캐시](/docs/{{version}}/cache)를 이용해 잠금을 관리합니다. 만약 필요하다면, `schedule:clear-cache` Artisan 명령어를 사용해 이러한 캐시 잠금을 해제할 수 있습니다. 이는 일반적으로 예기치 않은 서버 문제로 인해 작업이 멈췄을 때만 필요합니다.
+내부적으로 `withoutOverlapping` 메서드는 애플리케이션의 [캐시](/laravel/12.x/cache)를 이용해 잠금을 관리합니다. 만약 필요하다면, `schedule:clear-cache` Artisan 명령어를 사용해 이러한 캐시 잠금을 해제할 수 있습니다. 이는 일반적으로 예기치 않은 서버 문제로 인해 작업이 멈췄을 때만 필요합니다.
 
 
 ### 한 서버에서만 작업 실행하기 {#running-tasks-on-one-server}
@@ -413,7 +413,7 @@ Schedule::command('analytics:report')
 
 ### 유지보수 모드 {#maintenance-mode}
 
-애플리케이션이 [유지보수 모드](/docs/{{version}}/configuration#maintenance-mode)일 때는, 서버에서 진행 중인 유지보수 작업에 스케줄된 작업이 방해가 되지 않도록 스케줄된 작업이 실행되지 않습니다. 그러나 유지보수 모드에서도 특정 작업을 강제로 실행하고 싶다면, 작업을 정의할 때 `evenInMaintenanceMode` 메서드를 호출하면 됩니다.
+애플리케이션이 [유지보수 모드](/laravel/12.x/configuration#maintenance-mode)일 때는, 서버에서 진행 중인 유지보수 작업에 스케줄된 작업이 방해가 되지 않도록 스케줄된 작업이 실행되지 않습니다. 그러나 유지보수 모드에서도 특정 작업을 강제로 실행하고 싶다면, 작업을 정의할 때 `evenInMaintenanceMode` 메서드를 호출하면 됩니다.
 
 ```php
 Schedule::command('emails:send')->evenInMaintenanceMode();
@@ -515,7 +515,7 @@ Schedule::command('emails:send')
     ->appendOutputTo($filePath);
 ```
 
-`emailOutputTo` 메서드를 사용하면 원하는 이메일 주소로 출력을 전송할 수 있습니다. 작업의 출력을 이메일로 보내기 전에 Laravel의 [이메일 서비스](/docs/{{version}}/mail)를 먼저 설정해야 합니다.
+`emailOutputTo` 메서드를 사용하면 원하는 이메일 주소로 출력을 전송할 수 있습니다. 작업의 출력을 이메일로 보내기 전에 Laravel의 [이메일 서비스](/laravel/12.x/mail)를 먼저 설정해야 합니다.
 
 ```php
 Schedule::command('report:generate')
@@ -619,7 +619,7 @@ Schedule::command('emails:send')
 
 ## 이벤트 {#events}
 
-Laravel은 스케줄링 과정에서 다양한 [이벤트](/docs/{{version}}/events)를 디스패치합니다. 아래의 이벤트들에 대해 [리스너를 정의](/docs/{{version}}/events)할 수 있습니다:
+Laravel은 스케줄링 과정에서 다양한 [이벤트](/laravel/12.x/events)를 디스패치합니다. 아래의 이벤트들에 대해 [리스너를 정의](/laravel/12.x/events)할 수 있습니다:
 
 <div class="overflow-auto">
 

@@ -54,7 +54,7 @@
 
 ## 소개 {#introduction}
 
-[이메일 전송](/docs/{{version}}/mail) 지원 외에도, Laravel은 이메일, SMS([Vonage](https://www.vonage.com/communications-apis/), 이전 명칭 Nexmo), [Slack](https://slack.com) 등 다양한 전송 채널을 통한 알림(Notification) 기능을 제공합니다. 또한, [커뮤니티에서 제작한 다양한 알림 채널](https://laravel-notification-channels.com/about/#suggesting-a-new-channel)도 있어 수십 가지의 채널을 통해 알림을 전송할 수 있습니다! 알림은 데이터베이스에 저장하여 웹 인터페이스에서 표시할 수도 있습니다.
+[이메일 전송](/laravel/12.x/mail) 지원 외에도, Laravel은 이메일, SMS([Vonage](https://www.vonage.com/communications-apis/), 이전 명칭 Nexmo), [Slack](https://slack.com) 등 다양한 전송 채널을 통한 알림(Notification) 기능을 제공합니다. 또한, [커뮤니티에서 제작한 다양한 알림 채널](https://laravel-notification-channels.com/about/#suggesting-a-new-channel)도 있어 수십 가지의 채널을 통해 알림을 전송할 수 있습니다! 알림은 데이터베이스에 저장하여 웹 인터페이스에서 표시할 수도 있습니다.
 
 일반적으로 알림은 애플리케이션에서 발생한 이벤트를 사용자에게 알려주는 짧고 정보성 메시지여야 합니다. 예를 들어, 결제 애플리케이션을 작성하는 경우, 사용자가 송장 결제를 완료했을 때 이메일과 SMS 채널을 통해 "송장 결제 완료" 알림을 보낼 수 있습니다.
 
@@ -75,7 +75,7 @@ php artisan make:notification InvoicePaid
 
 ### Notifiable 트레잇 사용하기 {#using-the-notifiable-trait}
 
-알림은 `Notifiable` 트레잇의 `notify` 메서드나 `Notification` [파사드](/docs/{{version}}/facades)를 사용하여 두 가지 방법으로 보낼 수 있습니다. `Notifiable` 트레잇은 기본적으로 애플리케이션의 `App\Models\User` 모델에 포함되어 있습니다:
+알림은 `Notifiable` 트레잇의 `notify` 메서드나 `Notification` [파사드](/laravel/12.x/facades)를 사용하여 두 가지 방법으로 보낼 수 있습니다. `Notifiable` 트레잇은 기본적으로 애플리케이션의 `App\Models\User` 모델에 포함되어 있습니다:
 
 ```php
 <?php
@@ -105,7 +105,7 @@ $user->notify(new InvoicePaid($invoice));
 
 ### Notification 파사드 사용하기 {#using-the-notification-facade}
 
-또한, `Notification` [파사드](/docs/{{version}}/facades)를 통해 알림을 보낼 수도 있습니다. 이 방법은 여러 명의 알림 수신자(예: 사용자 컬렉션)에게 알림을 보내야 할 때 유용합니다. 파사드를 사용해 알림을 보내려면, 모든 알림 수신자와 알림 인스턴스를 `send` 메서드에 전달하면 됩니다:
+또한, `Notification` [파사드](/laravel/12.x/facades)를 통해 알림을 보낼 수도 있습니다. 이 방법은 여러 명의 알림 수신자(예: 사용자 컬렉션)에게 알림을 보내야 할 때 유용합니다. 파사드를 사용해 알림을 보내려면, 모든 알림 수신자와 알림 인스턴스를 `send` 메서드에 전달하면 됩니다:
 
 ```php
 use Illuminate\Support\Facades\Notification;
@@ -145,7 +145,7 @@ public function via(object $notifiable): array
 ### 알림 큐잉 {#queueing-notifications}
 
 > [!WARNING]
-> 알림을 큐에 넣기 전에 큐를 설정하고 [워커를 시작](/docs/{{version}}/queues#running-the-queue-worker)해야 합니다.
+> 알림을 큐에 넣기 전에 큐를 설정하고 [워커를 시작](/laravel/12.x/queues#running-the-queue-worker)해야 합니다.
 
 알림을 전송하는 데는 시간이 걸릴 수 있습니다. 특히 채널이 알림을 전달하기 위해 외부 API 호출이 필요한 경우에는 더욱 그렇습니다. 애플리케이션의 응답 속도를 높이기 위해, 알림 클래스에 `ShouldQueue` 인터페이스와 `Queueable` 트레이트를 추가하여 알림을 큐에 넣을 수 있습니다. 이 인터페이스와 트레이트는 `make:notification` 명령어로 생성된 모든 알림에 이미 임포트되어 있으므로, 바로 알림 클래스에 추가할 수 있습니다:
 
@@ -279,7 +279,7 @@ public function viaQueues(): array
 
 #### 큐잉된 알림 미들웨어 {#queued-notification-middleware}
 
-큐잉된 알림은 [큐잉된 작업](/docs/{{version}}/queues#job-middleware)과 마찬가지로 미들웨어를 정의할 수 있습니다. 시작하려면, 알림 클래스에 `middleware` 메서드를 정의하세요. `middleware` 메서드는 `$notifiable`과 `$channel` 변수를 전달받으며, 이를 통해 알림의 전송 대상에 따라 반환할 미들웨어를 커스터마이즈할 수 있습니다:
+큐잉된 알림은 [큐잉된 작업](/laravel/12.x/queues#job-middleware)과 마찬가지로 미들웨어를 정의할 수 있습니다. 시작하려면, 알림 클래스에 `middleware` 메서드를 정의하세요. `middleware` 메서드는 `$notifiable`과 `$channel` 변수를 전달받으며, 이를 통해 알림의 전송 대상에 따라 반환할 미들웨어를 커스터마이즈할 수 있습니다:
 
 ```php
 use Illuminate\Queue\Middleware\RateLimited;
@@ -338,7 +338,7 @@ class InvoicePaid extends Notification implements ShouldQueue
 ```
 
 > [!NOTE]
-> 이러한 문제를 우회하는 방법에 대해 더 알아보려면 [큐잉된 작업과 데이터베이스 트랜잭션](/docs/{{version}}/queues#jobs-and-database-transactions) 문서를 참고하세요.
+> 이러한 문제를 우회하는 방법에 대해 더 알아보려면 [큐잉된 작업과 데이터베이스 트랜잭션](/laravel/12.x/queues#jobs-and-database-transactions) 문서를 참고하세요.
 
 
 #### 큐에 등록된 알림이 전송되어야 하는지 결정하기 {#determining-if-the-queued-notification-should-be-sent}
@@ -603,7 +603,7 @@ public function toMail(object $notifiable): MailMessage
 ```
 
 > [!NOTE]
-> 알림 메일 메시지에서 제공하는 `attach` 메서드는 [첨부 객체](/docs/{{version}}/mail#attachable-objects)도 받을 수 있습니다. 자세한 내용은 [첨부 객체 문서](/docs/{{version}}/mail#attachable-objects)를 참고하세요.
+> 알림 메일 메시지에서 제공하는 `attach` 메서드는 [첨부 객체](/laravel/12.x/mail#attachable-objects)도 받을 수 있습니다. 자세한 내용은 [첨부 객체 문서](/laravel/12.x/mail#attachable-objects)를 참고하세요.
 
 파일을 메시지에 첨부할 때, 두 번째 인자로 `array`를 전달하여 표시 이름이나 MIME 타입을 지정할 수도 있습니다:
 
@@ -622,7 +622,7 @@ public function toMail(object $notifiable): MailMessage
 }
 ```
 
-mailable 객체에서 파일을 첨부하는 것과 달리, `attachFromStorage`를 사용하여 저장소 디스크에서 직접 파일을 첨부할 수 없습니다. 대신, 저장소 디스크에 있는 파일의 절대 경로를 사용하여 `attach` 메서드를 사용해야 합니다. 또는, `toMail` 메서드에서 [mailable](/docs/{{version}}/mail#generating-mailables)를 반환할 수도 있습니다:
+mailable 객체에서 파일을 첨부하는 것과 달리, `attachFromStorage`를 사용하여 저장소 디스크에서 직접 파일을 첨부할 수 없습니다. 대신, 저장소 디스크에 있는 파일의 절대 경로를 사용하여 `attach` 메서드를 사용해야 합니다. 또는, `toMail` 메서드에서 [mailable](/laravel/12.x/mail#generating-mailables)를 반환할 수도 있습니다:
 
 ```php
 use App\Mail\InvoicePaid as InvoicePaidMailable;
@@ -724,7 +724,7 @@ public function toMail(object $notifiable): MailMessage
 
 ### 메일러블(Mailable) 사용하기 {#using-mailables}
 
-필요하다면, 알림의 `toMail` 메서드에서 전체 [메일러블 객체](/docs/{{version}}/mail)를 반환할 수 있습니다. `MailMessage` 대신 `Mailable`을 반환할 경우, 메일러블 객체의 `to` 메서드를 사용하여 수신자를 직접 지정해야 합니다:
+필요하다면, 알림의 `toMail` 메서드에서 전체 [메일러블 객체](/laravel/12.x/mail)를 반환할 수 있습니다. `MailMessage` 대신 `Mailable`을 반환할 경우, 메일러블 객체의 `to` 메서드를 사용하여 수신자를 직접 지정해야 합니다:
 
 ```php
 use App\Mail\InvoicePaid as InvoicePaidMailable;
@@ -911,7 +911,7 @@ public function toMail(object $notifiable): MailMessage
 
 `database` 알림 채널은 알림 정보를 데이터베이스 테이블에 저장합니다. 이 테이블에는 알림 유형과 알림을 설명하는 JSON 데이터 구조와 같은 정보가 포함됩니다.
 
-이 테이블을 조회하여 애플리케이션의 사용자 인터페이스에 알림을 표시할 수 있습니다. 하지만, 이를 위해서는 먼저 알림을 저장할 데이터베이스 테이블을 생성해야 합니다. `make:notifications-table` 명령어를 사용하여 적절한 테이블 스키마가 포함된 [마이그레이션](/docs/{{version}}/migrations)을 생성할 수 있습니다.
+이 테이블을 조회하여 애플리케이션의 사용자 인터페이스에 알림을 표시할 수 있습니다. 하지만, 이를 위해서는 먼저 알림을 저장할 데이터베이스 테이블을 생성해야 합니다. `make:notifications-table` 명령어를 사용하여 적절한 테이블 스키마가 포함된 [마이그레이션](/laravel/12.x/migrations)을 생성할 수 있습니다.
 
 ```shell
 php artisan make:notifications-table
@@ -920,7 +920,7 @@ php artisan migrate
 ```
 
 > [!NOTE]
-> 만약 알림을 받을 모델이 [UUID 또는 ULID 기본 키](/docs/{{version}}/eloquent#uuid-and-ulid-keys)를 사용한다면, 알림 테이블 마이그레이션에서 `morphs` 메서드를 [uuidMorphs](/docs/{{version}}/migrations#column-method-uuidMorphs) 또는 [ulidMorphs](/docs/{{version}}/migrations#column-method-ulidMorphs)로 교체해야 합니다.
+> 만약 알림을 받을 모델이 [UUID 또는 ULID 기본 키](/laravel/12.x/eloquent#uuid-and-ulid-keys)를 사용한다면, 알림 테이블 마이그레이션에서 `morphs` 메서드를 [uuidMorphs](/laravel/12.x/migrations#column-method-uuidMorphs) 또는 [ulidMorphs](/laravel/12.x/migrations#column-method-ulidMorphs)로 교체해야 합니다.
 
 
 ### 데이터베이스 알림 포맷팅 {#formatting-database-notifications}
@@ -972,7 +972,7 @@ public function initialDatabaseReadAtValue(): ?Carbon
 
 ### 알림 접근하기 {#accessing-the-notifications}
 
-알림이 데이터베이스에 저장된 후에는, 알림을 받을 수 있는 엔티티에서 이를 편리하게 조회할 수 있어야 합니다. Laravel의 기본 `App\Models\User` 모델에 포함된 `Illuminate\Notifications\Notifiable` 트레이트에는 해당 엔티티의 알림을 반환하는 `notifications` [Eloquent 관계](/docs/{{version}}/eloquent-relationships)가 포함되어 있습니다. 알림을 조회하려면, 다른 Eloquent 관계와 마찬가지로 이 메서드에 접근하면 됩니다. 기본적으로 알림은 `created_at` 타임스탬프를 기준으로 가장 최근 알림이 컬렉션의 맨 앞에 오도록 정렬됩니다:
+알림이 데이터베이스에 저장된 후에는, 알림을 받을 수 있는 엔티티에서 이를 편리하게 조회할 수 있어야 합니다. Laravel의 기본 `App\Models\User` 모델에 포함된 `Illuminate\Notifications\Notifiable` 트레이트에는 해당 엔티티의 알림을 반환하는 `notifications` [Eloquent 관계](/laravel/12.x/eloquent-relationships)가 포함되어 있습니다. 알림을 조회하려면, 다른 Eloquent 관계와 마찬가지로 이 메서드에 접근하면 됩니다. 기본적으로 알림은 `created_at` 타임스탬프를 기준으로 가장 최근 알림이 컬렉션의 맨 앞에 오도록 정렬됩니다:
 
 ```php
 $user = App\Models\User::find(1);
@@ -1034,12 +1034,12 @@ $user->notifications()->delete();
 
 ### 사전 준비 사항 {#broadcast-prerequisites}
 
-알림을 브로드캐스트하기 전에, Laravel의 [이벤트 브로드캐스팅](/docs/{{version}}/broadcasting) 서비스를 설정하고 숙지해야 합니다. 이벤트 브로드캐스팅은 서버 측 Laravel 이벤트에 자바스크립트 기반 프론트엔드에서 반응할 수 있는 방법을 제공합니다.
+알림을 브로드캐스트하기 전에, Laravel의 [이벤트 브로드캐스팅](/laravel/12.x/broadcasting) 서비스를 설정하고 숙지해야 합니다. 이벤트 브로드캐스팅은 서버 측 Laravel 이벤트에 자바스크립트 기반 프론트엔드에서 반응할 수 있는 방법을 제공합니다.
 
 
 ### 브로드캐스트 알림 포맷팅 {#formatting-broadcast-notifications}
 
-`broadcast` 채널은 Laravel의 [이벤트 브로드캐스팅](/docs/{{version}}/broadcasting) 서비스를 사용하여 알림을 브로드캐스트합니다. 이를 통해 자바스크립트 기반 프론트엔드에서 실시간으로 알림을 받을 수 있습니다. 알림이 브로드캐스트를 지원하는 경우, 알림 클래스에 `toBroadcast` 메서드를 정의할 수 있습니다. 이 메서드는 `$notifiable` 엔티티를 인자로 받아야 하며, `BroadcastMessage` 인스턴스를 반환해야 합니다. 만약 `toBroadcast` 메서드가 존재하지 않으면, 브로드캐스트할 데이터를 수집하기 위해 `toArray` 메서드가 사용됩니다. 반환된 데이터는 JSON으로 인코딩되어 자바스크립트 기반 프론트엔드로 브로드캐스트됩니다. 아래는 `toBroadcast` 메서드의 예시입니다:
+`broadcast` 채널은 Laravel의 [이벤트 브로드캐스팅](/laravel/12.x/broadcasting) 서비스를 사용하여 알림을 브로드캐스트합니다. 이를 통해 자바스크립트 기반 프론트엔드에서 실시간으로 알림을 받을 수 있습니다. 알림이 브로드캐스트를 지원하는 경우, 알림 클래스에 `toBroadcast` 메서드를 정의할 수 있습니다. 이 메서드는 `$notifiable` 엔티티를 인자로 받아야 하며, `BroadcastMessage` 인스턴스를 반환해야 합니다. 만약 `toBroadcast` 메서드가 존재하지 않으면, 브로드캐스트할 데이터를 수집하기 위해 `toArray` 메서드가 사용됩니다. 반환된 데이터는 JSON으로 인코딩되어 자바스크립트 기반 프론트엔드로 브로드캐스트됩니다. 아래는 `toBroadcast` 메서드의 예시입니다:
 
 ```php
 use Illuminate\Notifications\Messages\BroadcastMessage;
@@ -1085,7 +1085,7 @@ public function broadcastType(): string
 
 ### 알림 수신 대기 {#listening-for-notifications}
 
-알림은 `{notifiable}.{id}` 형식의 프라이빗 채널에서 브로드캐스트됩니다. 예를 들어, ID가 `1`인 `App\Models\User` 인스턴스에 알림을 보낼 경우, 해당 알림은 `App.Models.User.1` 프라이빗 채널에서 브로드캐스트됩니다. [Laravel Echo](/docs/{{version}}/broadcasting#client-side-installation)를 사용할 때는, `notification` 메서드를 이용해 해당 채널에서 손쉽게 알림을 수신할 수 있습니다:
+알림은 `{notifiable}.{id}` 형식의 프라이빗 채널에서 브로드캐스트됩니다. 예를 들어, ID가 `1`인 `App\Models\User` 인스턴스에 알림을 보낼 경우, 해당 알림은 `App.Models.User.1` 프라이빗 채널에서 브로드캐스트됩니다. [Laravel Echo](/laravel/12.x/broadcasting#client-side-installation)를 사용할 때는, `notification` 메서드를 이용해 해당 채널에서 손쉽게 알림을 수신할 수 있습니다:
 
 ```js
 Echo.private('App.Models.User.' + userId)
@@ -1351,7 +1351,7 @@ composer require laravel/slack-notification-channel
 
 #### 앱 배포 {#slack-app-distribution}
 
-만약 여러분의 애플리케이션이 애플리케이션 사용자가 소유한 외부 Slack 워크스페이스로 알림을 전송해야 한다면, Slack을 통해 앱을 "배포"해야 합니다. 앱 배포는 Slack 내의 앱 "배포 관리(Manage Distribution)" 탭에서 관리할 수 있습니다. 앱이 배포된 후에는 [Socialite](/docs/{{version}}/socialite)를 사용하여 애플리케이션 사용자를 대신해 [Slack Bot 토큰](/docs/{{version}}/socialite#slack-bot-scopes)를 획득할 수 있습니다.
+만약 여러분의 애플리케이션이 애플리케이션 사용자가 소유한 외부 Slack 워크스페이스로 알림을 전송해야 한다면, Slack을 통해 앱을 "배포"해야 합니다. 앱 배포는 Slack 내의 앱 "배포 관리(Manage Distribution)" 탭에서 관리할 수 있습니다. 앱이 배포된 후에는 [Socialite](/laravel/12.x/socialite)를 사용하여 애플리케이션 사용자를 대신해 [Slack Bot 토큰](/laravel/12.x/socialite#slack-bot-scopes)를 획득할 수 있습니다.
 
 
 ### Slack 알림 포맷팅 {#formatting-slack-notifications}
@@ -1556,7 +1556,7 @@ class User extends Authenticatable
 > [!NOTE]
 > 외부 Slack 워크스페이스로 알림을 보내기 전에, Slack 앱이 [배포(distributed)](#slack-app-distribution)되어 있어야 합니다.
 
-당연히, 애플리케이션 사용자가 소유한 Slack 워크스페이스로 알림을 보내고 싶을 때가 많을 것입니다. 이를 위해서는 먼저 사용자의 Slack OAuth 토큰을 획득해야 합니다. 다행히도, [Laravel Socialite](/docs/{{version}}/socialite)는 Slack 드라이버를 제공하여 애플리케이션 사용자를 Slack으로 쉽게 인증하고 [봇 토큰을 획득](/docs/{{version}}/socialite#slack-bot-scopes)할 수 있습니다.
+당연히, 애플리케이션 사용자가 소유한 Slack 워크스페이스로 알림을 보내고 싶을 때가 많을 것입니다. 이를 위해서는 먼저 사용자의 Slack OAuth 토큰을 획득해야 합니다. 다행히도, [Laravel Socialite](/laravel/12.x/socialite)는 Slack 드라이버를 제공하여 애플리케이션 사용자를 Slack으로 쉽게 인증하고 [봇 토큰을 획득](/laravel/12.x/socialite#slack-bot-scopes)할 수 있습니다.
 
 봇 토큰을 획득하여 애플리케이션의 데이터베이스에 저장한 후, `SlackRoute::make` 메서드를 사용해 해당 사용자의 워크스페이스로 알림을 라우팅할 수 있습니다. 또한, 애플리케이션에서 사용자가 알림을 받을 채널을 지정할 수 있도록 기능을 제공해야 할 수도 있습니다:
 
@@ -1738,7 +1738,7 @@ Notification::assertSentOnDemand(
 
 #### Notification Sending 이벤트 {#notification-sending-event}
 
-알림이 전송될 때, 알림 시스템은 `Illuminate\Notifications\Events\NotificationSending` 이벤트를 디스패치합니다. 이 이벤트에는 "notifiable" 엔티티와 알림 인스턴스 자체가 포함되어 있습니다. 애플리케이션 내에서 이 이벤트에 대한 [이벤트 리스너](/docs/{{version}}/events)를 생성할 수 있습니다:
+알림이 전송될 때, 알림 시스템은 `Illuminate\Notifications\Events\NotificationSending` 이벤트를 디스패치합니다. 이 이벤트에는 "notifiable" 엔티티와 알림 인스턴스 자체가 포함되어 있습니다. 애플리케이션 내에서 이 이벤트에 대한 [이벤트 리스너](/laravel/12.x/events)를 생성할 수 있습니다:
 
 ```php
 use Illuminate\Notifications\Events\NotificationSending;
@@ -1784,7 +1784,7 @@ public function handle(NotificationSending $event): void
 
 #### Notification Sent 이벤트 {#notification-sent-event}
 
-알림이 전송될 때, 알림 시스템은 `Illuminate\Notifications\Events\NotificationSent` [이벤트](/docs/{{version}}/events)를 디스패치합니다. 이 이벤트에는 "notifiable" 엔티티와 알림 인스턴스 자체가 포함되어 있습니다. 애플리케이션 내에서 이 이벤트에 대한 [이벤트 리스너](/docs/{{version}}/events)를 생성할 수 있습니다:
+알림이 전송될 때, 알림 시스템은 `Illuminate\Notifications\Events\NotificationSent` [이벤트](/laravel/12.x/events)를 디스패치합니다. 이 이벤트에는 "notifiable" 엔티티와 알림 인스턴스 자체가 포함되어 있습니다. 애플리케이션 내에서 이 이벤트에 대한 [이벤트 리스너](/laravel/12.x/events)를 생성할 수 있습니다:
 
 ```php
 use Illuminate\Notifications\Events\NotificationSent;

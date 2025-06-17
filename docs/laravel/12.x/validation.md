@@ -185,7 +185,7 @@ $request->validate([
 
 ### 유효성 검사 오류 표시하기 {#quick-displaying-the-validation-errors}
 
-그렇다면, 들어오는 요청 필드가 지정된 유효성 검사 규칙을 통과하지 못하면 어떻게 될까요? 앞서 언급했듯이, Laravel은 자동으로 사용자를 이전 위치로 리디렉션합니다. 또한, 모든 유효성 검사 오류와 [요청 입력값](/docs/{{version}}/requests#retrieving-old-input)은 자동으로 [세션에 플래시](/docs/{{version}}/session#flash-data)됩니다.
+그렇다면, 들어오는 요청 필드가 지정된 유효성 검사 규칙을 통과하지 못하면 어떻게 될까요? 앞서 언급했듯이, Laravel은 자동으로 사용자를 이전 위치로 리디렉션합니다. 또한, 모든 유효성 검사 오류와 [요청 입력값](/laravel/12.x/requests#retrieving-old-input)은 자동으로 [세션에 플래시](/laravel/12.x/session#flash-data)됩니다.
 
 `Illuminate\View\Middleware\ShareErrorsFromSession` 미들웨어는 `$errors` 변수를 애플리케이션의 모든 뷰에 공유합니다. 이 미들웨어는 `web` 미들웨어 그룹에 포함되어 있습니다. 이 미들웨어가 적용되면, 뷰에서 항상 `$errors` 변수를 사용할 수 있으므로, `$errors` 변수가 항상 정의되어 있다고 가정하고 안전하게 사용할 수 있습니다. `$errors` 변수는 `Illuminate\Support\MessageBag` 인스턴스입니다. 이 객체를 다루는 방법에 대한 자세한 내용은 [관련 문서](#working-with-error-messages)를 참고하세요.
 
@@ -216,7 +216,7 @@ Laravel의 내장 유효성 검사 규칙마다 각각의 에러 메시지가 �
 
 `lang/en/validation.php` 파일 안에는 각 유효성 검사 규칙에 대한 번역 항목이 있습니다. 애플리케이션의 필요에 따라 이 메시지들을 자유롭게 변경하거나 수정할 수 있습니다.
 
-또한, 이 파일을 다른 언어 디렉터리로 복사하여 애플리케이션의 언어에 맞게 메시지를 번역할 수도 있습니다. Laravel의 로컬라이제이션에 대해 더 자세히 알고 싶다면 [로컬라이제이션 문서](/docs/{{version}}/localization)를 참고하세요.
+또한, 이 파일을 다른 언어 디렉터리로 복사하여 애플리케이션의 언어에 맞게 메시지를 번역할 수도 있습니다. Laravel의 로컬라이제이션에 대해 더 자세히 알고 싶다면 [로컬라이제이션 문서](/laravel/12.x/localization)를 참고하세요.
 
 > [!WARNING]
 > 기본적으로 Laravel 애플리케이션 스캐폴딩에는 `lang` 디렉터리가 포함되어 있지 않습니다. Laravel의 언어 파일을 커스터마이즈하고 싶다면, `lang:publish` Artisan 명령어를 통해 해당 파일들을 퍼블리시할 수 있습니다.
@@ -229,7 +229,7 @@ Laravel의 내장 유효성 검사 규칙마다 각각의 에러 메시지가 �
 
 #### `@error` 디렉티브 {#the-at-error-directive}
 
-`@error` [Blade](/docs/{{version}}/blade) 디렉티브를 사용하면 특정 속성에 대한 유효성 검사 에러 메시지가 존재하는지 빠르게 확인할 수 있습니다. `@error` 디렉티브 내부에서는 `$message` 변수를 출력하여 에러 메시지를 표시할 수 있습니다:
+`@error` [Blade](/laravel/12.x/blade) 디렉티브를 사용하면 특정 속성에 대한 유효성 검사 에러 메시지가 존재하는지 빠르게 확인할 수 있습니다. `@error` 디렉티브 내부에서는 `$message` 변수를 출력하여 에러 메시지를 표시할 수 있습니다:
 
 ```blade
 <!-- /resources/views/post/create.blade.php -->
@@ -257,15 +257,15 @@ Laravel의 내장 유효성 검사 규칙마다 각각의 에러 메시지가 �
 
 ### 폼 값 재입력 {#repopulating-forms}
 
-라라벨은 유효성 검사 오류로 인해 리디렉션 응답을 생성할 때, 프레임워크가 자동으로 [요청의 모든 입력값을 세션에 플래시](/docs/{{version}}/session#flash-data)합니다. 이렇게 하면 사용자가 제출하려고 했던 폼의 입력값을 다음 요청에서 편리하게 접근하고, 폼을 다시 채울 수 있습니다.
+라라벨은 유효성 검사 오류로 인해 리디렉션 응답을 생성할 때, 프레임워크가 자동으로 [요청의 모든 입력값을 세션에 플래시](/laravel/12.x/session#flash-data)합니다. 이렇게 하면 사용자가 제출하려고 했던 폼의 입력값을 다음 요청에서 편리하게 접근하고, 폼을 다시 채울 수 있습니다.
 
-이전 요청에서 플래시된 입력값을 가져오려면, `Illuminate\Http\Request` 인스턴스에서 `old` 메서드를 호출하면 됩니다. `old` 메서드는 [세션](/docs/{{version}}/session)에서 이전에 플래시된 입력 데이터를 가져옵니다:
+이전 요청에서 플래시된 입력값을 가져오려면, `Illuminate\Http\Request` 인스턴스에서 `old` 메서드를 호출하면 됩니다. `old` 메서드는 [세션](/laravel/12.x/session)에서 이전에 플래시된 입력 데이터를 가져옵니다:
 
 ```php
 $title = $request->old('title');
 ```
 
-라라벨은 또한 전역 `old` 헬퍼를 제공합니다. [Blade 템플릿](/docs/{{version}}/blade)에서 이전 입력값을 표시할 때는 `old` 헬퍼를 사용하여 폼을 다시 채우는 것이 더 편리합니다. 해당 필드에 대한 이전 입력값이 없으면 `null`이 반환됩니다:
+라라벨은 또한 전역 `old` 헬퍼를 제공합니다. [Blade 템플릿](/laravel/12.x/blade)에서 이전 입력값을 표시할 때는 `old` 헬퍼를 사용하여 폼을 다시 채우는 것이 더 편리합니다. 해당 필드에 대한 이전 입력값이 없으면 `null`이 반환됩니다:
 
 ```blade
 <input type="text" name="title" value="{{ old('title') }}">
@@ -346,7 +346,7 @@ public function rules(): array
 ```
 
 > [!NOTE]
-> `rules` 메서드의 시그니처에 필요한 의존성을 타입힌트로 지정할 수 있습니다. 이들은 Laravel [서비스 컨테이너](/docs/{{version}}/container)를 통해 자동으로 주입됩니다.
+> `rules` 메서드의 시그니처에 필요한 의존성을 타입힌트로 지정할 수 있습니다. 이들은 Laravel [서비스 컨테이너](/laravel/12.x/container)를 통해 자동으로 주입됩니다.
 
 그렇다면 검증 규칙은 어떻게 평가될까요? 컨트롤러 메서드에서 해당 요청을 타입힌트로 지정하기만 하면 됩니다. 들어오는 폼 요청은 컨트롤러 메서드가 호출되기 전에 자동으로 검증되므로, 컨트롤러에 검증 로직을 추가할 필요가 없습니다.
 
@@ -374,7 +374,7 @@ public function store(StorePostRequest $request): RedirectResponse
 만약 검증에 실패하면, 사용자를 이전 위치로 되돌리는 리다이렉트 응답이 생성됩니다. 오류 메시지는 세션에 플래시되어 화면에 표시할 수 있습니다. 요청이 XHR 요청이었다면, 422 상태 코드와 함께 [검증 오류의 JSON 표현](#validation-error-response-format)이 포함된 HTTP 응답이 반환됩니다.
 
 > [!NOTE]
-> Inertia 기반의 Laravel 프론트엔드에 실시간 폼 요청 검증을 추가하고 싶으신가요? [Laravel Precognition](/docs/{{version}}/precognition)를 확인해보세요.
+> Inertia 기반의 Laravel 프론트엔드에 실시간 폼 요청 검증을 추가하고 싶으신가요? [Laravel Precognition](/laravel/12.x/precognition)를 확인해보세요.
 
 
 #### 추가 검증 수행하기 {#performing-additional-validation-on-form-requests}
@@ -468,7 +468,7 @@ protected $redirectRoute = 'dashboard';
 
 ### 폼 요청 권한 부여 {#authorizing-form-requests}
 
-폼 요청 클래스에는 `authorize` 메서드도 포함되어 있습니다. 이 메서드 내에서 인증된 사용자가 실제로 특정 리소스를 업데이트할 권한이 있는지 판단할 수 있습니다. 예를 들어, 사용자가 실제로 자신이 작성한 블로그 댓글을 업데이트하려고 하는지 확인할 수 있습니다. 대부분의 경우, 이 메서드 내에서 [권한 게이트 및 정책](/docs/{{version}}/authorization)과 상호작용하게 됩니다.
+폼 요청 클래스에는 `authorize` 메서드도 포함되어 있습니다. 이 메서드 내에서 인증된 사용자가 실제로 특정 리소스를 업데이트할 권한이 있는지 판단할 수 있습니다. 예를 들어, 사용자가 실제로 자신이 작성한 블로그 댓글을 업데이트하려고 하는지 확인할 수 있습니다. 대부분의 경우, 이 메서드 내에서 [권한 게이트 및 정책](/laravel/12.x/authorization)과 상호작용하게 됩니다.
 
 ```php
 use App\Models\Comment;
@@ -490,7 +490,7 @@ public function authorize(): bool
 Route::post('/comment/{comment}');
 ```
 
-따라서, 애플리케이션에서 [라우트 모델 바인딩](/docs/{{version}}/routing#route-model-binding)을 활용하고 있다면, 요청의 속성으로 바인딩된 모델에 바로 접근하여 코드를 더욱 간결하게 만들 수 있습니다.
+따라서, 애플리케이션에서 [라우트 모델 바인딩](/laravel/12.x/routing#route-model-binding)을 활용하고 있다면, 요청의 속성으로 바인딩된 모델에 바로 접근하여 코드를 더욱 간결하게 만들 수 있습니다.
 
 ```php
 return $this->user()->can('update', $this->comment);
@@ -511,7 +511,7 @@ public function authorize(): bool
 ```
 
 > [!NOTE]
-> `authorize` 메서드의 시그니처에 필요한 의존성을 타입힌트로 지정할 수 있습니다. 이들은 Laravel [서비스 컨테이너](/docs/{{version}}/container)를 통해 자동으로 주입됩니다.
+> `authorize` 메서드의 시그니처에 필요한 의존성을 타입힌트로 지정할 수 있습니다. 이들은 Laravel [서비스 컨테이너](/laravel/12.x/container)를 통해 자동으로 주입됩니다.
 
 
 ### 에러 메시지 커스터마이징 {#customizing-the-error-messages}
@@ -586,7 +586,7 @@ protected function passedValidation(): void
 
 ## 수동으로 Validator 생성하기 {#manually-creating-validators}
 
-요청에서 `validate` 메서드를 사용하고 싶지 않은 경우, `Validator` [파사드](/docs/{{version}}/facades)를 사용하여 수동으로 validator 인스턴스를 생성할 수 있습니다. 파사드의 `make` 메서드는 새로운 validator 인스턴스를 생성합니다:
+요청에서 `validate` 메서드를 사용하고 싶지 않은 경우, `Validator` [파사드](/laravel/12.x/facades)를 사용하여 수동으로 validator 인스턴스를 생성할 수 있습니다. 파사드의 `make` 메서드는 새로운 validator 인스턴스를 생성합니다:
 
 ```php
 <?php
@@ -802,7 +802,7 @@ $email = $validated['email'];
 $validated = $request->safe()->merge(['name' => 'Taylor Otwell']);
 ```
 
-검증된 데이터를 [컬렉션](/docs/{{version}}/collections) 인스턴스로 가져오고 싶다면, `collect` 메서드를 호출하면 됩니다:
+검증된 데이터를 [컬렉션](/laravel/12.x/collections) 인스턴스로 가져오고 싶다면, `collect` 메서드를 호출하면 됩니다:
 
 ```php
 $collection = $request->safe()->collect();
@@ -872,7 +872,7 @@ Laravel의 내장 유효성 검사 규칙마다 각각의 에러 메시지가 �
 
 `lang/en/validation.php` 파일 안에는 각 유효성 검사 규칙에 대한 번역 항목이 있습니다. 애플리케이션의 필요에 따라 이 메시지들을 자유롭게 변경하거나 수정할 수 있습니다.
 
-또한, 이 파일을 다른 언어 디렉터리로 복사하여 애플리케이션의 언어에 맞게 메시지를 번역할 수도 있습니다. Laravel의 로컬라이제이션에 대해 더 자세히 알고 싶다면 [로컬라이제이션 문서](/docs/{{version}}/localization)를 참고하세요.
+또한, 이 파일을 다른 언어 디렉터리로 복사하여 애플리케이션의 언어에 맞게 메시지를 번역할 수도 있습니다. Laravel의 로컬라이제이션에 대해 더 자세히 알고 싶다면 [로컬라이제이션 문서](/laravel/12.x/localization)를 참고하세요.
 
 > [!경고]
 > 기본적으로 Laravel 애플리케이션 스캐폴딩에는 `lang` 디렉터리가 포함되어 있지 않습니다. Laravel의 언어 파일을 커스터마이즈하고 싶다면, `lang:publish` Artisan 명령어를 통해 해당 파일들을 퍼블리시할 수 있습니다.
@@ -1374,7 +1374,7 @@ Validator::make($data, [
 
 #### current_password {#rule-current-password}
 
-검증 중인 필드는 인증된 사용자의 비밀번호와 일치해야 합니다. 규칙의 첫 번째 파라미터로 [인증 가드](/docs/{{version}}/authentication)를 지정할 수 있습니다:
+검증 중인 필드는 인증된 사용자의 비밀번호와 일치해야 합니다. 규칙의 첫 번째 파라미터로 [인증 가드](/laravel/12.x/authentication)를 지정할 수 있습니다:
 
 ```php
 'password' => 'current_password:api'
@@ -2775,7 +2775,7 @@ $request->validate([
 
 #### 유효성 검사 메시지 번역하기
 
-리터럴 에러 메시지를 `$fail` 클로저에 직접 전달하는 대신, [번역 문자열 키](/docs/{{version}}/localization)를 제공하고 Laravel이 에러 메시지를 번역하도록 할 수 있습니다:
+리터럴 에러 메시지를 `$fail` 클로저에 직접 전달하는 대신, [번역 문자열 키](/laravel/12.x/localization)를 제공하고 Laravel이 에러 메시지를 번역하도록 할 수 있습니다:
 
 ```php
 if (strtoupper($value) !== $value) {

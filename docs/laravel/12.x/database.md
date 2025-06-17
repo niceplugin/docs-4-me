@@ -15,7 +15,7 @@
 
 ## 소개 {#introduction}
 
-거의 모든 현대 웹 애플리케이션은 데이터베이스와 상호작용합니다. Laravel은 다양한 지원 데이터베이스에서 원시 SQL, [유연한 쿼리 빌더](/docs/{{version}}/queries), 그리고 [Eloquent ORM](/docs/{{version}}/eloquent)를 사용하여 데이터베이스와의 상호작용을 매우 간단하게 만들어줍니다. 현재 Laravel은 다섯 가지 데이터베이스에 대한 1차 지원을 제공합니다:
+거의 모든 현대 웹 애플리케이션은 데이터베이스와 상호작용합니다. Laravel은 다양한 지원 데이터베이스에서 원시 SQL, [유연한 쿼리 빌더](/laravel/12.x/queries), 그리고 [Eloquent ORM](/laravel/12.x/eloquent)를 사용하여 데이터베이스와의 상호작용을 매우 간단하게 만들어줍니다. 현재 Laravel은 다섯 가지 데이터베이스에 대한 1차 지원을 제공합니다:
 
 <div class="content-list" markdown="1">
 
@@ -34,7 +34,7 @@
 
 Laravel의 데이터베이스 서비스 설정은 애플리케이션의 `config/database.php` 설정 파일에 위치해 있습니다. 이 파일에서 모든 데이터베이스 연결을 정의할 수 있으며, 기본적으로 사용할 연결도 지정할 수 있습니다. 이 파일 내 대부분의 설정 옵션은 애플리케이션의 환경 변수 값에 의해 결정됩니다. Laravel이 지원하는 대부분의 데이터베이스 시스템에 대한 예시가 이 파일에 제공되어 있습니다.
 
-기본적으로, Laravel의 샘플 [환경 설정](/docs/{{version}}/configuration#environment-configuration)은 [Laravel Sail](/docs/{{version}}/sail)과 함께 사용할 준비가 되어 있습니다. Laravel Sail은 로컬 머신에서 Laravel 애플리케이션을 개발할 수 있도록 해주는 Docker 설정입니다. 하지만, 필요에 따라 로컬 데이터베이스에 맞게 데이터베이스 설정을 자유롭게 수정할 수 있습니다.
+기본적으로, Laravel의 샘플 [환경 설정](/laravel/12.x/configuration#environment-configuration)은 [Laravel Sail](/laravel/12.x/sail)과 함께 사용할 준비가 되어 있습니다. Laravel Sail은 로컬 머신에서 Laravel 애플리케이션을 개발할 수 있도록 해주는 Docker 설정입니다. 하지만, 필요에 따라 로컬 데이터베이스에 맞게 데이터베이스 설정을 자유롭게 수정할 수 있습니다.
 
 
 #### SQLite 구성 {#sqlite-configuration}
@@ -53,7 +53,7 @@ DB_FOREIGN_KEYS=false
 ```
 
 > [!NOTE]
-> [Laravel 설치 프로그램](/docs/{{version}}/installation#creating-a-laravel-project)를 사용하여 Laravel 애플리케이션을 생성하고 데이터베이스로 SQLite를 선택하면, Laravel이 자동으로 `database/database.sqlite` 파일을 생성하고 기본 [데이터베이스 마이그레이션](/docs/{{version}}/migrations)을 실행해줍니다.
+> [Laravel 설치 프로그램](/laravel/12.x/installation#creating-a-laravel-project)를 사용하여 Laravel 애플리케이션을 생성하고 데이터베이스로 SQLite를 선택하면, Laravel이 자동으로 `database/database.sqlite` 파일을 생성하고 기본 [데이터베이스 마이그레이션](/laravel/12.x/migrations)을 실행해줍니다.
 
 
 #### Microsoft SQL Server 구성 {#mssql-configuration}
@@ -291,7 +291,7 @@ $pdo = DB::connection()->getPdo();
 
 ### 쿼리 이벤트 리스닝 {#listening-for-query-events}
 
-애플리케이션에서 실행되는 각 SQL 쿼리에 대해 호출되는 클로저를 지정하고 싶다면, `DB` 파사드의 `listen` 메서드를 사용할 수 있습니다. 이 메서드는 쿼리 로깅이나 디버깅에 유용하게 사용할 수 있습니다. 쿼리 리스너 클로저는 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드에서 등록할 수 있습니다:
+애플리케이션에서 실행되는 각 SQL 쿼리에 대해 호출되는 클로저를 지정하고 싶다면, `DB` 파사드의 `listen` 메서드를 사용할 수 있습니다. 이 메서드는 쿼리 로깅이나 디버깅에 유용하게 사용할 수 있습니다. 쿼리 리스너 클로저는 [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메서드에서 등록할 수 있습니다:
 
 ```php
 <?php
@@ -330,7 +330,7 @@ class AppServiceProvider extends ServiceProvider
 
 ### 누적 쿼리 시간 모니터링 {#monitoring-cumulative-query-time}
 
-현대 웹 애플리케이션의 일반적인 성능 병목 현상 중 하나는 데이터베이스 쿼리에 소요되는 시간입니다. 다행히도, Laravel은 단일 요청 중 데이터베이스 쿼리에 너무 많은 시간이 소요될 때, 여러분이 지정한 클로저나 콜백을 호출할 수 있습니다. 시작하려면, `whenQueryingForLongerThan` 메서드에 쿼리 시간 임계값(밀리초 단위)과 클로저를 전달하면 됩니다. 이 메서드는 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드에서 호출할 수 있습니다:
+현대 웹 애플리케이션의 일반적인 성능 병목 현상 중 하나는 데이터베이스 쿼리에 소요되는 시간입니다. 다행히도, Laravel은 단일 요청 중 데이터베이스 쿼리에 너무 많은 시간이 소요될 때, 여러분이 지정한 클로저나 콜백을 호출할 수 있습니다. 시작하려면, `whenQueryingForLongerThan` 메서드에 쿼리 시간 임계값(밀리초 단위)과 클로저를 전달하면 됩니다. 이 메서드는 [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메서드에서 호출할 수 있습니다:
 
 ```php
 <?php
@@ -418,7 +418,7 @@ DB::commit();
 ```
 
 > [!NOTE]
-> `DB` 파사드의 트랜잭션 메서드는 [쿼리 빌더](/docs/{{version}}/queries)와 [Eloquent ORM](/docs/{{version}}/eloquent) 모두의 트랜잭션을 제어합니다.
+> `DB` 파사드의 트랜잭션 메서드는 [쿼리 빌더](/laravel/12.x/queries)와 [Eloquent ORM](/laravel/12.x/eloquent) 모두의 트랜잭션을 제어합니다.
 
 
 ## 데이터베이스 CLI에 연결하기 {#connecting-to-the-database-cli}
@@ -488,7 +488,7 @@ php artisan db:table users
 
 `db:monitor` Artisan 명령어를 사용하면, 데이터베이스가 지정한 개수 이상의 열린 연결을 관리하고 있을 때 `Illuminate\Database\Events\DatabaseBusy` 이벤트를 Laravel이 디스패치하도록 지시할 수 있습니다.
 
-시작하려면, `db:monitor` 명령어를 [매 분마다 실행](/docs/{{version}}/scheduling)되도록 스케줄링해야 합니다. 이 명령어는 모니터링하려는 데이터베이스 연결 설정의 이름과 이벤트가 디스패치되기 전에 허용할 최대 열린 연결 수를 인수로 받습니다:
+시작하려면, `db:monitor` 명령어를 [매 분마다 실행](/laravel/12.x/scheduling)되도록 스케줄링해야 합니다. 이 명령어는 모니터링하려는 데이터베이스 연결 설정의 이름과 이벤트가 디스패치되기 전에 허용할 최대 열린 연결 수를 인수로 받습니다:
 
 ```shell
 php artisan db:monitor --databases=mysql,pgsql --max=100

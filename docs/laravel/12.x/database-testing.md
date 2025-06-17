@@ -61,9 +61,9 @@ class ExampleTest extends TestCase
 
 ## 모델 팩토리 {#model-factories}
 
-테스트를 할 때, 테스트를 실행하기 전에 데이터베이스에 몇 개의 레코드를 삽입해야 할 수도 있습니다. 이 테스트 데이터를 생성할 때 각 컬럼의 값을 수동으로 지정하는 대신, Laravel은 [모델 팩토리](/docs/{{version}}/eloquent-factories)를 사용하여 각 [Eloquent 모델](/docs/{{version}}/eloquent)에 대한 기본 속성 집합을 정의할 수 있도록 해줍니다.
+테스트를 할 때, 테스트를 실행하기 전에 데이터베이스에 몇 개의 레코드를 삽입해야 할 수도 있습니다. 이 테스트 데이터를 생성할 때 각 컬럼의 값을 수동으로 지정하는 대신, Laravel은 [모델 팩토리](/laravel/12.x/eloquent-factories)를 사용하여 각 [Eloquent 모델](/laravel/12.x/eloquent)에 대한 기본 속성 집합을 정의할 수 있도록 해줍니다.
 
-모델을 생성하기 위해 모델 팩토리를 생성하고 활용하는 방법에 대해 더 자세히 알고 싶다면, 전체 [모델 팩토리 문서](/docs/{{version}}/eloquent-factories)를 참고하세요. 모델 팩토리를 정의한 후에는 테스트 내에서 팩토리를 사용하여 모델을 생성할 수 있습니다:
+모델을 생성하기 위해 모델 팩토리를 생성하고 활용하는 방법에 대해 더 자세히 알고 싶다면, 전체 [모델 팩토리 문서](/laravel/12.x/eloquent-factories)를 참고하세요. 모델 팩토리를 정의한 후에는 테스트 내에서 팩토리를 사용하여 모델을 생성할 수 있습니다:
 
 ```php tab=Pest
 use App\Models\User;
@@ -89,7 +89,7 @@ public function test_models_can_be_instantiated(): void
 
 ## 시더 실행하기 {#running-seeders}
 
-기능 테스트 중에 [데이터베이스 시더](/docs/{{version}}/seeding)를 사용하여 데이터베이스를 채우고 싶다면, `seed` 메서드를 호출하면 됩니다. 기본적으로 `seed` 메서드는 `DatabaseSeeder`를 실행하며, 이 시더는 다른 모든 시더들을 실행해야 합니다. 또는, `seed` 메서드에 특정 시더 클래스 이름을 전달할 수도 있습니다:
+기능 테스트 중에 [데이터베이스 시더](/laravel/12.x/seeding)를 사용하여 데이터베이스를 채우고 싶다면, `seed` 메서드를 호출하면 됩니다. 기본적으로 `seed` 메서드는 `DatabaseSeeder`를 실행하며, 이 시더는 다른 모든 시더들을 실행해야 합니다. 또는, `seed` 메서드에 특정 시더 클래스 이름을 전달할 수도 있습니다:
 
 ```php tab=Pest
 <?php

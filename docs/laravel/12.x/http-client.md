@@ -828,7 +828,7 @@ $recorded = Http::recorded(function (Request $request, Response $response) {
 
 Laravel은 HTTP 요청을 보내는 과정에서 세 가지 이벤트를 발생시킵니다. `RequestSending` 이벤트는 요청이 전송되기 전에 발생하며, `ResponseReceived` 이벤트는 특정 요청에 대한 응답을 받은 후에 발생합니다. 만약 특정 요청에 대해 응답을 받지 못한 경우에는 `ConnectionFailed` 이벤트가 발생합니다.
 
-`RequestSending`과 `ConnectionFailed` 이벤트에는 모두 `Illuminate\Http\Client\Request` 인스턴스를 확인할 수 있는 public `$request` 프로퍼티가 포함되어 있습니다. 마찬가지로, `ResponseReceived` 이벤트에는 `$request` 프로퍼티와 함께 `Illuminate\Http\Client\Response` 인스턴스를 확인할 수 있는 `$response` 프로퍼티가 포함되어 있습니다. 애플리케이션 내에서 이러한 이벤트에 대한 [이벤트 리스너](/docs/{{version}}/events)를 생성할 수 있습니다:
+`RequestSending`과 `ConnectionFailed` 이벤트에는 모두 `Illuminate\Http\Client\Request` 인스턴스를 확인할 수 있는 public `$request` 프로퍼티가 포함되어 있습니다. 마찬가지로, `ResponseReceived` 이벤트에는 `$request` 프로퍼티와 함께 `Illuminate\Http\Client\Response` 인스턴스를 확인할 수 있는 `$response` 프로퍼티가 포함되어 있습니다. 애플리케이션 내에서 이러한 이벤트에 대한 [이벤트 리스너](/laravel/12.x/events)를 생성할 수 있습니다:
 
 ```php
 use Illuminate\Http\Client\Events\RequestSending;

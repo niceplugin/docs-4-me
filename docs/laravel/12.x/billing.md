@@ -395,7 +395,7 @@ Route::get('/subscription-checkout', function (Request $request) {
 
 #### 구독자 미들웨어 만들기 {#quickstart-building-a-subscribed-middleware}
 
-편의를 위해, 들어오는 요청이 구독한 사용자에게서 온 것인지 확인하는 [미들웨어](/docs/{{version}}/middleware)를 생성할 수 있습니다. 이 미들웨어를 정의한 후에는, 구독하지 않은 사용자가 해당 라우트에 접근하지 못하도록 라우트에 쉽게 할당할 수 있습니다:
+편의를 위해, 들어오는 요청이 구독한 사용자에게서 온 것인지 확인하는 [미들웨어](/laravel/12.x/middleware)를 생성할 수 있습니다. 이 미들웨어를 정의한 후에는, 구독하지 않은 사용자가 해당 라우트에 접근하지 못하도록 라우트에 쉽게 할당할 수 있습니다:
 
 ```php
 <?php
@@ -1064,7 +1064,7 @@ if ($user->subscribed('default')) {
 }
 ```
 
-`subscribed` 메서드는 [라우트 미들웨어](/docs/{{version}}/middleware)로도 훌륭하게 사용할 수 있어, 사용자의 구독 상태에 따라 라우트와 컨트롤러에 대한 접근을 필터링할 수 있습니다:
+`subscribed` 메서드는 [라우트 미들웨어](/laravel/12.x/middleware)로도 훌륭하게 사용할 수 있어, 사용자의 구독 상태에 따라 라우트와 컨트롤러에 대한 접근을 필터링할 수 있습니다:
 
 ```php
 <?php
@@ -1812,7 +1812,7 @@ $user = User::create([
 ```
 
 > [!WARNING]
-> 반드시 청구 모델 클래스 정의 내에서 `trial_ends_at` 속성에 대해 [날짜 캐스팅](/docs/{{version}}/eloquent-mutators#date-casting)을 추가해야 합니다.
+> 반드시 청구 모델 클래스 정의 내에서 `trial_ends_at` 속성에 대해 [날짜 캐스팅](/laravel/12.x/eloquent-mutators#date-casting)을 추가해야 합니다.
 
 Cashier는 이러한 유형의 체험을 "일반 체험(generic trial)"이라고 부르며, 이는 기존 구독과 연결되어 있지 않기 때문입니다. 청구 모델 인스턴스의 `onTrial` 메서드는 현재 날짜가 `trial_ends_at` 값보다 이전이면 `true`를 반환합니다:
 
@@ -1918,7 +1918,7 @@ php artisan cashier:webhook --disabled
 
 #### 웹훅과 CSRF 보호 {#webhooks-csrf-protection}
 
-Stripe 웹훅은 Laravel의 [CSRF 보호](/docs/{{version}}/csrf)를 우회해야 하므로, Stripe 웹훅이 들어올 때 Laravel이 CSRF 토큰을 검증하지 않도록 설정해야 합니다. 이를 위해 애플리케이션의 `bootstrap/app.php` 파일에서 `stripe/*` 경로를 CSRF 보호에서 제외해야 합니다:
+Stripe 웹훅은 Laravel의 [CSRF 보호](/laravel/12.x/csrf)를 우회해야 하므로, Stripe 웹훅이 들어올 때 Laravel이 CSRF 토큰을 검증하지 않도록 설정해야 합니다. 이를 위해 애플리케이션의 `bootstrap/app.php` 파일에서 `stripe/*` 경로를 CSRF 보호에서 제외해야 합니다:
 
 ```php
 ->withMiddleware(function (Middleware $middleware) {
@@ -1936,7 +1936,7 @@ Cashier는 결제 실패로 인한 구독 취소 및 기타 일반적인 Stripe 
 - `Laravel\Cashier\Events\WebhookReceived`
 - `Laravel\Cashier\Events\WebhookHandled`
 
-두 이벤트 모두 Stripe 웹훅의 전체 페이로드를 포함합니다. 예를 들어, `invoice.payment_succeeded` 웹훅을 처리하고 싶다면, 해당 이벤트를 처리할 [리스너](/docs/{{version}}/events#defining-listeners)를 등록할 수 있습니다:
+두 이벤트 모두 Stripe 웹훅의 전체 페이로드를 포함합니다. 예를 들어, `invoice.payment_succeeded` 웹훅을 처리하고 싶다면, 해당 이벤트를 처리할 [리스너](/laravel/12.x/events#defining-listeners)를 등록할 수 있습니다:
 
 ```php
 <?php

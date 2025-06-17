@@ -361,7 +361,7 @@ $url = Storage::temporaryUrl(
 'local' => [
     'driver' => 'local',
     'root' => storage_path('app/private'),
-    'serve' => true, // [tl! add]
+    'serve' => true, // [!code ++]
     'throw' => false,
 ],
 ```
@@ -841,7 +841,7 @@ class ExampleTest extends TestCase
 }
 ```
 
-기본적으로 `fake` 메서드는 임시 디렉터리 내의 모든 파일을 삭제합니다. 만약 이 파일들을 유지하고 싶다면, "persistentFake" 메서드를 대신 사용할 수 있습니다. 파일 업로드 테스트에 대한 더 자세한 내용은 [HTTP 테스트 문서의 파일 업로드 관련 정보](/docs/{{version}}/http-tests#testing-file-uploads)를 참고하세요.
+기본적으로 `fake` 메서드는 임시 디렉터리 내의 모든 파일을 삭제합니다. 만약 이 파일들을 유지하고 싶다면, "persistentFake" 메서드를 대신 사용할 수 있습니다. 파일 업로드 테스트에 대한 더 자세한 내용은 [HTTP 테스트 문서의 파일 업로드 관련 정보](/laravel/12.x/http-tests#testing-file-uploads)를 참고하세요.
 
 > [!WARNING]
 > `image` 메서드는 [GD 확장](https://www.php.net/manual/en/book.image.php)이 필요합니다.
@@ -857,7 +857,7 @@ Laravel의 Flysystem 통합은 여러 "드라이버"를 기본적으로 지원�
 composer require spatie/flysystem-dropbox
 ```
 
-다음으로, 애플리케이션의 [서비스 프로바이더](/docs/{{version}}/providers) 중 하나의 `boot` 메서드에서 드라이버를 등록할 수 있습니다. 이를 위해 `Storage` 파사드의 `extend` 메서드를 사용합니다.
+다음으로, 애플리케이션의 [서비스 프로바이더](/laravel/12.x/providers) 중 하나의 `boot` 메서드에서 드라이버를 등록할 수 있습니다. 이를 위해 `Storage` 파사드의 `extend` 메서드를 사용합니다.
 
 ```php
 <?php

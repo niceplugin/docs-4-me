@@ -18,7 +18,7 @@
 
 ## 소개 {#introduction}
 
-다른 프레임워크에서는 페이지네이션이 매우 번거로울 수 있습니다. Laravel의 페이지네이션 방식이 신선한 바람이 되길 바랍니다. Laravel의 페이지네이터는 [쿼리 빌더](/docs/{{version}}/queries)와 [Eloquent ORM](/docs/{{version}}/eloquent)에 통합되어 있으며, 별도의 설정 없이 데이터베이스 레코드를 편리하고 쉽게 페이지네이션할 수 있도록 제공합니다.
+다른 프레임워크에서는 페이지네이션이 매우 번거로울 수 있습니다. Laravel의 페이지네이션 방식이 신선한 바람이 되길 바랍니다. Laravel의 페이지네이터는 [쿼리 빌더](/laravel/12.x/queries)와 [Eloquent ORM](/laravel/12.x/eloquent)에 통합되어 있으며, 별도의 설정 없이 데이터베이스 레코드를 편리하고 쉽게 페이지네이션할 수 있도록 제공합니다.
 
 기본적으로 페이지네이터가 생성하는 HTML은 [Tailwind CSS 프레임워크](https://tailwindcss.com/)와 호환됩니다. 하지만 Bootstrap 페이지네이션도 지원합니다.
 
@@ -39,7 +39,7 @@ Laravel의 기본 Tailwind 페이지네이션 뷰를 Tailwind 4.x와 함께 사�
 
 ### 쿼리 빌더 결과 페이지네이션 {#paginating-query-builder-results}
 
-항목을 페이지네이션하는 방법에는 여러 가지가 있습니다. 가장 간단한 방법은 [쿼리 빌더](/docs/{{version}}/queries)나 [Eloquent 쿼리](/docs/{{version}}/eloquent)에서 `paginate` 메서드를 사용하는 것입니다. `paginate` 메서드는 사용자가 보고 있는 현재 페이지에 따라 쿼리의 "limit"과 "offset"을 자동으로 처리해줍니다. 기본적으로 현재 페이지는 HTTP 요청의 `page` 쿼리 문자열 인자의 값으로 감지됩니다. 이 값은 Laravel이 자동으로 감지하며, 페이지네이터가 생성하는 링크에도 자동으로 삽입됩니다.
+항목을 페이지네이션하는 방법에는 여러 가지가 있습니다. 가장 간단한 방법은 [쿼리 빌더](/laravel/12.x/queries)나 [Eloquent 쿼리](/laravel/12.x/eloquent)에서 `paginate` 메서드를 사용하는 것입니다. `paginate` 메서드는 사용자가 보고 있는 현재 페이지에 따라 쿼리의 "limit"과 "offset"을 자동으로 처리해줍니다. 기본적으로 현재 페이지는 HTTP 요청의 `page` 쿼리 문자열 인자의 값으로 감지됩니다. 이 값은 Laravel이 자동으로 감지하며, 페이지네이터가 생성하는 링크에도 자동으로 삽입됩니다.
 
 이 예제에서 `paginate` 메서드에 전달되는 유일한 인자는 "페이지당" 표시할 항목의 개수입니다. 이 경우, 한 페이지에 `15`개의 항목을 표시하도록 지정해보겠습니다:
 
@@ -79,7 +79,7 @@ $users = DB::table('users')->simplePaginate(15);
 
 ### Eloquent 결과 페이지네이션 {#paginating-eloquent-results}
 
-[Eloquent](/docs/{{version}}/eloquent) 쿼리도 페이지네이션할 수 있습니다. 이 예제에서는 `App\Models\User` 모델을 페이지네이션하며, 한 페이지에 15개의 레코드를 표시할 계획임을 나타냅니다. 보시다시피, 구문은 쿼리 빌더 결과를 페이지네이션하는 것과 거의 동일합니다:
+[Eloquent](/laravel/12.x/eloquent) 쿼리도 페이지네이션할 수 있습니다. 이 예제에서는 `App\Models\User` 모델을 페이지네이션하며, 한 페이지에 15개의 레코드를 표시할 계획임을 나타냅니다. 보시다시피, 구문은 쿼리 빌더 결과를 페이지네이션하는 것과 거의 동일합니다:
 
 ```php
 use App\Models\User;
@@ -231,7 +231,7 @@ $users = User::paginate(15)->fragment('users');
 
 `paginate` 메서드를 호출하면 `Illuminate\Pagination\LengthAwarePaginator` 인스턴스를 받게 되며, `simplePaginate` 메서드를 호출하면 `Illuminate\Pagination\Paginator` 인스턴스를 반환합니다. 마지막으로, `cursorPaginate` 메서드를 호출하면 `Illuminate\Pagination\CursorPaginator` 인스턴스를 반환합니다.
 
-이 객체들은 결과 집합을 설명하는 여러 메서드를 제공합니다. 이러한 헬퍼 메서드 외에도, 페이지네이터 인스턴스는 반복자이기 때문에 배열처럼 반복문을 사용할 수 있습니다. 따라서 결과를 가져온 후에는 결과를 표시하고 [Blade](/docs/{{version}}/blade)를 사용하여 페이지 링크를 렌더링할 수 있습니다:
+이 객체들은 결과 집합을 설명하는 여러 메서드를 제공합니다. 이러한 헬퍼 메서드 외에도, 페이지네이터 인스턴스는 반복자이기 때문에 배열처럼 반복문을 사용할 수 있습니다. 따라서 결과를 가져온 후에는 결과를 표시하고 [Blade](/laravel/12.x/blade)를 사용하여 페이지 링크를 렌더링할 수 있습니다:
 
 ```blade
 <div class="container">

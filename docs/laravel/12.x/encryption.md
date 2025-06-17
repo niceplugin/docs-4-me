@@ -13,7 +13,7 @@ Laravel의 암호화 서비스는 AES-256 및 AES-128 암호화를 사용하여 
 
 ## 설정 {#configuration}
 
-Laravel의 암호화기를 사용하기 전에, `config/app.php` 설정 파일에서 `key` 설정 옵션을 지정해야 합니다. 이 설정 값은 `APP_KEY` 환경 변수에 의해 결정됩니다. 이 변수의 값을 생성하려면 `php artisan key:generate` 명령어를 사용해야 합니다. `key:generate` 명령어는 PHP의 보안 랜덤 바이트 생성기를 사용하여 애플리케이션을 위한 암호학적으로 안전한 키를 생성합니다. 일반적으로, `APP_KEY` 환경 변수의 값은 [Laravel 설치](/docs/{{version}}/installation) 과정에서 자동으로 생성됩니다.
+Laravel의 암호화기를 사용하기 전에, `config/app.php` 설정 파일에서 `key` 설정 옵션을 지정해야 합니다. 이 설정 값은 `APP_KEY` 환경 변수에 의해 결정됩니다. 이 변수의 값을 생성하려면 `php artisan key:generate` 명령어를 사용해야 합니다. `key:generate` 명령어는 PHP의 보안 랜덤 바이트 생성기를 사용하여 애플리케이션을 위한 암호학적으로 안전한 키를 생성합니다. 일반적으로, `APP_KEY` 환경 변수의 값은 [Laravel 설치](/laravel/12.x/installation) 과정에서 자동으로 생성됩니다.
 
 
 ### 암호화 키를 원활하게 교체하기 {#gracefully-rotating-encryption-keys}

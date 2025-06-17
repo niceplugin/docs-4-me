@@ -16,7 +16,7 @@ Laravel은 이벤트, 작업(jobs), 그리고 기타 파사드(facade)를 모킹
 
 ## 객체 모킹 {#mocking-objects}
 
-Laravel의 [서비스 컨테이너](/docs/{{version}}/container)를 통해 애플리케이션에 주입될 객체를 모킹할 때는, 모킹된 인스턴스를 `instance` 바인딩으로 컨테이너에 바인딩해야 합니다. 이렇게 하면 컨테이너는 객체를 직접 생성하는 대신, 여러분이 모킹한 인스턴스를 사용하게 됩니다:
+Laravel의 [서비스 컨테이너](/laravel/12.x/container)를 통해 애플리케이션에 주입될 객체를 모킹할 때는, 모킹된 인스턴스를 `instance` 바인딩으로 컨테이너에 바인딩해야 합니다. 이렇게 하면 컨테이너는 객체를 직접 생성하는 대신, 여러분이 모킹한 인스턴스를 사용하게 됩니다:
 
 ```php tab=Pest
 use App\Service;
@@ -86,7 +86,7 @@ $spy->shouldHaveReceived('process');
 
 ## 파사드(Mock) 사용하기 {#mocking-facades}
 
-전통적인 정적 메서드 호출과 달리, [파사드](/docs/{{version}}/facades) (그리고 [실시간 파사드](/docs/{{version}}/facades#real-time-facades))는 모킹(mocking)이 가능합니다. 이는 전통적인 정적 메서드에 비해 큰 이점을 제공하며, 전통적인 의존성 주입을 사용할 때와 동일한 테스트 가능성을 제공합니다. 테스트를 할 때, 컨트롤러에서 발생하는 Laravel 파사드 호출을 모킹하고 싶을 때가 많습니다. 예를 들어, 다음과 같은 컨트롤러 액션을 살펴보겠습니다:
+전통적인 정적 메서드 호출과 달리, [파사드](/laravel/12.x/facades) (그리고 [실시간 파사드](/laravel/12.x/facades#real-time-facades))는 모킹(mocking)이 가능합니다. 이는 전통적인 정적 메서드에 비해 큰 이점을 제공하며, 전통적인 의존성 주입을 사용할 때와 동일한 테스트 가능성을 제공합니다. 테스트를 할 때, 컨트롤러에서 발생하는 Laravel 파사드 호출을 모킹하고 싶을 때가 많습니다. 예를 들어, 다음과 같은 컨트롤러 액션을 살펴보겠습니다:
 
 ```php
 <?php
@@ -111,7 +111,7 @@ class UserController extends Controller
 }
 ```
 
-`expects` 메서드를 사용하여 `Cache` 파사드 호출을 모킹할 수 있습니다. 이 메서드는 [Mockery](https://github.com/padraic/mockery) 모크 인스턴스를 반환합니다. 파사드는 실제로 Laravel [서비스 컨테이너](/docs/{{version}}/container)에 의해 해석되고 관리되기 때문에, 일반적인 정적 클래스보다 훨씬 더 테스트가 용이합니다. 예를 들어, `Cache` 파사드의 `get` 메서드 호출을 모킹해보겠습니다:
+`expects` 메서드를 사용하여 `Cache` 파사드 호출을 모킹할 수 있습니다. 이 메서드는 [Mockery](https://github.com/padraic/mockery) 모크 인스턴스를 반환합니다. 파사드는 실제로 Laravel [서비스 컨테이너](/laravel/12.x/container)에 의해 해석되고 관리되기 때문에, 일반적인 정적 클래스보다 훨씬 더 테스트가 용이합니다. 예를 들어, `Cache` 파사드의 `get` 메서드 호출을 모킹해보겠습니다:
 
 ```php tab=Pest
 <?php
@@ -153,7 +153,7 @@ class UserControllerTest extends TestCase
 ```
 
 > [!WARNING]
-> `Request` 파사드는 모킹하지 않아야 합니다. 대신, 테스트를 실행할 때 원하는 입력값을 [HTTP 테스트 메서드](/docs/{{version}}/http-tests)인 `get`이나 `post`에 전달하세요. 마찬가지로, `Config` 파사드를 모킹하는 대신 테스트에서 `Config::set` 메서드를 호출하세요.
+> `Request` 파사드는 모킹하지 않아야 합니다. 대신, 테스트를 실행할 때 원하는 입력값을 [HTTP 테스트 메서드](/laravel/12.x/http-tests)인 `get`이나 `post`에 전달하세요. 마찬가지로, `Config` 파사드를 모킹하는 대신 테스트에서 `Config::set` 메서드를 호출하세요.
 
 
 ### Facade Spies {#facade-spies}

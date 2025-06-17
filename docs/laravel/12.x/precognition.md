@@ -16,9 +16,9 @@
 
 ## 소개 {#introduction}
 
-Laravel Precognition은 미래의 HTTP 요청 결과를 미리 예측할 수 있게 해줍니다. Precognition의 주요 사용 사례 중 하나는 프론트엔드 JavaScript 애플리케이션에서 백엔드의 검증 규칙을 중복하지 않고도 "실시간" 유효성 검사를 제공할 수 있다는 점입니다. Precognition은 Laravel의 Inertia 기반 [스타터 키트](/docs/{{version}}/starter-kits)와 특히 잘 어울립니다.
+Laravel Precognition은 미래의 HTTP 요청 결과를 미리 예측할 수 있게 해줍니다. Precognition의 주요 사용 사례 중 하나는 프론트엔드 JavaScript 애플리케이션에서 백엔드의 검증 규칙을 중복하지 않고도 "실시간" 유효성 검사를 제공할 수 있다는 점입니다. Precognition은 Laravel의 Inertia 기반 [스타터 키트](/laravel/12.x/starter-kits)와 특히 잘 어울립니다.
 
-Laravel이 "precognitive request"를 받으면, 해당 라우트의 모든 미들웨어를 실행하고 라우트 컨트롤러의 의존성을 해결하며, [폼 요청](/docs/{{version}}/validation#form-request-validation) 검증도 수행합니다. 하지만 실제로 라우트의 컨트롤러 메서드는 실행하지 않습니다.
+Laravel이 "precognitive request"를 받으면, 해당 라우트의 모든 미들웨어를 실행하고 라우트 컨트롤러의 의존성을 해결하며, [폼 요청](/laravel/12.x/validation#form-request-validation) 검증도 수행합니다. 하지만 실제로 라우트의 컨트롤러 메서드는 실행하지 않습니다.
 
 
 ## 실시간 유효성 검사 {#live-validation}
@@ -28,7 +28,7 @@ Laravel이 "precognitive request"를 받으면, 해당 라우트의 모든 미�
 
 Laravel Precognition을 사용하면, 프론트엔드 Vue 애플리케이션에서 검증 규칙을 중복 작성하지 않고도 사용자에게 실시간 검증 경험을 제공할 수 있습니다. 어떻게 동작하는지 설명하기 위해, 애플리케이션 내에서 새로운 사용자를 생성하는 폼을 만들어보겠습니다.
 
-먼저, Precognition을 라우트에서 활성화하려면 `HandlePrecognitiveRequests` 미들웨어를 라우트 정의에 추가해야 합니다. 또한, 라우트의 검증 규칙을 담을 [폼 리퀘스트](/docs/{{version}}/validation#form-request-validation)를 생성해야 합니다:
+먼저, Precognition을 라우트에서 활성화하려면 `HandlePrecognitiveRequests` 미들웨어를 라우트 정의에 추가해야 합니다. 또한, 라우트의 검증 규칙을 담을 [폼 리퀘스트](/laravel/12.x/validation#form-request-validation)를 생성해야 합니다:
 
 ```php
 use App\Http\Requests\StoreUserRequest;
@@ -191,7 +191,7 @@ const submit = () => form.submit()
 ### Vue와 Inertia 사용하기 {#using-vue-and-inertia}
 
 > [!NOTE]
-> Vue와 Inertia로 Laravel 애플리케이션을 개발할 때 빠르게 시작하고 싶다면, [스타터 키트](/docs/{{version}}/starter-kits) 중 하나를 사용하는 것을 고려해보세요. Laravel의 스타터 키트는 새로운 Laravel 애플리케이션을 위한 백엔드 및 프론트엔드 인증 스캐폴딩을 제공합니다.
+> Vue와 Inertia로 Laravel 애플리케이션을 개발할 때 빠르게 시작하고 싶다면, [스타터 키트](/laravel/12.x/starter-kits) 중 하나를 사용하는 것을 고려해보세요. Laravel의 스타터 키트는 새로운 Laravel 애플리케이션을 위한 백엔드 및 프론트엔드 인증 스캐폴딩을 제공합니다.
 
 Vue와 Inertia에서 Precognition을 사용하기 전에, [Vue에서 Precognition 사용하기](#using-vue) 관련 일반 문서를 먼저 확인하세요. Vue와 Inertia를 함께 사용할 때는 NPM을 통해 Inertia 호환 Precognition 라이브러리를 설치해야 합니다:
 
@@ -224,7 +224,7 @@ const submit = () => form.submit({
 
 Laravel Precognition을 사용하면 프론트엔드 React 애플리케이션에서 유효성 검사 규칙을 중복하지 않고도 사용자에게 실시간 유효성 검사 경험을 제공할 수 있습니다. 작동 방식을 설명하기 위해, 애플리케이션 내에서 새로운 사용자를 생성하는 폼을 만들어 보겠습니다.
 
-먼저, Precognition을 라우트에서 활성화하려면 `HandlePrecognitiveRequests` 미들웨어를 라우트 정의에 추가해야 합니다. 또한, 라우트의 유효성 검사 규칙을 담을 [폼 리퀘스트](/docs/{{version}}/validation#form-request-validation)를 생성해야 합니다:
+먼저, Precognition을 라우트에서 활성화하려면 `HandlePrecognitiveRequests` 미들웨어를 라우트 정의에 추가해야 합니다. 또한, 라우트의 유효성 검사 규칙을 담을 [폼 리퀘스트](/laravel/12.x/validation#form-request-validation)를 생성해야 합니다:
 
 ```php
 use App\Http\Requests\StoreUserRequest;
@@ -382,7 +382,7 @@ const submit = (e) => {
 ### React와 Inertia 사용하기 {#using-react-and-inertia}
 
 > [!NOTE]
-> React와 Inertia로 Laravel 애플리케이션을 개발할 때 빠르게 시작하고 싶다면, [스타터 키트](/docs/{{version}}/starter-kits) 중 하나를 사용하는 것을 고려해보세요. Laravel의 스타터 키트는 새로운 Laravel 애플리케이션을 위한 백엔드 및 프론트엔드 인증 스캐폴딩을 제공합니다.
+> React와 Inertia로 Laravel 애플리케이션을 개발할 때 빠르게 시작하고 싶다면, [스타터 키트](/laravel/12.x/starter-kits) 중 하나를 사용하는 것을 고려해보세요. Laravel의 스타터 키트는 새로운 Laravel 애플리케이션을 위한 백엔드 및 프론트엔드 인증 스캐폴딩을 제공합니다.
 
 React와 Inertia에서 Precognition을 사용하기 전에, [React에서 Precognition 사용하기](#using-react)에 대한 일반 문서를 먼저 확인하세요. React와 Inertia를 함께 사용할 때는 NPM을 통해 Inertia 호환 Precognition 라이브러리를 설치해야 합니다:
 
@@ -417,7 +417,7 @@ const submit = (e) => {
 
 Laravel Precognition을 사용하면, 프론트엔드 Alpine 애플리케이션에서 검증 규칙을 중복 작성하지 않고도 사용자에게 실시간 검증 경험을 제공할 수 있습니다. 어떻게 동작하는지 알아보기 위해, 애플리케이션 내에서 새로운 사용자를 생성하는 폼을 만들어보겠습니다.
 
-먼저, Precognition을 라우트에서 활성화하려면 `HandlePrecognitiveRequests` 미들웨어를 라우트 정의에 추가해야 합니다. 또한, 라우트의 검증 규칙을 담을 [폼 리퀘스트](/docs/{{version}}/validation#form-request-validation)를 생성해야 합니다:
+먼저, Precognition을 라우트에서 활성화하려면 `HandlePrecognitiveRequests` 미들웨어를 라우트 정의에 추가해야 합니다. 또한, 라우트의 검증 규칙을 담을 [폼 리퀘스트](/laravel/12.x/validation#form-request-validation)를 생성해야 합니다:
 
 ```php
 use App\Http\Requests\CreateUserRequest;

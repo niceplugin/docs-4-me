@@ -38,7 +38,7 @@ $collection = collect([1, 2, 3]);
 또한 [make](#method-make) 및 [fromJson](#method-fromjson) 메서드를 사용하여 컬렉션을 생성할 수도 있습니다.
 
 > [!NOTE]
-> [Eloquent](/docs/{{version}}/eloquent) 쿼리의 결과는 항상 `Collection` 인스턴스로 반환됩니다.
+> [Eloquent](/laravel/12.x/eloquent) 쿼리의 결과는 항상 `Collection` 인스턴스로 반환됩니다.
 
 
 ### 컬렉션 확장하기 {#extending-collections}
@@ -62,7 +62,7 @@ $upper = $collection->toUpper();
 // ['FIRST', 'SECOND']
 ```
 
-일반적으로, 컬렉션 매크로는 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드에서 선언하는 것이 좋습니다.
+일반적으로, 컬렉션 매크로는 [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메서드에서 선언하는 것이 좋습니다.
 
 
 #### 매크로 인자 {#macro-arguments}
@@ -385,7 +385,7 @@ $chunks->all();
 // [[1, 2, 3, 4], [5, 6, 7]]
 ```
 
-이 메서드는 [Bootstrap](https://getbootstrap.com/docs/5.3/layout/grid/)과 같은 그리드 시스템을 사용하는 [뷰](/docs/{{version}}/views)에서 특히 유용합니다. 예를 들어, [Eloquent](/docs/{{version}}/eloquent) 모델의 컬렉션을 그리드 형태로 출력하고 싶을 때 다음과 같이 사용할 수 있습니다:
+이 메서드는 [Bootstrap](https://getbootstrap.com/docs/5.3/layout/grid/)과 같은 그리드 시스템을 사용하는 [뷰](/laravel/12.x/views)에서 특히 유용합니다. 예를 들어, [Eloquent](/laravel/12.x/eloquent) 모델의 컬렉션을 그리드 형태로 출력하고 싶을 때 다음과 같이 사용할 수 있습니다:
 
 ```blade
 @foreach ($products->chunk(3) as $chunk)
@@ -601,7 +601,7 @@ collect([1, 2, 3])->containsOneItem(fn (int $item) => $item === 2);
 이 메서드는 [contains](#method-contains) 메서드와 동일한 시그니처를 가지고 있지만, 모든 값을 "엄격한" 비교(strict comparison)를 사용하여 비교합니다.
 
 > [!NOTE]
-> 이 메서드의 동작 방식은 [Eloquent 컬렉션](/docs/{{version}}/eloquent-collections#method-contains)을 사용할 때 변경됩니다.
+> 이 메서드의 동작 방식은 [Eloquent 컬렉션](/laravel/12.x/eloquent-collections#method-contains)을 사용할 때 변경됩니다.
 
 
 #### `count()` {#method-count}
@@ -722,7 +722,7 @@ $diff->all();
 ```
 
 > [!NOTE]
-> 이 메서드는 [Eloquent 컬렉션](/docs/{{version}}/eloquent-collections#method-diff)에서 사용할 때 동작 방식이 다릅니다.
+> 이 메서드는 [Eloquent 컬렉션](/laravel/12.x/eloquent-collections#method-diff)에서 사용할 때 동작 방식이 다릅니다.
 
 
 #### `diffAssoc()` {#method-diffassoc}
@@ -1017,7 +1017,7 @@ $filtered->all();
 `except`의 반대 동작을 원한다면 [only](#method-only) 메서드를 참고하세요.
 
 > [!NOTE]
-> 이 메서드는 [Eloquent 컬렉션](/docs/{{version}}/eloquent-collections#method-except)을 사용할 때 동작이 다르게 동작할 수 있습니다.
+> 이 메서드는 [Eloquent 컬렉션](/laravel/12.x/eloquent-collections#method-except)을 사용할 때 동작이 다르게 동작할 수 있습니다.
 
 
 #### `filter()` {#method-filter}
@@ -1478,7 +1478,7 @@ $intersect->all();
 ```
 
 > [!NOTE]
-> 이 메서드는 [Eloquent 컬렉션](/docs/{{version}}/eloquent-collections#method-intersect)에서 사용할 때 동작 방식이 다릅니다.
+> 이 메서드는 [Eloquent 컬렉션](/laravel/12.x/eloquent-collections#method-intersect)에서 사용할 때 동작 방식이 다릅니다.
 
 
 #### `intersectUsing()` {#method-intersectusing}
@@ -2049,7 +2049,7 @@ $filtered->all();
 `only`의 반대 동작을 원한다면 [except](#method-except) 메서드를 참고하세요.
 
 > [!NOTE]
-> 이 메서드는 [Eloquent 컬렉션](/docs/{{version}}/eloquent-collections#method-only)에서 사용할 때 동작이 다를 수 있습니다.
+> 이 메서드는 [Eloquent 컬렉션](/laravel/12.x/eloquent-collections#method-only)에서 사용할 때 동작이 다를 수 있습니다.
 
 
 #### `pad()` {#method-pad}
@@ -2096,7 +2096,7 @@ $equalOrAboveThree->all();
 ```
 
 > [!NOTE]
-> 이 메서드는 [Eloquent 컬렉션](/docs/{{version}}/eloquent-collections#method-partition)과 함께 사용할 때 동작 방식이 달라집니다.
+> 이 메서드는 [Eloquent 컬렉션](/laravel/12.x/eloquent-collections#method-partition)과 함께 사용할 때 동작 방식이 달라집니다.
 
 
 #### `percentage()` {#method-percentage}
@@ -3285,7 +3285,7 @@ $collection->all();
 
 #### `toArray()` {#method-toarray}
 
-`toArray` 메서드는 컬렉션을 일반 PHP `array`로 변환합니다. 만약 컬렉션의 값이 [Eloquent](/docs/{{version}}/eloquent) 모델이라면, 해당 모델들도 배열로 변환됩니다:
+`toArray` 메서드는 컬렉션을 일반 PHP `array`로 변환합니다. 만약 컬렉션의 값이 [Eloquent](/laravel/12.x/eloquent) 모델이라면, 해당 모델들도 배열로 변환됩니다:
 
 ```php
 $collection = collect(['name' => 'Desk', 'price' => 200]);
@@ -3447,7 +3447,7 @@ $unique->values()->all();
 `unique` 메서드는 항목 값을 비교할 때 "느슨한(loose)" 비교를 사용합니다. 즉, 정수 값의 문자열과 같은 값을 가진 정수는 동일하다고 간주됩니다. "엄격한(strict)" 비교를 사용하려면 [uniqueStrict](#method-uniquestrict) 메서드를 사용하세요.
 
 > [!NOTE]
-> 이 메서드는 [Eloquent 컬렉션](/docs/{{version}}/eloquent-collections#method-unique)을 사용할 때 동작이 다르게 동작할 수 있습니다.
+> 이 메서드는 [Eloquent 컬렉션](/laravel/12.x/eloquent-collections#method-unique)을 사용할 때 동작이 다르게 동작할 수 있습니다.
 
 
 #### `uniqueStrict()` {#method-uniquestrict}
@@ -4233,7 +4233,7 @@ $lazyCollection->each(function (int $number) {
 // 59
 ```
 
-이 메서드의 사용 예시로, 데이터베이스에서 커서를 사용해 송장(invoices)을 제출하는 애플리케이션을 생각해볼 수 있습니다. 15분마다 실행되는 [스케줄된 작업](/docs/{{version}}/scheduling)을 정의하고, 최대 14분 동안만 송장을 처리하도록 할 수 있습니다.
+이 메서드의 사용 예시로, 데이터베이스에서 커서를 사용해 송장(invoices)을 제출하는 애플리케이션을 생각해볼 수 있습니다. 15분마다 실행되는 [스케줄된 작업](/laravel/12.x/scheduling)을 정의하고, 최대 14분 동안만 송장을 처리하도록 할 수 있습니다.
 
 ```php
 use App\Models\Invoice;

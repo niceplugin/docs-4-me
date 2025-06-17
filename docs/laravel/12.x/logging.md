@@ -147,7 +147,7 @@ PHP, Laravel, 그리고 기타 라이브러리들은 종종 일부 기능이 더
 'channels' => [
     'stack' => [
         'driver' => 'stack',
-        'channels' => ['syslog', 'slack'], // [tl! add]
+        'channels' => ['syslog', 'slack'], // [!code ++]
         'ignore_exceptions' => false,
     ],
 
@@ -191,7 +191,7 @@ Log::emergency('The system is down!');
 
 ## 로그 메시지 작성하기 {#writing-log-messages}
 
-`Log` [파사드](/docs/{{version}}/facades)를 사용하여 로그에 정보를 기록할 수 있습니다. 앞서 언급했듯이, 로거는 [RFC 5424 명세](https://tools.ietf.org/html/rfc5424)에 정의된 여덟 가지 로그 레벨을 제공합니다: **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info**, **debug**:
+`Log` [파사드](/laravel/12.x/facades)를 사용하여 로그에 정보를 기록할 수 있습니다. 앞서 언급했듯이, 로거는 [RFC 5424 명세](https://tools.ietf.org/html/rfc5424)에 정의된 여덟 가지 로그 레벨을 제공합니다: **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info**, **debug**:
 
 ```php
 use Illuminate\Support\Facades\Log;
@@ -315,7 +315,7 @@ class AssignRequestId
 ```
 
 > [!NOTE]
-> 큐에 등록된 작업을 처리하는 동안 로그 컨텍스트를 공유해야 한다면, [작업 미들웨어](/docs/{{version}}/queues#job-middleware)를 활용할 수 있습니다.
+> 큐에 등록된 작업을 처리하는 동안 로그 컨텍스트를 공유해야 한다면, [작업 미들웨어](/laravel/12.x/queues#job-middleware)를 활용할 수 있습니다.
 
 
 ### 특정 채널에 로그 기록하기 {#writing-to-specific-channels}
@@ -408,7 +408,7 @@ class CustomizeFormatter
 ```
 
 > [!NOTE]
-> 모든 "tap" 클래스는 [서비스 컨테이너](/docs/{{version}}/container)에 의해 해석되므로, 생성자에서 필요한 의존성은 자동으로 주입됩니다.
+> 모든 "tap" 클래스는 [서비스 컨테이너](/laravel/12.x/container)에 의해 해석되므로, 생성자에서 필요한 의존성은 자동으로 주입됩니다.
 
 
 ### Monolog 핸들러 채널 생성하기 {#creating-monolog-handler-channels}

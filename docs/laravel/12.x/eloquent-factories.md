@@ -20,7 +20,7 @@
 
 ## 소개 {#introduction}
 
-애플리케이션을 테스트하거나 데이터베이스에 시딩할 때, 데이터베이스에 몇 개의 레코드를 삽입해야 할 수도 있습니다. 각 컬럼의 값을 수동으로 지정하는 대신, Laravel은 [Eloquent 모델](/docs/{{version}}/eloquent)마다 모델 팩토리를 사용하여 기본 속성 집합을 정의할 수 있도록 해줍니다.
+애플리케이션을 테스트하거나 데이터베이스에 시딩할 때, 데이터베이스에 몇 개의 레코드를 삽입해야 할 수도 있습니다. 각 컬럼의 값을 수동으로 지정하는 대신, Laravel은 [Eloquent 모델](/laravel/12.x/eloquent)마다 모델 팩토리를 사용하여 기본 속성 집합을 정의할 수 있도록 해줍니다.
 
 팩토리를 작성하는 예제를 보려면, 애플리케이션의 `database/factories/UserFactory.php` 파일을 확인해 보세요. 이 팩토리는 모든 새로운 Laravel 애플리케이션에 포함되어 있으며, 다음과 같은 팩토리 정의를 담고 있습니다:
 
@@ -82,7 +82,7 @@ class UserFactory extends Factory
 
 ### 팩토리 생성하기 {#generating-factories}
 
-팩토리를 생성하려면 `make:factory` [Artisan 명령어](/docs/{{version}}/artisan)를 실행하세요:
+팩토리를 생성하려면 `make:factory` [Artisan 명령어](/laravel/12.x/artisan)를 실행하세요:
 
 ```shell
 php artisan make:factory PostFactory
@@ -152,7 +152,7 @@ public function suspended(): Factory
 
 #### "Trashed" 상태 {#trashed-state}
 
-만약 여러분의 Eloquent 모델이 [소프트 삭제](/docs/{{version}}/eloquent#soft-deleting)를 지원한다면, 내장된 `trashed` 상태 메서드를 호출하여 생성된 모델이 이미 "소프트 삭제"된 상태임을 나타낼 수 있습니다. `trashed` 상태는 모든 팩토리에서 자동으로 제공되므로, 직접 정의할 필요가 없습니다:
+만약 여러분의 Eloquent 모델이 [소프트 삭제](/laravel/12.x/eloquent#soft-deleting)를 지원한다면, 내장된 `trashed` 상태 메서드를 호출하여 생성된 모델이 이미 "소프트 삭제"된 상태임을 나타낼 수 있습니다. `trashed` 상태는 모든 팩토리에서 자동으로 제공되므로, 직접 정의할 필요가 없습니다:
 
 ```php
 use App\Models\User;
@@ -261,7 +261,7 @@ $user = User::factory()->state([
 ```
 
 > [!NOTE]
-> 팩토리를 사용해 모델을 생성할 때는 [대량 할당 보호](/docs/{{version}}/eloquent#mass-assignment)가 자동으로 비활성화됩니다.
+> 팩토리를 사용해 모델을 생성할 때는 [대량 할당 보호](/laravel/12.x/eloquent#mass-assignment)가 자동으로 비활성화됩니다.
 
 
 ### 모델 영속화 {#persisting-models}
@@ -525,7 +525,7 @@ $user = User::factory()
 
 ### 다형성 관계 {#polymorphic-relationships}
 
-[다형성 관계](/docs/{{version}}/eloquent-relationships#polymorphic-relationships)도 팩토리를 사용하여 생성할 수 있습니다. 다형성 "morph many" 관계는 일반적인 "has many" 관계와 동일한 방식으로 생성됩니다. 예를 들어, `App\Models\Post` 모델이 `App\Models\Comment` 모델과 `morphMany` 관계를 가지고 있다면:
+[다형성 관계](/laravel/12.x/eloquent-relationships#polymorphic-relationships)도 팩토리를 사용하여 생성할 수 있습니다. 다형성 "morph many" 관계는 일반적인 "has many" 관계와 동일한 방식으로 생성됩니다. 예를 들어, `App\Models\Post` 모델이 `App\Models\Comment` 모델과 `morphMany` 관계를 가지고 있다면:
 
 ```php
 use App\Models\Post;

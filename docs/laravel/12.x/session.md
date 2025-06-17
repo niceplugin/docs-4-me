@@ -40,7 +40,7 @@ Laravel은 다양한 세션 백엔드를 제공하며, 이를 표현력 있고 �
 </div>
 
 > [!NOTE]
-> array 드라이버는 주로 [테스트](/docs/{{version}}/testing) 시에 사용되며, 세션에 저장된 데이터가 영구적으로 저장되지 않도록 합니다.
+> array 드라이버는 주로 [테스트](/laravel/12.x/testing) 시에 사용되며, 세션에 저장된 데이터가 영구적으로 저장되지 않도록 합니다.
 
 
 ### 드라이버 필수 조건 {#driver-prerequisites}
@@ -48,7 +48,7 @@ Laravel은 다양한 세션 백엔드를 제공하며, 이를 표현력 있고 �
 
 #### 데이터베이스 {#database}
 
-`database` 세션 드라이버를 사용할 때는 세션 데이터를 저장할 데이터베이스 테이블이 필요합니다. 일반적으로 이 테이블은 Laravel의 기본 `0001_01_01_000000_create_users_table.php` [데이터베이스 마이그레이션](/docs/{{version}}/migrations)에 포함되어 있습니다. 그러나 어떤 이유로든 `sessions` 테이블이 없다면, `make:session-table` Artisan 명령어를 사용하여 해당 마이그레이션을 생성할 수 있습니다:
+`database` 세션 드라이버를 사용할 때는 세션 데이터를 저장할 데이터베이스 테이블이 필요합니다. 일반적으로 이 테이블은 Laravel의 기본 `0001_01_01_000000_create_users_table.php` [데이터베이스 마이그레이션](/laravel/12.x/migrations)에 포함되어 있습니다. 그러나 어떤 이유로든 `sessions` 테이블이 없다면, `make:session-table` Artisan 명령어를 사용하여 해당 마이그레이션을 생성할 수 있습니다:
 
 ```shell
 php artisan make:session-table
@@ -59,7 +59,7 @@ php artisan migrate
 
 #### Redis {#redis}
 
-Laravel에서 Redis 세션을 사용하기 전에 PECL을 통해 PhpRedis PHP 확장 프로그램을 설치하거나 Composer를 통해 `predis/predis` 패키지(~1.0)를 설치해야 합니다. Redis 설정에 대한 자세한 내용은 Laravel의 [Redis 문서](/docs/{{version}}/redis#configuration)를 참고하세요.
+Laravel에서 Redis 세션을 사용하기 전에 PECL을 통해 PhpRedis PHP 확장 프로그램을 설치하거나 Composer를 통해 `predis/predis` 패키지(~1.0)를 설치해야 합니다. Redis 설정에 대한 자세한 내용은 Laravel의 [Redis 문서](/laravel/12.x/redis#configuration)를 참고하세요.
 
 > [!NOTE]
 > `SESSION_CONNECTION` 환경 변수 또는 `session.php` 설정 파일의 `connection` 옵션을 사용하여 세션 저장에 사용할 Redis 연결을 지정할 수 있습니다.
@@ -70,7 +70,7 @@ Laravel에서 Redis 세션을 사용하기 전에 PECL을 통해 PhpRedis PHP �
 
 ### 데이터 조회 {#retrieving-data}
 
-Laravel에서 세션 데이터를 다루는 주요 방법은 두 가지가 있습니다: 전역 `session` 헬퍼를 사용하는 방법과 `Request` 인스턴스를 사용하는 방법입니다. 먼저, 라우트 클로저나 컨트롤러 메서드에서 타입힌트로 주입받을 수 있는 `Request` 인스턴스를 통해 세션에 접근하는 방법을 살펴보겠습니다. 참고로, 컨트롤러 메서드의 의존성은 Laravel [서비스 컨테이너](/docs/{{version}}/container)를 통해 자동으로 주입됩니다.
+Laravel에서 세션 데이터를 다루는 주요 방법은 두 가지가 있습니다: 전역 `session` 헬퍼를 사용하는 방법과 `Request` 인스턴스를 사용하는 방법입니다. 먼저, 라우트 클로저나 컨트롤러 메서드에서 타입힌트로 주입받을 수 있는 `Request` 인스턴스를 통해 세션에 접근하는 방법을 살펴보겠습니다. 참고로, 컨트롤러 메서드의 의존성은 Laravel [서비스 컨테이너](/laravel/12.x/container)를 통해 자동으로 주입됩니다.
 
 ```php
 <?php
@@ -265,7 +265,7 @@ $request->session()->flush();
 
 세션 ID를 재생성하는 것은 악의적인 사용자가 애플리케이션에서 [세션 고정(Session Fixation)](https://owasp.org/www-community/attacks/Session_fixation) 공격을 악용하는 것을 방지하기 위해 자주 수행됩니다.
 
-Laravel은 [애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)나 [Laravel Fortify](/docs/{{version}}/fortify)를 사용하는 경우 인증 시 자동으로 세션 ID를 재생성합니다. 그러나 세션 ID를 수동으로 재생성해야 하는 경우, `regenerate` 메서드를 사용할 수 있습니다:
+Laravel은 [애플리케이션 스타터 키트](/laravel/12.x/starter-kits)나 [Laravel Fortify](/laravel/12.x/fortify)를 사용하는 경우 인증 시 자동으로 세션 ID를 재생성합니다. 그러나 세션 ID를 수동으로 재생성해야 하는 경우, `regenerate` 메서드를 사용할 수 있습니다:
 
 ```php
 $request->session()->regenerate();
@@ -281,7 +281,7 @@ $request->session()->invalidate();
 ## 세션 블로킹 {#session-blocking}
 
 > [!WARNING]
-> 세션 블로킹을 사용하려면, 애플리케이션에서 [원자적 락](/docs/{{version}}/cache#atomic-locks)을 지원하는 캐시 드라이버를 사용해야 합니다. 현재 지원되는 캐시 드라이버는 `memcached`, `dynamodb`, `redis`, `mongodb`(공식 `mongodb/laravel-mongodb` 패키지 포함), `database`, `file`, `array` 드라이버입니다. 또한, `cookie` 세션 드라이버는 사용할 수 없습니다.
+> 세션 블로킹을 사용하려면, 애플리케이션에서 [원자적 락](/laravel/12.x/cache#atomic-locks)을 지원하는 캐시 드라이버를 사용해야 합니다. 현재 지원되는 캐시 드라이버는 `memcached`, `dynamodb`, `redis`, `mongodb`(공식 `mongodb/laravel-mongodb` 패키지 포함), `database`, `file`, `array` 드라이버입니다. 또한, `cookie` 세션 드라이버는 사용할 수 없습니다.
 
 기본적으로 Laravel은 동일한 세션을 사용하는 요청들이 동시에 실행되는 것을 허용합니다. 예를 들어, JavaScript HTTP 라이브러리를 사용해 두 개의 HTTP 요청을 애플리케이션에 보낼 경우, 두 요청이 동시에 처리됩니다. 대부분의 애플리케이션에서는 문제가 없지만, 서로 다른 엔드포인트에 동시에 요청을 보내고 두 엔드포인트 모두 세션에 데이터를 쓸 경우, 일부 애플리케이션에서는 세션 데이터 손실이 발생할 수 있습니다.
 
@@ -351,7 +351,7 @@ Laravel은 확장 기능을 위한 기본 디렉터리를 제공하지 않으므
 
 ### 드라이버 등록하기 {#registering-the-driver}
 
-드라이버 구현이 완료되면, 이제 Laravel에 드라이버를 등록할 준비가 된 것입니다. Laravel의 세션 백엔드에 추가 드라이버를 등록하려면, `Session` [파사드](/docs/{{version}}/facades)에서 제공하는 `extend` 메서드를 사용할 수 있습니다. 이 `extend` 메서드는 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드에서 호출해야 합니다. 기존의 `App\Providers\AppServiceProvider`에서 호출할 수도 있고, 별도의 프로바이더를 새로 만들어서 사용할 수도 있습니다:
+드라이버 구현이 완료되면, 이제 Laravel에 드라이버를 등록할 준비가 된 것입니다. Laravel의 세션 백엔드에 추가 드라이버를 등록하려면, `Session` [파사드](/laravel/12.x/facades)에서 제공하는 `extend` 메서드를 사용할 수 있습니다. 이 `extend` 메서드는 [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메서드에서 호출해야 합니다. 기존의 `App\Providers\AppServiceProvider`에서 호출할 수도 있고, 별도의 프로바이더를 새로 만들어서 사용할 수도 있습니다:
 
 ```php
 <?php

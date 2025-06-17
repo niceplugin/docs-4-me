@@ -21,7 +21,7 @@
 
 ## 소개 {#introduction}
 
-접근자, 변환자, 그리고 속성 캐스팅을 사용하면 Eloquent 모델 인스턴스에서 속성 값을 가져오거나 설정할 때 해당 값을 변환할 수 있습니다. 예를 들어, [Laravel 암호화기](/docs/{{version}}/encryption)를 사용하여 값을 데이터베이스에 저장할 때 암호화하고, Eloquent 모델에서 해당 속성에 접근할 때 자동으로 복호화할 수 있습니다. 또는, 데이터베이스에 저장된 JSON 문자열을 Eloquent 모델을 통해 접근할 때 배열로 변환하고 싶을 수도 있습니다.
+접근자, 변환자, 그리고 속성 캐스팅을 사용하면 Eloquent 모델 인스턴스에서 속성 값을 가져오거나 설정할 때 해당 값을 변환할 수 있습니다. 예를 들어, [Laravel 암호화기](/laravel/12.x/encryption)를 사용하여 값을 데이터베이스에 저장할 때 암호화하고, Eloquent 모델에서 해당 속성에 접근할 때 자동으로 복호화할 수 있습니다. 또는, 데이터베이스에 저장된 JSON 문자열을 Eloquent 모델을 통해 접근할 때 배열로 변환하고 싶을 수도 있습니다.
 
 
 ## 접근자와 변환자 {#accessors-and-mutators}
@@ -68,7 +68,7 @@ $firstName = $user->first_name;
 ```
 
 > [!NOTE]
-> 이러한 계산된 값을 모델의 배열/JSON 표현에 추가하고 싶다면, [값을 JSON에 추가](/docs/{{version}}/eloquent-serialization#appending-values-to-json)해야 합니다.
+> 이러한 계산된 값을 모델의 배열/JSON 표현에 추가하고 싶다면, [값을 JSON에 추가](/laravel/12.x/eloquent-serialization#appending-values-to-json)해야 합니다.
 
 
 #### 여러 속성으로부터 값 객체(Value Object) 생성하기 {#building-value-objects-from-multiple-attributes}
@@ -288,7 +288,7 @@ $user->mergeCasts([
 
 #### Stringable 캐스팅 {#stringable-casting}
 
-`Illuminate\Database\Eloquent\Casts\AsStringable` 캐스트 클래스를 사용하여 모델 속성을 [유연한 Illuminate\Support\Stringable 객체](/docs/{{version}}/strings#fluent-strings-method-list)로 캐스팅할 수 있습니다:
+`Illuminate\Database\Eloquent\Casts\AsStringable` 캐스트 클래스를 사용하여 모델 속성을 [유연한 Illuminate\Support\Stringable 객체](/laravel/12.x/strings#fluent-strings-method-list)로 캐스팅할 수 있습니다:
 
 ```php
 <?php
@@ -358,7 +358,7 @@ $user->options = $options;
 $user->save();
 ```
 
-더 간결한 문법으로 JSON 속성의 단일 필드를 업데이트하려면, [속성을 대량 할당 가능하도록 만들고](/docs/{{version}}/eloquent#mass-assignment-json-columns) `update` 메서드를 호출할 때 `->` 연산자를 사용할 수 있습니다:
+더 간결한 문법으로 JSON 속성의 단일 필드를 업데이트하려면, [속성을 대량 할당 가능하도록 만들고](/laravel/12.x/eloquent#mass-assignment-json-columns) `update` 메서드를 호출할 때 `->` 연산자를 사용할 수 있습니다:
 
 ```php
 $user = User::find(1);
@@ -414,7 +414,7 @@ protected function casts(): array
 }
 ```
 
-마찬가지로, Laravel은 JSON 속성을 Laravel [Collection](/docs/{{version}}/collections) 인스턴스로 캐스팅하는 `AsCollection` 캐스트도 제공합니다:
+마찬가지로, Laravel은 JSON 속성을 Laravel [Collection](/laravel/12.x/collections) 인스턴스로 캐스팅하는 `AsCollection` 캐스트도 제공합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Casts\AsCollection;
@@ -451,7 +451,7 @@ protected function casts(): array
 }
 ```
 
-`of` 메서드를 사용하면 컬렉션의 [mapInto 메서드](/docs/{{version}}/collections#method-mapinto)를 통해 컬렉션 아이템을 지정한 클래스로 매핑할 수 있습니다:
+`of` 메서드를 사용하면 컬렉션의 [mapInto 메서드](/laravel/12.x/collections#method-mapinto)를 통해 컬렉션 아이템을 지정한 클래스로 매핑할 수 있습니다:
 
 ```php
 use App\ValueObjects\Option;
@@ -527,7 +527,7 @@ class Option implements Arrayable, JsonSerializable
 
 기본적으로 Eloquent는 `created_at`과 `updated_at` 컬럼을 [Carbon](https://github.com/briannesbitt/Carbon) 인스턴스로 캐스팅합니다. Carbon은 PHP의 `DateTime` 클래스를 확장하며 다양한 유용한 메서드를 제공합니다. 모델의 `casts` 메서드 내에 추가적인 날짜 캐스트를 정의하여 더 많은 날짜 속성을 캐스팅할 수 있습니다. 일반적으로 날짜는 `datetime` 또는 `immutable_datetime` 캐스트 타입을 사용하여 캐스팅해야 합니다.
 
-`date` 또는 `datetime` 캐스트를 정의할 때 날짜의 포맷도 지정할 수 있습니다. 이 포맷은 [모델이 배열이나 JSON으로 직렬화될 때](/docs/{{version}}/eloquent-serialization) 사용됩니다:
+`date` 또는 `datetime` 캐스트를 정의할 때 날짜의 포맷도 지정할 수 있습니다. 이 포맷은 [모델이 배열이나 JSON으로 직렬화될 때](/laravel/12.x/eloquent-serialization) 사용됩니다:
 
 ```php
 /**
@@ -631,7 +631,7 @@ protected function casts(): array
 
 ### 암호화 캐스팅 {#encrypted-casting}
 
-`encrypted` 캐스팅은 Laravel의 내장 [암호화](/docs/{{version}}/encryption) 기능을 사용하여 모델의 속성 값을 암호화합니다. 또한, `encrypted:array`, `encrypted:collection`, `encrypted:object`, `AsEncryptedArrayObject`, `AsEncryptedCollection` 캐스팅은 암호화되지 않은 버전과 동일하게 동작하지만, 예상할 수 있듯이 데이터베이스에 저장될 때 해당 값이 암호화됩니다.
+`encrypted` 캐스팅은 Laravel의 내장 [암호화](/laravel/12.x/encryption) 기능을 사용하여 모델의 속성 값을 암호화합니다. 또한, `encrypted:array`, `encrypted:collection`, `encrypted:object`, `AsEncryptedArrayObject`, `AsEncryptedCollection` 캐스팅은 암호화되지 않은 버전과 동일하게 동작하지만, 예상할 수 있듯이 데이터베이스에 저장될 때 해당 값이 암호화됩니다.
 
 암호화된 텍스트의 최종 길이는 예측할 수 없으며 일반 텍스트보다 더 길기 때문에, 관련 데이터베이스 컬럼이 반드시 `TEXT` 타입 이상이어야 합니다. 또한, 값이 데이터베이스에서 암호화되어 저장되므로 암호화된 속성 값을 쿼리하거나 검색할 수 없습니다.
 

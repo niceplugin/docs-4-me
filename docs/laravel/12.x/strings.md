@@ -244,9 +244,9 @@ Laravel은 문자열 값을 조작하기 위한 다양한 함수를 포함하고
 ## 문자열 {#strings}
 
 
-#### `__()` {.collection-method} {#method-__}
+#### `__()` {#method-__}
 
-`__` 함수는 주어진 번역 문자열 또는 번역 키를 [언어 파일](/docs/{{version}}/localization)를 사용하여 번역합니다:
+`__` 함수는 주어진 번역 문자열 또는 번역 키를 [언어 파일](/laravel/12.x/localization)를 사용하여 번역합니다:
 
 ```php
 echo __('Welcome to our application');
@@ -257,7 +257,7 @@ echo __('messages.welcome');
 지정한 번역 문자열이나 키가 존재하지 않을 경우, `__` 함수는 전달된 값을 그대로 반환합니다. 따라서 위의 예시에서 해당 번역 키가 존재하지 않으면 `__` 함수는 `messages.welcome`을 반환합니다.
 
 
-#### `class_basename()` {.collection-method} {#method-class-basename}
+#### `class_basename()` {#method-class-basename}
 
 `class_basename` 함수는 주어진 클래스에서 네임스페이스를 제거한 클래스 이름만 반환합니다:
 
@@ -268,7 +268,7 @@ $class = class_basename('Foo\Bar\Baz');
 ```
 
 
-#### `e()` {.collection-method} {#method-e}
+#### `e()` {#method-e}
 
 `e` 함수는 PHP의 `htmlspecialchars` 함수를 실행하며, 기본적으로 `double_encode` 옵션이 `true`로 설정되어 있습니다:
 
@@ -279,7 +279,7 @@ echo e('<html>foo</html>');
 ```
 
 
-#### `preg_replace_array()` {.collection-method} {#method-preg-replace-array}
+#### `preg_replace_array()` {#method-preg-replace-array}
 
 `preg_replace_array` 함수는 문자열에서 주어진 패턴을 배열의 값들로 순차적으로 교체합니다:
 
@@ -292,7 +292,7 @@ $replaced = preg_replace_array('/:[a-z_]+/', ['8:30', '9:00'], $string);
 ```
 
 
-#### `Str::after()` {.collection-method} {#method-str-after}
+#### `Str::after()` {#method-str-after}
 
 `Str::after` 메서드는 문자열에서 지정한 값 이후의 모든 내용을 반환합니다. 만약 지정한 값이 문자열 내에 존재하지 않으면 전체 문자열이 반환됩니다:
 
@@ -305,7 +305,7 @@ $slice = Str::after('This is my name', 'This is');
 ```
 
 
-#### `Str::afterLast()` {.collection-method} {#method-str-after-last}
+#### `Str::afterLast()` {#method-str-after-last}
 
 `Str::afterLast` 메서드는 문자열에서 주어진 값이 마지막으로 등장한 이후의 모든 내용을 반환합니다. 만약 해당 값이 문자열에 존재하지 않으면 전체 문자열을 반환합니다:
 
@@ -318,7 +318,7 @@ $slice = Str::afterLast('App\Http\Controllers\Controller', '\\');
 ```
 
 
-#### `Str::apa()` {.collection-method} {#method-str-apa}
+#### `Str::apa()` {#method-str-apa}
 
 `Str::apa` 메서드는 주어진 문자열을 [APA 가이드라인](https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case)에 따라 제목 표기법(Title Case)으로 변환합니다:
 
@@ -331,7 +331,7 @@ $title = Str::apa('Creating A Project');
 ```
 
 
-#### `Str::ascii()` {.collection-method} {#method-str-ascii}
+#### `Str::ascii()` {#method-str-ascii}
 
 `Str::ascii` 메서드는 문자열을 ASCII 값으로 음역(Transliterate)하려고 시도합니다:
 
@@ -344,7 +344,7 @@ $slice = Str::ascii('û');
 ```
 
 
-#### `Str::before()` {.collection-method} {#method-str-before}
+#### `Str::before()` {#method-str-before}
 
 `Str::before` 메서드는 문자열에서 지정한 값 이전의 모든 내용을 반환합니다:
 
@@ -357,7 +357,7 @@ $slice = Str::before('This is my name', 'my name');
 ```
 
 
-#### `Str::beforeLast()` {.collection-method} {#method-str-before-last}
+#### `Str::beforeLast()` {#method-str-before-last}
 
 `Str::beforeLast` 메서드는 문자열에서 주어진 값이 마지막으로 등장하기 전까지의 모든 내용을 반환합니다:
 
@@ -370,7 +370,7 @@ $slice = Str::beforeLast('This is my name', 'is');
 ```
 
 
-#### `Str::between()` {.collection-method} {#method-str-between}
+#### `Str::between()` {#method-str-between}
 
 `Str::between` 메서드는 두 값 사이에 있는 문자열의 일부를 반환합니다:
 
@@ -383,7 +383,7 @@ $slice = Str::between('This is my name', 'This', 'name');
 ```
 
 
-#### `Str::betweenFirst()` {.collection-method} {#method-str-between-first}
+#### `Str::betweenFirst()` {#method-str-between-first}
 
 `Str::betweenFirst` 메서드는 두 값 사이에 있는 문자열 중 가장 작은 부분을 반환합니다:
 
@@ -396,7 +396,7 @@ $slice = Str::betweenFirst('[a] bc [d]', '[', ']');
 ```
 
 
-#### `Str::camel()` {.collection-method} {#method-camel-case}
+#### `Str::camel()` {#method-camel-case}
 
 `Str::camel` 메서드는 주어진 문자열을 `camelCase`(카멜 케이스)로 변환합니다:
 
@@ -409,7 +409,7 @@ $converted = Str::camel('foo_bar');
 ```
 
 
-#### `Str::charAt()` {.collection-method} {#method-char-at}
+#### `Str::charAt()` {#method-char-at}
 
 `Str::charAt` 메서드는 지정한 인덱스에 있는 문자를 반환합니다. 만약 인덱스가 범위를 벗어나면 `false`를 반환합니다:
 
@@ -422,7 +422,7 @@ $character = Str::charAt('This is my name.', 6);
 ```
 
 
-#### `Str::chopStart()` {.collection-method} {#method-str-chop-start}
+#### `Str::chopStart()` {#method-str-chop-start}
 
 `Str::chopStart` 메서드는 주어진 값이 문자열의 시작 부분에 있을 때만, 그 값의 첫 번째 발생을 제거합니다:
 
@@ -445,7 +445,7 @@ $url = Str::chopStart('http://laravel.com', ['https://', 'http://']);
 ```
 
 
-#### `Str::chopEnd()` {.collection-method} {#method-str-chop-end}
+#### `Str::chopEnd()` {#method-str-chop-end}
 
 `Str::chopEnd` 메서드는 주어진 값이 문자열의 끝에 있을 때만 마지막으로 등장하는 해당 값을 제거합니다:
 
@@ -468,7 +468,7 @@ $url = Str::chopEnd('laravel.com/index.php', ['/index.html', '/index.php']);
 ```
 
 
-#### `Str::contains()` {.collection-method} {#method-str-contains}
+#### `Str::contains()` {#method-str-contains}
 
 `Str::contains` 메서드는 주어진 문자열에 특정 값이 포함되어 있는지 확인합니다. 기본적으로 이 메서드는 대소문자를 구분합니다:
 
@@ -501,7 +501,7 @@ $contains = Str::contains('This is my name', 'MY', ignoreCase: true);
 ```
 
 
-#### `Str::containsAll()` {.collection-method} {#method-str-contains-all}
+#### `Str::containsAll()` {#method-str-contains-all}
 
 `Str::containsAll` 메서드는 주어진 문자열이 주어진 배열의 모든 값을 포함하고 있는지 확인합니다:
 
@@ -524,7 +524,7 @@ $containsAll = Str::containsAll('This is my name', ['MY', 'NAME'], ignoreCase: t
 ```
 
 
-#### `Str::doesntContain()` {.collection-method} {#method-str-doesnt-contain}
+#### `Str::doesntContain()` {#method-str-doesnt-contain}
 
 `Str::doesntContain` 메서드는 주어진 문자열에 특정 값이 포함되어 있지 않은지 확인합니다. 기본적으로 이 메서드는 대소문자를 구분합니다:
 
@@ -557,7 +557,7 @@ $doesntContain = Str::doesntContain('This is name', 'MY', ignoreCase: true);
 ```
 
 
-#### `Str::deduplicate()` {.collection-method} {#method-deduplicate}
+#### `Str::deduplicate()` {#method-deduplicate}
 
 `Str::deduplicate` 메서드는 주어진 문자열에서 연속적으로 나타나는 특정 문자를 하나의 문자로 대체합니다. 기본적으로 이 메서드는 공백을 중복 제거합니다:
 
@@ -580,7 +580,7 @@ $result = Str::deduplicate('The---Laravel---Framework', '-');
 ```
 
 
-#### `Str::endsWith()` {.collection-method} {#method-ends-with}
+#### `Str::endsWith()` {#method-ends-with}
 
 `Str::endsWith` 메서드는 주어진 문자열이 지정한 값으로 끝나는지 확인합니다:
 
@@ -607,7 +607,7 @@ $result = Str::endsWith('This is my name', ['this', 'foo']);
 ```
 
 
-#### `Str::excerpt()` {.collection-method} {#method-excerpt}
+#### `Str::excerpt()` {#method-excerpt}
 
 `Str::excerpt` 메서드는 주어진 문자열에서 특정 구문이 처음 등장하는 부분을 중심으로 발췌(excerpt)하여 반환합니다:
 
@@ -637,7 +637,7 @@ $excerpt = Str::excerpt('This is my name', 'name', [
 ```
 
 
-#### `Str::finish()` {.collection-method} {#method-str-finish}
+#### `Str::finish()` {#method-str-finish}
 
 `Str::finish` 메서드는 주어진 문자열이 해당 값으로 끝나지 않을 경우, 해당 값을 문자열 끝에 한 번만 추가합니다:
 
@@ -654,7 +654,7 @@ $adjusted = Str::finish('this/string/', '/');
 ```
 
 
-#### `Str::headline()` {.collection-method} {#method-str-headline}
+#### `Str::headline()` {#method-str-headline}
 
 `Str::headline` 메서드는 대소문자, 하이픈(-), 언더스코어(_)로 구분된 문자열을 각 단어의 첫 글자가 대문자인 공백으로 구분된 문자열로 변환합니다:
 
@@ -671,7 +671,7 @@ $headline = Str::headline('EmailNotificationSent');
 ```
 
 
-#### `Str::inlineMarkdown()` {.collection-method} {#method-str-inline-markdown}
+#### `Str::inlineMarkdown()` {#method-str-inline-markdown}
 
 `Str::inlineMarkdown` 메서드는 GitHub 스타일의 마크다운을 [CommonMark](https://commonmark.thephpleague.com/)를 사용하여 인라인 HTML로 변환합니다. 하지만 `markdown` 메서드와 달리, 생성된 모든 HTML을 블록 레벨 요소로 감싸지 않습니다:
 
@@ -699,7 +699,7 @@ Str::inlineMarkdown('Inject: <script>alert("Hello XSS!");</script>', [
 ```
 
 
-#### `Str::is()` {.collection-method} {#method-str-is}
+#### `Str::is()` {#method-str-is}
 
 `Str::is` 메서드는 주어진 문자열이 특정 패턴과 일치하는지 확인합니다. 별표(*)는 와일드카드 값으로 사용할 수 있습니다:
 
@@ -726,7 +726,7 @@ $matches = Str::is('*.jpg', 'photo.JPG', ignoreCase: true);
 ```
 
 
-#### `Str::isAscii()` {.collection-method} {#method-str-is-ascii}
+#### `Str::isAscii()` {#method-str-is-ascii}
 
 `Str::isAscii` 메서드는 주어진 문자열이 7비트 ASCII인지 확인합니다:
 
@@ -743,7 +743,7 @@ $isAscii = Str::isAscii('ü');
 ```
 
 
-#### `Str::isJson()` {.collection-method} {#method-str-is-json}
+#### `Str::isJson()` {#method-str-is-json}
 
 `Str::isJson` 메서드는 주어진 문자열이 유효한 JSON인지 확인합니다:
 
@@ -764,7 +764,7 @@ $result = Str::isJson('{first: "John", last: "Doe"}');
 ```
 
 
-#### `Str::isUrl()` {.collection-method} {#method-str-is-url}
+#### `Str::isUrl()` {#method-str-is-url}
 
 `Str::isUrl` 메서드는 주어진 문자열이 유효한 URL인지 확인합니다:
 
@@ -787,7 +787,7 @@ $isUrl = Str::isUrl('http://example.com', ['http', 'https']);
 ```
 
 
-#### `Str::isUlid()` {.collection-method} {#method-str-is-ulid}
+#### `Str::isUlid()` {#method-str-is-ulid}
 
 `Str::isUlid` 메서드는 주어진 문자열이 유효한 ULID인지 확인합니다:
 
@@ -804,7 +804,7 @@ $isUlid = Str::isUlid('laravel');
 ```
 
 
-#### `Str::isUuid()` {.collection-method} {#method-str-is-uuid}
+#### `Str::isUuid()` {#method-str-is-uuid}
 
 `Str::isUuid` 메서드는 주어진 문자열이 유효한 UUID인지 확인합니다:
 
@@ -821,7 +821,7 @@ $isUuid = Str::isUuid('laravel');
 ```
 
 
-#### `Str::kebab()` {.collection-method} {#method-kebab-case}
+#### `Str::kebab()` {#method-kebab-case}
 
 `Str::kebab` 메서드는 주어진 문자열을 `kebab-case`로 변환합니다:
 
@@ -834,7 +834,7 @@ $converted = Str::kebab('fooBar');
 ```
 
 
-#### `Str::lcfirst()` {.collection-method} {#method-str-lcfirst}
+#### `Str::lcfirst()` {#method-str-lcfirst}
 
 `Str::lcfirst` 메서드는 주어진 문자열의 첫 번째 문자를 소문자로 변환하여 반환합니다:
 
@@ -847,7 +847,7 @@ $string = Str::lcfirst('Foo Bar');
 ```
 
 
-#### `Str::length()` {.collection-method} {#method-str-length}
+#### `Str::length()` {#method-str-length}
 
 `Str::length` 메서드는 주어진 문자열의 길이를 반환합니다:
 
@@ -860,7 +860,7 @@ $length = Str::length('Laravel');
 ```
 
 
-#### `Str::limit()` {.collection-method} {#method-str-limit}
+#### `Str::limit()` {#method-str-limit}
 
 `Str::limit` 메서드는 주어진 문자열을 지정한 길이로 잘라냅니다:
 
@@ -889,7 +889,7 @@ $truncated = Str::limit('The quick brown fox', 12, preserveWords: true);
 ```
 
 
-#### `Str::lower()` {.collection-method} {#method-str-lower}
+#### `Str::lower()` {#method-str-lower}
 
 `Str::lower` 메서드는 주어진 문자열을 소문자로 변환합니다:
 
@@ -902,7 +902,7 @@ $converted = Str::lower('LARAVEL');
 ```
 
 
-#### `Str::markdown()` {.collection-method} {#method-str-markdown}
+#### `Str::markdown()` {#method-str-markdown}
 
 `Str::markdown` 메서드는 GitHub 스타일의 마크다운을 [CommonMark](https://commonmark.thephpleague.com/)를 사용하여 HTML로 변환합니다:
 
@@ -936,7 +936,7 @@ Str::markdown('Inject: <script>alert("Hello XSS!");</script>', [
 ```
 
 
-#### `Str::mask()` {.collection-method} {#method-str-mask}
+#### `Str::mask()` {#method-str-mask}
 
 `Str::mask` 메서드는 문자열의 일부를 반복된 문자로 마스킹(가림)하여, 이메일 주소나 전화번호와 같은 문자열의 일부 구간을 숨기고자 할 때 사용할 수 있습니다.
 
@@ -957,7 +957,7 @@ $string = Str::mask('taylor@example.com', '*', -15, 3);
 ```
 
 
-#### `Str::match()` {.collection-method} {#method-str-match}
+#### `Str::match()` {#method-str-match}
 
 `Str::match` 메서드는 주어진 정규 표현식 패턴과 일치하는 문자열의 일부를 반환합니다:
 
@@ -974,7 +974,7 @@ $result = Str::match('/foo (.*)/', 'foo bar');
 ```
 
 
-#### `Str::matchAll()` {.collection-method} {#method-str-match-all}
+#### `Str::matchAll()` {#method-str-match-all}
 
 `Str::matchAll` 메서드는 주어진 정규 표현식 패턴과 일치하는 문자열의 부분들을 포함하는 컬렉션을 반환합니다:
 
@@ -999,7 +999,7 @@ $result = Str::matchAll('/f(\w*)/', 'bar fun bar fly');
 일치하는 값이 없으면 빈 컬렉션이 반환됩니다.
 
 
-#### `Str::orderedUuid()` {.collection-method} {#method-str-ordered-uuid}
+#### `Str::orderedUuid()` {#method-str-ordered-uuid}
 
 `Str::orderedUuid` 메서드는 "타임스탬프 우선" UUID를 생성하며, 이는 인덱싱된 데이터베이스 컬럼에 효율적으로 저장될 수 있습니다. 이 메서드를 사용하여 생성된 각 UUID는 이전에 이 메서드로 생성된 UUID 뒤에 정렬됩니다:
 
@@ -1010,7 +1010,7 @@ return (string) Str::orderedUuid();
 ```
 
 
-#### `Str::padBoth()` {.collection-method} {#method-str-padboth}
+#### `Str::padBoth()` {#method-str-padboth}
 
 `Str::padBoth` 메서드는 PHP의 `str_pad` 함수를 감싸며, 문자열의 양쪽을 다른 문자열로 채워 최종 문자열이 원하는 길이에 도달할 때까지 패딩합니다:
 
@@ -1027,7 +1027,7 @@ $padded = Str::padBoth('James', 10);
 ```
 
 
-#### `Str::padLeft()` {.collection-method} {#method-str-padleft}
+#### `Str::padLeft()` {#method-str-padleft}
 
 `Str::padLeft` 메서드는 PHP의 `str_pad` 함수를 감싸며, 문자열의 왼쪽을 다른 문자열로 채워 최종 문자열이 원하는 길이에 도달할 때까지 패딩합니다:
 
@@ -1044,7 +1044,7 @@ $padded = Str::padLeft('James', 10);
 ```
 
 
-#### `Str::padRight()` {.collection-method} {#method-str-padright}
+#### `Str::padRight()` {#method-str-padright}
 
 `Str::padRight` 메서드는 PHP의 `str_pad` 함수를 감싸며, 문자열의 오른쪽을 다른 문자열로 채워 최종 문자열이 원하는 길이에 도달할 때까지 패딩합니다:
 
@@ -1061,7 +1061,7 @@ $padded = Str::padRight('James', 10);
 ```
 
 
-#### `Str::password()` {.collection-method} {#method-str-password}
+#### `Str::password()` {#method-str-password}
 
 `Str::password` 메서드는 지정한 길이의 안전하고 무작위인 비밀번호를 생성하는 데 사용할 수 있습니다. 생성된 비밀번호는 문자, 숫자, 기호, 공백의 조합으로 이루어집니다. 기본적으로 비밀번호는 32자 길이로 생성됩니다:
 
@@ -1078,9 +1078,9 @@ $password = Str::password(12);
 ```
 
 
-#### `Str::plural()` {.collection-method} {#method-str-plural}
+#### `Str::plural()` {#method-str-plural}
 
-`Str::plural` 메서드는 단수 형태의 문자열을 복수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/docs/{{version}}/localization#pluralization-language)를 지원합니다:
+`Str::plural` 메서드는 단수 형태의 문자열을 복수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/laravel/12.x/localization#pluralization-language)를 지원합니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -1109,9 +1109,9 @@ $singular = Str::plural('child', 1);
 ```
 
 
-#### `Str::pluralStudly()` {.collection-method} {#method-str-plural-studly}
+#### `Str::pluralStudly()` {#method-str-plural-studly}
 
-`Str::pluralStudly` 메서드는 StudlyCaps(카멜 케이스의 각 단어가 대문자로 시작하는 형식)로 작성된 단수 단어 문자열을 복수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/docs/{{version}}/localization#pluralization-language)를 지원합니다:
+`Str::pluralStudly` 메서드는 StudlyCaps(카멜 케이스의 각 단어가 대문자로 시작하는 형식)로 작성된 단수 단어 문자열을 복수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/laravel/12.x/localization#pluralization-language)를 지원합니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -1140,7 +1140,7 @@ $singular = Str::pluralStudly('VerifiedHuman', 1);
 ```
 
 
-#### `Str::position()` {.collection-method} {#method-str-position}
+#### `Str::position()` {#method-str-position}
 
 `Str::position` 메서드는 문자열에서 특정 하위 문자열이 처음으로 등장하는 위치를 반환합니다. 만약 하위 문자열이 주어진 문자열에 존재하지 않으면, `false`를 반환합니다:
 
@@ -1157,7 +1157,7 @@ $position = Str::position('Hello, World!', 'W');
 ```
 
 
-#### `Str::random()` {.collection-method} {#method-str-random}
+#### `Str::random()` {#method-str-random}
 
 `Str::random` 메서드는 지정된 길이만큼의 랜덤 문자열을 생성합니다. 이 함수는 PHP의 `random_bytes` 함수를 사용합니다:
 
@@ -1182,7 +1182,7 @@ Str::createRandomStringsNormally();
 ```
 
 
-#### `Str::remove()` {.collection-method} {#method-str-remove}
+#### `Str::remove()` {#method-str-remove}
 
 `Str::remove` 메서드는 주어진 값 또는 값의 배열을 문자열에서 제거합니다:
 
@@ -1199,7 +1199,7 @@ $removed = Str::remove('e', $string);
 문자열을 제거할 때 대소문자를 구분하지 않으려면 세 번째 인자로 `false`를 전달할 수 있습니다.
 
 
-#### `Str::repeat()` {.collection-method} {#method-str-repeat}
+#### `Str::repeat()` {#method-str-repeat}
 
 `Str::repeat` 메서드는 주어진 문자열을 반복합니다:
 
@@ -1214,7 +1214,7 @@ $repeat = Str::repeat($string, 5);
 ```
 
 
-#### `Str::replace()` {.collection-method} {#method-str-replace}
+#### `Str::replace()` {#method-str-replace}
 
 `Str::replace` 메서드는 문자열 내에서 주어진 문자열을 다른 문자열로 교체합니다:
 
@@ -1242,7 +1242,7 @@ $replaced = Str::replace(
 ```
 
 
-#### `Str::replaceArray()` {.collection-method} {#method-str-replace-array}
+#### `Str::replaceArray()` {#method-str-replace-array}
 
 `Str::replaceArray` 메서드는 문자열에서 주어진 값을 배열을 사용해 순차적으로 교체합니다:
 
@@ -1257,7 +1257,7 @@ $replaced = Str::replaceArray('?', ['8:30', '9:00'], $string);
 ```
 
 
-#### `Str::replaceFirst()` {.collection-method} {#method-str-replace-first}
+#### `Str::replaceFirst()` {#method-str-replace-first}
 
 `Str::replaceFirst` 메서드는 문자열에서 주어진 값이 처음으로 나타나는 부분만을 다른 값으로 대체합니다:
 
@@ -1270,7 +1270,7 @@ $replaced = Str::replaceFirst('the', 'a', 'the quick brown fox jumps over the la
 ```
 
 
-#### `Str::replaceLast()` {.collection-method} {#method-str-replace-last}
+#### `Str::replaceLast()` {#method-str-replace-last}
 
 `Str::replaceLast` 메서드는 문자열에서 주어진 값의 마지막 발생을 다른 값으로 대체합니다:
 
@@ -1283,7 +1283,7 @@ $replaced = Str::replaceLast('the', 'a', 'the quick brown fox jumps over the laz
 ```
 
 
-#### `Str::replaceMatches()` {.collection-method} {#method-str-replace-matches}
+#### `Str::replaceMatches()` {#method-str-replace-matches}
 
 `Str::replaceMatches` 메서드는 주어진 패턴과 일치하는 문자열의 모든 부분을 지정한 문자열로 대체합니다:
 
@@ -1312,7 +1312,7 @@ $replaced = Str::replaceMatches('/\d/', function (array $matches) {
 ```
 
 
-#### `Str::replaceStart()` {.collection-method} {#method-str-replace-start}
+#### `Str::replaceStart()` {#method-str-replace-start}
 
 `Str::replaceStart` 메서드는 주어진 값이 문자열의 시작 부분에 나타날 때만, 그 첫 번째 발생을 다른 값으로 대체합니다:
 
@@ -1329,7 +1329,7 @@ $replaced = Str::replaceStart('World', 'Laravel', 'Hello World');
 ```
 
 
-#### `Str::replaceEnd()` {.collection-method} {#method-str-replace-end}
+#### `Str::replaceEnd()` {#method-str-replace-end}
 
 `Str::replaceEnd` 메서드는 주어진 값이 문자열의 끝에 나타날 경우에만, 그 마지막 발생을 지정한 값으로 대체합니다:
 
@@ -1346,7 +1346,7 @@ $replaced = Str::replaceEnd('Hello', 'Laravel', 'Hello World');
 ```
 
 
-#### `Str::reverse()` {.collection-method} {#method-str-reverse}
+#### `Str::reverse()` {#method-str-reverse}
 
 `Str::reverse` 메서드는 주어진 문자열을 뒤집습니다:
 
@@ -1359,9 +1359,9 @@ $reversed = Str::reverse('Hello World');
 ```
 
 
-#### `Str::singular()` {.collection-method} {#method-str-singular}
+#### `Str::singular()` {#method-str-singular}
 
-`Str::singular` 메서드는 문자열을 단수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/docs/{{version}}/localization#pluralization-language)를 지원합니다:
+`Str::singular` 메서드는 문자열을 단수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/laravel/12.x/localization#pluralization-language)를 지원합니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -1376,7 +1376,7 @@ $singular = Str::singular('children');
 ```
 
 
-#### `Str::slug()` {.collection-method} {#method-str-slug}
+#### `Str::slug()` {#method-str-slug}
 
 `Str::slug` 메서드는 주어진 문자열로부터 URL에 적합한 "슬러그(slug)"를 생성합니다:
 
@@ -1389,7 +1389,7 @@ $slug = Str::slug('Laravel 5 Framework', '-');
 ```
 
 
-#### `Str::snake()` {.collection-method} {#method-snake-case}
+#### `Str::snake()` {#method-snake-case}
 
 `Str::snake` 메서드는 주어진 문자열을 `snake_case`로 변환합니다:
 
@@ -1406,7 +1406,7 @@ $converted = Str::snake('fooBar', '-');
 ```
 
 
-#### `Str::squish()` {.collection-method} {#method-str-squish}
+#### `Str::squish()` {#method-str-squish}
 
 `Str::squish` 메서드는 문자열에서 불필요한 모든 공백을 제거합니다. 단어 사이의 불필요한 공백도 포함됩니다:
 
@@ -1419,7 +1419,7 @@ $string = Str::squish('    laravel    framework    ');
 ```
 
 
-#### `Str::start()` {.collection-method} {#method-str-start}
+#### `Str::start()` {#method-str-start}
 
 `Str::start` 메서드는 주어진 값이 문자열의 시작에 없을 경우, 해당 값을 한 번만 문자열 앞에 추가합니다:
 
@@ -1436,7 +1436,7 @@ $adjusted = Str::start('/this/string', '/');
 ```
 
 
-#### `Str::startsWith()` {.collection-method} {#method-starts-with}
+#### `Str::startsWith()` {#method-starts-with}
 
 `Str::startsWith` 메서드는 주어진 문자열이 지정한 값으로 시작하는지 확인합니다:
 
@@ -1457,7 +1457,7 @@ $result = Str::startsWith('This is my name', ['This', 'That', 'There']);
 ```
 
 
-#### `Str::studly()` {.collection-method} {#method-studly-case}
+#### `Str::studly()` {#method-studly-case}
 
 `Str::studly` 메서드는 주어진 문자열을 `StudlyCase`(카멜 케이스의 첫 글자도 대문자인 형태)로 변환합니다:
 
@@ -1470,7 +1470,7 @@ $converted = Str::studly('foo_bar');
 ```
 
 
-#### `Str::substr()` {.collection-method} {#method-str-substr}
+#### `Str::substr()` {#method-str-substr}
 
 `Str::substr` 메서드는 start와 length 파라미터로 지정된 문자열의 일부를 반환합니다:
 
@@ -1483,7 +1483,7 @@ $converted = Str::substr('The Laravel Framework', 4, 7);
 ```
 
 
-#### `Str::substrCount()` {.collection-method} {#method-str-substrcount}
+#### `Str::substrCount()` {#method-str-substrcount}
 
 `Str::substrCount` 메서드는 주어진 문자열에서 특정 값이 몇 번 등장하는지 반환합니다:
 
@@ -1496,7 +1496,7 @@ $count = Str::substrCount('If you like ice cream, you will like snow cones.', 'l
 ```
 
 
-#### `Str::substrReplace()` {.collection-method} {#method-str-substrreplace}
+#### `Str::substrReplace()` {#method-str-substrreplace}
 
 `Str::substrReplace` 메서드는 문자열의 일부를 지정한 위치(세 번째 인자)에서 시작하여, 네 번째 인자로 지정한 문자 수만큼을 대체합니다. 네 번째 인자에 `0`을 전달하면 기존 문자열을 대체하지 않고, 지정한 위치에 문자열을 삽입합니다:
 
@@ -1511,7 +1511,7 @@ $result = Str::substrReplace('1300', ':', 2, 0);
 ```
 
 
-#### `Str::swap()` {.collection-method} {#method-str-swap}
+#### `Str::swap()` {#method-str-swap}
 
 `Str::swap` 메서드는 PHP의 `strtr` 함수를 사용하여 주어진 문자열에서 여러 값을 한 번에 치환합니다:
 
@@ -1527,7 +1527,7 @@ $string = Str::swap([
 ```
 
 
-#### `Str::take()` {.collection-method} {#method-take}
+#### `Str::take()` {#method-take}
 
 `Str::take` 메서드는 문자열의 시작 부분에서 지정한 개수만큼의 문자를 반환합니다:
 
@@ -1540,7 +1540,7 @@ $taken = Str::take('Build something amazing!', 5);
 ```
 
 
-#### `Str::title()` {.collection-method} {#method-title-case}
+#### `Str::title()` {#method-title-case}
 
 `Str::title` 메서드는 주어진 문자열을 `Title Case`(각 단어의 첫 글자가 대문자인 형태)로 변환합니다:
 
@@ -1553,7 +1553,7 @@ $converted = Str::title('a nice title uses the correct case');
 ```
 
 
-#### `Str::toBase64()` {.collection-method} {#method-str-to-base64}
+#### `Str::toBase64()` {#method-str-to-base64}
 
 `Str::toBase64` 메서드는 주어진 문자열을 Base64로 변환합니다:
 
@@ -1566,7 +1566,7 @@ $base64 = Str::toBase64('Laravel');
 ```
 
 
-#### `Str::transliterate()` {.collection-method} {#method-str-transliterate}
+#### `Str::transliterate()` {#method-str-transliterate}
 
 `Str::transliterate` 메서드는 주어진 문자열을 가장 가까운 ASCII 표현으로 변환하려고 시도합니다:
 
@@ -1579,7 +1579,7 @@ $email = Str::transliterate('ⓣⓔⓢⓣ@ⓛⓐⓡⓐⓥⓔⓛ.ⓒⓞⓜ');
 ```
 
 
-#### `Str::trim()` {.collection-method} {#method-str-trim}
+#### `Str::trim()` {#method-str-trim}
 
 `Str::trim` 메서드는 주어진 문자열의 시작과 끝에서 공백(또는 다른 문자)을 제거합니다. PHP의 기본 `trim` 함수와 달리, `Str::trim` 메서드는 유니코드 공백 문자도 함께 제거합니다:
 
@@ -1592,7 +1592,7 @@ $string = Str::trim(' foo bar ');
 ```
 
 
-#### `Str::ltrim()` {.collection-method} {#method-str-ltrim}
+#### `Str::ltrim()` {#method-str-ltrim}
 
 `Str::ltrim` 메서드는 주어진 문자열의 시작 부분에서 공백(또는 다른 문자들)을 제거합니다. PHP의 기본 `ltrim` 함수와 달리, `Str::ltrim` 메서드는 유니코드 공백 문자도 함께 제거합니다:
 
@@ -1605,7 +1605,7 @@ $string = Str::ltrim('  foo bar  ');
 ```
 
 
-#### `Str::rtrim()` {.collection-method} {#method-str-rtrim}
+#### `Str::rtrim()` {#method-str-rtrim}
 
 `Str::rtrim` 메서드는 주어진 문자열의 끝에서 공백(또는 다른 문자들)을 제거합니다. PHP의 기본 `rtrim` 함수와 달리, `Str::rtrim` 메서드는 유니코드 공백 문자도 함께 제거합니다:
 
@@ -1618,7 +1618,7 @@ $string = Str::rtrim('  foo bar  ');
 ```
 
 
-#### `Str::ucfirst()` {.collection-method} {#method-str-ucfirst}
+#### `Str::ucfirst()` {#method-str-ucfirst}
 
 `Str::ucfirst` 메서드는 주어진 문자열의 첫 번째 문자를 대문자로 변환하여 반환합니다:
 
@@ -1631,7 +1631,7 @@ $string = Str::ucfirst('foo bar');
 ```
 
 
-#### `Str::ucsplit()` {.collection-method} {#method-str-ucsplit}
+#### `Str::ucsplit()` {#method-str-ucsplit}
 
 `Str::ucsplit` 메서드는 주어진 문자열을 대문자 문자를 기준으로 배열로 분할합니다:
 
@@ -1644,7 +1644,7 @@ $segments = Str::ucsplit('FooBar');
 ```
 
 
-#### `Str::upper()` {.collection-method} {#method-str-upper}
+#### `Str::upper()` {#method-str-upper}
 
 `Str::upper` 메서드는 주어진 문자열을 모두 대문자로 변환합니다:
 
@@ -1657,7 +1657,7 @@ $string = Str::upper('laravel');
 ```
 
 
-#### `Str::ulid()` {.collection-method} {#method-str-ulid}
+#### `Str::ulid()` {#method-str-ulid}
 
 `Str::ulid` 메서드는 ULID(시간 순서가 보장되는 고유 식별자)를 생성합니다:
 
@@ -1695,7 +1695,7 @@ Str::createUlidsNormally();
 ```
 
 
-#### `Str::unwrap()` {.collection-method} {#method-str-unwrap}
+#### `Str::unwrap()` {#method-str-unwrap}
 
 `Str::unwrap` 메서드는 주어진 문자열의 시작과 끝에서 지정한 문자열을 제거합니다:
 
@@ -1712,7 +1712,7 @@ Str::unwrap('{framework: "Laravel"}', '{', '}');
 ```
 
 
-#### `Str::uuid()` {.collection-method} {#method-str-uuid}
+#### `Str::uuid()` {#method-str-uuid}
 
 `Str::uuid` 메서드는 UUID(버전 4)를 생성합니다:
 
@@ -1739,7 +1739,7 @@ Str::createUuidsNormally();
 ```
 
 
-#### `Str::uuid7()` {.collection-method} {#method-str-uuid7}
+#### `Str::uuid7()` {#method-str-uuid7}
 
 `Str::uuid7` 메서드는 UUID(버전 7)를 생성합니다:
 
@@ -1756,7 +1756,7 @@ return (string) Str::uuid7(time: now());
 ```
 
 
-#### `Str::wordCount()` {.collection-method} {#method-str-word-count}
+#### `Str::wordCount()` {#method-str-word-count}
 
 `Str::wordCount` 메서드는 문자열에 포함된 단어의 개수를 반환합니다:
 
@@ -1767,7 +1767,7 @@ Str::wordCount('Hello, world!'); // 2
 ```
 
 
-#### `Str::wordWrap()` {.collection-method} {#method-str-word-wrap}
+#### `Str::wordWrap()` {#method-str-word-wrap}
 
 `Str::wordWrap` 메서드는 문자열을 지정한 글자 수로 줄바꿈합니다:
 
@@ -1786,7 +1786,7 @@ dog.
 ```
 
 
-#### `Str::words()` {.collection-method} {#method-str-words}
+#### `Str::words()` {#method-str-words}
 
 `Str::words` 메서드는 문자열의 단어 수를 제한합니다. 세 번째 인자를 통해 잘린 문자열 끝에 어떤 문자열을 추가할지 지정할 수 있습니다:
 
@@ -1799,7 +1799,7 @@ return Str::words('Perfectly balanced, as all things should be.', 3, ' >>>');
 ```
 
 
-#### `Str::wrap()` {.collection-method} {#method-str-wrap}
+#### `Str::wrap()` {#method-str-wrap}
 
 `Str::wrap` 메서드는 주어진 문자열을 추가 문자열 또는 문자열 쌍으로 감쌉니다:
 
@@ -1816,7 +1816,7 @@ Str::wrap('is', before: 'This ', after: ' Laravel!');
 ```
 
 
-#### `str()` {.collection-method} {#method-str}
+#### `str()` {#method-str}
 
 `str` 함수는 주어진 문자열의 새로운 `Illuminate\Support\Stringable` 인스턴스를 반환합니다. 이 함수는 `Str::of` 메서드와 동일합니다:
 
@@ -1835,9 +1835,9 @@ $snake = str()->snake('FooBar');
 ```
 
 
-#### `trans()` {.collection-method} {#method-trans}
+#### `trans()` {#method-trans}
 
-`trans` 함수는 주어진 번역 키를 [언어 파일](/docs/{{version}}/localization)를 사용하여 번역합니다:
+`trans` 함수는 주어진 번역 키를 [언어 파일](/laravel/12.x/localization)를 사용하여 번역합니다:
 
 ```php
 echo trans('messages.welcome');
@@ -1846,7 +1846,7 @@ echo trans('messages.welcome');
 지정한 번역 키가 존재하지 않을 경우, `trans` 함수는 해당 키 자체를 반환합니다. 따라서 위의 예시에서 번역 키가 존재하지 않으면 `trans` 함수는 `messages.welcome`을 반환합니다.
 
 
-#### `trans_choice()` {.collection-method} {#method-trans-choice}
+#### `trans_choice()` {#method-trans-choice}
 
 `trans_choice` 함수는 주어진 번역 키를 복수형 규칙에 따라 번역합니다:
 
@@ -1862,7 +1862,7 @@ echo trans_choice('messages.notifications', $unreadCount);
 Fluent 문자열은 문자열 값을 다루기 위한 보다 유창하고 객체 지향적인 인터페이스를 제공합니다. 이를 통해 기존의 문자열 연산 방식에 비해 더 읽기 쉬운 문법으로 여러 문자열 연산을 체이닝하여 사용할 수 있습니다.
 
 
-#### `after` {.collection-method} {#method-fluent-str-after}
+#### `after` {#method-fluent-str-after}
 
 `after` 메서드는 문자열에서 지정한 값 이후의 모든 내용을 반환합니다. 만약 지정한 값이 문자열 내에 존재하지 않으면 전체 문자열이 반환됩니다:
 
@@ -1875,7 +1875,7 @@ $slice = Str::of('This is my name')->after('This is');
 ```
 
 
-#### `afterLast` {.collection-method} {#method-fluent-str-after-last}
+#### `afterLast` {#method-fluent-str-after-last}
 
 `afterLast` 메서드는 문자열에서 주어진 값이 마지막으로 등장한 이후의 모든 내용을 반환합니다. 만약 해당 값이 문자열에 존재하지 않으면 전체 문자열을 반환합니다:
 
@@ -1888,7 +1888,7 @@ $slice = Str::of('App\Http\Controllers\Controller')->afterLast('\\');
 ```
 
 
-#### `apa` {.collection-method} {#method-fluent-str-apa}
+#### `apa` {#method-fluent-str-apa}
 
 `apa` 메서드는 주어진 문자열을 [APA 가이드라인](https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case)에 따라 타이틀 케이스로 변환합니다:
 
@@ -1901,7 +1901,7 @@ $converted = Str::of('a nice title uses the correct case')->apa();
 ```
 
 
-#### `append` {.collection-method} {#method-fluent-str-append}
+#### `append` {#method-fluent-str-append}
 
 `append` 메서드는 주어진 값을 문자열에 덧붙입니다:
 
@@ -1914,7 +1914,7 @@ $string = Str::of('Taylor')->append(' Otwell');
 ```
 
 
-#### `ascii` {.collection-method} {#method-fluent-str-ascii}
+#### `ascii` {#method-fluent-str-ascii}
 
 `ascii` 메서드는 문자열을 ASCII 값으로 음역(Transliterate)하려고 시도합니다:
 
@@ -1927,7 +1927,7 @@ $string = Str::of('ü')->ascii();
 ```
 
 
-#### `basename` {.collection-method} {#method-fluent-str-basename}
+#### `basename` {#method-fluent-str-basename}
 
 `basename` 메서드는 주어진 문자열의 마지막 이름 부분(파일명 등)을 반환합니다:
 
@@ -1950,7 +1950,7 @@ $string = Str::of('/foo/bar/baz.jpg')->basename('.jpg');
 ```
 
 
-#### `before` {.collection-method} {#method-fluent-str-before}
+#### `before` {#method-fluent-str-before}
 
 `before` 메서드는 문자열에서 지정한 값 이전의 모든 내용을 반환합니다:
 
@@ -1963,7 +1963,7 @@ $slice = Str::of('This is my name')->before('my name');
 ```
 
 
-#### `beforeLast` {.collection-method} {#method-fluent-str-before-last}
+#### `beforeLast` {#method-fluent-str-before-last}
 
 `beforeLast` 메서드는 문자열에서 주어진 값이 마지막으로 등장하기 전까지의 모든 내용을 반환합니다:
 
@@ -1976,7 +1976,7 @@ $slice = Str::of('This is my name')->beforeLast('is');
 ```
 
 
-#### `between` {.collection-method} {#method-fluent-str-between}
+#### `between` {#method-fluent-str-between}
 
 `between` 메서드는 두 값 사이에 있는 문자열의 일부를 반환합니다:
 
@@ -1989,7 +1989,7 @@ $converted = Str::of('This is my name')->between('This', 'name');
 ```
 
 
-#### `betweenFirst` {.collection-method} {#method-fluent-str-between-first}
+#### `betweenFirst` {#method-fluent-str-between-first}
 
 `betweenFirst` 메서드는 두 값 사이에 있는 문자열 중 가장 작은 부분을 반환합니다:
 
@@ -2002,7 +2002,7 @@ $converted = Str::of('[a] bc [d]')->betweenFirst('[', ']');
 ```
 
 
-#### `camel` {.collection-method} {#method-fluent-str-camel}
+#### `camel` {#method-fluent-str-camel}
 
 `camel` 메서드는 주어진 문자열을 `camelCase`로 변환합니다:
 
@@ -2015,7 +2015,7 @@ $converted = Str::of('foo_bar')->camel();
 ```
 
 
-#### `charAt` {.collection-method} {#method-fluent-str-char-at}
+#### `charAt` {#method-fluent-str-char-at}
 
 `charAt` 메서드는 지정한 인덱스에 있는 문자를 반환합니다. 만약 인덱스가 범위를 벗어나면 `false`를 반환합니다:
 
@@ -2028,7 +2028,7 @@ $character = Str::of('This is my name.')->charAt(6);
 ```
 
 
-#### `classBasename` {.collection-method} {#method-fluent-str-class-basename}
+#### `classBasename` {#method-fluent-str-class-basename}
 
 `classBasename` 메서드는 주어진 클래스의 네임스페이스를 제거한 클래스 이름만 반환합니다:
 
@@ -2041,7 +2041,7 @@ $class = Str::of('Foo\Bar\Baz')->classBasename();
 ```
 
 
-#### `chopStart` {.collection-method} {#method-fluent-str-chop-start}
+#### `chopStart` {#method-fluent-str-chop-start}
 
 `chopStart` 메서드는 주어진 값이 문자열의 시작 부분에 있을 때, 그 값의 첫 번째 등장만을 제거합니다:
 
@@ -2064,7 +2064,7 @@ $url = Str::of('http://laravel.com')->chopStart(['https://', 'http://']);
 ```
 
 
-#### `chopEnd` {.collection-method} {#method-fluent-str-chop-end}
+#### `chopEnd` {#method-fluent-str-chop-end}
 
 `chopEnd` 메서드는 주어진 값이 문자열의 끝에 있을 경우, 마지막에 등장하는 해당 값만을 제거합니다:
 
@@ -2087,7 +2087,7 @@ $url = Str::of('http://laravel.com')->chopEnd(['.com', '.io']);
 ```
 
 
-#### `contains` {.collection-method} {#method-fluent-str-contains}
+#### `contains` {#method-fluent-str-contains}
 
 `contains` 메서드는 주어진 문자열이 특정 값을 포함하고 있는지 확인합니다. 기본적으로 이 메서드는 대소문자를 구분합니다:
 
@@ -2120,7 +2120,7 @@ $contains = Str::of('This is my name')->contains('MY', ignoreCase: true);
 ```
 
 
-#### `containsAll` {.collection-method} {#method-fluent-str-contains-all}
+#### `containsAll` {#method-fluent-str-contains-all}
 
 `containsAll` 메서드는 주어진 문자열이 주어진 배열의 모든 값을 포함하고 있는지 확인합니다:
 
@@ -2143,9 +2143,9 @@ $containsAll = Str::of('This is my name')->containsAll(['MY', 'NAME'], ignoreCas
 ```
 
 
-#### `decrypt` {.collection-method} {#method-fluent-str-decrypt}
+#### `decrypt` {#method-fluent-str-decrypt}
 
-`decrypt` 메서드는 암호화된 문자열을 [복호화](/docs/{{version}}/encryption)합니다:
+`decrypt` 메서드는 암호화된 문자열을 [복호화](/laravel/12.x/encryption)합니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -2158,7 +2158,7 @@ $decrypted = $encrypted->decrypt();
 `decrypt`의 반대 동작을 원한다면 [encrypt](#method-fluent-str-encrypt) 메서드를 참고하세요.
 
 
-#### `deduplicate` {.collection-method} {#method-fluent-str-deduplicate}
+#### `deduplicate` {#method-fluent-str-deduplicate}
 
 `deduplicate` 메서드는 주어진 문자열에서 연속적으로 나타나는 특정 문자를 하나의 문자로 대체합니다. 기본적으로 이 메서드는 공백을 중복 제거합니다:
 
@@ -2181,7 +2181,7 @@ $result = Str::of('The---Laravel---Framework')->deduplicate('-');
 ```
 
 
-#### `dirname` {.collection-method} {#method-fluent-str-dirname}
+#### `dirname` {#method-fluent-str-dirname}
 
 `dirname` 메서드는 주어진 문자열에서 상위 디렉터리 부분을 반환합니다:
 
@@ -2204,9 +2204,9 @@ $string = Str::of('/foo/bar/baz')->dirname(2);
 ```
 
 
-#### `encrypt` {.collection-method} {#method-fluent-str-encrypt}
+#### `encrypt` {#method-fluent-str-encrypt}
 
-`encrypt` 메서드는 문자열을 [암호화](/docs/{{version}}/encryption)합니다:
+`encrypt` 메서드는 문자열을 [암호화](/laravel/12.x/encryption)합니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -2217,7 +2217,7 @@ $encrypted = Str::of('secret')->encrypt();
 `encrypt`의 반대 동작을 원한다면 [decrypt](#method-fluent-str-decrypt) 메서드를 참고하세요.
 
 
-#### `endsWith` {.collection-method} {#method-fluent-str-ends-with}
+#### `endsWith` {#method-fluent-str-ends-with}
 
 `endsWith` 메서드는 주어진 문자열이 특정 값으로 끝나는지 확인합니다:
 
@@ -2244,7 +2244,7 @@ $result = Str::of('This is my name')->endsWith(['this', 'foo']);
 ```
 
 
-#### `exactly` {.collection-method} {#method-fluent-str-exactly}
+#### `exactly` {#method-fluent-str-exactly}
 
 `exactly` 메서드는 주어진 문자열이 다른 문자열과 정확히 일치하는지 확인합니다:
 
@@ -2257,7 +2257,7 @@ $result = Str::of('Laravel')->exactly('Laravel');
 ```
 
 
-#### `excerpt` {.collection-method} {#method-fluent-str-excerpt}
+#### `excerpt` {#method-fluent-str-excerpt}
 
 `excerpt` 메서드는 문자열에서 지정한 구문이 처음 등장하는 부분을 중심으로 발췌(excerpt)하여 반환합니다:
 
@@ -2287,7 +2287,7 @@ $excerpt = Str::of('This is my name')->excerpt('name', [
 ```
 
 
-#### `explode` {.collection-method} {#method-fluent-str-explode}
+#### `explode` {#method-fluent-str-explode}
 
 `explode` 메서드는 주어진 구분자로 문자열을 분할하여, 분할된 각 부분을 포함하는 컬렉션을 반환합니다:
 
@@ -2300,7 +2300,7 @@ $collection = Str::of('foo bar baz')->explode(' ');
 ```
 
 
-#### `finish` {.collection-method} {#method-fluent-str-finish}
+#### `finish` {#method-fluent-str-finish}
 
 `finish` 메서드는 주어진 값이 문자열의 끝에 없을 경우, 해당 값을 문자열 끝에 한 번만 추가합니다:
 
@@ -2317,7 +2317,7 @@ $adjusted = Str::of('this/string/')->finish('/');
 ```
 
 
-#### `hash` {.collection-method} {#method-fluent-str-hash}
+#### `hash` {#method-fluent-str-hash}
 
 `hash` 메서드는 주어진 [알고리즘](https://www.php.net/manual/en/function.hash-algos.php)을 사용하여 문자열을 해시합니다:
 
@@ -2330,7 +2330,7 @@ $hashed = Str::of('secret')->hash(algorithm: 'sha256');
 ```
 
 
-#### `headline` {.collection-method} {#method-fluent-str-headline}
+#### `headline` {#method-fluent-str-headline}
 
 `headline` 메서드는 대소문자, 하이픈(-), 또는 언더스코어(_)로 구분된 문자열을 각 단어의 첫 글자가 대문자인 공백으로 구분된 문자열로 변환합니다:
 
@@ -2347,7 +2347,7 @@ $headline = Str::of('EmailNotificationSent')->headline();
 ```
 
 
-#### `inlineMarkdown` {.collection-method} {#method-fluent-str-inline-markdown}
+#### `inlineMarkdown` {#method-fluent-str-inline-markdown}
 
 `inlineMarkdown` 메서드는 GitHub 스타일의 마크다운을 [CommonMark](https://commonmark.thephpleague.com/)를 사용하여 인라인 HTML로 변환합니다. 하지만 `markdown` 메서드와 달리, 생성된 모든 HTML을 블록 레벨 요소로 감싸지 않습니다:
 
@@ -2375,7 +2375,7 @@ Str::of('Inject: <script>alert("Hello XSS!");</script>')->inlineMarkdown([
 ```
 
 
-#### `is` {.collection-method} {#method-fluent-str-is}
+#### `is` {#method-fluent-str-is}
 
 `is` 메서드는 주어진 문자열이 특정 패턴과 일치하는지 확인합니다. 별표(*)는 와일드카드 값으로 사용할 수 있습니다.
 
@@ -2392,7 +2392,7 @@ $matches = Str::of('foobar')->is('baz*');
 ```
 
 
-#### `isAscii` {.collection-method} {#method-fluent-str-is-ascii}
+#### `isAscii` {#method-fluent-str-is-ascii}
 
 `isAscii` 메서드는 주어진 문자열이 ASCII 문자열인지 확인합니다:
 
@@ -2409,7 +2409,7 @@ $result = Str::of('ü')->isAscii();
 ```
 
 
-#### `isEmpty` {.collection-method} {#method-fluent-str-is-empty}
+#### `isEmpty` {#method-fluent-str-is-empty}
 
 `isEmpty` 메서드는 주어진 문자열이 비어 있는지 확인합니다:
 
@@ -2426,7 +2426,7 @@ $result = Str::of('Laravel')->trim()->isEmpty();
 ```
 
 
-#### `isNotEmpty` {.collection-method} {#method-fluent-str-is-not-empty}
+#### `isNotEmpty` {#method-fluent-str-is-not-empty}
 
 `isNotEmpty` 메서드는 주어진 문자열이 비어 있지 않은지 확인합니다:
 
@@ -2443,7 +2443,7 @@ $result = Str::of('Laravel')->trim()->isNotEmpty();
 ```
 
 
-#### `isJson` {.collection-method} {#method-fluent-str-is-json}
+#### `isJson` {#method-fluent-str-is-json}
 
 `isJson` 메서드는 주어진 문자열이 유효한 JSON인지 확인합니다:
 
@@ -2464,7 +2464,7 @@ $result = Str::of('{first: "John", last: "Doe"}')->isJson();
 ```
 
 
-#### `isUlid` {.collection-method} {#method-fluent-str-is-ulid}
+#### `isUlid` {#method-fluent-str-is-ulid}
 
 `isUlid` 메서드는 주어진 문자열이 ULID인지 확인합니다:
 
@@ -2481,7 +2481,7 @@ $result = Str::of('Taylor')->isUlid();
 ```
 
 
-#### `isUrl` {.collection-method} {#method-fluent-str-is-url}
+#### `isUrl` {#method-fluent-str-is-url}
 
 `isUrl` 메서드는 주어진 문자열이 URL인지 여부를 판단합니다:
 
@@ -2504,7 +2504,7 @@ $result = Str::of('http://example.com')->isUrl(['http', 'https']);
 ```
 
 
-#### `isUuid` {.collection-method} {#method-fluent-str-is-uuid}
+#### `isUuid` {#method-fluent-str-is-uuid}
 
 `isUuid` 메서드는 주어진 문자열이 UUID인지 여부를 판단합니다:
 
@@ -2521,7 +2521,7 @@ $result = Str::of('Taylor')->isUuid();
 ```
 
 
-#### `kebab` {.collection-method} {#method-fluent-str-kebab}
+#### `kebab` {#method-fluent-str-kebab}
 
 `kebab` 메서드는 주어진 문자열을 `kebab-case`로 변환합니다:
 
@@ -2534,7 +2534,7 @@ $converted = Str::of('fooBar')->kebab();
 ```
 
 
-#### `lcfirst` {.collection-method} {#method-fluent-str-lcfirst}
+#### `lcfirst` {#method-fluent-str-lcfirst}
 
 `lcfirst` 메서드는 주어진 문자열의 첫 번째 문자를 소문자로 변환하여 반환합니다:
 
@@ -2547,7 +2547,7 @@ $string = Str::of('Foo Bar')->lcfirst();
 ```
 
 
-#### `length` {.collection-method} {#method-fluent-str-length}
+#### `length` {#method-fluent-str-length}
 
 `length` 메서드는 주어진 문자열의 길이를 반환합니다:
 
@@ -2560,7 +2560,7 @@ $length = Str::of('Laravel')->length();
 ```
 
 
-#### `limit` {.collection-method} {#method-fluent-str-limit}
+#### `limit` {#method-fluent-str-limit}
 
 `limit` 메서드는 주어진 문자열을 지정한 길이로 잘라냅니다:
 
@@ -2589,7 +2589,7 @@ $truncated = Str::of('The quick brown fox')->limit(12, preserveWords: true);
 ```
 
 
-#### `lower` {.collection-method} {#method-fluent-str-lower}
+#### `lower` {#method-fluent-str-lower}
 
 `lower` 메서드는 주어진 문자열을 소문자로 변환합니다:
 
@@ -2602,7 +2602,7 @@ $result = Str::of('LARAVEL')->lower();
 ```
 
 
-#### `markdown` {.collection-method} {#method-fluent-str-markdown}
+#### `markdown` {#method-fluent-str-markdown}
 
 `markdown` 메서드는 GitHub 스타일의 마크다운을 HTML로 변환합니다:
 
@@ -2636,7 +2636,7 @@ Str::of('Inject: <script>alert("Hello XSS!");</script>')->markdown([
 ```
 
 
-#### `mask` {.collection-method} {#method-fluent-str-mask}
+#### `mask` {#method-fluent-str-mask}
 
 `mask` 메서드는 문자열의 일부를 반복되는 문자로 마스킹(가림)하여, 이메일 주소나 전화번호와 같은 문자열의 일부 구간을 숨기는 데 사용할 수 있습니다:
 
@@ -2661,7 +2661,7 @@ $string = Str::of('taylor@example.com')->mask('*', 4, -4);
 ```
 
 
-#### `match` {.collection-method} {#method-fluent-str-match}
+#### `match` {#method-fluent-str-match}
 
 `match` 메서드는 주어진 정규 표현식 패턴과 일치하는 문자열의 일부를 반환합니다:
 
@@ -2678,7 +2678,7 @@ $result = Str::of('foo bar')->match('/foo (.*)/');
 ```
 
 
-#### `matchAll` {.collection-method} {#method-fluent-str-match-all}
+#### `matchAll` {#method-fluent-str-match-all}
 
 `matchAll` 메서드는 주어진 정규 표현식 패턴과 일치하는 문자열의 부분들을 포함하는 컬렉션을 반환합니다:
 
@@ -2703,7 +2703,7 @@ $result = Str::of('bar fun bar fly')->matchAll('/f(\w*)/');
 일치하는 값이 없으면 빈 컬렉션이 반환됩니다.
 
 
-#### `isMatch` {.collection-method} {#method-fluent-str-is-match}
+#### `isMatch` {#method-fluent-str-is-match}
 
 `isMatch` 메서드는 문자열이 주어진 정규 표현식과 일치하면 `true`를 반환합니다:
 
@@ -2720,7 +2720,7 @@ $result = Str::of('laravel')->isMatch('/foo (.*)/');
 ```
 
 
-#### `newLine` {.collection-method} {#method-fluent-str-new-line}
+#### `newLine` {#method-fluent-str-new-line}
 
 `newLine` 메서드는 문자열 끝에 "줄 바꿈" 문자를 추가합니다:
 
@@ -2734,7 +2734,7 @@ $padded = Str::of('Laravel')->newLine()->append('Framework');
 ```
 
 
-#### `padBoth` {.collection-method} {#method-fluent-str-padboth}
+#### `padBoth` {#method-fluent-str-padboth}
 
 `padBoth` 메서드는 PHP의 `str_pad` 함수를 감싸며, 문자열의 양쪽을 다른 문자열로 채워 최종 문자열이 원하는 길이에 도달할 때까지 패딩합니다:
 
@@ -2751,7 +2751,7 @@ $padded = Str::of('James')->padBoth(10);
 ```
 
 
-#### `padLeft` {.collection-method} {#method-fluent-str-padleft}
+#### `padLeft` {#method-fluent-str-padleft}
 
 `padLeft` 메서드는 PHP의 `str_pad` 함수를 감싸며, 문자열의 왼쪽을 다른 문자열로 채워 최종 문자열이 원하는 길이에 도달할 때까지 패딩합니다:
 
@@ -2768,7 +2768,7 @@ $padded = Str::of('James')->padLeft(10);
 ```
 
 
-#### `padRight` {.collection-method} {#method-fluent-str-padright}
+#### `padRight` {#method-fluent-str-padright}
 
 `padRight` 메서드는 PHP의 `str_pad` 함수를 감싸며, 문자열의 오른쪽을 다른 문자열로 채워 최종 문자열이 원하는 길이에 도달할 때까지 패딩합니다:
 
@@ -2785,7 +2785,7 @@ $padded = Str::of('James')->padRight(10);
 ```
 
 
-#### `pipe` {.collection-method} {#method-fluent-str-pipe}
+#### `pipe` {#method-fluent-str-pipe}
 
 `pipe` 메서드는 현재 문자열 값을 주어진 callable(콜백 함수)에 전달하여 문자열을 변환할 수 있게 해줍니다:
 
@@ -2805,9 +2805,9 @@ $closure = Str::of('foo')->pipe(function (Stringable $str) {
 ```
 
 
-#### `plural` {.collection-method} {#method-fluent-str-plural}
+#### `plural` {#method-fluent-str-plural}
 
-`plural` 메서드는 단수형 단어 문자열을 복수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/docs/{{version}}/localization#pluralization-language)를 지원합니다:
+`plural` 메서드는 단수형 단어 문자열을 복수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/laravel/12.x/localization#pluralization-language)를 지원합니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -2836,7 +2836,7 @@ $plural = Str::of('child')->plural(1);
 ```
 
 
-#### `position` {.collection-method} {#method-fluent-str-position}
+#### `position` {#method-fluent-str-position}
 
 `position` 메서드는 문자열에서 특정 하위 문자열이 처음으로 등장하는 위치를 반환합니다. 만약 하위 문자열이 문자열 내에 존재하지 않으면, `false`를 반환합니다:
 
@@ -2853,7 +2853,7 @@ $position = Str::of('Hello, World!')->position('W');
 ```
 
 
-#### `prepend` {.collection-method} {#method-fluent-str-prepend}
+#### `prepend` {#method-fluent-str-prepend}
 
 `prepend` 메서드는 주어진 값을 문자열 앞에 추가합니다:
 
@@ -2866,7 +2866,7 @@ $string = Str::of('Framework')->prepend('Laravel ');
 ```
 
 
-#### `remove` {.collection-method} {#method-fluent-str-remove}
+#### `remove` {#method-fluent-str-remove}
 
 `remove` 메서드는 주어진 값 또는 값의 배열을 문자열에서 제거합니다:
 
@@ -2881,7 +2881,7 @@ $string = Str::of('Arkansas is quite beautiful!')->remove('quite');
 또한 두 번째 인자로 `false`를 전달하면 문자열을 제거할 때 대소문자를 구분하지 않도록 할 수 있습니다.
 
 
-#### `repeat` {.collection-method} {#method-fluent-str-repeat}
+#### `repeat` {#method-fluent-str-repeat}
 
 `repeat` 메서드는 주어진 문자열을 반복합니다:
 
@@ -2894,7 +2894,7 @@ $repeated = Str::of('a')->repeat(5);
 ```
 
 
-#### `replace` {.collection-method} {#method-fluent-str-replace}
+#### `replace` {#method-fluent-str-replace}
 
 `replace` 메서드는 문자열 내에서 주어진 문자열을 다른 문자열로 교체합니다:
 
@@ -2915,7 +2915,7 @@ $replaced = Str::of('macOS 13.x')->replace(
 ```
 
 
-#### `replaceArray` {.collection-method} {#method-fluent-str-replace-array}
+#### `replaceArray` {#method-fluent-str-replace-array}
 
 `replaceArray` 메서드는 문자열에서 주어진 값을 배열의 값들로 순차적으로 교체합니다:
 
@@ -2930,7 +2930,7 @@ $replaced = Str::of($string)->replaceArray('?', ['8:30', '9:00']);
 ```
 
 
-#### `replaceFirst` {.collection-method} {#method-fluent-str-replace-first}
+#### `replaceFirst` {#method-fluent-str-replace-first}
 
 `replaceFirst` 메서드는 문자열에서 주어진 값의 첫 번째 등장만을 다른 값으로 대체합니다:
 
@@ -2943,7 +2943,7 @@ $replaced = Str::of('the quick brown fox jumps over the lazy dog')->replaceFirst
 ```
 
 
-#### `replaceLast` {.collection-method} {#method-fluent-str-replace-last}
+#### `replaceLast` {#method-fluent-str-replace-last}
 
 `replaceLast` 메서드는 문자열에서 주어진 값의 마지막 발생을 다른 값으로 교체합니다:
 
@@ -2956,7 +2956,7 @@ $replaced = Str::of('the quick brown fox jumps over the lazy dog')->replaceLast(
 ```
 
 
-#### `replaceMatches` {.collection-method} {#method-fluent-str-replace-matches}
+#### `replaceMatches` {#method-fluent-str-replace-matches}
 
 `replaceMatches` 메서드는 주어진 패턴과 일치하는 문자열의 모든 부분을 지정한 대체 문자열로 교체합니다:
 
@@ -2981,7 +2981,7 @@ $replaced = Str::of('123')->replaceMatches('/\d/', function (array $matches) {
 ```
 
 
-#### `replaceStart` {.collection-method} {#method-fluent-str-replace-start}
+#### `replaceStart` {#method-fluent-str-replace-start}
 
 `replaceStart` 메서드는 주어진 값이 문자열의 시작 부분에 나타날 때만, 그 첫 번째 발생을 다른 값으로 대체합니다:
 
@@ -2998,7 +2998,7 @@ $replaced = Str::of('Hello World')->replaceStart('World', 'Laravel');
 ```
 
 
-#### `replaceEnd` {.collection-method} {#method-fluent-str-replace-end}
+#### `replaceEnd` {#method-fluent-str-replace-end}
 
 `replaceEnd` 메서드는 주어진 값이 문자열의 끝에 나타날 경우에만, 그 마지막 발생을 대체합니다:
 
@@ -3015,7 +3015,7 @@ $replaced = Str::of('Hello World')->replaceEnd('Hello', 'Laravel');
 ```
 
 
-#### `scan` {.collection-method} {#method-fluent-str-scan}
+#### `scan` {#method-fluent-str-scan}
 
 `scan` 메서드는 [`sscanf` PHP 함수](https://www.php.net/manual/en/function.sscanf.php)에서 지원하는 형식에 따라 문자열에서 입력을 파싱하여 컬렉션으로 반환합니다:
 
@@ -3028,9 +3028,9 @@ $collection = Str::of('filename.jpg')->scan('%[^.].%s');
 ```
 
 
-#### `singular` {.collection-method} {#method-fluent-str-singular}
+#### `singular` {#method-fluent-str-singular}
 
-`singular` 메서드는 문자열을 단수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/docs/{{version}}/localization#pluralization-language)를 지원합니다:
+`singular` 메서드는 문자열을 단수형으로 변환합니다. 이 함수는 [Laravel의 복수화 도구가 지원하는 모든 언어](/laravel/12.x/localization#pluralization-language)를 지원합니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -3045,7 +3045,7 @@ $singular = Str::of('children')->singular();
 ```
 
 
-#### `slug` {.collection-method} {#method-fluent-str-slug}
+#### `slug` {#method-fluent-str-slug}
 
 `slug` 메서드는 주어진 문자열로부터 URL에 적합한 "슬러그(slug)"를 생성합니다:
 
@@ -3058,7 +3058,7 @@ $slug = Str::of('Laravel Framework')->slug('-');
 ```
 
 
-#### `snake` {.collection-method} {#method-fluent-str-snake}
+#### `snake` {#method-fluent-str-snake}
 
 `snake` 메서드는 주어진 문자열을 `snake_case`로 변환합니다:
 
@@ -3071,7 +3071,7 @@ $converted = Str::of('fooBar')->snake();
 ```
 
 
-#### `split` {.collection-method} {#method-fluent-str-split}
+#### `split` {#method-fluent-str-split}
 
 `split` 메서드는 정규 표현식을 사용하여 문자열을 컬렉션으로 분할합니다:
 
@@ -3084,7 +3084,7 @@ $segments = Str::of('one, two, three')->split('/[\s,]+/');
 ```
 
 
-#### `squish` {.collection-method} {#method-fluent-str-squish}
+#### `squish` {#method-fluent-str-squish}
 
 `squish` 메서드는 문자열에서 불필요한 모든 공백을 제거합니다. 여기에는 단어 사이의 불필요한 공백도 포함됩니다:
 
@@ -3097,7 +3097,7 @@ $string = Str::of('    laravel    framework    ')->squish();
 ```
 
 
-#### `start` {.collection-method} {#method-fluent-str-start}
+#### `start` {#method-fluent-str-start}
 
 `start` 메서드는 주어진 값이 문자열의 시작 부분에 없을 경우, 해당 값을 문자열의 앞에 한 번만 추가합니다:
 
@@ -3114,7 +3114,7 @@ $adjusted = Str::of('/this/string')->start('/');
 ```
 
 
-#### `startsWith` {.collection-method} {#method-fluent-str-starts-with}
+#### `startsWith` {#method-fluent-str-starts-with}
 
 `startsWith` 메서드는 주어진 문자열이 지정한 값으로 시작하는지 확인합니다:
 
@@ -3127,7 +3127,7 @@ $result = Str::of('This is my name')->startsWith('This');
 ```
 
 
-#### `stripTags` {.collection-method} {#method-fluent-str-strip-tags}
+#### `stripTags` {#method-fluent-str-strip-tags}
 
 `stripTags` 메서드는 문자열에서 모든 HTML 및 PHP 태그를 제거합니다:
 
@@ -3144,7 +3144,7 @@ $result = Str::of('<a href="https://laravel.com">Taylor <b>Otwell</b></a>')->str
 ```
 
 
-#### `studly` {.collection-method} {#method-fluent-str-studly}
+#### `studly` {#method-fluent-str-studly}
 
 `studly` 메서드는 주어진 문자열을 `StudlyCase`로 변환합니다:
 
@@ -3157,7 +3157,7 @@ $converted = Str::of('foo_bar')->studly();
 ```
 
 
-#### `substr` {.collection-method} {#method-fluent-str-substr}
+#### `substr` {#method-fluent-str-substr}
 
 `substr` 메서드는 주어진 시작 위치와 길이 파라미터에 따라 문자열의 일부를 반환합니다:
 
@@ -3174,7 +3174,7 @@ $string = Str::of('Laravel Framework')->substr(8, 5);
 ```
 
 
-#### `substrReplace` {.collection-method} {#method-fluent-str-substrreplace}
+#### `substrReplace` {#method-fluent-str-substrreplace}
 
 `substrReplace` 메서드는 문자열의 일부 구간에 있는 텍스트를 교체합니다. 두 번째 인자로 지정한 위치에서 시작하여, 세 번째 인자로 지정한 문자 수만큼을 교체합니다. 세 번째 인자에 `0`을 전달하면 기존 문자열의 문자를 교체하지 않고, 지정한 위치에 문자열을 삽입합니다.
 
@@ -3191,7 +3191,7 @@ $string = Str::of('The Framework')->substrReplace(' Laravel', 3, 0);
 ```
 
 
-#### `swap` {.collection-method} {#method-fluent-str-swap}
+#### `swap` {#method-fluent-str-swap}
 
 `swap` 메서드는 PHP의 `strtr` 함수를 사용하여 문자열 내 여러 값을 한 번에 치환합니다:
 
@@ -3208,7 +3208,7 @@ $string = Str::of('Tacos are great!')
 ```
 
 
-#### `take` {.collection-method} {#method-fluent-str-take}
+#### `take` {#method-fluent-str-take}
 
 `take` 메서드는 문자열의 시작 부분에서 지정한 개수만큼의 문자를 반환합니다:
 
@@ -3221,7 +3221,7 @@ $taken = Str::of('Build something amazing!')->take(5);
 ```
 
 
-#### `tap` {.collection-method} {#method-fluent-str-tap}
+#### `tap` {#method-fluent-str-tap}
 
 `tap` 메서드는 문자열을 주어진 클로저에 전달하여, 문자열 자체에는 영향을 주지 않으면서 문자열을 확인하고 조작할 수 있도록 해줍니다. 클로저에서 무엇을 반환하든 상관없이, `tap` 메서드는 원본 문자열을 반환합니다:
 
@@ -3240,7 +3240,7 @@ $string = Str::of('Laravel')
 ```
 
 
-#### `test` {.collection-method} {#method-fluent-str-test}
+#### `test` {#method-fluent-str-test}
 
 `test` 메서드는 문자열이 주어진 정규 표현식 패턴과 일치하는지 확인합니다:
 
@@ -3253,7 +3253,7 @@ $result = Str::of('Laravel Framework')->test('/Laravel/');
 ```
 
 
-#### `title` {.collection-method} {#method-fluent-str-title}
+#### `title` {#method-fluent-str-title}
 
 `title` 메서드는 주어진 문자열을 `Title Case`(각 단어의 첫 글자가 대문자인 형태)로 변환합니다:
 
@@ -3266,7 +3266,7 @@ $converted = Str::of('a nice title uses the correct case')->title();
 ```
 
 
-#### `toBase64` {.collection-method} {#method-fluent-str-to-base64}
+#### `toBase64` {#method-fluent-str-to-base64}
 
 `toBase64` 메서드는 주어진 문자열을 Base64로 변환합니다:
 
@@ -3279,7 +3279,7 @@ $base64 = Str::of('Laravel')->toBase64();
 ```
 
 
-#### `toHtmlString` {.collection-method} {#method-fluent-str-to-html-string}
+#### `toHtmlString` {#method-fluent-str-to-html-string}
 
 `toHtmlString` 메서드는 주어진 문자열을 `Illuminate\Support\HtmlString` 인스턴스로 변환합니다. 이렇게 변환된 문자열은 Blade 템플릿에서 렌더링될 때 이스케이프되지 않습니다.
 
@@ -3290,9 +3290,9 @@ $htmlString = Str::of('Nuno Maduro')->toHtmlString();
 ```
 
 
-#### `toUri` {.collection-method} {#method-fluent-str-to-uri}
+#### `toUri` {#method-fluent-str-to-uri}
 
-`toUri` 메서드는 주어진 문자열을 [Illuminate\Support\Uri](/docs/{{version}}/helpers#uri) 인스턴스로 변환합니다:
+`toUri` 메서드는 주어진 문자열을 [Illuminate\Support\Uri](/laravel/12.x/helpers#uri) 인스턴스로 변환합니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -3301,7 +3301,7 @@ $uri = Str::of('https://example.com')->toUri();
 ```
 
 
-#### `transliterate` {.collection-method} {#method-fluent-str-transliterate}
+#### `transliterate` {#method-fluent-str-transliterate}
 
 `transliterate` 메서드는 주어진 문자열을 가장 가까운 ASCII 표현으로 변환하려고 시도합니다:
 
@@ -3314,7 +3314,7 @@ $email = Str::of('ⓣⓔⓢⓣ@ⓛⓐⓡⓐⓥⓔⓛ.ⓒⓞⓜ')->transliterate(
 ```
 
 
-#### `trim` {.collection-method} {#method-fluent-str-trim}
+#### `trim` {#method-fluent-str-trim}
 
 `trim` 메서드는 주어진 문자열의 양쪽 공백을 제거합니다. PHP의 기본 `trim` 함수와 달리, Laravel의 `trim` 메서드는 유니코드 공백 문자도 함께 제거합니다:
 
@@ -3331,7 +3331,7 @@ $string = Str::of('/Laravel/')->trim('/');
 ```
 
 
-#### `ltrim` {.collection-method} {#method-fluent-str-ltrim}
+#### `ltrim` {#method-fluent-str-ltrim}
 
 `ltrim` 메서드는 문자열의 왼쪽(앞쪽) 공백을 제거합니다. PHP의 기본 `ltrim` 함수와 달리, Laravel의 `ltrim` 메서드는 유니코드 공백 문자도 함께 제거합니다:
 
@@ -3348,7 +3348,7 @@ $string = Str::of('/Laravel/')->ltrim('/');
 ```
 
 
-#### `rtrim` {.collection-method} {#method-fluent-str-rtrim}
+#### `rtrim` {#method-fluent-str-rtrim}
 
 `rtrim` 메서드는 주어진 문자열의 오른쪽(끝) 부분의 공백을 제거합니다. PHP의 기본 `rtrim` 함수와 달리, Laravel의 `rtrim` 메서드는 유니코드 공백 문자도 함께 제거합니다:
 
@@ -3365,7 +3365,7 @@ $string = Str::of('/Laravel/')->rtrim('/');
 ```
 
 
-#### `ucfirst` {.collection-method} {#method-fluent-str-ucfirst}
+#### `ucfirst` {#method-fluent-str-ucfirst}
 
 `ucfirst` 메서드는 주어진 문자열의 첫 번째 문자를 대문자로 변환하여 반환합니다:
 
@@ -3378,7 +3378,7 @@ $string = Str::of('foo bar')->ucfirst();
 ```
 
 
-#### `ucsplit` {.collection-method} {#method-fluent-str-ucsplit}
+#### `ucsplit` {#method-fluent-str-ucsplit}
 
 `ucsplit` 메서드는 주어진 문자열을 대문자 문자를 기준으로 분할하여 컬렉션으로 반환합니다:
 
@@ -3391,7 +3391,7 @@ $string = Str::of('Foo Bar')->ucsplit();
 ```
 
 
-#### `unwrap` {.collection-method} {#method-fluent-str-unwrap}
+#### `unwrap` {#method-fluent-str-unwrap}
 
 `unwrap` 메서드는 주어진 문자열의 시작과 끝에서 지정된 문자열을 제거합니다:
 
@@ -3408,7 +3408,7 @@ Str::of('{framework: "Laravel"}')->unwrap('{', '}');
 ```
 
 
-#### `upper` {.collection-method} {#method-fluent-str-upper}
+#### `upper` {#method-fluent-str-upper}
 
 `upper` 메서드는 주어진 문자열을 모두 대문자로 변환합니다:
 
@@ -3421,7 +3421,7 @@ $adjusted = Str::of('laravel')->upper();
 ```
 
 
-#### `when` {.collection-method} {#method-fluent-str-when}
+#### `when` {#method-fluent-str-when}
 
 `when` 메서드는 주어진 조건이 `true`일 때, 전달된 클로저를 실행합니다. 이 클로저는 플루언트 문자열 인스턴스를 인자로 받습니다:
 
@@ -3440,7 +3440,7 @@ $string = Str::of('Taylor')
 필요하다면, `when` 메서드의 세 번째 인자로 또 다른 클로저를 전달할 수 있습니다. 이 클로저는 조건 파라미터가 `false`로 평가될 때 실행됩니다.
 
 
-#### `whenContains` {.collection-method} {#method-fluent-str-when-contains}
+#### `whenContains` {#method-fluent-str-when-contains}
 
 `whenContains` 메서드는 문자열에 주어진 값이 포함되어 있을 때, 지정한 클로저를 실행합니다. 이 클로저는 유창한 문자열(fluent string) 인스턴스를 인자로 받습니다:
 
@@ -3473,7 +3473,7 @@ $string = Str::of('tony stark')
 ```
 
 
-#### `whenContainsAll` {.collection-method} {#method-fluent-str-when-contains-all}
+#### `whenContainsAll` {#method-fluent-str-when-contains-all}
 
 `whenContainsAll` 메서드는 문자열이 주어진 모든 하위 문자열을 포함하고 있을 때, 지정한 클로저를 실행합니다. 이 클로저는 유창한 문자열(fluent string) 인스턴스를 인자로 받습니다:
 
@@ -3492,7 +3492,7 @@ $string = Str::of('tony stark')
 필요하다면, `when` 메서드의 세 번째 인자로 또 다른 클로저를 전달할 수 있습니다. 이 클로저는 조건 파라미터가 `false`로 평가될 때 실행됩니다.
 
 
-#### `whenEmpty` {.collection-method} {#method-fluent-str-when-empty}
+#### `whenEmpty` {#method-fluent-str-when-empty}
 
 `whenEmpty` 메서드는 문자열이 비어 있을 때 주어진 클로저를 실행합니다. 클로저가 값을 반환하면, 그 값이 `whenEmpty` 메서드의 반환값이 됩니다. 클로저가 값을 반환하지 않으면, fluent string 인스턴스가 반환됩니다:
 
@@ -3508,7 +3508,7 @@ $string = Str::of('  ')->trim()->whenEmpty(function (Stringable $string) {
 ```
 
 
-#### `whenNotEmpty` {.collection-method} {#method-fluent-str-when-not-empty}
+#### `whenNotEmpty` {#method-fluent-str-when-not-empty}
 
 `whenNotEmpty` 메서드는 문자열이 비어 있지 않을 때 주어진 클로저를 실행합니다. 클로저가 값을 반환하면, 그 값이 `whenNotEmpty` 메서드의 반환값이 됩니다. 클로저가 값을 반환하지 않으면, fluent string 인스턴스가 반환됩니다:
 
@@ -3524,7 +3524,7 @@ $string = Str::of('Framework')->whenNotEmpty(function (Stringable $string) {
 ```
 
 
-#### `whenStartsWith` {.collection-method} {#method-fluent-str-when-starts-with}
+#### `whenStartsWith` {#method-fluent-str-when-starts-with}
 
 `whenStartsWith` 메서드는 문자열이 주어진 하위 문자열로 시작할 때, 지정한 클로저를 실행합니다. 이 클로저는 유창한 문자열(fluent string) 인스턴스를 인자로 받습니다:
 
@@ -3540,7 +3540,7 @@ $string = Str::of('disney world')->whenStartsWith('disney', function (Stringable
 ```
 
 
-#### `whenEndsWith` {.collection-method} {#method-fluent-str-when-ends-with}
+#### `whenEndsWith` {#method-fluent-str-when-ends-with}
 
 `whenEndsWith` 메서드는 문자열이 주어진 하위 문자열로 끝날 경우, 지정된 클로저를 실행합니다. 이 클로저는 유창한 문자열(fluent string) 인스턴스를 인자로 받습니다:
 
@@ -3556,7 +3556,7 @@ $string = Str::of('disney world')->whenEndsWith('world', function (Stringable $s
 ```
 
 
-#### `whenExactly` {.collection-method} {#method-fluent-str-when-exactly}
+#### `whenExactly` {#method-fluent-str-when-exactly}
 
 `whenExactly` 메서드는 주어진 문자열이 정확히 일치할 때 지정한 클로저를 실행합니다. 이 클로저는 fluent string 인스턴스를 인자로 받습니다:
 
@@ -3572,7 +3572,7 @@ $string = Str::of('laravel')->whenExactly('laravel', function (Stringable $strin
 ```
 
 
-#### `whenNotExactly` {.collection-method} {#method-fluent-str-when-not-exactly}
+#### `whenNotExactly` {#method-fluent-str-when-not-exactly}
 
 `whenNotExactly` 메서드는 주어진 문자열과 정확히 일치하지 않을 경우, 지정한 클로저를 실행합니다. 이 클로저는 유창한 문자열(fluent string) 인스턴스를 인자로 받습니다:
 
@@ -3588,7 +3588,7 @@ $string = Str::of('framework')->whenNotExactly('laravel', function (Stringable $
 ```
 
 
-#### `whenIs` {.collection-method} {#method-fluent-str-when-is}
+#### `whenIs` {#method-fluent-str-when-is}
 
 `whenIs` 메서드는 문자열이 주어진 패턴과 일치할 때 지정된 클로저를 실행합니다. 별표(*)는 와일드카드 값으로 사용할 수 있습니다. 클로저는 유연한 문자열(fluent string) 인스턴스를 인자로 받습니다:
 
@@ -3604,7 +3604,7 @@ $string = Str::of('foo/bar')->whenIs('foo/*', function (Stringable $string) {
 ```
 
 
-#### `whenIsAscii` {.collection-method} {#method-fluent-str-when-is-ascii}
+#### `whenIsAscii` {#method-fluent-str-when-is-ascii}
 
 `whenIsAscii` 메서드는 문자열이 7비트 ASCII일 경우 주어진 클로저를 실행합니다. 이 클로저는 유창한 문자열(fluent string) 인스턴스를 인자로 받습니다:
 
@@ -3620,7 +3620,7 @@ $string = Str::of('laravel')->whenIsAscii(function (Stringable $string) {
 ```
 
 
-#### `whenIsUlid` {.collection-method} {#method-fluent-str-when-is-ulid}
+#### `whenIsUlid` {#method-fluent-str-when-is-ulid}
 
 `whenIsUlid` 메서드는 문자열이 유효한 ULID일 경우 주어진 클로저를 실행합니다. 이 클로저는 fluent string 인스턴스를 인자로 받습니다:
 
@@ -3635,7 +3635,7 @@ $string = Str::of('01gd6r360bp37zj17nxb55yv40')->whenIsUlid(function (Stringable
 ```
 
 
-#### `whenIsUuid` {.collection-method} {#method-fluent-str-when-is-uuid}
+#### `whenIsUuid` {#method-fluent-str-when-is-uuid}
 
 `whenIsUuid` 메서드는 문자열이 유효한 UUID일 경우, 주어진 클로저를 실행합니다. 이 클로저는 fluent string 인스턴스를 인자로 받습니다:
 
@@ -3651,7 +3651,7 @@ $string = Str::of('a0a2a2d2-0b87-4a18-83f2-2529882be2de')->whenIsUuid(function (
 ```
 
 
-#### `whenTest` {.collection-method} {#method-fluent-str-when-test}
+#### `whenTest` {#method-fluent-str-when-test}
 
 `whenTest` 메서드는 주어진 정규 표현식과 문자열이 일치할 경우, 지정된 클로저를 실행합니다. 이 클로저는 fluent string 인스턴스를 인자로 받습니다:
 
@@ -3667,7 +3667,7 @@ $string = Str::of('laravel framework')->whenTest('/laravel/', function (Stringab
 ```
 
 
-#### `wordCount` {.collection-method} {#method-fluent-str-word-count}
+#### `wordCount` {#method-fluent-str-word-count}
 
 `wordCount` 메서드는 문자열에 포함된 단어의 개수를 반환합니다:
 
@@ -3678,7 +3678,7 @@ Str::of('Hello, world!')->wordCount(); // 2
 ```
 
 
-#### `words` {.collection-method} {#method-fluent-str-words}
+#### `words` {#method-fluent-str-words}
 
 `words` 메서드는 문자열의 단어 수를 제한합니다. 필요하다면, 잘린 문자열 뒤에 추가로 붙일 문자열을 지정할 수 있습니다:
 
@@ -3691,7 +3691,7 @@ $string = Str::of('Perfectly balanced, as all things should be.')->words(3, ' >>
 ```
 
 
-#### `wrap` {.collection-method} {#method-fluent-str-wrap}
+#### `wrap` {#method-fluent-str-wrap}
 
 `wrap` 메서드는 주어진 문자열을 추가 문자열 또는 문자열 쌍으로 감쌉니다:
 

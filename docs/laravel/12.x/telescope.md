@@ -86,7 +86,7 @@ public function register(): void
 }
 ```
 
-마지막으로, 아래와 같이 `composer.json` 파일에 추가하여 Telescope 패키지가 [자동 검색](/docs/{{version}}/packages#package-discovery)되지 않도록 해야 합니다:
+마지막으로, 아래와 같이 `composer.json` 파일에 추가하여 Telescope 패키지가 [자동 검색](/laravel/12.x/packages#package-discovery)되지 않도록 해야 합니다:
 
 ```json
 "extra": {
@@ -112,7 +112,7 @@ Telescope의 에셋을 퍼블리시한 후, 주요 설정 파일은 `config/tele
 
 ### 데이터 정리 {#data-pruning}
 
-정리를 하지 않으면 `telescope_entries` 테이블에 레코드가 매우 빠르게 쌓일 수 있습니다. 이를 방지하기 위해 [스케줄링](/docs/{{version}}/scheduling)을 통해 `telescope:prune` Artisan 명령어를 매일 실행하도록 설정해야 합니다:
+정리를 하지 않으면 `telescope_entries` 테이블에 레코드가 매우 빠르게 쌓일 수 있습니다. 이를 방지하기 위해 [스케줄링](/laravel/12.x/scheduling)을 통해 `telescope:prune` Artisan 명령어를 매일 실행하도록 설정해야 합니다:
 
 ```php
 use Illuminate\Support\Facades\Schedule;
@@ -131,7 +131,7 @@ Schedule::command('telescope:prune --hours=48')->daily();
 
 ### 대시보드 권한 부여 {#dashboard-authorization}
 
-Telescope 대시보드는 `/telescope` 경로를 통해 접근할 수 있습니다. 기본적으로, 이 대시보드는 `local` 환경에서만 접근할 수 있습니다. `app/Providers/TelescopeServiceProvider.php` 파일 내에는 [인증 게이트](/docs/{{version}}/authorization#gates) 정의가 있습니다. 이 인증 게이트는 **비로컬** 환경에서 Telescope에 대한 접근을 제어합니다. 필요에 따라 이 게이트를 수정하여 Telescope 설치에 대한 접근을 제한할 수 있습니다:
+Telescope 대시보드는 `/telescope` 경로를 통해 접근할 수 있습니다. 기본적으로, 이 대시보드는 `local` 환경에서만 접근할 수 있습니다. `app/Providers/TelescopeServiceProvider.php` 파일 내에는 [인증 게이트](/laravel/12.x/authorization#gates) 정의가 있습니다. 이 인증 게이트는 **비로컬** 환경에서 Telescope에 대한 접근을 제어합니다. 필요에 따라 이 게이트를 수정하여 Telescope 설치에 대한 접근을 제한할 수 있습니다:
 
 ```php
 use App\Models\User;
@@ -295,7 +295,7 @@ Telescope의 "워처"는 요청이나 콘솔 명령이 실행될 때 애플리�
 
 ### 배치 워처 {#batch-watcher}
 
-배치 워처는 큐에 등록된 [배치](/docs/{{version}}/queues#job-batching)에 대한 정보와 작업 및 연결 정보를 기록합니다.
+배치 워처는 큐에 등록된 [배치](/laravel/12.x/queues#job-batching)에 대한 정보와 작업 및 연결 정보를 기록합니다.
 
 
 ### 캐시 워처 {#cache-watcher}
@@ -325,7 +325,7 @@ Dump Watcher는 Telescope에서 변수 덤프를 기록하고 표시합니다. L
 
 ### 이벤트 워처 {#event-watcher}
 
-이벤트 워처는 애플리케이션에서 디스패치된 [이벤트](/docs/{{version}}/events)의 페이로드, 리스너, 브로드캐스트 데이터를 기록합니다. Laravel 프레임워크의 내부 이벤트는 이벤트 워처에 의해 무시됩니다.
+이벤트 워처는 애플리케이션에서 디스패치된 [이벤트](/laravel/12.x/events)의 페이로드, 리스너, 브로드캐스트 데이터를 기록합니다. Laravel 프레임워크의 내부 이벤트는 이벤트 워처에 의해 무시됩니다.
 
 
 ### 예외 감시자 {#exception-watcher}
@@ -335,7 +335,7 @@ Dump Watcher는 Telescope에서 변수 덤프를 기록하고 표시합니다. L
 
 ### 게이트 워처 {#gate-watcher}
 
-게이트 워처는 애플리케이션에서 [게이트와 정책](/docs/{{version}}/authorization) 검사의 데이터와 결과를 기록합니다. 특정 권한을 워처에서 기록하지 않으려면, `config/telescope.php` 파일의 `ignore_abilities` 옵션에 해당 권한을 지정할 수 있습니다:
+게이트 워처는 애플리케이션에서 [게이트와 정책](/laravel/12.x/authorization) 검사의 데이터와 결과를 기록합니다. 특정 권한을 워처에서 기록하지 않으려면, `config/telescope.php` 파일의 `ignore_abilities` 옵션에 해당 권한을 지정할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -350,17 +350,17 @@ Dump Watcher는 Telescope에서 변수 덤프를 기록하고 표시합니다. L
 
 ### HTTP 클라이언트 워처 {#http-client-watcher}
 
-HTTP 클라이언트 워처는 애플리케이션에서 발생하는 [HTTP 클라이언트 요청](/docs/{{version}}/http-client)을 기록합니다.
+HTTP 클라이언트 워처는 애플리케이션에서 발생하는 [HTTP 클라이언트 요청](/laravel/12.x/http-client)을 기록합니다.
 
 
 ### 작업 감시자 {#job-watcher}
 
-작업 감시자는 애플리케이션에서 디스패치된 [작업](/docs/{{version}}/queues)의 데이터와 상태를 기록합니다.
+작업 감시자는 애플리케이션에서 디스패치된 [작업](/laravel/12.x/queues)의 데이터와 상태를 기록합니다.
 
 
 ### 로그 워처 {#log-watcher}
 
-로그 워처는 애플리케이션에서 작성된 [로그 데이터](/docs/{{version}}/logging)를 기록합니다.
+로그 워처는 애플리케이션에서 작성된 [로그 데이터](/laravel/12.x/logging)를 기록합니다.
 
 기본적으로 Telescope는 `error` 레벨 이상의 로그만 기록합니다. 하지만, 애플리케이션의 `config/telescope.php` 설정 파일에서 `level` 옵션을 수정하여 이 동작을 변경할 수 있습니다:
 
@@ -378,12 +378,12 @@ HTTP 클라이언트 워처는 애플리케이션에서 발생하는 [HTTP 클�
 
 ### 메일 워처 {#mail-watcher}
 
-메일 워처를 사용하면 애플리케이션에서 전송된 [이메일](/docs/{{version}}/mail)의 브라우저 내 미리보기를 관련 데이터와 함께 확인할 수 있습니다. 또한 이메일을 `.eml` 파일로 다운로드할 수도 있습니다.
+메일 워처를 사용하면 애플리케이션에서 전송된 [이메일](/laravel/12.x/mail)의 브라우저 내 미리보기를 관련 데이터와 함께 확인할 수 있습니다. 또한 이메일을 `.eml` 파일로 다운로드할 수도 있습니다.
 
 
 ### 모델 워처 {#model-watcher}
 
-모델 워처는 Eloquent [모델 이벤트](/docs/{{version}}/eloquent#events)가 디스패치될 때마다 모델의 변경 사항을 기록합니다. 워처의 `events` 옵션을 통해 어떤 모델 이벤트를 기록할지 지정할 수 있습니다:
+모델 워처는 Eloquent [모델 이벤트](/laravel/12.x/eloquent#events)가 디스패치될 때마다 모델의 변경 사항을 기록합니다. 워처의 `events` 옵션을 통해 어떤 모델 이벤트를 기록할지 지정할 수 있습니다:
 
 ```php
 'watchers' => [
@@ -411,7 +411,7 @@ HTTP 클라이언트 워처는 애플리케이션에서 발생하는 [HTTP 클�
 
 ### 알림 감시자 {#notification-watcher}
 
-알림 감시자는 애플리케이션에서 전송된 모든 [알림](/docs/{{version}}/notifications)을 기록합니다. 만약 알림이 이메일을 트리거하고 메일 감시자가 활성화되어 있다면, 해당 이메일도 메일 감시자 화면에서 미리 볼 수 있습니다.
+알림 감시자는 애플리케이션에서 전송된 모든 [알림](/laravel/12.x/notifications)을 기록합니다. 만약 알림이 이메일을 트리거하고 메일 감시자가 활성화되어 있다면, 해당 이메일도 메일 감시자 화면에서 미리 볼 수 있습니다.
 
 
 ### 쿼리 워처 {#query-watcher}
@@ -431,7 +431,7 @@ HTTP 클라이언트 워처는 애플리케이션에서 발생하는 [HTTP 클�
 
 ### Redis 감시자 {#redis-watcher}
 
-Redis 감시자는 애플리케이션에서 실행된 모든 [Redis](/docs/{{version}}/redis) 명령어를 기록합니다. Redis를 캐싱에 사용하고 있다면, 캐시 명령어 또한 Redis 감시자에 의해 기록됩니다.
+Redis 감시자는 애플리케이션에서 실행된 모든 [Redis](/laravel/12.x/redis) 명령어를 기록합니다. Redis를 캐싱에 사용하고 있다면, 캐시 명령어 또한 Redis 감시자에 의해 기록됩니다.
 
 
 ### 요청 감시자 {#request-watcher}
@@ -451,12 +451,12 @@ Redis 감시자는 애플리케이션에서 실행된 모든 [Redis](/docs/{{ver
 
 ### 스케줄 감시자 {#schedule-watcher}
 
-스케줄 감시자는 애플리케이션에서 실행되는 [스케줄된 작업](/docs/{{version}}/scheduling)의 명령어와 출력을 기록합니다.
+스케줄 감시자는 애플리케이션에서 실행되는 [스케줄된 작업](/laravel/12.x/scheduling)의 명령어와 출력을 기록합니다.
 
 
 ### 뷰 워처 {#view-watcher}
 
-뷰 워처는 뷰를 렌더링할 때 사용된 [뷰](/docs/{{version}}/views) 이름, 경로, 데이터, 그리고 "컴포저"를 기록합니다.
+뷰 워처는 뷰를 렌더링할 때 사용된 [뷰](/laravel/12.x/views) 이름, 경로, 데이터, 그리고 "컴포저"를 기록합니다.
 
 
 ## 사용자 아바타 표시 {#displaying-user-avatars}

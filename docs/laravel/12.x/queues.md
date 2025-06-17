@@ -65,7 +65,7 @@ Laravel 큐는 [Amazon SQS](https://aws.amazon.com/sqs/), [Redis](https://redis.
 Laravel의 큐 설정 옵션은 애플리케이션의 `config/queue.php` 설정 파일에 저장되어 있습니다. 이 파일에는 프레임워크에 포함된 각 큐 드라이버(데이터베이스, [Amazon SQS](https://aws.amazon.com/sqs/), [Redis](https://redis.io), [Beanstalkd](https://beanstalkd.github.io/) 등)와 관련된 연결 설정이 포함되어 있습니다. 또한, 작업을 즉시 실행하는 동기(synchronous) 드라이버(로컬 개발 시 사용)와 큐에 쌓인 작업을 폐기하는 `null` 큐 드라이버도 포함되어 있습니다.
 
 > [!NOTE]
-> Laravel은 이제 Redis 기반 큐를 위한 아름다운 대시보드와 설정 시스템인 Horizon을 제공합니다. 자세한 내용은 [Horizon 공식 문서](/docs/{{version}}/horizon)를 참고하세요.
+> Laravel은 이제 Redis 기반 큐를 위한 아름다운 대시보드와 설정 시스템인 Horizon을 제공합니다. 자세한 내용은 [Horizon 공식 문서](/laravel/12.x/horizon)를 참고하세요.
 
 
 ### 연결(Connections)과 큐(Queues)의 차이점 {#connections-vs-queues}
@@ -96,7 +96,7 @@ php artisan queue:work --queue=high,default
 
 #### 데이터베이스 {#database}
 
-`database` 큐 드라이버를 사용하려면 작업을 저장할 데이터베이스 테이블이 필요합니다. 일반적으로 이 테이블은 Laravel의 기본 `0001_01_01_000002_create_jobs_table.php` [데이터베이스 마이그레이션](/docs/{{version}}/migrations)에 포함되어 있습니다. 그러나 애플리케이션에 이 마이그레이션이 없다면, `make:queue-table` Artisan 명령어를 사용하여 생성할 수 있습니다:
+`database` 큐 드라이버를 사용하려면 작업을 저장할 데이터베이스 테이블이 필요합니다. 일반적으로 이 테이블은 Laravel의 기본 `0001_01_01_000002_create_jobs_table.php` [데이터베이스 마이그레이션](/laravel/12.x/migrations)에 포함되어 있습니다. 그러나 애플리케이션에 이 마이그레이션이 없다면, `make:queue-table` Artisan 명령어를 사용하여 생성할 수 있습니다:
 
 ```shell
 php artisan make:queue-table
@@ -176,7 +176,7 @@ php artisan make:job ProcessPodcast
 생성된 클래스는 `Illuminate\Contracts\Queue\ShouldQueue` 인터페이스를 구현하며, 이는 해당 작업이 비동기적으로 실행되도록 큐에 푸시되어야 함을 Laravel에 알립니다.
 
 > [!NOTE]
-> 작업 스텁은 [스텁 커스터마이징](/docs/{{version}}/artisan#stub-customization)을 통해 사용자 정의할 수 있습니다.
+> 작업 스텁은 [스텁 커스터마이징](/laravel/12.x/artisan#stub-customization)을 통해 사용자 정의할 수 있습니다.
 
 
 ### 클래스 구조 {#class-structure}
@@ -214,16 +214,16 @@ class ProcessPodcast implements ShouldQueue
 }
 ```
 
-이 예시에서 볼 수 있듯이, [Eloquent 모델](/docs/{{version}}/eloquent)을 큐에 등록된 Job의 생성자에 직접 전달할 수 있습니다. Job이 사용하는 Queueable 트레이트 덕분에, Eloquent 모델과 그에 로드된 관계들은 Job이 처리될 때 자동으로 직렬화 및 역직렬화됩니다.
+이 예시에서 볼 수 있듯이, [Eloquent 모델](/laravel/12.x/eloquent)을 큐에 등록된 Job의 생성자에 직접 전달할 수 있습니다. Job이 사용하는 Queueable 트레이트 덕분에, Eloquent 모델과 그에 로드된 관계들은 Job이 처리될 때 자동으로 직렬화 및 역직렬화됩니다.
 
 큐에 등록된 Job이 생성자에서 Eloquent 모델을 받는 경우, 큐에는 모델의 식별자만 직렬화되어 저장됩니다. 실제로 Job이 처리될 때, 큐 시스템은 데이터베이스에서 전체 모델 인스턴스와 로드된 관계를 자동으로 다시 조회합니다. 이러한 모델 직렬화 방식은 큐 드라이버로 전송되는 Job 페이로드의 크기를 훨씬 더 작게 만들어줍니다.
 
 
 #### `handle` 메서드 의존성 주입 {#handle-method-dependency-injection}
 
-`handle` 메서드는 큐에서 작업이 처리될 때 호출됩니다. 이때 작업의 `handle` 메서드에 의존성을 타입힌트로 지정할 수 있습니다. Laravel의 [서비스 컨테이너](/docs/{{version}}/container)는 이러한 의존성들을 자동으로 주입해줍니다.
+`handle` 메서드는 큐에서 작업이 처리될 때 호출됩니다. 이때 작업의 `handle` 메서드에 의존성을 타입힌트로 지정할 수 있습니다. Laravel의 [서비스 컨테이너](/laravel/12.x/container)는 이러한 의존성들을 자동으로 주입해줍니다.
 
-만약 컨테이너가 `handle` 메서드에 의존성을 주입하는 방식을 완전히 제어하고 싶다면, 컨테이너의 `bindMethod` 메서드를 사용할 수 있습니다. `bindMethod`는 작업과 컨테이너를 인자로 받는 콜백을 전달받으며, 콜백 내부에서 원하는 방식으로 `handle` 메서드를 호출할 수 있습니다. 일반적으로 이 메서드는 `App\Providers\AppServiceProvider`의 `boot` 메서드에서 호출하는 것이 좋습니다. [서비스 프로바이더](/docs/{{version}}/providers)에서 다음과 같이 사용할 수 있습니다:
+만약 컨테이너가 `handle` 메서드에 의존성을 주입하는 방식을 완전히 제어하고 싶다면, 컨테이너의 `bindMethod` 메서드를 사용할 수 있습니다. `bindMethod`는 작업과 컨테이너를 인자로 받는 콜백을 전달받으며, 콜백 내부에서 원하는 방식으로 `handle` 메서드를 호출할 수 있습니다. 일반적으로 이 메서드는 `App\Providers\AppServiceProvider`의 `boot` 메서드에서 호출하는 것이 좋습니다. [서비스 프로바이더](/laravel/12.x/providers)에서 다음과 같이 사용할 수 있습니다:
 
 ```php
 use App\Jobs\ProcessPodcast;
@@ -276,7 +276,7 @@ public function __construct(
 ### 유니크 잡 {#unique-jobs}
 
 > [!WARNING]
-> 유니크 잡은 [락](/docs/{{version}}/cache#atomic-locks)를 지원하는 캐시 드라이버가 필요합니다. 현재 `memcached`, `redis`, `dynamodb`, `database`, `file`, `array` 캐시 드라이버가 원자적 락을 지원합니다. 또한, 유니크 잡 제약 조건은 배치 내의 잡에는 적용되지 않습니다.
+> 유니크 잡은 [락](/laravel/12.x/cache#atomic-locks)를 지원하는 캐시 드라이버가 필요합니다. 현재 `memcached`, `redis`, `dynamodb`, `database`, `file`, `array` 캐시 드라이버가 원자적 락을 지원합니다. 또한, 유니크 잡 제약 조건은 배치 내의 잡에는 적용되지 않습니다.
 
 특정 잡의 인스턴스가 한 번에 큐에 하나만 존재하도록 보장하고 싶을 때가 있습니다. 이럴 때는 잡 클래스에 `ShouldBeUnique` 인터페이스를 구현하면 됩니다. 이 인터페이스는 클래스에 추가 메서드를 정의할 필요가 없습니다.
 
@@ -355,7 +355,7 @@ class UpdateSearchIndex implements ShouldQueue, ShouldBeUniqueUntilProcessing
 
 #### 고유 잡 락 {#unique-job-locks}
 
-`ShouldBeUnique` 잡이 디스패치될 때, Laravel은 내부적으로 `uniqueId` 키를 사용하여 [락](/docs/{{version}}/cache#atomic-locks)을 획득하려고 시도합니다. 만약 락을 획득하지 못하면, 해당 잡은 디스패치되지 않습니다. 이 락은 잡이 정상적으로 처리되거나 모든 재시도에서 실패할 때 해제됩니다. 기본적으로 Laravel은 기본 캐시 드라이버를 사용하여 이 락을 획득합니다. 하지만, 락을 획득할 때 다른 드라이버를 사용하고 싶다면, 어떤 캐시 드라이버를 사용할지 반환하는 `uniqueVia` 메서드를 정의할 수 있습니다:
+`ShouldBeUnique` 잡이 디스패치될 때, Laravel은 내부적으로 `uniqueId` 키를 사용하여 [락](/laravel/12.x/cache#atomic-locks)을 획득하려고 시도합니다. 만약 락을 획득하지 못하면, 해당 잡은 디스패치되지 않습니다. 이 락은 잡이 정상적으로 처리되거나 모든 재시도에서 실패할 때 해제됩니다. 기본적으로 Laravel은 기본 캐시 드라이버를 사용하여 이 락을 획득합니다. 하지만, 락을 획득할 때 다른 드라이버를 사용하고 싶다면, 어떤 캐시 드라이버를 사용할지 반환하는 `uniqueVia` 메서드를 정의할 수 있습니다:
 
 ```php
 use Illuminate\Contracts\Cache\Repository;
@@ -376,12 +376,12 @@ class UpdateSearchIndex implements ShouldQueue, ShouldBeUnique
 ```
 
 > [!NOTE]
-> 만약 단순히 잡의 동시 실행만 제한하고 싶다면, [WithoutOverlapping](/docs/{{version}}/queues#preventing-job-overlaps) 잡 미들웨어를 대신 사용하세요.
+> 만약 단순히 잡의 동시 실행만 제한하고 싶다면, [WithoutOverlapping](/laravel/12.x/queues#preventing-job-overlaps) 잡 미들웨어를 대신 사용하세요.
 
 
 ### 암호화된 작업 {#encrypted-jobs}
 
-Laravel은 [암호화](/docs/{{version}}/encryption)를 통해 작업 데이터의 프라이버시와 무결성을 보장할 수 있도록 지원합니다. 시작하려면, 작업 클래스에 `ShouldBeEncrypted` 인터페이스를 추가하기만 하면 됩니다. 이 인터페이스가 클래스에 추가되면, Laravel은 해당 작업을 큐에 넣기 전에 자동으로 암호화합니다:
+Laravel은 [암호화](/laravel/12.x/encryption)를 통해 작업 데이터의 프라이버시와 무결성을 보장할 수 있도록 지원합니다. 시작하려면, 작업 클래스에 `ShouldBeEncrypted` 인터페이스를 추가하기만 하면 됩니다. 이 인터페이스가 클래스에 추가되면, Laravel은 해당 작업을 큐에 넣기 전에 자동으로 암호화합니다:
 
 ```php
 <?php
@@ -456,7 +456,7 @@ class RateLimited
 }
 ```
 
-보시다시피, [라우트 미들웨어](/docs/{{version}}/middleware)와 마찬가지로 잡 미들웨어는 처리 중인 잡과 잡 처리를 계속 진행할 콜백을 전달받습니다.
+보시다시피, [라우트 미들웨어](/laravel/12.x/middleware)와 마찬가지로 잡 미들웨어는 처리 중인 잡과 잡 처리를 계속 진행할 콜백을 전달받습니다.
 
 `make:job-middleware` Artisan 명령어를 사용하여 새로운 잡 미들웨어 클래스를 생성할 수 있습니다. 잡 미들웨어를 생성한 후에는, 잡의 `middleware` 메서드에서 반환하여 해당 잡에 미들웨어를 적용할 수 있습니다. 이 메서드는 `make:job` Artisan 명령어로 생성된 잡에는 기본적으로 존재하지 않으므로, 직접 추가해야 합니다:
 
@@ -475,12 +475,12 @@ public function middleware(): array
 ```
 
 > [!NOTE]
-> 잡 미들웨어는 [큐 처리 이벤트 리스너](/docs/{{version}}/events#queued-event-listeners), [메일러블](/docs/{{version}}/mail#queueing-mail), [알림](/docs/{{version}}/notifications#queueing-notifications)에도 적용할 수 있습니다.
+> 잡 미들웨어는 [큐 처리 이벤트 리스너](/laravel/12.x/events#queued-event-listeners), [메일러블](/laravel/12.x/mail#queueing-mail), [알림](/laravel/12.x/notifications#queueing-notifications)에도 적용할 수 있습니다.
 
 
 ### Rate Limiting {#rate-limiting}
 
-직접 레이트 리미팅(요청 제한) 잡 미들웨어를 작성하는 방법을 앞서 살펴보았지만, 실제로 Laravel에는 잡에 사용할 수 있는 기본 레이트 리미팅 미들웨어가 포함되어 있습니다. [라우트 레이트 리미터](/docs/{{version}}/routing#defining-rate-limiters)와 마찬가지로, 잡 레이트 리미터도 `RateLimiter` 파사드의 `for` 메서드를 사용해 정의할 수 있습니다.
+직접 레이트 리미팅(요청 제한) 잡 미들웨어를 작성하는 방법을 앞서 살펴보았지만, 실제로 Laravel에는 잡에 사용할 수 있는 기본 레이트 리미팅 미들웨어가 포함되어 있습니다. [라우트 레이트 리미터](/laravel/12.x/routing#defining-rate-limiters)와 마찬가지로, 잡 레이트 리미터도 `RateLimiter` 파사드의 `for` 메서드를 사용해 정의할 수 있습니다.
 
 예를 들어, 일반 사용자는 한 시간에 한 번만 데이터를 백업할 수 있도록 제한하고, 프리미엄 고객에게는 이런 제한을 두지 않으려 할 수 있습니다. 이를 위해 `AppServiceProvider`의 `boot` 메서드에서 `RateLimiter`를 다음과 같이 정의할 수 있습니다:
 
@@ -620,7 +620,7 @@ public function middleware(): array
 ```
 
 > [!WARNING]
-> `WithoutOverlapping` 미들웨어는 [락](/docs/{{version}}/cache#atomic-locks)를 지원하는 캐시 드라이버가 필요합니다. 현재 `memcached`, `redis`, `dynamodb`, `database`, `file`, `array` 캐시 드라이버가 원자적 락을 지원합니다.
+> `WithoutOverlapping` 미들웨어는 [락](/laravel/12.x/cache#atomic-locks)를 지원하는 캐시 드라이버가 필요합니다. 현재 `memcached`, `redis`, `dynamodb`, `database`, `file`, `array` 캐시 드라이버가 원자적 락을 지원합니다.
 
 
 #### 작업 클래스 간의 Lock Key 공유 {#sharing-lock-keys}
@@ -1273,7 +1273,7 @@ public function retryUntil(): DateTime
 `retryUntil`과 `tries`가 모두 정의되어 있는 경우, Laravel은 `retryUntil` 메서드를 우선적으로 적용합니다.
 
 > [!NOTE]
-> [큐에 등록된 이벤트 리스너](/docs/{{version}}/events#queued-event-listeners)와 [큐에 등록된 알림](/docs/{{version}}/notifications#queueing-notifications)에도 `tries` 속성이나 `retryUntil` 메서드를 정의할 수 있습니다.
+> [큐에 등록된 이벤트 리스너](/laravel/12.x/events#queued-event-listeners)와 [큐에 등록된 알림](/laravel/12.x/notifications#queueing-notifications)에도 `tries` 속성이나 `retryUntil` 메서드를 정의할 수 있습니다.
 
 
 #### 최대 예외 수 {#max-exceptions}
@@ -1739,7 +1739,7 @@ php artisan queue:retry-batch 32dbc76c-4f82-4749-b610-a639fe0099b5
 
 ### 배치 정리 {#pruning-batches}
 
-정리를 하지 않으면 `job_batches` 테이블에 레코드가 매우 빠르게 쌓일 수 있습니다. 이를 방지하기 위해, [스케줄러](/docs/{{version}}/scheduling)를 사용하여 `queue:prune-batches` Artisan 명령어를 매일 실행하도록 설정해야 합니다.
+정리를 하지 않으면 `job_batches` 테이블에 레코드가 매우 빠르게 쌓일 수 있습니다. 이를 방지하기 위해, [스케줄러](/laravel/12.x/scheduling)를 사용하여 `queue:prune-batches` Artisan 명령어를 매일 실행하도록 설정해야 합니다.
 
 ```php
 use Illuminate\Support\Facades\Schedule;
@@ -1956,7 +1956,7 @@ php artisan queue:work --sleep=3
 
 #### 유지보수 모드와 큐 {#maintenance-mode-queues}
 
-애플리케이션이 [유지보수 모드](/docs/{{version}}/configuration#maintenance-mode)일 때는 큐에 등록된 작업이 처리되지 않습니다. 애플리케이션이 유지보수 모드에서 벗어나면 작업들은 정상적으로 처리됩니다.
+애플리케이션이 [유지보수 모드](/laravel/12.x/configuration#maintenance-mode)일 때는 큐에 등록된 작업이 처리되지 않습니다. 애플리케이션이 유지보수 모드에서 벗어나면 작업들은 정상적으로 처리됩니다.
 
 유지보수 모드가 활성화되어 있어도 큐 워커가 작업을 강제로 처리하도록 하려면, `--force` 옵션을 사용할 수 있습니다:
 
@@ -1996,7 +1996,7 @@ php artisan queue:restart
 이 명령어는 모든 큐 워커에게 현재 작업을 마친 후 정상적으로 종료하라는 신호를 보냅니다. 이로 인해 기존 작업이 유실되지 않습니다. `queue:restart` 명령어가 실행되면 큐 워커가 종료되므로, 큐 워커를 자동으로 재시작할 수 있도록 [Supervisor](#supervisor-configuration)와 같은 프로세스 관리자를 사용해야 합니다.
 
 > [!NOTE]
-> 큐는 재시작 신호를 저장하기 위해 [캐시](/docs/{{version}}/cache)를 사용하므로, 이 기능을 사용하기 전에 애플리케이션에 캐시 드라이버가 올바르게 설정되어 있는지 반드시 확인해야 합니다.
+> 큐는 재시작 신호를 저장하기 위해 [캐시](/laravel/12.x/cache)를 사용하므로, 이 기능을 사용하기 전에 애플리케이션에 캐시 드라이버가 올바르게 설정되어 있는지 반드시 확인해야 합니다.
 
 
 ### 작업 만료 및 타임아웃 {#job-expirations-and-timeouts}
@@ -2085,7 +2085,7 @@ Supervisor에 대한 더 자세한 내용은 [Supervisor 공식 문서](http://s
 
 ## 실패한 작업 처리하기 {#dealing-with-failed-jobs}
 
-가끔 큐에 등록된 작업이 실패할 수 있습니다. 걱정하지 마세요, 모든 일이 항상 계획대로 되지는 않으니까요! Laravel은 [작업이 시도될 최대 횟수](#max-job-attempts-and-timeout)를 지정할 수 있는 편리한 방법을 제공합니다. 비동기 작업이 이 횟수를 초과하면, 해당 작업은 `failed_jobs` 데이터베이스 테이블에 저장됩니다. [동기적으로 디스패치된 작업](/docs/{{version}}/queues#synchronous-dispatching)이 실패할 경우에는 이 테이블에 저장되지 않고, 예외가 즉시 애플리케이션에서 처리됩니다.
+가끔 큐에 등록된 작업이 실패할 수 있습니다. 걱정하지 마세요, 모든 일이 항상 계획대로 되지는 않으니까요! Laravel은 [작업이 시도될 최대 횟수](#max-job-attempts-and-timeout)를 지정할 수 있는 편리한 방법을 제공합니다. 비동기 작업이 이 횟수를 초과하면, 해당 작업은 `failed_jobs` 데이터베이스 테이블에 저장됩니다. [동기적으로 디스패치된 작업](/laravel/12.x/queues#synchronous-dispatching)이 실패할 경우에는 이 테이블에 저장되지 않고, 예외가 즉시 애플리케이션에서 처리됩니다.
 
 새로운 Laravel 애플리케이션에는 일반적으로 `failed_jobs` 테이블을 생성하는 마이그레이션이 이미 포함되어 있습니다. 만약 애플리케이션에 이 테이블을 위한 마이그레이션이 없다면, `make:queue-failed-table` 명령어를 사용해 마이그레이션을 생성할 수 있습니다:
 
@@ -2232,7 +2232,7 @@ php artisan queue:forget 91401d2c-0784-4f43-824c-34f94a33c24d
 ```
 
 > [!NOTE]
-> [Horizon](/docs/{{version}}/horizon)을 사용할 경우, `queue:forget` 명령어 대신 `horizon:forget` 명령어로 실패한 작업을 삭제해야 합니다.
+> [Horizon](/laravel/12.x/horizon)을 사용할 경우, `queue:forget` 명령어 대신 `horizon:forget` 명령어로 실패한 작업을 삭제해야 합니다.
 
 `failed_jobs` 테이블에 있는 모든 실패한 작업을 삭제하려면, `queue:flush` 명령어를 사용하세요:
 
@@ -2347,7 +2347,7 @@ class AppServiceProvider extends ServiceProvider
 ## 큐에서 작업 삭제하기 {#clearing-jobs-from-queues}
 
 > [!NOTE]
-> [Horizon](/docs/{{version}}/horizon)를 사용하는 경우, `queue:clear` 명령어 대신 `horizon:clear` 명령어를 사용하여 큐에서 작업을 삭제해야 합니다.
+> [Horizon](/laravel/12.x/horizon)를 사용하는 경우, `queue:clear` 명령어 대신 `horizon:clear` 명령어를 사용하여 큐에서 작업을 삭제해야 합니다.
 
 기본 연결의 기본 큐에 있는 모든 작업을 삭제하려면 `queue:clear` Artisan 명령어를 사용할 수 있습니다.
 
@@ -2369,7 +2369,7 @@ php artisan queue:clear redis --queue=emails
 
 큐에 갑작스럽게 많은 작업이 몰리면, 큐가 과부하되어 작업 완료까지 오랜 시간이 걸릴 수 있습니다. 원한다면, Laravel은 큐의 작업 수가 지정한 임계값을 초과할 때 알림을 보낼 수 있습니다.
 
-먼저, `queue:monitor` 명령어를 [매 분마다 실행](/docs/{{version}}/scheduling)하도록 스케줄링해야 합니다. 이 명령어는 모니터링할 큐의 이름과 원하는 작업 수 임계값을 인자로 받습니다:
+먼저, `queue:monitor` 명령어를 [매 분마다 실행](/laravel/12.x/scheduling)하도록 스케줄링해야 합니다. 이 명령어는 모니터링할 큐의 이름과 원하는 작업 수 임계값을 인자로 받습니다:
 
 ```shell
 php artisan queue:monitor redis:default,redis:deployments --max=100
@@ -2530,7 +2530,7 @@ Queue::fake()->except([
 
 ### 잡 체인 테스트하기 {#testing-job-chains}
 
-잡 체인을 테스트하려면 `Bus` 파사드의 페이크 기능을 활용해야 합니다. `Bus` 파사드의 `assertChained` 메서드는 [잡 체인](/docs/{{version}}/queues#job-chaining)이 디스패치되었는지 확인하는 데 사용할 수 있습니다. `assertChained` 메서드는 체인에 포함된 잡들의 배열을 첫 번째 인자로 받습니다:
+잡 체인을 테스트하려면 `Bus` 파사드의 페이크 기능을 활용해야 합니다. `Bus` 파사드의 `assertChained` 메서드는 [잡 체인](/laravel/12.x/queues#job-chaining)이 디스패치되었는지 확인하는 데 사용할 수 있습니다. `assertChained` 메서드는 체인에 포함된 잡들의 배열을 첫 번째 인자로 받습니다:
 
 ```php
 use App\Jobs\RecordShipment;
@@ -2611,7 +2611,7 @@ Bus::assertChained([
 
 ### 잡 배치 테스트 {#testing-job-batches}
 
-`Bus` 파사드의 `assertBatched` 메서드를 사용하여 [잡 배치](/docs/{{version}}/queues#job-batching)가 디스패치되었는지 확인할 수 있습니다. `assertBatched` 메서드에 전달되는 클로저는 `Illuminate\Bus\PendingBatch` 인스턴스를 받으며, 이를 통해 배치 내의 잡들을 검사할 수 있습니다:
+`Bus` 파사드의 `assertBatched` 메서드를 사용하여 [잡 배치](/laravel/12.x/queues#job-batching)가 디스패치되었는지 확인할 수 있습니다. `assertBatched` 메서드에 전달되는 클로저는 `Illuminate\Bus\PendingBatch` 인스턴스를 받으며, 이를 통해 배치 내의 잡들을 검사할 수 있습니다:
 
 ```php
 use Illuminate\Bus\PendingBatch;
@@ -2679,7 +2679,7 @@ $job->assertNotFailed();
 
 ## 작업 이벤트 {#job-events}
 
-`Queue` [파사드](/docs/{{version}}/facades)의 `before`와 `after` 메서드를 사용하면, 큐에 등록된 작업이 처리되기 전이나 후에 실행할 콜백을 지정할 수 있습니다. 이러한 콜백은 추가적인 로깅을 하거나 대시보드 통계를 증가시키는 데 유용합니다. 일반적으로 이 메서드들은 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드에서 호출하는 것이 좋습니다. 예를 들어, Laravel에 기본 포함된 `AppServiceProvider`를 사용할 수 있습니다:
+`Queue` [파사드](/laravel/12.x/facades)의 `before`와 `after` 메서드를 사용하면, 큐에 등록된 작업이 처리되기 전이나 후에 실행할 콜백을 지정할 수 있습니다. 이러한 콜백은 추가적인 로깅을 하거나 대시보드 통계를 증가시키는 데 유용합니다. 일반적으로 이 메서드들은 [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메서드에서 호출하는 것이 좋습니다. 예를 들어, Laravel에 기본 포함된 `AppServiceProvider`를 사용할 수 있습니다:
 
 ```php
 <?php
@@ -2721,7 +2721,7 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-`Queue` [파사드](/docs/{{version}}/facades)의 `looping` 메서드를 사용하면, 워커가 큐에서 작업을 가져오기 전에 실행할 콜백을 지정할 수 있습니다. 예를 들어, 이전에 실패한 작업으로 인해 남아있는 트랜잭션을 롤백하는 클로저를 등록할 수 있습니다:
+`Queue` [파사드](/laravel/12.x/facades)의 `looping` 메서드를 사용하면, 워커가 큐에서 작업을 가져오기 전에 실행할 콜백을 지정할 수 있습니다. 예를 들어, 이전에 실패한 작업으로 인해 남아있는 트랜잭션을 롤백하는 클로저를 등록할 수 있습니다:
 
 ```php
 use Illuminate\Support\Facades\DB;

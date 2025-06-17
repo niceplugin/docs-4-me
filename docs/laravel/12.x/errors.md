@@ -32,7 +32,7 @@
 
 ### 예외 보고 {#reporting-exceptions}
 
-Laravel에서 예외 보고는 예외를 로그로 남기거나 [Sentry](https://github.com/getsentry/sentry-laravel)나 [Flare](https://flareapp.io)와 같은 외부 서비스로 전송하는 데 사용됩니다. 기본적으로 예외는 [로깅](/docs/{{version}}/logging) 설정에 따라 기록됩니다. 하지만, 원하는 방식으로 예외를 자유롭게 기록할 수 있습니다.
+Laravel에서 예외 보고는 예외를 로그로 남기거나 [Sentry](https://github.com/getsentry/sentry-laravel)나 [Flare](https://flareapp.io)와 같은 외부 서비스로 전송하는 데 사용됩니다. 기본적으로 예외는 [로깅](/laravel/12.x/logging) 설정에 따라 기록됩니다. 하지만, 원하는 방식으로 예외를 자유롭게 기록할 수 있습니다.
 
 서로 다른 유형의 예외를 각각 다른 방식으로 보고해야 한다면, 애플리케이션의 `bootstrap/app.php` 파일에서 `report` 예외 메서드를 사용하여 특정 유형의 예외가 보고될 때 실행할 클로저를 등록할 수 있습니다. Laravel은 클로저의 타입 힌트를 확인하여 어떤 유형의 예외를 보고할지 결정합니다.
 
@@ -63,7 +63,7 @@ use App\Exceptions\InvalidOrderException;
 ```
 
 > [!NOTE]
-> 특정 예외에 대한 예외 보고를 커스터마이즈하려면 [보고 가능한 예외](/docs/{{version}}/errors#renderable-exceptions)를 활용할 수도 있습니다.
+> 특정 예외에 대한 예외 보고를 커스터마이즈하려면 [보고 가능한 예외](/laravel/12.x/errors#renderable-exceptions)를 활용할 수도 있습니다.
 
 
 #### 전역 로그 컨텍스트 {#global-log-context}
@@ -157,7 +157,7 @@ report($caught); // 무시됨
 
 ### 예외 로그 레벨 {#exception-log-levels}
 
-애플리케이션의 [로그](/docs/{{version}}/logging)에 메시지가 기록될 때, 해당 메시지는 지정된 [로그 레벨](/docs/{{version}}/logging#log-levels)로 기록됩니다. 로그 레벨은 기록되는 메시지의 심각도나 중요도를 나타냅니다.
+애플리케이션의 [로그](/laravel/12.x/logging)에 메시지가 기록될 때, 해당 메시지는 지정된 [로그 레벨](/laravel/12.x/logging#log-levels)로 기록됩니다. 로그 레벨은 기록되는 메시지의 심각도나 중요도를 나타냅니다.
 
 앞서 언급했듯이, `report` 메서드를 사용해 커스텀 예외 리포팅 콜백을 등록하더라도, Laravel은 여전히 애플리케이션의 기본 로깅 설정을 사용해 예외를 기록합니다. 하지만 로그 레벨에 따라 메시지가 기록되는 채널이 달라질 수 있으므로, 특정 예외가 기록되는 로그 레벨을 직접 설정하고 싶을 수 있습니다.
 
@@ -360,7 +360,7 @@ public function report(): bool
 ```
 
 > [!NOTE]
-> `report` 메서드에 필요한 의존성을 타입힌트로 지정하면, Laravel의 [서비스 컨테이너](/docs/{{version}}/container)가 자동으로 해당 의존성을 주입해줍니다.
+> `report` 메서드에 필요한 의존성을 타입힌트로 지정하면, Laravel의 [서비스 컨테이너](/laravel/12.x/container)가 자동으로 해당 의존성을 주입해줍니다.
 
 
 ### 예외 보고 제한 {#throttling-reported-exceptions}

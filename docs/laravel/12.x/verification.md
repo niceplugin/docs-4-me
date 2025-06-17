@@ -17,7 +17,7 @@
 많은 웹 애플리케이션에서는 사용자가 애플리케이션을 사용하기 전에 이메일 주소를 인증하도록 요구합니다. 매번 직접 이 기능을 구현하지 않도록, Laravel은 이메일 인증 요청을 보내고 검증하는 편리한 내장 서비스를 제공합니다.
 
 > [!NOTE]
-> 빠르게 시작하고 싶으신가요? 새로운 Laravel 애플리케이션에 [Laravel 애플리케이션 스타터 키트](/docs/{{version}}/starter-kits) 중 하나를 설치하세요. 스타터 키트는 이메일 인증 지원을 포함하여 전체 인증 시스템의 스캐폴딩을 자동으로 처리해줍니다.
+> 빠르게 시작하고 싶으신가요? 새로운 Laravel 애플리케이션에 [Laravel 애플리케이션 스타터 키트](/laravel/12.x/starter-kits) 중 하나를 설치하세요. 스타터 키트는 이메일 인증 지원을 포함하여 전체 인증 시스템의 스캐폴딩을 자동으로 처리해줍니다.
 
 
 ### 모델 준비 {#model-preparation}
@@ -41,9 +41,9 @@ class User extends Authenticatable implements MustVerifyEmail
 }
 ```
 
-이 인터페이스를 모델에 추가하면, 새로 등록된 사용자에게 이메일 인증 링크가 포함된 이메일이 자동으로 전송됩니다. 이는 Laravel이 `Illuminate\Auth\Events\Registered` 이벤트에 대해 `Illuminate\Auth\Listeners\SendEmailVerificationNotification` [리스너](/docs/{{version}}/events)를 자동으로 등록하기 때문에 원활하게 처리됩니다.
+이 인터페이스를 모델에 추가하면, 새로 등록된 사용자에게 이메일 인증 링크가 포함된 이메일이 자동으로 전송됩니다. 이는 Laravel이 `Illuminate\Auth\Events\Registered` 이벤트에 대해 `Illuminate\Auth\Listeners\SendEmailVerificationNotification` [리스너](/laravel/12.x/events)를 자동으로 등록하기 때문에 원활하게 처리됩니다.
 
-[스타터 키트](/docs/{{version}}/starter-kits)를 사용하지 않고 애플리케이션 내에서 직접 회원가입을 구현하는 경우, 사용자의 회원가입이 성공한 후에 `Illuminate\Auth\Events\Registered` 이벤트를 디스패치하고 있는지 확인해야 합니다:
+[스타터 키트](/laravel/12.x/starter-kits)를 사용하지 않고 애플리케이션 내에서 직접 회원가입을 구현하는 경우, 사용자의 회원가입이 성공한 후에 `Illuminate\Auth\Events\Registered` 이벤트를 디스패치하고 있는지 확인해야 합니다:
 
 ```php
 use Illuminate\Auth\Events\Registered;
@@ -79,7 +79,7 @@ Route::get('/email/verify', function () {
 이메일 인증 알림을 반환하는 라우트는 반드시 `verification.notice`라는 이름을 가져야 합니다. 이 라우트에 정확히 이 이름이 할당되어야 하는 이유는, [Laravel에 포함된](#protecting-routes) `verified` 미들웨어가 사용자가 이메일 주소를 인증하지 않은 경우 자동으로 이 라우트 이름으로 리디렉션하기 때문입니다.
 
 > [!NOTE]
-> 이메일 인증을 수동으로 구현할 때는 인증 알림 뷰의 내용을 직접 정의해야 합니다. 모든 필요한 인증 및 인증 관련 뷰가 포함된 스캐폴딩이 필요하다면, [Laravel 애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)를 확인해 보세요.
+> 이메일 인증을 수동으로 구현할 때는 인증 알림 뷰의 내용을 직접 정의해야 합니다. 모든 필요한 인증 및 인증 관련 뷰가 포함된 스캐폴딩이 필요하다면, [Laravel 애플리케이션 스타터 키트](/laravel/12.x/starter-kits)를 확인해 보세요.
 
 
 ### 이메일 인증 처리기 {#the-email-verification-handler}
@@ -96,7 +96,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 ```
 
-다음 단계로 넘어가기 전에, 이 라우트를 좀 더 자세히 살펴보겠습니다. 먼저, 일반적으로 사용하는 `Illuminate\Http\Request` 인스턴스 대신 `EmailVerificationRequest` 요청 타입을 사용하고 있다는 점을 알 수 있습니다. `EmailVerificationRequest`는 Laravel에 포함된 [폼 요청](/docs/{{version}}/validation#form-request-validation)입니다. 이 요청은 자동으로 요청의 `id`와 `hash` 파라미터를 검증해줍니다.
+다음 단계로 넘어가기 전에, 이 라우트를 좀 더 자세히 살펴보겠습니다. 먼저, 일반적으로 사용하는 `Illuminate\Http\Request` 인스턴스 대신 `EmailVerificationRequest` 요청 타입을 사용하고 있다는 점을 알 수 있습니다. `EmailVerificationRequest`는 Laravel에 포함된 [폼 요청](/laravel/12.x/validation#form-request-validation)입니다. 이 요청은 자동으로 요청의 `id`와 `hash` 파라미터를 검증해줍니다.
 
 다음으로, 요청에서 바로 `fulfill` 메서드를 호출할 수 있습니다. 이 메서드는 인증된 사용자에 대해 `markEmailAsVerified` 메서드를 호출하고, `Illuminate\Auth\Events\Verified` 이벤트를 디스패치합니다. `markEmailAsVerified` 메서드는 기본 `App\Models\User` 모델이 `Illuminate\Foundation\Auth\User` 기본 클래스를 통해 사용할 수 있습니다. 사용자의 이메일 주소가 인증되면, 원하는 곳으로 리다이렉트할 수 있습니다.
 
@@ -118,7 +118,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 ### 라우트 보호하기 {#protecting-routes}
 
-[라우트 미들웨어](/docs/{{version}}/middleware)는 인증된 사용자만 특정 라우트에 접근할 수 있도록 사용할 수 있습니다. Laravel에는 `verified`라는 [미들웨어 별칭](/docs/{{version}}/middleware#middleware-aliases)이 포함되어 있으며, 이는 `Illuminate\Auth\Middleware\EnsureEmailIsVerified` 미들웨어 클래스의 별칭입니다. 이 별칭은 Laravel에서 이미 자동으로 등록되어 있으므로, 라우트 정의에 `verified` 미들웨어만 추가하면 됩니다. 일반적으로 이 미들웨어는 `auth` 미들웨어와 함께 사용됩니다:
+[라우트 미들웨어](/laravel/12.x/middleware)는 인증된 사용자만 특정 라우트에 접근할 수 있도록 사용할 수 있습니다. Laravel에는 `verified`라는 [미들웨어 별칭](/laravel/12.x/middleware#middleware-aliases)이 포함되어 있으며, 이는 `Illuminate\Auth\Middleware\EnsureEmailIsVerified` 미들웨어 클래스의 별칭입니다. 이 별칭은 Laravel에서 이미 자동으로 등록되어 있으므로, 라우트 정의에 `verified` 미들웨어만 추가하면 됩니다. 일반적으로 이 미들웨어는 `auth` 미들웨어와 함께 사용됩니다:
 
 ```php
 Route::get('/profile', function () {
@@ -126,7 +126,7 @@ Route::get('/profile', function () {
 })->middleware(['auth', 'verified']);
 ```
 
-인증되지 않은 사용자가 이 미들웨어가 할당된 라우트에 접근하려고 하면, 자동으로 `verification.notice` [네임드 라우트](/docs/{{version}}/routing#named-routes)로 리디렉션됩니다.
+인증되지 않은 사용자가 이 미들웨어가 할당된 라우트에 접근하려고 하면, 자동으로 `verification.notice` [네임드 라우트](/laravel/12.x/routing#named-routes)로 리디렉션됩니다.
 
 
 ## 사용자 정의 {#customization}
@@ -159,9 +159,9 @@ public function boot(): void
 ```
 
 > [!NOTE]
-> 메일 알림에 대해 더 자세히 알아보려면 [메일 알림 문서](/docs/{{version}}/notifications#mail-notifications)를 참고하세요.
+> 메일 알림에 대해 더 자세히 알아보려면 [메일 알림 문서](/laravel/12.x/notifications#mail-notifications)를 참고하세요.
 
 
 ## 이벤트 {#events}
 
-[Laravel 애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)를 사용할 때, Laravel은 이메일 인증 과정에서 `Illuminate\Auth\Events\Verified` [이벤트](/docs/{{version}}/events)를 디스패치합니다. 애플리케이션에서 이메일 인증을 수동으로 처리하는 경우, 인증이 완료된 후 이러한 이벤트를 수동으로 디스패치할 수 있습니다.
+[Laravel 애플리케이션 스타터 키트](/laravel/12.x/starter-kits)를 사용할 때, Laravel은 이메일 인증 과정에서 `Illuminate\Auth\Events\Verified` [이벤트](/laravel/12.x/events)를 디스패치합니다. 애플리케이션에서 이메일 인증을 수동으로 처리하는 경우, 인증이 완료된 후 이러한 이벤트를 수동으로 디스패치할 수 있습니다.

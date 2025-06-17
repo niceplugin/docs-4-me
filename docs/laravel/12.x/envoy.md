@@ -20,7 +20,7 @@
 
 ## 소개 {#introduction}
 
-[Laravel Envoy](https://github.com/laravel/envoy)는 원격 서버에서 자주 실행하는 작업을 수행하기 위한 도구입니다. [Blade](/docs/{{version}}/blade) 스타일의 문법을 사용하여 배포, Artisan 명령어 등 다양한 작업을 손쉽게 설정할 수 있습니다. 현재 Envoy는 Mac과 Linux 운영 체제만 지원합니다. 하지만 [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)를 사용하면 Windows에서도 사용할 수 있습니다.
+[Laravel Envoy](https://github.com/laravel/envoy)는 원격 서버에서 자주 실행하는 작업을 수행하기 위한 도구입니다. [Blade](/laravel/12.x/blade) 스타일의 문법을 사용하여 배포, Artisan 명령어 등 다양한 작업을 손쉽게 설정할 수 있습니다. 현재 Envoy는 Mac과 Linux 운영 체제만 지원합니다. 하지만 [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)를 사용하면 Windows에서도 사용할 수 있습니다.
 
 
 ## 설치 {#installation}

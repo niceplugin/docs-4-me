@@ -32,34 +32,34 @@
 Fortify는 자체 사용자 인터페이스를 제공하지 않으므로, Fortify가 등록한 라우트에 요청을 보내는 여러분만의 사용자 인터페이스와 함께 사용해야 합니다. 이 문서의 나머지 부분에서는 이러한 라우트에 요청을 보내는 방법에 대해 자세히 다루겠습니다.
 
 > [!NOTE]
-> Fortify는 Laravel의 인증 기능을 빠르게 구현할 수 있도록 도와주는 패키지임을 기억하세요. **반드시 사용해야 하는 것은 아닙니다.** [인증](/docs/{{version}}/authentication), [비밀번호 재설정](/docs/{{version}}/passwords), [이메일 인증](/docs/{{version}}/verification) 문서에 따라 Laravel의 인증 서비스를 직접 다루는 것도 언제든지 가능합니다.
+> Fortify는 Laravel의 인증 기능을 빠르게 구현할 수 있도록 도와주는 패키지임을 기억하세요. **반드시 사용해야 하는 것은 아닙니다.** [인증](/laravel/12.x/authentication), [비밀번호 재설정](/laravel/12.x/passwords), [이메일 인증](/laravel/12.x/verification) 문서에 따라 Laravel의 인증 서비스를 직접 다루는 것도 언제든지 가능합니다.
 
 
 ### Fortify란 무엇인가요? {#what-is-fortify}
 
 앞서 언급했듯이, Laravel Fortify는 프론트엔드에 독립적인 Laravel 인증 백엔드 구현체입니다. Fortify는 로그인, 회원가입, 비밀번호 재설정, 이메일 인증 등 Laravel의 모든 인증 기능을 구현하는 데 필요한 라우트와 컨트롤러를 등록합니다.
 
-**Laravel의 인증 기능을 사용하기 위해 반드시 Fortify를 사용할 필요는 없습니다.** [인증](/docs/{{version}}/authentication), [비밀번호 재설정](/docs/{{version}}/passwords), [이메일 인증](/docs/{{version}}/verification) 문서에 안내된 대로, 언제든지 직접 Laravel의 인증 서비스를 수동으로 사용할 수 있습니다.
+**Laravel의 인증 기능을 사용하기 위해 반드시 Fortify를 사용할 필요는 없습니다.** [인증](/laravel/12.x/authentication), [비밀번호 재설정](/laravel/12.x/passwords), [이메일 인증](/laravel/12.x/verification) 문서에 안내된 대로, 언제든지 직접 Laravel의 인증 서비스를 수동으로 사용할 수 있습니다.
 
-Laravel을 처음 접하신다면, Laravel Fortify를 사용하기 전에 [애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)를 먼저 살펴보는 것이 좋습니다. 스타터 키트는 [Tailwind CSS](https://tailwindcss.com)로 제작된 사용자 인터페이스와 함께 인증 스캐폴딩을 제공합니다. 이를 통해 Fortify가 인증 기능을 구현해주기 전에, Laravel의 인증 기능을 직접 학습하고 익숙해질 수 있습니다.
+Laravel을 처음 접하신다면, Laravel Fortify를 사용하기 전에 [애플리케이션 스타터 키트](/laravel/12.x/starter-kits)를 먼저 살펴보는 것이 좋습니다. 스타터 키트는 [Tailwind CSS](https://tailwindcss.com)로 제작된 사용자 인터페이스와 함께 인증 스캐폴딩을 제공합니다. 이를 통해 Fortify가 인증 기능을 구현해주기 전에, Laravel의 인증 기능을 직접 학습하고 익숙해질 수 있습니다.
 
 Laravel Fortify는 기본적으로 애플리케이션 스타터 키트의 라우트와 컨트롤러를 사용자 인터페이스 없이 패키지로 제공하는 역할을 합니다. 이를 통해 특정 프론트엔드 방식에 얽매이지 않고도, 애플리케이션 인증 레이어의 백엔드 구현을 빠르게 스캐폴딩할 수 있습니다.
 
 
 ### 언제 Fortify를 사용해야 하나요? {#when-should-i-use-fortify}
 
-Laravel Fortify를 언제 사용하는 것이 적절한지 궁금할 수 있습니다. 먼저, Laravel의 [애플리케이션 스타터 키트](/docs/{{version}}/starter-kits) 중 하나를 사용하고 있다면 Laravel Fortify를 설치할 필요가 없습니다. 모든 Laravel 애플리케이션 스타터 키트에는 이미 완전한 인증 구현이 제공되기 때문입니다.
+Laravel Fortify를 언제 사용하는 것이 적절한지 궁금할 수 있습니다. 먼저, Laravel의 [애플리케이션 스타터 키트](/laravel/12.x/starter-kits) 중 하나를 사용하고 있다면 Laravel Fortify를 설치할 필요가 없습니다. 모든 Laravel 애플리케이션 스타터 키트에는 이미 완전한 인증 구현이 제공되기 때문입니다.
 
 애플리케이션 스타터 키트를 사용하지 않고 애플리케이션에 인증 기능이 필요하다면, 두 가지 선택지가 있습니다. 직접 애플리케이션의 인증 기능을 구현하거나, Laravel Fortify를 사용해 이러한 기능의 백엔드 구현을 제공받는 것입니다.
 
 Fortify를 설치하기로 선택했다면, 사용자 인터페이스는 이 문서에서 자세히 설명하는 Fortify의 인증 라우트로 요청을 보내 사용자 인증 및 등록을 처리하게 됩니다.
 
-Fortify를 사용하지 않고 Laravel의 인증 서비스를 직접 다루고 싶다면, [인증](/docs/{{version}}/authentication), [비밀번호 재설정](/docs/{{version}}/passwords), [이메일 인증](/docs/{{version}}/verification) 문서를 참고하여 구현할 수 있습니다.
+Fortify를 사용하지 않고 Laravel의 인증 서비스를 직접 다루고 싶다면, [인증](/laravel/12.x/authentication), [비밀번호 재설정](/laravel/12.x/passwords), [이메일 인증](/laravel/12.x/verification) 문서를 참고하여 구현할 수 있습니다.
 
 
 #### Laravel Fortify와 Laravel Sanctum {#laravel-fortify-and-laravel-sanctum}
 
-일부 개발자들은 [Laravel Sanctum](/docs/{{version}}/sanctum)과 Laravel Fortify의 차이점에 대해 혼란스러워합니다. 이 두 패키지는 서로 다르지만 관련된 문제를 해결하기 때문에, Laravel Fortify와 Laravel Sanctum은 상호 배타적이거나 경쟁하는 패키지가 아닙니다.
+일부 개발자들은 [Laravel Sanctum](/laravel/12.x/sanctum)과 Laravel Fortify의 차이점에 대해 혼란스러워합니다. 이 두 패키지는 서로 다르지만 관련된 문제를 해결하기 때문에, Laravel Fortify와 Laravel Sanctum은 상호 배타적이거나 경쟁하는 패키지가 아닙니다.
 
 Laravel Sanctum은 오직 API 토큰 관리와 세션 쿠키 또는 토큰을 사용한 기존 사용자 인증에만 관여합니다. Sanctum은 사용자 등록, 비밀번호 재설정 등과 관련된 라우트를 제공하지 않습니다.
 
@@ -118,7 +118,7 @@ Fortify의 뷰를 비활성화하고 애플리케이션에 비밀번호 재설�
 
 ## 인증 {#authentication}
 
-시작하려면, Fortify에게 우리의 "로그인" 뷰를 어떻게 반환할지 지시해야 합니다. Fortify는 헤드리스 인증 라이브러리임을 기억하세요. 이미 완성된 Laravel의 인증 기능의 프론트엔드 구현이 필요하다면, [애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)를 사용하는 것이 좋습니다.
+시작하려면, Fortify에게 우리의 "로그인" 뷰를 어떻게 반환할지 지시해야 합니다. Fortify는 헤드리스 인증 라이브러리임을 기억하세요. 이미 완성된 Laravel의 인증 기능의 프론트엔드 구현이 필요하다면, [애플리케이션 스타터 키트](/laravel/12.x/starter-kits)를 사용하는 것이 좋습니다.
 
 모든 인증 뷰의 렌더링 로직은 `Laravel\Fortify\Fortify` 클래스에서 제공하는 적절한 메서드를 사용하여 커스터마이즈할 수 있습니다. 일반적으로 이 메서드는 애플리케이션의 `App\Providers\FortifyServiceProvider` 클래스의 `boot` 메서드에서 호출해야 합니다. Fortify는 이 뷰를 반환하는 `/login` 라우트를 자동으로 정의해줍니다:
 
@@ -142,7 +142,7 @@ public function boot(): void
 
 로그인 시도가 성공하면, Fortify는 애플리케이션의 `fortify` 설정 파일 내 `home` 설정 옵션을 통해 구성된 URI로 리디렉션합니다. 만약 로그인 요청이 XHR 요청이었다면, 200 HTTP 응답이 반환됩니다.
 
-요청이 성공하지 못한 경우, 사용자는 다시 로그인 화면으로 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/docs/{{version}}/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
+요청이 성공하지 못한 경우, 사용자는 다시 로그인 화면으로 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/laravel/12.x/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
 
 
 ### 사용자 인증 커스터마이징 {#customizing-user-authentication}
@@ -183,7 +183,7 @@ Fortify에서 사용하는 인증 가드는 애플리케이션의 `fortify` 설�
 
 ### 인증 파이프라인 커스터마이징 {#customizing-the-authentication-pipeline}
 
-Laravel Fortify는 호출 가능한 클래스들의 파이프라인을 통해 로그인 요청을 인증합니다. 원한다면, 로그인 요청이 통과해야 하는 커스텀 클래스 파이프라인을 정의할 수 있습니다. 각 클래스는 들어오는 `Illuminate\Http\Request` 인스턴스를 받고, [미들웨어](/docs/{{version}}/middleware)처럼 요청을 파이프라인의 다음 클래스로 전달하기 위해 호출되는 `$next` 변수를 받는 `__invoke` 메서드를 가져야 합니다.
+Laravel Fortify는 호출 가능한 클래스들의 파이프라인을 통해 로그인 요청을 인증합니다. 원한다면, 로그인 요청이 통과해야 하는 커스텀 클래스 파이프라인을 정의할 수 있습니다. 각 클래스는 들어오는 `Illuminate\Http\Request` 인스턴스를 받고, [미들웨어](/laravel/12.x/middleware)처럼 요청을 파이프라인의 다음 클래스로 전달하기 위해 호출되는 `$next` 변수를 받는 `__invoke` 메서드를 가져야 합니다.
 
 커스텀 파이프라인을 정의하려면 `Fortify::authenticateThrough` 메서드를 사용할 수 있습니다. 이 메서드는 로그인 요청이 통과할 클래스 배열을 반환하는 클로저를 인자로 받습니다. 일반적으로 이 메서드는 `App\Providers\FortifyServiceProvider` 클래스의 `boot` 메서드에서 호출해야 합니다.
 
@@ -214,17 +214,17 @@ Fortify::authenticateThrough(function (Request $request) {
 
 기본적으로 Fortify는 `EnsureLoginIsNotThrottled` 미들웨어를 사용하여 인증 시도를 제한합니다. 이 미들웨어는 사용자 이름과 IP 주소 조합에 따라 고유하게 인증 시도를 제한합니다.
 
-일부 애플리케이션에서는 인증 시도를 제한하는 데 IP 주소만을 기준으로 하는 등 다른 접근 방식이 필요할 수 있습니다. 따라서 Fortify는 `fortify.limiters.login` 설정 옵션을 통해 [사용자 지정 속도 제한기](/docs/{{version}}/routing#rate-limiting)를 지정할 수 있도록 지원합니다. 이 설정 옵션은 애플리케이션의 `config/fortify.php` 설정 파일에 위치해 있습니다.
+일부 애플리케이션에서는 인증 시도를 제한하는 데 IP 주소만을 기준으로 하는 등 다른 접근 방식이 필요할 수 있습니다. 따라서 Fortify는 `fortify.limiters.login` 설정 옵션을 통해 [사용자 지정 속도 제한기](/laravel/12.x/routing#rate-limiting)를 지정할 수 있도록 지원합니다. 이 설정 옵션은 애플리케이션의 `config/fortify.php` 설정 파일에 위치해 있습니다.
 
 > [!NOTE]
-> 제한(Throttling), [2단계 인증](/docs/{{version}}/fortify#two-factor-authentication), 그리고 외부 웹 애플리케이션 방화벽(WAF)을 함께 활용하면 합법적인 애플리케이션 사용자를 위한 가장 강력한 방어책을 마련할 수 있습니다.
+> 제한(Throttling), [2단계 인증](/laravel/12.x/fortify#two-factor-authentication), 그리고 외부 웹 애플리케이션 방화벽(WAF)을 함께 활용하면 합법적인 애플리케이션 사용자를 위한 가장 강력한 방어책을 마련할 수 있습니다.
 
 
 ### 리디렉션 커스터마이징 {#customizing-authentication-redirects}
 
 로그인 시도가 성공하면, Fortify는 애플리케이션의 `fortify` 설정 파일 내 `home` 설정 옵션을 통해 구성된 URI로 리디렉션합니다. 만약 로그인 요청이 XHR 요청이었다면, 200 HTTP 응답이 반환됩니다. 사용자가 애플리케이션에서 로그아웃하면, 사용자는 `/` URI로 리디렉션됩니다.
 
-이 동작을 더 세밀하게 커스터마이징해야 한다면, `LoginResponse`와 `LogoutResponse` 계약의 구현체를 Laravel [서비스 컨테이너](/docs/{{version}}/container)에 바인딩할 수 있습니다. 일반적으로, 이는 애플리케이션의 `App\Providers\FortifyServiceProvider` 클래스의 `register` 메서드 내에서 수행해야 합니다:
+이 동작을 더 세밀하게 커스터마이징해야 한다면, `LoginResponse`와 `LogoutResponse` 계약의 구현체를 Laravel [서비스 컨테이너](/laravel/12.x/container)에 바인딩할 수 있습니다. 일반적으로, 이는 애플리케이션의 `App\Providers\FortifyServiceProvider` 클래스의 `register` 메서드 내에서 수행해야 합니다:
 
 ```php
 use Laravel\Fortify\Contracts\LogoutResponse;
@@ -349,7 +349,7 @@ Fortify는 이 뷰를 반환하는 `/two-factor-challenge` 라우트를 정의�
 
 로그인 시도가 성공하면, Fortify는 애플리케이션의 `fortify` 설정 파일 내 `home` 설정 옵션을 통해 구성된 URI로 사용자를 리디렉션합니다. 로그인 요청이 XHR 요청이었다면, 204 HTTP 응답이 반환됩니다.
 
-요청이 성공하지 못한 경우, 사용자는 다시 2단계 인증 도전 화면으로 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/docs/{{version}}/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
+요청이 성공하지 못한 경우, 사용자는 다시 2단계 인증 도전 화면으로 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/laravel/12.x/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
 
 
 ### 이중 인증 비활성화 {#disabling-two-factor-authentication}
@@ -359,7 +359,7 @@ Fortify는 이 뷰를 반환하는 `/two-factor-challenge` 라우트를 정의�
 
 ## 회원가입 {#registration}
 
-애플리케이션의 회원가입 기능을 구현하기 시작하려면, Fortify에 "register" 뷰를 반환하는 방법을 지시해야 합니다. Fortify는 헤드리스 인증 라이브러리임을 기억하세요. 이미 완성된 Laravel 인증 기능의 프론트엔드 구현이 필요하다면, [애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)를 사용하는 것이 좋습니다.
+애플리케이션의 회원가입 기능을 구현하기 시작하려면, Fortify에 "register" 뷰를 반환하는 방법을 지시해야 합니다. Fortify는 헤드리스 인증 라이브러리임을 기억하세요. 이미 완성된 Laravel 인증 기능의 프론트엔드 구현이 필요하다면, [애플리케이션 스타터 키트](/laravel/12.x/starter-kits)를 사용하는 것이 좋습니다.
 
 Fortify의 모든 뷰 렌더링 로직은 `Laravel\Fortify\Fortify` 클래스에서 제공하는 적절한 메서드를 사용하여 커스터마이즈할 수 있습니다. 일반적으로 이 메서드는 `App\Providers\FortifyServiceProvider` 클래스의 `boot` 메서드에서 호출해야 합니다:
 
@@ -385,7 +385,7 @@ Fortify는 이 뷰를 반환하는 `/register` 라우트를 자동으로 정의�
 
 회원가입이 성공하면, Fortify는 애플리케이션의 `fortify` 설정 파일 내 `home` 설정 옵션에 구성된 URI로 사용자를 리디렉션합니다. 요청이 XHR 요청이었다면, 201 HTTP 응답이 반환됩니다.
 
-요청이 성공하지 못한 경우, 사용자는 다시 회원가입 화면으로 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/docs/{{version}}/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
+요청이 성공하지 못한 경우, 사용자는 다시 회원가입 화면으로 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/laravel/12.x/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
 
 
 ### 등록 커스터마이징 {#customizing-registration}
@@ -398,7 +398,7 @@ Fortify는 이 뷰를 반환하는 `/register` 라우트를 자동으로 정의�
 
 ### 비밀번호 재설정 링크 요청하기 {#requesting-a-password-reset-link}
 
-애플리케이션의 비밀번호 재설정 기능을 구현하기 시작하려면, Fortify에 "비밀번호 찾기" 뷰를 어떻게 반환할지 지시해야 합니다. Fortify는 헤드리스 인증 라이브러리임을 기억하세요. 이미 완성된 Laravel 인증 기능의 프론트엔드 구현이 필요하다면, [애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)를 사용하는 것이 좋습니다.
+애플리케이션의 비밀번호 재설정 기능을 구현하기 시작하려면, Fortify에 "비밀번호 찾기" 뷰를 어떻게 반환할지 지시해야 합니다. Fortify는 헤드리스 인증 라이브러리임을 기억하세요. 이미 완성된 Laravel 인증 기능의 프론트엔드 구현이 필요하다면, [애플리케이션 스타터 키트](/laravel/12.x/starter-kits)를 사용하는 것이 좋습니다.
 
 Fortify의 모든 뷰 렌더링 로직은 `Laravel\Fortify\Fortify` 클래스에서 제공하는 적절한 메서드를 사용하여 커스터마이즈할 수 있습니다. 일반적으로 이 메서드는 애플리케이션의 `App\Providers\FortifyServiceProvider` 클래스의 `boot` 메서드에서 호출해야 합니다:
 
@@ -429,7 +429,7 @@ Fortify는 이 뷰를 반환하는 `/forgot-password` 엔드포인트를 자동�
 
 성공적으로 요청한 후 `/forgot-password` 엔드포인트로 리디렉션되면, `status` 세션 변수를 사용하여 비밀번호 재설정 링크 요청 시도의 상태를 표시할 수 있습니다.
 
-`$status` 세션 변수의 값은 애플리케이션의 `passwords` [언어 파일](/docs/{{version}}/localization)에 정의된 번역 문자열 중 하나와 일치합니다. 이 값을 커스터마이즈하고 싶고, 아직 Laravel의 언어 파일을 퍼블리시하지 않았다면, `lang:publish` Artisan 명령어를 통해 퍼블리시할 수 있습니다:
+`$status` 세션 변수의 값은 애플리케이션의 `passwords` [언어 파일](/laravel/12.x/localization)에 정의된 번역 문자열 중 하나와 일치합니다. 이 값을 커스터마이즈하고 싶고, 아직 Laravel의 언어 파일을 퍼블리시하지 않았다면, `lang:publish` Artisan 명령어를 통해 퍼블리시할 수 있습니다:
 
 ```html
 @if (session('status'))
@@ -439,7 +439,7 @@ Fortify는 이 뷰를 반환하는 `/forgot-password` 엔드포인트를 자동�
 @endif
 ```
 
-요청이 성공하지 못한 경우, 사용자는 비밀번호 재설정 링크 요청 화면으로 다시 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/docs/{{version}}/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
+요청이 성공하지 못한 경우, 사용자는 비밀번호 재설정 링크 요청 화면으로 다시 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/laravel/12.x/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
 
 
 ### 비밀번호 재설정 {#resetting-the-password}
@@ -484,7 +484,7 @@ Fortify는 이 뷰를 표시하는 라우트를 정의하는 작업을 처리합
 
 요청이 XHR 요청이었다면, 200 HTTP 응답이 반환됩니다.
 
-요청이 성공하지 못한 경우, 사용자는 비밀번호 재설정 화면으로 다시 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/docs/{{version}}/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
+요청이 성공하지 못한 경우, 사용자는 비밀번호 재설정 화면으로 다시 리디렉션되며, 검증 오류는 공유된 `$errors` [Blade 템플릿 변수](/laravel/12.x/validation#quick-displaying-the-validation-errors)를 통해 확인할 수 있습니다. 또는 XHR 요청의 경우, 검증 오류가 422 HTTP 응답과 함께 반환됩니다.
 
 
 ### 비밀번호 재설정 커스터마이징 {#customizing-password-resets}
@@ -551,7 +551,7 @@ Route::get('/dashboard', function () {
 
 애플리케이션을 개발하다 보면 사용자가 특정 작업을 수행하기 전에 비밀번호를 다시 한 번 확인하도록 요구해야 하는 경우가 있습니다. 일반적으로 이러한 라우트는 Laravel의 내장 `password.confirm` 미들웨어로 보호됩니다.
 
-비밀번호 확인 기능을 구현하려면, 먼저 Fortify에 애플리케이션의 "비밀번호 확인" 뷰를 반환하는 방법을 알려주어야 합니다. Fortify는 헤드리스 인증 라이브러리임을 기억하세요. 이미 완성된 Laravel 인증 기능의 프론트엔드 구현이 필요하다면 [애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)를 사용하는 것이 좋습니다.
+비밀번호 확인 기능을 구현하려면, 먼저 Fortify에 애플리케이션의 "비밀번호 확인" 뷰를 반환하는 방법을 알려주어야 합니다. Fortify는 헤드리스 인증 라이브러리임을 기억하세요. 이미 완성된 Laravel 인증 기능의 프론트엔드 구현이 필요하다면 [애플리케이션 스타터 키트](/laravel/12.x/starter-kits)를 사용하는 것이 좋습니다.
 
 Fortify의 모든 뷰 렌더링 로직은 `Laravel\Fortify\Fortify` 클래스에서 제공하는 적절한 메서드를 사용하여 커스터마이즈할 수 있습니다. 일반적으로 이 메서드는 애플리케이션의 `App\Providers\FortifyServiceProvider` 클래스의 `boot` 메서드에서 호출해야 합니다:
 

@@ -33,7 +33,7 @@
 
 ## 소개 {#introduction}
 
-[Laravel Scout](https://github.com/laravel/scout)는 [Eloquent 모델](/docs/{{version}}/eloquent)에 전체 텍스트 검색 기능을 추가할 수 있는 간단하고 드라이버 기반의 솔루션을 제공합니다. 모델 옵저버를 사용하여, Scout는 Eloquent 레코드와 검색 인덱스를 자동으로 동기화해줍니다.
+[Laravel Scout](https://github.com/laravel/scout)는 [Eloquent 모델](/laravel/12.x/eloquent)에 전체 텍스트 검색 기능을 추가할 수 있는 간단하고 드라이버 기반의 솔루션을 제공합니다. 모델 옵저버를 사용하여, Scout는 Eloquent 레코드와 검색 인덱스를 자동으로 동기화해줍니다.
 
 현재 Scout는 [Algolia](https://www.algolia.com/), [Meilisearch](https://www.meilisearch.com), [Typesense](https://typesense.org), 그리고 MySQL / PostgreSQL(`database`) 드라이버를 기본으로 제공합니다. 또한, Scout에는 외부 의존성이나 서드파티 서비스가 필요 없는 로컬 개발용 "collection" 드라이버도 포함되어 있습니다. 더불어, 커스텀 드라이버를 작성하는 것도 간단하므로, Scout를 자유롭게 확장하여 자신만의 검색 구현을 추가할 수 있습니다.
 
@@ -71,7 +71,7 @@ class Post extends Model
 
 ### 큐잉 {#queueing}
 
-Scout를 사용하기 위해 반드시 필요한 것은 아니지만, 라이브러리를 사용하기 전에 [큐 드라이버](/docs/{{version}}/queues)를 설정하는 것을 강력히 권장합니다. 큐 워커를 실행하면 Scout가 모델 정보를 검색 인덱스에 동기화하는 모든 작업을 큐에 넣을 수 있어, 애플리케이션의 웹 인터페이스에서 훨씬 더 빠른 응답 시간을 제공할 수 있습니다.
+Scout를 사용하기 위해 반드시 필요한 것은 아니지만, 라이브러리를 사용하기 전에 [큐 드라이버](/laravel/12.x/queues)를 설정하는 것을 강력히 권장합니다. 큐 워커를 실행하면 Scout가 모델 정보를 검색 인덱스에 동기화하는 모든 작업을 큐에 넣을 수 있어, 애플리케이션의 웹 인터페이스에서 훨씬 더 빠른 응답 시간을 제공할 수 있습니다.
 
 큐 드라이버를 설정한 후에는 `config/scout.php` 설정 파일의 `queue` 옵션 값을 `true`로 지정하세요:
 
@@ -111,7 +111,7 @@ composer require algolia/algoliasearch-client-php
 
 ### Meilisearch {#meilisearch}
 
-[Meilisearch](https://www.meilisearch.com)는 매우 빠르고 오픈 소스인 검색 엔진입니다. 로컬 컴퓨터에 Meilisearch를 설치하는 방법을 잘 모를 경우, Laravel의 공식적으로 지원하는 Docker 개발 환경인 [Laravel Sail](/docs/{{version}}/sail#meilisearch)을 사용할 수 있습니다.
+[Meilisearch](https://www.meilisearch.com)는 매우 빠르고 오픈 소스인 검색 엔진입니다. 로컬 컴퓨터에 Meilisearch를 설치하는 방법을 잘 모를 경우, Laravel의 공식적으로 지원하는 Docker 개발 환경인 [Laravel Sail](/laravel/12.x/sail#meilisearch)을 사용할 수 있습니다.
 
 Meilisearch 드라이버를 사용할 때는 Composer 패키지 관리자를 통해 Meilisearch PHP SDK를 설치해야 합니다:
 
@@ -155,7 +155,7 @@ TYPESENSE_API_KEY=masterKey
 TYPESENSE_HOST=localhost
 ```
 
-[Laravel Sail](/docs/{{version}}/sail)을 사용하는 경우, Docker 컨테이너 이름에 맞게 `TYPESENSE_HOST` 환경 변수를 조정해야 할 수 있습니다. 또한 설치된 포트, 경로, 프로토콜을 선택적으로 지정할 수 있습니다:
+[Laravel Sail](/laravel/12.x/sail)을 사용하는 경우, Docker 컨테이너 이름에 맞게 `TYPESENSE_HOST` 환경 변수를 조정해야 할 수 있습니다. 또한 설치된 포트, 경로, 프로토콜을 선택적으로 지정할 수 있습니다:
 
 ```ini
 TYPESENSE_PORT=8108
@@ -503,7 +503,7 @@ public function toSearchableArray(): array
 ```
 
 > [!WARNING]
-> 컬럼이 전체 텍스트 쿼리 제약 조건을 사용하도록 지정하기 전에, 해당 컬럼에 [전체 텍스트 인덱스](/docs/{{version}}/migrations#available-index-types)가 할당되어 있는지 확인하세요.
+> 컬럼이 전체 텍스트 쿼리 제약 조건을 사용하도록 지정하기 전에, 해당 컬럼에 [전체 텍스트 인덱스](/laravel/12.x/migrations#available-index-types)가 할당되어 있는지 확인하세요.
 
 
 ### Collection 엔진 {#collection-engine}
@@ -560,7 +560,7 @@ protected function makeAllSearchableUsing(Builder $query): Builder
 ```
 
 > [!WARNING]
-> `makeAllSearchableUsing` 메서드는 큐를 사용하여 모델을 배치 가져올 때는 적용되지 않을 수 있습니다. 모델 컬렉션이 작업에 의해 처리될 때 관계는 [복원되지 않습니다](/docs/{{version}}/queues#handling-relationships).
+> `makeAllSearchableUsing` 메서드는 큐를 사용하여 모델을 배치 가져올 때는 적용되지 않을 수 있습니다. 모델 컬렉션이 작업에 의해 처리될 때 관계는 [복원되지 않습니다](/laravel/12.x/queues#handling-relationships).
 
 
 ### 레코드 추가하기 {#adding-records}
@@ -580,7 +580,7 @@ $order->save();
 
 #### 쿼리를 통한 레코드 추가 {#adding-records-via-query}
 
-Eloquent 쿼리를 통해 모델 컬렉션을 검색 인덱스에 추가하고 싶다면, `searchable` 메서드를 Eloquent 쿼리에 체이닝하면 됩니다. `searchable` 메서드는 쿼리 결과를 [청크로 분할](/docs/{{version}}/eloquent#chunking-results)하여 각 레코드를 검색 인덱스에 추가합니다. Scout에서 큐를 사용하도록 설정했다면, 모든 청크는 큐 워커에 의해 백그라운드에서 임포트됩니다:
+Eloquent 쿼리를 통해 모델 컬렉션을 검색 인덱스에 추가하고 싶다면, `searchable` 메서드를 Eloquent 쿼리에 체이닝하면 됩니다. `searchable` 메서드는 쿼리 결과를 [청크로 분할](/laravel/12.x/eloquent#chunking-results)하여 각 레코드를 검색 인덱스에 추가합니다. Scout에서 큐를 사용하도록 설정했다면, 모든 청크는 큐 워커에 의해 백그라운드에서 임포트됩니다:
 
 ```php
 use App\Models\Order;
@@ -656,7 +656,7 @@ public function makeSearchableUsing(Collection $models): Collection
 
 ### 레코드 삭제하기 {#removing-records}
 
-인덱스에서 레코드를 제거하려면 데이터베이스에서 해당 모델을 `delete` 하면 됩니다. 이는 [소프트 삭제](/docs/{{version}}/eloquent#soft-deleting) 모델을 사용하는 경우에도 가능합니다:
+인덱스에서 레코드를 제거하려면 데이터베이스에서 해당 모델을 `delete` 하면 됩니다. 이는 [소프트 삭제](/laravel/12.x/eloquent#soft-deleting) 모델을 사용하는 경우에도 가능합니다:
 
 ```php
 use App\Models\Order;
@@ -797,7 +797,7 @@ $orders = Order::search('Star Trek')->whereNotIn(
 
 ### 페이지네이션 {#pagination}
 
-모델 컬렉션을 조회하는 것 외에도, `paginate` 메서드를 사용하여 검색 결과를 페이지네이션할 수 있습니다. 이 메서드는 [기존 Eloquent 쿼리를 페이지네이션](/docs/{{version}}/pagination)한 것과 마찬가지로 `Illuminate\Pagination\LengthAwarePaginator` 인스턴스를 반환합니다:
+모델 컬렉션을 조회하는 것 외에도, `paginate` 메서드를 사용하여 검색 결과를 페이지네이션할 수 있습니다. 이 메서드는 [기존 Eloquent 쿼리를 페이지네이션](/laravel/12.x/pagination)한 것과 마찬가지로 `Illuminate\Pagination\LengthAwarePaginator` 인스턴스를 반환합니다:
 
 ```php
 use App\Models\Order;
@@ -811,7 +811,7 @@ $orders = Order::search('Star Trek')->paginate();
 $orders = Order::search('Star Trek')->paginate(15);
 ```
 
-결과를 조회한 후에는, [Blade](/docs/{{version}}/blade)를 사용하여 기존 Eloquent 쿼리를 페이지네이션한 것과 마찬가지로 결과를 표시하고 페이지 링크를 렌더링할 수 있습니다:
+결과를 조회한 후에는, [Blade](/laravel/12.x/blade)를 사용하여 기존 Eloquent 쿼리를 페이지네이션한 것과 마찬가지로 결과를 표시하고 페이지 링크를 렌더링할 수 있습니다:
 
 ```html
 <div class="container">
@@ -840,7 +840,7 @@ Route::get('/orders', function (Request $request) {
 
 ### 소프트 삭제 {#soft-deleting}
 
-인덱싱된 모델이 [소프트 삭제](/docs/{{version}}/eloquent#soft-deleting)를 사용하고 있고, 소프트 삭제된 모델도 검색해야 한다면 `config/scout.php` 설정 파일의 `soft_delete` 옵션을 `true`로 설정하세요:
+인덱싱된 모델이 [소프트 삭제](/laravel/12.x/eloquent#soft-deleting)를 사용하고 있고, 소프트 삭제된 모델도 검색해야 한다면 `config/scout.php` 설정 파일의 `soft_delete` 옵션을 `true`로 설정하세요:
 
 ```php
 'soft_delete' => true,

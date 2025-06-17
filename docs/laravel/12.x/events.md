@@ -107,7 +107,7 @@ php artisan event:list
 
 #### 프로덕션 환경에서의 이벤트 디스커버리 {#event-discovery-in-production}
 
-애플리케이션의 속도를 높이기 위해, `optimize` 또는 `event:cache` Artisan 명령어를 사용하여 모든 리스너의 매니페스트를 캐시해야 합니다. 일반적으로 이 명령어는 애플리케이션의 [배포 프로세스](/docs/{{version}}/deployment#optimization) 중에 실행되어야 합니다. 이 매니페스트는 프레임워크가 이벤트 등록 과정을 더 빠르게 처리할 수 있도록 사용됩니다. 이벤트 캐시를 삭제하려면 `event:clear` 명령어를 사용할 수 있습니다.
+애플리케이션의 속도를 높이기 위해, `optimize` 또는 `event:cache` Artisan 명령어를 사용하여 모든 리스너의 매니페스트를 캐시해야 합니다. 일반적으로 이 명령어는 애플리케이션의 [배포 프로세스](/laravel/12.x/deployment#optimization) 중에 실행되어야 합니다. 이 매니페스트는 프레임워크가 이벤트 등록 과정을 더 빠르게 처리할 수 있도록 사용됩니다. 이벤트 캐시를 삭제하려면 `event:clear` 명령어를 사용할 수 있습니다.
 
 
 ### 이벤트 수동 등록 {#manually-registering-events}
@@ -160,7 +160,7 @@ public function boot(): void
 
 #### 큐에 등록 가능한 익명 이벤트 리스너 {#queuable-anonymous-event-listeners}
 
-클로저 기반 이벤트 리스너를 등록할 때, 리스너 클로저를 `Illuminate\Events\queueable` 함수로 감싸면 Laravel이 해당 리스너를 [큐](/docs/{{version}}/queues)를 사용하여 실행하도록 지시할 수 있습니다.
+클로저 기반 이벤트 리스너를 등록할 때, 리스너 클로저를 `Illuminate\Events\queueable` 함수로 감싸면 Laravel이 해당 리스너를 [큐](/laravel/12.x/queues)를 사용하여 실행하도록 지시할 수 있습니다.
 
 ```php
 use App\Events\PodcastProcessed;
@@ -215,7 +215,7 @@ Event::listen('event.*', function (string $eventName, array $data) {
 
 ## 이벤트 정의하기 {#defining-events}
 
-이벤트 클래스는 본질적으로 이벤트와 관련된 정보를 담는 데이터 컨테이너입니다. 예를 들어, `App\Events\OrderShipped` 이벤트가 [Eloquent ORM](/docs/{{version}}/eloquent) 객체를 받는다고 가정해봅시다:
+이벤트 클래스는 본질적으로 이벤트와 관련된 정보를 담는 데이터 컨테이너입니다. 예를 들어, `App\Events\OrderShipped` 이벤트가 [Eloquent ORM](/laravel/12.x/eloquent) 객체를 받는다고 가정해봅시다:
 
 ```php
 <?php
@@ -272,7 +272,7 @@ class SendShipmentNotification
 ```
 
 > [!NOTE]
-> 이벤트 리스너는 생성자에서 필요한 의존성을 타입힌트로 지정할 수도 있습니다. 모든 이벤트 리스너는 Laravel [서비스 컨테이너](/docs/{{version}}/container)를 통해 해석되므로, 의존성은 자동으로 주입됩니다.
+> 이벤트 리스너는 생성자에서 필요한 의존성을 타입힌트로 지정할 수도 있습니다. 모든 이벤트 리스너는 Laravel [서비스 컨테이너](/laravel/12.x/container)를 통해 해석되므로, 의존성은 자동으로 주입됩니다.
 
 
 #### 이벤트 전파 중지하기 {#stopping-the-propagation-of-an-event}
@@ -282,7 +282,7 @@ class SendShipmentNotification
 
 ## 큐잉된 이벤트 리스너 {#queued-event-listeners}
 
-리스너가 이메일 전송이나 HTTP 요청과 같이 느린 작업을 수행해야 하는 경우, 리스너를 큐잉하는 것이 유용할 수 있습니다. 큐잉된 리스너를 사용하기 전에 [큐를 설정](/docs/{{version}}/queues)하고, 서버나 로컬 개발 환경에서 큐 워커를 실행해야 합니다.
+리스너가 이메일 전송이나 HTTP 요청과 같이 느린 작업을 수행해야 하는 경우, 리스너를 큐잉하는 것이 유용할 수 있습니다. 큐잉된 리스너를 사용하기 전에 [큐를 설정](/laravel/12.x/queues)하고, 서버나 로컬 개발 환경에서 큐 워커를 실행해야 합니다.
 
 리스너가 큐잉되도록 지정하려면, 리스너 클래스에 `ShouldQueue` 인터페이스를 추가하면 됩니다. `make:listener` 아티즌 명령어로 생성된 리스너는 이미 이 인터페이스가 현재 네임스페이스에 임포트되어 있으므로 바로 사용할 수 있습니다:
 
@@ -300,7 +300,7 @@ class SendShipmentNotification implements ShouldQueue
 }
 ```
 
-이렇게 하면 끝입니다! 이제 이 리스너가 처리하는 이벤트가 디스패치될 때, 라라벨의 [큐 시스템](/docs/{{version}}/queues)을 통해 해당 리스너가 자동으로 큐잉됩니다. 큐에서 리스너가 실행될 때 예외가 발생하지 않으면, 큐에 등록된 작업은 처리 완료 후 자동으로 삭제됩니다.
+이렇게 하면 끝입니다! 이제 이 리스너가 처리하는 이벤트가 디스패치될 때, 라라벨의 [큐 시스템](/laravel/12.x/queues)을 통해 해당 리스너가 자동으로 큐잉됩니다. 큐에서 리스너가 실행될 때 예외가 발생하지 않으면, 큐에 등록된 작업은 처리 완료 후 자동으로 삭제됩니다.
 
 
 #### 큐 연결, 이름, 지연 시간 커스터마이징 {#customizing-the-queue-connection-queue-name}
@@ -453,7 +453,7 @@ class SendShipmentNotification implements ShouldQueueAfterCommit
 ```
 
 > [!NOTE]
-> 이러한 문제를 우회하는 방법에 대해 더 자세히 알아보려면 [큐 작업과 데이터베이스 트랜잭션](/docs/{{version}}/queues#jobs-and-database-transactions) 문서를 참고하세요.
+> 이러한 문제를 우회하는 방법에 대해 더 자세히 알아보려면 [큐 작업과 데이터베이스 트랜잭션](/laravel/12.x/queues#jobs-and-database-transactions) 문서를 참고하세요.
 
 
 ### 실패한 작업 처리 {#handling-failed-jobs}

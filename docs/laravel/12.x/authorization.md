@@ -27,7 +27,7 @@
 
 ## 소개 {#introduction}
 
-Laravel은 내장된 [인증](/docs/{{version}}/authentication) 서비스를 제공할 뿐만 아니라, 주어진 리소스에 대해 사용자 행동을 인가(authorization)하는 간단한 방법도 제공합니다. 예를 들어, 사용자가 인증되었더라도, 애플리케이션에서 관리하는 특정 Eloquent 모델이나 데이터베이스 레코드를 수정하거나 삭제할 권한이 없을 수 있습니다. Laravel의 인가 기능은 이러한 유형의 인가 검사를 쉽고 체계적으로 관리할 수 있는 방법을 제공합니다.
+Laravel은 내장된 [인증](/laravel/12.x/authentication) 서비스를 제공할 뿐만 아니라, 주어진 리소스에 대해 사용자 행동을 인가(authorization)하는 간단한 방법도 제공합니다. 예를 들어, 사용자가 인증되었더라도, 애플리케이션에서 관리하는 특정 Eloquent 모델이나 데이터베이스 레코드를 수정하거나 삭제할 권한이 없을 수 있습니다. Laravel의 인가 기능은 이러한 유형의 인가 검사를 쉽고 체계적으로 관리할 수 있는 방법을 제공합니다.
 
 Laravel은 행동을 인가하는 두 가지 주요 방법, 즉 [게이트](#gates)와 [정책](#creating-policies)을 제공합니다. 게이트와 정책을 각각 라우트와 컨트롤러에 비유할 수 있습니다. 게이트는 클로저 기반의 간단한 인가 방식을 제공하며, 정책은 컨트롤러처럼 특정 모델이나 리소스에 대한 로직을 그룹화합니다. 이 문서에서는 먼저 게이트를 살펴보고, 그 다음에 정책을 살펴보겠습니다.
 
@@ -396,7 +396,7 @@ class PostPolicy
 Artisan 콘솔을 통해 정책을 생성할 때 `--model` 옵션을 사용했다면, 이미 `viewAny`, `view`, `create`, `update`, `delete`, `restore`, `forceDelete` 액션에 대한 메서드가 포함되어 있을 것입니다.
 
 > [!NOTE]
-> 모든 정책은 Laravel [서비스 컨테이너](/docs/{{version}}/container)를 통해 해석되므로, 정책의 생성자에서 필요한 의존성을 타입힌트하면 자동으로 주입받을 수 있습니다.
+> 모든 정책은 Laravel [서비스 컨테이너](/laravel/12.x/container)를 통해 해석되므로, 정책의 생성자에서 필요한 의존성을 타입힌트하면 자동으로 주입받을 수 있습니다.
 
 
 ### 정책 응답 {#policy-responses}
@@ -679,7 +679,7 @@ public function create(Request $request): RedirectResponse
 
 ### 미들웨어를 통한 권한 부여 {#via-middleware}
 
-Laravel에는 들어오는 요청이 라우트나 컨트롤러에 도달하기 전에 동작을 승인할 수 있는 미들웨어가 포함되어 있습니다. 기본적으로, `Illuminate\Auth\Middleware\Authorize` 미들웨어는 `can` [미들웨어 별칭](/docs/{{version}}/middleware#middleware-aliases)를 사용하여 라우트에 연결할 수 있으며, 이 별칭은 Laravel에 의해 자동으로 등록됩니다. `can` 미들웨어를 사용하여 사용자가 게시글을 수정할 수 있는지 권한을 부여하는 예제를 살펴보겠습니다:
+Laravel에는 들어오는 요청이 라우트나 컨트롤러에 도달하기 전에 동작을 승인할 수 있는 미들웨어가 포함되어 있습니다. 기본적으로, `Illuminate\Auth\Middleware\Authorize` 미들웨어는 `can` [미들웨어 별칭](/laravel/12.x/middleware#middleware-aliases)를 사용하여 라우트에 연결할 수 있으며, 이 별칭은 Laravel에 의해 자동으로 등록됩니다. `can` 미들웨어를 사용하여 사용자가 게시글을 수정할 수 있는지 권한을 부여하는 예제를 살펴보겠습니다:
 
 ```php
 use App\Models\Post;
@@ -689,7 +689,7 @@ Route::put('/post/{post}', function (Post $post) {
 })->middleware('can:update,post');
 ```
 
-이 예제에서는 `can` 미들웨어에 두 개의 인수를 전달하고 있습니다. 첫 번째는 승인하려는 동작의 이름이고, 두 번째는 정책 메서드에 전달하려는 라우트 파라미터입니다. 이 경우, [암시적 모델 바인딩](/docs/{{version}}/routing#implicit-binding)을 사용하고 있으므로, `App\Models\Post` 모델이 정책 메서드에 전달됩니다. 사용자가 해당 동작을 수행할 권한이 없으면, 미들웨어는 403 상태 코드의 HTTP 응답을 반환합니다.
+이 예제에서는 `can` 미들웨어에 두 개의 인수를 전달하고 있습니다. 첫 번째는 승인하려는 동작의 이름이고, 두 번째는 정책 메서드에 전달하려는 라우트 파라미터입니다. 이 경우, [암시적 모델 바인딩](/laravel/12.x/routing#implicit-binding)을 사용하고 있으므로, `App\Models\Post` 모델이 정책 메서드에 전달됩니다. 사용자가 해당 동작을 수행할 권한이 없으면, 미들웨어는 403 상태 코드의 HTTP 응답을 반환합니다.
 
 편의를 위해, `can` 미들웨어를 `can` 메서드를 사용하여 라우트에 연결할 수도 있습니다:
 
@@ -819,7 +819,7 @@ public function update(Request $request, Post $post): RedirectResponse
 
 권한 부여는 항상 서버에서 처리되어야 하지만, 프론트엔드 애플리케이션이 애플리케이션의 UI를 적절하게 렌더링할 수 있도록 권한 데이터를 제공하는 것이 편리할 때가 많습니다. Laravel은 Inertia 기반 프론트엔드에 권한 정보를 노출하는 데 필요한 규칙을 정의하지 않습니다.
 
-하지만, Laravel의 Inertia 기반 [스타터 키트](/docs/{{version}}/starter-kits) 중 하나를 사용하고 있다면, 애플리케이션에는 이미 `HandleInertiaRequests` 미들웨어가 포함되어 있습니다. 이 미들웨어의 `share` 메서드 내에서, 애플리케이션의 모든 Inertia 페이지에 제공될 공유 데이터를 반환할 수 있습니다. 이 공유 데이터는 사용자에 대한 권한 정보를 정의하기에 편리한 위치가 될 수 있습니다:
+하지만, Laravel의 Inertia 기반 [스타터 키트](/laravel/12.x/starter-kits) 중 하나를 사용하고 있다면, 애플리케이션에는 이미 `HandleInertiaRequests` 미들웨어가 포함되어 있습니다. 이 미들웨어의 `share` 메서드 내에서, 애플리케이션의 모든 Inertia 페이지에 제공될 공유 데이터를 반환할 수 있습니다. 이 공유 데이터는 사용자에 대한 권한 정보를 정의하기에 편리한 위치가 될 수 있습니다:
 
 ```php
 <?php

@@ -324,7 +324,7 @@ while ($process->running()) {
 
 Laravel은 동시 비동기 프로세스 풀을 손쉽게 관리할 수 있도록 지원하여, 여러 작업을 동시에 쉽게 실행할 수 있습니다. 시작하려면, `pool` 메서드를 호출하면 되며, 이 메서드는 `Illuminate\Process\Pool` 인스턴스를 받는 클로저를 인자로 받습니다.
 
-이 클로저 안에서 풀에 속하는 프로세스들을 정의할 수 있습니다. 프로세스 풀이 `start` 메서드를 통해 시작되면, `running` 메서드를 사용하여 실행 중인 프로세스의 [컬렉션](/docs/{{version}}/collections)에 접근할 수 있습니다:
+이 클로저 안에서 풀에 속하는 프로세스들을 정의할 수 있습니다. 프로세스 풀이 `start` 메서드를 통해 시작되면, `running` 메서드를 사용하여 실행 중인 프로세스의 [컬렉션](/laravel/12.x/collections)에 접근할 수 있습니다:
 
 ```php
 use Illuminate\Process\Pool;

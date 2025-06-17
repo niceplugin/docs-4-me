@@ -8,7 +8,7 @@
 
 ## 소개 {#introduction}
 
-HTTP 테스트를 간소화하는 것 외에도, Laravel은 애플리케이션의 [커스텀 콘솔 명령어](/docs/{{version}}/artisan)를 테스트할 수 있는 간단한 API를 제공합니다.
+HTTP 테스트를 간소화하는 것 외에도, Laravel은 애플리케이션의 [커스텀 콘솔 명령어](/laravel/12.x/artisan)를 테스트할 수 있는 간단한 API를 제공합니다.
 
 
 ## 성공 / 실패 기대값 {#success-failure-expectations}
@@ -92,7 +92,7 @@ public function test_console_command(): void
 }
 ```
 
-[Laravel Prompts](/docs/{{version}}/prompts)에서 제공하는 `search` 또는 `multisearch` 기능을 사용하는 경우, `expectsSearch` 어설션을 사용하여 사용자의 입력, 검색 결과, 선택을 모킹할 수 있습니다:
+[Laravel Prompts](/laravel/12.x/prompts)에서 제공하는 `search` 또는 `multisearch` 기능을 사용하는 경우, `expectsSearch` 어설션을 사용하여 사용자의 입력, 검색 결과, 선택을 모킹할 수 있습니다:
 
 ```php tab=Pest
 test('console command', function () {

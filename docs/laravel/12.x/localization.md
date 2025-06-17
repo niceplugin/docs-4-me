@@ -107,7 +107,7 @@ public function boot(): void
 ```
 
 > [!WARNING]
-> 복수화 도구의 언어를 커스터마이즈하는 경우, Eloquent 모델의 [테이블 이름](/docs/{{version}}/eloquent#table-names)을 명시적으로 정의해야 합니다.
+> 복수화 도구의 언어를 커스터마이즈하는 경우, Eloquent 모델의 [테이블 이름](/laravel/12.x/eloquent#table-names)을 명시적으로 정의해야 합니다.
 
 
 ## 번역 문자열 정의하기 {#defining-translation-strings}
@@ -176,7 +176,7 @@ echo __('I love programming.');
 
 이 경우에도 번역 문자열이 존재하지 않으면, `__` 함수는 전달받은 번역 문자열 키를 그대로 반환합니다.
 
-[Blade 템플릿 엔진](/docs/{{version}}/blade)을 사용하는 경우, `{{ }}` 출력 구문을 이용해 번역 문자열을 표시할 수 있습니다:
+[Blade 템플릿 엔진](/laravel/12.x/blade)을 사용하는 경우, `{{ }}` 출력 구문을 이용해 번역 문자열을 표시할 수 있습니다:
 
 ```blade
 {{ __('messages.welcome') }}

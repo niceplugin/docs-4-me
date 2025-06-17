@@ -19,9 +19,9 @@
 ## 소개 {#introduction}
 
 > [!NOTE]
-> Laravel Horizon을 살펴보기 전에, Laravel의 기본 [큐 서비스](/docs/{{version}}/queues)에 익숙해지는 것이 좋습니다. Horizon은 Laravel의 큐에 추가 기능을 제공하므로, Laravel이 제공하는 기본 큐 기능에 익숙하지 않다면 혼란스러울 수 있습니다.
+> Laravel Horizon을 살펴보기 전에, Laravel의 기본 [큐 서비스](/laravel/12.x/queues)에 익숙해지는 것이 좋습니다. Horizon은 Laravel의 큐에 추가 기능을 제공하므로, Laravel이 제공하는 기본 큐 기능에 익숙하지 않다면 혼란스러울 수 있습니다.
 
-[Laravel Horizon](https://github.com/laravel/horizon)은 Laravel 기반의 [Redis 큐](/docs/{{version}}/queues)를 위한 아름다운 대시보드와 코드 기반 설정을 제공합니다. Horizon을 사용하면 작업 처리량, 실행 시간, 작업 실패와 같은 큐 시스템의 주요 지표를 쉽게 모니터링할 수 있습니다.
+[Laravel Horizon](https://github.com/laravel/horizon)은 Laravel 기반의 [Redis 큐](/laravel/12.x/queues)를 위한 아름다운 대시보드와 코드 기반 설정을 제공합니다. Horizon을 사용하면 작업 처리량, 실행 시간, 작업 실패와 같은 큐 시스템의 주요 지표를 쉽게 모니터링할 수 있습니다.
 
 Horizon을 사용할 때 모든 큐 워커 설정은 하나의 간단한 설정 파일에 저장됩니다. 애플리케이션의 워커 구성을 버전 관리되는 파일에 정의함으로써, 애플리케이션을 배포할 때 큐 워커를 손쉽게 확장하거나 수정할 수 있습니다.
 
@@ -90,10 +90,10 @@ Horizon의 에셋을 퍼블리시한 후, 주요 설정 파일은 `config/horizo
 ],
 ```
 
-Horizon을 시작하면, 애플리케이션이 실행 중인 환경에 맞는 워커 프로세스 설정 옵션을 사용하게 됩니다. 일반적으로 환경은 `APP_ENV` [환경 변수](/docs/{{version}}/configuration#determining-the-current-environment)의 값에 의해 결정됩니다. 예를 들어, 기본 `local` Horizon 환경은 세 개의 워커 프로세스를 시작하고, 각 큐에 할당된 워커 프로세스 수를 자동으로 조절하도록 설정되어 있습니다. 기본 `production` 환경은 최대 10개의 워커 프로세스를 시작하고, 각 큐에 할당된 워커 프로세스 수를 자동으로 조절하도록 설정되어 있습니다.
+Horizon을 시작하면, 애플리케이션이 실행 중인 환경에 맞는 워커 프로세스 설정 옵션을 사용하게 됩니다. 일반적으로 환경은 `APP_ENV` [환경 변수](/laravel/12.x/configuration#determining-the-current-environment)의 값에 의해 결정됩니다. 예를 들어, 기본 `local` Horizon 환경은 세 개의 워커 프로세스를 시작하고, 각 큐에 할당된 워커 프로세스 수를 자동으로 조절하도록 설정되어 있습니다. 기본 `production` 환경은 최대 10개의 워커 프로세스를 시작하고, 각 큐에 할당된 워커 프로세스 수를 자동으로 조절하도록 설정되어 있습니다.
 
 > [!WARNING]
-> `horizon` 설정 파일의 `environments` 부분에 Horizon을 실행할 계획인 각 [환경](/docs/{{version}}/configuration#environment-configuration)에 대한 항목이 포함되어 있는지 반드시 확인해야 합니다.
+> `horizon` 설정 파일의 `environments` 부분에 Horizon을 실행할 계획인 각 [환경](/laravel/12.x/configuration#environment-configuration)에 대한 항목이 포함되어 있는지 반드시 확인해야 합니다.
 
 
 #### 슈퍼바이저 {#supervisors}
@@ -105,7 +105,7 @@ Horizon의 기본 설정 파일에서 볼 수 있듯이, 각 환경에는 하나
 
 #### 유지 관리 모드 {#maintenance-mode}
 
-애플리케이션이 [유지 관리 모드](/docs/{{version}}/configuration#maintenance-mode)일 때, Horizon은 Horizon 설정 파일 내에서 supervisor의 `force` 옵션이 `true`로 정의되지 않는 한 대기 중인 작업을 처리하지 않습니다:
+애플리케이션이 [유지 관리 모드](/laravel/12.x/configuration#maintenance-mode)일 때, Horizon은 Horizon 설정 파일 내에서 supervisor의 `force` 옵션이 `true`로 정의되지 않는 한 대기 중인 작업을 처리하지 않습니다:
 
 ```php
 'environments' => [
@@ -161,7 +161,7 @@ Laravel의 기본 큐 시스템과 달리, Horizon은 세 가지 워커 밸런�
 
 ### 대시보드 권한 부여 {#dashboard-authorization}
 
-Horizon 대시보드는 `/horizon` 경로를 통해 접근할 수 있습니다. 기본적으로 이 대시보드는 `local` 환경에서만 접근할 수 있습니다. 하지만, `app/Providers/HorizonServiceProvider.php` 파일 내에는 [권한 게이트](/docs/{{version}}/authorization#gates) 정의가 있습니다. 이 권한 게이트는 **비로컬** 환경에서 Horizon에 대한 접근을 제어합니다. 필요에 따라 이 게이트를 수정하여 Horizon 설치에 대한 접근을 제한할 수 있습니다:
+Horizon 대시보드는 `/horizon` 경로를 통해 접근할 수 있습니다. 기본적으로 이 대시보드는 `local` 환경에서만 접근할 수 있습니다. 하지만, `app/Providers/HorizonServiceProvider.php` 파일 내에는 [권한 게이트](/laravel/12.x/authorization#gates) 정의가 있습니다. 이 권한 게이트는 **비로컬** 환경에서 Horizon에 대한 접근을 제어합니다. 필요에 따라 이 게이트를 수정하여 Horizon 설치에 대한 접근을 제한할 수 있습니다:
 
 ```php
 /**
@@ -407,7 +407,7 @@ class SendRenderNotifications implements ShouldQueue
 ## 알림 {#notifications}
 
 > [!WARNING]
-> Horizon에서 Slack 또는 SMS 알림을 설정하려면, [해당 알림 채널의 사전 요구 사항](/docs/{{version}}/notifications)을 확인해야 합니다.
+> Horizon에서 Slack 또는 SMS 알림을 설정하려면, [해당 알림 채널의 사전 요구 사항](/laravel/12.x/notifications)을 확인해야 합니다.
 
 큐 중 하나에 대기 시간이 길어질 때 알림을 받고 싶다면, `Horizon::routeMailNotificationsTo`, `Horizon::routeSlackNotificationsTo`, `Horizon::routeSmsNotificationsTo` 메서드를 사용할 수 있습니다. 이 메서드들은 애플리케이션의 `App\Providers\HorizonServiceProvider`의 `boot` 메서드에서 호출할 수 있습니다:
 

@@ -257,14 +257,14 @@ Sail을 설치할 때 Valkey 서비스를 선택하면, 애플리케이션의 `d
 
 ### Meilisearch {#meilisearch}
 
-Sail을 설치할 때 [Meilisearch](https://www.meilisearch.com) 서비스를 선택했다면, 애플리케이션의 `docker-compose.yml` 파일에 이 강력한 검색 엔진에 대한 항목이 포함되어 있을 것입니다. Meilisearch는 [Laravel Scout](/docs/{{version}}/scout)와 통합되어 있습니다. 컨테이너를 시작한 후에는 `MEILISEARCH_HOST` 환경 변수를 `http://meilisearch:7700`으로 설정하여 애플리케이션 내에서 Meilisearch 인스턴스에 연결할 수 있습니다.
+Sail을 설치할 때 [Meilisearch](https://www.meilisearch.com) 서비스를 선택했다면, 애플리케이션의 `docker-compose.yml` 파일에 이 강력한 검색 엔진에 대한 항목이 포함되어 있을 것입니다. Meilisearch는 [Laravel Scout](/laravel/12.x/scout)와 통합되어 있습니다. 컨테이너를 시작한 후에는 `MEILISEARCH_HOST` 환경 변수를 `http://meilisearch:7700`으로 설정하여 애플리케이션 내에서 Meilisearch 인스턴스에 연결할 수 있습니다.
 
 로컬 컴퓨터에서 웹 브라우저로 `http://localhost:7700`에 접속하면 Meilisearch의 웹 기반 관리 패널에 접근할 수 있습니다.
 
 
 ### Typesense {#typesense}
 
-Sail을 설치할 때 [Typesense](https://typesense.org) 서비스를 선택했다면, 애플리케이션의 `docker-compose.yml` 파일에 이 초고속 오픈소스 검색 엔진에 대한 항목이 포함되어 있을 것입니다. Typesense는 [Laravel Scout](/docs/{{version}}/scout#typesense)와 네이티브로 통합되어 있습니다. 컨테이너를 시작한 후에는 다음 환경 변수를 설정하여 애플리케이션 내에서 Typesense 인스턴스에 연결할 수 있습니다:
+Sail을 설치할 때 [Typesense](https://typesense.org) 서비스를 선택했다면, 애플리케이션의 `docker-compose.yml` 파일에 이 초고속 오픈소스 검색 엔진에 대한 항목이 포함되어 있을 것입니다. Typesense는 [Laravel Scout](/laravel/12.x/scout#typesense)와 네이티브로 통합되어 있습니다. 컨테이너를 시작한 후에는 다음 환경 변수를 설정하여 애플리케이션 내에서 Typesense 인스턴스에 연결할 수 있습니다:
 
 ```ini
 TYPESENSE_HOST=typesense
@@ -306,7 +306,7 @@ MinIO 콘솔(`http://localhost:8900`)을 통해 버킷을 생성할 수 있습�
 
 ## 테스트 실행하기 {#running-tests}
 
-Laravel은 기본적으로 뛰어난 테스트 지원을 제공하며, Sail의 `test` 명령어를 사용하여 애플리케이션의 [기능 및 단위 테스트](/docs/{{version}}/testing)를 실행할 수 있습니다. Pest / PHPUnit에서 허용하는 모든 CLI 옵션도 `test` 명령어에 함께 전달할 수 있습니다:
+Laravel은 기본적으로 뛰어난 테스트 지원을 제공하며, Sail의 `test` 명령어를 사용하여 애플리케이션의 [기능 및 단위 테스트](/laravel/12.x/testing)를 실행할 수 있습니다. Pest / PHPUnit에서 허용하는 모든 CLI 옵션도 `test` 명령어에 함께 전달할 수 있습니다:
 
 ```shell
 sail test
@@ -329,7 +329,7 @@ sail artisan test
 
 ### Laravel Dusk {#laravel-dusk}
 
-[Laravel Dusk](/docs/{{version}}/dusk)는 표현력이 뛰어나고 사용하기 쉬운 브라우저 자동화 및 테스트 API를 제공합니다. Sail 덕분에, Selenium이나 기타 도구를 로컬 컴퓨터에 설치하지 않고도 이러한 테스트를 실행할 수 있습니다. 시작하려면, 애플리케이션의 `docker-compose.yml` 파일에서 Selenium 서비스를 주석 해제하세요:
+[Laravel Dusk](/laravel/12.x/dusk)는 표현력이 뛰어나고 사용하기 쉬운 브라우저 자동화 및 테스트 API를 제공합니다. Sail 덕분에, Selenium이나 기타 도구를 로컬 컴퓨터에 설치하지 않고도 이러한 테스트를 실행할 수 있습니다. 시작하려면, 애플리케이션의 `docker-compose.yml` 파일에서 Selenium 서비스를 주석 해제하세요:
 
 ```yaml
 selenium:

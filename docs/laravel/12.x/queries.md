@@ -89,7 +89,7 @@ foreach ($users as $user) {
 ```
 
 > [!NOTE]
-> Laravel 컬렉션은 데이터를 매핑하고 축소하는 데 매우 강력한 다양한 메서드를 제공합니다. Laravel 컬렉션에 대한 자세한 내용은 [컬렉션 문서](/docs/{{version}}/collections)를 참고하세요.
+> Laravel 컬렉션은 데이터를 매핑하고 축소하는 데 매우 강력한 다양한 메서드를 제공합니다. Laravel 컬렉션에 대한 자세한 내용은 [컬렉션 문서](/laravel/12.x/collections)를 참고하세요.
 
 
 #### 테이블에서 단일 행 / 컬럼 조회하기 {#retrieving-a-single-row-column-from-a-table}
@@ -204,7 +204,7 @@ DB::table('users')->where(function ($query) {
 
 ### 결과를 느리게 스트리밍하기 {#streaming-results-lazily}
 
-`lazy` 메서드는 [청크 메서드](#chunking-results)와 유사하게 쿼리를 청크 단위로 실행합니다. 하지만 각 청크를 콜백에 전달하는 대신, `lazy()` 메서드는 [LazyCollection](/docs/{{version}}/collections#lazy-collections)을 반환하여 결과를 하나의 스트림처럼 다룰 수 있게 해줍니다:
+`lazy` 메서드는 [청크 메서드](#chunking-results)와 유사하게 쿼리를 청크 단위로 실행합니다. 하지만 각 청크를 콜백에 전달하는 대신, `lazy()` 메서드는 [LazyCollection](/laravel/12.x/collections#lazy-collections)을 반환하여 결과를 하나의 스트림처럼 다룰 수 있게 해줍니다:
 
 ```php
 use Illuminate\Support\Facades\DB;
@@ -1088,7 +1088,7 @@ $incomes = Income::where('amount', '<', function (Builder $query) {
 > [!WARNING]
 > 전체 텍스트 where 절은 현재 MariaDB, MySQL, 그리고 PostgreSQL에서만 지원됩니다.
 
-`whereFullText`와 `orWhereFullText` 메서드는 [전체 텍스트 인덱스](/docs/{{version}}/migrations#available-index-types)가 적용된 컬럼에 대해 쿼리에 전체 텍스트 "where" 절을 추가할 때 사용할 수 있습니다. 이 메서드들은 라라벨에 의해 해당 데이터베이스 시스템에 맞는 적절한 SQL로 변환됩니다. 예를 들어, MariaDB나 MySQL을 사용하는 애플리케이션에서는 `MATCH AGAINST` 절이 생성됩니다:
+`whereFullText`와 `orWhereFullText` 메서드는 [전체 텍스트 인덱스](/laravel/12.x/migrations#available-index-types)가 적용된 컬럼에 대해 쿼리에 전체 텍스트 "where" 절을 추가할 때 사용할 수 있습니다. 이 메서드들은 라라벨에 의해 해당 데이터베이스 시스템에 맞는 적절한 SQL로 변환됩니다. 예를 들어, MariaDB나 MySQL을 사용하는 애플리케이션에서는 `MATCH AGAINST` 절이 생성됩니다:
 
 ```php
 $users = DB::table('users')
@@ -1449,7 +1449,7 @@ DB::table('users')
     ->get();
 ```
 
-필수는 아니지만, 비관적 잠금은 [트랜잭션](/docs/{{version}}/database#database-transactions) 내에서 감싸는 것이 권장됩니다. 이렇게 하면 전체 작업이 완료될 때까지 데이터베이스의 조회된 데이터가 변경되지 않도록 보장할 수 있습니다. 실패가 발생할 경우, 트랜잭션은 모든 변경 사항을 롤백하고 잠금을 자동으로 해제합니다:
+필수는 아니지만, 비관적 잠금은 [트랜잭션](/laravel/12.x/database#database-transactions) 내에서 감싸는 것이 권장됩니다. 이렇게 하면 전체 작업이 완료될 때까지 데이터베이스의 조회된 데이터가 변경되지 않도록 보장할 수 있습니다. 실패가 발생할 경우, 트랜잭션은 모든 변경 사항을 롤백하고 잠금을 자동으로 해제합니다:
 
 ```php
 DB::transaction(function () {
@@ -1544,20 +1544,20 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
 DB::table('flights')
-    ->when($destination, function (Builder $query, string $destination) { // [tl! remove]
-        $query->where('destination', $destination); // [tl! remove]
-    }) // [tl! remove]
-    ->tap(new DestinationFilter($destination)) // [tl! add]
+    ->when($destination, function (Builder $query, string $destination) { // [!code --]
+        $query->where('destination', $destination); // [!code --]
+    }) // [!code --]
+    ->tap(new DestinationFilter($destination)) // [!code ++]
     ->orderByDesc('price')
     ->get();
 
 // ...
 
 DB::table('flights')
-    ->when($destination, function (Builder $query, string $destination) { // [tl! remove]
-        $query->where('destination', $destination); // [tl! remove]
-    }) // [tl! remove]
-    ->tap(new DestinationFilter($destination)) // [tl! add]
+    ->when($destination, function (Builder $query, string $destination) { // [!code --]
+        $query->where('destination', $destination); // [!code --]
+    }) // [!code --]
+    ->tap(new DestinationFilter($destination)) // [!code ++]
     ->where('user', $request->user()->id)
     ->orderBy('destination')
     ->get();
@@ -1568,7 +1568,7 @@ DB::table('flights')
 
 `tap` 메서드는 항상 쿼리 빌더를 반환합니다. 쿼리를 실행하고 다른 값을 반환하는 객체를 추출하고 싶다면, 대신 `pipe` 메서드를 사용할 수 있습니다.
 
-애플리케이션 전반에서 사용되는 공통 [페이지네이션](/docs/{{version}}/pagination) 로직을 포함하는 다음 쿼리 객체를 살펴보세요. 쿼리 조건을 쿼리에 적용하는 `DestinationFilter`와 달리, `Paginate` 객체는 쿼리를 실행하고 페이지네이터 인스턴스를 반환합니다:
+애플리케이션 전반에서 사용되는 공통 [페이지네이션](/laravel/12.x/pagination) 로직을 포함하는 다음 쿼리 객체를 살펴보세요. 쿼리 조건을 쿼리에 적용하는 `DestinationFilter`와 달리, `Paginate` 객체는 쿼리를 실행하고 페이지네이터 인스턴스를 반환합니다:
 
 ```php
 <?php

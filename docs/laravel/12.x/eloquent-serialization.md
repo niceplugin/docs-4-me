@@ -14,7 +14,7 @@
 Laravel로 API를 구축할 때, 모델과 관계를 배열이나 JSON으로 변환해야 할 일이 자주 있습니다. Eloquent는 이러한 변환을 간편하게 처리할 수 있는 메서드와, 모델의 직렬화된 표현에 어떤 속성이 포함될지 제어할 수 있는 방법을 제공합니다.
 
 > [!NOTE]
-> Eloquent 모델과 컬렉션의 JSON 직렬화를 더욱 강력하게 처리하고 싶다면, [Eloquent API 리소스](/docs/{{version}}/eloquent-resources) 문서를 참고하세요.
+> Eloquent 모델과 컬렉션의 JSON 직렬화를 더욱 강력하게 처리하고 싶다면, [Eloquent API 리소스](/laravel/12.x/eloquent-resources) 문서를 참고하세요.
 
 
 ## 모델 및 컬렉션 직렬화 {#serializing-models-and-collections}
@@ -22,7 +22,7 @@ Laravel로 API를 구축할 때, 모델과 관계를 배열이나 JSON으로 변
 
 ### 배열로 직렬화하기 {#serializing-to-arrays}
 
-모델과 로드된 [관계](/docs/{{version}}/eloquent-relationships)를 배열로 변환하려면 `toArray` 메서드를 사용하면 됩니다. 이 메서드는 재귀적으로 동작하므로, 모든 속성과 모든 관계(관계의 관계까지 포함)가 배열로 변환됩니다:
+모델과 로드된 [관계](/laravel/12.x/eloquent-relationships)를 배열로 변환하려면 `toArray` 메서드를 사용하면 됩니다. 이 메서드는 재귀적으로 동작하므로, 모든 속성과 모든 관계(관계의 관계까지 포함)가 배열로 변환됩니다:
 
 ```php
 use App\Models\User;
@@ -40,7 +40,7 @@ $user = User::first();
 return $user->attributesToArray();
 ```
 
-또한, [컬렉션](/docs/{{version}}/eloquent-collections) 전체를 컬렉션 인스턴스에서 `toArray` 메서드를 호출하여 배열로 변환할 수도 있습니다:
+또한, [컬렉션](/laravel/12.x/eloquent-collections) 전체를 컬렉션 인스턴스에서 `toArray` 메서드를 호출하여 배열로 변환할 수도 있습니다:
 
 ```php
 $users = User::all();
@@ -154,7 +154,7 @@ return $user->setHidden(['email', 'password', 'remember_token'])->toArray();
 
 ## JSON에 값 추가하기 {#appending-values-to-json}
 
-때때로, 모델을 배열이나 JSON으로 변환할 때 데이터베이스에 해당 컬럼이 없는 속성을 추가하고 싶을 수 있습니다. 이를 위해 먼저 해당 값에 대한 [접근자](/docs/{{version}}/eloquent-mutators)를 정의해야 합니다:
+때때로, 모델을 배열이나 JSON으로 변환할 때 데이터베이스에 해당 컬럼이 없는 속성을 추가하고 싶을 수 있습니다. 이를 위해 먼저 해당 값에 대한 [접근자](/laravel/12.x/eloquent-mutators)를 정의해야 합니다:
 
 ```php
 <?php
@@ -232,7 +232,7 @@ protected function serializeDate(DateTimeInterface $date): string
 
 #### 속성별 날짜 형식 커스터마이징 {#customizing-the-date-format-per-attribute}
 
-모델의 [캐스트 선언](/docs/{{version}}/eloquent-mutators#attribute-casting)에서 날짜 형식을 지정하여 개별 Eloquent 날짜 속성의 직렬화 형식을 커스터마이징할 수 있습니다:
+모델의 [캐스트 선언](/laravel/12.x/eloquent-mutators#attribute-casting)에서 날짜 형식을 지정하여 개별 Eloquent 날짜 속성의 직렬화 형식을 커스터마이징할 수 있습니다:
 
 ```php
 protected function casts(): array

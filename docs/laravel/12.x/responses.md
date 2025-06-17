@@ -44,12 +44,12 @@ Route::get('/', function () {
 ```
 
 > [!NOTE]
-> 라우트나 컨트롤러에서 [Eloquent 컬렉션](/docs/{{version}}/eloquent-collections)도 반환할 수 있다는 사실을 알고 계셨나요? 이 또한 자동으로 JSON으로 변환됩니다. 한 번 시도해보세요!
+> 라우트나 컨트롤러에서 [Eloquent 컬렉션](/laravel/12.x/eloquent-collections)도 반환할 수 있다는 사실을 알고 계셨나요? 이 또한 자동으로 JSON으로 변환됩니다. 한 번 시도해보세요!
 
 
 #### 응답 객체 {#response-objects}
 
-일반적으로 라우트 액션에서 단순한 문자열이나 배열만 반환하지 않습니다. 대신, 전체 `Illuminate\Http\Response` 인스턴스나 [뷰](/docs/{{version}}/views)를 반환하게 됩니다.
+일반적으로 라우트 액션에서 단순한 문자열이나 배열만 반환하지 않습니다. 대신, 전체 `Illuminate\Http\Response` 인스턴스나 [뷰](/laravel/12.x/views)를 반환하게 됩니다.
 
 전체 `Response` 인스턴스를 반환하면 응답의 HTTP 상태 코드와 헤더를 자유롭게 커스터마이즈할 수 있습니다. `Response` 인스턴스는 `Symfony\Component\HttpFoundation\Response` 클래스를 상속받으며, 다양한 HTTP 응답을 생성할 수 있는 여러 메서드를 제공합니다:
 
@@ -63,7 +63,7 @@ Route::get('/home', function () {
 
 #### Eloquent 모델과 컬렉션 {#eloquent-models-and-collections}
 
-[엘로퀀트 ORM](/docs/{{version}}/eloquent) 모델과 컬렉션을 라우트나 컨트롤러에서 직접 반환할 수도 있습니다. 이렇게 하면 라라벨이 모델의 [숨김 속성](/docs/{{version}}/eloquent-serialization#hiding-attributes-from-json)을 존중하면서, 해당 모델과 컬렉션을 자동으로 JSON 응답으로 변환해줍니다:
+[엘로퀀트 ORM](/laravel/12.x/eloquent) 모델과 컬렉션을 라우트나 컨트롤러에서 직접 반환할 수도 있습니다. 이렇게 하면 라라벨이 모델의 [숨김 속성](/laravel/12.x/eloquent-serialization#hiding-attributes-from-json)을 존중하면서, 해당 모델과 컬렉션을 자동으로 JSON 응답으로 변환해줍니다:
 
 ```php
 use App\Models\User;
@@ -190,7 +190,7 @@ Route::get('/dashboard', function () {
 });
 ```
 
-때때로 제출된 폼이 유효하지 않은 경우처럼, 사용자를 이전 위치로 리다이렉트하고 싶을 때가 있습니다. 이럴 때는 전역 `back` 헬퍼 함수를 사용할 수 있습니다. 이 기능은 [세션](/docs/{{version}}/session)을 활용하므로, `back` 함수를 호출하는 라우트가 반드시 `web` 미들웨어 그룹을 사용하고 있는지 확인해야 합니다:
+때때로 제출된 폼이 유효하지 않은 경우처럼, 사용자를 이전 위치로 리다이렉트하고 싶을 때가 있습니다. 이럴 때는 전역 `back` 헬퍼 함수를 사용할 수 있습니다. 이 기능은 [세션](/laravel/12.x/session)을 활용하므로, `back` 함수를 호출하는 라우트가 반드시 `web` 미들웨어 그룹을 사용하고 있는지 확인해야 합니다:
 
 ```php
 Route::post('/user/profile', function () {
@@ -243,7 +243,7 @@ public function getRouteKey(): mixed
 
 ### 컨트롤러 액션으로 리다이렉트하기 {#redirecting-controller-actions}
 
-[컨트롤러 액션](/docs/{{version}}/controllers)으로 리다이렉트도 생성할 수 있습니다. 이를 위해 `action` 메서드에 컨트롤러와 액션 이름을 전달하면 됩니다:
+[컨트롤러 액션](/laravel/12.x/controllers)으로 리다이렉트도 생성할 수 있습니다. 이를 위해 `action` 메서드에 컨트롤러와 액션 이름을 전달하면 됩니다:
 
 ```php
 use App\Http\Controllers\UserController;
@@ -271,7 +271,7 @@ return redirect()->away('https://www.google.com');
 
 ### 플래시 세션 데이터와 함께 리다이렉트하기 {#redirecting-with-flashed-session-data}
 
-새로운 URL로 리다이렉트하면서 [데이터를 세션에 플래시](/docs/{{version}}/session#flash-data)하는 작업은 보통 동시에 이루어집니다. 일반적으로 어떤 작업을 성공적으로 수행한 후, 성공 메시지를 세션에 플래시할 때 사용됩니다. 편의를 위해, `RedirectResponse` 인스턴스를 생성하고 플루언트 메서드 체이닝을 통해 세션에 데이터를 플래시할 수 있습니다:
+새로운 URL로 리다이렉트하면서 [데이터를 세션에 플래시](/laravel/12.x/session#flash-data)하는 작업은 보통 동시에 이루어집니다. 일반적으로 어떤 작업을 성공적으로 수행한 후, 성공 메시지를 세션에 플래시할 때 사용됩니다. 편의를 위해, `RedirectResponse` 인스턴스를 생성하고 플루언트 메서드 체이닝을 통해 세션에 데이터를 플래시할 수 있습니다:
 
 ```php
 Route::post('/user/profile', function () {
@@ -281,7 +281,7 @@ Route::post('/user/profile', function () {
 });
 ```
 
-사용자가 리다이렉트된 후, [세션](/docs/{{version}}/session)에서 플래시된 메시지를 표시할 수 있습니다. 예를 들어, [Blade 문법](/docs/{{version}}/blade)을 사용하면 다음과 같이 작성할 수 있습니다:
+사용자가 리다이렉트된 후, [세션](/laravel/12.x/session)에서 플래시된 메시지를 표시할 수 있습니다. 예를 들어, [Blade 문법](/laravel/12.x/blade)을 사용하면 다음과 같이 작성할 수 있습니다:
 
 ```blade
 @if (session('status'))
@@ -294,7 +294,7 @@ Route::post('/user/profile', function () {
 
 #### 입력값과 함께 리디렉션하기 {#redirecting-with-input}
 
-`RedirectResponse` 인스턴스에서 제공하는 `withInput` 메서드를 사용하면, 사용자를 새로운 위치로 리디렉션하기 전에 현재 요청의 입력 데이터를 세션에 플래시할 수 있습니다. 이는 주로 사용자가 유효성 검사 오류를 만났을 때 사용됩니다. 입력값이 세션에 플래시된 후에는, 다음 요청에서 [이전 입력값을 쉽게 가져와](/docs/{{version}}/requests#retrieving-old-input) 폼을 다시 채울 수 있습니다:
+`RedirectResponse` 인스턴스에서 제공하는 `withInput` 메서드를 사용하면, 사용자를 새로운 위치로 리디렉션하기 전에 현재 요청의 입력 데이터를 세션에 플래시할 수 있습니다. 이는 주로 사용자가 유효성 검사 오류를 만났을 때 사용됩니다. 입력값이 세션에 플래시된 후에는, 다음 요청에서 [이전 입력값을 쉽게 가져와](/laravel/12.x/requests#retrieving-old-input) 폼을 다시 채울 수 있습니다:
 
 ```php
 return back()->withInput();
@@ -303,12 +303,12 @@ return back()->withInput();
 
 ## 기타 응답 타입 {#other-response-types}
 
-`response` 헬퍼는 다양한 타입의 응답 인스턴스를 생성하는 데 사용할 수 있습니다. `response` 헬퍼를 인자 없이 호출하면, `Illuminate\Contracts\Routing\ResponseFactory` [컨트랙트](/docs/{{version}}/contracts)의 구현체가 반환됩니다. 이 컨트랙트는 응답을 생성할 때 유용한 여러 메서드를 제공합니다.
+`response` 헬퍼는 다양한 타입의 응답 인스턴스를 생성하는 데 사용할 수 있습니다. `response` 헬퍼를 인자 없이 호출하면, `Illuminate\Contracts\Routing\ResponseFactory` [컨트랙트](/laravel/12.x/contracts)의 구현체가 반환됩니다. 이 컨트랙트는 응답을 생성할 때 유용한 여러 메서드를 제공합니다.
 
 
 ### 뷰 응답 {#view-responses}
 
-응답의 상태 코드와 헤더를 제어해야 하면서, 동시에 [뷰](/docs/{{version}}/views)를 응답의 내용으로 반환해야 한다면 `view` 메서드를 사용하면 됩니다:
+응답의 상태 코드와 헤더를 제어해야 하면서, 동시에 [뷰](/laravel/12.x/views)를 응답의 내용으로 반환해야 한다면 `view` 메서드를 사용하면 됩니다:
 
 ```php
 return response()
@@ -459,7 +459,7 @@ const sendMessage = () => {
 `send`를 통해 데이터를 스트림으로 다시 보낼 때, 새로운 데이터를 보내기 전에 스트림에 대한 활성 연결이 취소됩니다. 모든 요청은 JSON `POST` 요청으로 전송됩니다.
 
 > [!WARNING]
-> `useStream` 훅이 애플리케이션에 `POST` 요청을 보내므로, 유효한 CSRF 토큰이 필요합니다. CSRF 토큰을 제공하는 가장 쉬운 방법은 [애플리케이션 레이아웃의 `head`에 `meta` 태그로 포함하는 것](/docs/{{version}}/csrf#csrf-x-csrf-token)입니다.
+> `useStream` 훅이 애플리케이션에 `POST` 요청을 보내므로, 유효한 CSRF 토큰이 필요합니다. CSRF 토큰을 제공하는 가장 쉬운 방법은 [애플리케이션 레이아웃의 `head`에 `meta` 태그로 포함하는 것](/laravel/12.x/csrf#csrf-x-csrf-token)입니다.
 
 `useStream`에 전달하는 두 번째 인자는 스트림 소비 동작을 커스터마이즈할 수 있는 옵션 객체입니다. 이 객체의 기본값은 아래와 같습니다:
 
@@ -872,7 +872,7 @@ return response()->streamDownload(function () {
 
 ## 응답 매크로 {#response-macros}
 
-여러 라우트와 컨트롤러에서 재사용할 수 있는 커스텀 응답을 정의하고 싶다면, `Response` 파사드의 `macro` 메서드를 사용할 수 있습니다. 일반적으로 이 메서드는 애플리케이션의 [서비스 프로바이더](/docs/{{version}}/providers) 중 하나의 `boot` 메서드에서 호출하는 것이 좋습니다. 예를 들어, `App\Providers\AppServiceProvider` 서비스 프로바이더에서 사용할 수 있습니다:
+여러 라우트와 컨트롤러에서 재사용할 수 있는 커스텀 응답을 정의하고 싶다면, `Response` 파사드의 `macro` 메서드를 사용할 수 있습니다. 일반적으로 이 메서드는 애플리케이션의 [서비스 프로바이더](/laravel/12.x/providers) 중 하나의 `boot` 메서드에서 호출하는 것이 좋습니다. 예를 들어, `App\Providers\AppServiceProvider` 서비스 프로바이더에서 사용할 수 있습니다:
 
 ```php
 <?php

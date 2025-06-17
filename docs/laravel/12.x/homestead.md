@@ -37,7 +37,7 @@
 ## 소개 {#introduction}
 
 > [!WARNING]
-> Laravel Homestead는 더 이상 적극적으로 유지 관리되지 않는 레거시 패키지입니다. [Laravel Sail](/docs/{{version}}/sail)을 현대적인 대안으로 사용할 수 있습니다.
+> Laravel Homestead는 더 이상 적극적으로 유지 관리되지 않는 레거시 패키지입니다. [Laravel Sail](/laravel/12.x/sail)을 현대적인 대안으로 사용할 수 있습니다.
 
 Laravel은 PHP 개발 경험 전체를 즐겁게 만들기 위해 노력하며, 로컬 개발 환경도 예외가 아닙니다. [Laravel Homestead](https://github.com/laravel/homestead)는 공식적으로 제공되는, 사전 패키징된 Vagrant 박스로, 로컬 컴퓨터에 PHP, 웹 서버 또는 기타 서버 소프트웨어를 설치하지 않고도 훌륭한 개발 환경을 제공합니다.
 
@@ -632,7 +632,7 @@ backup: true
 
 ### 크론 스케줄 설정하기 {#configuring-cron-schedules}
 
-Laravel은 [크론 작업 예약](/docs/{{version}}/scheduling)을 편리하게 할 수 있도록, 매 분마다 실행되는 단일 `schedule:run` Artisan 명령어를 예약하는 방법을 제공합니다. `schedule:run` 명령어는 `routes/console.php` 파일에 정의된 작업 스케줄을 확인하여 어떤 예약 작업을 실행할지 결정합니다.
+Laravel은 [크론 작업 예약](/laravel/12.x/scheduling)을 편리하게 할 수 있도록, 매 분마다 실행되는 단일 `schedule:run` Artisan 명령어를 예약하는 방법을 제공합니다. `schedule:run` 명령어는 `routes/console.php` 파일에 정의된 작업 스케줄을 확인하여 어떤 예약 작업을 실행할지 결정합니다.
 
 Homestead 사이트에서 `schedule:run` 명령어가 실행되도록 하려면, 사이트를 정의할 때 `schedule` 옵션을 `true`로 설정하면 됩니다:
 
@@ -695,7 +695,7 @@ buckets:
 
 ### Laravel Dusk {#laravel-dusk}
 
-[Laravel Dusk](/docs/{{version}}/dusk) 테스트를 Homestead 내에서 실행하려면, Homestead 설정에서 [webdriver 기능](#installing-optional-features)을 활성화해야 합니다:
+[Laravel Dusk](/laravel/12.x/dusk) 테스트를 Homestead 내에서 실행하려면, Homestead 설정에서 [webdriver 기능](#installing-optional-features)을 활성화해야 합니다:
 
 ```yaml
 features:

@@ -22,7 +22,7 @@ Laravel은 테스트를 염두에 두고 설계되었습니다. 실제로 [Pest]
 
 ## 환경 {#environment}
 
-테스트를 실행할 때, Laravel은 `phpunit.xml` 파일에 정의된 환경 변수로 인해 [설정 환경](/docs/{{version}}/configuration#environment-configuration)을 자동으로 `testing`으로 설정합니다. 또한 Laravel은 세션과 캐시를 자동으로 `array` 드라이버로 설정하여, 테스트 중에는 세션이나 캐시 데이터가 영구적으로 저장되지 않도록 합니다.
+테스트를 실행할 때, Laravel은 `phpunit.xml` 파일에 정의된 환경 변수로 인해 [설정 환경](/laravel/12.x/configuration#environment-configuration)을 자동으로 `testing`으로 설정합니다. 또한 Laravel은 세션과 캐시를 자동으로 `array` 드라이버로 설정하여, 테스트 중에는 세션이나 캐시 데이터가 영구적으로 저장되지 않도록 합니다.
 
 필요에 따라 다른 테스트 환경 설정 값을 자유롭게 정의할 수 있습니다. `testing` 환경 변수는 애플리케이션의 `phpunit.xml` 파일에서 설정할 수 있지만, 테스트를 실행하기 전에 반드시 `config:clear` Artisan 명령어로 설정 캐시를 비워야 합니다!
 
@@ -47,7 +47,7 @@ php artisan make:test UserTest --unit
 ```
 
 > [!NOTE]
-> 테스트 스텁은 [스텁 커스터마이징](/docs/{{version}}/artisan#stub-customization)을 통해 커스터마이즈할 수 있습니다.
+> 테스트 스텁은 [스텁 커스터마이징](/laravel/12.x/artisan#stub-customization)을 통해 커스터마이즈할 수 있습니다.
 
 테스트가 생성되면, Pest 또는 PHPUnit을 사용하여 일반적으로 테스트를 정의할 수 있습니다. 테스트를 실행하려면 터미널에서 `vendor/bin/pest`, `vendor/bin/phpunit`, 또는 `php artisan test` 명령어를 실행하세요:
 

@@ -46,9 +46,9 @@
 
 많은 현대 웹 애플리케이션에서는 WebSocket을 사용하여 실시간으로 업데이트되는 사용자 인터페이스를 구현합니다. 서버에서 데이터가 업데이트되면, 일반적으로 WebSocket 연결을 통해 메시지가 전송되어 클라이언트에서 처리됩니다. WebSocket은 UI에 반영되어야 하는 데이터 변경 사항을 계속해서 애플리케이션 서버에 폴링하는 것보다 더 효율적인 대안을 제공합니다.
 
-예를 들어, 애플리케이션에서 사용자의 데이터를 CSV 파일로 내보내고 이를 이메일로 전송할 수 있다고 가정해봅시다. 하지만 이 CSV 파일을 생성하는 데 몇 분이 걸리기 때문에, [큐 작업](/docs/{{version}}/queues) 내에서 CSV를 생성하고 메일로 전송하도록 선택할 수 있습니다. CSV가 생성되어 사용자에게 메일로 전송되면, `App\Events\UserDataExported` 이벤트를 브로드캐스팅하여 애플리케이션의 JavaScript에서 이 이벤트를 수신할 수 있습니다. 이벤트가 수신되면, 사용자가 페이지를 새로고침하지 않아도 CSV가 이메일로 전송되었다는 메시지를 사용자에게 표시할 수 있습니다.
+예를 들어, 애플리케이션에서 사용자의 데이터를 CSV 파일로 내보내고 이를 이메일로 전송할 수 있다고 가정해봅시다. 하지만 이 CSV 파일을 생성하는 데 몇 분이 걸리기 때문에, [큐 작업](/laravel/12.x/queues) 내에서 CSV를 생성하고 메일로 전송하도록 선택할 수 있습니다. CSV가 생성되어 사용자에게 메일로 전송되면, `App\Events\UserDataExported` 이벤트를 브로드캐스팅하여 애플리케이션의 JavaScript에서 이 이벤트를 수신할 수 있습니다. 이벤트가 수신되면, 사용자가 페이지를 새로고침하지 않아도 CSV가 이메일로 전송되었다는 메시지를 사용자에게 표시할 수 있습니다.
 
-이러한 기능을 쉽게 구축할 수 있도록, Laravel은 서버 측 Laravel [이벤트](/docs/{{version}}/events)를 WebSocket 연결을 통해 "브로드캐스트"하는 기능을 간편하게 제공합니다. Laravel 이벤트를 브로드캐스트하면 서버 측 Laravel 애플리케이션과 클라이언트 측 JavaScript 애플리케이션 간에 동일한 이벤트 이름과 데이터를 공유할 수 있습니다.
+이러한 기능을 쉽게 구축할 수 있도록, Laravel은 서버 측 Laravel [이벤트](/laravel/12.x/events)를 WebSocket 연결을 통해 "브로드캐스트"하는 기능을 간편하게 제공합니다. Laravel 이벤트를 브로드캐스트하면 서버 측 Laravel 애플리케이션과 클라이언트 측 JavaScript 애플리케이션 간에 동일한 이벤트 이름과 데이터를 공유할 수 있습니다.
 
 브로드캐스팅의 핵심 개념은 간단합니다: 클라이언트는 프론트엔드에서 이름이 지정된 채널에 연결하고, Laravel 애플리케이션은 백엔드에서 이 채널로 이벤트를 브로드캐스트합니다. 이 이벤트에는 프론트엔드에서 사용할 수 있도록 원하는 추가 데이터를 포함할 수 있습니다.
 
@@ -58,7 +58,7 @@
 기본적으로 Laravel은 세 가지 서버 사이드 브로드캐스팅 드라이버를 제공합니다: [Laravel Reverb](https://reverb.laravel.com), [Pusher Channels](https://pusher.com/channels), 그리고 [Ably](https://ably.com).
 
 > [!NOTE]
-> 이벤트 브로드캐스팅을 시작하기 전에, Laravel의 [이벤트와 리스너](/docs/{{version}}/events) 문서를 먼저 읽어보시기 바랍니다.
+> 이벤트 브로드캐스팅을 시작하기 전에, Laravel의 [이벤트와 리스너](/laravel/12.x/events) 문서를 먼저 읽어보시기 바랍니다.
 
 
 ## 빠른 시작 {#quickstart}
@@ -71,17 +71,17 @@ php artisan install:broadcasting
 
 `install:broadcasting` 명령어를 실행하면 어떤 이벤트 브로드캐스팅 서비스를 사용할지 선택하라는 안내가 표시됩니다. 또한, 이 명령어는 `config/broadcasting.php` 설정 파일과 애플리케이션의 브로드캐스트 인증 라우트 및 콜백을 등록할 수 있는 `routes/channels.php` 파일을 생성합니다.
 
-Laravel은 기본적으로 여러 브로드캐스트 드라이버를 지원합니다: [Laravel Reverb](/docs/{{version}}/reverb), [Pusher Channels](https://pusher.com/channels), [Ably](https://ably.com), 그리고 로컬 개발 및 디버깅을 위한 `log` 드라이버가 있습니다. 또한, 테스트 중 브로드캐스팅을 비활성화할 수 있는 `null` 드라이버도 포함되어 있습니다. 각 드라이버에 대한 설정 예시는 `config/broadcasting.php` 설정 파일에 포함되어 있습니다.
+Laravel은 기본적으로 여러 브로드캐스트 드라이버를 지원합니다: [Laravel Reverb](/laravel/12.x/reverb), [Pusher Channels](https://pusher.com/channels), [Ably](https://ably.com), 그리고 로컬 개발 및 디버깅을 위한 `log` 드라이버가 있습니다. 또한, 테스트 중 브로드캐스팅을 비활성화할 수 있는 `null` 드라이버도 포함되어 있습니다. 각 드라이버에 대한 설정 예시는 `config/broadcasting.php` 설정 파일에 포함되어 있습니다.
 
 애플리케이션의 모든 이벤트 브로드캐스팅 설정은 `config/broadcasting.php` 설정 파일에 저장됩니다. 만약 이 파일이 애플리케이션에 없다면 걱정하지 마세요. `install:broadcasting` Artisan 명령어를 실행하면 자동으로 생성됩니다.
 
 
 #### 다음 단계 {#quickstart-next-steps}
 
-이벤트 브로드캐스팅을 활성화했다면, 이제 [브로드캐스트 이벤트 정의하기](#defining-broadcast-events)와 [이벤트 리스닝하기](#listening-for-events)에 대해 더 알아볼 준비가 되었습니다. 만약 Laravel의 React 또는 Vue [스타터 키트](/docs/{{version}}/starter-kits)를 사용하고 있다면, Echo의 [useEcho hook](#using-react-or-vue)을 통해 이벤트를 수신할 수 있습니다.
+이벤트 브로드캐스팅을 활성화했다면, 이제 [브로드캐스트 이벤트 정의하기](#defining-broadcast-events)와 [이벤트 리스닝하기](#listening-for-events)에 대해 더 알아볼 준비가 되었습니다. 만약 Laravel의 React 또는 Vue [스타터 키트](/laravel/12.x/starter-kits)를 사용하고 있다면, Echo의 [useEcho hook](#using-react-or-vue)을 통해 이벤트를 수신할 수 있습니다.
 
 > [!NOTE]
-> 이벤트를 브로드캐스트하기 전에 먼저 [큐 워커](/docs/{{version}}/queues)를 설정하고 실행해야 합니다. 모든 이벤트 브로드캐스팅은 큐에 등록된 작업을 통해 처리되므로, 이벤트 브로드캐스트로 인해 애플리케이션의 응답 속도가 심각하게 저하되지 않습니다.
+> 이벤트를 브로드캐스트하기 전에 먼저 [큐 워커](/laravel/12.x/queues)를 설정하고 실행해야 합니다. 모든 이벤트 브로드캐스팅은 큐에 등록된 작업을 통해 처리되므로, 이벤트 브로드캐스트로 인해 애플리케이션의 응답 속도가 심각하게 저하되지 않습니다.
 
 
 ## 서버 사이드 설치 {#server-side-installation}
@@ -102,7 +102,7 @@ php artisan install:broadcasting --reverb
 
 #### 수동 설치 {#reverb-manual-installation}
 
-`install:broadcasting` 명령어를 실행하면 [Laravel Reverb](/docs/{{version}}/reverb) 설치 여부를 묻게 됩니다. 물론, Composer 패키지 관리자를 사용하여 Reverb를 수동으로 설치할 수도 있습니다:
+`install:broadcasting` 명령어를 실행하면 [Laravel Reverb](/laravel/12.x/reverb) 설치 여부를 묻게 됩니다. 물론, Composer 패키지 관리자를 사용하여 Reverb를 수동으로 설치할 수도 있습니다:
 
 ```shell
 composer require laravel/reverb
@@ -114,7 +114,7 @@ composer require laravel/reverb
 php artisan reverb:install
 ```
 
-Reverb의 설치 및 사용에 대한 자세한 안내는 [Reverb 문서](/docs/{{version}}/reverb)에서 확인할 수 있습니다.
+Reverb의 설치 및 사용에 대한 자세한 안내는 [Reverb 문서](/laravel/12.x/reverb)에서 확인할 수 있습니다.
 
 
 ### Pusher Channels {#pusher-channels}
@@ -179,7 +179,7 @@ Ably 지원을 수동으로 설치하려면 Composer 패키지 관리자를 사�
 composer require ably/ably-php
 ```
 
-다음으로, `config/broadcasting.php` 설정 파일에서 Ably 자격 증명을 구성해야 합니다. 이 파일에는 이미 Ably 설정 예시가 포함되어 있어, 키만 빠르게 지정할 수 있습니다. 일반적으로 이 값은 `ABLY_KEY` [환경 변수](/docs/{{version}}/configuration#environment-configuration)를 통해 설정해야 합니다:
+다음으로, `config/broadcasting.php` 설정 파일에서 Ably 자격 증명을 구성해야 합니다. 이 파일에는 이미 Ably 설정 예시가 포함되어 있어, 키만 빠르게 지정할 수 있습니다. 일반적으로 이 값은 `ABLY_KEY` [환경 변수](/laravel/12.x/configuration#environment-configuration)를 통해 설정해야 합니다:
 
 ```ini
 ABLY_KEY=your-ably-key
@@ -356,7 +356,7 @@ npm run build
 ```
 
 > [!NOTE]
-> 애플리케이션의 JavaScript 에셋 컴파일에 대해 더 자세히 알고 싶다면 [Vite](/docs/{{version}}/vite) 문서를 참고하세요.
+> 애플리케이션의 JavaScript 에셋 컴파일에 대해 더 자세히 알고 싶다면 [Vite](/laravel/12.x/vite) 문서를 참고하세요.
 
 
 #### 기존 클라이언트 인스턴스 사용하기 {#using-an-existing-client-instance}
@@ -452,7 +452,7 @@ npm run dev
 ```
 
 > [!NOTE]
-> 애플리케이션의 JavaScript 에셋 컴파일에 대해 더 자세히 알고 싶다면 [Vite](/docs/{{version}}/vite) 문서를 참고하세요.
+> 애플리케이션의 JavaScript 에셋 컴파일에 대해 더 자세히 알고 싶다면 [Vite](/laravel/12.x/vite) 문서를 참고하세요.
 
 
 ## 개념 개요 {#concept-overview}
@@ -630,7 +630,7 @@ class ServerCreated implements ShouldBroadcast
 }
 ```
 
-`ShouldBroadcast` 인터페이스를 구현한 후에는, [이벤트를 평소처럼 발생시키기](/docs/{{version}}/events)만 하면 됩니다. 이벤트가 발생하면, [큐에 등록된 작업](/docs/{{version}}/queues)이 자동으로 지정한 브로드캐스트 드라이버를 사용해 이벤트를 브로드캐스트합니다.
+`ShouldBroadcast` 인터페이스를 구현한 후에는, [이벤트를 평소처럼 발생시키기](/laravel/12.x/events)만 하면 됩니다. 이벤트가 발생하면, [큐에 등록된 작업](/laravel/12.x/queues)이 자동으로 지정한 브로드캐스트 드라이버를 사용해 이벤트를 브로드캐스트합니다.
 
 
 ### 브로드캐스트 이름 {#broadcast-name}
@@ -770,7 +770,7 @@ class ServerCreated implements ShouldBroadcast, ShouldDispatchAfterCommit
 ```
 
 > [!NOTE]
-> 이러한 문제를 우회하는 방법에 대해 더 알아보려면 [큐 작업과 데이터베이스 트랜잭션](/docs/{{version}}/queues#jobs-and-database-transactions) 문서를 참고하세요.
+> 이러한 문제를 우회하는 방법에 대해 더 알아보려면 [큐 작업과 데이터베이스 트랜잭션](/laravel/12.x/queues#jobs-and-database-transactions) 문서를 참고하세요.
 
 
 ## 채널 권한 부여 {#authorizing-channels}
@@ -805,7 +805,7 @@ php artisan channel:list
 
 #### 인증 콜백 모델 바인딩 {#authorization-callback-model-binding}
 
-HTTP 라우트와 마찬가지로, 채널 라우트에서도 암시적 및 명시적 [라우트 모델 바인딩](/docs/{{version}}/routing#route-model-binding)을 활용할 수 있습니다. 예를 들어, 문자열이나 숫자 형태의 주문 ID를 받는 대신 실제 `Order` 모델 인스턴스를 요청할 수 있습니다:
+HTTP 라우트와 마찬가지로, 채널 라우트에서도 암시적 및 명시적 [라우트 모델 바인딩](/laravel/12.x/routing#route-model-binding)을 활용할 수 있습니다. 예를 들어, 문자열이나 숫자 형태의 주문 ID를 받는 대신 실제 `Order` 모델 인스턴스를 요청할 수 있습니다:
 
 ```php
 use App\Models\Order;
@@ -817,7 +817,7 @@ Broadcast::channel('orders.{order}', function (User $user, Order $order) {
 ```
 
 > [!WARNING]
-> HTTP 라우트 모델 바인딩과 달리, 채널 모델 바인딩은 자동 [암시적 모델 바인딩 범위 지정](/docs/{{version}}/routing#implicit-model-binding-scoping)을 지원하지 않습니다. 하지만 대부분의 채널은 단일 모델의 고유한 기본 키를 기준으로 범위 지정이 가능하기 때문에, 이는 거의 문제가 되지 않습니다.
+> HTTP 라우트 모델 바인딩과 달리, 채널 모델 바인딩은 자동 [암시적 모델 바인딩 범위 지정](/laravel/12.x/routing#implicit-model-binding-scoping)을 지원하지 않습니다. 하지만 대부분의 채널은 단일 모델의 고유한 기본 키를 기준으로 범위 지정이 가능하기 때문에, 이는 거의 문제가 되지 않습니다.
 
 
 #### 인증 콜백 인증 {#authorization-callback-authentication}
@@ -875,7 +875,7 @@ class OrderChannel
 ```
 
 > [!NOTE]
-> Laravel의 다른 많은 클래스와 마찬가지로, 채널 클래스도 [서비스 컨테이너](/docs/{{version}}/container)에 의해 자동으로 해석됩니다. 따라서 생성자에서 필요한 의존성을 타입힌트로 지정할 수 있습니다.
+> Laravel의 다른 많은 클래스와 마찬가지로, 채널 클래스도 [서비스 컨테이너](/laravel/12.x/container)에 의해 자동으로 해석됩니다. 따라서 생성자에서 필요한 의존성을 타입힌트로 지정할 수 있습니다.
 
 
 ## 이벤트 브로드캐스팅 {#broadcasting-events}
@@ -1009,7 +1009,7 @@ Broadcast::private('orders.'.$order->id)->send();
 Broadcast::presence('channels.'.$channel->id)->send();
 ```
 
-`send` 메서드를 사용해 익명 이벤트를 브로드캐스트하면, 해당 이벤트는 애플리케이션의 [큐](/docs/{{version}}/queues)로 디스패치되어 처리됩니다. 하지만 이벤트를 즉시 브로드캐스트하고 싶다면 `sendNow` 메서드를 사용할 수 있습니다:
+`send` 메서드를 사용해 익명 이벤트를 브로드캐스트하면, 해당 이벤트는 애플리케이션의 [큐](/laravel/12.x/queues)로 디스패치되어 처리됩니다. 하지만 이벤트를 즉시 브로드캐스트하고 싶다면 `sendNow` 메서드를 사용할 수 있습니다:
 
 ```php
 Broadcast::on('orders.'.$order->id)->sendNow();
@@ -1028,7 +1028,7 @@ Broadcast::on('orders.'.$order->id)
 
 애플리케이션의 큐 서버를 사용할 수 없거나, Laravel이 이벤트를 브로드캐스트하는 도중 오류가 발생하면 예외가 발생하여 최종 사용자에게 애플리케이션 오류가 표시될 수 있습니다. 이벤트 브로드캐스팅은 종종 애플리케이션의 핵심 기능을 보조하는 역할을 하므로, 이벤트에 `ShouldRescue` 인터페이스를 구현하여 이러한 예외가 사용자 경험을 방해하지 않도록 할 수 있습니다.
 
-`ShouldRescue` 인터페이스를 구현한 이벤트는 브로드캐스트 시도 중에 Laravel의 [rescue 헬퍼 함수](/docs/{{version}}/helpers#method-rescue)를 자동으로 사용합니다. 이 헬퍼는 발생한 예외를 포착하여 애플리케이션의 예외 핸들러에 로깅하도록 전달하고, 사용자의 작업 흐름을 방해하지 않고 애플리케이션이 정상적으로 계속 실행될 수 있도록 합니다.
+`ShouldRescue` 인터페이스를 구현한 이벤트는 브로드캐스트 시도 중에 Laravel의 [rescue 헬퍼 함수](/laravel/12.x/helpers#method-rescue)를 자동으로 사용합니다. 이 헬퍼는 발생한 예외를 포착하여 애플리케이션의 예외 핸들러에 로깅하도록 전달하고, 사용자의 작업 흐름을 방해하지 않고 애플리케이션이 정상적으로 계속 실행될 수 있도록 합니다.
 
 ```php
 <?php
@@ -1365,7 +1365,7 @@ Echo.join(`chat.${roomId}`)
 > [!WARNING]
 > 아래의 모델 브로드캐스팅 문서를 읽기 전에, Laravel의 모델 브로드캐스팅 서비스의 일반적인 개념과 브로드캐스트 이벤트를 수동으로 생성하고 수신하는 방법에 대해 먼저 익숙해질 것을 권장합니다.
 
-애플리케이션의 [Eloquent 모델](/docs/{{version}}/eloquent)이 생성, 수정, 삭제될 때 이벤트를 브로드캐스트하는 것은 흔한 일입니다. 물론, 이는 Eloquent 모델 상태 변경에 대한 [커스텀 이벤트를 직접 정의](/docs/{{version}}/eloquent#events)하고 해당 이벤트에 `ShouldBroadcast` 인터페이스를 지정함으로써 쉽게 구현할 수 있습니다.
+애플리케이션의 [Eloquent 모델](/laravel/12.x/eloquent)이 생성, 수정, 삭제될 때 이벤트를 브로드캐스트하는 것은 흔한 일입니다. 물론, 이는 Eloquent 모델 상태 변경에 대한 [커스텀 이벤트를 직접 정의](/laravel/12.x/eloquent#events)하고 해당 이벤트에 `ShouldBroadcast` 인터페이스를 지정함으로써 쉽게 구현할 수 있습니다.
 
 하지만, 애플리케이션에서 이러한 이벤트를 다른 용도로 사용하지 않는 경우, 단순히 브로드캐스트만을 위해 이벤트 클래스를 생성하는 것은 번거로울 수 있습니다. 이를 해결하기 위해, Laravel은 Eloquent 모델이 상태 변경 시 자동으로 브로드캐스트하도록 지정할 수 있는 기능을 제공합니다.
 
@@ -1663,7 +1663,7 @@ channel().listenForWhisper('typing', (e) => {
 
 ## 알림 {#notifications}
 
-이벤트 브로드캐스팅과 [알림](/docs/{{version}}/notifications)을 결합하면, 자바스크립트 애플리케이션이 페이지를 새로고침하지 않고도 실시간으로 새로운 알림을 받을 수 있습니다. 시작하기 전에 [브로드캐스트 알림 채널](/docs/{{version}}/notifications#broadcast-notifications) 사용에 대한 문서를 먼저 읽어보시기 바랍니다.
+이벤트 브로드캐스팅과 [알림](/laravel/12.x/notifications)을 결합하면, 자바스크립트 애플리케이션이 페이지를 새로고침하지 않고도 실시간으로 새로운 알림을 받을 수 있습니다. 시작하기 전에 [브로드캐스트 알림 채널](/laravel/12.x/notifications#broadcast-notifications) 사용에 대한 문서를 먼저 읽어보시기 바랍니다.
 
 알림이 브로드캐스트 채널을 사용하도록 설정되었다면, Echo의 `notification` 메서드를 사용하여 브로드캐스트 이벤트를 수신할 수 있습니다. 이때 채널 이름은 알림을 받는 엔티티의 클래스 이름과 일치해야 합니다:
 

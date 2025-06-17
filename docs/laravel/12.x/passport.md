@@ -58,9 +58,9 @@
 
 ### Passport 또는 Sanctum? {#passport-or-sanctum}
 
-시작하기 전에, 여러분의 애플리케이션에 Laravel Passport가 더 적합한지 아니면 [Laravel Sanctum](/docs/{{version}}/sanctum)이 더 적합한지 결정하는 것이 좋습니다. 만약 애플리케이션이 반드시 OAuth2를 지원해야 한다면 Laravel Passport를 사용해야 합니다.
+시작하기 전에, 여러분의 애플리케이션에 Laravel Passport가 더 적합한지 아니면 [Laravel Sanctum](/laravel/12.x/sanctum)이 더 적합한지 결정하는 것이 좋습니다. 만약 애플리케이션이 반드시 OAuth2를 지원해야 한다면 Laravel Passport를 사용해야 합니다.
 
-하지만 싱글 페이지 애플리케이션, 모바일 애플리케이션을 인증하거나 API 토큰을 발급하려는 경우에는 [Laravel Sanctum](/docs/{{version}}/sanctum)을 사용하는 것이 좋습니다. Laravel Sanctum은 OAuth2를 지원하지 않지만, 훨씬 더 간단한 API 인증 개발 환경을 제공합니다.
+하지만 싱글 페이지 애플리케이션, 모바일 애플리케이션을 인증하거나 API 토큰을 발급하려는 경우에는 [Laravel Sanctum](/laravel/12.x/sanctum)을 사용하는 것이 좋습니다. Laravel Sanctum은 OAuth2를 지원하지 않지만, 훨씬 더 간단한 API 인증 개발 환경을 제공합니다.
 
 
 ## 설치 {#installation}
@@ -523,7 +523,7 @@ php artisan passport:purge --revoked
 php artisan passport:purge --expired
 ```
 
-또한, 애플리케이션의 `routes/console.php` 파일에서 [스케줄링된 작업](/docs/{{version}}/scheduling)을 설정하여 토큰을 자동으로 정리할 수 있습니다:
+또한, 애플리케이션의 `routes/console.php` 파일에서 [스케줄링된 작업](/laravel/12.x/scheduling)을 설정하여 토큰을 자동으로 정리할 수 있습니다:
 
 ```php
 use Illuminate\Support\Facades\Schedule;
@@ -833,7 +833,7 @@ $response = Http::asForm()->post('https://passport-app.test/oauth/token', [
 
 ### 사용자 제공자 커스터마이징 {#customizing-the-user-provider}
 
-애플리케이션에서 하나 이상의 [인증 사용자 제공자](/docs/{{version}}/authentication#introduction)를 사용하는 경우, `artisan passport:client --password` 명령어로 클라이언트를 생성할 때 `--provider` 옵션을 제공하여 패스워드 그랜트 클라이언트가 사용할 사용자 제공자를 지정할 수 있습니다. 지정한 제공자 이름은 애플리케이션의 `config/auth.php` 설정 파일에 정의된 유효한 제공자와 일치해야 합니다. 그런 다음 [미들웨어를 사용하여 라우트를 보호](#multiple-authentication-guards)하여, 가드에 지정된 제공자의 사용자만이 인가되도록 할 수 있습니다.
+애플리케이션에서 하나 이상의 [인증 사용자 제공자](/laravel/12.x/authentication#introduction)를 사용하는 경우, `artisan passport:client --password` 명령어로 클라이언트를 생성할 때 `--provider` 옵션을 제공하여 패스워드 그랜트 클라이언트가 사용할 사용자 제공자를 지정할 수 있습니다. 지정한 제공자 이름은 애플리케이션의 `config/auth.php` 설정 파일에 정의된 유효한 제공자와 일치해야 합니다. 그런 다음 [미들웨어를 사용하여 라우트를 보호](#multiple-authentication-guards)하여, 가드에 지정된 제공자의 사용자만이 인가되도록 할 수 있습니다.
 
 
 ### 사용자명 필드 커스터마이징 {#customizing-the-username-field}
@@ -995,7 +995,7 @@ return $response->json()['access_token'];
 때때로 사용자는 일반적인 인가 코드 리디렉션 플로우를 거치지 않고 스스로 액세스 토큰을 발급받고 싶어할 수 있습니다. 애플리케이션의 UI를 통해 사용자가 직접 토큰을 발급받을 수 있도록 허용하면, 사용자가 API를 실험해볼 수 있도록 하거나, 전반적으로 액세스 토큰을 발급하는 더 간단한 방법을 제공할 수 있습니다.
 
 > [!NOTE]
-> 애플리케이션이 주로 개인 액세스 토큰을 발급하기 위해 Passport를 사용하고 있다면, API 액세스 토큰 발급을 위한 라라벨의 경량 1st-party 라이브러리인 [Laravel Sanctum](/docs/{{version}}/sanctum) 사용을 고려해보세요.
+> 애플리케이션이 주로 개인 액세스 토큰을 발급하기 위해 Passport를 사용하고 있다면, API 액세스 토큰 발급을 위한 라라벨의 경량 1st-party 라이브러리인 [Laravel Sanctum](/laravel/12.x/sanctum) 사용을 고려해보세요.
 
 
 ### 개인 액세스 클라이언트 생성하기 {#creating-a-personal-access-client}
@@ -1009,7 +1009,7 @@ php artisan passport:client --personal
 
 ### 사용자 제공자 커스터마이징 {#customizing-the-user-provider-for-pat}
 
-애플리케이션에서 둘 이상의 [인증 사용자 제공자](/docs/{{version}}/authentication#introduction)를 사용하는 경우, `artisan passport:client --personal` 명령어로 클라이언트를 생성할 때 `--provider` 옵션을 제공하여 개인 액세스 권한 부여 클라이언트가 사용할 사용자 제공자를 지정할 수 있습니다. 지정한 제공자 이름은 애플리케이션의 `config/auth.php` 설정 파일에 정의된 유효한 제공자와 일치해야 합니다. 그런 다음 [미들웨어를 사용하여 라우트를 보호](#multiple-authentication-guards)하여 가드에 지정된 제공자의 사용자만 인가되도록 할 수 있습니다.
+애플리케이션에서 둘 이상의 [인증 사용자 제공자](/laravel/12.x/authentication#introduction)를 사용하는 경우, `artisan passport:client --personal` 명령어로 클라이언트를 생성할 때 `--provider` 옵션을 제공하여 개인 액세스 권한 부여 클라이언트가 사용할 사용자 제공자를 지정할 수 있습니다. 지정한 제공자 이름은 애플리케이션의 `config/auth.php` 설정 파일에 정의된 유효한 제공자와 일치해야 합니다. 그런 다음 [미들웨어를 사용하여 라우트를 보호](#multiple-authentication-guards)하여 가드에 지정된 제공자의 사용자만 인가되도록 할 수 있습니다.
 
 
 ### 개인 액세스 토큰 관리 {#managing-personal-access-tokens}
@@ -1047,7 +1047,7 @@ $tokens = $user->tokens()
 
 ### 미들웨어를 통한 인증 {#via-middleware}
 
-Passport는 들어오는 요청의 액세스 토큰을 검증하는 [인증 가드](/docs/{{version}}/authentication#adding-custom-guards)를 포함하고 있습니다. `api` 가드가 `passport` 드라이버를 사용하도록 설정한 후에는, 유효한 액세스 토큰이 필요한 모든 라우트에 `auth:api` 미들웨어만 지정하면 됩니다:
+Passport는 들어오는 요청의 액세스 토큰을 검증하는 [인증 가드](/laravel/12.x/authentication#adding-custom-guards)를 포함하고 있습니다. `api` 가드가 `passport` 드라이버를 사용하도록 설정한 후에는, 유효한 액세스 토큰이 필요한 모든 라우트에 `auth:api` 미들웨어만 지정하면 됩니다:
 
 ```php
 Route::get('/user', function () {
@@ -1308,7 +1308,7 @@ public function boot(): void
 
 ## 이벤트 {#events}
 
-Passport는 액세스 토큰과 리프레시 토큰을 발급할 때 이벤트를 발생시킵니다. 데이터베이스에서 다른 액세스 토큰을 정리하거나 폐기하기 위해 [이 이벤트들을 리스닝](/docs/{{version}}/events)할 수 있습니다:
+Passport는 액세스 토큰과 리프레시 토큰을 발급할 때 이벤트를 발생시킵니다. 데이터베이스에서 다른 액세스 토큰을 정리하거나 폐기하기 위해 [이 이벤트들을 리스닝](/laravel/12.x/events)할 수 있습니다:
 
 <div class="overflow-auto">
 

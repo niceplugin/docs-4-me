@@ -153,7 +153,7 @@ $instance = Feature::instance(NewApi::class);
 ```
 
 > [!NOTE]
-> 기능 클래스는 [컨테이너](/docs/{{version}}/container)를 통해 해석되므로, 필요하다면 기능 클래스의 생성자에 의존성을 주입할 수 있습니다.
+> 기능 클래스는 [컨테이너](/laravel/12.x/container)를 통해 해석되므로, 필요하다면 기능 클래스의 생성자에 의존성을 주입할 수 있습니다.
 
 #### 저장된 기능 이름 커스터마이징
 
@@ -386,7 +386,7 @@ Blade에서 기능을 손쉽게 확인할 수 있도록, Pennant는 `@feature`�
 
 ### 미들웨어 {#middleware}
 
-Pennant는 또한 현재 인증된 사용자가 라우트에 접근하기 전에 해당 기능에 대한 접근 권한이 있는지 확인할 수 있는 [미들웨어](/docs/{{version}}/middleware)를 제공합니다. 이 미들웨어를 라우트에 할당하고, 라우트에 접근하기 위해 필요한 기능들을 지정할 수 있습니다. 지정된 기능 중 하나라도 현재 인증된 사용자에게 비활성화되어 있다면, 해당 라우트는 `400 Bad Request` HTTP 응답을 반환합니다. 여러 개의 기능을 static `using` 메서드에 전달할 수 있습니다.
+Pennant는 또한 현재 인증된 사용자가 라우트에 접근하기 전에 해당 기능에 대한 접근 권한이 있는지 확인할 수 있는 [미들웨어](/laravel/12.x/middleware)를 제공합니다. 이 미들웨어를 라우트에 할당하고, 라우트에 접근하기 위해 필요한 기능들을 지정할 수 있습니다. 지정된 기능 중 하나라도 현재 인증된 사용자에게 비활성화되어 있다면, 해당 라우트는 `400 Bad Request` HTTP 응답을 반환합니다. 여러 개의 기능을 static `using` 메서드에 전달할 수 있습니다.
 
 ```php
 use Illuminate\Support\Facades\Route;
@@ -647,7 +647,7 @@ class User extends Model implements FeatureScopeable
 
 ### 직렬화 범위 {#serializing-scope}
 
-기본적으로 Pennant는 Eloquent 모델과 연관된 기능을 저장할 때 완전히 한정된 클래스 이름을 사용합니다. 이미 [Eloquent morph map](/docs/{{version}}/eloquent-relationships#custom-polymorphic-types)를 사용하고 있다면, Pennant가 저장된 기능을 애플리케이션 구조와 분리할 수 있도록 morph map을 사용하도록 선택할 수 있습니다.
+기본적으로 Pennant는 Eloquent 모델과 연관된 기능을 저장할 때 완전히 한정된 클래스 이름을 사용합니다. 이미 [Eloquent morph map](/laravel/12.x/eloquent-relationships#custom-polymorphic-types)를 사용하고 있다면, Pennant가 저장된 기능을 애플리케이션 구조와 분리할 수 있도록 morph map을 사용하도록 선택할 수 있습니다.
 
 이를 위해 서비스 프로바이더에서 Eloquent morph map을 정의한 후, `Feature` 파사드의 `useMorphMap` 메서드를 호출하면 됩니다:
 
@@ -987,7 +987,7 @@ public function test_it_can_control_feature_values()
 }
 ```
 
-기능이 `Lottery` 인스턴스를 반환하는 경우, 몇 가지 유용한 [테스트 헬퍼](/docs/{{version}}/helpers#testing-lotteries)를 사용할 수 있습니다.
+기능이 `Lottery` 인스턴스를 반환하는 경우, 몇 가지 유용한 [테스트 헬퍼](/laravel/12.x/helpers#testing-lotteries)를 사용할 수 있습니다.
 
 
 #### 저장소 구성 {#store-configuration}
@@ -1041,7 +1041,7 @@ class RedisFeatureDriver implements Driver
 
 #### 드라이버 등록하기 {#registering-the-driver}
 
-드라이버 구현이 완료되면, 이제 Laravel에 드라이버를 등록할 준비가 된 것입니다. Pennant에 추가 드라이버를 등록하려면 `Feature` 파사드에서 제공하는 `extend` 메서드를 사용할 수 있습니다. 이 `extend` 메서드는 애플리케이션의 [서비스 프로바이더](/docs/{{version}}/providers) 중 하나의 `boot` 메서드에서 호출해야 합니다:
+드라이버 구현이 완료되면, 이제 Laravel에 드라이버를 등록할 준비가 된 것입니다. Pennant에 추가 드라이버를 등록하려면 `Feature` 파사드에서 제공하는 `extend` 메서드를 사용할 수 있습니다. 이 `extend` 메서드는 애플리케이션의 [서비스 프로바이더](/laravel/12.x/providers) 중 하나의 `boot` 메서드에서 호출해야 합니다:
 
 ```php
 <?php

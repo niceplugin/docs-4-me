@@ -34,7 +34,7 @@ Laravel 애플리케이션을 작성할 때는 계약(Contracts)이나 퍼사드
 
 ## 패키지 자동 발견 {#package-discovery}
 
-Laravel 애플리케이션의 `bootstrap/providers.php` 파일에는 Laravel이 로드해야 하는 서비스 프로바이더 목록이 포함되어 있습니다. 하지만 사용자가 직접 서비스 프로바이더를 목록에 추가하도록 요구하는 대신, 패키지의 `composer.json` 파일의 `extra` 섹션에 프로바이더를 정의하면 Laravel이 자동으로 로드해줍니다. 서비스 프로바이더뿐만 아니라, 등록하고 싶은 [파사드](/docs/{{version}}/facades)도 함께 지정할 수 있습니다:
+Laravel 애플리케이션의 `bootstrap/providers.php` 파일에는 Laravel이 로드해야 하는 서비스 프로바이더 목록이 포함되어 있습니다. 하지만 사용자가 직접 서비스 프로바이더를 목록에 추가하도록 요구하는 대신, 패키지의 `composer.json` 파일의 `extra` 섹션에 프로바이더를 정의하면 Laravel이 자동으로 로드해줍니다. 서비스 프로바이더뿐만 아니라, 등록하고 싶은 [파사드](/laravel/12.x/facades)도 함께 지정할 수 있습니다:
 
 ```json
 "extra": {
@@ -81,9 +81,9 @@ Laravel 애플리케이션의 `bootstrap/providers.php` 파일에는 Laravel이 
 
 ## 서비스 프로바이더 {#service-providers}
 
-[서비스 프로바이더](/docs/{{version}}/providers)는 여러분의 패키지와 Laravel을 연결하는 지점입니다. 서비스 프로바이더는 Laravel의 [서비스 컨테이너](/docs/{{version}}/container)에 다양한 요소를 바인딩하고, 뷰, 설정, 언어 파일과 같은 패키지 리소스를 어디에서 로드할지 Laravel에 알려주는 역할을 합니다.
+[서비스 프로바이더](/laravel/12.x/providers)는 여러분의 패키지와 Laravel을 연결하는 지점입니다. 서비스 프로바이더는 Laravel의 [서비스 컨테이너](/laravel/12.x/container)에 다양한 요소를 바인딩하고, 뷰, 설정, 언어 파일과 같은 패키지 리소스를 어디에서 로드할지 Laravel에 알려주는 역할을 합니다.
 
-서비스 프로바이더는 `Illuminate\Support\ServiceProvider` 클래스를 확장하며, `register`와 `boot` 두 가지 메서드를 포함합니다. 기본 `ServiceProvider` 클래스는 `illuminate/support` Composer 패키지에 위치해 있으므로, 여러분의 패키지 의존성에 추가해야 합니다. 서비스 프로바이더의 구조와 목적에 대해 더 자세히 알고 싶다면 [관련 문서](/docs/{{version}}/providers)를 참고하세요.
+서비스 프로바이더는 `Illuminate\Support\ServiceProvider` 클래스를 확장하며, `register`와 `boot` 두 가지 메서드를 포함합니다. 기본 `ServiceProvider` 클래스는 `illuminate/support` Composer 패키지에 위치해 있으므로, 여러분의 패키지 의존성에 추가해야 합니다. 서비스 프로바이더의 구조와 목적에 대해 더 자세히 알고 싶다면 [관련 문서](/laravel/12.x/providers)를 참고하세요.
 
 
 ## 리소스 {#resources}
@@ -154,7 +154,7 @@ public function boot(): void
 
 ### 마이그레이션 {#migrations}
 
-패키지에 [데이터베이스 마이그레이션](/docs/{{version}}/migrations)이 포함되어 있다면, `publishesMigrations` 메서드를 사용하여 해당 디렉터리나 파일에 마이그레이션이 있음을 Laravel에 알릴 수 있습니다. Laravel이 마이그레이션을 퍼블리시할 때, 파일 이름의 타임스탬프를 현재 날짜와 시간으로 자동으로 업데이트합니다:
+패키지에 [데이터베이스 마이그레이션](/laravel/12.x/migrations)이 포함되어 있다면, `publishesMigrations` 메서드를 사용하여 해당 디렉터리나 파일에 마이그레이션이 있음을 Laravel에 알릴 수 있습니다. Laravel이 마이그레이션을 퍼블리시할 때, 파일 이름의 타임스탬프를 현재 날짜와 시간으로 자동으로 업데이트합니다:
 
 ```php
 /**
@@ -171,7 +171,7 @@ public function boot(): void
 
 ### 언어 파일 {#language-files}
 
-패키지에 [언어 파일](/docs/{{version}}/localization)이 포함되어 있다면, `loadTranslationsFrom` 메서드를 사용하여 Laravel에 언어 파일을 어떻게 불러올지 알릴 수 있습니다. 예를 들어, 패키지 이름이 `courier`라면 서비스 프로바이더의 `boot` 메서드에 다음과 같이 추가하면 됩니다.
+패키지에 [언어 파일](/laravel/12.x/localization)이 포함되어 있다면, `loadTranslationsFrom` 메서드를 사용하여 Laravel에 언어 파일을 어떻게 불러올지 알릴 수 있습니다. 예를 들어, 패키지 이름이 `courier`라면 서비스 프로바이더의 `boot` 메서드에 다음과 같이 추가하면 됩니다.
 
 ```php
 /**
@@ -225,7 +225,7 @@ public function boot(): void
 
 ### 뷰 {#views}
 
-패키지의 [뷰](/docs/{{version}}/views)를 Laravel에 등록하려면, Laravel에 뷰가 어디에 위치하는지 알려주어야 합니다. 이는 서비스 프로바이더의 `loadViewsFrom` 메서드를 사용하여 할 수 있습니다. `loadViewsFrom` 메서드는 두 개의 인자를 받습니다: 뷰 템플릿의 경로와 패키지의 이름입니다. 예를 들어, 패키지 이름이 `courier`라면, 서비스 프로바이더의 `boot` 메서드에 다음과 같이 추가할 수 있습니다:
+패키지의 [뷰](/laravel/12.x/views)를 Laravel에 등록하려면, Laravel에 뷰가 어디에 위치하는지 알려주어야 합니다. 이는 서비스 프로바이더의 `loadViewsFrom` 메서드를 사용하여 할 수 있습니다. `loadViewsFrom` 메서드는 두 개의 인자를 받습니다: 뷰 템플릿의 경로와 패키지의 이름입니다. 예를 들어, 패키지 이름이 `courier`라면, 서비스 프로바이더의 `boot` 메서드에 다음과 같이 추가할 수 있습니다:
 
 ```php
 /**
@@ -350,7 +350,7 @@ public function boot(): void
 
 ## 명령어 {#commands}
 
-패키지의 Artisan 명령어를 Laravel에 등록하려면 `commands` 메서드를 사용할 수 있습니다. 이 메서드는 명령어 클래스 이름의 배열을 인자로 받습니다. 명령어가 등록되면 [Artisan CLI](/docs/{{version}}/artisan)를 사용하여 실행할 수 있습니다:
+패키지의 Artisan 명령어를 Laravel에 등록하려면 `commands` 메서드를 사용할 수 있습니다. 이 메서드는 명령어 클래스 이름의 배열을 인자로 받습니다. 명령어가 등록되면 [Artisan CLI](/laravel/12.x/artisan)를 사용하여 실행할 수 있습니다:
 
 ```php
 use Courier\Console\Commands\InstallCommand;
@@ -373,7 +373,7 @@ public function boot(): void
 
 ### 최적화 명령어 {#optimize-commands}
 
-Laravel의 [optimize 명령어](/docs/{{version}}/deployment#optimization)는 애플리케이션의 설정, 이벤트, 라우트, 뷰를 캐시합니다. `optimizes` 메서드를 사용하면, 패키지에서 자체적으로 정의한 Artisan 명령어를 등록하여 `optimize` 및 `optimize:clear` 명령어가 실행될 때 함께 호출되도록 할 수 있습니다:
+Laravel의 [optimize 명령어](/laravel/12.x/deployment#optimization)는 애플리케이션의 설정, 이벤트, 라우트, 뷰를 캐시합니다. `optimizes` 메서드를 사용하면, 패키지에서 자체적으로 정의한 Artisan 명령어를 등록하여 `optimize` 및 `optimize:clear` 명령어가 실행될 때 함께 호출되도록 할 수 있습니다:
 
 ```php
 /**

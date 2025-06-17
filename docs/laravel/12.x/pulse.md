@@ -27,7 +27,7 @@
 
 [Laravel Pulse](https://github.com/laravel/pulse)는 애플리케이션의 성능과 사용 현황을 한눈에 파악할 수 있는 인사이트를 제공합니다. Pulse를 사용하면 느린 작업과 엔드포인트와 같은 병목 현상을 추적하고, 가장 활발한 사용자를 찾는 등 다양한 정보를 확인할 수 있습니다.
 
-개별 이벤트에 대한 심층 디버깅이 필요하다면 [Laravel Telescope](/docs/{{version}}/telescope)를 참고하세요.
+개별 이벤트에 대한 심층 디버깅이 필요하다면 [Laravel Telescope](/laravel/12.x/telescope)를 참고하세요.
 
 
 ## 설치 {#installation}
@@ -159,7 +159,7 @@ public function boot(): void
 ```
 
 > [!NOTE]
-> 인증된 사용자를 캡처하고 조회하는 방식을 완전히 커스터마이즈하려면 `Laravel\Pulse\Contracts\ResolvesUsers` 계약을 구현하고, Laravel의 [서비스 컨테이너](/docs/{{version}}/container#binding-a-singleton)에 바인딩하면 됩니다.
+> 인증된 사용자를 캡처하고 조회하는 방식을 완전히 커스터마이즈하려면 `Laravel\Pulse\Contracts\ResolvesUsers` 계약을 구현하고, Laravel의 [서비스 컨테이너](/laravel/12.x/container#binding-a-singleton)에 바인딩하면 됩니다.
 
 
 ### 카드 {#dashboard-cards}
@@ -231,7 +231,7 @@ Pulse가 사용자 정보를 가져오고 표시하는 방식을 커스터마이
 
 #### 느린 외부 요청 {#slow-outgoing-requests-card}
 
-`<livewire:pulse.slow-outgoing-requests />` 카드는 Laravel의 [HTTP 클라이언트](/docs/{{version}}/http-client)를 사용하여 설정된 임계값(기본값은 1,000ms)을 초과한 외부 요청을 보여줍니다.
+`<livewire:pulse.slow-outgoing-requests />` 카드는 Laravel의 [HTTP 클라이언트](/laravel/12.x/http-client)를 사용하여 설정된 임계값(기본값은 1,000ms)을 초과한 외부 요청을 보여줍니다.
 
 기본적으로 항목은 전체 URL로 그룹화됩니다. 하지만 정규식을 사용하여 유사한 외부 요청을 정규화하거나 그룹화할 수도 있습니다. 자세한 내용은 [느린 외부 요청 기록기](#slow-outgoing-requests-recorder) 문서를 참고하세요.
 
@@ -261,7 +261,7 @@ php artisan pulse:restart
 ```
 
 > [!NOTE]
-> Pulse는 재시작 신호를 저장하기 위해 [캐시](/docs/{{version}}/cache)를 사용하므로, 이 기능을 사용하기 전에 애플리케이션에 적절한 캐시 드라이버가 설정되어 있는지 확인해야 합니다.
+> Pulse는 재시작 신호를 저장하기 위해 [캐시](/laravel/12.x/cache)를 사용하므로, 이 기능을 사용하기 전에 애플리케이션에 적절한 캐시 드라이버가 설정되어 있는지 확인해야 합니다.
 
 
 ### 레코더 {#recorders}
@@ -271,7 +271,7 @@ php artisan pulse:restart
 
 #### 캐시 상호작용 {#cache-interactions-recorder}
 
-`CacheInteractions` 레코더는 애플리케이션에서 발생하는 [캐시](/docs/{{version}}/cache) 히트와 미스를 캡처하여 [Cache](#cache-card) 카드에 표시합니다.
+`CacheInteractions` 레코더는 애플리케이션에서 발생하는 [캐시](/laravel/12.x/cache) 히트와 미스를 캡처하여 [Cache](#cache-card) 카드에 표시합니다.
 
 원한다면 [샘플링 비율](#sampling)과 무시할 키 패턴을 조정할 수 있습니다.
 
@@ -326,7 +326,7 @@ Recorders\SlowJobs::class => [
 
 #### 느린 외부 요청 {#slow-outgoing-requests-recorder}
 
-`SlowOutgoingRequests` 레코더는 Laravel의 [HTTP 클라이언트](/docs/{{version}}/http-client)를 사용하여 발생한 외부 HTTP 요청 중, 설정된 임계값을 초과하는 요청에 대한 정보를 [느린 외부 요청](#slow-outgoing-requests-card) 카드에 표시하기 위해 캡처합니다.
+`SlowOutgoingRequests` 레코더는 Laravel의 [HTTP 클라이언트](/laravel/12.x/http-client)를 사용하여 발생한 외부 HTTP 요청 중, 설정된 임계값을 초과하는 요청에 대한 정보를 [느린 외부 요청](#slow-outgoing-requests-card) 카드에 표시하기 위해 캡처합니다.
 
 느린 외부 요청 임계값, [샘플링 비율](#sampling), 무시할 URL 패턴을 선택적으로 조정할 수 있습니다.
 
@@ -462,7 +462,7 @@ Pulse는 추가적인 인프라 없이 기존 애플리케이션에 바로 적�
 
 트래픽이 많은 애플리케이션의 경우, Pulse가 애플리케이션 데이터베이스에 영향을 주지 않도록 전용 데이터베이스 연결을 사용하는 것이 좋습니다.
 
-Pulse에서 사용하는 [데이터베이스 연결](/docs/{{version}}/database#configuration)은 `PULSE_DB_CONNECTION` 환경 변수를 설정하여 커스터마이즈할 수 있습니다.
+Pulse에서 사용하는 [데이터베이스 연결](/laravel/12.x/database#configuration)은 `PULSE_DB_CONNECTION` 환경 변수를 설정하여 커스터마이즈할 수 있습니다.
 
 ```env
 PULSE_DB_CONNECTION=pulse
@@ -480,7 +480,7 @@ PULSE_DB_CONNECTION=pulse
 PULSE_INGEST_DRIVER=redis
 ```
 
-Pulse는 기본적으로 기본 [Redis 연결](/docs/{{version}}/redis#configuration)을 사용하지만, `PULSE_REDIS_CONNECTION` 환경 변수를 통해 이를 커스터마이즈할 수 있습니다:
+Pulse는 기본적으로 기본 [Redis 연결](/laravel/12.x/redis#configuration)을 사용하지만, `PULSE_REDIS_CONNECTION` 환경 변수를 통해 이를 커스터마이즈할 수 있습니다:
 
 ```ini
 PULSE_REDIS_CONNECTION=pulse
@@ -502,7 +502,7 @@ php artisan pulse:restart
 ```
 
 > [!NOTE]
-> Pulse는 [캐시](/docs/{{version}}/cache)를 사용하여 재시작 신호를 저장하므로, 이 기능을 사용하기 전에 애플리케이션에 적절한 캐시 드라이버가 설정되어 있는지 확인해야 합니다.
+> Pulse는 [캐시](/laravel/12.x/cache)를 사용하여 재시작 신호를 저장하므로, 이 기능을 사용하기 전에 애플리케이션에 적절한 캐시 드라이버가 설정되어 있는지 확인해야 합니다.
 
 
 ### 샘플링 {#sampling}
@@ -604,7 +604,7 @@ Livewire 컴포넌트와 템플릿을 정의한 후에는, 해당 카드를 [대
 
 #### Laravel Vite 통합 {#custom-card-styling-vite}
 
-커스텀 카드가 애플리케이션 코드베이스 내에 있고 Laravel의 [Vite 통합](/docs/{{version}}/vite)을 사용 중이라면, `vite.config.js` 파일을 수정하여 카드 전용 CSS 엔트리 포인트를 추가할 수 있습니다:
+커스텀 카드가 애플리케이션 코드베이스 내에 있고 Laravel의 [Vite 통합](/laravel/12.x/vite)을 사용 중이라면, `vite.config.js` 파일을 수정하여 카드 전용 CSS 엔트리 포인트를 추가할 수 있습니다:
 
 ```js
 laravel({

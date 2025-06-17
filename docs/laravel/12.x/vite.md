@@ -57,7 +57,7 @@ Vite 스캐폴딩을 사용하여 새로운 Laravel 애플리케이션을 시작
 ## 설치 및 설정 {#installation}
 
 > [!NOTE]
-> 다음 문서는 Laravel Vite 플러그인을 수동으로 설치하고 구성하는 방법에 대해 설명합니다. 하지만, Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 이 모든 기본 구조가 포함되어 있으며, Laravel과 Vite를 시작하는 가장 빠른 방법입니다.
+> 다음 문서는 Laravel Vite 플러그인을 수동으로 설치하고 구성하는 방법에 대해 설명합니다. 하지만, Laravel의 [스타터 키트](/laravel/12.x/starter-kits)에는 이미 이 모든 기본 구조가 포함되어 있으며, Laravel과 Vite를 시작하는 가장 빠른 방법입니다.
 
 
 ### Node 설치 {#installing-node}
@@ -115,7 +115,7 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel([
-            'resources/css/app.css', // [tl! remove]
+            'resources/css/app.css', // [!code --]
             'resources/js/app.js',
         ]),
     ],
@@ -126,7 +126,7 @@ export default defineConfig({
 
 ```js
 import './bootstrap';
-import '../css/app.css'; // [tl! add]
+import '../css/app.css'; // [!code ++]
 ```
 
 Laravel 플러그인은 또한 여러 개의 엔트리 포인트와 [SSR 엔트리 포인트](#ssr)와 같은 고급 설정 옵션도 지원합니다.
@@ -136,7 +136,7 @@ Laravel 플러그인은 또한 여러 개의 엔트리 포인트와 [SSR 엔트�
 
 로컬 개발 웹 서버가 애플리케이션을 HTTPS로 제공하는 경우, Vite 개발 서버에 연결할 때 문제가 발생할 수 있습니다.
 
-[Laravel Herd](https://herd.laravel.com)를 사용하여 사이트를 보안 처리했거나, [Laravel Valet](/docs/{{version}}/valet)를 사용하고 애플리케이션에 대해 [secure 명령어](/docs/{{version}}/valet#securing-sites)를 실행한 경우, Laravel Vite 플러그인은 자동으로 생성된 TLS 인증서를 감지하여 사용합니다.
+[Laravel Herd](https://herd.laravel.com)를 사용하여 사이트를 보안 처리했거나, [Laravel Valet](/laravel/12.x/valet)를 사용하고 애플리케이션에 대해 [secure 명령어](/laravel/12.x/valet#securing-sites)를 실행한 경우, Laravel Vite 플러그인은 자동으로 생성된 TLS 인증서를 감지하여 사용합니다.
 
 사이트를 애플리케이션의 디렉터리 이름과 일치하지 않는 호스트로 보안 처리한 경우, 애플리케이션의 `vite.config.js` 파일에서 호스트를 수동으로 지정할 수 있습니다:
 
@@ -148,7 +148,7 @@ export default defineConfig({
     plugins: [
         laravel({
             // ...
-            detectTls: 'my-app.test', // [tl! add]
+            detectTls: 'my-app.test', // [!code ++]
         }),
     ],
 });
@@ -158,20 +158,20 @@ export default defineConfig({
 
 ```js
 // ...
-import fs from 'fs'; // [tl! add]
+import fs from 'fs'; // [!code ++]
 
-const host = 'my-app.test'; // [tl! add]
+const host = 'my-app.test'; // [!code ++]
 
 export default defineConfig({
     // ...
-    server: { // [tl! add]
-        host, // [tl! add]
-        hmr: { host }, // [tl! add]
-        https: { // [tl! add]
-            key: fs.readFileSync(`/path/to/${host}.key`), // [tl! add]
-            cert: fs.readFileSync(`/path/to/${host}.crt`), // [tl! add]
-        }, // [tl! add]
-    }, // [tl! add]
+    server: { // [!code ++]
+        host, // [!code ++]
+        hmr: { host }, // [!code ++]
+        https: { // [!code ++]
+            key: fs.readFileSync(`/path/to/${host}.key`), // [!code ++]
+            cert: fs.readFileSync(`/path/to/${host}.crt`), // [!code ++]
+        }, // [!code ++]
+    }, // [!code ++]
 });
 ```
 
@@ -180,7 +180,7 @@ export default defineConfig({
 
 #### WSL2에서 Sail로 개발 서버 실행하기 {#configuring-hmr-in-sail-on-wsl2}
 
-Windows Subsystem for Linux 2 (WSL2)에서 [Laravel Sail](/docs/{{version}}/sail)를 사용하여 Vite 개발 서버를 실행할 때, 브라우저가 개발 서버와 통신할 수 있도록 `vite.config.js` 파일에 다음 설정을 추가해야 합니다:
+Windows Subsystem for Linux 2 (WSL2)에서 [Laravel Sail](/laravel/12.x/sail)를 사용하여 Vite 개발 서버를 실행할 때, 브라우저가 개발 서버와 통신할 수 있도록 `vite.config.js` 파일에 다음 설정을 추가해야 합니다:
 
 ```js
 // ...
@@ -271,7 +271,7 @@ npm run dev
 npm run build
 ```
 
-[WSL2](https://docs.microsoft.com/ko-kr/windows/wsl/)에서 [Sail](/docs/{{version}}/sail)로 개발 서버를 실행하는 경우, [추가 설정](#configuring-hmr-in-sail-on-wsl2)이 필요할 수 있습니다.
+[WSL2](https://docs.microsoft.com/ko-kr/windows/wsl/)에서 [Sail](/laravel/12.x/sail)로 개발 서버를 실행하는 경우, [추가 설정](#configuring-hmr-in-sail-on-wsl2)이 필요할 수 있습니다.
 
 
 ## 자바스크립트와 함께 작업하기 {#working-with-scripts}
@@ -346,7 +346,7 @@ export default defineConfig({
 ```
 
 > [!NOTE]
-> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Laravel, Vue, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, Vue, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
+> Laravel의 [스타터 키트](/laravel/12.x/starter-kits)에는 이미 적절한 Laravel, Vue, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, Vue, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
 
 
 
@@ -385,7 +385,7 @@ JSX가 포함된 파일은 `.jsx` 또는 `.tsx` 확장자를 사용해야 하며
 `@viteReactRefresh` 디렉티브는 반드시 `@vite` 디렉티브보다 먼저 호출되어야 합니다.
 
 > [!NOTE]
-> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Laravel, React, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, React, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
+> Laravel의 [스타터 키트](/laravel/12.x/starter-kits)에는 이미 적절한 Laravel, React, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, React, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
 
 
 ### Inertia {#inertia}
@@ -410,7 +410,7 @@ createInertiaApp({
 Inertia와 함께 Vite의 코드 분할 기능을 사용하는 경우, [에셋 프리페칭](#asset-prefetching) 구성을 권장합니다.
 
 > [!NOTE]
-> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Laravel, Inertia, Vite 구성이 포함되어 있습니다. 이 스타터 키트는 Laravel, Inertia, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
+> Laravel의 [스타터 키트](/laravel/12.x/starter-kits)에는 이미 적절한 Laravel, Inertia, Vite 구성이 포함되어 있습니다. 이 스타터 키트는 Laravel, Inertia, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
 
 
 ### URL 처리 {#url-processing}
@@ -446,7 +446,7 @@ resources/
 ## 스타일시트 작업하기 {#working-with-stylesheets}
 
 > [!NOTE]
-> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Tailwind와 Vite 설정이 포함되어 있습니다. 또는, 스타터 키트를 사용하지 않고 Tailwind와 Laravel을 함께 사용하고 싶다면 [Tailwind의 Laravel 설치 가이드](https://tailwindcss.com/docs/guides/laravel)를 참고하세요.
+> Laravel의 [스타터 키트](/laravel/12.x/starter-kits)에는 이미 적절한 Tailwind와 Vite 설정이 포함되어 있습니다. 또는, 스타터 키트를 사용하지 않고 Tailwind와 Laravel을 함께 사용하고 싶다면 [Tailwind의 Laravel 설치 가이드](https://tailwindcss.com/docs/guides/laravel)를 참고하세요.
 
 모든 Laravel 애플리케이션에는 이미 Tailwind와 적절하게 구성된 `vite.config.js` 파일이 포함되어 있습니다. 따라서 Vite 개발 서버를 시작하거나, `dev` Composer 명령어를 실행하면 Laravel과 Vite 개발 서버가 모두 시작됩니다:
 
@@ -547,7 +547,7 @@ export default defineConfig({
 
 ### 별칭 {#blade-aliases}
 
-JavaScript 애플리케이션에서는 자주 참조하는 디렉터리에 [별칭을 생성](#aliases)하는 것이 일반적입니다. 하지만, Blade에서도 `Illuminate\Support\Facades\Vite` 클래스의 `macro` 메서드를 사용하여 별칭을 생성할 수 있습니다. 일반적으로 "매크로"는 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드 내에서 정의해야 합니다:
+JavaScript 애플리케이션에서는 자주 참조하는 디렉터리에 [별칭을 생성](#aliases)하는 것이 일반적입니다. 하지만, Blade에서도 `Illuminate\Support\Facades\Vite` 클래스의 `macro` 메서드를 사용하여 별칭을 생성할 수 있습니다. 일반적으로 "매크로"는 [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메서드 내에서 정의해야 합니다:
 
 ```php
 /**
@@ -570,7 +570,7 @@ public function boot(): void
 
 Vite의 코드 분할 기능을 사용하여 SPA를 구축할 때, 필요한 에셋들은 각 페이지 이동 시마다 가져오게 됩니다. 이 동작은 UI 렌더링이 지연되는 원인이 될 수 있습니다. 만약 이 문제가 사용하는 프론트엔드 프레임워크에서 문제가 된다면, Laravel은 초기 페이지 로드 시 애플리케이션의 JavaScript와 CSS 에셋을 미리 프리페칭할 수 있는 기능을 제공합니다.
 
-에셋을 미리 프리페칭하도록 Laravel에 지시하려면, [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메소드에서 `Vite::prefetch` 메소드를 호출하면 됩니다:
+에셋을 미리 프리페칭하도록 Laravel에 지시하려면, [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메소드에서 `Vite::prefetch` 메소드를 호출하면 됩니다:
 
 ```php
 <?php
@@ -739,8 +739,8 @@ SSR 엔트리 포인트를 재빌드하는 것을 잊지 않도록, 애플리케
 ```json
 "scripts": {
      "dev": "vite",
-     "build": "vite build" // [tl! remove]
-     "build": "vite build && vite build --ssr" // [tl! add]
+     "build": "vite build" // [!code --]
+     "build": "vite build && vite build --ssr" // [!code ++]
 }
 ```
 
@@ -758,7 +758,7 @@ php artisan inertia:start-ssr
 ```
 
 > [!NOTE]
-> Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에는 이미 적절한 Laravel, Inertia SSR, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, Inertia SSR, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
+> Laravel의 [스타터 키트](/laravel/12.x/starter-kits)에는 이미 적절한 Laravel, Inertia SSR, Vite 설정이 포함되어 있습니다. 이 스타터 키트는 Laravel, Inertia SSR, Vite로 빠르게 시작할 수 있는 가장 빠른 방법을 제공합니다.
 
 
 ## 스크립트 및 스타일 태그 속성 {#script-and-style-attributes}
@@ -766,7 +766,7 @@ php artisan inertia:start-ssr
 
 ### 콘텐츠 보안 정책(CSP) Nonce {#content-security-policy-csp-nonce}
 
-스크립트 및 스타일 태그에 [nonce 속성](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce)을 [콘텐츠 보안 정책](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)의 일부로 포함하고 싶다면, 커스텀 [미들웨어](/docs/{{version}}/middleware) 내에서 `useCspNonce` 메서드를 사용하여 nonce를 생성하거나 지정할 수 있습니다:
+스크립트 및 스타일 태그에 [nonce 속성](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce)을 [콘텐츠 보안 정책](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)의 일부로 포함하고 싶다면, 커스텀 [미들웨어](/laravel/12.x/middleware) 내에서 `useCspNonce` 메서드를 사용하여 nonce를 생성하거나 지정할 수 있습니다:
 
 ```php
 <?php
@@ -798,7 +798,7 @@ class AddContentSecurityPolicyHeaders
 
 `useCspNonce` 메서드를 호출한 후에는, Laravel이 생성하는 모든 스크립트 및 스타일 태그에 자동으로 `nonce` 속성이 포함됩니다.
 
-다른 곳에서 nonce가 필요하다면, 예를 들어 Laravel의 [스타터 키트](/docs/{{version}}/starter-kits)에 포함된 [Ziggy `@route` 디렉티브](https://github.com/tighten/ziggy#using-routes-with-a-content-security-policy)에서도 `cspNonce` 메서드를 사용해 가져올 수 있습니다:
+다른 곳에서 nonce가 필요하다면, 예를 들어 Laravel의 [스타터 키트](/laravel/12.x/starter-kits)에 포함된 [Ziggy `@route` 디렉티브](https://github.com/tighten/ziggy#using-routes-with-a-content-security-policy)에서도 `cspNonce` 메서드를 사용해 가져올 수 있습니다:
 
 ```blade
 @routes(nonce: Vite::cspNonce())
@@ -853,7 +853,7 @@ Vite::useIntegrityKey(false);
 
 ### 임의 속성 {#arbitrary-attributes}
 
-스크립트 및 스타일 태그에 [data-turbo-track](https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change) 속성과 같은 추가 속성을 포함해야 하는 경우, `useScriptTagAttributes` 및 `useStyleTagAttributes` 메서드를 통해 지정할 수 있습니다. 일반적으로 이 메서드들은 [서비스 프로바이더](/docs/{{version}}/providers)에서 호출해야 합니다:
+스크립트 및 스타일 태그에 [data-turbo-track](https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change) 속성과 같은 추가 속성을 포함해야 하는 경우, `useScriptTagAttributes` 및 `useStyleTagAttributes` 메서드를 통해 지정할 수 있습니다. 일반적으로 이 메서드들은 [서비스 프로바이더](/laravel/12.x/providers)에서 호출해야 합니다:
 
 ```php
 use Illuminate\Support\Facades\Vite;
@@ -959,14 +959,14 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {  // [tl! add]
-        cors: {  // [tl! add]
-            origin: [  // [tl! add]
-                'https://backend.laravel',  // [tl! add]
-                'http://admin.laravel:8566',  // [tl! add]
-            ],  // [tl! add]
-        },  // [tl! add]
-    },  // [tl! add]
+    server: {  // [!code ++]
+        cors: {  // [!code ++]
+            origin: [  // [!code ++]
+                'https://backend.laravel',  // [!code ++]
+                'http://admin.laravel:8566',  // [!code ++]
+            ],  // [!code ++]
+        },  // [!code ++]
+    },  // [!code ++]
 });
 ```
 
@@ -983,14 +983,14 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {  // [tl! add]
-        cors: {  // [tl! add]
-            origin: [ // [tl! add]
+    server: {  // [!code ++]
+        cors: {  // [!code ++]
+            origin: [ // [!code ++]
                 // 지원: SCHEME://DOMAIN.laravel[:PORT] [tl! add]
                 /^https?:\/\/.*\.laravel(:\d+)?$/, //[tl! add]
-            ], // [tl! add]
-        }, // [tl! add]
-    }, // [tl! add]
+            ], // [!code ++]
+        }, // [!code ++]
+    }, // [!code ++]
 });
 ```
 

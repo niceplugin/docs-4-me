@@ -38,7 +38,7 @@
 
 #### 데이터베이스 {#prerequisites-database}
 
-`database` 캐시 드라이버를 사용할 때는 캐시 데이터를 저장할 데이터베이스 테이블이 필요합니다. 일반적으로 이 테이블은 Laravel의 기본 `0001_01_01_000001_create_cache_table.php` [데이터베이스 마이그레이션](/docs/{{version}}/migrations)에 포함되어 있습니다. 하지만, 애플리케이션에 이 마이그레이션이 없다면, `make:cache-table` Artisan 명령어를 사용해 직접 생성할 수 있습니다:
+`database` 캐시 드라이버를 사용할 때는 캐시 데이터를 저장할 데이터베이스 테이블이 필요합니다. 일반적으로 이 테이블은 Laravel의 기본 `0001_01_01_000001_create_cache_table.php` [데이터베이스 마이그레이션](/laravel/12.x/migrations)에 포함되어 있습니다. 하지만, 애플리케이션에 이 마이그레이션이 없다면, `make:cache-table` Artisan 명령어를 사용해 직접 생성할 수 있습니다:
 
 ```shell
 php artisan make:cache-table
@@ -84,9 +84,9 @@ Memcached 드라이버를 사용하려면 [Memcached PECL 패키지](https://pec
 
 #### Redis {#redis}
 
-Laravel에서 Redis 캐시를 사용하기 전에, PECL을 통해 PhpRedis PHP 확장 프로그램을 설치하거나 Composer를 통해 `predis/predis` 패키지(~2.0)를 설치해야 합니다. [Laravel Sail](/docs/{{version}}/sail)에는 이미 이 확장 프로그램이 포함되어 있습니다. 또한, [Laravel Cloud](https://cloud.laravel.com)나 [Laravel Forge](https://forge.laravel.com)와 같은 공식 Laravel 애플리케이션 플랫폼에는 기본적으로 PhpRedis 확장 프로그램이 설치되어 있습니다.
+Laravel에서 Redis 캐시를 사용하기 전에, PECL을 통해 PhpRedis PHP 확장 프로그램을 설치하거나 Composer를 통해 `predis/predis` 패키지(~2.0)를 설치해야 합니다. [Laravel Sail](/laravel/12.x/sail)에는 이미 이 확장 프로그램이 포함되어 있습니다. 또한, [Laravel Cloud](https://cloud.laravel.com)나 [Laravel Forge](https://forge.laravel.com)와 같은 공식 Laravel 애플리케이션 플랫폼에는 기본적으로 PhpRedis 확장 프로그램이 설치되어 있습니다.
 
-Redis 설정에 대한 자세한 내용은 [Laravel 공식 문서](/docs/{{version}}/redis#configuration)를 참고하세요.
+Redis 설정에 대한 자세한 내용은 [Laravel 공식 문서](/laravel/12.x/redis#configuration)를 참고하세요.
 
 
 #### DynamoDB {#dynamodb}
@@ -239,7 +239,7 @@ $value = Cache::rememberForever('users', function () {
 
 `flexible` 메서드는 캐시된 값이 "신선(fresh)"하다고 간주되는 기간과 "오래됨(stale)"으로 간주되는 시점을 지정하는 배열을 인자로 받습니다. 배열의 첫 번째 값은 캐시가 신선하다고 간주되는 초 단위의 시간이고, 두 번째 값은 재계산이 필요해지기 전까지 오래된 데이터로 제공될 수 있는 시간을 의미합니다.
 
-신선 기간(첫 번째 값 이전)에 요청이 들어오면, 캐시가 즉시 반환되며 재계산이 일어나지 않습니다. 오래된 기간(두 값 사이)에 요청이 들어오면, 사용자에게 오래된 값이 제공되고, [지연 함수](/docs/{{version}}/helpers#deferred-functions)가 등록되어 응답이 사용자에게 전송된 후 캐시 값을 새로고침합니다. 두 번째 값 이후에 요청이 들어오면, 캐시는 만료된 것으로 간주되어 즉시 값을 재계산하며, 이 경우 사용자는 느린 응답을 경험할 수 있습니다.
+신선 기간(첫 번째 값 이전)에 요청이 들어오면, 캐시가 즉시 반환되며 재계산이 일어나지 않습니다. 오래된 기간(두 값 사이)에 요청이 들어오면, 사용자에게 오래된 값이 제공되고, [지연 함수](/laravel/12.x/helpers#deferred-functions)가 등록되어 응답이 사용자에게 전송된 후 캐시 값을 새로고침합니다. 두 번째 값 이후에 요청이 들어오면, 캐시는 만료된 것으로 간주되어 즉시 값을 재계산하며, 이 경우 사용자는 느린 응답을 경험할 수 있습니다.
 
 ```php
 $value = Cache::flexible('users', [5, 10], function () {
@@ -396,7 +396,7 @@ cache()->remember('users', $seconds, function () {
 ```
 
 > [!NOTE]
-> 전역 `cache` 함수 호출을 테스트할 때는, [파사드 테스트](/docs/{{version}}/mocking#mocking-facades)와 마찬가지로 `Cache::shouldReceive` 메서드를 사용할 수 있습니다.
+> 전역 `cache` 함수 호출을 테스트할 때는, [파사드 테스트](/laravel/12.x/mocking#mocking-facades)와 마찬가지로 `Cache::shouldReceive` 메서드를 사용할 수 있습니다.
 
 
 ## 원자적 락 {#atomic-locks}
@@ -490,7 +490,7 @@ Cache::lock('processing')->forceRelease();
 
 ### 드라이버 작성하기 {#writing-the-driver}
 
-커스텀 캐시 드라이버를 만들기 위해서는 먼저 `Illuminate\Contracts\Cache\Store` [계약](/docs/{{version}}/contracts)을 구현해야 합니다. 예를 들어, MongoDB 캐시 구현은 다음과 같이 작성할 수 있습니다:
+커스텀 캐시 드라이버를 만들기 위해서는 먼저 `Illuminate\Contracts\Cache\Store` [계약](/laravel/12.x/contracts)을 구현해야 합니다. 예를 들어, MongoDB 캐시 구현은 다음과 같이 작성할 수 있습니다:
 
 ```php
 <?php
@@ -571,7 +571,7 @@ class AppServiceProvider extends ServiceProvider
 
 ## 이벤트 {#events}
 
-모든 캐시 작업에서 코드를 실행하려면, 캐시에서 디스패치되는 다양한 [이벤트](/docs/{{version}}/events)를 리스닝할 수 있습니다:
+모든 캐시 작업에서 코드를 실행하려면, 캐시에서 디스패치되는 다양한 [이벤트](/laravel/12.x/events)를 리스닝할 수 있습니다:
 
 <div class="overflow-auto">
 

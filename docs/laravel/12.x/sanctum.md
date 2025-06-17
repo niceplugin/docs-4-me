@@ -195,7 +195,7 @@ Route::get('/orders', function () {
 
 편의를 위해, 인증된 요청이 여러분의 1차 SPA(싱글 페이지 애플리케이션)에서 왔고 Sanctum의 내장 [SPA 인증](#spa-authentication)을 사용하고 있다면, `tokenCan` 메서드는 항상 `true`를 반환합니다.
 
-하지만 이것이 반드시 애플리케이션이 사용자가 해당 작업을 수행하도록 허용해야 한다는 의미는 아닙니다. 일반적으로, 애플리케이션의 [인가 정책](/docs/{{version}}/authorization#creating-policies)이 토큰이 해당 권한을 수행할 수 있는 권한이 부여되었는지와 사용자 인스턴스 자체가 해당 작업을 수행할 수 있는지도 함께 확인합니다.
+하지만 이것이 반드시 애플리케이션이 사용자가 해당 작업을 수행하도록 허용해야 한다는 의미는 아닙니다. 일반적으로, 애플리케이션의 [인가 정책](/laravel/12.x/authorization#creating-policies)이 토큰이 해당 권한을 수행할 수 있는 권한이 부여되었는지와 사용자 인스턴스 자체가 해당 작업을 수행할 수 있는지도 함께 확인합니다.
 
 예를 들어, 서버를 관리하는 애플리케이션을 상상해본다면, 이는 토큰이 서버를 업데이트할 권한이 있는지 **그리고** 해당 서버가 사용자에게 속해 있는지도 확인하는 것을 의미할 수 있습니다:
 
@@ -254,7 +254,7 @@ return $user->createToken(
 )->plainTextToken;
 ```
 
-애플리케이션에 토큰 만료 시간을 설정했다면, [작업 스케줄링](/docs/{{version}}/scheduling)을 통해 만료된 토큰을 정리하는 작업도 예약할 수 있습니다. 다행히 Sanctum에는 이를 위한 `sanctum:prune-expired` Artisan 명령어가 포함되어 있습니다. 예를 들어, 만료된 지 최소 24시간이 지난 모든 토큰 데이터베이스 레코드를 삭제하는 예약 작업을 다음과 같이 설정할 수 있습니다:
+애플리케이션에 토큰 만료 시간을 설정했다면, [작업 스케줄링](/laravel/12.x/scheduling)을 통해 만료된 토큰을 정리하는 작업도 예약할 수 있습니다. 다행히 Sanctum에는 이를 위한 `sanctum:prune-expired` Artisan 명령어가 포함되어 있습니다. 예를 들어, 만료된 지 최소 24시간이 지난 모든 토큰 데이터베이스 레코드를 삭제하는 예약 작업을 다음과 같이 설정할 수 있습니다:
 
 ```php
 use Illuminate\Support\Facades\Schedule;
@@ -341,14 +341,14 @@ axios.get('/sanctum/csrf-cookie').then(response => {
 
 #### 로그인 {#logging-in}
 
-CSRF 보호가 초기화되면, Laravel 애플리케이션의 `/login` 경로로 `POST` 요청을 보내야 합니다. 이 `/login` 경로는 [직접 구현](/docs/{{version}}/authentication#authenticating-users)하거나 [Laravel Fortify](/docs/{{version}}/fortify)와 같은 헤드리스 인증 패키지를 사용하여 구현할 수 있습니다.
+CSRF 보호가 초기화되면, Laravel 애플리케이션의 `/login` 경로로 `POST` 요청을 보내야 합니다. 이 `/login` 경로는 [직접 구현](/laravel/12.x/authentication#authenticating-users)하거나 [Laravel Fortify](/laravel/12.x/fortify)와 같은 헤드리스 인증 패키지를 사용하여 구현할 수 있습니다.
 
 로그인 요청이 성공하면 인증이 완료되며, 이후 애플리케이션의 라우트에 대한 요청은 Laravel 애플리케이션이 클라이언트에 발급한 세션 쿠키를 통해 자동으로 인증됩니다. 또한, 이미 애플리케이션이 `/sanctum/csrf-cookie` 경로에 요청을 보냈으므로, 이후 요청에서는 JavaScript HTTP 클라이언트가 `XSRF-TOKEN` 쿠키의 값을 `X-XSRF-TOKEN` 헤더에 담아 전송하는 한 CSRF 보호가 자동으로 적용됩니다.
 
 물론, 사용자의 세션이 비활동으로 인해 만료되면, 이후 Laravel 애플리케이션에 대한 요청은 401 또는 419 HTTP 오류 응답을 받을 수 있습니다. 이 경우, 사용자를 SPA의 로그인 페이지로 리디렉션해야 합니다.
 
 > [!WARNING]
-> 직접 `/login` 엔드포인트를 작성할 수 있지만, 반드시 Laravel이 제공하는 표준 [세션 기반 인증 서비스](/docs/{{version}}/authentication#authenticating-users)를 사용하여 사용자를 인증해야 합니다. 일반적으로 이는 `web` 인증 가드를 사용하는 것을 의미합니다.
+> 직접 `/login` 엔드포인트를 작성할 수 있지만, 반드시 Laravel이 제공하는 표준 [세션 기반 인증 서비스](/laravel/12.x/authentication#authenticating-users)를 사용하여 사용자를 인증해야 합니다. 일반적으로 이는 `web` 인증 가드를 사용하는 것을 의미합니다.
 
 
 ### 라우트 보호하기 {#protecting-spa-routes}
@@ -366,7 +366,7 @@ Route::get('/user', function (Request $request) {
 
 ### 프라이빗 브로드캐스트 채널 권한 부여 {#authorizing-private-broadcast-channels}
 
-SPA가 [프라이빗 / 프레즌스 브로드캐스트 채널](/docs/{{version}}/broadcasting#authorizing-channels)에 인증해야 하는 경우, 애플리케이션의 `bootstrap/app.php` 파일에 있는 `withRouting` 메서드에서 `channels` 항목을 제거해야 합니다. 대신, `withBroadcasting` 메서드를 호출하여 브로드캐스팅 라우트에 올바른 미들웨어를 지정할 수 있습니다:
+SPA가 [프라이빗 / 프레즌스 브로드캐스트 채널](/laravel/12.x/broadcasting#authorizing-channels)에 인증해야 하는 경우, 애플리케이션의 `bootstrap/app.php` 파일에 있는 `withRouting` 메서드에서 `channels` 항목을 제거해야 합니다. 대신, `withBroadcasting` 메서드를 호출하여 브로드캐스팅 라우트에 올바른 미들웨어를 지정할 수 있습니다:
 
 ```php
 return Application::configure(basePath: dirname(__DIR__))
@@ -380,7 +380,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
 ```
 
-다음으로, Pusher의 인증 요청이 성공하려면 [Laravel Echo](/docs/{{version}}/broadcasting#client-side-installation)를 초기화할 때 커스텀 Pusher `authorizer`를 제공해야 합니다. 이를 통해 애플리케이션이 [크로스 도메인 요청에 적절히 구성된](#cors-and-cookies) `axios` 인스턴스를 사용하도록 Pusher를 설정할 수 있습니다:
+다음으로, Pusher의 인증 요청이 성공하려면 [Laravel Echo](/laravel/12.x/broadcasting#client-side-installation)를 초기화할 때 커스텀 Pusher `authorizer`를 제공해야 합니다. 이를 통해 애플리케이션이 [크로스 도메인 요청에 적절히 구성된](#cors-and-cookies) `axios` 인스턴스를 사용하도록 Pusher를 설정할 수 있습니다:
 
 ```js
 window.Echo = new Echo({

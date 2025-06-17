@@ -30,7 +30,7 @@
 
 <img src="https://laravel.com/img/docs/prompts-example.png">
 
-Laravel Prompts는 [Artisan 콘솔 명령어](/docs/{{version}}/artisan#writing-commands)에서 사용자 입력을 받을 때 완벽하게 사용할 수 있으며, 모든 명령줄 PHP 프로젝트에서도 사용할 수 있습니다.
+Laravel Prompts는 [Artisan 콘솔 명령어](/laravel/12.x/artisan#writing-commands)에서 사용자 입력을 받을 때 완벽하게 사용할 수 있으며, 모든 명령줄 PHP 프로젝트에서도 사용할 수 있습니다.
 
 > [!NOTE]
 > Laravel Prompts는 macOS, Linux, 그리고 WSL이 지원되는 Windows를 지원합니다. 더 자세한 내용은 [지원되지 않는 환경 및 대체 기능](#fallbacks) 문서를 참고하세요.
@@ -110,7 +110,7 @@ $name = text(
 
 클로저는 입력된 값을 전달받으며, 에러 메시지를 반환하거나 검증이 통과하면 `null`을 반환할 수 있습니다.
 
-또는, Laravel의 [validator](/docs/{{version}}/validation) 기능을 활용할 수도 있습니다. 이를 위해, 속성명과 원하는 검증 규칙이 담긴 배열을 `validate` 인자에 전달하면 됩니다:
+또는, Laravel의 [validator](/laravel/12.x/validation) 기능을 활용할 수도 있습니다. 이를 위해, 속성명과 원하는 검증 규칙이 담긴 배열을 `validate` 인자에 전달하면 됩니다:
 
 ```php
 $name = text(
@@ -179,7 +179,7 @@ $story = textarea(
 
 클로저는 입력된 값을 전달받으며, 에러 메시지를 반환하거나 검증이 통과하면 `null`을 반환할 수 있습니다.
 
-또는, Laravel의 [validator](/docs/{{version}}/validation) 기능을 활용할 수도 있습니다. 이를 위해, 속성 이름과 원하는 검증 규칙이 담긴 배열을 `validate` 인자에 전달하면 됩니다:
+또는, Laravel의 [validator](/laravel/12.x/validation) 기능을 활용할 수도 있습니다. 이를 위해, 속성 이름과 원하는 검증 규칙이 담긴 배열을 `validate` 인자에 전달하면 됩니다:
 
 ```php
 $story = textarea(
@@ -247,7 +247,7 @@ $password = password(
 
 클로저는 입력된 값을 전달받으며, 에러 메시지를 반환하거나 검증이 통과하면 `null`을 반환할 수 있습니다.
 
-또는, Laravel의 [validator](/docs/{{version}}/validation) 기능을 활용할 수도 있습니다. 이를 위해 `validate` 인자에 속성명과 원하는 검증 규칙이 담긴 배열을 전달하면 됩니다:
+또는, Laravel의 [validator](/laravel/12.x/validation) 기능을 활용할 수도 있습니다. 이를 위해 `validate` 인자에 속성명과 원하는 검증 규칙이 담긴 배열을 전달하면 됩니다:
 
 ```php
 $password = password(
@@ -543,7 +543,7 @@ $name = suggest(
 
 클로저는 입력된 값을 전달받으며, 에러 메시지를 반환하거나 검증이 통과하면 `null`을 반환할 수 있습니다.
 
-또는, Laravel의 [validator](/docs/{{version}}/validation) 기능을 활용할 수도 있습니다. 이를 위해, 속성 이름과 원하는 검증 규칙이 담긴 배열을 `validate` 인자에 전달하면 됩니다:
+또는, Laravel의 [validator](/laravel/12.x/validation) 기능을 활용할 수도 있습니다. 이를 위해, 속성 이름과 원하는 검증 규칙이 담긴 배열을 `validate` 인자에 전달하면 됩니다:
 
 ```php
 $name = suggest(

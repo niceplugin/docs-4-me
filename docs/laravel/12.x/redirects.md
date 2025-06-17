@@ -16,7 +16,7 @@ Route::get('/dashboard', function () {
 });
 ```
 
-때때로 제출된 폼이 유효하지 않을 때와 같이 사용자를 이전 위치로 리디렉션하고 싶을 수 있습니다. 이럴 때는 전역 `back` 헬퍼 함수를 사용할 수 있습니다. 이 기능은 [세션](/docs/{{version}}/session)을 활용하므로, `back` 함수를 호출하는 라우트가 반드시 `web` 미들웨어 그룹을 사용하거나 모든 세션 미들웨어가 적용되어 있어야 합니다:
+때때로 제출된 폼이 유효하지 않을 때와 같이 사용자를 이전 위치로 리디렉션하고 싶을 수 있습니다. 이럴 때는 전역 `back` 헬퍼 함수를 사용할 수 있습니다. 이 기능은 [세션](/laravel/12.x/session)을 활용하므로, `back` 함수를 호출하는 라우트가 반드시 `web` 미들웨어 그룹을 사용하거나 모든 세션 미들웨어가 적용되어 있어야 합니다:
 
 ```php
 Route::post('/user/profile', function () {
@@ -75,7 +75,7 @@ public function getRouteKey(): mixed
 
 ## 컨트롤러 액션으로 리다이렉트하기 {#redirecting-controller-actions}
 
-[컨트롤러 액션](/docs/{{version}}/controllers)으로 리다이렉트도 생성할 수 있습니다. 이를 위해 `action` 메서드에 컨트롤러와 액션 이름을 전달하면 됩니다:
+[컨트롤러 액션](/laravel/12.x/controllers)으로 리다이렉트도 생성할 수 있습니다. 이를 위해 `action` 메서드에 컨트롤러와 액션 이름을 전달하면 됩니다:
 
 ```php
 use App\Http\Controllers\HomeController;
@@ -94,7 +94,7 @@ return redirect()->action(
 
 ## 플래시된 세션 데이터와 함께 리다이렉트하기 {#redirecting-with-flashed-session-data}
 
-새 URL로 리다이렉트하면서 [데이터를 세션에 플래시](/docs/{{version}}/session#flash-data)하는 작업은 보통 동시에 이루어집니다. 일반적으로, 어떤 작업을 성공적으로 수행한 후 성공 메시지를 세션에 플래시할 때 사용됩니다. 편의를 위해, `RedirectResponse` 인스턴스를 생성하고 하나의 유창한 메서드 체인으로 세션에 데이터를 플래시할 수 있습니다:
+새 URL로 리다이렉트하면서 [데이터를 세션에 플래시](/laravel/12.x/session#flash-data)하는 작업은 보통 동시에 이루어집니다. 일반적으로, 어떤 작업을 성공적으로 수행한 후 성공 메시지를 세션에 플래시할 때 사용됩니다. 편의를 위해, `RedirectResponse` 인스턴스를 생성하고 하나의 유창한 메서드 체인으로 세션에 데이터를 플래시할 수 있습니다:
 
 ```php
 Route::post('/user/profile', function () {
@@ -104,13 +104,13 @@ Route::post('/user/profile', function () {
 });
 ```
 
-`RedirectResponse` 인스턴스에서 제공하는 `withInput` 메서드를 사용하면, 사용자를 새로운 위치로 리다이렉트하기 전에 현재 요청의 입력 데이터를 세션에 플래시할 수 있습니다. 입력 데이터가 세션에 플래시된 후에는, 다음 요청에서 [쉽게 이를 조회](/docs/{{version}}/requests#retrieving-old-input)할 수 있습니다:
+`RedirectResponse` 인스턴스에서 제공하는 `withInput` 메서드를 사용하면, 사용자를 새로운 위치로 리다이렉트하기 전에 현재 요청의 입력 데이터를 세션에 플래시할 수 있습니다. 입력 데이터가 세션에 플래시된 후에는, 다음 요청에서 [쉽게 이를 조회](/laravel/12.x/requests#retrieving-old-input)할 수 있습니다:
 
 ```php
 return back()->withInput();
 ```
 
-사용자가 리다이렉트된 후, [세션](/docs/{{version}}/session)에서 플래시된 메시지를 표시할 수 있습니다. 예를 들어, [Blade 문법](/docs/{{version}}/blade)을 사용하면 다음과 같습니다:
+사용자가 리다이렉트된 후, [세션](/laravel/12.x/session)에서 플래시된 메시지를 표시할 수 있습니다. 예를 들어, [Blade 문법](/laravel/12.x/blade)을 사용하면 다음과 같습니다:
 
 ```blade
 @if (session('status'))

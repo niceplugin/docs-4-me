@@ -76,7 +76,7 @@ php artisan dusk:install
 다음으로, 애플리케이션의 `.env` 파일에서 `APP_URL` 환경 변수를 설정하세요. 이 값은 브라우저에서 애플리케이션에 접근할 때 사용하는 URL과 일치해야 합니다.
 
 > [!NOTE]
-> 로컬 개발 환경 관리를 위해 [Laravel Sail](/docs/{{version}}/sail)을 사용하고 있다면, [Dusk 테스트 구성 및 실행](/docs/{{version}}/sail#laravel-dusk)에 관한 Sail 문서도 참고하시기 바랍니다.
+> 로컬 개발 환경 관리를 위해 [Laravel Sail](/laravel/12.x/sail)을 사용하고 있다면, [Dusk 테스트 구성 및 실행](/laravel/12.x/sail#laravel-dusk)에 관한 Sail 문서도 참고하시기 바랍니다.
 
 
 ### ChromeDriver 설치 관리 {#managing-chromedriver-installations}
@@ -300,7 +300,7 @@ php artisan dusk --group=foo
 ```
 
 > [!NOTE]
-> 로컬 개발 환경을 관리하기 위해 [Laravel Sail](/docs/{{version}}/sail)를 사용하고 있다면, [Dusk 테스트 구성 및 실행](/docs/{{version}}/sail#laravel-dusk)에 대한 Sail 문서를 참고하세요.
+> 로컬 개발 환경을 관리하기 위해 [Laravel Sail](/laravel/12.x/sail)를 사용하고 있다면, [Dusk 테스트 구성 및 실행](/laravel/12.x/sail#laravel-dusk)에 대한 Sail 문서를 참고하세요.
 
 
 #### ChromeDriver 수동 시작 {#manually-starting-chromedriver}
@@ -441,7 +441,7 @@ $this->browse(function (Browser $first, Browser $second) {
 $browser->visit('/login');
 ```
 
-`visitRoute` 메서드를 사용하여 [이름이 지정된 라우트](/docs/{{version}}/routing#named-routes)로 이동할 수 있습니다:
+`visitRoute` 메서드를 사용하여 [이름이 지정된 라우트](/laravel/12.x/routing#named-routes)로 이동할 수 있습니다:
 
 ```php
 $browser->visitRoute($routeName, $parameters);
@@ -497,7 +497,7 @@ $browser->move($x = 100, $y = 100);
 
 ### 브라우저 매크로 {#browser-macros}
 
-여러 테스트에서 재사용할 수 있는 커스텀 브라우저 메서드를 정의하고 싶다면, `Browser` 클래스의 `macro` 메서드를 사용할 수 있습니다. 일반적으로 이 메서드는 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드에서 호출해야 합니다:
+여러 테스트에서 재사용할 수 있는 커스텀 브라우저 메서드를 정의하고 싶다면, `Browser` 클래스의 `macro` 메서드를 사용할 수 있습니다. 일반적으로 이 메서드는 [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메서드에서 호출해야 합니다:
 
 ```php
 <?php
@@ -888,7 +888,7 @@ $browser->withKeyboard(function (Keyboard $keyboard) {
 
 #### 키보드 매크로 {#keyboard-macros}
 
-테스트 스위트 전반에서 쉽게 재사용할 수 있는 커스텀 키보드 상호작용을 정의하고 싶다면, `Keyboard` 클래스에서 제공하는 `macro` 메서드를 사용할 수 있습니다. 일반적으로 이 메서드는 [서비스 프로바이더](/docs/{{version}}/providers)의 `boot` 메서드에서 호출해야 합니다:
+테스트 스위트 전반에서 쉽게 재사용할 수 있는 커스텀 키보드 상호작용을 정의하고 싶다면, `Keyboard` 클래스에서 제공하는 `macro` 메서드를 사용할 수 있습니다. 일반적으로 이 메서드는 [서비스 프로바이더](/laravel/12.x/providers)의 `boot` 메서드에서 호출해야 합니다:
 
 ```php
 <?php
@@ -1254,7 +1254,7 @@ $browser->waitForLocation('/secret');
 $browser->waitForLocation('https://example.com/path');
 ```
 
-또한, [이름이 지정된 라우트](/docs/{{version}}/routing#named-routes)의 위치를 기다릴 수도 있습니다:
+또한, [이름이 지정된 라우트](/laravel/12.x/routing#named-routes)의 위치를 기다릴 수도 있습니다:
 
 ```php
 $browser->waitForRoute($routeName, $parameters);
@@ -1593,7 +1593,7 @@ $browser->assertPathIsNot('/home');
 
 #### assertRouteIs {#assert-route-is}
 
-현재 URL이 주어진 [네임드 라우트](/docs/{{version}}/routing#named-routes)의 URL과 일치하는지 확인합니다:
+현재 URL이 주어진 [네임드 라우트](/laravel/12.x/routing#named-routes)의 URL과 일치하는지 확인합니다:
 
 ```php
 $browser->assertRouteIs($name, $parameters);

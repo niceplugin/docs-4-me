@@ -82,7 +82,7 @@ echo url()->previous();
 echo url()->previousPath();
 ```
 
-이러한 메서드들은 `URL` [파사드](/docs/{{version}}/facades)를 통해서도 사용할 수 있습니다:
+이러한 메서드들은 `URL` [파사드](/laravel/12.x/facades)를 통해서도 사용할 수 있습니다:
 
 ```php
 use Illuminate\Support\Facades\URL;
@@ -93,7 +93,7 @@ echo URL::current();
 
 ## 네임드 라우트의 URL 생성 {#urls-for-named-routes}
 
-`route` 헬퍼는 [네임드 라우트](/docs/{{version}}/routing#named-routes)에 대한 URL을 생성할 때 사용할 수 있습니다. 네임드 라우트를 사용하면 실제 라우트에 정의된 URL에 의존하지 않고도 URL을 생성할 수 있습니다. 따라서 라우트의 URL이 변경되더라도 `route` 함수 호출 부분을 수정할 필요가 없습니다. 예를 들어, 아래와 같이 라우트가 정의되어 있다고 가정해봅시다:
+`route` 헬퍼는 [네임드 라우트](/laravel/12.x/routing#named-routes)에 대한 URL을 생성할 때 사용할 수 있습니다. 네임드 라우트를 사용하면 실제 라우트에 정의된 URL에 의존하지 않고도 URL을 생성할 수 있습니다. 따라서 라우트의 URL이 변경되더라도 `route` 함수 호출 부분을 수정할 필요가 없습니다. 예를 들어, 아래와 같이 라우트가 정의되어 있다고 가정해봅시다:
 
 ```php
 Route::get('/post/{post}', function (Post $post) {
@@ -132,7 +132,7 @@ echo route('post.show', ['post' => 1, 'search' => 'rocket']);
 
 #### Eloquent 모델 {#eloquent-models}
 
-URL을 생성할 때 종종 [Eloquent 모델](/docs/{{version}}/eloquent)의 라우트 키(일반적으로 기본 키)를 사용하게 됩니다. 이러한 이유로, Eloquent 모델을 파라미터 값으로 전달할 수 있습니다. `route` 헬퍼는 모델의 라우트 키를 자동으로 추출합니다:
+URL을 생성할 때 종종 [Eloquent 모델](/laravel/12.x/eloquent)의 라우트 키(일반적으로 기본 키)를 사용하게 됩니다. 이러한 이유로, Eloquent 모델을 파라미터 값으로 전달할 수 있습니다. `route` 헬퍼는 모델의 라우트 키를 자동으로 추출합니다:
 
 ```php
 echo route('post.show', ['post' => $post]);
@@ -192,7 +192,7 @@ if (! $request->hasValidSignatureWhileIgnoring(['page', 'order'])) {
 }
 ```
 
-들어오는 요청 인스턴스를 사용하여 서명된 URL을 검증하는 대신, 해당 라우트에 `signed`(`Illuminate\Routing\Middleware\ValidateSignature`) [미들웨어](/docs/{{version}}/middleware)를 지정할 수도 있습니다. 만약 들어오는 요청이 유효한 서명을 가지고 있지 않다면, 미들웨어는 자동으로 `403` HTTP 응답을 반환합니다:
+들어오는 요청 인스턴스를 사용하여 서명된 URL을 검증하는 대신, 해당 라우트에 `signed`(`Illuminate\Routing\Middleware\ValidateSignature`) [미들웨어](/laravel/12.x/middleware)를 지정할 수도 있습니다. 만약 들어오는 요청이 유효한 서명을 가지고 있지 않다면, 미들웨어는 자동으로 `403` HTTP 응답을 반환합니다:
 
 ```php
 Route::post('/unsubscribe/{user}', function (Request $request) {
@@ -279,7 +279,7 @@ $uri = Uri::of('https://example.com')
     ->withFragment('section-1');
 ```
 
-유연한 URI 객체 사용에 대한 더 자세한 내용은 [URI 문서](/docs/{{version}}/helpers#uri)를 참고하세요.
+유연한 URI 객체 사용에 대한 더 자세한 내용은 [URI 문서](/laravel/12.x/helpers#uri)를 참고하세요.
 
 
 ## 기본값 {#default-values}
@@ -292,7 +292,7 @@ Route::get('/{locale}/posts', function () {
 })->name('post.index');
 ```
 
-`route` 헬퍼를 사용할 때마다 항상 `locale`을 전달하는 것은 번거로운 일입니다. 이럴 때, `URL::defaults` 메서드를 사용하여 해당 파라미터의 기본값을 현재 요청 동안 항상 적용되도록 지정할 수 있습니다. 이 메서드는 [라우트 미들웨어](/docs/{{version}}/middleware#assigning-middleware-to-routes)에서 호출하면 현재 요청에 접근할 수 있으므로 유용합니다:
+`route` 헬퍼를 사용할 때마다 항상 `locale`을 전달하는 것은 번거로운 일입니다. 이럴 때, `URL::defaults` 메서드를 사용하여 해당 파라미터의 기본값을 현재 요청 동안 항상 적용되도록 지정할 수 있습니다. 이 메서드는 [라우트 미들웨어](/laravel/12.x/middleware#assigning-middleware-to-routes)에서 호출하면 현재 요청에 접근할 수 있으므로 유용합니다:
 
 ```php
 <?php
@@ -325,7 +325,7 @@ class SetDefaultLocaleForUrls
 
 #### URL 기본값과 미들웨어 우선순위 {#url-defaults-middleware-priority}
 
-URL 기본값을 설정하면 Laravel의 암시적 모델 바인딩 처리에 영향을 줄 수 있습니다. 따라서 URL 기본값을 설정하는 미들웨어는 Laravel의 `SubstituteBindings` 미들웨어보다 먼저 실행되도록 [미들웨어의 우선순위](/docs/{{version}}/middleware#sorting-middleware)를 지정해야 합니다. 이는 애플리케이션의 `bootstrap/app.php` 파일에서 `priority` 미들웨어 메서드를 사용하여 설정할 수 있습니다:
+URL 기본값을 설정하면 Laravel의 암시적 모델 바인딩 처리에 영향을 줄 수 있습니다. 따라서 URL 기본값을 설정하는 미들웨어는 Laravel의 `SubstituteBindings` 미들웨어보다 먼저 실행되도록 [미들웨어의 우선순위](/laravel/12.x/middleware#sorting-middleware)를 지정해야 합니다. 이는 애플리케이션의 `bootstrap/app.php` 파일에서 `priority` 미들웨어 메서드를 사용하여 설정할 수 있습니다:
 
 ```php
 ->withMiddleware(function (Middleware $middleware) {

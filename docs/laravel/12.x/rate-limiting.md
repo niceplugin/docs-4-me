@@ -12,7 +12,7 @@
 Laravel은 사용하기 쉬운 속도 제한 추상화를 제공하며, 애플리케이션의 [캐시](cache)와 함께 지정된 시간 동안 어떤 동작이든 쉽게 제한할 수 있는 방법을 제공합니다.
 
 > [!NOTE]
-> 들어오는 HTTP 요청에 대한 속도 제한에 관심이 있다면, [속도 제한 미들웨어 문서](/docs/{{version}}/routing#rate-limiting)를 참고하세요.
+> 들어오는 HTTP 요청에 대한 속도 제한에 관심이 있다면, [속도 제한 미들웨어 문서](/laravel/12.x/routing#rate-limiting)를 참고하세요.
 
 
 ### 캐시 설정 {#cache-configuration}

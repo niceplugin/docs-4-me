@@ -42,7 +42,7 @@ php artisan help migrate
 
 #### Laravel Sail {#laravel-sail}
 
-[Laravel Sail](/docs/{{version}}/sail)를 로컬 개발 환경으로 사용하고 있다면, Artisan 명령어를 실행할 때 `sail` 명령줄을 사용해야 합니다. Sail은 여러분의 애플리케이션 Docker 컨테이너 내에서 Artisan 명령어를 실행합니다:
+[Laravel Sail](/laravel/12.x/sail)를 로컬 개발 환경으로 사용하고 있다면, Artisan 명령어를 실행할 때 `sail` 명령줄을 사용해야 합니다. Sail은 여러분의 애플리케이션 Docker 컨테이너 내에서 Artisan 명령어를 실행합니다:
 
 ```shell
 ./vendor/bin/sail artisan list
@@ -124,7 +124,7 @@ php artisan make:command SendEmails
 
 명령어를 생성한 후에는 클래스의 `signature`와 `description` 속성에 적절한 값을 정의해야 합니다. 이 속성들은 `list` 화면에 명령어를 표시할 때 사용됩니다. 또한 `signature` 속성을 통해 [명령어의 입력값 기대치](#defining-input-expectations)도 정의할 수 있습니다. 명령어가 실행되면 `handle` 메서드가 호출되며, 이 메서드에 명령어의 로직을 작성하면 됩니다.
 
-예시 명령어를 살펴보겠습니다. 아래 예시에서 볼 수 있듯이, 명령어의 `handle` 메서드를 통해 필요한 의존성을 자유롭게 주입받을 수 있습니다. 라라벨의 [서비스 컨테이너](/docs/{{version}}/container)는 이 메서드의 시그니처에 타입힌트된 모든 의존성을 자동으로 주입해줍니다.
+예시 명령어를 살펴보겠습니다. 아래 예시에서 볼 수 있듯이, 명령어의 `handle` 메서드를 통해 필요한 의존성을 자유롭게 주입받을 수 있습니다. 라라벨의 [서비스 컨테이너](/laravel/12.x/container)는 이 메서드의 시그니처에 타입힌트된 모든 의존성을 자동으로 주입해줍니다.
 
 ```php
 <?php
@@ -199,7 +199,7 @@ Artisan::command('mail:send {user}', function (string $user) {
 
 #### 의존성 타입-힌트 {#type-hinting-dependencies}
 
-명령어 클로저는 명령어의 인자와 옵션을 받을 뿐만 아니라, [서비스 컨테이너](/docs/{{version}}/container)에서 해결하고 싶은 추가적인 의존성도 타입-힌트로 지정할 수 있습니다:
+명령어 클로저는 명령어의 인자와 옵션을 받을 뿐만 아니라, [서비스 컨테이너](/laravel/12.x/container)에서 해결하고 싶은 추가적인 의존성도 타입-힌트로 지정할 수 있습니다:
 
 ```php
 use App\Models\User;
@@ -500,7 +500,7 @@ return [
 ```
 
 > [!NOTE]
-자세한 프롬프트 종류와 사용법은 [Laravel Prompts](/docs/{{version}}/prompts) 공식 문서를 참고하세요.
+자세한 프롬프트 종류와 사용법은 [Laravel Prompts](/laravel/12.x/prompts) 공식 문서를 참고하세요.
 
 사용자에게 [옵션](#options)을 선택하거나 입력하도록 프롬프트를 띄우고 싶다면, 명령어의 `handle` 메서드에서 프롬프트를 사용할 수 있습니다. 하지만, 누락된 인자에 대해 자동으로 프롬프트가 실행된 경우에만 추가 프롬프트를 띄우고 싶다면, `afterPromptingForMissingArguments` 메서드를 구현할 수 있습니다:
 
@@ -561,7 +561,7 @@ $options = $this->options();
 ### 입력 요청하기 {#prompting-for-input}
 
 > [!NOTE]
-> [Laravel Prompts](/docs/{{version}}/prompts)는 명령줄 애플리케이션에 아름답고 사용자 친화적인 폼을 추가할 수 있는 PHP 패키지로, 플레이스홀더 텍스트와 유효성 검사 등 브라우저와 유사한 기능을 제공합니다.
+> [Laravel Prompts](/laravel/12.x/prompts)는 명령줄 애플리케이션에 아름답고 사용자 친화적인 폼을 추가할 수 있는 PHP 패키지로, 플레이스홀더 텍스트와 유효성 검사 등 브라우저와 유사한 기능을 제공합니다.
 
 출력만 표시하는 것 외에도, 명령 실행 중에 사용자에게 입력을 요청할 수 있습니다. `ask` 메서드는 지정한 질문으로 사용자를 프롬프트하고, 입력을 받아, 그 값을 명령으로 반환합니다:
 
@@ -763,7 +763,7 @@ use App\Domain\Orders\Commands\SendEmails;
 ])
 ```
 
-Artisan이 부팅될 때, 애플리케이션의 모든 명령어는 [서비스 컨테이너](/docs/{{version}}/container)에 의해 해석되고 Artisan에 등록됩니다.
+Artisan이 부팅될 때, 애플리케이션의 모든 명령어는 [서비스 컨테이너](/laravel/12.x/container)에 의해 해석되고 Artisan에 등록됩니다.
 
 
 ## 프로그램적으로 명령어 실행하기 {#programmatically-executing-commands}
@@ -817,7 +817,7 @@ $exitCode = Artisan::call('migrate:refresh', [
 
 #### Artisan 명령어 큐잉 {#queueing-artisan-commands}
 
-`Artisan` 파사드의 `queue` 메서드를 사용하면 Artisan 명령어를 큐에 넣어 [큐 워커](/docs/{{version}}/queues)가 백그라운드에서 처리하도록 할 수 있습니다. 이 메서드를 사용하기 전에 큐 설정이 완료되어 있고 큐 리스너가 실행 중인지 확인하세요.
+`Artisan` 파사드의 `queue` 메서드를 사용하면 Artisan 명령어를 큐에 넣어 [큐 워커](/laravel/12.x/queues)가 백그라운드에서 처리하도록 할 수 있습니다. 이 메서드를 사용하기 전에 큐 설정이 완료되어 있고 큐 리스너가 실행 중인지 확인하세요.
 
 ```php
 use Illuminate\Support\Facades\Artisan;

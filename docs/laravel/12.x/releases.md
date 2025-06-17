@@ -60,10 +60,10 @@ Laravel 12는 상위 의존성 업데이트와 함께 React, Vue, Livewire용 �
 
 ### 새로운 애플리케이션 스타터 키트 {#new-application-starter-kits}
 
-Laravel 12에서는 React, Vue, Livewire용 새로운 [애플리케이션 스타터 키트](/docs/{{version}}/starter-kits)를 도입했습니다. React와 Vue 스타터 키트는 Inertia 2, TypeScript, [shadcn/ui](https://ui.shadcn.com), Tailwind를 활용하며, Livewire 스타터 키트는 Tailwind 기반의 [Flux UI](https://fluxui.dev) 컴포넌트 라이브러리와 Laravel Volt를 사용합니다.
+Laravel 12에서는 React, Vue, Livewire용 새로운 [애플리케이션 스타터 키트](/laravel/12.x/starter-kits)를 도입했습니다. React와 Vue 스타터 키트는 Inertia 2, TypeScript, [shadcn/ui](https://ui.shadcn.com), Tailwind를 활용하며, Livewire 스타터 키트는 Tailwind 기반의 [Flux UI](https://fluxui.dev) 컴포넌트 라이브러리와 Laravel Volt를 사용합니다.
 
 React, Vue, Livewire 스타터 키트 모두 Laravel의 내장 인증 시스템을 활용하여 로그인, 회원가입, 비밀번호 재설정, 이메일 인증 등 다양한 기능을 제공합니다. 또한, 각 스타터 키트에는 [WorkOS AuthKit 기반](https://authkit.com) 버전도 제공되어 소셜 인증, 패스키, SSO(싱글 사인온) 지원 기능을 사용할 수 있습니다. WorkOS는 월간 활성 사용자 100만 명까지 무료 인증 서비스를 제공합니다.
 
 새로운 애플리케이션 스타터 키트가 도입됨에 따라, Laravel Breeze와 Laravel Jetstream은 더 이상 추가 업데이트를 받지 않습니다.
 
-새로운 스타터 키트로 시작하려면 [스타터 키트 문서](/docs/{{version}}/starter-kits)를 참고하세요.
+새로운 스타터 키트로 시작하려면 [스타터 키트 문서](/laravel/12.x/starter-kits)를 참고하세요.
