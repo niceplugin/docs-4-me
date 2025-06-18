@@ -72,7 +72,7 @@ public function table(Table $table): Table
 }
 ```
 
-[트리거 액션 API](getting-started#customizing-the-filters-trigger-action)를 사용하여 [모달을 커스터마이즈](../actions/modals)할 수 있으며, [slideOver()를 사용하는 것](../actions/modals#using-a-slide-over-instead-of-a-modal)도 가능합니다.
+[트리거 액션 API](getting-started#customizing-the-filters-trigger-action)를 사용하여 [모달을 커스터마이즈](../../actions/modals)할 수 있으며, [slideOver()를 사용하는 것](../../actions/modals#using-a-slide-over-instead-of-a-modal)도 가능합니다.
 
 ## 테이블 내용 위에 필터 표시하기 {#displaying-filters-above-the-table-content}
 

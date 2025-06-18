@@ -9,7 +9,7 @@ title: 요약
 
 기본적으로, 현재 페이지의 데이터에 대한 단일 요약 행이 표시되며, 여러 페이지가 있는 경우 모든 데이터의 합계를 위한 추가 요약 행이 표시됩니다. 또한 [레코드 그룹](grouping)에 대한 요약도 추가할 수 있습니다. 자세한 내용은 ["행 그룹 요약하기"](#summarising-groups-of-rows)를 참고하세요.
 
-"요약자(Summarizer)" 객체는 `summarize()` 메서드를 사용하여 [테이블 컬럼](columns)에 추가할 수 있습니다:
+"요약자(Summarizer)" 객체는 `summarize()` 메서드를 사용하여 [테이블 컬럼](columns/getting-started)에 추가할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;

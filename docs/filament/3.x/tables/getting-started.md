@@ -115,7 +115,7 @@ public function table(Table $table): Table
 
 두 번째 필터는 셀렉트 드롭다운으로 렌더링됩니다. 사용자가 옵션을 선택하면 해당 상태의 행만 표시되고, 아무 옵션도 선택하지 않으면 모든 행이 표시됩니다.
 
-필요한 만큼 많은 필터를 정의할 수 있으며, [Form Builder 패키지](../forms/getting-started)의 어떤 컴포넌트도 UI 생성에 사용할 수 있습니다. 예를 들어, [커스텀 날짜 범위 필터](../filters/custom)를 만들 수도 있습니다.
+필요한 만큼 많은 필터를 정의할 수 있으며, [Form Builder 패키지](../forms/getting-started)의 어떤 컴포넌트도 UI 생성에 사용할 수 있습니다. 예를 들어, [커스텀 날짜 범위 필터](./filters/custom)를 만들 수도 있습니다.
 
 ## 테이블 액션 정의하기 {#defining-table-actions}
 

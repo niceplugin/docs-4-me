@@ -4,7 +4,7 @@ title: 독립형 플러그인 만들기
 # [핵심개념.플러그인] 독립형 플러그인 만들기
 ## 서문 {#preface}
 
-계속 진행하기 전에 [패널 플러그인 개발](/filament/3.x/panels/plugins/)과 [시작 가이드](/filament/3.x/support/plugins/getting-started)를 읽어보시기 바랍니다.
+계속 진행하기 전에 [패널 플러그인 개발](/filament/3.x/panels/plugins)과 [시작 가이드](/filament/3.x/support/plugins/getting-started)를 읽어보시기 바랍니다.
 
 ## 개요 {#overview}
 

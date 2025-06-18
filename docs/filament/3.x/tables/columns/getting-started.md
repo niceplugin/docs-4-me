@@ -427,7 +427,7 @@ TextColumn::make('id')
 
 #### 토글 컬럼 드롭다운 트리거 액션 커스터마이징하기 {#customizing-the-toggle-columns-dropdown-trigger-action}
 
-토글 드롭다운 트리거 버튼을 커스터마이징하려면, `toggleColumnsTriggerAction()` 메서드에 클로저를 전달하여 액션을 반환하면 됩니다. [액션 트리거 버튼 커스터마이징](../actions/trigger-button)에 사용할 수 있는 모든 메서드를 사용할 수 있습니다:
+토글 드롭다운 트리거 버튼을 커스터마이징하려면, `toggleColumnsTriggerAction()` 메서드에 클로저를 전달하여 액션을 반환하면 됩니다. [액션 트리거 버튼 커스터마이징](/filament/3.x/actions/trigger-button)에 사용할 수 있는 모든 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\Action;
