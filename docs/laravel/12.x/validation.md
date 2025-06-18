@@ -1,4 +1,4 @@
-# 유효성 검사(Validation)
+# [기본] 유효성 검사(Validation)
 
 
 

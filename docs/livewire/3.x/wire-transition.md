@@ -1,4 +1,4 @@
-# wire:transition
+# [HTML지시문] wire:transition
 ## 기본 사용법 {#basic-usage}
 
 Livewire에서 콘텐츠를 표시하거나 숨기는 것은 `@if`와 같은 Blade의 조건부 지시문을 사용하는 것만큼 간단합니다. 사용자 경험을 향상시키기 위해 Livewire는 조건부 요소가 페이지에 부드럽게 나타나고 사라지도록 해주는 `wire:transition` 지시문을 제공합니다.

@@ -1,4 +1,4 @@
-# Laravel Cashier (Stripe)
+# [패키지] Laravel Cashier (Stripe)
 
 
 

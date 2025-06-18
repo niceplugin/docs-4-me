@@ -1,4 +1,4 @@
-# wire:confirm
+# [HTML지시문] wire:confirm
 Livewire에서 위험한 작업을 수행하기 전에 사용자에게 시각적인 확인을 제공하고 싶을 수 있습니다.
 
 Livewire는 `wire:click`, `wire:submit` 등과 함께 `wire:confirm`을 추가하는 것만으로 이를 쉽게 구현할 수 있습니다.

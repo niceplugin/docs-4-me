@@ -1,4 +1,4 @@
-# wire:submit
+# [HTML지시문] wire:submit
 Livewire는 `wire:submit` 지시어를 통해 폼 제출을 쉽게 처리할 수 있게 해줍니다. `<form>` 요소에 `wire:submit`을 추가하면, Livewire가 폼 제출을 가로채고 브라우저의 기본 동작을 방지한 뒤, Livewire 컴포넌트의 메서드를 호출합니다.
 
 아래는 "게시글 생성" 폼 제출을 처리하기 위해 `wire:submit`을 사용하는 기본 예시입니다:

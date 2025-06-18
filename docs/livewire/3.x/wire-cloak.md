@@ -1,4 +1,4 @@
-# wire:cloak
+# [HTML지시문] wire:cloak
 `wire:cloak`은(는) 페이지가 로드될 때 Livewire가 완전히 초기화될 때까지 요소를 숨기는 디렉티브입니다. 이는 페이지가 Livewire가 초기화되기 전에 로드될 때 발생할 수 있는 "스타일이 적용되지 않은 콘텐츠의 깜빡임"을 방지하는 데 유용합니다.
 
 ## 기본 사용법 {#basic-usage}

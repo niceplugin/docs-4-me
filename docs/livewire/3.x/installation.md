@@ -1,4 +1,4 @@
-# 설치
+# [시작하기] 설치
 Livewire는 Laravel 패키지이므로, Livewire를 설치하고 사용하려면 먼저 Laravel 애플리케이션이 실행 중이어야 합니다. 새로운 Laravel 애플리케이션을 설정하는 데 도움이 필요하다면 [공식 Laravel 문서](https://laravel.com/docs/installation)를 참고하세요.
 
 Livewire를 설치하려면, 터미널을 열고 Laravel 애플리케이션 디렉터리로 이동한 후 다음 명령어를 실행하세요:

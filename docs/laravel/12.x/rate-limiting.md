@@ -1,4 +1,4 @@
-# 속도 제한(Rate Limiting)
+# [고급] 속도 제한(Rate Limiting)
 
 
 

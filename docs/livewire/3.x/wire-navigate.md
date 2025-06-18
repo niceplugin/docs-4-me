@@ -1,4 +1,4 @@
-# wire:navigate
+# [HTML지시문] wire:navigate
 Livewire의 `wire:navigate` 기능은 페이지 네비게이션을 훨씬 더 빠르게 만들어, 사용자에게 SPA와 유사한 경험을 제공합니다.
 
 이 페이지는 `wire:navigate` 디렉티브에 대한 간단한 참고 자료입니다. 보다 완전한 문서는 [Livewire의 Navigate 기능 페이지](/livewire/3.x/navigate)를 꼭 참고하세요.

@@ -1,4 +1,4 @@
-# Configuration
+# [시작하기] 환경설정
 
 
 
