@@ -1,4 +1,4 @@
-# 계산된 속성(Computed Properties)
+# [기능] 계산된 속성(Computed Properties)
 계산된 속성은 Livewire에서 "파생" 속성을 생성하는 방법입니다. Eloquent 모델의 접근자(accessor)처럼, 계산된 속성을 사용하면 값을 접근하고, 요청 중에 이후 접근을 위해 해당 값을 캐싱할 수 있습니다.
 
 계산된 속성은 컴포넌트의 public 속성과 결합하여 사용할 때 특히 유용합니다.

@@ -1,4 +1,4 @@
-# Volt (볼트)
+# [패키지] Volt (볼트)
 > > [!warning] 먼저 Livewire에 익숙해지세요
 > Volt를 사용하기 전에, 표준 클래스 기반 Livewire 사용법에 익숙해지는 것을 권장합니다. 이렇게 하면 Livewire에 대한 지식을 Volt의 함수형 API를 사용한 컴포넌트 작성으로 빠르게 이전할 수 있습니다.
 

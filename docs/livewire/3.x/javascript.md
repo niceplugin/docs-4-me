@@ -1,4 +1,4 @@
-# 자바스크립트
+# [고급] 자바스크립트
 ## Livewire 컴포넌트에서 JavaScript 사용하기 {#using-javascript-in-livewire-components}
 
 Livewire와 Alpine은 동적인 컴포넌트를 HTML 내에서 직접 만들 수 있는 다양한 유틸리티를 제공합니다. 하지만 때로는 HTML을 벗어나 컴포넌트에 대해 순수 JavaScript를 실행하는 것이 도움이 될 때가 있습니다. Livewire의 `@script`와 `@assets` 디렉티브를 사용하면 이를 예측 가능하고 유지보수하기 쉬운 방식으로 할 수 있습니다.

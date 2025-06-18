@@ -1,4 +1,4 @@
-# wire:ignore
+# [HTML지시문] wire:ignore
 Livewire가 페이지를 업데이트할 수 있는 기능이 바로 Livewire를 "라이브"하게 만드는 이유입니다. 하지만 때로는 Livewire가 페이지의 일부를 업데이트하지 않도록 하고 싶을 때가 있습니다.
 
 이런 경우, `wire:ignore` 디렉티브를 사용하여 Livewire에게 특정 요소의 내용을 무시하도록 지시할 수 있습니다. 요청 사이에 내용이 변경되더라도 Livewire는 해당 요소를 무시합니다.

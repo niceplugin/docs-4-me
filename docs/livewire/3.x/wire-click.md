@@ -1,4 +1,4 @@
-# wire:click
+# [HTML지시문] wire:click
 Livewire는 사용자가 페이지의 특정 요소를 클릭할 때 컴포넌트 메서드(즉, 액션)를 호출할 수 있도록 간단한 `wire:click` 디렉티브를 제공합니다.
 
 예를 들어, 아래의 `ShowInvoice` 컴포넌트를 살펴보겠습니다:

@@ -1,4 +1,4 @@
-# wire:model
+# [HTML지시문] wire:model
 Livewire는 `wire:model`을 사용하여 컴포넌트 속성과 폼 입력값을 쉽게 바인딩할 수 있게 해줍니다.
 
 아래는 "게시글 작성" 컴포넌트에서 `$title`과 `$content` 속성을 폼 입력값과 바인딩하는 간단한 예시입니다:

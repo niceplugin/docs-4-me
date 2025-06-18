@@ -1,4 +1,4 @@
-# wire:stream
+# [HTML지시문] wire:stream
 Livewire는 `wire:stream` API를 통해 요청이 완료되기 전에 웹 페이지로 콘텐츠를 스트리밍할 수 있도록 해줍니다. 이 기능은 AI 챗봇처럼 응답이 생성되는 대로 스트리밍해야 하는 경우에 매우 유용합니다.
 
 > [!warning] Laravel Octane과 호환되지 않음

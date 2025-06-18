@@ -1,4 +1,4 @@
-# wire:replace
+# [HTML지시문] wire:replace
 Livewire의 DOM diffing은 페이지의 기존 요소를 업데이트하는 데 유용하지만, 때로는 내부 상태를 초기화하기 위해 일부 요소를 처음부터 다시 렌더링해야 할 때가 있습니다.
 
 이런 경우, `wire:replace` 디렉티브를 사용하여 Livewire에게 해당 요소의 자식들에 대해 DOM diffing을 건너뛰고, 대신 서버에서 전달된 새로운 요소들로 내용을 완전히 교체하도록 지시할 수 있습니다.
