@@ -1,3 +1,4 @@
+.env
 /coverage
 /src/client/shared.ts
 /src/node/shared.ts
