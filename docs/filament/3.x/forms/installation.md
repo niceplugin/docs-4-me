@@ -160,7 +160,7 @@ php artisan vendor:publish --tag=filament-config
 
 ## 업그레이드 {#upgrading}
 
-> Filament v2에서 업그레이드하시나요? [업그레이드 가이드](upgrade-guide)를 확인해 주세요.
+> Filament v2에서 업그레이드하시나요? [업그레이드 가이드](https://filamentphp.com/docs/3.x/forms/upgrade-guide)를 확인해 주세요.
 
 Filament는 `composer update`를 실행할 때 자동으로 최신의 비파괴(non-breaking) 버전으로 업그레이드됩니다. 업데이트 후에는 모든 Laravel 캐시를 비워야 하며, 프론트엔드 에셋도 다시 배포해야 합니다. 이 모든 작업은 `filament:upgrade` 명령어로 한 번에 처리할 수 있습니다. 이 명령어는 처음 `filament:install`을 실행할 때 `composer.json` 파일에 추가되어야 합니다:
 

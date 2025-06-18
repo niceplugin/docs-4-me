@@ -466,7 +466,7 @@ Field::make('email')->unique(column: 'email_address')
 Field::make('email')->unique(ignorable: $ignoredUser)
 ```
 
-[패널 빌더](../panels)를 사용 중이라면, `ignoreRecord`를 사용하여 현재 레코드를 쉽게 무시할 수 있습니다:
+[패널 빌더](/filament/3.x/panels/getting-started)를 사용 중이라면, `ignoreRecord`를 사용하여 현재 레코드를 쉽게 무시할 수 있습니다:
 
 ```php
 Field::make('email')->unique(ignoreRecord: true)

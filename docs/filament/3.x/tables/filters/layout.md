@@ -147,7 +147,7 @@ public function table(Table $table): Table
 
 ## 필터 폼 스키마 커스터마이징 {#customizing-the-filter-form-schema}
 
-필터 폼 전체의 [폼 스키마](../../forms/layout)를 한 번에 커스터마이징하여, 원하는 레이아웃으로 필터를 재배치하고, 폼에서 사용할 수 있는 [레이아웃 컴포넌트](../../forms/layout)를 사용할 수 있습니다. 이를 위해 `filterFormSchema()` 메서드를 사용하며, 정의된 `$filters` 배열을 전달받는 클로저 함수를 전달할 수 있습니다:
+필터 폼 전체의 [폼 스키마](../../forms/layout/getting-started)를 한 번에 커스터마이징하여, 원하는 레이아웃으로 필터를 재배치하고, 폼에서 사용할 수 있는 [레이아웃 컴포넌트](../../forms/layout/getting-started)를 사용할 수 있습니다. 이를 위해 `filterFormSchema()` 메서드를 사용하며, 정의된 `$filters` 배열을 전달받는 클로저 함수를 전달할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Section;

@@ -5,7 +5,7 @@ title: Action
 
 ## 개요 {#overview}
 
-Filament의 인포리스트는 [액션](../actions)을 사용할 수 있습니다. 액션은 모든 인포리스트 컴포넌트에 추가할 수 있는 버튼입니다. 또한, 특정 인포리스트 컴포넌트에 연결하지 않고 [익명 액션 집합을 렌더링](#adding-anonymous-actions-to-an-infolist-without-attaching-them-to-a-component)할 수도 있습니다.
+Filament의 인포리스트는 [액션](/filament/3.x/actions/overview)을 사용할 수 있습니다. 액션은 모든 인포리스트 컴포넌트에 추가할 수 있는 버튼입니다. 또한, 특정 인포리스트 컴포넌트에 연결하지 않고 [익명 액션 집합을 렌더링](#adding-anonymous-actions-to-an-infolist-without-attaching-them-to-a-component)할 수도 있습니다.
 
 ## 인포리스트 컴포넌트 액션 정의하기 {#defining-a-infolist-component-action}
 
@@ -28,7 +28,7 @@ Action::make('resetStars')
 
 특정 엔트리들은 "접두/접미 액션(affix actions)"을 지원합니다. 이는 엔트리의 내용 앞이나 뒤에 배치할 수 있는 버튼입니다. 다음 엔트리들이 접두/접미 액션을 지원합니다:
 
-- [텍스트 엔트리](entries/text-entry)
+- [텍스트 엔트리](./entries/text)
 
 접두/접미 액션을 정의하려면, `prefixAction()` 또는 `suffixAction()`에 전달하면 됩니다:
 

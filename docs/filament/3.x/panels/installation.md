@@ -12,7 +12,7 @@ Filament을 실행하려면 다음이 필요합니다:
 
 ## 설치 {#installation}
 
-> Filament v2에서 업그레이드하는 경우, [업그레이드 가이드](upgrade-guide)를 참고하세요.
+> Filament v2에서 업그레이드하는 경우, [업그레이드 가이드](https://filamentphp.com/docs/3.x/panels/upgrade-guide)를 참고하세요.
 
 Laravel 프로젝트 디렉터리에서 다음 명령어를 실행하여 Filament 패널 빌더를 설치하세요:
 
@@ -40,7 +40,7 @@ php artisan make:filament-user
 
 ## 다른 Filament 패키지 사용하기 {#using-other-filament-packages}
 
-Filament 패널 빌더는 [폼 빌더](/filament/3.x/forms), [테이블 빌더](/filament/3.x/tables), [알림](/filament/3.x/notifications), [액션](/filament/3.x/actions), [인포리스트](/filament/3.x/infolists), [위젯](/filament/3.x/widgets) 패키지를 미리 설치합니다. 패널 내에서 이 패키지들을 사용하기 위해 추가적인 설치 과정은 필요하지 않습니다.
+Filament 패널 빌더는 [폼 빌더](/filament/3.x/forms/getting-started), [테이블 빌더](/filament/3.x/tables/getting-started), [알림](/filament/3.x/notifications/installation), [액션](/filament/3.x/actions/overview), [인포리스트](/filament/3.x/infolists/getting-started), [위젯](/filament/3.x/widgets/installation) 패키지를 미리 설치합니다. 패널 내에서 이 패키지들을 사용하기 위해 추가적인 설치 과정은 필요하지 않습니다.
 
 ## Filament 패널 성능 향상하기 {#improving-filament-panel-performance}
 
@@ -154,7 +154,7 @@ php artisan vendor:publish --tag=filament-translations
 
 ## 업그레이드 {#upgrading}
 
-> Filament v2에서 업그레이드하시나요? [업그레이드 가이드](upgrade-guide)를 확인해 주세요.
+> Filament v2에서 업그레이드하시나요? [업그레이드 가이드](https://filamentphp.com/docs/3.x/panels/upgrade-guide)를 확인해 주세요.
 
 Filament는 `composer update`를 실행할 때 자동으로 최신의 비파괴(non-breaking) 버전으로 업그레이드됩니다. 업데이트 후에는 모든 Laravel 캐시를 비워야 하며, 프론트엔드 에셋도 다시 배포해야 합니다. 이 모든 작업은 `filament:upgrade` 명령어로 한 번에 처리할 수 있으며, 이 명령어는 처음 `filament:install`을 실행할 때 `composer.json` 파일에 추가되어야 합니다:
 

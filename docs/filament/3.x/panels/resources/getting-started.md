@@ -372,7 +372,7 @@ public static function getNavigationParentItem(): ?string
 }
 ```
 
-> 이와 같이 세 번째 수준의 네비게이션이 필요하다면, 대신 [클러스터](clusters)를 사용하는 것을 고려하세요. 클러스터는 리소스와 [커스텀 페이지](../pages)를 논리적으로 그룹화하며, 각각 별도의 네비게이션을 가질 수 있습니다.
+> 이와 같이 세 번째 수준의 네비게이션이 필요하다면, 대신 [클러스터](../clusters)를 사용하는 것을 고려하세요. 클러스터는 리소스와 [커스텀 페이지](../pages)를 논리적으로 그룹화하며, 각각 별도의 네비게이션을 가질 수 있습니다.
 
 ## 리소스 페이지로의 URL 생성 {#generating-urls-to-resource-pages}
 

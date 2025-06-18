@@ -31,7 +31,7 @@ public static function canAccess(): bool
 
 ## 페이지에 액션 추가하기 {#adding-actions-to-pages}
 
-액션은 페이지에서 작업을 수행하거나 URL을 방문할 수 있는 버튼입니다. 그 기능에 대해 더 알고 싶다면 [여기](../actions)를 참고하세요.
+액션은 페이지에서 작업을 수행하거나 URL을 방문할 수 있는 버튼입니다. 그 기능에 대해 더 알고 싶다면 [여기](../actions/overview)를 참고하세요.
 
 모든 페이지는 Livewire 컴포넌트이기 때문에, [액션을 어디서든 추가](../actions/adding-an-action-to-a-livewire-component#adding-the-action)할 수 있습니다. 페이지에는 이미 `InteractsWithActions` 트레이트, `HasActions` 인터페이스, `<x-filament-actions::modals />` Blade 컴포넌트가 모두 설정되어 있습니다.
 
@@ -359,7 +359,7 @@ Settings::getUrl(panel: 'marketing');
 
 ## 페이지 간 하위 내비게이션 추가하기 {#adding-sub-navigation-between-pages}
 
-여러 페이지에 공통 하위 내비게이션을 추가하여 사용자가 빠르게 이동할 수 있도록 할 수 있습니다. 이를 위해 [클러스터](clusters)를 정의하면 됩니다. 클러스터에는 [리소스](resources)도 포함될 수 있으며, 클러스터 내에서 여러 페이지나 리소스 간에 전환할 수 있습니다.
+여러 페이지에 공통 하위 내비게이션을 추가하여 사용자가 빠르게 이동할 수 있도록 할 수 있습니다. 이를 위해 [클러스터](clusters)를 정의하면 됩니다. 클러스터에는 [리소스](resources/getting-started)도 포함될 수 있으며, 클러스터 내에서 여러 페이지나 리소스 간에 전환할 수 있습니다.
 
 ## 페이지의 body 태그에 추가 속성 추가하기 {#adding-extra-attributes-to-the-body-tag-of-a-page}
 

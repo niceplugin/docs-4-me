@@ -4,7 +4,7 @@ title: 시작하기
 # [인포리스트] 시작하기
 ## 개요 {#overview}
 
-Filament의 infolist 패키지는 [특정 엔터티에 대한 읽기 전용 데이터 목록을 렌더링](adding-an-infolist-to-a-livewire-component)할 수 있게 해줍니다. 이 패키지는 [Panel Builder](../panels)에서 [앱 리소스](../panels/resources/getting-started)와 [관계 매니저](../panels/resources/relation-managers)를 표시하거나, [액션 모달](../actions) 등 다른 Filament 패키지 내에서도 사용됩니다. Infolist Builder의 기능을 익히면 직접 커스텀 Livewire 애플리케이션을 개발할 때나 Filament의 다른 패키지를 사용할 때 큰 시간을 절약할 수 있습니다.
+Filament의 infolist 패키지는 [특정 엔터티에 대한 읽기 전용 데이터 목록을 렌더링](adding-an-infolist-to-a-livewire-component)할 수 있게 해줍니다. 이 패키지는 [Panel Builder](/filament/3.x/panels/getting-started)에서 [앱 리소스](../panels/resources/getting-started)와 [관계 매니저](../panels/resources/relation-managers)를 표시하거나, [액션 모달](/filament/3.x/actions/overview) 등 다른 Filament 패키지 내에서도 사용됩니다. Infolist Builder의 기능을 익히면 직접 커스텀 Livewire 애플리케이션을 개발할 때나 Filament의 다른 패키지를 사용할 때 큰 시간을 절약할 수 있습니다.
 
 이 가이드는 Filament의 infolist 패키지로 인포리스트를 만드는 기본적인 방법을 안내합니다. 만약 직접 만든 Livewire 컴포넌트에 새로운 인포리스트를 추가하려는 경우, [먼저 이 작업을 진행](adding-an-infolist-to-a-livewire-component)한 후 다시 돌아오세요. [앱 리소스](../panels/resources/getting-started)나 다른 Filament 패키지에 인포리스트를 추가하려는 경우라면 바로 시작하셔도 됩니다!
 

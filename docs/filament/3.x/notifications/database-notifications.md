@@ -25,7 +25,7 @@ php artisan notifications:table
 
 > 패널에 데이터베이스 알림을 추가하고 싶다면, [이 가이드의 해당 부분](#adding-the-database-notifications-modal-to-a-panel)을 따라주세요.
 
-[패널 빌더](../panels) 외부에서 데이터베이스 알림 모달을 렌더링하고 싶다면, Blade 레이아웃에 새로운 Livewire 컴포넌트를 추가해야 합니다:
+[패널 빌더](../panels/getting-started) 외부에서 데이터베이스 알림 모달을 렌더링하고 싶다면, Blade 레이아웃에 새로운 Livewire 컴포넌트를 추가해야 합니다:
 
 ```blade
 @livewire('database-notifications')

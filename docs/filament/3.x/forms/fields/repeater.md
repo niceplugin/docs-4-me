@@ -582,7 +582,7 @@ Repeater::make('members')
 
 이 메서드는 필드에 자동으로 `distinct()`와 `live()` 메서드를 활성화합니다.
 
-[옵션 비활성화](../select#disabling-specific-options)에 다른 조건을 추가하고 싶다면, `merge: true` 인자를 사용하여 `disableOptionWhen()`을 체이닝할 수 있습니다:
+[옵션 비활성화](./select#disabling-specific-options)에 다른 조건을 추가하고 싶다면, `merge: true` 인자를 사용하여 `disableOptionWhen()`을 체이닝할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;

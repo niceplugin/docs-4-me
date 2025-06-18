@@ -170,7 +170,7 @@ php artisan make:filament-relation-manager CategoryResource posts title --soft-d
 
 관련 레코드는 테이블에 나열됩니다. 전체 관계 매니저는 이 테이블을 기반으로 하며, 이 테이블에는 [생성](#creating-related-records), [수정](#editing-related-records), [첨부 / 분리](#attaching-and-detaching-records), [연결 / 연결 해제](#associating-and-dissociating-records), 그리고 레코드 삭제와 같은 작업이 포함되어 있습니다.
 
-관계 매니저를 커스터마이즈하기 위해 [테이블 빌더](../../tables)의 모든 기능을 사용할 수 있습니다.
+관계 매니저를 커스터마이즈하기 위해 [테이블 빌더](../../tables/getting-started)의 모든 기능을 사용할 수 있습니다.
 
 ### 피벗 속성과 함께 목록 표시 {#listing-with-pivot-attributes}
 

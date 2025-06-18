@@ -19,7 +19,7 @@ public function infolist(Infolist $infolist): Infolist
 }
 ```
 
-[패널 빌더 리소스](../../panels/resources) 내부에 있다면, `infolist()` 메서드는 static이어야 합니다:
+[패널 빌더 리소스](/filament/3.x/panels/resources/getting-started) 내부에 있다면, `infolist()` 메서드는 static이어야 합니다:
 
 ```php
 use Filament\Infolists\Infolist;

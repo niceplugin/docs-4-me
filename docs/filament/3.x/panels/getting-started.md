@@ -342,7 +342,7 @@ Forms\Components\Select::make('owner_id')
 
 #### 텍스트 컬럼 추가하기 {#adding-text-columns}
 
-Filament는 [테이블 컬럼](../tables/columns#available-columns)의 다양한 선택지를 제공합니다. `patients` 테이블의 모든 필드에 대해 간단한 [텍스트 컬럼](../tables/columns/text)을 사용해보겠습니다:
+Filament는 [테이블 컬럼](../tables/columns/getting-started#available-columns)의 다양한 선택지를 제공합니다. `patients` 테이블의 모든 필드에 대해 간단한 [텍스트 컬럼](../tables/columns/text)을 사용해보겠습니다:
 
 ```php
 use Filament\Tables;

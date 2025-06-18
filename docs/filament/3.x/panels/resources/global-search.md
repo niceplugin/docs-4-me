@@ -65,7 +65,7 @@ public static function getGlobalSearchEloquentQuery(): Builder
 
 ## 전역 검색 결과 URL 사용자 지정 {#customizing-global-search-result-urls}
 
-전역 검색 결과는 리소스의 [수정 페이지](editing-records)로 연결되며, 사용자가 [수정 권한](editing-records#authorization)이 없는 경우 [보기 페이지](viewing-page)로 연결됩니다. 이를 사용자 지정하려면 `getGlobalSearchResultUrl()` 메서드를 오버라이드하여 원하는 라우트를 반환하면 됩니다:
+전역 검색 결과는 리소스의 [수정 페이지](editing-records)로 연결되며, 사용자가 [수정 권한](editing-records#authorization)이 없는 경우 [보기 페이지](viewing-records)로 연결됩니다. 이를 사용자 지정하려면 `getGlobalSearchResultUrl()` 메서드를 오버라이드하여 원하는 라우트를 반환하면 됩니다:
 
 ```php
 public static function getGlobalSearchResultUrl(Model $record): string
@@ -128,7 +128,7 @@ protected static int $globalSearchResultsLimit = 20;
 
 [위에서 설명한 것처럼](#title), 리소스에 title 속성을 설정하면 전역 검색이 자동으로 활성화됩니다. 때로는 title 속성을 지정하되 전역 검색은 활성화하지 않고 싶을 수 있습니다.
 
-이 경우 [설정](configuration)에서 전역 검색을 비활성화하여 해결할 수 있습니다:
+이 경우 [설정](/filament/3.x/panels/configuration)에서 전역 검색을 비활성화하여 해결할 수 있습니다:
 
 ```php
 use Filament\Panel;
@@ -143,7 +143,7 @@ public function panel(Panel $panel): Panel
 
 ## 전역 검색 키 바인딩 등록하기 {#registering-global-search-key-bindings}
 
-전역 검색 필드는 키보드 단축키를 사용하여 열 수 있습니다. 이를 설정하려면 [설정](configuration)에 `globalSearchKeyBindings()` 메서드를 전달하세요:
+전역 검색 필드는 키보드 단축키를 사용하여 열 수 있습니다. 이를 설정하려면 [설정](/filament/3.x/panels/configuration)에 `globalSearchKeyBindings()` 메서드를 전달하세요:
 
 ```php
 use Filament\Panel;
@@ -158,7 +158,7 @@ public function panel(Panel $panel): Panel
 
 ## 전역 검색 디바운스 설정 {#configuring-the-global-search-debounce}
 
-전역 검색은 사용자가 입력하는 동안 요청 수를 제한하기 위해 기본적으로 500ms의 디바운스 시간이 설정되어 있습니다. 이 값을 변경하려면 [설정](configuration)에서 `globalSearchDebounce()` 메서드를 사용할 수 있습니다:
+전역 검색은 사용자가 입력하는 동안 요청 수를 제한하기 위해 기본적으로 500ms의 디바운스 시간이 설정되어 있습니다. 이 값을 변경하려면 [설정](/filament/3.x/panels/configuration)에서 `globalSearchDebounce()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Panel;
@@ -173,7 +173,7 @@ public function panel(Panel $panel): Panel
 
 ## 전역 검색 필드 접미사 설정하기 {#configuring-the-global-search-field-suffix}
 
-전역 검색 필드는 기본적으로 접미사가 포함되어 있지 않습니다. [설정](configuration)에서 `globalSearchFieldSuffix()` 메서드를 사용하여 이를 커스터마이즈할 수 있습니다.
+전역 검색 필드는 기본적으로 접미사가 포함되어 있지 않습니다. [설정](/filament/3.x/panels/configuration)에서 `globalSearchFieldSuffix()` 메서드를 사용하여 이를 커스터마이즈할 수 있습니다.
 
 현재 설정된 [전역 검색 키 바인딩](#registering-global-search-key-bindings)을 접미사로 표시하고 싶다면, `globalSearchFieldKeyBindingSuffix()` 메서드를 사용할 수 있습니다. 이 메서드는 전역 검색 필드의 접미사로 첫 번째로 등록된 키 바인딩을 표시합니다:
 
