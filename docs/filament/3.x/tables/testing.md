@@ -1,16 +1,16 @@
 ---
-title: Testing
+title: 테스트
 ---
+# [테이블] 테스트
+## 개요 {#overview}
 
-## Overview
+이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성됩니다. Pest의 Livewire 플러그인을 테스트에 사용하려면, Pest 문서의 플러그인 설치 안내를 참고하세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만, 이를 PHPUnit에 쉽게 적용할 수도 있습니다.
 
-All examples in this guide will be written using [Pest](https://pestphp.com). To use Pest's Livewire plugin for testing, you can follow the installation instructions in the Pest documentation on plugins: [Livewire plugin for Pest](https://pestphp.com/docs/plugins#livewire). However, you can easily adapt this to PHPUnit.
+Table Builder는 Livewire 컴포넌트에서 동작하므로, [Livewire 테스트 헬퍼](https://livewire.laravel.com/docs/testing)를 사용할 수 있습니다. 또한, 테이블을 위해 사용할 수 있는 다양한 커스텀 테스트 헬퍼도 제공됩니다.
 
-Since the Table Builder works on Livewire components, you can use the [Livewire testing helpers](https://livewire.laravel.com/docs/testing). However, we have many custom testing helpers that you can use for tables:
+## 렌더링 {#render}
 
-## Render
-
-To ensure a table component renders, use the `assertSuccessful()` Livewire helper:
+테이블 컴포넌트가 렌더링되는지 확인하려면 `assertSuccessful()` Livewire 헬퍼를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -20,7 +20,7 @@ it('can render page', function () {
 });
 ```
 
-To test which records are shown, you can use `assertCanSeeTableRecords()`, `assertCanNotSeeTableRecords()` and `assertCountTableRecords()`:
+어떤 레코드가 표시되는지 테스트하려면 `assertCanSeeTableRecords()`, `assertCanNotSeeTableRecords()`, `assertCountTableRecords()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -36,13 +36,13 @@ it('cannot display trashed posts by default', function () {
 });
 ```
 
-> If your table uses pagination, `assertCanSeeTableRecords()` will only check for records on the first page. To switch page, call `call('gotoPage', 2)`.
+> 테이블이 페이지네이션을 사용하는 경우, `assertCanSeeTableRecords()`는 첫 번째 페이지의 레코드만 확인합니다. 다른 페이지로 이동하려면 `call('gotoPage', 2)`를 호출하세요.
 
-> If your table uses `deferLoading()`, you should call `loadTable()` before `assertCanSeeTableRecords()`.
+> 테이블이 `deferLoading()`을 사용하는 경우, `assertCanSeeTableRecords()`를 호출하기 전에 `loadTable()`을 호출해야 합니다.
 
-## Columns
+## 컬럼 {#columns}
 
-To ensure that a certain column is rendered, pass the column name to `assertCanRenderTableColumn()`:
+특정 컬럼이 렌더링되는지 확인하려면, 컬럼 이름을 `assertCanRenderTableColumn()`에 전달하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -55,9 +55,9 @@ it('can render post titles', function () {
 });
 ```
 
-This helper will get the HTML for this column, and check that it is present in the table.
+이 헬퍼는 해당 컬럼의 HTML을 가져와서, 테이블에 존재하는지 확인합니다.
 
-For testing that a column is not rendered, you can use `assertCanNotRenderTableColumn()`:
+컬럼이 렌더링되지 않는지 테스트하려면 `assertCanNotRenderTableColumn()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -70,13 +70,13 @@ it('can not render post comments', function () {
 });
 ```
 
-This helper will assert that the HTML for this column is not shown by default in the present table.
+이 헬퍼는 해당 컬럼의 HTML이 기본적으로 현재 테이블에 표시되지 않는지 검증합니다.
 
-### Sorting
+### 정렬 {#sorting}
 
-To sort table records, you can call `sortTable()`, passing the name of the column to sort by. You can use `'desc'` in the second parameter of `sortTable()` to reverse the sorting direction.
+테이블 레코드를 정렬하려면 `sortTable()`을 호출하고, 정렬할 열의 이름을 전달하면 됩니다. `sortTable()`의 두 번째 매개변수에 `'desc'`를 사용하면 정렬 방향을 반대로 할 수 있습니다.
 
-Once the table is sorted, you can ensure that the table records are rendered in order using `assertCanSeeTableRecords()` with the `inOrder` parameter:
+테이블이 정렬된 후에는 `assertCanSeeTableRecords()`의 `inOrder` 매개변수를 사용하여 테이블 레코드가 올바른 순서로 렌더링되는지 확인할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -92,11 +92,11 @@ it('can sort posts by title', function () {
 });
 ```
 
-### Searching
+### 검색하기 {#searching}
 
-To search the table, call the `searchTable()` method with your search query.
+테이블을 검색하려면 `searchTable()` 메서드에 검색어를 전달하세요.
 
-You can then use `assertCanSeeTableRecords()` to check your filtered table records, and use `assertCanNotSeeTableRecords()` to assert that some records are no longer in the table:
+그런 다음 `assertCanSeeTableRecords()`를 사용하여 필터링된 테이블 레코드를 확인하고, `assertCanNotSeeTableRecords()`를 사용하여 일부 레코드가 더 이상 테이블에 없는지 확인할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -113,7 +113,7 @@ it('can search posts by title', function () {
 });
 ```
 
-To search individual columns, you can pass an array of searches to `searchTableColumns()`:
+개별 컬럼을 검색하려면, `searchTableColumns()`에 검색어 배열을 전달할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -130,9 +130,9 @@ it('can search posts by title column', function () {
 });
 ```
 
-### State
+### 상태 {#state}
 
-To assert that a certain column has a state or does not have a state for a record you can use `assertTableColumnStateSet()` and `assertTableColumnStateNotSet()`:
+특정 컬럼이 레코드에 대해 상태를 가지고 있는지 또는 가지고 있지 않은지 확인하려면 `assertTableColumnStateSet()`과 `assertTableColumnStateNotSet()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -148,7 +148,7 @@ it('can get post author names', function () {
 });
 ```
 
-To assert that a certain column has a formatted state or does not have a formatted state for a record you can use `assertTableColumnFormattedStateSet()` and `assertTableColumnFormattedStateNotSet()`:
+특정 컬럼이 레코드에 대해 포맷된 상태를 가지고 있는지 또는 가지고 있지 않은지 확인하려면 `assertTableColumnFormattedStateSet()`과 `assertTableColumnFormattedStateNotSet()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -162,9 +162,9 @@ it('can get post author names', function () {
 });
 ```
 
-### Existence
+### 존재 여부 {#existence}
 
-To ensure that a column exists, you can use the `assertTableColumnExists()` method:
+컬럼이 존재하는지 확인하려면 `assertTableColumnExists()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -175,7 +175,7 @@ it('has an author column', function () {
 });
 ```
 
-You may pass a function as an additional argument in order to assert that a column passes a given "truth test". This is useful for asserting that a column has a specific configuration. You can also pass in a record as the third parameter, which is useful if your check is dependant on which table row is being rendered:
+특정 "진리 테스트"를 통과하는지 확인하기 위해 함수형 인자를 추가로 전달할 수 있습니다. 이는 컬럼이 특정 설정을 가지고 있는지 검증할 때 유용합니다. 또한, 세 번째 파라미터로 레코드를 전달할 수도 있는데, 이는 어떤 테이블 행이 렌더링되는지에 따라 검증이 달라질 때 유용합니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -191,9 +191,9 @@ it('has an author column', function () {
 });
 ```
 
-### Authorization
+### 권한 부여 {#authorization}
 
-To ensure that a particular user cannot see a column, you can use the `assertTableColumnVisible()` and `assertTableColumnHidden()` methods:
+특정 사용자가 컬럼을 볼 수 없도록 하려면 `assertTableColumnVisible()` 및 `assertTableColumnHidden()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -205,14 +205,14 @@ it('shows the correct columns', function () {
 });
 ```
 
-### Descriptions
+### 설명 {#descriptions}
 
-To ensure a column has the correct description above or below you can use the `assertTableColumnHasDescription()` and `assertTableColumnDoesNotHaveDescription()` methods:
+컬럼 위나 아래에 올바른 설명이 있는지 확인하려면 `assertTableColumnHasDescription()` 및 `assertTableColumnDoesNotHaveDescription()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('has the correct descriptions above and below author', function () {
+it('author 위와 아래에 올바른 설명이 있는지 확인합니다', function () {
     $post = Post::factory()->create();
 
     livewire(PostsTable::class)
@@ -223,9 +223,9 @@ it('has the correct descriptions above and below author', function () {
 });
 ```
 
-### Extra Attributes
+### 추가 속성 {#extra-attributes}
 
-To ensure that a column has the correct extra attributes, you can use the `assertTableColumnHasExtraAttributes()` and `assertTableColumnDoesNotHaveExtraAttributes()` methods:
+컬럼에 올바른 추가 속성이 있는지 확인하려면 `assertTableColumnHasExtraAttributes()` 및 `assertTableColumnDoesNotHaveExtraAttributes()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -239,9 +239,9 @@ it('displays author in red', function () {
 });
 ```
 
-### Select Columns
+### 선택 컬럼 {#select-columns}
 
-If you have a select column, you can ensure it has the correct options with `assertTableSelectColumnHasOptions()` and `assertTableSelectColumnDoesNotHaveOptions()`:
+선택(select) 컬럼이 있는 경우, `assertTableSelectColumnHasOptions()`와 `assertTableSelectColumnDoesNotHaveOptions()`를 사용하여 올바른 옵션이 있는지 확인할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -255,9 +255,9 @@ it('has the correct statuses', function () {
 });
 ```
 
-## Filters
+## 필터 {#filters}
 
-To filter the table records, you can use the `filterTable()` method, along with `assertCanSeeTableRecords()` and `assertCanNotSeeTableRecords()`:
+테이블 레코드를 필터링하려면 `filterTable()` 메서드와 함께 `assertCanSeeTableRecords()`, `assertCanNotSeeTableRecords()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -273,9 +273,9 @@ it('can filter posts by `is_published`', function () {
 });
 ```
 
-For a simple filter, this will just enable the filter.
+간단한 필터의 경우, 이 코드는 필터를 활성화하기만 합니다.
 
-If you'd like to set the value of a `SelectFilter` or `TernaryFilter`, pass the value as a second argument:
+`SelectFilter` 또는 `TernaryFilter`의 값을 설정하려면, 두 번째 인자로 값을 전달하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -293,9 +293,9 @@ it('can filter posts by `author_id`', function () {
 });
 ```
 
-### Resetting filters
+### 필터 재설정 {#resetting-filters}
 
-To reset all filters to their original state, call `resetTableFilters()`:
+모든 필터를 원래 상태로 재설정하려면 `resetTableFilters()`를 호출하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -308,9 +308,9 @@ it('can reset table filters', function () {
 });
 ```
 
-### Removing Filters
+### 필터 제거하기 {#removing-filters}
 
-To remove a single filter you can use `removeTableFilter()`:
+단일 필터를 제거하려면 `removeTableFilter()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -328,7 +328,7 @@ it('filters list by published', function () {
 });
 ```
 
-To remove all filters you can use `removeTableFilters()`:
+모든 필터를 제거하려면 `removeTableFilters()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -349,9 +349,9 @@ it('can remove all table filters', function () {
 });
 ```
 
-### Hidden filters
+### 숨겨진 필터 {#hidden-filters}
 
-To ensure that a particular user cannot see a filter, you can use the `assertTableFilterVisible()` and `assertTableFilterHidden()` methods:
+특정 사용자가 필터를 볼 수 없도록 하려면 `assertTableFilterVisible()` 및 `assertTableFilterHidden()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -362,9 +362,9 @@ it('shows the correct filters', function () {
         ->assertTableFilterHidden('author');
 ```
 
-### Filter existence
+### 필터 존재 여부 확인 {#filter-existence}
 
-To ensure that a filter exists, you can use the `assertTableFilterExists()` method:
+필터가 존재하는지 확인하려면 `assertTableFilterExists()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -375,7 +375,7 @@ it('has an author filter', function () {
 });
 ```
 
-You may pass a function as an additional argument in order to assert that a filter passes a given "truth test". This is useful for asserting that a filter has a specific configuration:
+필터가 특정 "진리 테스트"를 통과하는지 확인하기 위해 추가 인수로 함수를 전달할 수 있습니다. 이는 필터가 특정 설정을 가지고 있는지 검증할 때 유용합니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -389,11 +389,11 @@ it('has an author filter', function () {
 });
 ```
 
-## Actions
+## 액션 {#actions}
 
-### Calling actions
+### 액션 호출하기 {#calling-actions}
 
-You can call an action by passing its name or class to `callTableAction()`:
+액션을 호출하려면 `callTableAction()`에 액션의 이름이나 클래스를 전달하면 됩니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -408,9 +408,9 @@ it('can delete posts', function () {
 });
 ```
 
-This example assumes that you have a `DeleteAction` on your table. If you have a custom `Action::make('reorder')`, you may use `callTableAction('reorder')`.
+이 예제는 테이블에 `DeleteAction`이 있다고 가정합니다. 만약 커스텀 `Action::make('reorder')`가 있다면, `callTableAction('reorder')`를 사용할 수 있습니다.
 
-For column actions, you may do the same, using `callTableColumnAction()`:
+컬럼 액션의 경우에도 마찬가지로 `callTableColumnAction()`을 사용하면 됩니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -425,7 +425,7 @@ it('can copy posts', function () {
 });
 ```
 
-For bulk actions, you may do the same, passing in multiple records to execute the bulk action against with `callTableBulkAction()`:
+일괄 액션의 경우에도 마찬가지로, 여러 레코드를 전달하여 `callTableBulkAction()`으로 일괄 액션을 실행할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -442,7 +442,7 @@ it('can bulk delete posts', function () {
 });
 ```
 
-To pass an array of data into an action, use the `data` parameter:
+액션에 데이터 배열을 전달하려면 `data` 파라미터를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -461,15 +461,15 @@ it('can edit posts', function () {
 });
 ```
 
-### Execution
+### 실행 {#execution}
 
-To check if an action or bulk action has been halted, you can use `assertTableActionHalted()` / `assertTableBulkActionHalted()`:
+액션 또는 벌크 액션이 중단되었는지 확인하려면 `assertTableActionHalted()` / `assertTableBulkActionHalted()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('will halt delete if post is flagged', function () {
-    $posts= Post::factory()->count(2)->flagged()->create();
+it('게시물이 플래그 처리된 경우 삭제가 중단된다', function () {
+    $posts = Post::factory()->count(2)->flagged()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
         ->callTableAction('delete', $posts->first())
@@ -481,11 +481,11 @@ it('will halt delete if post is flagged', function () {
 });
 ```
 
-### Errors
+### 오류 {#errors}
 
-`assertHasNoTableActionErrors()` is used to assert that no validation errors occurred when submitting the action form.
+`assertHasNoTableActionErrors()`는 액션 폼을 제출할 때 검증 오류가 발생하지 않았는지 확인하는 데 사용됩니다.
 
-To check if a validation error has occurred with the data, use `assertHasTableActionErrors()`, similar to `assertHasErrors()` in Livewire:
+데이터에 검증 오류가 발생했는지 확인하려면, Livewire의 `assertHasErrors()`와 유사하게 `assertHasTableActionErrors()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -501,16 +501,16 @@ it('can validate edited post data', function () {
 });
 ```
 
-For bulk actions these methods are called `assertHasTableBulkActionErrors()` and `assertHasNoTableBulkActionErrors()`.
+일괄 액션의 경우 이 메서드들은 `assertHasTableBulkActionErrors()`와 `assertHasNoTableBulkActionErrors()`로 호출됩니다.
 
-### Pre-filled data
+### 미리 채워진 데이터 {#pre-filled-data}
 
-To check if an action or bulk action is pre-filled with data, you can use the `assertTableActionDataSet()` or `assertTableBulkActionDataSet()` method:
+액션이나 일괄 액션이 데이터로 미리 채워져 있는지 확인하려면 `assertTableActionDataSet()` 또는 `assertTableBulkActionDataSet()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can load existing post data for editing', function () {
+it('기존 게시글 데이터를 편집용으로 불러올 수 있다', function () {
     $post = Post::factory()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
@@ -529,13 +529,13 @@ it('can load existing post data for editing', function () {
 });
 ```
 
-You may also find it useful to pass a function to the `assertTableActionDataSet()` and `assertTableBulkActionDataSet()` methods, which allow you to access the form `$state` and perform additional assertions:
+또한 `assertTableActionDataSet()` 및 `assertTableBulkActionDataSet()` 메서드에 함수를 전달하여 폼의 `$state`에 접근하고 추가적인 검증을 수행할 수도 있습니다:
 
 ```php
 use Illuminate\Support\Str;
 use function Pest\Livewire\livewire;
 
-it('can automatically generate a slug from the title without any spaces', function () {
+it('제목에서 공백 없이 자동으로 슬러그를 생성할 수 있다', function () {
     $post = Post::factory()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
@@ -551,14 +551,14 @@ it('can automatically generate a slug from the title without any spaces', functi
 });
 ```
 
-### Action state
+### 액션 상태 {#action-state}
 
-To ensure that an action or bulk action exists or doesn't in a table, you can use the `assertTableActionExists()` / `assertTableActionDoesNotExist()` or  `assertTableBulkActionExists()` / `assertTableBulkActionDoesNotExist()` method:
+테이블에서 액션 또는 일괄 액션이 존재하는지 또는 존재하지 않는지 확인하려면 `assertTableActionExists()` / `assertTableActionDoesNotExist()` 또는 `assertTableBulkActionExists()` / `assertTableBulkActionDoesNotExist()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can publish but not unpublish posts', function () {
+it('게시글을 발행할 수 있지만, 발행 취소는 할 수 없다', function () {
     livewire(PostResource\Pages\ListPosts::class)
         ->assertTableActionExists('publish')
         ->assertTableActionDoesNotExist('unpublish')
@@ -567,12 +567,12 @@ it('can publish but not unpublish posts', function () {
 });
 ```
 
-To ensure different sets of actions exist in the correct order, you can use the various "InOrder" assertions
+서로 다른 액션 세트가 올바른 순서로 존재하는지 확인하려면 다양한 "InOrder" 어서션을 사용할 수 있습니다.
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('has all actions in expected order', function () {
+it('모든 액션이 예상 순서대로 있다', function () {
     livewire(PostResource\Pages\ListPosts::class)
         ->assertTableActionsExistInOrder(['edit', 'delete'])
         ->assertTableBulkActionsExistInOrder(['restore', 'forceDelete'])
@@ -581,12 +581,12 @@ it('has all actions in expected order', function () {
 });
 ```
 
-To ensure that an action or bulk action is enabled or disabled for a user, you can use the `assertTableActionEnabled()` / `assertTableActionDisabled()` or `assertTableBulkActionEnabled()` / `assertTableBulkActionDisabled()` methods:
+액션 또는 일괄 액션이 사용자에게 활성화 또는 비활성화되어 있는지 확인하려면 `assertTableActionEnabled()` / `assertTableActionDisabled()` 또는 `assertTableBulkActionEnabled()` / `assertTableBulkActionDisabled()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can not publish, but can delete posts', function () {
+it('게시글을 발행할 수는 없지만, 삭제는 할 수 있다', function () {
     $post = Post::factory()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
@@ -598,12 +598,12 @@ it('can not publish, but can delete posts', function () {
 ```
 
 
-To ensure that an action or bulk action is visible or hidden for a user, you can use the `assertTableActionVisible()` / `assertTableActionHidden()` or `assertTableBulkActionVisible()` / `assertTableBulkActionHidden()` methods:
+액션 또는 일괄 액션이 사용자에게 표시되거나 숨겨져 있는지 확인하려면 `assertTableActionVisible()` / `assertTableActionHidden()` 또는 `assertTableBulkActionVisible()` / `assertTableBulkActionHidden()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can not publish, but can delete posts', function () {
+it('게시글을 발행할 수는 없지만, 삭제는 할 수 있다', function () {
     $post = Post::factory()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
@@ -614,14 +614,14 @@ it('can not publish, but can delete posts', function () {
 });
 ```
 
-### Button Style
+### 버튼 스타일 {#button-style}
 
-To ensure an action or bulk action has the correct label, you can use `assertTableActionHasLabel()` / `assertTableBulkActionHasLabel()` and `assertTableActionDoesNotHaveLabel()` / `assertTableBulkActionDoesNotHaveLabel()`:
+액션 또는 일괄 액션에 올바른 라벨이 있는지 확인하려면 `assertTableActionHasLabel()` / `assertTableBulkActionHasLabel()` 및 `assertTableActionDoesNotHaveLabel()` / `assertTableBulkActionDoesNotHaveLabel()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('delete actions have correct labels', function () {
+it('삭제 액션에 올바른 라벨이 있는지 확인', function () {
     $post = Post::factory()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
@@ -632,12 +632,12 @@ it('delete actions have correct labels', function () {
 });
 ```
 
-To ensure an action or bulk action's button is showing the correct icon, you can use `assertTableActionHasIcon()` / `assertTableBulkActionHasIcon()` or `assertTableActionDoesNotHaveIcon()` / `assertTableBulkActionDoesNotHaveIcon()`:
+액션 또는 일괄 액션의 버튼에 올바른 아이콘이 표시되는지 확인하려면 `assertTableActionHasIcon()` / `assertTableBulkActionHasIcon()` 또는 `assertTableActionDoesNotHaveIcon()` / `assertTableBulkActionDoesNotHaveIcon()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('delete actions have correct icons', function () {
+it('삭제 액션에 올바른 아이콘이 있는지 확인', function () {
     $post = Post::factory()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
@@ -648,12 +648,12 @@ it('delete actions have correct icons', function () {
 });
 ```
 
-To ensure that an action or bulk action's button is displaying the right color, you can use `assertTableActionHasColor()` / `assertTableBulkActionHasColor()` or `assertTableActionDoesNotHaveColor()` / `assertTableBulkActionDoesNotHaveColor()`:
+액션 또는 일괄 액션의 버튼에 올바른 색상이 표시되는지 확인하려면 `assertTableActionHasColor()` / `assertTableBulkActionHasColor()` 또는 `assertTableActionDoesNotHaveColor()` / `assertTableBulkActionDoesNotHaveColor()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('delete actions have correct colors', function () {
+it('삭제 액션에 올바른 색상이 있는지 확인', function () {
     $post = Post::factory()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
@@ -664,14 +664,14 @@ it('delete actions have correct colors', function () {
 });
 ```
 
-### URL
+### URL {#url}
 
-To ensure an action or bulk action has the correct URL traits, you can use `assertTableActionHasUrl()`, `assertTableActionDoesNotHaveUrl()`, `assertTableActionShouldOpenUrlInNewTab()`, and `assertTableActionShouldNotOpenUrlInNewTab()`:
+액션 또는 일괄 액션이 올바른 URL 특성을 가지는지 확인하려면 `assertTableActionHasUrl()`, `assertTableActionDoesNotHaveUrl()`, `assertTableActionShouldOpenUrlInNewTab()`, `assertTableActionShouldNotOpenUrlInNewTab()`을 사용할 수 있습니다.
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('links to the correct Filament sites', function () {
+it('올바른 Filament 사이트로 링크되는지 확인합니다', function () {
     $post = Post::factory()->create();
 
     livewire(PostResource\Pages\ListPosts::class)
@@ -682,9 +682,9 @@ it('links to the correct Filament sites', function () {
 });
 ```
 
-## Summaries
+## 요약 {#summaries}
 
-To test that a summary calculation is working, you may use the `assertTableColumnSummarySet()` method:
+요약 계산이 제대로 작동하는지 테스트하려면 `assertTableColumnSummarySet()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -698,11 +698,11 @@ it('can average values in a column', function () {
 });
 ```
 
-The first argument is the column name, the second is the summarizer ID, and the third is the expected value.
+첫 번째 인자는 컬럼 이름이고, 두 번째는 요약자 ID, 세 번째는 기대하는 값입니다.
 
-Note that the expected and actual values are normalized, such that `123.12` is considered the same as `"123.12"`, and `['Fred', 'Jim']` is the same as `['Jim', 'Fred']`.
+기대값과 실제값은 정규화되어 비교되므로, `123.12`와 `"123.12"`는 동일하게 간주되고, `['Fred', 'Jim']`과 `['Jim', 'Fred']`도 동일하게 간주됩니다.
 
-You may set a summarizer ID by passing it to the `make()` method:
+요약자 ID는 `make()` 메서드에 전달하여 설정할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -712,11 +712,11 @@ TextColumn::make('rating')
     ->summarize(Average::make('average'))
 ```
 
-The ID should be unique between summarizers in that column.
+ID는 해당 컬럼 내의 요약자들 사이에서 고유해야 합니다.
 
-### Summarizing only one pagination page
+### 한 페이지만 요약하기 {#summarizing-only-one-pagination-page}
 
-To calculate the average for only one pagination page, use the `isCurrentPaginationPageOnly` argument:
+한 페이지만의 평균을 계산하려면 `isCurrentPaginationPageOnly` 인수를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -730,9 +730,9 @@ it('can average values in a column', function () {
 });
 ```
 
-### Testing a range summarizer
+### 범위 요약자 테스트하기 {#testing-a-range-summarizer}
 
-To test a range, pass the minimum and maximum value into a tuple-style `[$minimum, $maximum]` array:
+범위를 테스트하려면 최소값과 최대값을 튜플 형식의 `[$minimum, $maximum]` 배열로 전달하세요:
 
 ```php
 use function Pest\Livewire\livewire;

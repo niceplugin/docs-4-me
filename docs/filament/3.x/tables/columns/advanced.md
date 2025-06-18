@@ -1,10 +1,10 @@
 ---
-title: Advanced columns
+title: 고급 컬럼
 ---
+# [테이블.컬럼] 고급 컬럼
+## 테이블 컬럼 유틸리티 주입 {#table-column-utility-injection}
 
-## Table column utility injection
-
-The vast majority of methods used to configure columns accept functions as parameters instead of hardcoded values:
+대부분의 컬럼 설정 메서드는 하드코딩된 값 대신 함수형 파라미터를 허용합니다:
 
 ```php
 use Filament\Tables\Columns\TextColumn;
@@ -18,15 +18,15 @@ TextColumn::make('status')
     })
 ```
 
-This alone unlocks many customization possibilities.
+이것만으로도 다양한 커스터마이징이 가능합니다.
 
-The package is also able to inject many utilities to use inside these functions, as parameters. All customization methods that accept functions as arguments can inject utilities.
+이 패키지는 또한 이러한 함수 내부에서 사용할 수 있는 다양한 유틸리티를 파라미터로 주입할 수 있습니다. 함수형 인자를 받는 모든 커스터마이징 메서드는 유틸리티 주입이 가능합니다.
 
-These injected utilities require specific parameter names to be used. Otherwise, Filament doesn't know what to inject.
+이렇게 주입되는 유틸리티는 특정 파라미터 이름을 사용해야 합니다. 그렇지 않으면 Filament가 무엇을 주입해야 하는지 알 수 없습니다.
 
-### Injecting the current state of a column
+### 열의 현재 상태 주입하기 {#injecting-the-current-state-of-a-column}
 
-If you wish to access the current state (value) of the column, define a `$state` parameter:
+열의 현재 상태(값)에 접근하고 싶다면, `$state` 파라미터를 정의하세요:
 
 ```php
 function ($state) {
@@ -34,9 +34,9 @@ function ($state) {
 }
 ```
 
-### Injecting the current Eloquent record
+### 현재 Eloquent 레코드 주입하기 {#injecting-the-current-eloquent-record}
 
-If you wish to access the current Eloquent record of the column, define a `$record` parameter:
+컬럼의 현재 Eloquent 레코드에 접근하고 싶다면, `$record` 파라미터를 정의하세요:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -46,11 +46,11 @@ function (Model $record) {
 }
 ```
 
-Be aware that this parameter will be `null` if the column is not bound to an Eloquent record. For instance, the `label()` method of a column will not have access to the record, as the label is not related to any table row.
+이 파라미터는 컬럼이 Eloquent 레코드에 바인딩되어 있지 않으면 `null`이 될 수 있다는 점에 유의하세요. 예를 들어, 컬럼의 `label()` 메서드는 레코드에 접근할 수 없습니다. 라벨은 어떤 테이블 행과도 관련이 없기 때문입니다.
 
-### Injecting the current column instance
+### 현재 컬럼 인스턴스 주입하기 {#injecting-the-current-column-instance}
 
-If you wish to access the current column instance, define a `$column` parameter:
+현재 컬럼 인스턴스에 접근하고 싶다면, `$column` 파라미터를 정의하세요:
 
 ```php
 use Filament\Tables\Columns\Column;
@@ -60,9 +60,9 @@ function (Column $column) {
 }
 ```
 
-### Injecting the current Livewire component instance
+### 현재 Livewire 컴포넌트 인스턴스 주입하기 {#injecting-the-current-livewire-component-instance}
 
-If you wish to access the current Livewire component instance that the table belongs to, define a `$livewire` parameter:
+테이블이 속한 현재 Livewire 컴포넌트 인스턴스에 접근하고 싶다면, `$livewire` 파라미터를 정의하세요:
 
 ```php
 use Filament\Tables\Contracts\HasTable;
@@ -72,9 +72,9 @@ function (HasTable $livewire) {
 }
 ```
 
-### Injecting the current table instance
+### 현재 테이블 인스턴스 주입하기 {#injecting-the-current-table-instance}
 
-If you wish to access the current table configuration instance that the column belongs to, define a `$table` parameter:
+컬럼이 속한 현재 테이블 설정 인스턴스에 접근하고 싶다면, `$table` 파라미터를 정의하세요:
 
 ```php
 use Filament\Tables\Table;
@@ -84,9 +84,9 @@ function (Table $table) {
 }
 ```
 
-### Injecting the current table row loop
+### 현재 테이블 행 루프 주입하기 {#injecting-the-current-table-row-loop}
 
-If you wish to access the current [Laravel Blade loop object](https://laravel.com/docs/blade#the-loop-variable) that the column is rendered part of, define a `$rowLoop` parameter:
+컬럼이 렌더링되는 [Laravel Blade 루프 객체](https://laravel.com/docs/blade#the-loop-variable)에 접근하고 싶다면, `$rowLoop` 파라미터를 정의하세요:
 
 ```php
 function (stdClass $rowLoop) {
@@ -94,11 +94,11 @@ function (stdClass $rowLoop) {
 }
 ```
 
-As `$rowLoop` is [Laravel Blade's `$loop` object](https://laravel.com/docs/blade#the-loop-variable), you can access the current row index using `$rowLoop->index`. Similar to `$record`, this parameter will be `null` if the column is currently being rendered outside a table row.
+`$rowLoop`는 [Laravel Blade의 `$loop` 객체](https://laravel.com/docs/blade#the-loop-variable)이므로, `$rowLoop->index`를 사용해 현재 행의 인덱스에 접근할 수 있습니다. `$record`와 마찬가지로, 컬럼이 테이블 행 외부에서 렌더링될 때 이 파라미터는 `null`이 됩니다.
 
-### Injecting multiple utilities
+### 여러 유틸리티 주입하기 {#injecting-multiple-utilities}
 
-The parameters are injected dynamically using reflection, so you are able to combine multiple parameters in any order:
+매개변수는 리플렉션을 사용하여 동적으로 주입되므로, 여러 매개변수를 어떤 순서로든 조합할 수 있습니다:
 
 ```php
 use Filament\Tables\Contracts\HasTable;
@@ -109,9 +109,9 @@ function (HasTable $livewire, Model $record) {
 }
 ```
 
-### Injecting dependencies from Laravel's container
+### 라라벨 컨테이너에서 의존성 주입하기 {#injecting-dependencies-from-laravels-container}
 
-You may inject anything from Laravel's container like normal, alongside utilities:
+유틸리티와 함께 라라벨 컨테이너에서 평소처럼 어떤 것이든 주입할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;

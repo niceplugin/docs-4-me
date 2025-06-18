@@ -1,28 +1,28 @@
 ---
-title: Assets
+title: 에셋
 ---
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [핵심개념] 에셋
 
 <LaracastsBanner
-    title="Registering Plugin Assets"
-    description="Watch the Build Advanced Components for Filament series on Laracasts - it will teach you how to get started with registering assets into a plugin. Alternatively, continue reading this text-based guide."
+    title="플러그인 에셋 등록하기"
+    description="Laracasts의 Filament 고급 컴포넌트 빌드(Build Advanced Components for Filament) 시리즈를 시청하세요. 이 시리즈는 플러그인에 에셋을 등록하는 방법을 시작하는 데 도움이 됩니다. 또는 아래의 텍스트 기반 가이드를 계속 읽으셔도 됩니다."
     url="https://laracasts.com/series/build-advanced-components-for-filament/episodes/14"
     series="building-advanced-components"
 />
 
-## Overview
+## 개요 {#overview}
 
-All packages in the Filament ecosystem share an asset management system. This allows both official plugins and third-party plugins to register CSS and JavaScript files that can then be consumed by Blade views.
+Filament 생태계의 모든 패키지는 자산 관리 시스템을 공유합니다. 이를 통해 공식 플러그인과 서드파티 플러그인 모두 CSS 및 JavaScript 파일을 등록할 수 있으며, 이렇게 등록된 파일들은 Blade 뷰에서 사용할 수 있습니다.
 
-## The `FilamentAsset` facade
+## `FilamentAsset` 파사드 {#the-filamentasset-facade}
 
-The `FilamentAsset` facade is used to register files into the asset system. These files may be sourced from anywhere in the filesystem, but are then copied into the `/public` directory of the application when the `php artisan filament:assets` command is run. By copying them into the `/public` directory for you, we can predictably load them in Blade views, and also ensure that third party packages are able to load their assets without having to worry about where they are located.
+`FilamentAsset` 파사드는 파일을 에셋 시스템에 등록할 때 사용됩니다. 이 파일들은 파일 시스템 어디에서나 가져올 수 있지만, `php artisan filament:assets` 명령어를 실행하면 애플리케이션의 `/public` 디렉터리로 복사됩니다. 파일을 `/public` 디렉터리로 복사함으로써, Blade 뷰에서 예측 가능하게 로드할 수 있고, 서드파티 패키지들도 에셋의 위치를 신경 쓰지 않고 자신의 에셋을 로드할 수 있도록 보장합니다.
 
-Assets always have a unique ID chosen by you, which is used as the file name when the asset is copied into the `/public` directory. This ID is also used to reference the asset in Blade views. While the ID is unique, if you are registering assets for a plugin, then you do not need to worry about IDs clashing with other plugins, since the asset will be copied into a directory named after your plugin.
+에셋은 항상 여러분이 선택한 고유한 ID를 가지며, 이 ID는 에셋이 `/public` 디렉터리로 복사될 때 파일 이름으로 사용됩니다. 이 ID는 Blade 뷰에서 에셋을 참조할 때도 사용됩니다. ID는 고유해야 하지만, 플러그인을 위해 에셋을 등록하는 경우에는 다른 플러그인과 ID가 충돌할 걱정을 할 필요가 없습니다. 에셋이 여러분의 플러그인 이름으로 된 디렉터리에 복사되기 때문입니다.
 
-The `FilamentAsset` facade should be used in the `boot()` method of a service provider. It can be used inside an application service provider such as `AppServiceProvider`, or inside a plugin service provider.
+`FilamentAsset` 파사드는 서비스 프로바이더의 `boot()` 메서드에서 사용해야 합니다. `AppServiceProvider`와 같은 애플리케이션 서비스 프로바이더나, 플러그인 서비스 프로바이더 내에서 사용할 수 있습니다.
 
-The `FilamentAsset` facade has one main method, `register()`, which accepts an array of assets to register:
+`FilamentAsset` 파사드에는 주요 메서드인 `register()`가 있으며, 등록할 에셋의 배열을 인자로 받습니다:
 
 ```php
 use Filament\Support\Facades\FilamentAsset;
@@ -39,9 +39,9 @@ public function boot(): void
 }
 ```
 
-### Registering assets for a plugin
+### 플러그인에 대한 에셋 등록 {#registering-assets-for-a-plugin}
 
-When registering assets for a plugin, you should pass the name of the Composer package as the second argument of the `register()` method:
+플러그인에 대한 에셋을 등록할 때는 `register()` 메서드의 두 번째 인자로 Composer 패키지의 이름을 전달해야 합니다:
 
 ```php
 use Filament\Support\Facades\FilamentAsset;
@@ -51,13 +51,13 @@ FilamentAsset::register([
 ], package: 'danharrin/filament-blog');
 ```
 
-Now, all the assets for this plugin will be copied into their own directory inside `/public`, to avoid the possibility of clashing with other plugins' files with the same names.
+이제 이 플러그인의 모든 에셋은 `/public` 내부의 자체 디렉터리에 복사되어, 동일한 이름을 가진 다른 플러그인의 파일과 충돌하는 것을 방지할 수 있습니다.
 
-## Registering CSS files
+## CSS 파일 등록하기 {#registering-css-files}
 
-To register a CSS file with the asset system, use the `FilamentAsset::register()` method in the `boot()` method of a service provider. You must pass in an array of `Css` objects, which each represents a CSS file that should be registered in the asset system.
+에셋 시스템에 CSS 파일을 등록하려면, 서비스 프로바이더의 `boot()` 메소드에서 `FilamentAsset::register()` 메소드를 사용하세요. 이때, 각각 등록할 CSS 파일을 나타내는 `Css` 객체의 배열을 전달해야 합니다.
 
-Each `Css` object has a unique ID and a path to the CSS file:
+각 `Css` 객체는 고유한 ID와 CSS 파일의 경로를 가집니다:
 
 ```php
 use Filament\Support\Assets\Css;
@@ -68,34 +68,34 @@ FilamentAsset::register([
 ]);
 ```
 
-In this example, we use `__DIR__` to generate a relative path to the asset from the current file. For instance, if you were adding this code to `/app/Providers/AppServiceProvider.php`, then the CSS file should exist in `/resources/css/custom.css`.
+이 예시에서는 `__DIR__`를 사용하여 현재 파일로부터 에셋의 상대 경로를 생성합니다. 예를 들어, 이 코드를 `/app/Providers/AppServiceProvider.php`에 추가한다면, CSS 파일은 `/resources/css/custom.css`에 존재해야 합니다.
 
-Now, when the `php artisan filament:assets` command is run, this CSS file is copied into the `/public` directory. In addition, it is now loaded into all Blade views that use Filament. If you're interested in only loading the CSS when it is required by an element on the page, check out the [Lazy loading CSS](#lazy-loading-css) section.
+이제 `php artisan filament:assets` 명령어를 실행하면, 이 CSS 파일이 `/public` 디렉터리로 복사됩니다. 또한, Filament를 사용하는 모든 Blade 뷰에 이 파일이 로드됩니다. 만약 페이지의 특정 요소가 필요할 때만 CSS를 로드하고 싶다면, [CSS 지연 로딩](#lazy-loading-css) 섹션을 참고하세요.
 
-### Using Tailwind CSS in plugins
+### 플러그인에서 Tailwind CSS 사용하기 {#using-tailwind-css-in-plugins}
 
-Typically, registering CSS files is used to register custom stylesheets for your application. If you want to process these files using Tailwind CSS, you need to consider the implications of that, especially if you are a plugin developer.
+일반적으로 CSS 파일 등록은 애플리케이션에 맞는 커스텀 스타일시트를 등록하는 데 사용됩니다. 만약 Tailwind CSS로 이 파일들을 처리하고 싶다면, 특히 플러그인 개발자라면 그에 따른 영향을 고려해야 합니다.
 
-Tailwind builds are unique to every application - they contain a minimal set of utility classes, only the ones that you are actually using in your application. This means that if you are a plugin developer, you probably should not be building your Tailwind CSS files into your plugin. Instead, you should provide the raw CSS files and instruct the user that they should build the Tailwind CSS file themselves. To do this, they probably just need to add your vendor directory into the `content` array of their `tailwind.config.js` file:
+Tailwind 빌드는 각 애플리케이션마다 고유합니다. 실제로 애플리케이션에서 사용하는 최소한의 유틸리티 클래스만 포함하기 때문입니다. 즉, 플러그인 개발자라면 Tailwind CSS 파일을 플러그인에 직접 빌드해서 포함시키지 않는 것이 좋습니다. 대신, 원본 CSS 파일을 제공하고 사용자가 직접 Tailwind CSS 파일을 빌드하도록 안내해야 합니다. 이를 위해서는 사용자가 자신의 `tailwind.config.js` 파일의 `content` 배열에 플러그인의 벤더 디렉터리를 추가하면 됩니다:
 
 ```js
 export default {
     content: [
         './resources/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
-        './vendor/danharrin/filament-blog/resources/views/**/*.blade.php', // Your plugin's vendor directory
+        './vendor/danharrin/filament-blog/resources/views/**/*.blade.php', // 플러그인 벤더 디렉터리
     ],
     // ...
 }
 ```
 
-This means that when they build their Tailwind CSS file, it will include all the utility classes that are used in your plugin's views, as well as the utility classes that are used in their application and the Filament core.
+이렇게 하면 사용자가 Tailwind CSS 파일을 빌드할 때, 플러그인 뷰에서 사용된 모든 유틸리티 클래스와 애플리케이션 및 Filament 코어에서 사용된 유틸리티 클래스가 모두 포함됩니다.
 
-However, with this technique, there might be extra complications for users who use your plugin with the [Panel Builder](../panels). If they have a [custom theme](../panels/themes), they will be fine, since they are building their own CSS file anyway using Tailwind CSS. However, if they are using the default stylesheet which is shipped with the Panel Builder, you might have to be careful about the utility classes that you use in your plugin's views. For instance, if you use a utility class that is not included in the default stylesheet, the user is not compiling it themselves, and it will not be included in the final CSS file. This means that your plugin's views might not look as expected. This is one of the few situations where I would recommend compiling and [registering](#registering-css-files) a Tailwind CSS-compiled stylesheet in your plugin.
+하지만 이 방법을 사용할 때, [패널 빌더](../panels)와 함께 플러그인을 사용하는 사용자에게는 추가적인 문제가 발생할 수 있습니다. 만약 사용자가 [커스텀 테마](../panels/themes)를 사용한다면, 어차피 Tailwind CSS로 직접 CSS 파일을 빌드하므로 문제가 없습니다. 하지만 패널 빌더에서 제공하는 기본 스타일시트를 사용하는 경우, 플러그인 뷰에서 사용하는 유틸리티 클래스가 기본 스타일시트에 포함되어 있지 않다면, 사용자가 직접 컴파일하지 않으므로 최종 CSS 파일에 포함되지 않습니다. 이 경우 플러그인 뷰가 의도한 대로 보이지 않을 수 있습니다. 이런 상황에서는 플러그인에서 Tailwind CSS로 컴파일된 스타일시트를 [등록](#registering-css-files)해서 사용하는 것을 권장합니다.
 
-### Lazy loading CSS
+### CSS 지연 로딩 {#lazy-loading-css}
 
-By default, all CSS files registered with the asset system are loaded in the `<head>` of every Filament page. This is the simplest way to load CSS files, but sometimes they may be quite heavy and not required on every page. In this case, you can leverage the [Alpine.js Lazy Load Assets](https://github.com/tanthammar/alpine-lazy-load-assets) package that comes bundled with Filament. It allows you to easily load CSS files on-demand using Alpine.js. The premise is very simple, you use the `x-load-css` directive on an element, and when that element is loaded onto the page, the specified CSS files are loaded into the `<head>` of the page. This is perfect for both small UI elements and entire pages that require a CSS file:
+기본적으로, 에셋 시스템에 등록된 모든 CSS 파일은 모든 Filament 페이지의 `<head>`에 로드됩니다. 이는 CSS 파일을 로드하는 가장 간단한 방법이지만, 때로는 파일이 무겁거나 모든 페이지에서 필요하지 않을 수 있습니다. 이 경우, Filament에 번들로 포함된 [Alpine.js Lazy Load Assets](https://github.com/tanthammar/alpine-lazy-load-assets) 패키지를 활용할 수 있습니다. 이 패키지를 사용하면 Alpine.js를 통해 CSS 파일을 필요할 때만 쉽게 로드할 수 있습니다. 사용법은 매우 간단하며, 요소에 `x-load-css` 디렉티브를 사용하면 해당 요소가 페이지에 로드될 때 지정한 CSS 파일이 페이지의 `<head>`에 추가됩니다. 이는 작은 UI 요소나 CSS 파일이 필요한 전체 페이지 모두에 적합합니다:
 
 ```blade
 <div
@@ -106,7 +106,7 @@ By default, all CSS files registered with the asset system are loaded in the `<h
 </div>
 ```
 
-To prevent the CSS file from being loaded automatically, you can use the `loadedOnRequest()` method:
+CSS 파일이 자동으로 로드되지 않도록 하려면 `loadedOnRequest()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Support\Assets\Css;
@@ -117,7 +117,7 @@ FilamentAsset::register([
 ]);
 ```
 
-If your CSS file was [registered to a plugin](#registering-assets-for-a-plugin), you must pass that in as the second argument to the `FilamentAsset::getStyleHref()` method:
+CSS 파일이 [플러그인에 등록](#registering-assets-for-a-plugin)된 경우, `FilamentAsset::getStyleHref()` 메서드의 두 번째 인자로 해당 플러그인을 전달해야 합니다:
 
 ```blade
 <div
@@ -128,9 +128,9 @@ If your CSS file was [registered to a plugin](#registering-assets-for-a-plugin),
 </div>
 ```
 
-### Registering CSS files from a URL
+### URL에서 CSS 파일 등록하기 {#registering-css-files-from-a-url}
 
-If you want to register a CSS file from a URL, you may do so. These assets will be loaded on every page as normal, but not copied into the `/public` directory when the `php artisan filament:assets` command is run. This is useful for registering external stylesheets from a CDN, or stylesheets that you are already compiling directly into the `/public` directory:
+URL에서 CSS 파일을 등록하고 싶다면, 아래와 같이 할 수 있습니다. 이렇게 등록된 에셋은 모든 페이지에서 정상적으로 로드되지만, `php artisan filament:assets` 명령어를 실행해도 `/public` 디렉터리로 복사되지는 않습니다. 이는 CDN에서 외부 스타일시트를 등록하거나, 이미 `/public` 디렉터리로 직접 컴파일하고 있는 스타일시트를 등록할 때 유용합니다:
 
 ```php
 use Filament\Support\Assets\Css;
@@ -142,9 +142,9 @@ FilamentAsset::register([
 ]);
 ```
 
-### Registering CSS variables
+### CSS 변수 등록하기 {#registering-css-variables}
 
-Sometimes, you may wish to use dynamic data from the backend in CSS files. To do this, you can use the `FilamentAsset::registerCssVariables()` method in the `boot()` method of a service provider:
+때때로, CSS 파일에서 백엔드의 동적 데이터를 사용하고 싶을 수 있습니다. 이를 위해 서비스 프로바이더의 `boot()` 메서드에서 `FilamentAsset::registerCssVariables()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Support\Facades\FilamentAsset;
@@ -154,17 +154,17 @@ FilamentAsset::registerCssVariables([
 ]);
 ```
 
-Now, you can access these variables from any CSS file:
+이제, 어떤 CSS 파일에서든 이러한 변수를 사용할 수 있습니다:
 
 ```css
 background-image: var(--background-image);
 ```
 
-## Registering JavaScript files
+## 자바스크립트 파일 등록하기 {#registering-javascript-files}
 
-To register a JavaScript file with the asset system, use the `FilamentAsset::register()` method in the `boot()` method of a service provider. You must pass in an array of `Js` objects, which each represents a JavaScript file that should be registered in the asset system.
+에셋 시스템에 자바스크립트 파일을 등록하려면, 서비스 프로바이더의 `boot()` 메소드에서 `FilamentAsset::register()` 메소드를 사용하세요. 이때, 각각 등록할 자바스크립트 파일을 나타내는 `Js` 객체의 배열을 전달해야 합니다.
 
-Each `Js` object has a unique ID and a path to the JavaScript file:
+각 `Js` 객체는 고유한 ID와 자바스크립트 파일의 경로를 가집니다:
 
 ```php
 use Filament\Support\Assets\Js;
@@ -174,13 +174,13 @@ FilamentAsset::register([
 ]);
 ```
 
-In this example, we use `__DIR__` to generate a relative path to the asset from the current file. For instance, if you were adding this code to `/app/Providers/AppServiceProvider.php`, then the JavaScript file should exist in `/resources/js/custom.js`.
+이 예제에서는 `__DIR__`를 사용하여 현재 파일로부터 에셋의 상대 경로를 생성합니다. 예를 들어, 이 코드를 `/app/Providers/AppServiceProvider.php`에 추가한다면, 자바스크립트 파일은 `/resources/js/custom.js`에 존재해야 합니다.
 
-Now, when the `php artisan filament:assets` command is run, this JavaScript file is copied into the `/public` directory. In addition, it is now loaded into all Blade views that use Filament. If you're interested in only loading the JavaScript when it is required by an element on the page, check out the [Lazy loading JavaScript](#lazy-loading-javascript) section.
+이제 `php artisan filament:assets` 명령어를 실행하면, 이 자바스크립트 파일이 `/public` 디렉터리로 복사됩니다. 또한, Filament를 사용하는 모든 Blade 뷰에 이 파일이 로드됩니다. 만약 페이지의 특정 요소에서 필요할 때만 자바스크립트를 로드하고 싶다면, [자바스크립트 지연 로딩](#lazy-loading-javascript) 섹션을 참고하세요.
 
-### Lazy loading JavaScript
+### JavaScript 지연 로딩 {#lazy-loading-javascript}
 
-By default, all JavaScript files registered with the asset system are loaded at the bottom of every Filament page. This is the simplest way to load JavaScript files, but sometimes they may be quite heavy and not required on every page. In this case, you can leverage the [Alpine.js Lazy Load Assets](https://github.com/tanthammar/alpine-lazy-load-assets) package that comes bundled with Filament. It allows you to easily load JavaScript files on-demand using Alpine.js. The premise is very simple, you use the `x-load-js` directive on an element, and when that element is loaded onto the page, the specified JavaScript files are loaded at the bottom of the page. This is perfect for both small UI elements and entire pages that require a JavaScript file:
+기본적으로, 에셋 시스템에 등록된 모든 JavaScript 파일은 모든 Filament 페이지의 하단에 로드됩니다. 이는 JavaScript 파일을 로드하는 가장 간단한 방법이지만, 때로는 파일이 무겁거나 모든 페이지에서 필요하지 않을 수 있습니다. 이 경우, Filament에 번들로 포함된 [Alpine.js Lazy Load Assets](https://github.com/tanthammar/alpine-lazy-load-assets) 패키지를 활용할 수 있습니다. 이 패키지를 사용하면 Alpine.js를 통해 JavaScript 파일을 필요할 때만 쉽게 로드할 수 있습니다. 사용법은 매우 간단하며, `x-load-js` 디렉티브를 요소에 사용하면 해당 요소가 페이지에 로드될 때 지정한 JavaScript 파일이 페이지 하단에 로드됩니다. 이는 작은 UI 요소나 JavaScript 파일이 필요한 전체 페이지 모두에 적합합니다:
 
 ```blade
 <div
@@ -191,7 +191,7 @@ By default, all JavaScript files registered with the asset system are loaded at 
 </div>
 ```
 
-To prevent the JavaScript file from being loaded automatically, you can use the `loadedOnRequest()` method:
+JavaScript 파일이 자동으로 로드되는 것을 방지하려면, `loadedOnRequest()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Support\Assets\Js;
@@ -202,7 +202,7 @@ FilamentAsset::register([
 ]);
 ```
 
-If your JavaScript file was [registered to a plugin](#registering-assets-for-a-plugin), you must pass that in as the second argument to the `FilamentAsset::getScriptSrc()` method:
+JavaScript 파일이 [플러그인에 등록](#registering-assets-for-a-plugin)된 경우, `FilamentAsset::getScriptSrc()` 메서드의 두 번째 인자로 해당 플러그인을 전달해야 합니다:
 
 ```blade
 <div
@@ -213,24 +213,24 @@ If your JavaScript file was [registered to a plugin](#registering-assets-for-a-p
 </div>
 ```
 
-#### Asynchronous Alpine.js components
+#### 비동기 Alpine.js 컴포넌트 {#asynchronous-alpinejs-components}
 
 <LaracastsBanner
-    title="Using Async Alpine components"
-    description="Watch the Build Advanced Components for Filament series on Laracasts - it will teach you how to get started with Async Alpine components into a plugin."
+    title="비동기 Alpine 컴포넌트 사용하기"
+    description="Laracasts의 Build Advanced Components for Filament 시리즈를 시청하세요 - 플러그인에 비동기 Alpine 컴포넌트를 적용하는 방법을 배울 수 있습니다."
     url="https://laracasts.com/series/build-advanced-components-for-filament/episodes/15"
     series="building-advanced-components"
 />
 
-Sometimes, you may want to load external JavaScript libraries for your Alpine.js-based components. The best way to do this is by storing the compiled JavaScript and Alpine component in a separate file, and letting us load it whenever the component is rendered.
+때때로, Alpine.js 기반 컴포넌트에서 외부 JavaScript 라이브러리를 로드하고 싶을 수 있습니다. 이를 위한 가장 좋은 방법은 컴파일된 JavaScript와 Alpine 컴포넌트를 별도의 파일로 저장하고, 해당 컴포넌트가 렌더링될 때마다 이를 로드하도록 하는 것입니다.
 
-Firstly, you should install [esbuild](https://esbuild.github.io) via NPM, which we will use to create a single JavaScript file containing your external library and Alpine component:
+먼저, [esbuild](https://esbuild.github.io)를 NPM을 통해 설치해야 합니다. esbuild를 사용하여 외부 라이브러리와 Alpine 컴포넌트가 포함된 단일 JavaScript 파일을 생성할 것입니다.
 
 ```bash
 npm install esbuild --save-dev
 ```
 
-Then, you must create a script to compile your JavaScript and Alpine component. You can put this anywhere, for example `bin/build.js`:
+그 다음, JavaScript와 Alpine 컴포넌트를 컴파일하는 스크립트를 만들어야 합니다. 이 스크립트는 예를 들어 `bin/build.js`와 같이 어디에나 둘 수 있습니다.
 
 ```js
 import * as esbuild from 'esbuild'
@@ -285,12 +285,12 @@ compile({
 })
 ```
 
-As you can see at the bottom of the script, we are compiling a file called `resources/js/components/test-component.js` into `resources/js/dist/components/test-component.js`. You can change these paths to suit your needs. You can compile as many components as you want.
+스크립트 하단을 보면, `resources/js/components/test-component.js` 파일을 `resources/js/dist/components/test-component.js`로 컴파일하고 있습니다. 필요에 따라 이 경로들을 변경할 수 있습니다. 원하는 만큼 많은 컴포넌트를 컴파일할 수 있습니다.
 
-Now, create a new file called `resources/js/components/test-component.js`:
+이제 `resources/js/components/test-component.js`라는 새 파일을 만듭니다.
 
 ```js
-// Import any external JavaScript libraries from NPM here.
+// 여기에서 NPM을 통해 외부 JavaScript 라이브러리를 import 하세요.
 
 export default function testComponent({
     state,
@@ -298,30 +298,30 @@ export default function testComponent({
     return {
         state,
         
-        // You can define any other Alpine.js properties here.
+        // 여기에 다른 Alpine.js 속성을 정의할 수 있습니다.
 
         init: function () {
-            // Initialise the Alpine component here, if you need to.
+            // 필요하다면 여기서 Alpine 컴포넌트를 초기화하세요.
         },
         
-        // You can define any other Alpine.js functions here.
+        // 여기에 다른 Alpine.js 함수를 정의할 수 있습니다.
     }
 }
 ```
 
-Now, you can compile this file into `resources/js/dist/components/test-component.js` by running the following command:
+이제 다음 명령어를 실행하여 이 파일을 `resources/js/dist/components/test-component.js`로 컴파일할 수 있습니다.
 
 ```bash
 node bin/build.js
 ```
 
-If you want to watch for changes to this file instead of compiling once, try the following command:
+한 번만 컴파일하는 대신 파일 변경을 감시하려면 다음 명령어를 사용하세요.
 
 ```bash
 node bin/build.js --dev
 ```
 
-Now, you need to tell Filament to publish this compiled JavaScript file into the `/public` directory of the Laravel application, so it is accessible to the browser. To do this, you can use the `FilamentAsset::register()` method in the `boot()` method of a service provider, passing in an `AlpineComponent` object:
+이제 Filament에 이 컴파일된 JavaScript 파일을 Laravel 애플리케이션의 `/public` 디렉터리로 퍼블리시하도록 알려야 합니다. 이를 위해 서비스 프로바이더의 `boot()` 메서드에서 `FilamentAsset::register()` 메서드를 사용하고, `AlpineComponent` 객체를 전달하면 됩니다.
 
 ```php
 use Filament\Support\Assets\AlpineComponent;
@@ -332,9 +332,9 @@ FilamentAsset::register([
 ]);
 ```
 
-When you run `php artisan filament:assets`, the compiled file will be copied into the `/public` directory.
+`php artisan filament:assets`를 실행하면, 컴파일된 파일이 `/public` 디렉터리로 복사됩니다.
 
-Finally, you can load this asynchronous Alpine component in your view using `x-load` attributes and the `FilamentAsset::getAlpineComponentSrc()` method:
+마지막으로, 뷰에서 `x-load` 속성과 `FilamentAsset::getAlpineComponentSrc()` 메서드를 사용하여 이 비동기 Alpine 컴포넌트를 로드할 수 있습니다.
 
 ```blade
 <div
@@ -348,13 +348,13 @@ Finally, you can load this asynchronous Alpine component in your view using `x-l
 </div>
 ```
 
-This example is for a [custom form field](../forms/fields/custom). It passes the `state` in as a parameter to the `testComponent()` function, which is entangled with a Livewire component property. You can pass in any parameters you want, and access them in the `testComponent()` function. If you're not using a custom form field, you can ignore the `state` parameter in this example.
+이 예시는 [커스텀 폼 필드](../forms/fields/custom)를 위한 것입니다. `state`를 `testComponent()` 함수의 파라미터로 전달하며, 이는 Livewire 컴포넌트 속성과 entangle되어 있습니다. 원하는 어떤 파라미터든 전달할 수 있으며, `testComponent()` 함수에서 접근할 수 있습니다. 커스텀 폼 필드를 사용하지 않는 경우, 이 예시의 `state` 파라미터는 무시해도 됩니다.
 
-The `x-load` attributes come from the [Async Alpine](https://async-alpine.dev/docs/strategies) package, and any features of that package can be used here.
+`x-load` 속성은 [Async Alpine](https://async-alpine.dev/docs/strategies) 패키지에서 제공되며, 해당 패키지의 모든 기능을 여기서 사용할 수 있습니다.
 
-### Registering script data
+### 스크립트 데이터 등록하기 {#registering-script-data}
 
-Sometimes, you may wish to make data from the backend available to JavaScript files. To do this, you can use the `FilamentAsset::registerScriptData()` method in the `boot()` method of a service provider:
+때때로, 백엔드의 데이터를 JavaScript 파일에서 사용할 수 있도록 하고 싶을 수 있습니다. 이를 위해 서비스 프로바이더의 `boot()` 메소드에서 `FilamentAsset::registerScriptData()` 메소드를 사용할 수 있습니다:
 
 ```php
 use Filament\Support\Facades\FilamentAsset;
@@ -366,15 +366,15 @@ FilamentAsset::registerScriptData([
 ]);
 ```
 
-Now, you can access that data from any JavaScript file at runtime, using the `window.filamentData` object:
+이제 런타임 시 모든 JavaScript 파일에서 `window.filamentData` 객체를 사용하여 해당 데이터에 접근할 수 있습니다:
 
 ```js
 window.filamentData.user.name // 'Dan Harrin'
 ```
 
-### Registering JavaScript files from a URL
+### URL에서 JavaScript 파일 등록하기 {#registering-javascript-files-from-a-url}
 
-If you want to register a JavaScript file from a URL, you may do so. These assets will be loaded on every page as normal, but not copied into the `/public` directory when the `php artisan filament:assets` command is run. This is useful for registering external scripts from a CDN, or scripts that you are already compiling directly into the `/public` directory:
+URL에서 JavaScript 파일을 등록하고 싶다면, 그렇게 할 수 있습니다. 이러한 에셋들은 모든 페이지에서 정상적으로 로드되지만, `php artisan filament:assets` 명령어를 실행할 때 `/public` 디렉터리로 복사되지는 않습니다. 이는 CDN에서 외부 스크립트를 등록하거나, 이미 `/public` 디렉터리로 직접 컴파일하고 있는 스크립트를 등록할 때 유용합니다:
 
 ```php
 use Filament\Support\Assets\Js;

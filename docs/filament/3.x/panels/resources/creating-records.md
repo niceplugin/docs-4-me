@@ -1,10 +1,10 @@
 ---
-title: Creating records
+title: 레코드 생성하기
 ---
+# [패널.리소스] 레코드 생성하기
+## 저장 전에 데이터 커스터마이징하기 {#customizing-data-before-saving}
 
-## Customizing data before saving
-
-Sometimes, you may wish to modify form data before it is finally saved to the database. To do this, you may define a `mutateFormDataBeforeCreate()` method on the Create page class, which accepts the `$data` as an array, and returns the modified version:
+때때로, 폼 데이터를 데이터베이스에 최종적으로 저장하기 전에 수정하고 싶을 수 있습니다. 이를 위해 Create 페이지 클래스에 `mutateFormDataBeforeCreate()` 메서드를 정의할 수 있으며, 이 메서드는 배열 형태의 `$data`를 받아 수정된 버전을 반환합니다:
 
 ```php
 protected function mutateFormDataBeforeCreate(array $data): array
@@ -15,11 +15,11 @@ protected function mutateFormDataBeforeCreate(array $data): array
 }
 ```
 
-Alternatively, if you're creating records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/create#customizing-data-before-saving).
+또는, 모달 액션에서 레코드를 생성하는 경우 [액션 문서](../../actions/prebuilt-actions/create#customizing-data-before-saving)를 참고하세요.
 
-## Customizing the creation process
+## 생성 프로세스 커스터마이징하기 {#customizing-the-creation-process}
 
-You can tweak how the record is created using the `handleRecordCreation()` method on the Create page class:
+Create 페이지 클래스에서 `handleRecordCreation()` 메서드를 사용하여 레코드가 생성되는 방식을 조정할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -30,15 +30,15 @@ protected function handleRecordCreation(array $data): Model
 }
 ```
 
-Alternatively, if you're creating records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/create#customizing-the-creation-process).
+또는, 모달 액션에서 레코드를 생성하는 경우 [액션 문서](../../actions/prebuilt-actions/create#customizing-the-creation-process)를 참고하세요.
 
-## Customizing redirects
+## 리디렉션 커스터마이징 {#customizing-redirects}
 
-By default, after saving the form, the user will be redirected to the [Edit page](editing-records) of the resource, or the [View page](viewing-records) if it is present.
+기본적으로 폼을 저장한 후에는 사용자가 해당 리소스의 [수정 페이지](editing-records)로 리디렉션되거나, [보기 페이지](viewing-records)가 존재한다면 그 페이지로 리디렉션됩니다.
 
-You may set up a custom redirect when the form is saved by overriding the `getRedirectUrl()` method on the Create page class.
+폼이 저장될 때 커스텀 리디렉션을 설정하려면 Create 페이지 클래스에서 `getRedirectUrl()` 메서드를 오버라이드하면 됩니다.
 
-For example, the form can redirect back to the [List page](listing-records):
+예를 들어, 폼 저장 후 [목록 페이지](listing-records)로 리디렉션할 수 있습니다:
 
 ```php
 protected function getRedirectUrl(): string
@@ -47,7 +47,7 @@ protected function getRedirectUrl(): string
 }
 ```
 
-If you wish to be redirected to the previous page, else the index page:
+이전 페이지가 있다면 그곳으로, 없다면 인덱스 페이지로 리디렉션하고 싶다면 다음과 같이 할 수 있습니다:
 
 ```php
 protected function getRedirectUrl(): string
@@ -56,22 +56,22 @@ protected function getRedirectUrl(): string
 }
 ```
 
-## Customizing the save notification
+## 저장 알림 커스터마이징하기 {#customizing-the-save-notification}
 
-When the record is successfully created, a notification is dispatched to the user, which indicates the success of their action.
+레코드가 성공적으로 생성되면, 사용자의 작업이 성공했음을 알리는 알림이 사용자에게 전송됩니다.
 
-To customize the title of this notification, define a `getCreatedNotificationTitle()` method on the create page class:
+이 알림의 제목을 커스터마이징하려면, 생성 페이지 클래스에 `getCreatedNotificationTitle()` 메서드를 정의하세요:
 
 ```php
 protected function getCreatedNotificationTitle(): ?string
 {
-    return 'User registered';
+    return '사용자가 등록되었습니다';
 }
 ```
 
-Alternatively, if you're creating records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/create#customizing-the-save-notification).
+또는, 모달 액션에서 레코드를 생성하는 경우 [액션 문서](../../actions/prebuilt-actions/create#customizing-the-save-notification)를 참고하세요.
 
-You may customize the entire notification by overriding the `getCreatedNotification()` method on the create page class:
+알림 전체를 커스터마이징하려면, 생성 페이지 클래스에서 `getCreatedNotification()` 메서드를 오버라이드하세요:
 
 ```php
 use Filament\Notifications\Notification;
@@ -80,12 +80,12 @@ protected function getCreatedNotification(): ?Notification
 {
     return Notification::make()
         ->success()
-        ->title('User registered')
-        ->body('The user has been created successfully.');
+        ->title('사용자가 등록되었습니다')
+        ->body('사용자가 성공적으로 생성되었습니다.');
 }
 ```
 
-To disable the notification altogether, return `null` from the `getCreatedNotification()` method on the create page class:
+알림을 완전히 비활성화하려면, 생성 페이지 클래스의 `getCreatedNotification()` 메서드에서 `null`을 반환하세요:
 
 ```php
 use Filament\Notifications\Notification;
@@ -96,9 +96,9 @@ protected function getCreatedNotification(): ?Notification
 }
 ```
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-Hooks may be used to execute code at various points within a page's lifecycle, like before a form is saved. To set up a hook, create a protected method on the Create page class with the name of the hook:
+훅은 페이지의 라이프사이클 내 여러 지점에서 코드를 실행하는 데 사용할 수 있습니다. 예를 들어, 폼이 저장되기 전에 코드를 실행할 수 있습니다. 훅을 설정하려면 Create 페이지 클래스에 훅 이름의 protected 메서드를 생성하세요:
 
 ```php
 protected function beforeCreate(): void
@@ -107,9 +107,9 @@ protected function beforeCreate(): void
 }
 ```
 
-In this example, the code in the `beforeCreate()` method will be called before the data in the form is saved to the database.
+이 예시에서 `beforeCreate()` 메서드의 코드는 폼의 데이터가 데이터베이스에 저장되기 전에 호출됩니다.
 
-There are several available hooks for the Create page:
+Create 페이지에서 사용할 수 있는 여러 훅이 있습니다:
 
 ```php
 use Filament\Resources\Pages\CreateRecord;
@@ -120,41 +120,41 @@ class CreateUser extends CreateRecord
 
     protected function beforeFill(): void
     {
-        // Runs before the form fields are populated with their default values.
+        // 폼 필드가 기본값으로 채워지기 전에 실행됩니다.
     }
 
     protected function afterFill(): void
     {
-        // Runs after the form fields are populated with their default values.
+        // 폼 필드가 기본값으로 채워진 후에 실행됩니다.
     }
 
     protected function beforeValidate(): void
     {
-        // Runs before the form fields are validated when the form is submitted.
+        // 폼이 제출될 때 폼 필드가 검증되기 전에 실행됩니다.
     }
 
     protected function afterValidate(): void
     {
-        // Runs after the form fields are validated when the form is submitted.
+        // 폼이 제출될 때 폼 필드가 검증된 후에 실행됩니다.
     }
 
     protected function beforeCreate(): void
     {
-        // Runs before the form fields are saved to the database.
+        // 폼 필드가 데이터베이스에 저장되기 전에 실행됩니다.
     }
 
     protected function afterCreate(): void
     {
-        // Runs after the form fields are saved to the database.
+        // 폼 필드가 데이터베이스에 저장된 후에 실행됩니다.
     }
 }
 ```
 
-Alternatively, if you're creating records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/create#lifecycle-hooks).
+또는, 모달 액션에서 레코드를 생성하는 경우 [액션 문서](../../actions/prebuilt-actions/create#lifecycle-hooks)를 참고하세요.
 
-## Halting the creation process
+## 생성 프로세스 중단하기 {#halting-the-creation-process}
 
-At any time, you may call `$this->halt()` from inside a lifecycle hook or mutation method, which will halt the entire creation process:
+언제든지 라이프사이클 훅이나 변이 메서드 내부에서 `$this->halt()`를 호출하여 전체 생성 프로세스를 중단할 수 있습니다:
 
 ```php
 use Filament\Notifications\Actions\Action;
@@ -165,8 +165,8 @@ protected function beforeCreate(): void
     if (! auth()->user()->team->subscribed()) {
         Notification::make()
             ->warning()
-            ->title('You don\'t have an active subscription!')
-            ->body('Choose a plan to continue.')
+            ->title('활성화된 구독이 없습니다!')
+            ->body('계속하려면 요금제를 선택하세요.')
             ->persistent()
             ->actions([
                 Action::make('subscribe')
@@ -180,19 +180,19 @@ protected function beforeCreate(): void
 }
 ```
 
-Alternatively, if you're creating records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/create#halting-the-creation-process).
+또는, 모달 액션에서 레코드를 생성하는 경우 [액션 문서](../../actions/prebuilt-actions/create#halting-the-creation-process)를 참고하세요.
 
-## Authorization
+## 권한 부여 {#authorization}
 
-For authorization, Filament will observe any [model policies](https://laravel.com/docs/authorization#creating-policies) that are registered in your app.
+권한 부여를 위해 Filament는 앱에 등록된 모든 [모델 정책](https://laravel.com/docs/authorization#creating-policies)을 따릅니다.
 
-Users may access the Create page if the `create()` method of the model policy returns `true`.
+모델 정책의 `create()` 메서드가 `true`를 반환하면 사용자는 생성 페이지에 접근할 수 있습니다.
 
-## Using a wizard
+## 위자드 사용하기 {#using-a-wizard}
 
-You may easily transform the creation process into a multistep wizard.
+생성 프로세스를 손쉽게 다단계 위자드로 변환할 수 있습니다.
 
-On the page class, add the corresponding `HasWizard` trait:
+페이지 클래스에서 해당 `HasWizard` 트레이트를 추가하세요:
 
 ```php
 use App\Filament\Resources\CategoryResource;
@@ -213,7 +213,7 @@ class CreateCategory extends CreateRecord
 }
 ```
 
-Inside the `getSteps()` array, return your [wizard steps](../../forms/layout/wizard):
+`getSteps()` 배열 안에서 [위자드 단계](../../forms/layout/wizard)를 반환하세요:
 
 ```php
 use Filament\Forms\Components\MarkdownEditor;
@@ -225,7 +225,7 @@ protected function getSteps(): array
 {
     return [
         Step::make('Name')
-            ->description('Give the category a clear and unique name')
+            ->description('카테고리에 명확하고 고유한 이름을 지정하세요')
             ->schema([
                 TextInput::make('name')
                     ->required()
@@ -237,27 +237,27 @@ protected function getSteps(): array
                     ->unique(Category::class, 'slug', fn ($record) => $record),
             ]),
         Step::make('Description')
-            ->description('Add some extra details')
+            ->description('추가 정보를 입력하세요')
             ->schema([
                 MarkdownEditor::make('description')
                     ->columnSpan('full'),
             ]),
         Step::make('Visibility')
-            ->description('Control who can view it')
+            ->description('누가 볼 수 있는지 제어하세요')
             ->schema([
                 Toggle::make('is_visible')
-                    ->label('Visible to customers.')
+                    ->label('고객에게 표시됩니다.')
                     ->default(true),
             ]),
     ];
 }
 ```
 
-Alternatively, if you're creating records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/create#using-a-wizard).
+또는, 모달 액션에서 레코드를 생성하는 경우 [액션 문서](../../actions/prebuilt-actions/create#using-a-wizard)를 참고하세요.
 
-Now, create a new record to see your wizard in action! Edit will still use the form defined within the resource class.
+이제 새 레코드를 생성하여 위자드가 동작하는 모습을 확인해보세요! 수정(Edit)은 여전히 리소스 클래스 내에 정의된 폼을 사용합니다.
 
-If you'd like to allow free navigation, so all the steps are skippable, override the `hasSkippableSteps()` method:
+모든 단계를 건너뛸 수 있도록 자유로운 이동을 허용하고 싶다면, `hasSkippableSteps()` 메서드를 오버라이드하세요:
 
 ```php
 public function hasSkippableSteps(): bool
@@ -266,9 +266,9 @@ public function hasSkippableSteps(): bool
 }
 ```
 
-### Sharing fields between the resource form and wizards
+### 리소스 폼과 위저드 간 필드 공유하기 {#sharing-fields-between-the-resource-form-and-wizards}
 
-If you'd like to reduce the amount of repetition between the resource form and wizard steps, it's a good idea to extract public static resource functions for your fields, where you can easily retrieve an instance of a field from the resource or the wizard:
+리소스 폼과 위저드 단계 간의 반복을 줄이고 싶다면, 필드에 대한 public static 리소스 함수를 추출하는 것이 좋습니다. 이렇게 하면 리소스나 위저드에서 쉽게 필드 인스턴스를 가져올 수 있습니다:
 
 ```php
 use Filament\Forms;
@@ -319,7 +319,7 @@ class CreateCategory extends CreateRecord
     {
         return [
             Step::make('Name')
-                ->description('Give the category a clear and unique name')
+                ->description('카테고리에 명확하고 고유한 이름을 지정하세요')
                 ->schema([
                     CategoryResource::getNameFormField(),
                     CategoryResource::getSlugFormField(),
@@ -330,9 +330,9 @@ class CreateCategory extends CreateRecord
 }
 ```
 
-## Importing resource records
+## 리소스 레코드 가져오기 {#importing-resource-records}
 
-Filament includes an `ImportAction` that you can add to the `getHeaderActions()` of the [List page](listing-records). It allows users to upload a CSV of data to import into the resource:
+Filament에는 `ImportAction`이 포함되어 있어 [목록 페이지](listing-records)의 `getHeaderActions()`에 추가할 수 있습니다. 이를 통해 사용자는 리소스에 가져올 데이터를 CSV 파일로 업로드할 수 있습니다:
 
 ```php
 use App\Filament\Imports\ProductImporter;
@@ -348,15 +348,15 @@ protected function getHeaderActions(): array
 }
 ```
 
-The "importer" class [needs to be created](../../actions/prebuilt-actions/import#creating-an-importer) to tell Filament how to import each row of the CSV. You can learn everything about the `ImportAction` in the [Actions documentation](../../actions/prebuilt-actions/import).
+"importer" 클래스는 Filament에 CSV의 각 행을 어떻게 가져올지 알려주기 위해 [생성되어야 합니다](../../actions/prebuilt-actions/import#creating-an-importer). `ImportAction`에 대한 모든 내용은 [액션 문서](../../actions/prebuilt-actions/import)에서 확인할 수 있습니다.
 
-## Custom actions
+## 커스텀 액션 {#custom-actions}
 
-"Actions" are buttons that are displayed on pages, which allow the user to run a Livewire method on the page or visit a URL.
+"액션"은 페이지에 표시되는 버튼으로, 사용자가 해당 페이지에서 Livewire 메서드를 실행하거나 URL을 방문할 수 있게 해줍니다.
 
-On resource pages, actions are usually in 2 places: in the top right of the page, and below the form.
+리소스 페이지에서는 액션이 보통 두 곳에 위치합니다: 페이지의 오른쪽 상단과 폼 아래입니다.
 
-For example, you may add a new button action in the header of the Create page:
+예를 들어, Create 페이지의 헤더에 새로운 버튼 액션을 추가할 수 있습니다:
 
 ```php
 use App\Filament\Imports\UserImporter;
@@ -377,7 +377,7 @@ class CreateUser extends CreateRecord
 }
 ```
 
-Or, a new button next to "Create" below the form:
+또는, 폼 아래 "Create" 버튼 옆에 새로운 버튼을 추가할 수도 있습니다:
 
 ```php
 use Filament\Actions\Action;
@@ -402,11 +402,11 @@ class CreateUser extends CreateRecord
 }
 ```
 
-To view the entire actions API, please visit the [pages section](../pages#adding-actions-to-pages).
+전체 액션 API를 보려면 [페이지 섹션](../pages#adding-actions-to-pages)을 참고하세요.
 
-### Adding a create action button to the header
+### 헤더에 생성 액션 버튼 추가하기 {#adding-a-create-action-button-to-the-header}
 
-The "Create" button can be moved to the header of the page by overriding the `getHeaderActions()` method and using `getCreateFormAction()`. You need to pass `formId()` to the action, to specify that the action should submit the form with the ID of `form`, which is the `<form>` ID used in the view of the page:
+"생성" 버튼은 `getHeaderActions()` 메서드를 오버라이드하고 `getCreateFormAction()`을 사용하여 페이지의 헤더로 이동할 수 있습니다. 이때, 액션이 `form`이라는 ID를 가진 폼을 제출하도록 지정하기 위해 `formId()`를 액션에 전달해야 합니다. 이 `form`은 페이지 뷰에서 사용되는 `<form>`의 ID입니다:
 
 ```php
 protected function getHeaderActions(): array
@@ -418,7 +418,7 @@ protected function getHeaderActions(): array
 }
 ```
 
-You may remove all actions from the form by overriding the `getFormActions()` method to return an empty array:
+`getFormActions()` 메서드를 오버라이드하여 빈 배열을 반환하면 폼에서 모든 액션을 제거할 수 있습니다:
 
 ```php
 protected function getFormActions(): array
@@ -427,17 +427,17 @@ protected function getFormActions(): array
 }
 ```
 
-## Custom view
+## 커스텀 뷰 {#custom-view}
 
-For further customization opportunities, you can override the static `$view` property on the page class to a custom view in your app:
+더 많은 커스터마이징을 원한다면, 페이지 클래스에서 static `$view` 프로퍼티를 앱의 커스텀 뷰로 오버라이드할 수 있습니다:
 
 ```php
 protected static string $view = 'filament.resources.users.pages.create-user';
 ```
 
-This assumes that you have created a view at `resources/views/filament/resources/users/pages/create-user.blade.php`.
+이 코드는 `resources/views/filament/resources/users/pages/create-user.blade.php`에 뷰를 생성했다고 가정합니다.
 
-Here's a basic example of what that view might contain:
+해당 뷰에 들어갈 수 있는 기본 예시는 다음과 같습니다:
 
 ```blade
 <x-filament-panels::page>
@@ -452,4 +452,4 @@ Here's a basic example of what that view might contain:
 </x-filament-panels::page>
 ```
 
-To see everything that the default view contains, you can check the `vendor/filament/filament/resources/views/resources/pages/create-record.blade.php` file in your project.
+기본 뷰에 포함된 모든 내용을 확인하려면, 프로젝트의 `vendor/filament/filament/resources/views/resources/pages/create-record.blade.php` 파일을 참고할 수 있습니다.

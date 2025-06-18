@@ -1,19 +1,19 @@
 ---
 title: Select
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [폼.필드] Select
 
-## Overview
+
+## 개요 {#overview}
 
 <LaracastsBanner
     title="Select Input"
-    description="Watch the Rapid Laravel Development with Filament series on Laracasts - it will teach you the basics of adding select fields to Filament forms."
+    description="Laracasts의 Rapid Laravel Development with Filament 시리즈를 시청하세요. 이 시리즈는 Filament 폼에 select 필드를 추가하는 기본 방법을 알려줍니다."
     url="https://laracasts.com/series/rapid-laravel-development-with-filament/episodes/4"
     series="rapid-laravel-development"
 />
 
-The select component allows you to select from a list of predefined options:
+select 컴포넌트는 미리 정의된 옵션 목록 중에서 선택할 수 있도록 해줍니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -28,9 +28,9 @@ Select::make('status')
 
 <AutoScreenshot name="forms/fields/select/simple" alt="Select" version="3.x" />
 
-## Enabling the JavaScript select
+## JavaScript 셀렉트 활성화 {#enabling-the-javascript-select}
 
-By default, Filament uses the native HTML5 select. You may enable a more customizable JavaScript select using the `native(false)` method:
+기본적으로 Filament는 네이티브 HTML5 셀렉트를 사용합니다. `native(false)` 메서드를 사용하여 더 커스터마이즈 가능한 JavaScript 셀렉트를 활성화할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -46,9 +46,9 @@ Select::make('status')
 
 <AutoScreenshot name="forms/fields/select/javascript" alt="JavaScript select" version="3.x" />
 
-## Searching options
+## 검색 옵션 {#searching-options}
 
-You may enable a search input to allow easier access to many options, using the `searchable()` method:
+`searchable()` 메서드를 사용하여 많은 옵션에 더 쉽게 접근할 수 있도록 검색 입력을 활성화할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -59,17 +59,17 @@ Select::make('author_id')
     ->searchable()
 ```
 
-<AutoScreenshot name="forms/fields/select/searchable" alt="Searchable select" version="3.x" />
+<AutoScreenshot name="forms/fields/select/searchable" alt="검색 가능한 셀렉트" version="3.x" />
 
-### Returning custom search results
+### 사용자 지정 검색 결과 반환 {#returning-custom-search-results}
 
-If you have lots of options and want to populate them based on a database search or other external data source, you can use the `getSearchResultsUsing()` and `getOptionLabelUsing()` methods instead of `options()`.
+옵션이 많고 데이터베이스 검색이나 기타 외부 데이터 소스를 기반으로 옵션을 채우고 싶다면, `options()` 대신 `getSearchResultsUsing()` 및 `getOptionLabelUsing()` 메서드를 사용할 수 있습니다.
 
-The `getSearchResultsUsing()` method accepts a callback that returns search results in `$key => $value` format. The current user's search is available as `$search`, and you should use that to filter your results.
+`getSearchResultsUsing()` 메서드는 `$key => $value` 형식의 검색 결과를 반환하는 콜백을 받습니다. 현재 사용자의 검색어는 `$search`로 제공되며, 이를 사용해 결과를 필터링해야 합니다.
 
-The `getOptionLabelUsing()` method accepts a callback that transforms the selected option `$value` into a label. This is used when the form is first loaded when the user has not made a search yet. Otherwise, the label used to display the currently selected option would not be available.
+`getOptionLabelUsing()` 메서드는 선택된 옵션 `$value`를 라벨로 변환하는 콜백을 받습니다. 이 메서드는 폼이 처음 로드될 때, 사용자가 아직 검색을 하지 않은 경우에 사용됩니다. 그렇지 않으면, 현재 선택된 옵션을 표시할 라벨을 사용할 수 없게 됩니다.
 
-Both `getSearchResultsUsing()` and `getOptionLabelUsing()` must be used on the select if you want to provide custom search results:
+사용자 지정 검색 결과를 제공하려면 `getSearchResultsUsing()`과 `getOptionLabelUsing()`을 모두 select에 사용해야 합니다:
 
 ```php
 Select::make('author_id')
@@ -78,9 +78,9 @@ Select::make('author_id')
     ->getOptionLabelUsing(fn ($value): ?string => User::find($value)?->name),
 ```
 
-## Multi-select
+## 다중 선택 {#multi-select}
 
-The `multiple()` method on the `Select` component allows you to select multiple values from the list of options:
+`Select` 컴포넌트의 `multiple()` 메서드를 사용하면 옵션 목록에서 여러 값을 선택할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -97,7 +97,7 @@ Select::make('technologies')
 
 <AutoScreenshot name="forms/fields/select/multiple" alt="Multi-select" version="3.x" />
 
-These options are returned in JSON format. If you're saving them using Eloquent, you should be sure to add an `array` [cast](https://laravel.com/docs/eloquent-mutators#array-and-json-casting) to the model property:
+이 옵션들은 JSON 형식으로 반환됩니다. Eloquent를 사용하여 저장하는 경우, 모델 속성에 `array` [캐스트](https://laravel.com/docs/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -112,7 +112,7 @@ class App extends Model
 }
 ```
 
-If you're [returning custom search results](#returning-custom-search-results), you should define `getOptionLabelsUsing()` instead of `getOptionLabelUsing()`. `$values` will be passed into the callback instead of `$value`, and you should return a `$key => $value` array of labels and their corresponding values:
+[커스텀 검색 결과를 반환](#returning-custom-search-results)하는 경우, `getOptionLabelUsing()` 대신 `getOptionLabelsUsing()`을 정의해야 합니다. 이때 콜백에는 `$value` 대신 `$values`가 전달되며, 라벨과 해당 값의 `$key => $value` 배열을 반환해야 합니다:
 
 ```php
 Select::make('technologies')
@@ -122,9 +122,9 @@ Select::make('technologies')
     ->getOptionLabelsUsing(fn (array $values): array => Technology::whereIn('id', $values)->pluck('name', 'id')->toArray()),
 ```
 
-## Grouping options
+## 옵션 그룹화 {#grouping-options}
 
-You can group options together under a label, to organize them better. To do this, you can pass an array of groups to `options()` or wherever you would normally pass an array of options. The keys of the array are used as group labels, and the values are arrays of options in that group:
+옵션을 더 잘 정리하기 위해 라벨 아래에 옵션을 그룹화할 수 있습니다. 이를 위해, `options()` 또는 일반적으로 옵션 배열을 전달하는 곳에 그룹 배열을 전달하면 됩니다. 배열의 키는 그룹 라벨로 사용되고, 값은 해당 그룹의 옵션 배열입니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -145,11 +145,11 @@ Select::make('status')
 
 <AutoScreenshot name="forms/fields/select/grouped" alt="Grouped select" version="3.x" />
 
-## Integrating with an Eloquent relationship
+## Eloquent 관계와 통합하기 {#integrating-with-an-eloquent-relationship}
 
-> If you're building a form inside your Livewire component, make sure you have set up the [form's model](../adding-a-form-to-a-livewire-component#setting-a-form-model). Otherwise, Filament doesn't know which model to use to retrieve the relationship from.
+> Livewire 컴포넌트 내에서 폼을 구축하는 경우, 반드시 [폼의 모델](../adding-a-form-to-a-livewire-component#setting-a-form-model)을 설정했는지 확인하세요. 그렇지 않으면 Filament는 어떤 모델에서 관계를 가져와야 하는지 알 수 없습니다.
 
-You may employ the `relationship()` method of the `Select` to configure a `BelongsTo` relationship to automatically retrieve options from. The `titleAttribute` is the name of a column that will be used to generate a label for each option:
+`Select`의 `relationship()` 메서드를 사용하여 `BelongsTo` 관계를 설정하고, 옵션을 자동으로 가져올 수 있습니다. `titleAttribute`는 각 옵션의 라벨을 생성할 때 사용할 컬럼의 이름입니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -158,7 +158,7 @@ Select::make('author_id')
     ->relationship(name: 'author', titleAttribute: 'name')
 ```
 
-The `multiple()` method may be used in combination with `relationship()` to use a `BelongsToMany` relationship. Filament will load the options from the relationship, and save them back to the relationship's pivot table when the form is submitted. If a `name` is not provided, Filament will use the field name as the relationship name:
+`multiple()` 메서드는 `relationship()`과 함께 사용하여 `BelongsToMany` 관계를 사용할 수 있습니다. Filament는 관계에서 옵션을 불러오고, 폼이 제출될 때 해당 값을 관계의 pivot 테이블에 저장합니다. `name`을 지정하지 않으면, Filament는 필드 이름을 관계 이름으로 사용합니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -168,7 +168,7 @@ Select::make('technologies')
     ->relationship(titleAttribute: 'name')
 ```
 
-When using `disabled()` with `multiple()` and `relationship()`, ensure that `disabled()` is called before `relationship()`. This ensures that the `dehydrated()` call from within `relationship()` is not overridden by the call from `disabled()`:
+`multiple()`과 `relationship()`을 사용할 때 `disabled()`를 함께 사용하려면, 반드시 `disabled()`를 `relationship()`보다 먼저 호출해야 합니다. 이렇게 하면 `relationship()` 내부의 `dehydrated()` 호출이 `disabled()`의 호출에 의해 덮어써지지 않습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -179,9 +179,9 @@ Select::make('technologies')
     ->relationship(titleAttribute: 'name')
 ```
 
-### Searching relationship options across multiple columns
+### 여러 컬럼에서 관계 옵션 검색하기 {#searching-relationship-options-across-multiple-columns}
 
-By default, if the select is also searchable, Filament will return search results for the relationship based on the title column of the relationship. If you'd like to search across multiple columns, you can pass an array of columns to the `searchable()` method:
+기본적으로, select가 검색 가능하도록 설정되어 있다면, Filament는 관계의 title 컬럼을 기준으로 검색 결과를 반환합니다. 여러 컬럼에서 검색하고 싶다면, `searchable()` 메서드에 컬럼 배열을 전달할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -191,9 +191,9 @@ Select::make('author_id')
     ->searchable(['name', 'email'])
 ```
 
-### Preloading relationship options
+### 관계 옵션 미리 불러오기 {#preloading-relationship-options}
 
-If you'd like to populate the searchable options from the database when the page is loaded, instead of when the user searches, you can use the `preload()` method:
+페이지가 로드될 때 데이터베이스에서 검색 가능한 옵션을 미리 불러오고 싶다면, 사용자가 검색할 때가 아니라 `preload()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -204,11 +204,11 @@ Select::make('author_id')
     ->preload()
 ```
 
-### Excluding the current record
+### 현재 레코드 제외하기 {#excluding-the-current-record}
 
-When working with recursive relationships, you will likely want to remove the current record from the set of results.
+재귀 관계를 다룰 때, 결과 집합에서 현재 레코드를 제거하고 싶을 때가 많습니다.
 
-This can be easily be done using the `ignoreRecord` argument:
+이는 `ignoreRecord` 인자를 사용하여 쉽게 처리할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -217,9 +217,9 @@ Select::make('parent_id')
     ->relationship(name: 'parent', titleAttribute: 'name', ignoreRecord: true)
 ```
 
-### Customizing the relationship query
+### 관계 쿼리 커스터마이징하기 {#customizing-the-relationship-query}
 
-You may customize the database query that retrieves options using the third parameter of the `relationship()` method:
+옵션을 가져오는 데이터베이스 쿼리를 `relationship()` 메서드의 세 번째 매개변수를 사용하여 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -233,11 +233,11 @@ Select::make('author_id')
     )
 ```
 
-If you would like to access the current search query in the `modifyQueryUsing` function, you can inject `$search`.
+`modifyQueryUsing` 함수에서 현재 검색 쿼리에 접근하고 싶다면, `$search`를 주입할 수 있습니다.
 
-### Customizing the relationship option labels
+### 관계 옵션 라벨 커스터마이징하기 {#customizing-the-relationship-option-labels}
 
-If you'd like to customize the label of each option, maybe to be more descriptive, or to concatenate a first and last name, you could use a virtual column in your database migration:
+각 옵션의 라벨을 더 설명적으로 만들거나, 예를 들어 이름과 성을 합치고 싶다면, 데이터베이스 마이그레이션에서 가상 컬럼을 사용할 수 있습니다:
 
 ```php
 $table->string('full_name')->virtualAs('concat(first_name, \' \', last_name)');
@@ -250,7 +250,7 @@ Select::make('author_id')
     ->relationship(name: 'author', titleAttribute: 'full_name')
 ```
 
-Alternatively, you can use the `getOptionLabelFromRecordUsing()` method to transform an option's Eloquent model into a label:
+또는, `getOptionLabelFromRecordUsing()` 메서드를 사용하여 옵션의 Eloquent 모델을 라벨로 변환할 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -266,9 +266,9 @@ Select::make('author_id')
     ->searchable(['first_name', 'last_name'])
 ```
 
-### Saving pivot data to the relationship
+### 관계에 피벗 데이터 저장하기 {#saving-pivot-data-to-the-relationship}
 
-If you're using a `multiple()` relationship and your pivot table has additional columns, you can use the `pivotData()` method to specify the data that should be saved in them:
+`multiple()` 관계를 사용하고 있고 피벗 테이블에 추가 컬럼이 있는 경우, `pivotData()` 메서드를 사용하여 해당 컬럼에 저장할 데이터를 지정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -281,9 +281,9 @@ Select::make('primaryTechnologies')
     ])
 ```
 
-### Creating a new option in a modal
+### 모달에서 새로운 옵션 생성하기 {#creating-a-new-option-in-a-modal}
 
-You may define a custom form that can be used to create a new record and attach it to the `BelongsTo` relationship:
+사용자는 새로운 레코드를 생성하고 이를 `BelongsTo` 관계에 연결할 수 있도록 커스텀 폼을 정의할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -299,15 +299,15 @@ Select::make('author_id')
     ]),
 ```
 
-<AutoScreenshot name="forms/fields/select/create-option" alt="Select with create option button" version="3.x" />
+<AutoScreenshot name="forms/fields/select/create-option" alt="옵션 생성 버튼이 있는 셀렉트" version="3.x" />
 
-The form opens in a modal, where the user can fill it with data. Upon form submission, the new record is selected by the field.
+폼은 모달에서 열리며, 사용자는 데이터를 입력할 수 있습니다. 폼을 제출하면 새 레코드가 해당 필드에서 선택됩니다.
 
-<AutoScreenshot name="forms/fields/select/create-option-modal" alt="Select with create option modal" version="3.x" />
+<AutoScreenshot name="forms/fields/select/create-option-modal" alt="옵션 생성 모달이 있는 셀렉트" version="3.x" />
 
-#### Customizing new option creation
+#### 새 옵션 생성 커스터마이징 {#customizing-new-option-creation}
 
-You can customize the creation process of the new option defined in the form using the `createOptionUsing()` method, which should return the primary key of the newly created record:
+폼에서 정의된 새 옵션의 생성 과정을 `createOptionUsing()` 메서드를 사용하여 커스터마이즈할 수 있습니다. 이 메서드는 새로 생성된 레코드의 기본 키를 반환해야 합니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -322,9 +322,9 @@ Select::make('author_id')
     }),
 ```
 
-### Editing the selected option in a modal
+### 모달에서 선택된 옵션 편집하기 {#editing-the-selected-option-in-a-modal}
 
-You may define a custom form that can be used to edit the selected record and save it back to the `BelongsTo` relationship:
+선택된 레코드를 편집하고 이를 `BelongsTo` 관계에 다시 저장할 수 있는 커스텀 폼을 정의할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -340,17 +340,17 @@ Select::make('author_id')
     ]),
 ```
 
-<AutoScreenshot name="forms/fields/select/edit-option" alt="Select with edit option button" version="3.x" />
+<AutoScreenshot name="forms/fields/select/edit-option" alt="옵션 편집 버튼이 있는 셀렉트" version="3.x" />
 
-The form opens in a modal, where the user can fill it with data. Upon form submission, the data from the form is saved back to the record.
+폼은 모달에서 열리며, 사용자가 데이터를 입력할 수 있습니다. 폼을 제출하면 폼의 데이터가 레코드에 다시 저장됩니다.
 
-<AutoScreenshot name="forms/fields/select/edit-option-modal" alt="Select with edit option modal" version="3.x" />
+<AutoScreenshot name="forms/fields/select/edit-option-modal" alt="옵션 편집 모달이 있는 셀렉트" version="3.x" />
 
-### Handling `MorphTo` relationships
+### `MorphTo` 관계 처리하기 {#handling-morphto-relationships}
 
-`MorphTo` relationships are special, since they give the user the ability to select records from a range of different models. Because of this, we have a dedicated `MorphToSelect` component which is not actually a select field, rather 2 select fields inside a fieldset. The first select field allows you to select the type, and the second allows you to select the record of that type.
+`MorphTo` 관계는 사용자가 다양한 모델 중에서 레코드를 선택할 수 있도록 해주기 때문에 특별합니다. 이러한 이유로, Filament에서는 전용 `MorphToSelect` 컴포넌트를 제공합니다. 이 컴포넌트는 실제로 하나의 select 필드가 아니라, 필드셋 안에 두 개의 select 필드로 구성되어 있습니다. 첫 번째 select 필드는 타입을 선택할 수 있게 해주고, 두 번째 select 필드는 해당 타입의 레코드를 선택할 수 있게 해줍니다.
 
-To use the `MorphToSelect`, you must pass `types()` into the component, which tell it how to render options for different types:
+`MorphToSelect`를 사용하려면, 컴포넌트에 `types()`를 전달해야 하며, 이를 통해 다양한 타입에 대한 옵션을 어떻게 렌더링할지 지정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\MorphToSelect;
@@ -364,9 +364,9 @@ MorphToSelect::make('commentable')
     ])
 ```
 
-#### Customizing the option labels for each morphed type
+#### 각 변환된 타입의 옵션 라벨 커스터마이징하기 {#customizing-the-option-labels-for-each-morphed-type}
 
-The `titleAttribute()` is used to extract the titles out of each product or post. If you'd like to customize the label of each option, you can use the `getOptionLabelFromRecordUsing()` method to transform the Eloquent model into a label:
+`titleAttribute()`는 각 상품이나 게시글에서 제목을 추출하는 데 사용됩니다. 각 옵션의 라벨을 커스터마이즈하고 싶다면, `getOptionLabelFromRecordUsing()` 메서드를 사용하여 Eloquent 모델을 라벨로 변환할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\MorphToSelect;
@@ -380,9 +380,9 @@ MorphToSelect::make('commentable')
     ])
 ```
 
-#### Customizing the relationship query for each morphed type
+#### 각 변형 타입별 관계 쿼리 커스터마이징 {#customizing-the-relationship-query-for-each-morphed-type}
 
-You may customize the database query that retrieves options using the `modifyOptionsQueryUsing()` method:
+옵션을 조회하는 데이터베이스 쿼리는 `modifyOptionsQueryUsing()` 메서드를 사용하여 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\MorphToSelect;
@@ -399,11 +399,11 @@ MorphToSelect::make('commentable')
     ])
 ```
 
-> Many of the same options in the select field are available for `MorphToSelect`, including `searchable()`, `preload()`, `native()`, `allowHtml()`, and `optionsLimit()`.
+> `searchable()`, `preload()`, `native()`, `allowHtml()`, `optionsLimit()` 등 select 필드에서 사용할 수 있는 많은 옵션들이 `MorphToSelect`에서도 사용 가능합니다.
 
-## Allowing HTML in the option labels
+## 옵션 라벨에서 HTML 허용하기 {#allowing-html-in-the-option-labels}
 
-By default, Filament will escape any HTML in the option labels. If you'd like to allow HTML, you can use the `allowHtml()` method:
+기본적으로 Filament는 옵션 라벨에 있는 모든 HTML을 이스케이프 처리합니다. HTML을 허용하고 싶다면 `allowHtml()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -419,11 +419,11 @@ Select::make('technology')
     ->allowHtml()
 ```
 
-Be aware that you will need to ensure that the HTML is safe to render, otherwise your application will be vulnerable to XSS attacks.
+렌더링할 HTML이 안전한지 반드시 확인해야 합니다. 그렇지 않으면 애플리케이션이 XSS 공격에 취약해질 수 있습니다.
 
-## Disable placeholder selection
+## 플레이스홀더 선택 비활성화 {#disable-placeholder-selection}
 
-You can prevent the placeholder (null option) from being selected using the `selectablePlaceholder()` method:
+`selectablePlaceholder()` 메서드를 사용하여 플레이스홀더(null 옵션)가 선택되지 않도록 막을 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -438,9 +438,9 @@ Select::make('status')
     ->selectablePlaceholder(false)
 ```
 
-## Disabling specific options
+## 특정 옵션 비활성화하기 {#disabling-specific-options}
 
-You can disable specific options using the `disableOptionWhen()` method. It accepts a closure, in which you can check if the option with a specific `$value` should be disabled:
+`disableOptionWhen()` 메서드를 사용하여 특정 옵션을 비활성화할 수 있습니다. 이 메서드는 클로저를 인자로 받으며, 해당 클로저에서 특정 `$value` 값을 가진 옵션을 비활성화할지 여부를 확인할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -455,7 +455,7 @@ Select::make('status')
     ->disableOptionWhen(fn (string $value): bool => $value === 'published')
 ```
 
-If you want to retrieve the options that have not been disabled, e.g. for validation purposes, you can do so using `getEnabledOptions()`:
+비활성화되지 않은 옵션만 가져오고 싶다면(예: 유효성 검사 목적 등), `getEnabledOptions()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -471,9 +471,9 @@ Select::make('status')
     ->in(fn (Select $component): array => array_keys($component->getEnabledOptions()))
 ```
 
-## Adding affix text aside the field
+## 필드 옆에 접두사/접미사 텍스트 추가하기 {#adding-affix-text-aside-the-field}
 
-You may place text before and after the input using the `prefix()` and `suffix()` methods:
+`prefix()`와 `suffix()` 메서드를 사용하여 입력란 앞과 뒤에 텍스트를 추가할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -483,11 +483,11 @@ Select::make('domain')
     ->suffix('.com')
 ```
 
-<AutoScreenshot name="forms/fields/select/affix" alt="Select with affixes" version="3.x" />
+<AutoScreenshot name="forms/fields/select/affix" alt="접두사와 접미사가 있는 Select" version="3.x" />
 
-### Using icons as affixes
+### 접두사 및 접미사로 아이콘 사용하기 {#using-icons-as-affixes}
 
-You may place an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) before and after the input using the `prefixIcon()` and `suffixIcon()` methods:
+`prefixIcon()` 및 `suffixIcon()` 메서드를 사용하여 입력란 앞이나 뒤에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 배치할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -496,11 +496,11 @@ Select::make('domain')
     ->suffixIcon('heroicon-m-globe-alt')
 ```
 
-<AutoScreenshot name="forms/fields/select/suffix-icon" alt="Select with suffix icon" version="3.x" />
+<AutoScreenshot name="forms/fields/select/suffix-icon" alt="접미사 아이콘이 있는 Select" version="3.x" />
 
-#### Setting the affix icon's color
+#### 접두사/접미사 아이콘 색상 설정하기 {#setting-the-affix-icons-color}
 
-Affix icons are gray by default, but you may set a different color using the `prefixIconColor()` and `suffixIconColor()` methods:
+접두사/접미사 아이콘은 기본적으로 회색이지만, `prefixIconColor()`와 `suffixIconColor()` 메서드를 사용하여 다른 색상으로 설정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -510,22 +510,9 @@ Select::make('domain')
     ->suffixIconColor('success')
 ```
 
-## Setting a custom loading message
+## 사용자 지정 로딩 메시지 설정하기 {#setting-a-custom-loading-message}
 
-When you're using a searchable select or multi-select, you may want to display a custom message while the options are loading. You can do this using the `loadingMessage()` method:
-
-```php
-use Filament\Forms\Components\Select;
-
-Select::make('author_id')
-    ->relationship(name: 'author', titleAttribute: 'name')
-    ->searchable()
-    ->loadingMessage('Loading authors...')
-```
-
-## Setting a custom no search results message
-
-When you're using a searchable select or multi-select, you may want to display a custom message when no search results are found. You can do this using the `noSearchResultsMessage()` method:
+검색 가능한 셀렉트나 멀티 셀렉트를 사용할 때, 옵션이 로딩되는 동안 사용자 지정 메시지를 표시하고 싶을 수 있습니다. `loadingMessage()` 메서드를 사용하여 이를 설정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -533,12 +520,25 @@ use Filament\Forms\Components\Select;
 Select::make('author_id')
     ->relationship(name: 'author', titleAttribute: 'name')
     ->searchable()
-    ->noSearchResultsMessage('No authors found.')
+    ->loadingMessage('저자 정보를 불러오는 중...')
 ```
 
-## Setting a custom search prompt
+## 사용자 지정 검색 결과 없음 메시지 설정하기 {#setting-a-custom-no-search-results-message}
 
-When you're using a searchable select or multi-select, you may want to display a custom message when the user has not yet entered a search term. You can do this using the `searchPrompt()` method:
+검색 가능한 셀렉트나 멀티 셀렉트를 사용할 때, 검색 결과가 없을 경우 사용자 지정 메시지를 표시하고 싶을 수 있습니다. `noSearchResultsMessage()` 메서드를 사용하여 이를 설정할 수 있습니다:
+
+```php
+use Filament\Forms\Components\Select;
+
+Select::make('author_id')
+    ->relationship(name: 'author', titleAttribute: 'name')
+    ->searchable()
+    ->noSearchResultsMessage('저자를 찾을 수 없습니다.')
+```
+
+## 사용자 지정 검색 프롬프트 설정 {#setting-a-custom-search-prompt}
+
+검색 가능한 셀렉트 또는 멀티 셀렉트를 사용할 때, 사용자가 아직 검색어를 입력하지 않았을 때 사용자 지정 메시지를 표시하고 싶을 수 있습니다. 이를 위해 `searchPrompt()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -546,12 +546,12 @@ use Filament\Forms\Components\Select;
 Select::make('author_id')
     ->relationship(name: 'author', titleAttribute: 'name')
     ->searchable(['name', 'email'])
-    ->searchPrompt('Search authors by their name or email address')
+    ->searchPrompt('이름이나 이메일 주소로 저자를 검색하세요')
 ```
 
-## Setting a custom searching message
+## 사용자 지정 검색 메시지 설정하기 {#setting-a-custom-searching-message}
 
-When you're using a searchable select or multi-select, you may want to display a custom message while the search results are being loaded. You can do this using the `searchingMessage()` method:
+검색 가능한 셀렉트나 멀티 셀렉트를 사용할 때, 검색 결과가 로드되는 동안 사용자 지정 메시지를 표시하고 싶을 수 있습니다. `searchingMessage()` 메서드를 사용하여 이를 설정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -559,12 +559,12 @@ use Filament\Forms\Components\Select;
 Select::make('author_id')
     ->relationship(name: 'author', titleAttribute: 'name')
     ->searchable()
-    ->searchingMessage('Searching authors...')
+    ->searchingMessage('저자 검색 중...')
 ```
 
-## Tweaking the search debounce
+## 검색 디바운스 조정하기 {#tweaking-the-search-debounce}
 
-By default, Filament will wait 1000 milliseconds (1 second) before searching for options when the user types in a searchable select or multi-select. It will also wait 1000 milliseconds between searches, if the user is continuously typing into the search input. You can change this using the `searchDebounce()` method:
+기본적으로 Filament는 사용자가 검색 가능한 셀렉트나 멀티 셀렉트에서 입력할 때 옵션을 검색하기 전에 1000밀리초(1초)를 대기합니다. 또한 사용자가 검색 입력란에 계속 입력할 경우, 검색 사이에도 1000밀리초를 대기합니다. 이 값은 `searchDebounce()` 메서드를 사용하여 변경할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -575,11 +575,11 @@ Select::make('author_id')
     ->searchDebounce(500)
 ```
 
-Ensure that you are not lowering the debounce too much, as this may cause the select to become slow and unresponsive due to a high number of network requests to retrieve options from server.
+디바운스 값을 너무 낮게 설정하면, 서버에서 옵션을 가져오기 위한 네트워크 요청이 많아져 셀렉트가 느려지거나 응답하지 않을 수 있으니 주의하세요.
 
-## Limiting the number of options
+## 옵션 수 제한하기 {#limiting-the-number-of-options}
 
-You can limit the number of options that are displayed in a searchable select or multi-select using the `optionsLimit()` method. The default is 50:
+`optionsLimit()` 메서드를 사용하여 검색 가능한 셀렉트 또는 멀티 셀렉트에 표시되는 옵션의 수를 제한할 수 있습니다. 기본값은 50입니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -590,15 +590,15 @@ Select::make('author_id')
     ->optionsLimit(20)
 ```
 
-Ensure that you are not raising the limit too high, as this may cause the select to become slow and unresponsive due to high in-browser memory usage.
+옵션 수를 너무 높게 설정하면 브라우저 내 메모리 사용량이 많아져 셀렉트가 느려지거나 응답하지 않을 수 있으니 주의하세요.
 
-## Select validation
+## 셀렉트 유효성 검사 {#select-validation}
 
-As well as all rules listed on the [validation](../validation) page, there are additional rules that are specific to selects.
+[유효성 검사](../validation) 페이지에 나열된 모든 규칙뿐만 아니라, 셀렉트에만 적용되는 추가 규칙도 있습니다.
 
-### Selected items validation
+### 선택된 항목 유효성 검사 {#selected-items-validation}
 
-You can validate the minimum and maximum number of items that you can select in a [multi-select](#multi-select) by setting the `minItems()` and `maxItems()` methods:
+[multi-select](#multi-select)에서 선택할 수 있는 항목의 최소 및 최대 개수를 `minItems()`와 `maxItems()` 메서드를 설정하여 검증할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -615,15 +615,15 @@ Select::make('technologies')
     ->maxItems(3)
 ```
 
-## Customizing the select action objects
+## 선택 액션 객체 커스터마이징 {#customizing-the-select-action-objects}
 
-This field uses action objects for easy customization of buttons within it. You can customize these buttons by passing a function to an action registration method. The function has access to the `$action` object, which you can use to [customize it](../../actions/trigger-button) or [customize its modal](../../actions/modals). The following methods are available to customize the actions:
+이 필드는 내부 버튼을 쉽게 커스터마이징할 수 있도록 액션 객체를 사용합니다. 액션 등록 메서드에 함수를 전달하여 이 버튼들을 커스터마이징할 수 있습니다. 이 함수는 `$action` 객체에 접근할 수 있으며, 이를 통해 [액션을 커스터마이징](../../actions/trigger-button)하거나 [모달을 커스터마이징](../../actions/modals)할 수 있습니다. 액션을 커스터마이징할 때 사용할 수 있는 메서드는 다음과 같습니다:
 
 - `createOptionAction()`
 - `editOptionAction()`
-- `manageOptionActions()` (for customizing both the create and edit option actions at once)
+- `manageOptionActions()` (생성 및 편집 옵션 액션을 한 번에 커스터마이징할 때 사용)
 
-Here is an example of how you might customize an action:
+다음은 액션을 커스터마이징하는 예시입니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;

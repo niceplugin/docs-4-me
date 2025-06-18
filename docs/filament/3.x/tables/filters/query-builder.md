@@ -1,14 +1,14 @@
 ---
-title: Query builder
+title: QueryBuilder
 ---
+# [테이블.필터] QueryBuilder
+## 개요 {#overview}
 
-## Overview
+QueryBuilder는 테이블의 데이터를 필터링하기 위해 복잡한 조건 집합을 정의할 수 있도록 해줍니다. "and" 및 "or" 연산으로 그룹화할 수 있는 무제한 중첩 조건을 처리할 수 있습니다.
 
-The query builder allows you to define a complex set of conditions to filter the data in your table. It is able to handle unlimited nesting of conditions, which you can group together with "and" and "or" operations.
+이를 사용하려면 데이터를 필터링하는 데 사용할 "제약 조건" 집합을 정의해야 합니다. Filament에는 일반적인 데이터 유형을 따르는 몇 가지 내장 제약 조건이 포함되어 있지만, 직접 커스텀 제약 조건을 정의할 수도 있습니다.
 
-To use it, you need to define a set of "constraints" that will be used to filter the data. Filament includes some built-in constraints, that follow common data types, but you can also define your own custom constraints.
-
-You can add a query builder to any table using the `QueryBuilder` filter:
+`QueryBuilder` 필터를 사용하여 모든 테이블에 QueryBuilder를 추가할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder;
@@ -47,7 +47,7 @@ QueryBuilder::make()
     ])
 ```
 
-When deeply nesting the query builder, you might need to increase the amount of space that the filters can consume. One way of doing this is to [position the filters above the table content](layout#displaying-filters-above-the-table-content):
+QueryBuilder를 깊게 중첩해서 사용할 때는 필터가 차지할 수 있는 공간을 늘려야 할 수도 있습니다. 이를 위한 한 가지 방법은 [필터를 테이블 콘텐츠 위에 배치](layout#displaying-filters-above-the-table-content)하는 것입니다:
 
 ```php
 use Filament\Tables\Enums\FiltersLayout;
@@ -66,90 +66,90 @@ public function table(Table $table): Table
 }
 ```
 
-## Available constraints
+## 사용 가능한 제약 조건 {#available-constraints}
 
-Filament ships with many different constraints that you can use out of the box. You can also [create your own custom constraints](#creating-custom-constraints):
+Filament에는 바로 사용할 수 있는 다양한 제약 조건이 기본으로 제공됩니다. 또한 [사용자 정의 제약 조건을 직접 생성](#creating-custom-constraints)할 수도 있습니다:
 
-- [Text constraint](#text-constraints)
-- [Boolean constraint](#boolean-constraints)
-- [Number constraint](#number-constraints)
-- [Date constraint](#date-constraints)
-- [Select constraint](#select-constraints)
-- [Relationship constraint](#relationship-constraints)
+- [텍스트 제약 조건](#text-constraints)
+- [불리언 제약 조건](#boolean-constraints)
+- [숫자 제약 조건](#number-constraints)
+- [날짜 제약 조건](#date-constraints)
+- [셀렉트 제약 조건](#select-constraints)
+- [관계 제약 조건](#relationship-constraints)
 
-### Text constraints
+### 텍스트 제약 조건 {#text-constraints}
 
-Text constraints allow you to filter text fields. They can be used to filter any text field, including via relationships.
+텍스트 제약 조건을 사용하면 텍스트 필드를 필터링할 수 있습니다. 관계를 통해서도 포함하여 모든 텍스트 필드를 필터링하는 데 사용할 수 있습니다.
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
 
-TextConstraint::make('name') // Filter the `name` column
+TextConstraint::make('name') // `name` 컬럼을 필터링
 
 TextConstraint::make('creatorName')
-    ->relationship(name: 'creator', titleAttribute: 'name') // Filter the `name` column on the `creator` relationship
+    ->relationship(name: 'creator', titleAttribute: 'name') // `creator` 관계의 `name` 컬럼을 필터링
 ```
 
-By default, the following operators are available:
+기본적으로 다음 연산자가 제공됩니다:
 
-- Contains - filters a column to contain the search term
-- Does not contain - filters a column to not contain the search term
-- Starts with - filters a column to start with the search term
-- Does not start with - filters a column to not start with the search term
-- Ends with - filters a column to end with the search term
-- Does not end with - filters a column to not end with the search term
-- Equals - filters a column to equal the search term
-- Does not equal - filters a column to not equal the search term
-- Is filled - filters a column to not be empty
-- Is blank - filters a column to be empty
+- 포함 - 컬럼이 검색어를 포함하도록 필터링
+- 포함하지 않음 - 컬럼이 검색어를 포함하지 않도록 필터링
+- 시작함 - 컬럼이 검색어로 시작하도록 필터링
+- 시작하지 않음 - 컬럼이 검색어로 시작하지 않도록 필터링
+- 끝남 - 컬럼이 검색어로 끝나도록 필터링
+- 끝나지 않음 - 컬럼이 검색어로 끝나지 않도록 필터링
+- 일치함 - 컬럼이 검색어와 일치하도록 필터링
+- 일치하지 않음 - 컬럼이 검색어와 일치하지 않도록 필터링
+- 값이 있음 - 컬럼이 비어 있지 않도록 필터링
+- 값이 없음 - 컬럼이 비어 있도록 필터링
 
-### Boolean constraints
+### 불리언 제약 조건 {#boolean-constraints}
 
-Boolean constraints allow you to filter boolean fields. They can be used to filter any boolean field, including via relationships.
+불리언 제약 조건을 사용하면 불리언 필드를 필터링할 수 있습니다. 관계를 통해서도 포함하여, 모든 불리언 필드를 필터링하는 데 사용할 수 있습니다.
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\BooleanConstraint;
 
-BooleanConstraint::make('is_visible') // Filter the `is_visible` column
+BooleanConstraint::make('is_visible') // `is_visible` 컬럼을 필터링
 
 BooleanConstraint::make('creatorIsAdmin')
-    ->relationship(name: 'creator', titleAttribute: 'is_admin') // Filter the `is_admin` column on the `creator` relationship
+    ->relationship(name: 'creator', titleAttribute: 'is_admin') // `creator` 관계의 `is_admin` 컬럼을 필터링
 ```
 
-By default, the following operators are available:
+기본적으로 다음 연산자를 사용할 수 있습니다:
 
-- Is true - filters a column to be `true`
-- Is false - filters a column to be `false`
+- 참임 - 컬럼이 `true`인 경우로 필터링
+- 거짓임 - 컬럼이 `false`인 경우로 필터링
 
-### Number constraints
+### 숫자 제약 조건 {#number-constraints}
 
-Number constraints allow you to filter numeric fields. They can be used to filter any numeric field, including via relationships.
+숫자 제약 조건을 사용하면 숫자 필드를 필터링할 수 있습니다. 이 제약 조건은 관계를 통해서도 포함하여 모든 숫자 필드에 사용할 수 있습니다.
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 
-NumberConstraint::make('stock') // Filter the `stock` column
+NumberConstraint::make('stock') // `stock` 컬럼을 필터링
 
 NumberConstraint::make('ordersItemCount')
-    ->relationship(name: 'orders', titleAttribute: 'item_count') // Filter the `item_count` column on the `orders` relationship
+    ->relationship(name: 'orders', titleAttribute: 'item_count') // `orders` 관계의 `item_count` 컬럼을 필터링
 ```
 
-By default, the following operators are available:
+기본적으로 다음 연산자를 사용할 수 있습니다:
 
-- Is minimum - filters a column to be greater than or equal to the search number
-- Is less than - filters a column to be less than the search number
-- Is maximum - filters a column to be less than or equal to the search number
-- Is greater than - filters a column to be greater than the search number
-- Equals - filters a column to equal the search number
-- Does not equal - filters a column to not equal the search number
-- Is filled - filters a column to not be empty
-- Is blank - filters a column to be empty
+- 최소값 이상 - 컬럼이 검색 숫자보다 크거나 같은 값을 필터링
+- 미만 - 컬럼이 검색 숫자보다 작은 값을 필터링
+- 최대값 이하 - 컬럼이 검색 숫자보다 작거나 같은 값을 필터링
+- 초과 - 컬럼이 검색 숫자보다 큰 값을 필터링
+- 일치 - 컬럼이 검색 숫자와 같은 값을 필터링
+- 불일치 - 컬럼이 검색 숫자와 같지 않은 값을 필터링
+- 값이 있음 - 컬럼이 비어 있지 않은 값을 필터링
+- 값이 없음 - 컬럼이 비어 있는 값을 필터링
 
-When using `relationship()` with a number constraint, users also have the ability to "aggregate" related records. This means that they can filter the column to be the sum, average, minimum or maximum of all the related records at once.
+숫자 제약 조건에서 `relationship()`을 사용할 때, 사용자는 관련 레코드를 "집계"할 수도 있습니다. 즉, 관련된 모든 레코드의 합계, 평균, 최소값 또는 최대값을 한 번에 필터링할 수 있습니다.
 
-#### Integer constraints
+#### 정수 제약 조건 {#integer-constraints}
 
-By default, number constraints will allow decimal values. If you'd like to only allow integer values, you can use the `integer()` method:
+기본적으로 숫자 제약 조건은 소수 값을 허용합니다. 정수 값만 허용하고 싶다면 `integer()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
@@ -158,40 +158,40 @@ NumberConstraint::make('stock')
     ->integer()
 ```
 
-### Date constraints
+### 날짜 제약 조건 {#date-constraints}
 
-Date constraints allow you to filter date fields. They can be used to filter any date field, including via relationships.
+날짜 제약 조건을 사용하면 날짜 필드를 필터링할 수 있습니다. 이 제약 조건은 관계를 통한 필드를 포함하여 모든 날짜 필드에 사용할 수 있습니다.
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint;
 
-DateConstraint::make('created_at') // Filter the `created_at` column
+DateConstraint::make('created_at') // `created_at` 컬럼을 필터링
 
 DateConstraint::make('creatorCreatedAt')
-    ->relationship(name: 'creator', titleAttribute: 'created_at') // Filter the `created_at` column on the `creator` relationship
+    ->relationship(name: 'creator', titleAttribute: 'created_at') // `creator` 관계의 `created_at` 컬럼을 필터링
 ```
 
-By default, the following operators are available:
+기본적으로 다음 연산자들이 제공됩니다:
 
-- Is after - filters a column to be after the search date
-- Is not after - filters a column to not be after the search date, or to be the same date
-- Is before - filters a column to be before the search date
-- Is not before - filters a column to not be before the search date, or to be the same date
-- Is date - filters a column to be the same date as the search date
-- Is not date - filters a column to not be the same date as the search date
-- Is month - filters a column to be in the same month as the selected month
-- Is not month - filters a column to not be in the same month as the selected month
-- Is year - filters a column to be in the same year as the searched year
-- Is not year - filters a column to not be in the same year as the searched year
+- 이후임 - 컬럼이 검색 날짜 이후인 경우로 필터링
+- 이후가 아님 - 컬럼이 검색 날짜 이후가 아니거나 같은 날짜인 경우로 필터링
+- 이전임 - 컬럼이 검색 날짜 이전인 경우로 필터링
+- 이전이 아님 - 컬럼이 검색 날짜 이전이 아니거나 같은 날짜인 경우로 필터링
+- 날짜임 - 컬럼이 검색 날짜와 같은 날짜인 경우로 필터링
+- 날짜가 아님 - 컬럼이 검색 날짜와 같은 날짜가 아닌 경우로 필터링
+- 월임 - 컬럼이 선택한 월과 같은 월인 경우로 필터링
+- 월이 아님 - 컬럼이 선택한 월과 같은 월이 아닌 경우로 필터링
+- 연도임 - 컬럼이 검색한 연도와 같은 연도인 경우로 필터링
+- 연도가 아님 - 컬럼이 검색한 연도와 같은 연도가 아닌 경우로 필터링
 
-### Select constraints
+### 선택 제약 조건 {#select-constraints}
 
-Select constraints allow you to filter fields using a select field. They can be used to filter any field, including via relationships.
+선택 제약 조건을 사용하면 선택 필드를 통해 필드를 필터링할 수 있습니다. 관계를 포함한 모든 필드를 필터링하는 데 사용할 수 있습니다.
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\SelectConstraint;
 
-SelectConstraint::make('status') // Filter the `status` column
+SelectConstraint::make('status') // `status` 컬럼을 필터링
     ->options([
         'draft' => 'Draft',
         'reviewing' => 'Reviewing',
@@ -199,7 +199,7 @@ SelectConstraint::make('status') // Filter the `status` column
     ])
     
 SelectConstraint::make('creatorStatus')
-    ->relationship(name: 'creator', titleAttribute: 'department') // Filter the `department` column on the `creator` relationship
+    ->relationship(name: 'creator', titleAttribute: 'department') // `creator` 관계의 `department` 컬럼을 필터링
     ->options([
         'sales' => 'Sales',
         'marketing' => 'Marketing',
@@ -208,9 +208,9 @@ SelectConstraint::make('creatorStatus')
     ])
 ```
 
-#### Searchable select constraints
+#### 검색 가능한 선택 제약 조건 {#searchable-select-constraints}
 
-By default, select constraints will not allow the user to search the options. If you'd like to allow the user to search the options, you can use the `searchable()` method:
+기본적으로, 선택 제약 조건은 사용자가 옵션을 검색할 수 없도록 합니다. 사용자가 옵션을 검색할 수 있도록 허용하려면 `searchable()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\SelectConstraint;
@@ -224,9 +224,9 @@ SelectConstraint::make('status')
     ])
 ```
 
-#### Multi-select constraints
+#### 다중 선택 제약 조건 {#multi-select-constraints}
 
-By default, select constraints will only allow the user to select a single option. If you'd like to allow the user to select multiple options, you can use the `multiple()` method:
+기본적으로, 선택 제약 조건은 사용자가 하나의 옵션만 선택할 수 있도록 허용합니다. 사용자가 여러 옵션을 선택할 수 있도록 하려면 `multiple()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\SelectConstraint;
@@ -240,17 +240,17 @@ SelectConstraint::make('status')
     ])
 ```
 
-When the user selects multiple options, the table will be filtered to show records that match any of the selected options.
+사용자가 여러 옵션을 선택하면, 테이블은 선택된 옵션 중 하나와 일치하는 레코드만 표시하도록 필터링됩니다.
 
-### Relationship constraints
+### 관계 제약 조건 {#relationship-constraints}
 
-Relationship constraints allow you to filter fields using data about a relationship:
+관계 제약 조건을 사용하면 관계에 대한 데이터를 이용해 필드를 필터링할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint;
 use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint\Operators\IsRelatedToOperator;
 
-RelationshipConstraint::make('creator') // Filter the `creator` relationship
+RelationshipConstraint::make('creator') // `creator` 관계를 필터링합니다
     ->selectable(
         IsRelatedToOperator::make()
             ->titleAttribute('name')
@@ -259,11 +259,11 @@ RelationshipConstraint::make('creator') // Filter the `creator` relationship
     )
 ```
 
-The `IsRelatedToOperator` is used to configure the "Is / Contains" and "Is not / Does not contain" operators. It provides a select field which allows the user to filter the relationship by which records are attached to it. The `titleAttribute()` method is used to specify which attribute should be used to identify each related record in the list. The `searchable()` method makes the list searchable. The `multiple()` method allows the user to select multiple related records, and if they do, the table will be filtered to show records that match any of the selected related records.
+`IsRelatedToOperator`는 "Is / Contains"와 "Is not / Does not contain" 연산자를 구성하는 데 사용됩니다. 이 연산자는 사용자가 어떤 레코드가 연결되어 있는지에 따라 관계를 필터링할 수 있도록 선택 필드를 제공합니다. `titleAttribute()` 메서드는 목록에서 각 관련 레코드를 식별하는 데 사용할 속성을 지정합니다. `searchable()` 메서드는 목록을 검색 가능하게 만듭니다. `multiple()` 메서드는 사용자가 여러 관련 레코드를 선택할 수 있도록 하며, 여러 개를 선택하면 테이블은 선택된 관련 레코드 중 하나와 일치하는 레코드만 표시하도록 필터링됩니다.
 
-#### Multiple relationships
+#### 다중 관계 {#multiple-relationships}
 
-By default, relationship constraints only include operators that are appropriate for filtering a singular relationship, like a `BelongsTo`. If you have a relationship such as a `HasMany` or `BelongsToMany`, you may wish to mark the constraint as `multiple()`:
+기본적으로, 관계 제약 조건은 `BelongsTo`와 같이 단일 관계를 필터링하는 데 적합한 연산자만 포함합니다. 만약 `HasMany`나 `BelongsToMany`와 같은 관계가 있다면, 제약 조건에 `multiple()`을 표시할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint;
@@ -272,20 +272,20 @@ RelationshipConstraint::make('categories')
     ->multiple()
 ```
 
-This will add the following operators to the constraint:
+이렇게 하면 다음과 같은 연산자가 제약 조건에 추가됩니다:
 
-- Has minimum - filters a column to have at least the specified number of related records
-- Has less than - filters a column to have less than the specified number of related records
-- Has maximum - filters a column to have at most the specified number of related records
-- Has more than - filters a column to have more than the specified number of related records
-- Has - filters a column to have the specified number of related records
-- Does not have - filters a column to not have the specified number of related records
+- 최소 보유 - 지정한 개수 이상의 관련 레코드를 가진 컬럼을 필터링합니다
+- 미만 보유 - 지정한 개수 미만의 관련 레코드를 가진 컬럼을 필터링합니다
+- 최대 보유 - 지정한 개수 이하의 관련 레코드를 가진 컬럼을 필터링합니다
+- 초과 보유 - 지정한 개수 초과의 관련 레코드를 가진 컬럼을 필터링합니다
+- 보유 - 지정한 개수의 관련 레코드를 가진 컬럼을 필터링합니다
+- 미보유 - 지정한 개수의 관련 레코드를 가지지 않은 컬럼을 필터링합니다
 
-#### Empty relationship constraints
+#### 빈 관계 제약 조건 {#empty-relationship-constraints}
 
-The `RelationshipConstraint` does not support [`nullable()`](#nullable-constraints) in the same way as other constraints.
+`RelationshipConstraint`는 다른 제약 조건에서 사용하는 [`nullable()`](#nullable-constraints)와 동일한 방식으로 동작하지 않습니다.
 
-If the relationship is `multiple()`, then the constraint will show an option to filter out "empty" relationships. This means that the relationship has no related records. If your relationship is singular, then you can use the `emptyable()` method to show an option to filter out "empty" relationships:
+관계가 `multiple()`인 경우, 제약 조건은 "비어 있는" 관계를 필터링할 수 있는 옵션을 표시합니다. 이는 해당 관계에 연관된 레코드가 없음을 의미합니다. 관계가 단수인 경우, `emptyable()` 메서드를 사용하여 "비어 있는" 관계를 필터링할 수 있는 옵션을 표시할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint;
@@ -294,7 +294,7 @@ RelationshipConstraint::make('creator')
     ->emptyable()
 ```
 
-If you have a `multiple()` relationship that must always have at least 1 related record, then you can use the `emptyable(false)` method to hide the option to filter out "empty" relationships:
+`multiple()` 관계이지만 항상 최소 1개의 연관 레코드가 있어야 하는 경우, `emptyable(false)` 메서드를 사용하여 "비어 있는" 관계를 필터링하는 옵션을 숨길 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint;
@@ -303,9 +303,9 @@ RelationshipConstraint::make('categories')
     ->emptyable(false)
 ```
 
-#### Nullable constraints
+#### Nullable 제약 조건 {#nullable-constraints}
 
-By default, constraints will not show an option to filter `null` values. If you'd like to show an option to filter `null` values, you can use the `nullable()` method:
+기본적으로 제약 조건에는 `null` 값을 필터링하는 옵션이 표시되지 않습니다. `null` 값을 필터링하는 옵션을 표시하려면 `nullable()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
@@ -314,14 +314,14 @@ TextConstraint::make('name')
     ->nullable()
 ```
 
-Now, the following operators are also available:
+이제 다음 연산자도 사용할 수 있습니다:
 
-- Is filled - filters a column to not be empty
-- Is blank - filters a column to be empty
+- 채워짐 - 컬럼이 비어 있지 않은 경우로 필터링
+- 비어 있음 - 컬럼이 비어 있는 경우로 필터링
 
-## Scoping relationships
+## 관계 범위 지정 {#scoping-relationships}
 
-When you use the `relationship()` method on a constraint, you can scope the relationship to filter the related records using the `modifyQueryUsing` argument:
+제약 조건에서 `relationship()` 메서드를 사용할 때, `modifyQueryUsing` 인수를 사용하여 관계를 범위 지정하고 관련 레코드를 필터링할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
@@ -335,9 +335,9 @@ TextConstraint::make('adminCreatorName')
     )
 ```
 
-## Customizing the constraint icon
+## 제약 조건 아이콘 사용자 지정 {#customizing-the-constraint-icon}
 
-Each constraint type has a default [icon](https://blade-ui-kit.com/blade-icons?set=1#search), which is displayed next to the label in the picker. You can customize the icon for a constraint by passing its name to the `icon()` method:
+각 제약 조건 유형에는 기본 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)이 있으며, 이 아이콘은 선택기에서 라벨 옆에 표시됩니다. `icon()` 메서드에 아이콘 이름을 전달하여 제약 조건의 아이콘을 사용자 지정할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
@@ -347,9 +347,9 @@ TextConstraint::make('author')
     ->icon('heroicon-m-user')
 ```
 
-## Overriding the default operators
+## 기본 연산자 재정의하기 {#overriding-the-default-operators}
 
-Each constraint type has a set of default operators, which you can customize by using the `operators()`method:
+각 제약 조건 타입에는 기본 연산자 집합이 있으며, `operators()` 메서드를 사용해 이를 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\Operators\IsFilledOperator;
@@ -362,9 +362,9 @@ TextConstraint::make('author')
     ])
 ```
 
-This will remove all operators, and register the `EqualsOperator`.
+이렇게 하면 모든 연산자가 제거되고, `EqualsOperator`가 등록됩니다.
 
-If you'd like to add an operator to the end of the list, use `pushOperators()` instead:
+연산자를 목록의 끝에 추가하고 싶다면, 대신 `pushOperators()`를 사용하세요:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\Operators\IsFilledOperator;
@@ -377,7 +377,7 @@ TextConstraint::make('author')
     ])
 ```
 
-If you'd like to add an operator to the start of the list, use `unshiftOperators()` instead:
+연산자를 목록의 맨 앞에 추가하고 싶다면, 대신 `unshiftOperators()`를 사용하세요:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\Operators\IsFilledOperator;
@@ -390,9 +390,9 @@ TextConstraint::make('author')
     ])
 ```
 
-## Creating custom constraints
+## 사용자 지정 제약 조건 생성 {#creating-custom-constraints}
 
-Custom constraints can be created "inline" with other constraints using the `Constraint::make()` method. You should also pass an [icon](#customizing-the-constraint-icon) to the `icon()` method:
+사용자 지정 제약 조건은 `Constraint::make()` 메서드를 사용하여 다른 제약 조건과 "인라인"으로 생성할 수 있습니다. 또한 [아이콘 커스터마이징](#customizing-the-constraint-icon)을 위해 `icon()` 메서드에 아이콘을 전달해야 합니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\Constraint;
@@ -404,7 +404,7 @@ Constraint::make('subscribed')
     ]),
 ```
 
-If you want to customize the label of the constraint, you can use the `label()` method:
+제약 조건의 라벨을 커스터마이즈하고 싶다면 `label()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\Constraint;
@@ -417,7 +417,7 @@ Constraint::make('subscribed')
     ]),
 ```
 
-Now, you must [define operators](#creating-custom-operators) for the constraint. These are options that you can pick from to filter the column. If the column is [nullable](#nullable-constraints), you can also register that built-in operator for your custom constraint:
+이제 제약 조건에 대한 [연산자 정의](#creating-custom-operators)를 해야 합니다. 이 연산자들은 컬럼을 필터링할 때 선택할 수 있는 옵션입니다. 만약 컬럼이 [nullable](#nullable-constraints)하다면, 해당 내장 연산자를 사용자 지정 제약 조건에 등록할 수도 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\Constraint;
@@ -432,35 +432,35 @@ Constraint::make('subscribed')
     ]),
 ```
 
-### Creating custom operators
+### 커스텀 연산자 생성하기 {#creating-custom-operators}
 
-Custom operators can be created using the `Operator::make()` method:
+커스텀 연산자는 `Operator::make()` 메서드를 사용하여 생성할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder\Constraints\Operators\Operator;
 
 Operator::make('subscribed')
-    ->label(fn (bool $isInverse): string => $isInverse ? 'Not subscribed' : 'Subscribed')
-    ->summary(fn (bool $isInverse): string => $isInverse ? 'You are not subscribed' : 'You are subscribed')
+    ->label(fn (bool $isInverse): string => $isInverse ? '구독하지 않음' : '구독함')
+    ->summary(fn (bool $isInverse): string => $isInverse ? '구독하지 않았습니다' : '구독 중입니다')
     ->baseQuery(fn (Builder $query, bool $isInverse) => $query->{$isInverse ? 'whereDoesntHave' : 'whereHas'}(
         'subscriptions.user',
         fn (Builder $query) => $query->whereKey(auth()->user()),
     )),
 ```
 
-In this example, the operator is able to filter records based on whether or not the authenticated user is subscribed to the record. A subscription is recorded in the `subscriptions` relationship of the table.
+이 예시에서 연산자는 인증된 사용자가 해당 레코드를 구독하고 있는지 여부에 따라 레코드를 필터링할 수 있습니다. 구독 정보는 테이블의 `subscriptions` 관계에 기록됩니다.
 
-The `baseQuery()` method is used to define the query that will be used to filter the records. The `$isInverse` argument is `false` when the "Subscribed" option is selected, and `true` when the "Not subscribed" option is selected. The function is applied to the base query of the table, where `whereHas()` can be used. If your function does not need to be applied to the base query of the table, like when you are using a simple `where()` or `whereIn()`, you can use the `query()` method instead, which has the bonus of being able to be used inside nested "OR" groups.
+`baseQuery()` 메서드는 레코드를 필터링하는 데 사용될 쿼리를 정의하는 데 사용됩니다. `$isInverse` 인자는 "구독함" 옵션이 선택되었을 때는 `false`, "구독하지 않음" 옵션이 선택되었을 때는 `true`입니다. 이 함수는 테이블의 기본 쿼리에 적용되며, 여기서 `whereHas()`를 사용할 수 있습니다. 만약 함수가 테이블의 기본 쿼리에 적용될 필요가 없고, 단순히 `where()`나 `whereIn()`을 사용할 경우에는, 대신 `query()` 메서드를 사용할 수 있습니다. 이 방법은 중첩된 "OR" 그룹 내에서도 사용할 수 있다는 장점이 있습니다.
 
-The `label()` method is used to render the options in the operator select. Two options are registered for each operator, one for when the operator is not inverted, and one for when it is inverted.
+`label()` 메서드는 연산자 선택에서 옵션을 렌더링하는 데 사용됩니다. 각 연산자마다 반전되지 않은 경우와 반전된 경우, 두 가지 옵션이 등록됩니다.
 
-The `summary()` method is used in the header of the constraint when it is applied to the query, to provide an overview of the active constraint.
+`summary()` 메서드는 쿼리에 제약 조건이 적용될 때, 해당 제약 조건의 개요를 제공하기 위해 제약 조건 헤더에 사용됩니다.
 
-## Customizing the constraint picker
+## 제약 조건 선택기 사용자 지정하기 {#customizing-the-constraint-picker}
 
-### Changing the number of columns in the constraint picker
+### 제약 조건 선택기에서 열 수 변경하기 {#changing-the-number-of-columns-in-the-constraint-picker}
 
-The constraint picker has only 1 column. You may customize it by passing a number of columns to `constraintPickerColumns()`:
+제약 조건 선택기는 기본적으로 1개의 열만 가집니다. `constraintPickerColumns()`에 열의 개수를 전달하여 이를 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\QueryBuilder;
@@ -472,16 +472,16 @@ QueryBuilder::make()
     ])
 ```
 
-This method can be used in a couple of different ways:
+이 메서드는 여러 가지 방식으로 사용할 수 있습니다:
 
-- You can pass an integer like `constraintPickerColumns(2)`. This integer is the number of columns used on the `lg` breakpoint and higher. All smaller devices will have just 1 column.
-- You can pass an array, where the key is the breakpoint and the value is the number of columns. For example, `constraintPickerColumns(['md' => 2, 'xl' => 4])` will create a 2 column layout on medium devices, and a 4 column layout on extra large devices. The default breakpoint for smaller devices uses 1 column, unless you use a `default` array key.
+- `constraintPickerColumns(2)`처럼 정수를 전달할 수 있습니다. 이 정수는 `lg` 브레이크포인트 이상에서 사용되는 열의 개수입니다. 더 작은 기기에서는 항상 1개의 열만 사용됩니다.
+- 배열을 전달할 수도 있는데, 이 경우 키는 브레이크포인트이고 값은 열의 개수입니다. 예를 들어, `constraintPickerColumns(['md' => 2, 'xl' => 4])`는 중간 크기 기기에서 2열 레이아웃을, 매우 큰 기기에서 4열 레이아웃을 만듭니다. 더 작은 기기의 기본 브레이크포인트는 1열을 사용하며, `default` 배열 키를 사용하지 않는 한 그렇습니다.
 
-Breakpoints (`sm`, `md`, `lg`, `xl`, `2xl`) are defined by Tailwind, and can be found in the [Tailwind documentation](https://tailwindcss.com/docs/responsive-design#overview).
+브레이크포인트(`sm`, `md`, `lg`, `xl`, `2xl`)는 Tailwind에서 정의되며, [Tailwind 문서](https://tailwindcss.com/docs/responsive-design#overview)에서 확인할 수 있습니다.
 
-### Increasing the width of the constraint picker
+### 제약 조건 선택기의 너비 늘리기 {#increasing-the-width-of-the-constraint-picker}
 
-When you [increase the number of columns](#changing-the-number-of-columns-in-the-constraint-picker), the width of the dropdown should increase incrementally to handle the additional columns. If you'd like more control, you can manually set a maximum width for the dropdown using the `constraintPickerWidth()` method. Options correspond to [Tailwind's max-width scale](https://tailwindcss.com/docs/max-width). The options are `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`:
+[열의 개수를 늘릴 때](#changing-the-number-of-columns-in-the-constraint-picker), 드롭다운의 너비도 추가된 열을 처리할 수 있도록 점진적으로 증가해야 합니다. 더 세밀하게 제어하고 싶다면, `constraintPickerWidth()` 메서드를 사용하여 드롭다운의 최대 너비를 수동으로 설정할 수 있습니다. 옵션은 [Tailwind의 max-width 스케일](https://tailwindcss.com/docs/max-width)과 일치합니다. 사용 가능한 옵션은 `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`입니다.
 
 ```php
 use Filament\Tables\Filters\QueryBuilder;

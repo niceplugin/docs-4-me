@@ -1,26 +1,26 @@
 ---
-title: Viewing records
+title: 레코드 보기
 ---
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [패널.리소스] 레코드 보기
 
-## Creating a resource with a View page
+## 뷰 페이지가 포함된 리소스 생성하기 {#creating-a-resource-with-a-view-page}
 
-To create a new resource with a View page, you can use the `--view` flag:
+뷰 페이지가 포함된 새로운 리소스를 생성하려면 `--view` 플래그를 사용할 수 있습니다:
 
 ```bash
 php artisan make:filament-resource User --view
 ```
 
-## Using an infolist instead of a disabled form
+## 비활성화된 폼 대신 인포리스트 사용하기 {#using-an-infolist-instead-of-a-disabled-form}
 
 <LaracastsBanner
     title="Infolists"
-    description="Watch the Rapid Laravel Development with Filament series on Laracasts - it will teach you the basics of adding infolists to Filament resources."
+    description="Laracasts의 Rapid Laravel Development with Filament 시리즈를 시청하세요. Filament 리소스에 인포리스트를 추가하는 기본 방법을 배울 수 있습니다."
     url="https://laracasts.com/series/rapid-laravel-development-with-filament/episodes/12"
     series="rapid-laravel-development"
 />
 
-By default, the View page will display a disabled form with the record's data. If you preferred to display the record's data in an "infolist", you can define an `infolist()` method on the resource class:
+기본적으로 View 페이지는 레코드의 데이터를 비활성화된 폼으로 표시합니다. 만약 레코드의 데이터를 "인포리스트"로 표시하고 싶다면, 리소스 클래스에 `infolist()` 메서드를 정의할 수 있습니다:
 
 ```php
 use Filament\Infolists;
@@ -38,19 +38,19 @@ public static function infolist(Infolist $infolist): Infolist
 }
 ```
 
-The `schema()` method is used to define the structure of your infolist. It is an array of [entries](../../infolists/entries/getting-started#available-entries) and [layout components](../../infolists/layout/getting-started#available-layout-components), in the order they should appear in your infolist.
+`schema()` 메서드는 인포리스트의 구조를 정의하는 데 사용됩니다. 이 메서드는 [엔트리](../../infolists/entries/getting-started#available-entries)와 [레이아웃 컴포넌트](../../infolists/layout/getting-started#available-layout-components)의 배열로, 인포리스트에 나타날 순서대로 작성합니다.
 
-Check out the Infolists docs for a [guide](../../infolists/getting-started) on how to build infolists with Filament.
+Filament로 인포리스트를 만드는 방법에 대한 [가이드](../../infolists/getting-started)는 Infolists 문서를 참고하세요.
 
-## Adding a View page to an existing resource
+## 기존 리소스에 View 페이지 추가하기 {#adding-a-view-page-to-an-existing-resource}
 
-If you want to add a View page to an existing resource, create a new page in your resource's `Pages` directory:
+기존 리소스에 View 페이지를 추가하려면, 해당 리소스의 `Pages` 디렉터리에 새 페이지를 생성하세요:
 
 ```bash
 php artisan make:filament-page ViewUser --resource=UserResource --type=ViewRecord
 ```
 
-You must register this new page in your resource's `getPages()` method:
+이 새 페이지를 리소스의 `getPages()` 메서드에 등록해야 합니다:
 
 ```php
 public static function getPages(): array
@@ -64,11 +64,11 @@ public static function getPages(): array
 }
 ```
 
-## Viewing records in modals
+## 모달에서 레코드 보기 {#viewing-records-in-modals}
 
-If your resource is simple, you may wish to view records in modals rather than on the [View page](viewing-records). If this is the case, you can just [delete the view page](getting-started#deleting-resource-pages).
+리소스가 단순하다면, [보기 페이지](viewing-records) 대신 모달에서 레코드를 보고 싶을 수 있습니다. 이 경우, [보기 페이지를 삭제](getting-started#deleting-resource-pages)하면 됩니다.
 
-If your resource doesn't contain a `ViewAction`, you can add one to the `$table->actions()` array:
+리소스에 `ViewAction`이 포함되어 있지 않다면, `$table->actions()` 배열에 추가할 수 있습니다:
 
 ```php
 use Filament\Tables;
@@ -87,9 +87,9 @@ public static function table(Table $table): Table
 }
 ```
 
-## Customizing data before filling the form
+## 폼에 데이터를 채우기 전에 데이터 커스터마이징하기 {#customizing-data-before-filling-the-form}
 
-You may wish to modify the data from a record before it is filled into the form. To do this, you may define a `mutateFormDataBeforeFill()` method on the View page class to modify the `$data` array, and return the modified version before it is filled into the form:
+레코드의 데이터를 폼에 채우기 전에 수정하고 싶을 수 있습니다. 이를 위해, View 페이지 클래스에 `mutateFormDataBeforeFill()` 메서드를 정의하여 `$data` 배열을 수정하고, 수정된 버전을 폼에 채우기 전에 반환할 수 있습니다:
 
 ```php
 protected function mutateFormDataBeforeFill(array $data): array
@@ -100,11 +100,11 @@ protected function mutateFormDataBeforeFill(array $data): array
 }
 ```
 
-Alternatively, if you're viewing records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/view#customizing-data-before-filling-the-form).
+또는, 모달 액션에서 레코드를 조회하는 경우에는 [액션 문서](../../actions/prebuilt-actions/view#customizing-data-before-filling-the-form)를 참고하세요.
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-Hooks may be used to execute code at various points within a page's lifecycle, like before a form is filled. To set up a hook, create a protected method on the View page class with the name of the hook:
+훅은 페이지의 라이프사이클 내 여러 지점에서 코드를 실행하는 데 사용할 수 있습니다. 예를 들어, 폼이 채워지기 전에 코드를 실행할 수 있습니다. 훅을 설정하려면, View 페이지 클래스에 훅 이름과 동일한 보호된 메서드를 생성하세요:
 
 ```php
 use Filament\Resources\Pages\ViewRecord;
@@ -115,33 +115,33 @@ class ViewUser extends ViewRecord
 
     protected function beforeFill(): void
     {
-        // Runs before the disabled form fields are populated from the database. Not run on pages using an infolist.
+        // 비활성화된 폼 필드가 데이터베이스에서 채워지기 전에 실행됩니다. infolist를 사용하는 페이지에서는 실행되지 않습니다.
     }
 
     protected function afterFill(): void
     {
-        // Runs after the disabled form fields are populated from the database. Not run on pages using an infolist.
+        // 비활성화된 폼 필드가 데이터베이스에서 채워진 후에 실행됩니다. infolist를 사용하는 페이지에서는 실행되지 않습니다.
     }
 }
 ```
 
-## Authorization
+## 권한 부여 {#authorization}
 
-For authorization, Filament will observe any [model policies](https://laravel.com/docs/authorization#creating-policies) that are registered in your app.
+권한 부여를 위해 Filament는 앱에 등록된 모든 [모델 정책](https://laravel.com/docs/authorization#creating-policies)을 따릅니다.
 
-Users may access the View page if the `view()` method of the model policy returns `true`.
+모델 정책의 `view()` 메서드가 `true`를 반환하면 사용자는 View 페이지에 접근할 수 있습니다.
 
-## Creating another View page
+## 또 다른 View 페이지 생성하기 {#creating-another-view-page}
 
-One View page may not be enough space to allow users to navigate a lot of information. You can create as many View pages for a resource as you want. This is especially useful if you are using [resource sub-navigation](getting-started#resource-sub-navigation), as you are then easily able to switch between the different View pages.
+하나의 View 페이지로는 사용자가 많은 정보를 탐색하기에 충분하지 않을 수 있습니다. 원하는 만큼 리소스에 대해 여러 개의 View 페이지를 생성할 수 있습니다. 특히 [리소스 하위 내비게이션](getting-started#resource-sub-navigation)을 사용하는 경우, 서로 다른 View 페이지 간에 쉽게 전환할 수 있어 매우 유용합니다.
 
-To create a View page, you should use the `make:filament-page` command:
+View 페이지를 생성하려면 `make:filament-page` 명령어를 사용해야 합니다:
 
 ```bash
 php artisan make:filament-page ViewCustomerContact --resource=CustomerResource --type=ViewRecord
 ```
 
-You must register this new page in your resource's `getPages()` method:
+이 새 페이지를 리소스의 `getPages()` 메서드에 등록해야 합니다:
 
 ```php
 public static function getPages(): array
@@ -156,7 +156,7 @@ public static function getPages(): array
 }
 ```
 
-Now, you can define the `infolist()` or `form()` for this page, which can contain other components that are not present on the main View page:
+이제 이 페이지에 대해 `infolist()` 또는 `form()`을 정의할 수 있으며, 이는 메인 View 페이지에 없는 다른 컴포넌트를 포함할 수 있습니다:
 
 ```php
 use Filament\Infolists\Infolist;
@@ -170,9 +170,9 @@ public function infolist(Infolist $infolist): Infolist
 }
 ```
 
-## Customizing relation managers for a specific view page
+## 특정 뷰 페이지에 대한 관계 매니저 커스터마이징 {#customizing-relation-managers-for-a-specific-view-page}
 
-You can specify which relation managers should appear on a view page by defining a `getAllRelationManagers()` method:
+`getAllRelationManagers()` 메서드를 정의하여 뷰 페이지에 표시할 관계 매니저를 지정할 수 있습니다:
 
 ```php
 protected function getAllRelationManagers(): array
@@ -184,10 +184,9 @@ protected function getAllRelationManagers(): array
 }
 ```
 
-This is useful when you have [multiple view pages](#creating-another-view-page) and need different relation managers on
-each page:
-
+이 방법은 [여러 개의 뷰 페이지](#creating-another-view-page)가 있고 각 페이지마다 다른 관계 매니저가 필요할 때 유용합니다:
 ```php
+
 // ViewCustomer.php
 protected function getAllRelationManagers(): array
 {
@@ -196,8 +195,8 @@ protected function getAllRelationManagers(): array
         RelationManagers\SubscriptionsRelationManager::class,
     ];
 }
-
 // ViewCustomerContact.php 
+
 protected function getAllRelationManagers(): array
 {
     return [
@@ -206,12 +205,13 @@ protected function getAllRelationManagers(): array
     ];
 }
 ```
+`getAllRelationManagers()`가 정의되어 있지 않으면, 리소스에 정의된 관계 매니저가 사용됩니다.
 
-If `getAllRelationManagers()` isn't defined, any relation managers defined in the resource will be used.
 
-## Adding view pages to resource sub-navigation
 
-If you're using [resource sub-navigation](getting-started#resource-sub-navigation), you can register this page as normal in `getRecordSubNavigation()` of the resource:
+## 리소스 하위 탐색에 뷰 페이지 추가하기 {#adding-view-pages-to-resource-sub-navigation}
+
+[리소스 하위 탐색](getting-started#resource-sub-navigation)을 사용 중이라면, 이 페이지를 리소스의 `getRecordSubNavigation()`에서 일반적으로 등록할 수 있습니다:
 
 ```php
 use App\Filament\Resources\CustomerResource\Pages;
@@ -226,17 +226,17 @@ public static function getRecordSubNavigation(Page $page): array
 }
 ```
 
-## Custom view
+## 커스텀 뷰 {#custom-view}
 
-For further customization opportunities, you can override the static `$view` property on the page class to a custom view in your app:
+더 많은 커스터마이징을 원한다면, 페이지 클래스에서 static `$view` 프로퍼티를 앱의 커스텀 뷰로 오버라이드할 수 있습니다:
 
 ```php
 protected static string $view = 'filament.resources.users.pages.view-user';
 ```
 
-This assumes that you have created a view at `resources/views/filament/resources/users/pages/view-user.blade.php`.
+이는 `resources/views/filament/resources/users/pages/view-user.blade.php` 경로에 뷰를 생성했다고 가정합니다.
 
-Here's a basic example of what that view might contain:
+해당 뷰에 들어갈 수 있는 기본 예시는 다음과 같습니다:
 
 ```blade
 <x-filament-panels::page>
@@ -257,4 +257,4 @@ Here's a basic example of what that view might contain:
 </x-filament-panels::page>
 ```
 
-To see everything that the default view contains, you can check the `vendor/filament/filament/resources/views/resources/pages/view-record.blade.php` file in your project.
+기본 뷰에 포함된 모든 내용을 확인하려면, 프로젝트 내 `vendor/filament/filament/resources/views/resources/pages/view-record.blade.php` 파일을 참고할 수 있습니다.

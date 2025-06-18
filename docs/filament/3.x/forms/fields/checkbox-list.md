@@ -1,20 +1,20 @@
 ---
-title: Checkbox list
+title: CheckboxList
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [폼.필드] CheckboxList
 
-## Overview
+
+## 개요 {#overview}
 
 <LaracastsBanner
-    title="Checkbox List"
-    description="Watch the Rapid Laravel Development with Filament series on Laracasts - it will teach you the basics of adding checkbox list fields to Filament forms."
+    title="체크박스 리스트"
+    description="Laracasts의 Rapid Laravel Development with Filament 시리즈를 시청하세요. 이 시리즈는 Filament 폼에 체크박스 리스트 필드를 추가하는 기본 방법을 알려줍니다."
     url="https://laracasts.com/series/rapid-laravel-development-with-filament/episodes/5"
     series="rapid-laravel-development"
 />
 
 
-The checkbox list component allows you to select multiple values from a list of predefined options:
+체크박스 리스트 컴포넌트를 사용하면 미리 정의된 옵션 목록에서 여러 값을 선택할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -28,9 +28,9 @@ CheckboxList::make('technologies')
     ])
 ```
 
-<AutoScreenshot name="forms/fields/checkbox-list/simple" alt="Checkbox list" version="3.x" />
+<AutoScreenshot name="forms/fields/checkbox-list/simple" alt="체크박스 리스트" version="3.x" />
 
-These options are returned in JSON format. If you're saving them using Eloquent, you should be sure to add an `array` [cast](https://laravel.com/docs/eloquent-mutators#array-and-json-casting) to the model property:
+이 옵션들은 JSON 형식으로 반환됩니다. Eloquent를 사용하여 저장하는 경우, 모델 속성에 `array` [캐스트](https://laravel.com/docs/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -45,9 +45,9 @@ class App extends Model
 }
 ```
 
-## Allowing HTML in the option labels
+## 옵션 라벨에서 HTML 허용하기 {#allowing-html-in-the-option-labels}
 
-By default, Filament will escape any HTML in the option labels. If you'd like to allow HTML, you can use the `allowHtml()` method:
+기본적으로 Filament는 옵션 라벨에 있는 모든 HTML을 이스케이프 처리합니다. HTML을 허용하고 싶다면 `allowHtml()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -63,11 +63,11 @@ CheckboxList::make('technology')
     ->allowHtml()
 ```
 
-Be aware that you will need to ensure that the HTML is safe to render, otherwise your application will be vulnerable to XSS attacks.
+HTML을 렌더링해도 안전한지 반드시 확인해야 합니다. 그렇지 않으면 애플리케이션이 XSS 공격에 취약해질 수 있습니다.
 
-## Setting option descriptions
+## 옵션 설명 설정하기 {#setting-option-descriptions}
 
-You can optionally provide descriptions to each option using the `descriptions()` method. This method accepts an array of plain text strings, or instances of `Illuminate\Support\HtmlString` or `Illuminate\Contracts\Support\Htmlable`. This allows you to render HTML, or even markdown, in the descriptions:
+각 옵션에 대해 `descriptions()` 메서드를 사용하여 선택적으로 설명을 제공할 수 있습니다. 이 메서드는 일반 텍스트 문자열의 배열이나, `Illuminate\Support\HtmlString` 또는 `Illuminate\Contracts\Support\Htmlable`의 인스턴스를 받을 수 있습니다. 이를 통해 설명에 HTML이나 마크다운을 렌더링할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -81,20 +81,20 @@ CheckboxList::make('technologies')
         'livewire' => 'Laravel Livewire',
     ])
     ->descriptions([
-        'tailwind' => 'A utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.',
-        'alpine' => new HtmlString('A rugged, minimal tool for composing behavior <strong>directly in your markup</strong>.'),
-        'laravel' => str('A **web application** framework with expressive, elegant syntax.')->inlineMarkdown()->toHtmlString(),
-        'livewire' => 'A full-stack framework for Laravel building dynamic interfaces simple, without leaving the comfort of Laravel.',
+        'tailwind' => 'HTML을 벗어나지 않고도 현대적인 웹사이트를 빠르게 구축할 수 있는 유틸리티 퍼스트 CSS 프레임워크입니다.',
+        'alpine' => new HtmlString('마크업 <strong>내부에서 직접</strong> 동작을 구성할 수 있는 견고하고 최소한의 도구입니다.'),
+        'laravel' => str('표현력 있고 우아한 문법을 가진 **웹 애플리케이션** 프레임워크입니다.')->inlineMarkdown()->toHtmlString(),
+        'livewire' => 'Laravel에서 동적 인터페이스를 간편하게 구축할 수 있는 풀스택 프레임워크입니다.',
     ])
 ```
 
-<AutoScreenshot name="forms/fields/checkbox-list/option-descriptions" alt="Checkbox list with option descriptions" version="3.x" />
+<AutoScreenshot name="forms/fields/checkbox-list/option-descriptions" alt="옵션 설명이 있는 체크박스 리스트" version="3.x" />
 
-Be sure to use the same `key` in the descriptions array as the `key` in the option array so the right description matches the right option.
+설명 배열의 `key`가 옵션 배열의 `key`와 동일해야 올바른 설명이 올바른 옵션에 매칭됩니다.
 
-## Splitting options into columns
+## 옵션을 열로 분할하기 {#splitting-options-into-columns}
 
-You may split options into columns by using the `columns()` method:
+옵션을 `columns()` 메서드를 사용하여 여러 열로 분할할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -106,13 +106,13 @@ CheckboxList::make('technologies')
     ->columns(2)
 ```
 
-<AutoScreenshot name="forms/fields/checkbox-list/columns" alt="Checkbox list with 2 columns" version="3.x" />
+<AutoScreenshot name="forms/fields/checkbox-list/columns" alt="2열로 구성된 체크박스 리스트" version="3.x" />
 
-This method accepts the same options as the `columns()` method of the [grid](layout/grid). This allows you to responsively customize the number of columns at various breakpoints.
+이 메서드는 [grid](/filament/3.x/forms/layout/grid)의 `columns()` 메서드와 동일한 옵션을 허용합니다. 이를 통해 다양한 브레이크포인트에서 열의 개수를 반응형으로 커스터마이즈할 수 있습니다.
 
-### Setting the grid direction
+### 그리드 방향 설정하기 {#setting-the-grid-direction}
 
-By default, when you arrange checkboxes into columns, they will be listed in order vertically. If you'd like to list them horizontally, you may use the `gridDirection('row')` method:
+기본적으로 체크박스를 여러 열로 배치하면, 체크박스들은 세로로 정렬됩니다. 만약 가로로 나열하고 싶다면, `gridDirection('row')` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -125,11 +125,11 @@ CheckboxList::make('technologies')
     ->gridDirection('row')
 ```
 
-<AutoScreenshot name="forms/fields/checkbox-list/rows" alt="Checkbox list with 2 rows" version="3.x" />
+<AutoScreenshot name="forms/fields/checkbox-list/rows" alt="2줄로 구성된 체크박스 리스트" version="3.x" />
 
-## Disabling specific options
+## 특정 옵션 비활성화하기 {#disabling-specific-options}
 
-You can disable specific options using the `disableOptionWhen()` method. It accepts a closure, in which you can check if the option with a specific `$value` should be disabled:
+`disableOptionWhen()` 메서드를 사용하여 특정 옵션을 비활성화할 수 있습니다. 이 메서드는 클로저를 인자로 받으며, 해당 클로저에서 특정 `$value` 값을 가진 옵션을 비활성화할지 여부를 확인할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -144,7 +144,7 @@ CheckboxList::make('technologies')
     ->disableOptionWhen(fn (string $value): bool => $value === 'livewire')
 ```
 
-If you want to retrieve the options that have not been disabled, e.g. for validation purposes, you can do so using `getEnabledOptions()`:
+비활성화되지 않은 옵션만 가져오고 싶다면(예: 유효성 검사 목적 등), `getEnabledOptions()`를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -161,9 +161,9 @@ CheckboxList::make('technologies')
     ->in(fn (CheckboxList $component): array => array_keys($component->getEnabledOptions()))
 ```
 
-## Searching options
+## 검색 옵션 {#searching-options}
 
-You may enable a search input to allow easier access to many options, using the `searchable()` method:
+`searchable()` 메서드를 사용하여 많은 옵션에 더 쉽게 접근할 수 있도록 검색 입력을 활성화할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -175,11 +175,11 @@ CheckboxList::make('technologies')
     ->searchable()
 ```
 
-<AutoScreenshot name="forms/fields/checkbox-list/searchable" alt="Searchable checkbox list" version="3.x" />
+<AutoScreenshot name="forms/fields/checkbox-list/searchable" alt="검색 가능한 체크박스 리스트" version="3.x" />
 
-## Bulk toggling checkboxes
+## 체크박스 일괄 전환 {#bulk-toggling-checkboxes}
 
-You may allow users to toggle all checkboxes at once using the `bulkToggleable()` method:
+`bulkToggleable()` 메서드를 사용하여 사용자가 모든 체크박스를 한 번에 전환할 수 있도록 허용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -191,13 +191,13 @@ CheckboxList::make('technologies')
     ->bulkToggleable()
 ```
 
-<AutoScreenshot name="forms/fields/checkbox-list/bulk-toggleable" alt="Bulk toggleable checkbox list" version="3.x" />
+<AutoScreenshot name="forms/fields/checkbox-list/bulk-toggleable" alt="일괄 전환 가능한 체크박스 리스트" version="3.x" />
 
-## Integrating with an Eloquent relationship
+## Eloquent 관계와 통합하기 {#integrating-with-an-eloquent-relationship}
 
-> If you're building a form inside your Livewire component, make sure you have set up the [form's model](../adding-a-form-to-a-livewire-component#setting-a-form-model). Otherwise, Filament doesn't know which model to use to retrieve the relationship from.
+> Livewire 컴포넌트 내에서 폼을 구축하는 경우, 반드시 [폼의 모델](../adding-a-form-to-a-livewire-component#setting-a-form-model)을 설정해야 합니다. 그렇지 않으면 Filament는 어떤 모델에서 관계를 가져와야 하는지 알 수 없습니다.
 
-You may employ the `relationship()` method of the `CheckboxList` to point to a `BelongsToMany` relationship. Filament will load the options from the relationship, and save them back to the relationship's pivot table when the form is submitted. The `titleAttribute` is the name of a column that will be used to generate a label for each option:
+`CheckboxList`의 `relationship()` 메서드를 사용하여 `BelongsToMany` 관계를 지정할 수 있습니다. Filament는 관계에서 옵션을 불러오고, 폼이 제출될 때 해당 값을 관계의 pivot 테이블에 저장합니다. `titleAttribute`는 각 옵션의 라벨을 생성할 때 사용할 컬럼의 이름입니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -206,7 +206,7 @@ CheckboxList::make('technologies')
     ->relationship(titleAttribute: 'name')
 ```
 
-When using `disabled()` with `relationship()`, ensure that `disabled()` is called before `relationship()`. This ensures that the `dehydrated()` call from within `relationship()` is not overridden by the call from `disabled()`:
+`relationship()`과 함께 `disabled()`를 사용할 때는, 반드시 `disabled()`를 `relationship()`보다 먼저 호출해야 합니다. 이렇게 하면 `relationship()` 내부의 `dehydrated()` 호출이 `disabled()`의 호출에 의해 덮어써지지 않게 됩니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -216,9 +216,9 @@ CheckboxList::make('technologies')
     ->relationship(titleAttribute: 'name')
 ```
 
-### Customizing the relationship query
+### 관계 쿼리 커스터마이징하기 {#customizing-the-relationship-query}
 
-You may customize the database query that retrieves options using the `modifyOptionsQueryUsing` parameter of the `relationship()` method:
+옵션을 가져오는 데이터베이스 쿼리는 `relationship()` 메서드의 `modifyOptionsQueryUsing` 파라미터를 사용하여 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -231,9 +231,9 @@ CheckboxList::make('technologies')
     )
 ```
 
-### Customizing the relationship option labels
+### 관계 옵션 라벨 커스터마이징하기 {#customizing-the-relationship-option-labels}
 
-If you'd like to customize the label of each option, maybe to be more descriptive, or to concatenate a first and last name, you could use a virtual column in your database migration:
+각 옵션의 라벨을 더 설명적으로 만들거나, 예를 들어 이름과 성을 합치고 싶다면, 데이터베이스 마이그레이션에서 가상 컬럼을 사용할 수 있습니다:
 
 ```php
 $table->string('full_name')->virtualAs('concat(first_name, \' \', last_name)');
@@ -246,7 +246,7 @@ CheckboxList::make('authors')
     ->relationship(titleAttribute: 'full_name')
 ```
 
-Alternatively, you can use the `getOptionLabelFromRecordUsing()` method to transform an option's Eloquent model into a label:
+또는, `getOptionLabelFromRecordUsing()` 메서드를 사용하여 옵션의 Eloquent 모델을 라벨로 변환할 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -260,9 +260,9 @@ CheckboxList::make('authors')
     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->first_name} {$record->last_name}")
 ```
 
-### Saving pivot data to the relationship
+### 관계에 피벗 데이터 저장하기 {#saving-pivot-data-to-the-relationship}
 
-If your pivot table has additional columns, you can use the `pivotData()` method to specify the data that should be saved in them:
+피벗 테이블에 추가 컬럼이 있는 경우, `pivotData()` 메서드를 사용하여 해당 컬럼에 저장할 데이터를 지정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -274,24 +274,9 @@ CheckboxList::make('primaryTechnologies')
     ])
 ```
 
-## Setting a custom no search results message
+## 사용자 지정 검색 결과 없음 메시지 설정하기 {#setting-a-custom-no-search-results-message}
 
-When you're using a searchable checkbox list, you may want to display a custom message when no search results are found. You can do this using the `noSearchResultsMessage()` method:
-
-```php
-use Filament\Forms\Components\CheckboxList;
-
-CheckboxList::make('technologies')
-    ->options([
-        // ...
-    ])
-    ->searchable()
-    ->noSearchResultsMessage('No technologies found.')
-```
-
-## Setting a custom search prompt
-
-When you're using a searchable checkbox list, you may want to tweak the search input's placeholder when the user has not yet entered a search term. You can do this using the `searchPrompt()` method:
+검색 가능한 체크박스 리스트를 사용할 때, 검색 결과가 없을 경우 사용자 지정 메시지를 표시하고 싶을 수 있습니다. `noSearchResultsMessage()` 메서드를 사용하여 이를 설정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -301,12 +286,27 @@ CheckboxList::make('technologies')
         // ...
     ])
     ->searchable()
-    ->searchPrompt('Search for a technology')
+    ->noSearchResultsMessage('기술을 찾을 수 없습니다.')
 ```
 
-## Tweaking the search debounce
+## 사용자 지정 검색 프롬프트 설정 {#setting-a-custom-search-prompt}
 
-By default, Filament will wait 1000 milliseconds (1 second) before searching for options when the user types in a searchable checkbox list. It will also wait 1000 milliseconds between searches if the user is continuously typing into the search input. You can change this using the `searchDebounce()` method:
+검색 가능한 체크박스 리스트를 사용할 때, 사용자가 아직 검색어를 입력하지 않았을 때의 검색 입력란 플레이스홀더를 변경하고 싶을 수 있습니다. 이럴 때는 `searchPrompt()` 메서드를 사용할 수 있습니다:
+
+```php
+use Filament\Forms\Components\CheckboxList;
+
+CheckboxList::make('technologies')
+    ->options([
+        // ...
+    ])
+    ->searchable()
+    ->searchPrompt('기술을 검색하세요')
+```
+
+## 검색 디바운스 조정하기 {#tweaking-the-search-debounce}
+
+기본적으로 Filament는 사용자가 검색 가능한 체크박스 리스트에 입력할 때 옵션을 검색하기 전에 1000밀리초(1초)를 대기합니다. 또한 사용자가 검색 입력란에 계속 입력할 경우, 검색 사이에도 1000밀리초를 대기합니다. 이 값은 `searchDebounce()` 메서드를 사용하여 변경할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\CheckboxList;
@@ -319,14 +319,14 @@ CheckboxList::make('technologies')
     ->searchDebounce(500)
 ```
 
-## Customizing the checkbox list action objects
+## 체크박스 리스트 액션 객체 커스터마이징 {#customizing-the-checkbox-list-action-objects}
 
-This field uses action objects for easy customization of buttons within it. You can customize these buttons by passing a function to an action registration method. The function has access to the `$action` object, which you can use to [customize it](../../actions/trigger-button). The following methods are available to customize the actions:
+이 필드는 내부 버튼을 쉽게 커스터마이징할 수 있도록 액션 객체를 사용합니다. 액션 등록 메서드에 함수를 전달하여 이 버튼들을 커스터마이즈할 수 있습니다. 이 함수는 `$action` 객체에 접근할 수 있으며, 이를 사용해 [커스터마이즈](../../actions/trigger-button)할 수 있습니다. 액션을 커스터마이즈할 수 있는 다음 메서드들이 제공됩니다:
 
 - `selectAllAction()`
 - `deselectAllAction()`
 
-Here is an example of how you might customize an action:
+다음은 액션을 커스터마이즈하는 예시입니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -337,6 +337,6 @@ CheckboxList::make('technologies')
         // ...
     ])
     ->selectAllAction(
-        fn (Action $action) => $action->label('Select all technologies'),
+        fn (Action $action) => $action->label('모든 기술 선택'),
     )
 ```

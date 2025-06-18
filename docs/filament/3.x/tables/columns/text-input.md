@@ -1,11 +1,11 @@
 ---
-title: Text input column
+title: TextInputColumn
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [테이블.컬럼] TextInputColumn
 
-## Overview
+## 개요 {#overview}
 
-The text input column allows you to render a text input inside the table, which can be used to update that database record without needing to open a new page or a modal:
+텍스트 입력 칼럼은 테이블 안에 텍스트 입력란을 렌더링할 수 있게 해주며, 이를 통해 새로운 페이지나 모달을 열지 않고도 해당 데이터베이스 레코드를 업데이트할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\TextInputColumn;
@@ -13,11 +13,11 @@ use Filament\Tables\Columns\TextInputColumn;
 TextInputColumn::make('email')
 ```
 
-<AutoScreenshot name="tables/columns/text-input/simple" alt="Text input column" version="3.x" />
+<AutoScreenshot name="tables/columns/text-input/simple" alt="텍스트 입력 칼럼" version="3.x" />
 
-## Validation
+## 유효성 검사 {#validation}
 
-You can validate the input by passing any [Laravel validation rules](https://laravel.com/docs/validation#available-validation-rules) in an array:
+입력값을 검증하려면, 배열에 [Laravel 유효성 검사 규칙](https://laravel.com/docs/validation#available-validation-rules)을 전달하면 됩니다:
 
 ```php
 use Filament\Tables\Columns\TextInputColumn;
@@ -26,9 +26,9 @@ TextInputColumn::make('name')
     ->rules(['required', 'max:255'])
 ```
 
-## Customizing the HTML input type
+## HTML 입력 유형 사용자화 {#customizing-the-html-input-type}
 
-You may use the `type()` method to pass a custom [HTML input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types):
+`type()` 메서드를 사용하여 커스텀 [HTML 입력 유형](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)을 지정할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\TextInputColumn;
@@ -36,16 +36,16 @@ use Filament\Tables\Columns\TextInputColumn;
 TextInputColumn::make('background_color')->type('color')
 ```
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-Hooks may be used to execute code at various points within the input's lifecycle:
+훅을 사용하여 입력의 라이프사이클 내 여러 지점에서 코드를 실행할 수 있습니다:
 
 ```php
 TextInputColumn::make()
     ->beforeStateUpdated(function ($record, $state) {
-        // Runs before the state is saved to the database.
+        // 상태가 데이터베이스에 저장되기 전에 실행됩니다.
     })
     ->afterStateUpdated(function ($record, $state) {
-        // Runs after the state is saved to the database.
+        // 상태가 데이터베이스에 저장된 후에 실행됩니다.
     })
 ```

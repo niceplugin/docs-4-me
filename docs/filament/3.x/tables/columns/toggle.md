@@ -1,11 +1,11 @@
 ---
-title: Toggle column
+title: ToggleColumn
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [테이블.컬럼] ToggleColumn
 
-## Overview
+## 개요 {#overview}
 
-The toggle column allows you to render a toggle button inside the table, which can be used to update that database record without needing to open a new page or a modal:
+ToggleColumn은 테이블 안에 토글 버튼을 렌더링할 수 있게 해주며, 이를 통해 새로운 페이지나 모달을 열지 않고도 해당 데이터베이스 레코드를 업데이트할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\ToggleColumn;
@@ -13,18 +13,18 @@ use Filament\Tables\Columns\ToggleColumn;
 ToggleColumn::make('is_admin')
 ```
 
-<AutoScreenshot name="tables/columns/toggle/simple" alt="Toggle column" version="3.x" />
+<AutoScreenshot name="tables/columns/toggle/simple" alt="ToggleColumn" version="3.x" />
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-Hooks may be used to execute code at various points within the toggle's lifecycle:
+훅을 사용하여 토글의 라이프사이클 내 여러 시점에서 코드를 실행할 수 있습니다:
 
 ```php
 ToggleColumn::make()
     ->beforeStateUpdated(function ($record, $state) {
-        // Runs before the state is saved to the database.
+        // 상태가 데이터베이스에 저장되기 전에 실행됩니다.
     })
     ->afterStateUpdated(function ($record, $state) {
-        // Runs after the state is saved to the database.
+        // 상태가 데이터베이스에 저장된 후에 실행됩니다.
     })
 ```

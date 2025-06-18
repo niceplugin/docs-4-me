@@ -1,19 +1,19 @@
 ---
-title: Custom filters
+title: 커스텀 필터
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [테이블.필터] 커스텀 필터
 
-## Custom filter forms
+
+## 커스텀 필터 폼 {#custom-filter-forms}
 
 <LaracastsBanner
-    title="Build a Custom Table Filter"
-    description="Watch the Build Advanced Components for Filament series on Laracasts - it will teach you how to build components, and you'll get to know all the internal tools to help you."
+    title="커스텀 테이블 필터 만들기"
+    description="Laracasts의 Build Advanced Components for Filament 시리즈를 시청하세요. 컴포넌트 제작 방법과 내부 도구 활용법을 배울 수 있습니다."
     url="https://laracasts.com/series/build-advanced-components-for-filament/episodes/11"
     series="building-advanced-components"
 />
 
-You may use components from the [Form Builder](../../forms/fields/getting-started) to create custom filter forms. The data from the custom filter form is available in the `$data` array of the `query()` callback:
+[폼 빌더](../../forms/fields/getting-started)의 컴포넌트를 사용하여 커스텀 필터 폼을 만들 수 있습니다. 커스텀 필터 폼에서 입력된 데이터는 `query()` 콜백의 `$data` 배열에서 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\DatePicker;
@@ -38,11 +38,11 @@ Filter::make('created_at')
     })
 ```
 
-<AutoScreenshot name="tables/filters/custom-form" alt="Table with custom filter form" version="3.x" />
+<AutoScreenshot name="tables/filters/custom-form" alt="커스텀 필터 폼이 있는 테이블" version="3.x" />
 
-### Setting default values for custom filter fields
+### 사용자 지정 필터 필드의 기본값 설정 {#setting-default-values-for-custom-filter-fields}
 
-To customize the default value of a field in a custom filter form, you may use the `default()` method:
+사용자 지정 필터 폼에서 필드의 기본값을 커스터마이즈하려면 `default()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\DatePicker;
@@ -56,31 +56,31 @@ Filter::make('created_at')
     ])
 ```
 
-## Active indicators
+## 활성 인디케이터 {#active-indicators}
 
-When a filter is active, an indicator is displayed above the table content to signal that the table query has been scoped.
+필터가 활성화되면, 테이블 쿼리가 범위 지정되었음을 알리기 위해 테이블 내용 위에 인디케이터가 표시됩니다.
 
-<AutoScreenshot name="tables/filters/indicators" alt="Table with filter indicators" version="3.x" />
+<AutoScreenshot name="tables/filters/indicators" alt="필터 인디케이터가 있는 테이블" version="3.x" />
 
-By default, the label of the filter is used as the indicator. You can override this using the `indicator()` method:
+기본적으로 필터의 라벨이 인디케이터로 사용됩니다. `indicator()` 메서드를 사용하여 이를 오버라이드할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\Filter;
 
 Filter::make('is_admin')
-    ->label('Administrators only?')
-    ->indicator('Administrators')
+    ->label('관리자만?')
+    ->indicator('관리자')
 ```
 
-If you are using a [custom filter form](#custom-filter-forms), you should use [`indicateUsing()`](#custom-active-indicators) to display an active indicator.
+[커스텀 필터 폼](#custom-filter-forms)을 사용하는 경우, 활성 인디케이터를 표시하려면 [`indicateUsing()`](#custom-active-indicators)를 사용해야 합니다.
 
-Please note: if you do not have an indicator for your filter, then the badge-count of how many filters are active in the table will not include that filter.
+참고: 필터에 인디케이터가 없는 경우, 테이블에서 활성화된 필터의 배지 개수에 해당 필터가 포함되지 않습니다.
 
-### Custom active indicators
+### 사용자 지정 활성 인디케이터 {#custom-active-indicators}
 
-Not all indicators are simple, so you may need to use `indicateUsing()` to customize which indicators should be shown at any time.
+모든 인디케이터가 단순하지는 않으므로, 언제든지 어떤 인디케이터를 표시할지 `indicateUsing()`을 사용하여 커스터마이즈해야 할 수 있습니다.
 
-For example, if you have a custom date filter, you may create a custom indicator that formats the selected date:
+예를 들어, 커스텀 날짜 필터가 있다면 선택한 날짜를 포맷팅하는 커스텀 인디케이터를 만들 수 있습니다:
 
 ```php
 use Carbon\Carbon;
@@ -99,9 +99,9 @@ Filter::make('created_at')
     })
 ```
 
-### Multiple active indicators
+### 여러 활성 인디케이터 {#multiple-active-indicators}
 
-You may even render multiple indicators at once, by returning an array of `Indicator` objects. If you have different fields associated with different indicators, you should set the field using the `removeField()` method on the `Indicator` object to ensure that the correct field is reset when the filter is removed:
+여러 개의 인디케이터를 한 번에 렌더링할 수도 있습니다. 이를 위해 `Indicator` 객체의 배열을 반환하면 됩니다. 서로 다른 인디케이터에 서로 다른 필드가 연결되어 있다면, `Indicator` 객체의 `removeField()` 메서드를 사용하여 필터가 제거될 때 올바른 필드가 리셋되도록 해야 합니다:
 
 ```php
 use Carbon\Carbon;
@@ -132,9 +132,9 @@ Filter::make('created_at')
     })
 ```
 
-### Preventing indicators from being removed
+### 인디케이터가 제거되지 않도록 방지하기 {#preventing-indicators-from-being-removed}
 
-You can prevent users from removing an indicator using `removable(false)` on an `Indicator` object:
+`Indicator` 객체에서 `removable(false)`를 사용하여 사용자가 인디케이터를 제거하지 못하도록 할 수 있습니다:
 
 ```php
 use Carbon\Carbon;

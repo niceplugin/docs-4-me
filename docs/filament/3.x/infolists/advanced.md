@@ -1,10 +1,10 @@
 ---
-title: Advanced infolists
+title: 고급 인포리스트
 ---
+# [인포리스트] 고급 인포리스트
+## 인포리스트에 Livewire 컴포넌트 삽입하기 {#inserting-livewire-components-into-an-infolist}
 
-## Inserting Livewire components into an infolist
-
-You may insert a Livewire component directly into an infolist:
+Livewire 컴포넌트를 인포리스트에 직접 삽입할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Livewire;
@@ -13,7 +13,7 @@ use App\Livewire\Foo;
 Livewire::make(Foo::class)
 ```
 
-If you are rendering multiple of the same Livewire component, please make sure to pass a unique `key()` to each:
+동일한 Livewire 컴포넌트를 여러 번 렌더링하는 경우, 각 컴포넌트에 고유한 `key()`를 반드시 전달해야 합니다:
 
 ```php
 use Filament\Infolists\Components\Livewire;
@@ -29,9 +29,9 @@ Livewire::make(Foo::class)
     ->key('foo-third')
 ```
 
-### Passing parameters to a Livewire component
+### Livewire 컴포넌트에 파라미터 전달하기 {#passing-parameters-to-a-livewire-component}
 
-You can pass an array of parameters to a Livewire component:
+Livewire 컴포넌트에 파라미터 배열을 전달할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Livewire;
@@ -40,7 +40,7 @@ use App\Livewire\Foo;
 Livewire::make(Foo::class, ['bar' => 'baz'])
 ```
 
-Now, those parameters will be passed to the Livewire component's `mount()` method:
+이제 해당 파라미터들은 Livewire 컴포넌트의 `mount()` 메서드로 전달됩니다:
 
 ```php
 class Foo extends Component
@@ -52,7 +52,7 @@ class Foo extends Component
 }
 ```
 
-Alternatively, they will be available as public properties on the Livewire component:
+또는, 해당 파라미터들은 Livewire 컴포넌트의 public 프로퍼티로도 사용할 수 있습니다:
 
 ```php
 class Foo extends Component
@@ -61,9 +61,9 @@ class Foo extends Component
 }
 ```
 
-#### Accessing the current record in the Livewire component
+#### Livewire 컴포넌트에서 현재 레코드에 접근하기 {#accessing-the-current-record-in-the-livewire-component}
 
-You can access the current record in the Livewire component using the `$record` parameter in the `mount()` method, or the `$record` property:
+Livewire 컴포넌트에서 `mount()` 메서드의 `$record` 파라미터나 `$record` 프로퍼티를 사용하여 현재 레코드에 접근할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -75,15 +75,15 @@ class Foo extends Component
         // ...
     }
     
-    // or
+    // 또는
     
     public Model $record;
 }
 ```
 
-### Lazy loading a Livewire component
+### Livewire 컴포넌트 지연 로딩 {#lazy-loading-a-livewire-component}
 
-You may allow the component to [lazily load](https://livewire.laravel.com/docs/lazy#rendering-placeholder-html) using the `lazy()` method:
+`lazy()` 메서드를 사용하여 컴포넌트를 [지연 로드](https://livewire.laravel.com/docs/lazy#rendering-placeholder-html)할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Livewire;

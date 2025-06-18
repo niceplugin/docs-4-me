@@ -1,18 +1,18 @@
 ---
-title: Custom fields
+title: 커스텀 필드
 ---
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [폼.필드] 커스텀 필드
 
 <LaracastsBanner
-    title="Build a Custom Form Field"
-    description="Watch the Build Advanced Components for Filament series on Laracasts - it will teach you how to build components, and you'll get to know all the internal tools to help you."
+    title="커스텀 폼 필드 만들기"
+    description="Laracasts의 'Build Advanced Components for Filament' 시리즈를 시청하세요. 컴포넌트 제작 방법과 내부 도구 활용법을 모두 배울 수 있습니다."
     url="https://laracasts.com/series/build-advanced-components-for-filament/episodes/6"
     series="building-advanced-components"
 />
 
-## View fields
+## 뷰 필드 {#view-fields}
 
-Aside from [building custom fields](#custom-field-classes), you may create "view" fields which allow you to create custom fields without extra PHP classes.
+[커스텀 필드 생성](#custom-field-classes) 외에도, 추가적인 PHP 클래스를 만들지 않고도 커스텀 필드를 생성할 수 있는 "뷰" 필드를 만들 수 있습니다.
 
 ```php
 use Filament\Forms\Components\ViewField;
@@ -21,11 +21,11 @@ ViewField::make('rating')
     ->view('filament.forms.components.range-slider')
 ```
 
-This assumes that you have a `resources/views/filament/forms/components/range-slider.blade.php` file.
+이는 `resources/views/filament/forms/components/range-slider.blade.php` 파일이 존재한다고 가정합니다.
 
-### Passing data to view fields
+### 뷰 필드에 데이터 전달하기 {#passing-data-to-view-fields}
 
-You can pass a simple array of data to the view using `viewData()`:
+`viewData()`를 사용하여 뷰에 간단한 배열 형태의 데이터를 전달할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\ViewField;
@@ -38,21 +38,21 @@ ViewField::make('rating')
     ])
 ```
 
-However, more complex configuration can be achieved with a [custom field class](#custom-field-classes).
+하지만, 더 복잡한 설정이 필요하다면 [커스텀 필드 클래스](#custom-field-classes)를 사용할 수 있습니다.
 
-## Custom field classes
+## 커스텀 필드 클래스 {#custom-field-classes}
 
-You may create your own custom field classes and views, which you can reuse across your project, and even release as a plugin to the community.
+프로젝트 전반에 걸쳐 재사용하거나, 커뮤니티에 플러그인으로 배포할 수 있는 커스텀 필드 클래스와 뷰를 직접 만들 수 있습니다.
 
-> If you're just creating a simple custom field to use once, you could instead use a [view field](#view) to render any custom Blade file.
+> 단 한 번만 사용할 간단한 커스텀 필드를 만들고 싶다면, [뷰 필드](#view)를 사용하여 원하는 Blade 파일을 렌더링할 수 있습니다.
 
-To create a custom field class and view, you may use the following command:
+커스텀 필드 클래스와 뷰를 생성하려면 다음 명령어를 사용할 수 있습니다:
 
 ```bash
 php artisan make:form-field RangeSlider
 ```
 
-This will create the following field class:
+이 명령어는 다음과 같은 필드 클래스를 생성합니다:
 
 ```php
 use Filament\Forms\Components\Field;
@@ -63,43 +63,43 @@ class RangeSlider extends Field
 }
 ```
 
-It will also create a view file at `resources/views/filament/forms/components/range-slider.blade.php`.
+또한 `resources/views/filament/forms/components/range-slider.blade.php` 경로에 뷰 파일도 생성됩니다.
 
-## How fields work
+## 필드의 작동 방식 {#how-fields-work}
 
-Livewire components are PHP classes that have their state stored in the user's browser. When a network request is made, the state is sent to the server, and filled into public properties on the Livewire component class, where it can be accessed in the same way as any other class property in PHP can be.
+Livewire 컴포넌트는 사용자의 브라우저에 상태가 저장되는 PHP 클래스입니다. 네트워크 요청이 발생하면, 상태가 서버로 전송되어 Livewire 컴포넌트 클래스의 public 프로퍼티에 채워지며, 이는 PHP의 다른 클래스 프로퍼티와 동일하게 접근할 수 있습니다.
 
-Imagine you had a Livewire component with a public property called `$name`. You could bind that property to an input field in the HTML of the Livewire component in one of two ways: with the [`wire:model` attribute](https://livewire.laravel.com/docs/properties#data-binding), or by [entangling](https://livewire.laravel.com/docs/javascript#the-wire-object) it with an Alpine.js property:
+예를 들어, `$name`이라는 public 프로퍼티가 있는 Livewire 컴포넌트가 있다고 가정해봅시다. 이 프로퍼티는 Livewire 컴포넌트의 HTML에서 [`wire:model` 속성](https://livewire.laravel.com/docs/properties#data-binding)을 사용하거나, Alpine.js 프로퍼티와 [entangle](https://livewire.laravel.com/docs/javascript#the-wire-object)하여 입력 필드에 바인딩할 수 있습니다:
 
 ```blade
 <input wire:model="name" />
 
-<!-- Or -->
+<!-- 또는 -->
 
 <div x-data="{ state: $wire.$entangle('name') }">
     <input x-model="state" />
 </div>
 ```
 
-When the user types into the input field, the `$name` property is updated in the Livewire component class. When the user submits the form, the `$name` property is sent to the server, where it can be saved.
+사용자가 입력 필드에 값을 입력하면, `$name` 프로퍼티가 Livewire 컴포넌트 클래스에서 업데이트됩니다. 사용자가 폼을 제출하면, `$name` 프로퍼티가 서버로 전송되어 저장할 수 있습니다.
 
-This is the basis of how fields work in Filament. Each field is assigned to a public property in the Livewire component class, which is where the state of the field is stored. We call the name of this property the "state path" of the field. You can access the state path of a field using the `$getStatePath()` function in the field's view:
+이것이 Filament에서 필드가 작동하는 기본 원리입니다. 각 필드는 Livewire 컴포넌트 클래스의 public 프로퍼티에 할당되며, 이곳에 필드의 상태가 저장됩니다. 우리는 이 프로퍼티의 이름을 필드의 "state path"라고 부릅니다. 필드의 뷰에서 `$getStatePath()` 함수를 사용하여 필드의 state path에 접근할 수 있습니다:
 
 ```blade
 <input wire:model="{{ $getStatePath() }}" />
 
-<!-- Or -->
+<!-- 또는 -->
 
 <div x-data="{ state: $wire.$entangle('{{ $getStatePath() }}') }">
     <input x-model="state" />
 </div>
 ```
 
-If your component heavily relies on third party libraries, we advise that you asynchronously load the Alpine.js component using the Filament asset system. This ensures that the Alpine.js component is only loaded when it's needed, and not on every page load. To find out how to do this, check out our [Assets documentation](../../support/assets#asynchronous-alpinejs-components).
+컴포넌트가 서드파티 라이브러리에 많이 의존한다면, Filament 에셋 시스템을 사용하여 Alpine.js 컴포넌트를 비동기적으로 로드하는 것을 권장합니다. 이렇게 하면 Alpine.js 컴포넌트가 필요할 때만 로드되고, 모든 페이지 로드 시마다 불필요하게 로드되지 않습니다. 자세한 방법은 [에셋 문서](../../support/assets#asynchronous-alpinejs-components)를 참고하세요.
 
-## Rendering the field wrapper
+## 필드 래퍼 렌더링하기 {#rendering-the-field-wrapper}
 
-Filament includes a "field wrapper" component, which is able to render the field's label, validation errors, and any other text surrounding the field. You may render the field wrapper like this in the view:
+Filament에는 "필드 래퍼" 컴포넌트가 포함되어 있어, 필드의 라벨, 유효성 검사 오류, 그리고 필드를 둘러싼 기타 텍스트를 렌더링할 수 있습니다. 뷰에서 필드 래퍼를 다음과 같이 렌더링할 수 있습니다:
 
 ```blade
 <x-dynamic-component
@@ -110,11 +110,11 @@ Filament includes a "field wrapper" component, which is able to render the field
 </x-dynamic-component>
 ```
 
-It's encouraged to use the field wrapper component whenever appropriate, as it will ensure that the field's design is consistent with the rest of the form.
+필드의 디자인이 폼의 나머지 부분과 일관되도록, 적절한 경우에는 항상 필드 래퍼 컴포넌트를 사용하는 것이 권장됩니다.
 
-## Accessing the Eloquent record
+## Eloquent 레코드에 접근하기 {#accessing-the-eloquent-record}
 
-Inside your view, you may access the Eloquent record using the `$getRecord()` function:
+뷰 내부에서 `$getRecord()` 함수를 사용하여 Eloquent 레코드에 접근할 수 있습니다:
 
 ```blade
 <div>
@@ -122,18 +122,18 @@ Inside your view, you may access the Eloquent record using the `$getRecord()` fu
 </div>
 ```
 
-## Obeying state binding modifiers
+## 상태 바인딩 수정자 준수하기 {#obeying-state-binding-modifiers}
 
-When you bind a field to a state path, you may use the `defer` modifier to ensure that the state is only sent to the server when the user submits the form, or whenever the next Livewire request is made. This is the default behavior.
+필드를 상태 경로에 바인딩할 때, `defer` 수정자를 사용하여 사용자가 폼을 제출하거나 다음 Livewire 요청이 발생할 때만 상태가 서버로 전송되도록 할 수 있습니다. 이것이 기본 동작입니다.
 
-However, you may use the [`live()`](../advanced#the-basics-of-reactivity) on a field to ensure that the state is sent to the server immediately when the user interacts with the field. This allows for lots of advanced use cases as explained in the [advanced](../advanced) section of the documentation.
+하지만 필드에 [`live()`](../advanced#the-basics-of-reactivity)를 사용하면 사용자가 필드와 상호작용할 때마다 상태가 즉시 서버로 전송되도록 할 수 있습니다. 이는 문서의 [고급](../advanced) 섹션에서 설명된 것처럼 다양한 고급 사용 사례에 활용할 수 있습니다.
 
-Filament provides a `$applyStateBindingModifiers()` function that you may use in your view to apply any state binding modifiers to a `wire:model` or `$wire.$entangle()` binding:
+Filament는 뷰에서 `wire:model` 또는 `$wire.$entangle()` 바인딩에 상태 바인딩 수정자를 적용할 수 있도록 `$applyStateBindingModifiers()` 함수를 제공합니다:
 
 ```blade
 <input {{ $applyStateBindingModifiers('wire:model') }}="{{ $getStatePath() }}" />
 
-<!-- Or -->
+<!-- 또는 -->
 
 <div x-data="{ state: $wire.{{ $applyStateBindingModifiers("\$entangle('{$getStatePath()}')") }} }">
     <input x-model="state" />

@@ -1,11 +1,11 @@
 ---
 title: Tabs
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [인포리스트.레이아웃] Tabs
 
-## Overview
+## 개요 {#overview}
 
-Some infolists can be long and complex. You may want to use tabs to reduce the number of components that are visible at once:
+일부 인포리스트는 길고 복잡할 수 있습니다. 한 번에 표시되는 컴포넌트의 수를 줄이기 위해 탭을 사용할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -29,9 +29,9 @@ Tabs::make('Tabs')
 
 <AutoScreenshot name="infolists/layout/tabs/simple" alt="Tabs" version="3.x" />
 
-## Setting the default active tab
+## 기본 활성 탭 설정하기 {#setting-the-default-active-tab}
 
-The first tab will be open by default. You can change the default open tab using the `activeTab()` method:
+첫 번째 탭이 기본적으로 열려 있습니다. `activeTab()` 메서드를 사용하여 기본으로 열릴 탭을 변경할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -54,9 +54,9 @@ Tabs::make('Tabs')
     ->activeTab(2)
 ```
 
-## Setting a tab icon
+## 탭 아이콘 설정하기 {#setting-a-tab-icon}
 
-Tabs may have an [icon](https://blade-ui-kit.com/blade-icons?set=1#search), which you can set using the `icon()` method:
+탭에는 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 추가할 수 있으며, `icon()` 메서드를 사용하여 설정할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -72,11 +72,11 @@ Tabs::make('Tabs')
     ])
 ```
 
-<AutoScreenshot name="infolists/layout/tabs/icons" alt="Tabs with icons" version="3.x" />
+<AutoScreenshot name="infolists/layout/tabs/icons" alt="아이콘이 있는 탭" version="3.x" />
 
-### Setting the tab icon position
+### 탭 아이콘 위치 설정하기 {#setting-the-tab-icon-position}
 
-The icon of the tab may be positioned before or after the label using the `iconPosition()` method:
+탭의 아이콘은 `iconPosition()` 메서드를 사용하여 라벨 앞이나 뒤에 위치시킬 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -94,11 +94,11 @@ Tabs::make('Tabs')
     ])
 ```
 
-<AutoScreenshot name="infolists/layout/tabs/icons-after" alt="Tabs with icons after their labels" version="3.x" />
+<AutoScreenshot name="infolists/layout/tabs/icons-after" alt="라벨 뒤에 아이콘이 있는 탭" version="3.x" />
 
-## Setting a tab badge
+## 탭 배지 설정하기 {#setting-a-tab-badge}
 
-Tabs may have a badge, which you can set using the `badge()` method:
+탭에는 배지를 추가할 수 있으며, `badge()` 메서드를 사용하여 설정할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -114,9 +114,9 @@ Tabs::make('Tabs')
     ])
 ```
 
-<AutoScreenshot name="infolists/layout/tabs/badges" alt="Tabs with badges" version="3.x" />
+<AutoScreenshot name="infolists/layout/tabs/badges" alt="배지가 있는 탭" version="3.x" />
 
-If you'd like to change the color for a badge, you can use the `badgeColor()` method:
+배지의 색상을 변경하고 싶다면, `badgeColor()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -133,9 +133,9 @@ Tabs::make('Tabs')
     ])
 ```
 
-## Using grid columns within a tab
+## 탭 내에서 그리드 열 사용하기 {#using-grid-columns-within-a-tab}
 
-You may use the `columns()` method to customize the [grid](grid) within the tab:
+탭 내의 [그리드](grid)를 커스터마이즈하려면 `columns()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -151,9 +151,9 @@ Tabs::make('Tabs')
     ])
 ```
 
-## Removing the styled container
+## 스타일이 적용된 컨테이너 제거하기 {#removing-the-styled-container}
 
-By default, tabs and their content are wrapped in a container styled as a card. You may remove the styled container using `contained()`:
+기본적으로 탭과 그 내용은 카드로 스타일링된 컨테이너에 감싸져 있습니다. `contained()`를 사용하여 스타일이 적용된 컨테이너를 제거할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -176,9 +176,9 @@ Tabs::make('Tabs')
     ->contained(false)
 ```
 
-## Persisting the current tab
+## 현재 탭 상태 유지하기 {#persisting-the-current-tab}
 
-By default, the current tab is not persisted in the browser's local storage. You can change this behavior using the `persistTab()` method. You must also pass in a unique `id()` for the tabs component, to distinguish it from all other sets of tabs in the app. This ID will be used as the key in the local storage to store the current tab:
+기본적으로 현재 탭은 브라우저의 로컬 스토리지에 저장되지 않습니다. `persistTab()` 메서드를 사용하여 이 동작을 변경할 수 있습니다. 또한, 앱 내의 다른 탭 세트와 구분하기 위해 탭 컴포넌트에 고유한 `id()`를 전달해야 합니다. 이 ID는 로컬 스토리지에서 현재 탭을 저장하는 키로 사용됩니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -191,9 +191,9 @@ Tabs::make('Tabs')
     ->id('order-tabs')
 ```
 
-### Persisting the current tab in the URL's query string
+### 현재 탭을 URL의 쿼리 문자열에 유지하기 {#persisting-the-current-tab-in-the-urls-query-string}
 
-By default, the current tab is not persisted in the URL's query string. You can change this behavior using the `persistTabInQueryString()` method:
+기본적으로, 현재 탭은 URL의 쿼리 문자열에 유지되지 않습니다. 이 동작을 변경하려면 `persistTabInQueryString()` 메서드를 사용하면 됩니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;
@@ -216,7 +216,7 @@ Tabs::make('Tabs')
     ->persistTabInQueryString()
 ```
 
-By default, the current tab is persisted in the URL's query string using the `tab` key. You can change this key by passing it to the `persistTabInQueryString()` method:
+기본적으로, 현재 탭은 `tab` 키를 사용하여 URL의 쿼리 문자열에 유지됩니다. 이 키를 변경하려면 `persistTabInQueryString()` 메서드에 값을 전달하면 됩니다:
 
 ```php
 use Filament\Infolists\Components\Tabs;

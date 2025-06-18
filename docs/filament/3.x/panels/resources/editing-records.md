@@ -1,10 +1,10 @@
 ---
-title: Editing records
+title: 레코드 편집
 ---
+# [패널.리소스] 레코드 편집
+## 폼에 데이터를 채우기 전에 데이터 커스터마이징하기 {#customizing-data-before-filling-the-form}
 
-## Customizing data before filling the form
-
-You may wish to modify the data from a record before it is filled into the form. To do this, you may define a `mutateFormDataBeforeFill()` method on the Edit page class to modify the `$data` array, and return the modified version before it is filled into the form:
+레코드의 데이터를 폼에 채우기 전에 수정하고 싶을 수 있습니다. 이를 위해 Edit 페이지 클래스에 `mutateFormDataBeforeFill()` 메서드를 정의하여 `$data` 배열을 수정하고, 수정된 버전을 폼에 채우기 전에 반환할 수 있습니다:
 
 ```php
 protected function mutateFormDataBeforeFill(array $data): array
@@ -15,11 +15,11 @@ protected function mutateFormDataBeforeFill(array $data): array
 }
 ```
 
-Alternatively, if you're editing records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/edit#customizing-data-before-filling-the-form).
+또는, 모달 액션에서 레코드를 수정하는 경우 [액션 문서](../../actions/prebuilt-actions/edit#customizing-data-before-filling-the-form)를 참고하세요.
 
-## Customizing data before saving
+## 저장 전에 데이터 커스터마이징하기 {#customizing-data-before-saving}
 
-Sometimes, you may wish to modify form data before it is finally saved to the database. To do this, you may define a `mutateFormDataBeforeSave()` method on the Edit page class, which accepts the `$data` as an array, and returns it modified:
+때때로, 폼 데이터를 데이터베이스에 최종적으로 저장하기 전에 수정하고 싶을 수 있습니다. 이를 위해 Edit 페이지 클래스에 `mutateFormDataBeforeSave()` 메서드를 정의할 수 있으며, 이 메서드는 배열 형태의 `$data`를 받아 수정된 데이터를 반환합니다:
 
 ```php
 protected function mutateFormDataBeforeSave(array $data): array
@@ -30,11 +30,11 @@ protected function mutateFormDataBeforeSave(array $data): array
 }
 ```
 
-Alternatively, if you're editing records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/edit#customizing-data-before-saving).
+또는, 모달 액션에서 레코드를 수정하는 경우에는 [액션 문서](../../actions/prebuilt-actions/edit#customizing-data-before-saving)를 참고하세요.
 
-## Customizing the saving process
+## 저장 프로세스 커스터마이징하기 {#customizing-the-saving-process}
 
-You can tweak how the record is updated using the `handleRecordUpdate()` method on the Edit page class:
+Edit 페이지 클래스에서 `handleRecordUpdate()` 메서드를 사용하여 레코드가 업데이트되는 방식을 조정할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -47,15 +47,15 @@ protected function handleRecordUpdate(Model $record, array $data): Model
 }
 ```
 
-Alternatively, if you're editing records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/edit#customizing-the-saving-process).
+또는, 모달 액션에서 레코드를 수정하는 경우 [액션 문서](../../actions/prebuilt-actions/edit#customizing-the-saving-process)를 참고하세요.
 
-## Customizing redirects
+## 리디렉션 커스터마이징 {#customizing-redirects}
 
-By default, saving the form will not redirect the user to another page.
+기본적으로 폼을 저장해도 사용자가 다른 페이지로 리디렉션되지 않습니다.
 
-You may set up a custom redirect when the form is saved by overriding the `getRedirectUrl()` method on the Edit page class.
+폼이 저장될 때 커스텀 리디렉션을 설정하려면 Edit 페이지 클래스에서 `getRedirectUrl()` 메서드를 오버라이드하면 됩니다.
 
-For example, the form can redirect back to the [List page](listing-records) of the resource:
+예를 들어, 폼 저장 후 리소스의 [목록 페이지](listing-records)로 리디렉션할 수 있습니다:
 
 ```php
 protected function getRedirectUrl(): string
@@ -64,7 +64,7 @@ protected function getRedirectUrl(): string
 }
 ```
 
-Or the [View page](viewing-records):
+또는 [상세보기 페이지](viewing-records)로 리디렉션할 수도 있습니다:
 
 ```php
 protected function getRedirectUrl(): string
@@ -73,7 +73,7 @@ protected function getRedirectUrl(): string
 }
 ```
 
-If you wish to be redirected to the previous page, else the index page:
+이전 페이지가 있다면 그곳으로, 없다면 인덱스 페이지로 리디렉션하고 싶다면 다음과 같이 할 수 있습니다:
 
 ```php
 protected function getRedirectUrl(): string
@@ -82,22 +82,22 @@ protected function getRedirectUrl(): string
 }
 ```
 
-## Customizing the save notification
+## 저장 알림 커스터마이징하기 {#customizing-the-save-notification}
 
-When the record is successfully updated, a notification is dispatched to the user, which indicates the success of their action.
+레코드가 성공적으로 업데이트되면, 사용자의 작업이 성공했음을 알리는 알림이 사용자에게 전송됩니다.
 
-To customize the title of this notification, define a `getSavedNotificationTitle()` method on the edit page class:
+이 알림의 제목을 커스터마이징하려면, 에디트 페이지 클래스에 `getSavedNotificationTitle()` 메서드를 정의하세요:
 
 ```php
 protected function getSavedNotificationTitle(): ?string
 {
-    return 'User updated';
+    return '사용자가 업데이트되었습니다';
 }
 ```
 
-Alternatively, if you're editing records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/edit#customizing-the-save-notification).
+또는, 모달 액션에서 레코드를 수정하는 경우 [액션 문서](../../actions/prebuilt-actions/edit#customizing-the-save-notification)를 참고하세요.
 
-You may customize the entire notification by overriding the `getSavedNotification()` method on the edit page class:
+알림 전체를 커스터마이징하려면, 에디트 페이지 클래스에서 `getSavedNotification()` 메서드를 오버라이드하세요:
 
 ```php
 use Filament\Notifications\Notification;
@@ -106,12 +106,12 @@ protected function getSavedNotification(): ?Notification
 {
     return Notification::make()
         ->success()
-        ->title('User updated')
-        ->body('The user has been saved successfully.');
+        ->title('사용자가 업데이트되었습니다')
+        ->body('사용자가 성공적으로 저장되었습니다.');
 }
 ```
 
-To disable the notification altogether, return `null` from the `getSavedNotification()` method on the edit page class:
+알림을 완전히 비활성화하려면, 에디트 페이지 클래스의 `getSavedNotification()` 메서드에서 `null`을 반환하세요:
 
 ```php
 use Filament\Notifications\Notification;
@@ -122,9 +122,9 @@ protected function getSavedNotification(): ?Notification
 }
 ```
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-Hooks may be used to execute code at various points within a page's lifecycle, like before a form is saved. To set up a hook, create a protected method on the Edit page class with the name of the hook:
+훅은 페이지의 라이프사이클 내 여러 지점에서 코드를 실행하는 데 사용할 수 있습니다. 예를 들어, 폼이 저장되기 전에 코드를 실행할 수 있습니다. 훅을 설정하려면, Edit 페이지 클래스에 훅 이름과 동일한 protected 메서드를 생성하세요:
 
 ```php
 protected function beforeSave(): void
@@ -133,9 +133,9 @@ protected function beforeSave(): void
 }
 ```
 
-In this example, the code in the `beforeSave()` method will be called before the data in the form is saved to the database.
+이 예시에서, `beforeSave()` 메서드의 코드는 폼의 데이터가 데이터베이스에 저장되기 전에 호출됩니다.
 
-There are several available hooks for the Edit pages:
+Edit 페이지에서 사용할 수 있는 여러 훅이 있습니다:
 
 ```php
 use Filament\Resources\Pages\EditRecord;
@@ -146,41 +146,41 @@ class EditUser extends EditRecord
 
     protected function beforeFill(): void
     {
-        // Runs before the form fields are populated from the database.
+        // 폼 필드가 데이터베이스에서 채워지기 전에 실행됩니다.
     }
 
     protected function afterFill(): void
     {
-        // Runs after the form fields are populated from the database.
+        // 폼 필드가 데이터베이스에서 채워진 후에 실행됩니다.
     }
 
     protected function beforeValidate(): void
     {
-        // Runs before the form fields are validated when the form is saved.
+        // 폼이 저장될 때 폼 필드가 검증되기 전에 실행됩니다.
     }
 
     protected function afterValidate(): void
     {
-        // Runs after the form fields are validated when the form is saved.
+        // 폼이 저장될 때 폼 필드가 검증된 후에 실행됩니다.
     }
 
     protected function beforeSave(): void
     {
-        // Runs before the form fields are saved to the database.
+        // 폼 필드가 데이터베이스에 저장되기 전에 실행됩니다.
     }
 
     protected function afterSave(): void
     {
-        // Runs after the form fields are saved to the database.
+        // 폼 필드가 데이터베이스에 저장된 후에 실행됩니다.
     }
 }
 ```
 
-Alternatively, if you're editing records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/edit#lifecycle-hooks).
+또한, 모달 액션에서 레코드를 수정하는 경우 [액션 문서](../../actions/prebuilt-actions/edit#lifecycle-hooks)를 참고하세요.
 
-## Saving a part of the form independently
+## 폼의 일부만 독립적으로 저장하기 {#saving-a-part-of-the-form-independently}
 
-You may want to allow the user to save a part of the form independently of the rest of the form. One way to do this is with a [section action in the header or footer](../../forms/layout/section#adding-actions-to-the-sections-header-or-footer). From the `action()` method, you can call `saveFormComponentOnly()`, passing in the `Section` component that you want to save:
+사용자가 폼의 일부만 나머지 폼과 독립적으로 저장할 수 있도록 허용하고 싶을 수 있습니다. 이를 위한 한 가지 방법은 [섹션의 헤더 또는 푸터에 액션 추가](../../forms/layout/section#adding-actions-to-the-sections-header-or-footer)를 사용하는 것입니다. `action()` 메서드에서, 저장하려는 `Section` 컴포넌트를 전달하여 `saveFormComponentOnly()`를 호출할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -207,11 +207,11 @@ Section::make('Rate limiting')
     ])
 ```
 
-The `$operation` helper is available, to ensure that the action is only visible when the form is being edited.
+액션이 폼이 편집 중일 때만 보이도록 `$operation` 헬퍼를 사용할 수 있습니다.
 
-## Halting the saving process
+## 저장 프로세스 중단하기 {#halting-the-saving-process}
 
-At any time, you may call `$this->halt()` from inside a lifecycle hook or mutation method, which will halt the entire saving process:
+언제든지 라이프사이클 훅이나 변이 메서드 내부에서 `$this->halt()`를 호출하여 전체 저장 프로세스를 중단할 수 있습니다:
 
 ```php
 use Filament\Notifications\Actions\Action;
@@ -222,8 +222,8 @@ protected function beforeSave(): void
     if (! $this->getRecord()->team->subscribed()) {
         Notification::make()
             ->warning()
-            ->title('You don\'t have an active subscription!')
-            ->body('Choose a plan to continue.')
+            ->title('활성화된 구독이 없습니다!')
+            ->body('계속하려면 요금제를 선택하세요.')
             ->persistent()
             ->actions([
                 Action::make('subscribe')
@@ -237,23 +237,23 @@ protected function beforeSave(): void
 }
 ```
 
-Alternatively, if you're editing records in a modal action, check out the [Actions documentation](../../actions/prebuilt-actions/edit#halting-the-saving-process).
+또는, 모달 액션에서 레코드를 편집하는 경우 [액션 문서](../../actions/prebuilt-actions/edit#halting-the-saving-process)를 참고하세요.
 
-## Authorization
+## 권한 부여 {#authorization}
 
-For authorization, Filament will observe any [model policies](https://laravel.com/docs/authorization#creating-policies) that are registered in your app.
+권한 부여를 위해 Filament는 앱에 등록된 [모델 정책](https://laravel.com/docs/authorization#creating-policies)을 따릅니다.
 
-Users may access the Edit page if the `update()` method of the model policy returns `true`.
+모델 정책의 `update()` 메서드가 `true`를 반환하면 사용자는 편집 페이지에 접근할 수 있습니다.
 
-They also have the ability to delete the record if the `delete()` method of the policy returns `true`.
+정책의 `delete()` 메서드가 `true`를 반환하면 레코드를 삭제할 수도 있습니다.
 
-## Custom actions
+## 커스텀 액션 {#custom-actions}
 
-"Actions" are buttons that are displayed on pages, which allow the user to run a Livewire method on the page or visit a URL.
+"액션"은 페이지에 표시되는 버튼으로, 사용자가 해당 페이지에서 Livewire 메서드를 실행하거나 URL을 방문할 수 있게 해줍니다.
 
-On resource pages, actions are usually in 2 places: in the top right of the page, and below the form.
+리소스 페이지에서는 일반적으로 액션이 두 곳에 위치합니다: 페이지 오른쪽 상단과 폼 아래입니다.
 
-For example, you may add a new button action next to "Delete" on the Edit page:
+예를 들어, Edit 페이지에서 "Delete" 옆에 새로운 버튼 액션을 추가할 수 있습니다:
 
 ```php
 use Filament\Actions;
@@ -276,7 +276,7 @@ class EditUser extends EditRecord
 }
 ```
 
-Or, a new button next to "Save" below the form:
+또는, 폼 아래 "Save" 옆에 새로운 버튼을 추가할 수도 있습니다:
 
 ```php
 use Filament\Actions\Action;
@@ -301,11 +301,11 @@ class EditUser extends EditRecord
 }
 ```
 
-To view the entire actions API, please visit the [pages section](../pages#adding-actions-to-pages).
+전체 액션 API를 보려면 [페이지 섹션](../pages#adding-actions-to-pages)을 방문해 주세요.
 
-### Adding a save action button to the header
+### 헤더에 저장 액션 버튼 추가하기 {#adding-a-save-action-button-to-the-header}
 
-The "Save" button can be added to the header of the page by overriding the `getHeaderActions()` method and using `getSaveFormAction()`. You need to pass `formId()` to the action, to specify that the action should submit the form with the ID of `form`, which is the `<form>` ID used in the view of the page:
+"저장" 버튼은 `getHeaderActions()` 메서드를 오버라이드하고 `getSaveFormAction()`을 사용하여 페이지의 헤더에 추가할 수 있습니다. 이때, 액션이 `form`이라는 ID를 가진 폼을 제출하도록 지정하려면 `formId()`에 `form`을 전달해야 합니다. 이 `form`은 페이지 뷰에서 사용되는 `<form>`의 ID입니다:
 
 ```php
 protected function getHeaderActions(): array
@@ -317,7 +317,7 @@ protected function getHeaderActions(): array
 }
 ```
 
-You may remove all actions from the form by overriding the `getFormActions()` method to return an empty array:
+`getFormActions()` 메서드를 오버라이드하여 빈 배열을 반환하면 폼에서 모든 액션을 제거할 수 있습니다:
 
 ```php
 protected function getFormActions(): array
@@ -326,17 +326,17 @@ protected function getFormActions(): array
 }
 ```
 
-## Creating another Edit page
+## 또 다른 Edit 페이지 생성하기 {#creating-another-edit-page}
 
-One Edit page may not be enough space to allow users to navigate many form fields. You can create as many Edit pages for a resource as you want. This is especially useful if you are using [resource sub-navigation](getting-started#resource-sub-navigation), as you are then easily able to switch between the different Edit pages.
+하나의 Edit 페이지로는 많은 폼 필드를 사용자에게 제공하기에 공간이 부족할 수 있습니다. 리소스에 대해 원하는 만큼 Edit 페이지를 생성할 수 있습니다. 특히 [리소스 하위 내비게이션](getting-started#resource-sub-navigation)을 사용하는 경우, 서로 다른 Edit 페이지 간에 쉽게 전환할 수 있어 매우 유용합니다.
 
-To create an Edit page, you should use the `make:filament-page` command:
+Edit 페이지를 생성하려면 `make:filament-page` 명령어를 사용해야 합니다:
 
 ```bash
 php artisan make:filament-page EditCustomerContact --resource=CustomerResource --type=EditRecord
 ```
 
-You must register this new page in your resource's `getPages()` method:
+이 새 페이지를 리소스의 `getPages()` 메서드에 등록해야 합니다:
 
 ```php
 public static function getPages(): array
@@ -351,7 +351,7 @@ public static function getPages(): array
 }
 ```
 
-Now, you can define the `form()` for this page, which can contain other fields that are not present on the main Edit page:
+이제 이 페이지에 대한 `form()`을 정의할 수 있으며, 이 폼에는 메인 Edit 페이지에 없는 다른 필드를 포함할 수 있습니다:
 
 ```php
 use Filament\Forms\Form;
@@ -365,9 +365,9 @@ public function form(Form $form): Form
 }
 ```
 
-## Adding edit pages to resource sub-navigation
+## 리소스 하위 내비게이션에 편집 페이지 추가하기 {#adding-edit-pages-to-resource-sub-navigation}
 
-If you're using [resource sub-navigation](getting-started#resource-sub-navigation), you can register this page as normal in `getRecordSubNavigation()` of the resource:
+[리소스 하위 내비게이션](getting-started#resource-sub-navigation)을 사용하고 있다면, 이 페이지를 리소스의 `getRecordSubNavigation()`에서 일반적으로 등록할 수 있습니다:
 
 ```php
 use App\Filament\Resources\CustomerResource\Pages;
@@ -382,17 +382,17 @@ public static function getRecordSubNavigation(Page $page): array
 }
 ```
 
-## Custom views
+## 커스텀 뷰 {#custom-views}
 
-For further customization opportunities, you can override the static `$view` property on the page class to a custom view in your app:
+더 많은 커스터마이징을 원한다면, 페이지 클래스의 정적 `$view` 프로퍼티를 앱 내의 커스텀 뷰로 오버라이드할 수 있습니다:
 
 ```php
 protected static string $view = 'filament.resources.users.pages.edit-user';
 ```
 
-This assumes that you have created a view at `resources/views/filament/resources/users/pages/edit-user.blade.php`.
+이는 `resources/views/filament/resources/users/pages/edit-user.blade.php` 경로에 뷰를 생성했음을 전제로 합니다.
 
-Here's a basic example of what that view might contain:
+해당 뷰에 들어갈 수 있는 기본 예시는 다음과 같습니다:
 
 ```blade
 <x-filament-panels::page>
@@ -416,4 +416,4 @@ Here's a basic example of what that view might contain:
 </x-filament-panels::page>
 ```
 
-To see everything that the default view contains, you can check the `vendor/filament/filament/resources/views/resources/pages/edit-record.blade.php` file in your project.
+기본 뷰에 포함된 모든 내용을 확인하려면, 프로젝트 내의 `vendor/filament/filament/resources/views/resources/pages/edit-record.blade.php` 파일을 참고할 수 있습니다.

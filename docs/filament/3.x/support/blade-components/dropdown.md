@@ -1,38 +1,38 @@
 ---
-title: Dropdown Blade component
+title: 드롭다운 블레이드 컴포넌트
 ---
+# [핵심개념.Blade컴포넌트] dropdown
+## 개요 {#overview}
 
-## Overview
-
-The dropdown component allows you to render a dropdown menu with a button that triggers it:
+드롭다운 컴포넌트는 버튼을 클릭하여 드롭다운 메뉴를 렌더링할 수 있게 해줍니다:
 
 ```blade
 <x-filament::dropdown>
     <x-slot name="trigger">
         <x-filament::button>
-            More actions
+            더 많은 작업
         </x-filament::button>
     </x-slot>
     
     <x-filament::dropdown.list>
         <x-filament::dropdown.list.item wire:click="openViewModal">
-            View
+            보기
         </x-filament::dropdown.list.item>
         
         <x-filament::dropdown.list.item wire:click="openEditModal">
-            Edit
+            수정
         </x-filament::dropdown.list.item>
         
         <x-filament::dropdown.list.item wire:click="openDeleteModal">
-            Delete
+            삭제
         </x-filament::dropdown.list.item>
     </x-filament::dropdown.list>
 </x-filament::dropdown>
 ```
 
-## Using a dropdown item as an anchor link
+## 드롭다운 항목을 앵커 링크로 사용하기 {#using-a-dropdown-item-as-an-anchor-link}
 
-By default, a dropdown item's underlying HTML tag is `<button>`. You can change it to be an `<a>` tag by using the `tag` attribute:
+기본적으로 드롭다운 항목의 하위 HTML 태그는 `<button>`입니다. `tag` 속성을 사용하여 `<a>` 태그로 변경할 수 있습니다:
 
 ```blade
 <x-filament::dropdown.list.item
@@ -43,9 +43,9 @@ By default, a dropdown item's underlying HTML tag is `<button>`. You can change 
 </x-filament::dropdown.list.item>
 ```
 
-## Changing the color of a dropdown item
+## 드롭다운 항목의 색상 변경하기 {#changing-the-color-of-a-dropdown-item}
 
-By default, the color of a dropdown item is "gray". You can change it to be `danger`, `info`, `primary`, `success` or `warning` by using the `color` attribute:
+기본적으로 드롭다운 항목의 색상은 "gray"입니다. `color` 속성을 사용하여 `danger`, `info`, `primary`, `success`, `warning` 중 하나로 변경할 수 있습니다:
 
 ```blade
 <x-filament::dropdown.list.item color="danger">
@@ -69,9 +69,9 @@ By default, the color of a dropdown item is "gray". You can change it to be `dan
 </x-filament::dropdown.list.item>
 ```
 
-## Adding an icon to a dropdown item
+## 드롭다운 항목에 아이콘 추가하기 {#adding-an-icon-to-a-dropdown-item}
 
-You can add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to a dropdown item by using the `icon` attribute:
+`icon` 속성을 사용하여 드롭다운 항목에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 추가할 수 있습니다:
 
 ```blade
 <x-filament::dropdown.list.item icon="heroicon-m-pencil">
@@ -79,9 +79,9 @@ You can add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to a dr
 </x-filament::dropdown.list.item>
 ```
 
-### Changing the icon color of a dropdown item
+### 드롭다운 항목의 아이콘 색상 변경하기 {#changing-the-icon-color-of-a-dropdown-item}
 
-By default, the icon color uses the [same color as the item itself](#changing-the-color-of-a-dropdown-item). You can override it to be `danger`, `info`, `primary`, `success` or `warning` by using the `icon-color` attribute:
+기본적으로 아이콘 색상은 [항목 자체의 색상과 동일하게](#changing-the-color-of-a-dropdown-item) 사용됩니다. `icon-color` 속성을 사용하여 `danger`, `info`, `primary`, `success`, `warning` 중 하나로 오버라이드할 수 있습니다:
 
 ```blade
 <x-filament::dropdown.list.item icon="heroicon-m-pencil" icon-color="danger">
@@ -105,9 +105,9 @@ By default, the icon color uses the [same color as the item itself](#changing-th
 </x-filament::dropdown.list.item>
 ```
 
-## Adding an image to a dropdown item
+## 드롭다운 항목에 이미지 추가하기 {#adding-an-image-to-a-dropdown-item}
 
-You can add a circular image to a dropdown item by using the `image` attribute:
+`image` 속성을 사용하여 드롭다운 항목에 원형 이미지를 추가할 수 있습니다:
 
 ```blade
 <x-filament::dropdown.list.item image="https://filamentphp.com/dan.jpg">
@@ -115,58 +115,58 @@ You can add a circular image to a dropdown item by using the `image` attribute:
 </x-filament::dropdown.list.item>
 ```
 
-## Adding a badge to a dropdown item
+## 드롭다운 항목에 배지 추가하기 {#adding-a-badge-to-a-dropdown-item}
 
-You can render a [badge](badge) on top of a dropdown item by using the `badge` slot:
+`badge` 슬롯을 사용하여 드롭다운 항목 위에 [배지](badge)를 렌더링할 수 있습니다:
 
 ```blade
 <x-filament::dropdown.list.item>
-    Mark notifications as read
-    
+    알림을 읽음으로 표시
     <x-slot name="badge">
         3
     </x-slot>
 </x-filament::dropdown.list.item>
 ```
-
-You can [change the color](badge#changing-the-color-of-the-badge) of the badge using the `badge-color` attribute:
+`badge-color` 속성을 사용하여 배지의 [색상을 변경](badge#changing-the-color-of-the-badge)할 수 있습니다:
 
 ```blade
+
 <x-filament::dropdown.list.item badge-color="danger">
-    Mark notifications as read
-    
+    알림을 읽음으로 표시
     <x-slot name="badge">
         3
     </x-slot>
 </x-filament::dropdown.list.item>
 ```
 
-## Setting the placement of a dropdown
 
-The dropdown may be positioned relative to the trigger button by using the `placement` attribute:
+
+## 드롭다운의 위치 설정하기 {#setting-the-placement-of-a-dropdown}
+
+드롭다운은 `placement` 속성을 사용하여 트리거 버튼을 기준으로 위치를 지정할 수 있습니다:
 
 ```blade
 <x-filament::dropdown placement="top-start">
-    {{-- Dropdown items --}}
+    {{-- 드롭다운 항목들 --}}
 </x-filament::dropdown>
 ```
 
-## Setting the width of a dropdown
+## 드롭다운의 너비 설정하기 {#setting-the-width-of-a-dropdown}
 
-The dropdown may be set to a width by using the `width` attribute. Options correspond to [Tailwind's max-width scale](https://tailwindcss.com/docs/max-width). The options are `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl` and `7xl`:
+드롭다운의 너비는 `width` 속성을 사용하여 설정할 수 있습니다. 옵션은 [Tailwind의 max-width 스케일](https://tailwindcss.com/docs/max-width)과 일치합니다. 사용 가능한 옵션은 `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`입니다:
 
 ```blade
 <x-filament::dropdown width="xs">
-    {{-- Dropdown items --}}
+    {{-- 드롭다운 항목들 --}}
 </x-filament::dropdown>
 ```
 
-## Controlling the maximum height of a dropdown
+## 드롭다운의 최대 높이 제어하기 {#controlling-the-maximum-height-of-a-dropdown}
 
-The dropdown content can have a maximum height using the `max-height` attribute, so that it scrolls. You can pass a [CSS length](https://developer.mozilla.org/en-US/docs/Web/CSS/length):
+드롭다운 내용은 `max-height` 속성을 사용하여 최대 높이를 지정할 수 있으며, 이로 인해 스크롤이 생깁니다. [CSS 길이](https://developer.mozilla.org/en-US/docs/Web/CSS/length)를 전달할 수 있습니다:
 
 ```blade
 <x-filament::dropdown max-height="400px">
-    {{-- Dropdown items --}}
+    {{-- 드롭다운 항목 --}}
 </x-filament::dropdown>
 ```

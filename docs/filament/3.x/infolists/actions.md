@@ -1,15 +1,15 @@
 ---
-title: Actions
+title: Action
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [인포리스트] Action
 
-## Overview
+## 개요 {#overview}
 
-Filament's infolists can use [Actions](../actions). They are buttons that can be added to any infolist component. Also, you can [render anonymous sets of actions](#adding-anonymous-actions-to-an-infolist-without-attaching-them-to-a-component) on their own, that are not attached to a particular infolist component.
+Filament의 인포리스트는 [액션](../actions)을 사용할 수 있습니다. 액션은 모든 인포리스트 컴포넌트에 추가할 수 있는 버튼입니다. 또한, 특정 인포리스트 컴포넌트에 연결하지 않고 [익명 액션 집합을 렌더링](#adding-anonymous-actions-to-an-infolist-without-attaching-them-to-a-component)할 수도 있습니다.
 
-## Defining a infolist component action
+## 인포리스트 컴포넌트 액션 정의하기 {#defining-a-infolist-component-action}
 
-Action objects inside an infolist component are instances of `Filament/Infolists/Components/Actions/Action`. You must pass a unique name to the action's `make()` method, which is used to identify it amongst others internally within Filament. You can [customize the trigger button](../actions/trigger-button) of an action, and even [open a modal](../actions/modals) with little effort:
+인포리스트 컴포넌트 내부의 액션 객체는 `Filament/Infolists/Components/Actions/Action`의 인스턴스입니다. 액션의 `make()` 메서드에 고유한 이름을 전달해야 하며, 이 이름은 Filament 내부에서 다른 액션들과 구분하는 데 사용됩니다. 액션의 [트리거 버튼을 커스터마이즈](../actions/trigger-button)할 수 있고, 간단하게 [모달을 열](../actions/modals) 수도 있습니다:
 
 ```php
 use App\Actions\ResetStars;
@@ -24,13 +24,13 @@ Action::make('resetStars')
     })
 ```
 
-### Adding an affix action to a entry
+### 엔트리에 접두/접미 액션 추가하기 {#adding-an-affix-action-to-a-entry}
 
-Certain entries support "affix actions", which are buttons that can be placed before or after its content. The following entries support affix actions:
+특정 엔트리들은 "접두/접미 액션(affix actions)"을 지원합니다. 이는 엔트리의 내용 앞이나 뒤에 배치할 수 있는 버튼입니다. 다음 엔트리들이 접두/접미 액션을 지원합니다:
 
-- [Text entry](entries/text-entry)
+- [텍스트 엔트리](entries/text-entry)
 
-To define an affix action, you can pass it to either `prefixAction()` or `suffixAction()`:
+접두/접미 액션을 정의하려면, `prefixAction()` 또는 `suffixAction()`에 전달하면 됩니다:
 
 ```php
 use App\Models\Product;
@@ -50,11 +50,11 @@ TextEntry::make('cost')
     )
 ```
 
-<AutoScreenshot name="infolists/entries/actions/suffix" alt="Text entry with suffix action" version="3.x" />
+<AutoScreenshot name="infolists/entries/actions/suffix" alt="접미 액션이 있는 텍스트 엔트리" version="3.x" />
 
-#### Passing multiple affix actions to a entry
+#### 엔트리에 여러 개의 affix 액션 전달하기 {#passing-multiple-affix-actions-to-a-entry}
 
-You may pass multiple affix actions to an entry by passing them in an array to either `prefixActions()` or `suffixActions()`. Either method can be used, or both at once, Filament will render all the registered actions in order:
+여러 개의 affix 액션을 배열로 `prefixActions()` 또는 `suffixActions()`에 전달하여 엔트리에 추가할 수 있습니다. 두 메서드 중 하나만 사용해도 되고, 둘 다 동시에 사용할 수도 있습니다. Filament는 등록된 모든 액션을 순서대로 렌더링합니다:
 
 ```php
 use Filament\Infolists\Components\Actions\Action;
@@ -73,9 +73,9 @@ TextEntry::make('cost')
     ])
 ```
 
-### Adding a hint action to an entry
+### 엔트리에 힌트 액션 추가하기 {#adding-a-hint-action-to-an-entry}
 
-All entries support "hint actions", which are rendered aside the entry's [hint](entries/getting-started#adding-a-hint-next-to-the-label). To add a hint action to a entry, you may pass it to `hintAction()`:
+모든 엔트리은 "힌트 액션"을 지원하며, 이는 엔트리의 [힌트](entries/getting-started#adding-a-hint-next-to-the-label) 옆에 렌더링됩니다. 엔트리에 힌트 액션을 추가하려면 `hintAction()`에 전달하면 됩니다:
 
 ```php
 use App\Models\Product;
@@ -95,11 +95,11 @@ TextEntry::make('cost')
     )
 ```
 
-<AutoScreenshot name="infolists/entries/actions/hint" alt="Text entry with hint action" version="3.x" />
+<AutoScreenshot name="infolists/entries/actions/hint" alt="힌트 액션이 있는 텍스트 엔트리" version="3.x" />
 
-#### Passing multiple hint actions to a entry
+#### 엔트리에 여러 힌트 액션 전달하기 {#passing-multiple-hint-actions-to-a-entry}
 
-You may pass multiple hint actions to a entry by passing them in an array to `hintActions()`. Filament will render all the registered actions in order:
+여러 개의 힌트 액션을 배열로 `hintActions()`에 전달하여 엔트리에 추가할 수 있습니다. Filament는 등록된 모든 액션을 순서대로 렌더링합니다:
 
 ```php
 use Filament\Infolists\Components\Actions\Action;
@@ -114,9 +114,9 @@ TextEntry::make('cost')
     ])
 ```
 
-### Adding an action to a custom infolist component
+### 커스텀 인포리스트 컴포넌트에 액션 추가하기 {#adding-an-action-to-a-custom-infolist-component}
 
-If you wish to render an action within a custom infolist component, `ViewEntry` object, or `View` component object, you may do so using the `registerActions()` method:
+커스텀 인포리스트 컴포넌트, `ViewEntry` 객체, 또는 `View` 컴포넌트 객체 내에서 액션을 렌더링하고 싶다면, `registerActions()` 메서드를 사용하면 됩니다:
 
 ```php
 use App\Models\Post;
@@ -140,7 +140,7 @@ ViewEntry::make('status')
     ])
 ```
 
-Now, to render the action in the view of the custom component, you need to call `$getAction()`, passing the name of the action you registered:
+이제 커스텀 컴포넌트의 뷰에서 액션을 렌더링하려면, 등록한 액션의 이름을 전달하여 `$getAction()`을 호출하면 됩니다:
 
 ```blade
 <div>
@@ -150,9 +150,9 @@ Now, to render the action in the view of the custom component, you need to call 
 </div>
 ```
 
-### Adding "anonymous" actions to an infolist without attaching them to a component
+### 인포리스트에 "익명" 액션 추가하기 (컴포넌트에 연결하지 않고) {#adding-anonymous-actions-to-an-infolist-without-attaching-them-to-a-component}
 
-You may use an `Actions` component to render a set of actions anywhere in the infolist, avoiding the need to register them to any particular component:
+`Actions` 컴포넌트를 사용하면 인포리스트 어디에서나 여러 액션을 렌더링할 수 있으며, 특정 컴포넌트에 등록할 필요가 없습니다:
 
 ```php
 use App\Actions\Star;
@@ -177,11 +177,11 @@ Actions::make([
 ]),
 ```
 
-<AutoScreenshot name="infolists/layout/actions/anonymous/simple" alt="Anonymous actions" version="3.x" />
+<AutoScreenshot name="infolists/layout/actions/anonymous/simple" alt="익명 액션" version="3.x" />
 
-#### Making the independent infolist actions consume the full width of the infolist
+#### 독립 인포리스트 액션이 인포리스트의 전체 너비를 차지하도록 만들기 {#making-the-independent-infolist-actions-consume-the-full-width-of-the-infolist}
 
-You can stretch the independent infolist actions to consume the full width of the infolist using `fullWidth()`:
+`fullWidth()`를 사용하여 독립 인포리스트 액션이 인포리스트의 전체 너비를 차지하도록 확장할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Actions;
@@ -191,11 +191,11 @@ Actions::make([
 ])->fullWidth(),
 ```
 
-<AutoScreenshot name="infolists/layout/actions/anonymous/full-width" alt="Anonymous actions consuming the full width" version="3.x" />
+<AutoScreenshot name="infolists/layout/actions/anonymous/full-width" alt="전체 너비를 차지하는 익명 액션" version="3.x" />
 
-#### Controlling the horizontal alignment of independent infolist actions
+#### 독립적인 인포리스트 액션의 수평 정렬 제어하기 {#controlling-the-horizontal-alignment-of-independent-infolist-actions}
 
-Independent infolist actions are aligned to the start of the component by default. You may change this by passing `Alignment::Center` or `Alignment::End` to `alignment()`:
+독립적인 인포리스트 액션은 기본적으로 컴포넌트의 시작 부분에 정렬됩니다. `alignment()`에 `Alignment::Center` 또는 `Alignment::End`를 전달하여 이를 변경할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Actions;
@@ -206,11 +206,11 @@ Actions::make([
 ])->alignment(Alignment::Center),
 ```
 
-<AutoScreenshot name="infolists/layout/actions/anonymous/horizontally-aligned-center" alt="Anonymous actions horizontally aligned to the center" version="3.x" />
+<AutoScreenshot name="infolists/layout/actions/anonymous/horizontally-aligned-center" alt="익명 액션이 중앙에 수평 정렬된 모습" version="3.x" />
 
-#### Controlling the vertical alignment of independent infolist actions
+#### 독립적인 인포리스트 액션의 수직 정렬 제어하기 {#controlling-the-vertical-alignment-of-independent-infolist-actions}
 
-Independent infolist actions are vertically aligned to the start of the component by default. You may change this by passing `Alignment::Center` or `Alignment::End` to `verticalAlignment()`:
+독립적인 인포리스트 액션은 기본적으로 컴포넌트의 시작 부분에 수직 정렬됩니다. `verticalAlignment()`에 `Alignment::Center` 또는 `Alignment::End`를 전달하여 이를 변경할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Actions;
@@ -221,4 +221,4 @@ Actions::make([
 ])->verticalAlignment(VerticalAlignment::End),
 ```
 
-<AutoScreenshot name="infolists/layout/actions/anonymous/vertically-aligned-end" alt="Anonymous actions vertically aligned to the end" version="3.x" />
+<AutoScreenshot name="infolists/layout/actions/anonymous/vertically-aligned-end" alt="익명 액션이 끝에 수직 정렬된 모습" version="3.x" />

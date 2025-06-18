@@ -1,13 +1,13 @@
 ---
-title: Sending notifications
+title: 알림 보내기
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [알림] 알림 보내기
 
-## Overview
+## 개요 {#overview}
 
-> To start, make sure the package is [installed](installation) - `@livewire('notifications')` should be in your Blade layout somewhere.
+> 시작하기 전에, 패키지가 [설치](installation)되어 있는지 확인하세요. `@livewire('notifications')`가 Blade 레이아웃 어딘가에 포함되어 있어야 합니다.
 
-Notifications are sent using a `Notification` object that's constructed through a fluent API. Calling the `send()` method on the `Notification` object will dispatch the notification and display it in your application. As the session is used to flash notifications, they can be sent from anywhere in your code, including JavaScript, not just Livewire components.
+알림은 유창한 API를 통해 구성된 `Notification` 객체를 사용하여 전송됩니다. `Notification` 객체에서 `send()` 메서드를 호출하면 알림이 전송되어 애플리케이션에 표시됩니다. 세션을 사용해 알림을 플래시하기 때문에, Livewire 컴포넌트뿐만 아니라 JavaScript를 포함한 코드 어디에서든 알림을 보낼 수 있습니다.
 
 ```php
 <?php
@@ -24,217 +24,217 @@ class EditPost extends Component
         // ...
 
         Notification::make()
-            ->title('Saved successfully')
+            ->title('저장에 성공했습니다')
             ->success()
             ->send();
     }
 }
 ```
 
-<AutoScreenshot name="notifications/success" alt="Success notification" version="3.x" />
+<AutoScreenshot name="notifications/success" alt="성공 알림" version="3.x" />
 
-## Setting a title
+## 제목 설정하기 {#setting-a-title}
 
-The main message of the notification is shown in the title. You can set the title as follows:
+알림의 주요 메시지는 제목에 표시됩니다. 제목은 다음과 같이 설정할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('저장에 성공했습니다')
     ->send();
 ```
 
-The title text can contain basic, safe HTML elements. To generate safe HTML with Markdown, you can use the [`Str::markdown()` helper](https://laravel.com/docs/strings#method-str-markdown): `title(Str::markdown('Saved **successfully**'))`
+제목 텍스트에는 기본적이고 안전한 HTML 요소를 포함할 수 있습니다. Markdown으로 안전한 HTML을 생성하려면 [`Str::markdown()` 헬퍼](https://laravel.com/docs/strings#method-str-markdown)를 사용할 수 있습니다: `title(Str::markdown('저장에 **성공했습니다**'))`
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('저장에 성공했습니다')
     .send()
 ```
 
-## Setting an icon
+## 아이콘 설정하기 {#setting-an-icon}
 
-Optionally, a notification can have an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) that's displayed in front of its content. You may also set a color for the icon, which is gray by default:
+옵션으로, 알림에는 내용 앞에 표시되는 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 지정할 수 있습니다. 아이콘의 색상도 설정할 수 있으며, 기본값은 회색입니다:
 
 ```php
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('저장에 성공했습니다')
     ->icon('heroicon-o-document-text')
     ->iconColor('success')
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('저장에 성공했습니다')
     .icon('heroicon-o-document-text')
     .iconColor('success')
     .send()
 ```
 
-<AutoScreenshot name="notifications/icon" alt="Notification with icon" version="3.x" />
+<AutoScreenshot name="notifications/icon" alt="아이콘이 있는 알림" version="3.x" />
 
-Notifications often have a status like `success`, `warning`, `danger` or `info`. Instead of manually setting the corresponding icons and colors, there's a `status()` method which you can pass the status. You may also use the dedicated `success()`, `warning()`, `danger()` and `info()` methods instead. So, cleaning up the above example would look like this:
+알림에는 종종 `success`, `warning`, `danger`, `info`와 같은 상태가 있습니다. 해당 아이콘과 색상을 직접 지정하는 대신, `status()` 메서드에 상태를 전달할 수 있습니다. 또한 `success()`, `warning()`, `danger()`, `info()`와 같은 전용 메서드도 사용할 수 있습니다. 위 예시를 더 간단하게 정리하면 다음과 같습니다:
 
 ```php
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('저장에 성공했습니다')
     ->success()
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('저장에 성공했습니다')
     .success()
     .send()
 ```
 
-<AutoScreenshot name="notifications/statuses" alt="Notifications with various statuses" version="3.x" />
+<AutoScreenshot name="notifications/statuses" alt="여러 상태의 알림" version="3.x" />
 
-## Setting a background color
+## 배경색 설정하기 {#setting-a-background-color}
 
-Notifications have no background color by default. You may want to provide additional context to your notification by setting a color as follows:
+알림은 기본적으로 배경색이 없습니다. 다음과 같이 색상을 설정하여 알림에 추가적인 맥락을 제공할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('저장에 성공했습니다')
     ->color('success')
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('저장에 성공했습니다')
     .color('success')
     .send()
 ```
 
-<AutoScreenshot name="notifications/color" alt="Notification with background color" version="3.x" />
+<AutoScreenshot name="notifications/color" alt="배경색이 적용된 알림" version="3.x" />
 
-## Setting a duration
+## 지속 시간 설정 {#setting-a-duration}
 
-By default, notifications are shown for 6 seconds before they're automatically closed. You may specify a custom duration value in milliseconds as follows:
+기본적으로 알림은 6초 동안 표시된 후 자동으로 닫힙니다. 밀리초 단위로 사용자 지정 지속 시간을 다음과 같이 지정할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('저장에 성공했습니다')
     ->success()
     ->duration(5000)
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('저장에 성공했습니다')
     .success()
     .duration(5000)
     .send()
 ```
 
-If you prefer setting a duration in seconds instead of milliseconds, you can do so:
+밀리초 대신 초 단위로 지속 시간을 설정하고 싶다면 다음과 같이 할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('저장에 성공했습니다')
     ->success()
     ->seconds(5)
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('저장에 성공했습니다')
     .success()
     .seconds(5)
     .send()
 ```
 
-You might want some notifications to not automatically close and require the user to close them manually. This can be achieved by making the notification persistent:
+일부 알림이 자동으로 닫히지 않고 사용자가 직접 닫아야 하도록 하고 싶을 수 있습니다. 이는 알림을 영구적으로(persistent) 설정하여 달성할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('저장에 성공했습니다')
     ->success()
     ->persistent()
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('저장에 성공했습니다')
     .success()
     .persistent()
     .send()
 ```
 
-## Setting body text
+## 본문 텍스트 설정하기 {#setting-body-text}
 
-Additional notification text can be shown in the `body()`:
+추가 알림 텍스트는 `body()`에 표시할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('성공적으로 저장되었습니다')
     ->success()
-    ->body('Changes to the post have been saved.')
+    ->body('게시글에 대한 변경 사항이 저장되었습니다.')
     ->send();
 ```
 
-The body text can contain basic, safe HTML elements. To generate safe HTML with Markdown, you can use the [`Str::markdown()` helper](https://laravel.com/docs/strings#method-str-markdown): `body(Str::markdown('Changes to the **post** have been saved.'))`
+본문 텍스트에는 기본적이고 안전한 HTML 요소를 포함할 수 있습니다. Markdown을 사용해 안전한 HTML을 생성하려면 [`Str::markdown()` 헬퍼](https://laravel.com/docs/strings#method-str-markdown)를 사용할 수 있습니다: `body(Str::markdown('게시글에 대한 **변경 사항**이 저장되었습니다.'))`
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('성공적으로 저장되었습니다')
     .success()
-    .body('Changes to the post have been saved.')
+    .body('게시글에 대한 변경 사항이 저장되었습니다.')
     .send()
 ```
 
-<AutoScreenshot name="notifications/body" alt="Notification with body text" version="3.x" />
+<AutoScreenshot name="notifications/body" alt="본문 텍스트가 포함된 알림" version="3.x" />
 
-## Adding actions to notifications
+## 알림에 액션 추가하기 {#adding-actions-to-notifications}
 
-Notifications support [Actions](../actions/trigger-button), which are buttons that render below the content of the notification. They can open a URL or dispatch a Livewire event. Actions can be defined as follows:
+알림은 [액션](../actions/trigger-button)을 지원합니다. 액션은 알림의 내용 아래에 렌더링되는 버튼입니다. 이 버튼들은 URL을 열거나 Livewire 이벤트를 디스패치할 수 있습니다. 액션은 다음과 같이 정의할 수 있습니다:
 
 ```php
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('성공적으로 저장됨')
     ->success()
-    ->body('Changes to the post have been saved.')
+    ->body('게시글의 변경사항이 저장되었습니다.')
     ->actions([
         Action::make('view')
             ->button(),
@@ -244,13 +244,13 @@ Notification::make()
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('성공적으로 저장됨')
     .success()
-    .body('Changes to the post have been saved.')
+    .body('게시글의 변경사항이 저장되었습니다.')
     .actions([
         new FilamentNotificationAction('view')
             .button(),
@@ -260,22 +260,22 @@ new FilamentNotification()
     .send()
 ```
 
-<AutoScreenshot name="notifications/actions" alt="Notification with actions" version="3.x" />
+<AutoScreenshot name="notifications/actions" alt="액션이 포함된 알림" version="3.x" />
 
-You can learn more about how to style action buttons [here](../actions/trigger-button).
+액션 버튼의 스타일링 방법에 대해서는 [여기](../actions/trigger-button)에서 더 자세히 알아볼 수 있습니다.
 
-### Opening URLs from notification actions
+### 알림 액션에서 URL 열기 {#opening-urls-from-notification-actions}
 
-You can open a URL, optionally in a new tab, when clicking on an action:
+액션을 클릭할 때 URL을 열 수 있으며, 선택적으로 새 탭에서 열 수도 있습니다:
 
 ```php
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('성공적으로 저장됨')
     ->success()
-    ->body('Changes to the post have been saved.')
+    ->body('게시글에 대한 변경 사항이 저장되었습니다.')
     ->actions([
         Action::make('view')
             ->button()
@@ -286,13 +286,13 @@ Notification::make()
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('성공적으로 저장됨')
     .success()
-    .body('Changes to the post have been saved.')
+    .body('게시글에 대한 변경 사항이 저장되었습니다.')
     .actions([
         new FilamentNotificationAction('view')
             .button()
@@ -304,18 +304,18 @@ new FilamentNotification()
     .send()
 ```
 
-### Dispatching Livewire events from notification actions
+### 알림 액션에서 Livewire 이벤트 디스패치하기 {#dispatching-livewire-events-from-notification-actions}
 
-Sometimes you want to execute additional code when a notification action is clicked. This can be achieved by setting a Livewire event which should be dispatched on clicking the action. You may optionally pass an array of data, which will be available as parameters in the event listener on your Livewire component:
+때때로 알림 액션이 클릭될 때 추가적인 코드를 실행하고 싶을 수 있습니다. 이는 액션 클릭 시 디스패치되어야 하는 Livewire 이벤트를 설정함으로써 달성할 수 있습니다. 선택적으로 데이터 배열을 전달할 수 있으며, 이 데이터는 Livewire 컴포넌트의 이벤트 리스너에서 파라미터로 사용할 수 있습니다:
 
 ```php
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('성공적으로 저장됨')
     ->success()
-    ->body('Changes to the post have been saved.')
+    ->body('게시글의 변경사항이 저장되었습니다.')
     ->actions([
         Action::make('view')
             ->button()
@@ -327,7 +327,7 @@ Notification::make()
     ->send();
 ```
 
-You can also `dispatchSelf` and `dispatchTo`:
+`dispatchSelf`와 `dispatchTo`도 사용할 수 있습니다:
 
 ```php
 Action::make('undo')
@@ -339,13 +339,13 @@ Action::make('undo')
     ->dispatchTo('another_component', 'undoEditingPost', [$post->id])
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('성공적으로 저장됨')
     .success()
-    .body('Changes to the post have been saved.')
+    .body('게시글의 변경사항이 저장되었습니다.')
     .actions([
         new FilamentNotificationAction('view')
             .button()
@@ -358,7 +358,7 @@ new FilamentNotification()
     .send()
 ```
 
-Similarly, `dispatchSelf` and `dispatchTo` are also available:
+마찬가지로, `dispatchSelf`와 `dispatchTo`도 사용할 수 있습니다:
 
 ```js
 new FilamentNotificationAction('undo')
@@ -370,18 +370,18 @@ new FilamentNotificationAction('undo')
     .dispatchTo('another_component', 'undoEditingPost')
 ```
 
-### Closing notifications from actions
+### 액션에서 알림 닫기 {#closing-notifications-from-actions}
 
-After opening a URL or dispatching an event from your action, you may want to close the notification right away:
+액션에서 URL을 열거나 이벤트를 디스패치한 후, 즉시 알림을 닫고 싶을 수 있습니다:
 
 ```php
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('성공적으로 저장됨')
     ->success()
-    ->body('Changes to the post have been saved.')
+    ->body('게시글의 변경사항이 저장되었습니다.')
     ->actions([
         Action::make('view')
             ->button()
@@ -394,13 +394,13 @@ Notification::make()
     ->send();
 ```
 
-Or with JavaScript:
+또는 JavaScript로도 가능합니다:
 
 ```js
 new FilamentNotification()
-    .title('Saved successfully')
+    .title('성공적으로 저장됨')
     .success()
-    .body('Changes to the post have been saved.')
+    .body('게시글의 변경사항이 저장되었습니다.')
     .actions([
         new FilamentNotificationAction('view')
             .button()
@@ -414,11 +414,11 @@ new FilamentNotification()
     .send()
 ```
 
-## Using the JavaScript objects
+## JavaScript 객체 사용하기 {#using-the-javascript-objects}
 
-The JavaScript objects (`FilamentNotification` and `FilamentNotificationAction`) are assigned to `window.FilamentNotification` and `window.FilamentNotificationAction`, so they are available in on-page scripts.
+JavaScript 객체(`FilamentNotification`와 `FilamentNotificationAction`)는 `window.FilamentNotification` 및 `window.FilamentNotificationAction`에 할당되어 있으므로, 페이지 내 스크립트에서 사용할 수 있습니다.
 
-You may also import them in a bundled JavaScript file:
+또한, 번들된 JavaScript 파일에서 다음과 같이 임포트할 수도 있습니다:
 
 ```js
 import { Notification, NotificationAction } from '../../vendor/filament/notifications/dist/index.js'
@@ -426,11 +426,11 @@ import { Notification, NotificationAction } from '../../vendor/filament/notifica
 // ...
 ```
 
-## Closing a notification with JavaScript
+## JavaScript로 알림 닫기 {#closing-a-notification-with-javascript}
 
-Once a notification has been sent, you can close it on demand by dispatching a browser event on the window called `close-notification`.
+알림이 전송된 후에는, `close-notification`이라는 브라우저 이벤트를 window에 디스패치하여 필요할 때 알림을 닫을 수 있습니다.
 
-The event needs to contain the ID of the notification you sent. To get the ID, you can use the `getId()` method on the `Notification` object:
+이 이벤트에는 전송한 알림의 ID가 포함되어야 합니다. ID를 얻으려면 `Notification` 객체의 `getId()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
@@ -443,13 +443,13 @@ $notification = Notification::make()
 $notificationId = $notification->getId()
 ```
 
-To close the notification, you can dispatch the event from Livewire:
+알림을 닫으려면 Livewire에서 이벤트를 디스패치할 수 있습니다:
 
 ```php
 $this->dispatch('close-notification', id: $notificationId);
 ```
 
-Or from JavaScript, in this case Alpine.js:
+또는 JavaScript, 이 경우 Alpine.js에서 다음과 같이 할 수 있습니다:
 
 ```blade
 <button x-on:click="$dispatch('close-notification', { id: notificationId })" type="button">
@@ -457,7 +457,7 @@ Or from JavaScript, in this case Alpine.js:
 </button>
 ```
 
-If you are able to retrieve the notification ID, persist it, and then use it to close the notification, that is the recommended approach, as IDs are generated uniquely, and you will not risk closing the wrong notification. However, if it is not possible to persist the random ID, you can pass in a custom ID when sending the notification:
+알림 ID를 가져와서 저장한 후 이를 사용해 알림을 닫을 수 있다면, 이 방법이 권장됩니다. ID는 고유하게 생성되므로 잘못된 알림이 닫히는 위험이 없습니다. 하지만 무작위 ID를 저장할 수 없는 경우, 알림을 전송할 때 커스텀 ID를 전달할 수도 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
@@ -468,7 +468,7 @@ Notification::make('greeting')
     ->send()
 ```
 
-In this case, you can close the notification by dispatching the event with the custom ID:
+이 경우, 커스텀 ID로 이벤트를 디스패치하여 알림을 닫을 수 있습니다:
 
 ```blade
 <button x-on:click="$dispatch('close-notification', { id: 'greeting' })" type="button">
@@ -476,4 +476,4 @@ In this case, you can close the notification by dispatching the event with the c
 </button>
 ```
 
-Please be aware that if you send multiple notifications with the same ID, you may experience unexpected side effects, so random IDs are recommended.
+동일한 ID로 여러 알림을 전송하면 예기치 않은 부작용이 발생할 수 있으니, 무작위 ID 사용을 권장합니다.

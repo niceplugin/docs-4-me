@@ -1,39 +1,39 @@
 ---
-title: Managing relationships
+title: 관계 관리
 ---
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [패널.리소스] 관계 관리
 
-## Choosing the right tool for the job
+## 작업에 적합한 도구 선택하기 {#choosing-the-right-tool-for-the-job}
 
-Filament provides many ways to manage relationships in the app. Which feature you should use depends on the type of relationship you are managing, and which UI you are looking for.
+Filament는 앱에서 관계를 관리할 수 있는 다양한 방법을 제공합니다. 어떤 기능을 사용해야 할지는 관리하려는 관계의 유형과 원하는 UI에 따라 달라집니다.
 
-### Relation managers - interactive tables underneath your resource forms
+### 관계 매니저 - 리소스 폼 아래에 위치한 인터랙티브 테이블 {#relation-managers---interactive-tables-underneath-your-resource-forms}
 
-> These are compatible with `HasMany`, `HasManyThrough`, `BelongsToMany`, `MorphMany` and `MorphToMany` relationships.
+> 이는 `HasMany`, `HasManyThrough`, `BelongsToMany`, `MorphMany`, `MorphToMany` 관계와 호환됩니다.
 
-[Relation managers](#creating-a-relation-manager) are interactive tables that allow administrators to list, create, attach, associate, edit, detach, dissociate and delete related records without leaving the resource's Edit or View page.
+[관계 매니저](#creating-a-relation-manager)는 관리자가 리소스의 편집 또는 보기 페이지를 벗어나지 않고도 관련 레코드를 나열, 생성, 첨부, 연관, 편집, 분리, 연결 해제 및 삭제할 수 있도록 해주는 인터랙티브 테이블입니다.
 
-### Select & checkbox list - choose from existing records or create a new one
+### 선택 및 체크박스 리스트 - 기존 레코드에서 선택하거나 새로 생성하기 {#select-checkbox-list---choose-from-existing-records-or-create-a-new-one}
 
-> These are compatible with `BelongsTo`, `MorphTo` and `BelongsToMany` relationships.
+> 이 기능은 `BelongsTo`, `MorphTo`, `BelongsToMany` 관계와 호환됩니다.
 
-Using a [select](../../forms/fields/select#integrating-with-an-eloquent-relationship), users will be able to choose from a list of existing records. You may also [add a button that allows you to create a new record inside a modal](../../forms/fields/select#creating-new-records), without leaving the page.
+[셀렉트](../../forms/fields/select#integrating-with-an-eloquent-relationship)를 사용하면 사용자가 기존 레코드 목록에서 선택할 수 있습니다. 또한 [모달 내에서 새 레코드를 생성할 수 있는 버튼을 추가](../../forms/fields/select#creating-new-records)하여 페이지를 벗어나지 않고도 새 레코드를 만들 수 있습니다.
 
-When using a `BelongsToMany` relationship with a select, you'll be able to select multiple options, not just one. Records will be automatically added to your pivot table when you submit the form. If you wish, you can swap out the multi-select dropdown with a simple [checkbox list](../../forms/fields/checkbox-list#integrating-with-an-eloquent-relationship). Both components work in the same way.
+`BelongsToMany` 관계에서 셀렉트를 사용할 때는 하나가 아닌 여러 옵션을 선택할 수 있습니다. 폼을 제출하면 레코드가 자동으로 피벗 테이블에 추가됩니다. 원한다면 멀티 셀렉트 드롭다운 대신 간단한 [체크박스 리스트](../../forms/fields/checkbox-list#integrating-with-an-eloquent-relationship)로 교체할 수도 있습니다. 두 컴포넌트 모두 동일한 방식으로 동작합니다.
 
-### Repeaters - CRUD multiple related records inside the owner's form
+### 반복자 - 소유자 폼 내에서 여러 관련 레코드 CRUD {#repeaters---crud-multiple-related-records-inside-the-owners-form}
 
-> These are compatible with `HasMany` and `MorphMany` relationships.
+> 이는 `HasMany` 및 `MorphMany` 관계와 호환됩니다.
 
-[Repeaters](../../forms/fields/repeater#integrating-with-an-eloquent-relationship) are standard form components, which can render a repeatable set of fields infinitely. They can be hooked up to a relationship, so records are automatically read, created, updated, and deleted from the related table. They live inside the main form schema, and can be used inside resource pages, as well as nesting within action modals.
+[반복자](../../forms/fields/repeater#integrating-with-an-eloquent-relationship)는 표준 폼 컴포넌트로, 필드 집합을 무한히 반복하여 렌더링할 수 있습니다. 반복자는 관계에 연결할 수 있어, 관련 테이블에서 레코드를 자동으로 읽고, 생성하고, 수정하고, 삭제할 수 있습니다. 반복자는 메인 폼 스키마 내에 존재하며, 리소스 페이지 안에서나 액션 모달 내에 중첩하여 사용할 수 있습니다.
 
-From a UX perspective, this solution is only suitable if your related model only has a few fields. Otherwise, the form can get very long.
+UX 관점에서, 이 솔루션은 관련 모델에 필드가 몇 개만 있을 때에만 적합합니다. 그렇지 않으면 폼이 너무 길어질 수 있습니다.
 
-### Layout form components - saving form fields to a single relationship
+### 레이아웃 폼 컴포넌트 - 폼 필드를 단일 관계에 저장하기 {#layout-form-components---saving-form-fields-to-a-single-relationship}
 
-> These are compatible with `BelongsTo`, `HasOne` and `MorphOne` relationships.
+> 이 기능은 `BelongsTo`, `HasOne`, `MorphOne` 관계와 호환됩니다.
 
-All layout form components ([Grid](../../forms/layout/grid#grid-component), [Section](../../forms/layout/section), [Fieldset](../../forms/layout/fieldset), etc.) have a [`relationship()` method](../../forms/advanced#saving-data-to-relationships). When you use this, all fields within that layout are saved to the related model instead of the owner's model:
+모든 레이아웃 폼 컴포넌트([Grid](../../forms/layout/grid#grid-component), [Section](../../forms/layout/section), [Fieldset](../../forms/layout/fieldset) 등)는 [`relationship()` 메서드](../../forms/advanced#saving-data-to-relationships)를 가지고 있습니다. 이 메서드를 사용하면, 해당 레이아웃 내의 모든 필드는 소유자 모델이 아닌 연관된 모델에 저장됩니다:
 
 ```php
 use Filament\Forms\Components\Fieldset;
@@ -50,30 +50,30 @@ Fieldset::make('Metadata')
     ])
 ```
 
-In this example, the `title`, `description` and `image` are automatically loaded from the `metadata` relationship, and saved again when the form is submitted. If the `metadata` record does not exist, it is automatically created.
+이 예시에서 `title`, `description`, `image`는 자동으로 `metadata` 관계에서 불러와지며, 폼이 제출될 때 다시 저장됩니다. 만약 `metadata` 레코드가 존재하지 않는다면, 자동으로 생성됩니다.
 
-This feature is explained more in depth in the [Forms documentation](../../forms/advanced#saving-data-to-relationships). Please visit that page for more information about how to use it.
+이 기능에 대한 자세한 설명은 [폼 문서](../../forms/advanced#saving-data-to-relationships)에 나와 있습니다. 사용 방법에 대한 더 많은 정보는 해당 페이지를 참고하세요.
 
-## Creating a relation manager
+## 관계 매니저 생성하기 {#creating-a-relation-manager}
 
 <LaracastsBanner
-    title="Relation Managers"
-    description="Watch the Rapid Laravel Development with Filament series on Laracasts - it will teach you the basics of adding relation managers to Filament resources."
+    title="관계 매니저"
+    description="Laracasts의 Rapid Laravel Development with Filament 시리즈를 시청하세요. 이 시리즈는 Filament 리소스에 관계 매니저를 추가하는 기본 방법을 알려줍니다."
     url="https://laracasts.com/series/rapid-laravel-development-with-filament/episodes/13"
     series="rapid-laravel-development"
 />
 
-To create a relation manager, you can use the `make:filament-relation-manager` command:
+관계 매니저를 생성하려면 `make:filament-relation-manager` 명령어를 사용할 수 있습니다:
 
 ```bash
 php artisan make:filament-relation-manager CategoryResource posts title
 ```
 
-- `CategoryResource` is the name of the resource class for the owner (parent) model.
-- `posts` is the name of the relationship you want to manage.
-- `title` is the name of the attribute that will be used to identify posts.
+- `CategoryResource`는 소유자(부모) 모델의 리소스 클래스 이름입니다.
+- `posts`는 관리하려는 관계의 이름입니다.
+- `title`은 게시글을 식별하는 데 사용할 속성의 이름입니다.
 
-This will create a `CategoryResource/RelationManagers/PostsRelationManager.php` file. This contains a class where you are able to define a [form](getting-started#resource-forms) and [table](getting-started#resource-tables) for your relation manager:
+이 명령은 `CategoryResource/RelationManagers/PostsRelationManager.php` 파일을 생성합니다. 이 파일에는 관계 매니저를 위한 [폼](getting-started#resource-forms)과 [테이블](getting-started#resource-tables)을 정의할 수 있는 클래스가 포함되어 있습니다:
 
 ```php
 use Filament\Forms;
@@ -100,7 +100,7 @@ public function table(Table $table): Table
 }
 ```
 
-You must register the new relation manager in your resource's `getRelations()` method:
+새로운 관계 매니저를 리소스의 `getRelations()` 메서드에 등록해야 합니다:
 
 ```php
 public static function getRelations(): array
@@ -111,11 +111,11 @@ public static function getRelations(): array
 }
 ```
 
-Once a table and form have been defined for the relation manager, visit the [Edit](editing-records) or [View](viewing-records) page of your resource to see it in action.
+관계 매니저를 위한 테이블과 폼을 정의한 후, 리소스의 [수정](editing-records) 또는 [보기](viewing-records) 페이지를 방문하여 실제로 동작하는 모습을 확인할 수 있습니다.
 
-### Read-only mode
+### 읽기 전용 모드 {#read-only-mode}
 
-Relation managers are usually displayed on either the Edit or View page of a resource. On the View page, Filament will automatically hide all actions that modify the relationship, such as create, edit, and delete. We call this "read-only mode", and it is there by default to preserve the read-only behavior of the View page. However, you can disable this behavior, by overriding the `isReadOnly()` method on the relation manager class to return `false` all the time:
+릴레이션 매니저는 일반적으로 리소스의 수정(Edit) 또는 보기(View) 페이지에 표시됩니다. 보기 페이지에서는 Filament가 생성, 수정, 삭제와 같이 관계를 변경하는 모든 액션을 자동으로 숨깁니다. 우리는 이것을 "읽기 전용 모드"라고 부르며, 보기 페이지의 읽기 전용 동작을 보장하기 위해 기본적으로 활성화되어 있습니다. 하지만, 이 동작을 비활성화하고 싶다면 릴레이션 매니저 클래스에서 `isReadOnly()` 메서드를 항상 `false`를 반환하도록 오버라이드할 수 있습니다:
 
 ```php
 public function isReadOnly(): bool
@@ -124,7 +124,7 @@ public function isReadOnly(): bool
 }
 ```
 
-Alternatively, if you hate this functionality, you can disable it for all relation managers at once in the panel [configuration](../configuration):
+또는, 이 기능이 마음에 들지 않는다면 패널 [설정](../configuration)에서 모든 릴레이션 매니저에 대해 한 번에 비활성화할 수도 있습니다:
 
 ```php
 use Filament\Panel;
@@ -137,9 +137,9 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-### Unconventional inverse relationship names
+### 관례적이지 않은 역관계 이름 {#unconventional-inverse-relationship-names}
 
-For inverse relationships that do not follow Laravel's naming guidelines, you may wish to use the `inverseRelationship()` method on the table:
+Laravel의 명명 규칙을 따르지 않는 역관계의 경우, 테이블에서 `inverseRelationship()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables;
@@ -152,29 +152,29 @@ public function table(Table $table): Table
             Tables\Columns\TextColumn::make('title'),
             // ...
         ])
-        ->inverseRelationship('section'); // Since the inverse related model is `Category`, this is normally `category`, not `section`.
+        ->inverseRelationship('section'); // 역관계 모델이 `Category`이므로, 일반적으로는 `category`여야 하지만 여기서는 `section`입니다.
 }
 ```
 
-### Handling soft deletes
+### 소프트 삭제 처리 {#handling-soft-deletes}
 
-By default, you will not be able to interact with deleted records in the relation manager. If you'd like to add functionality to restore, force delete and filter trashed records in your relation manager, use the `--soft-deletes` flag when generating the relation manager:
+기본적으로, 관계 관리자에서는 삭제된 레코드와 상호작용할 수 없습니다. 관계 관리자에서 복원, 강제 삭제 및 삭제된(휴지통) 레코드 필터링 기능을 추가하려면, 관계 관리자를 생성할 때 `--soft-deletes` 플래그를 사용하세요:
 
 ```bash
 php artisan make:filament-relation-manager CategoryResource posts title --soft-deletes
 ```
 
-You can find out more about soft deleting [here](#deleting-records).
+소프트 삭제에 대한 자세한 내용은 [여기](#deleting-records)에서 확인할 수 있습니다.
 
-## Listing related records
+## 관련 레코드 나열 {#listing-related-records}
 
-Related records will be listed in a table. The entire relation manager is based around this table, which contains actions to [create](#creating-related-records), [edit](#editing-related-records), [attach / detach](#attaching-and-detaching-records), [associate / dissociate](#associating-and-dissociating-records), and delete records.
+관련 레코드는 테이블에 나열됩니다. 전체 관계 매니저는 이 테이블을 기반으로 하며, 이 테이블에는 [생성](#creating-related-records), [수정](#editing-related-records), [첨부 / 분리](#attaching-and-detaching-records), [연결 / 연결 해제](#associating-and-dissociating-records), 그리고 레코드 삭제와 같은 작업이 포함되어 있습니다.
 
-You may use any features of the [Table Builder](../../tables) to customize relation managers.
+관계 매니저를 커스터마이즈하기 위해 [테이블 빌더](../../tables)의 모든 기능을 사용할 수 있습니다.
 
-### Listing with pivot attributes
+### 피벗 속성과 함께 목록 표시 {#listing-with-pivot-attributes}
 
-For `BelongsToMany` and `MorphToMany` relationships, you may also add pivot table attributes. For example, if you have a `TeamsRelationManager` for your `UserResource`, and you want to add the `role` pivot attribute to the table, you can use:
+`BelongsToMany` 및 `MorphToMany` 관계에서는 피벗 테이블 속성도 추가할 수 있습니다. 예를 들어, `UserResource`에 대한 `TeamsRelationManager`가 있고, 테이블에 `role` 피벗 속성을 추가하고 싶다면 다음과 같이 사용할 수 있습니다:
 
 ```php
 use Filament\Tables;
@@ -189,40 +189,13 @@ public function table(Table $table): Table
 }
 ```
 
-Please ensure that any pivot attributes are listed in the `withPivot()` method of the relationship *and* inverse relationship.
+모든 피벗 속성이 관계 *및* 역관계의 `withPivot()` 메서드에 나열되어 있는지 반드시 확인하세요.
 
-## Creating related records
+## 관련 레코드 생성하기 {#creating-related-records}
 
-### Creating with pivot attributes
+### 피벗 속성으로 생성하기 {#creating-with-pivot-attributes}
 
-For `BelongsToMany` and `MorphToMany` relationships, you may also add pivot table attributes. For example, if you have a `TeamsRelationManager` for your `UserResource`, and you want to add the `role` pivot attribute to the create form, you can use:
-
-```php
-use Filament\Forms;
-use Filament\Forms\Form;
-
-public function form(Form $form): Form
-{
-    return $form
-        ->schema([
-            Forms\Components\TextInput::make('name')->required(),
-            Forms\Components\TextInput::make('role')->required(),
-            // ...
-        ]);
-}
-```
-
-Please ensure that any pivot attributes are listed in the `withPivot()` method of the relationship *and* inverse relationship.
-
-### Customizing the `CreateAction`
-
-To learn how to customize the `CreateAction`, including mutating the form data, changing the notification, and adding lifecycle hooks, please see the [Actions documentation](../../actions/prebuilt-actions/create).
-
-## Editing related records
-
-### Editing with pivot attributes
-
-For `BelongsToMany` and `MorphToMany` relationships, you may also edit pivot table attributes. For example, if you have a `TeamsRelationManager` for your `UserResource`, and you want to add the `role` pivot attribute to the edit form, you can use:
+`BelongsToMany` 및 `MorphToMany` 관계의 경우, 피벗 테이블 속성도 추가할 수 있습니다. 예를 들어, `UserResource`에 대한 `TeamsRelationManager`가 있고, 생성 폼에 `role` 피벗 속성을 추가하고 싶다면 다음과 같이 할 수 있습니다:
 
 ```php
 use Filament\Forms;
@@ -239,23 +212,50 @@ public function form(Form $form): Form
 }
 ```
 
-Please ensure that any pivot attributes are listed in the `withPivot()` method of the relationship *and* inverse relationship.
+모든 피벗 속성이 관계 *및* 역관계의 `withPivot()` 메서드에 나열되어 있는지 반드시 확인하세요.
 
-### Customizing the `EditAction`
+### `CreateAction` 사용자 지정하기 {#customizing-the-createaction}
 
-To learn how to customize the `EditAction`, including mutating the form data, changing the notification, and adding lifecycle hooks, please see the [Actions documentation](../../actions/prebuilt-actions/edit).
+폼 데이터 변형, 알림 변경, 라이프사이클 훅 추가 등 `CreateAction`을 사용자 지정하는 방법을 알아보려면 [액션 문서](../../actions/prebuilt-actions/create)를 참고하세요.
 
-## Attaching and detaching records
+## 관련 레코드 편집하기 {#editing-related-records}
 
-Filament is able to attach and detach records for `BelongsToMany` and `MorphToMany` relationships.
+### 피벗 속성으로 편집하기 {#editing-with-pivot-attributes}
 
-When generating your relation manager, you may pass the `--attach` flag to also add `AttachAction`, `DetachAction` and `DetachBulkAction` to the table:
+`BelongsToMany` 및 `MorphToMany` 관계에서는 피벗 테이블 속성도 편집할 수 있습니다. 예를 들어, `UserResource`에 대한 `TeamsRelationManager`가 있고, 편집 폼에 `role` 피벗 속성을 추가하고 싶다면 다음과 같이 할 수 있습니다:
+
+```php
+use Filament\Forms;
+use Filament\Forms\Form;
+
+public function form(Form $form): Form
+{
+    return $form
+        ->schema([
+            Forms\Components\TextInput::make('name')->required(),
+            Forms\Components\TextInput::make('role')->required(),
+            // ...
+        ]);
+}
+```
+
+모든 피벗 속성이 관계 *및* 역관계의 `withPivot()` 메서드에 나열되어 있는지 반드시 확인하세요.
+
+### `EditAction` 커스터마이징하기 {#customizing-the-editaction}
+
+폼 데이터 변형, 알림 변경, 라이프사이클 훅 추가 등 `EditAction`을 커스터마이징하는 방법에 대해 알아보려면 [액션 문서](../../actions/prebuilt-actions/edit)를 참고하세요.
+
+## 레코드 연결 및 연결 해제 {#attaching-and-detaching-records}
+
+Filament는 `BelongsToMany` 및 `MorphToMany` 관계에 대해 레코드를 연결(attach) 및 연결 해제(detach)할 수 있습니다.
+
+관계 매니저를 생성할 때, `--attach` 플래그를 전달하면 `AttachAction`, `DetachAction`, `DetachBulkAction`이 테이블에 추가됩니다:
 
 ```bash
 php artisan make:filament-relation-manager CategoryResource posts title --attach
 ```
 
-Alternatively, if you've already generated your resource, you can just add the actions to the `$table` arrays:
+또는 이미 리소스를 생성했다면, 단순히 `$table` 배열에 액션을 추가할 수 있습니다:
 
 ```php
 use Filament\Tables;
@@ -284,9 +284,9 @@ public function table(Table $table): Table
 }
 ```
 
-### Preloading the attachment modal select options
+### 첨부 모달 선택 옵션 미리 불러오기 {#preloading-the-attachment-modal-select-options}
 
-By default, as you search for a record to attach, options will load from the database via AJAX. If you wish to preload these options when the form is first loaded instead, you can use the `preloadRecordSelect()` method of `AttachAction`:
+기본적으로 첨부할 레코드를 검색할 때, 옵션은 AJAX를 통해 데이터베이스에서 로드됩니다. 폼이 처음 로드될 때 이러한 옵션을 미리 불러오고 싶다면, `AttachAction`의 `preloadRecordSelect()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\AttachAction;
@@ -295,9 +295,9 @@ AttachAction::make()
     ->preloadRecordSelect()
 ```
 
-### Attaching with pivot attributes
+### 피벗 속성과 함께 연결하기 {#attaching-with-pivot-attributes}
 
-When you attach record with the `Attach` button, you may wish to define a custom form to add pivot attributes to the relationship:
+`Attach` 버튼으로 레코드를 연결할 때, 관계에 피벗 속성을 추가할 수 있도록 커스텀 폼을 정의할 수 있습니다:
 
 ```php
 use Filament\Forms;
@@ -310,13 +310,13 @@ AttachAction::make()
     ])
 ```
 
-In this example, `$action->getRecordSelect()` returns the select field to pick the record to attach. The `role` text input is then saved to the pivot table's `role` column.
+이 예시에서 `$action->getRecordSelect()`는 연결할 레코드를 선택하는 셀렉트 필드를 반환합니다. 그리고 `role` 텍스트 입력값은 피벗 테이블의 `role` 컬럼에 저장됩니다.
 
-Please ensure that any pivot attributes are listed in the `withPivot()` method of the relationship *and* inverse relationship.
+모든 피벗 속성이 관계 *및* 역관계의 `withPivot()` 메서드에 나열되어 있는지 반드시 확인하세요.
 
-### Scoping the options to attach
+### 연결할 옵션 범위 지정하기 {#scoping-the-options-to-attach}
 
-You may want to scope the options available to `AttachAction`:
+`AttachAction`에서 사용할 수 있는 옵션의 범위를 지정하고 싶을 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\AttachAction;
@@ -326,9 +326,9 @@ AttachAction::make()
     ->recordSelectOptionsQuery(fn (Builder $query) => $query->whereBelongsTo(auth()->user()))
 ```
 
-### Searching the options to attach across multiple columns
+### 여러 컬럼에서 첨부할 옵션 검색하기 {#searching-the-options-to-attach-across-multiple-columns}
 
-By default, the options available to `AttachAction` will be searched in the `recordTitleAttribute()` of the table. If you wish to search across multiple columns, you can use the `recordSelectSearchColumns()` method:
+기본적으로, `AttachAction`에서 사용할 수 있는 옵션은 테이블의 `recordTitleAttribute()`에서 검색됩니다. 여러 컬럼에서 검색하고 싶다면, `recordSelectSearchColumns()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\AttachAction;
@@ -337,9 +337,9 @@ AttachAction::make()
     ->recordSelectSearchColumns(['title', 'description'])
 ```
 
-### Attaching multiple records
+### 여러 레코드 연결하기 {#attaching-multiple-records}
 
-The `multiple()` method on the `AttachAction` component allows you to select multiple values:
+`AttachAction` 컴포넌트의 `multiple()` 메서드를 사용하면 여러 값을 선택할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\AttachAction;
@@ -348,9 +348,9 @@ AttachAction::make()
     ->multiple()
 ```
 
-### Customizing the select field in the attached modal
+### 첨부 모달에서 선택 필드 커스터마이징하기 {#customizing-the-select-field-in-the-attached-modal}
 
-You may customize the select field object that is used during attachment by passing a function to the `recordSelect()` method:
+첨부 시 사용되는 선택 필드 객체는 `recordSelect()` 메서드에 함수를 전달하여 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -358,17 +358,17 @@ use Filament\Tables\Actions\AttachAction;
 
 AttachAction::make()
     ->recordSelect(
-        fn (Select $select) => $select->placeholder('Select a post'),
+        fn (Select $select) => $select->placeholder('게시글을 선택하세요'),
     )
 ```
 
-### Handling duplicates
+### 중복 처리 {#handling-duplicates}
 
-By default, you will not be allowed to attach a record more than once. This is because you must also set up a primary `id` column on the pivot table for this feature to work.
+기본적으로, 하나의 레코드를 한 번 이상 첨부하는 것은 허용되지 않습니다. 이 기능이 작동하려면 피벗 테이블에 기본 `id` 컬럼을 설정해야 하기 때문입니다.
 
-Please ensure that the `id` attribute is listed in the `withPivot()` method of the relationship *and* inverse relationship.
+관계 *및* 역관계의 `withPivot()` 메서드에 `id` 속성이 포함되어 있는지 반드시 확인하세요.
 
-Finally, add the `allowDuplicates()` method to the table:
+마지막으로, 테이블에 `allowDuplicates()` 메서드를 추가하세요:
 
 ```php
 public function table(Table $table): Table
@@ -378,17 +378,17 @@ public function table(Table $table): Table
 }
 ```
 
-## Associating and dissociating records
+## 레코드 연결 및 연결 해제 {#associating-and-dissociating-records}
 
-Filament is able to associate and dissociate records for `HasMany` and `MorphMany` relationships.
+Filament은 `HasMany` 및 `MorphMany` 관계에 대해 레코드를 연결(associate) 및 연결 해제(dissociate)할 수 있습니다.
 
-When generating your relation manager, you may pass the `--associate` flag to also add `AssociateAction`, `DissociateAction` and `DissociateBulkAction` to the table:
+관계 매니저를 생성할 때, `--associate` 플래그를 전달하면 `AssociateAction`, `DissociateAction`, `DissociateBulkAction`이 테이블에 추가됩니다:
 
 ```bash
 php artisan make:filament-relation-manager CategoryResource posts title --associate
 ```
 
-Alternatively, if you've already generated your resource, you can just add the actions to the `$table` arrays:
+또는 이미 리소스를 생성한 경우, 해당 액션을 `$table` 배열에 직접 추가할 수 있습니다:
 
 ```php
 use Filament\Tables;
@@ -417,9 +417,9 @@ public function table(Table $table): Table
 }
 ```
 
-### Preloading the associate modal select options
+### 연결 모달 선택 옵션 미리 불러오기 {#preloading-the-associate-modal-select-options}
 
-By default, as you search for a record to associate, options will load from the database via AJAX. If you wish to preload these options when the form is first loaded instead, you can use the `preloadRecordSelect()` method of `AssociateAction`:
+기본적으로, 연결할 레코드를 검색할 때 옵션이 AJAX를 통해 데이터베이스에서 로드됩니다. 폼이 처음 로드될 때 이러한 옵션을 미리 불러오고 싶다면, `AssociateAction`의 `preloadRecordSelect()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\AssociateAction;
@@ -428,9 +428,9 @@ AssociateAction::make()
     ->preloadRecordSelect()
 ```
 
-### Scoping the options to associate
+### 연결할 옵션 범위 지정하기 {#scoping-the-options-to-associate}
 
-You may want to scope the options available to `AssociateAction`:
+`AssociateAction`에서 사용 가능한 옵션의 범위를 지정하고 싶을 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\AssociateAction;
@@ -440,9 +440,9 @@ AssociateAction::make()
     ->recordSelectOptionsQuery(fn (Builder $query) => $query->whereBelongsTo(auth()->user()))
 ```
 
-### Searching the options to associate across multiple columns
+### 여러 컬럼에 걸쳐 연관시킬 옵션 검색하기 {#searching-the-options-to-associate-across-multiple-columns}
 
-By default, the options available to `AssociateAction` will be searched in the `recordTitleAttribute()` of the table. If you wish to search across multiple columns, you can use the `recordSelectSearchColumns()` method:
+기본적으로, `AssociateAction`에서 사용할 수 있는 옵션은 테이블의 `recordTitleAttribute()`에서 검색됩니다. 여러 컬럼에 걸쳐 검색하고 싶다면, `recordSelectSearchColumns()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\AssociateAction;
@@ -451,9 +451,9 @@ AssociateAction::make()
     ->recordSelectSearchColumns(['title', 'description'])
 ```
 
-### Associating multiple records
+### 여러 레코드 연결하기 {#associating-multiple-records}
 
-The `multiple()` method on the `AssociateAction` component allows you to select multiple values:
+`AssociateAction` 컴포넌트의 `multiple()` 메서드를 사용하면 여러 값을 선택할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\AssociateAction;
@@ -462,9 +462,9 @@ AssociateAction::make()
     ->multiple()
 ```
 
-### Customizing the select field in the associate modal
+### 연결 모달에서 선택 필드 커스터마이징하기 {#customizing-the-select-field-in-the-associate-modal}
 
-You may customize the select field object that is used during association by passing a function to the `recordSelect()` method:
+`recordSelect()` 메서드에 함수를 전달하여 연결 시 사용되는 선택 필드 객체를 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -472,19 +472,19 @@ use Filament\Tables\Actions\AssociateAction;
 
 AssociateAction::make()
     ->recordSelect(
-        fn (Select $select) => $select->placeholder('Select a post'),
+        fn (Select $select) => $select->placeholder('게시글을 선택하세요'),
     )
 ```
 
-## Viewing related records
+## 관련 레코드 보기 {#viewing-related-records}
 
-When generating your relation manager, you may pass the `--view` flag to also add a `ViewAction` to the table:
+릴레이션 매니저를 생성할 때, `--view` 플래그를 전달하여 테이블에 `ViewAction`을 추가할 수 있습니다:
 
 ```bash
 php artisan make:filament-relation-manager CategoryResource posts title --view
 ```
 
-Alternatively, if you've already generated your relation manager, you can just add the `ViewAction` to the `$table->actions()` array:
+또는, 이미 릴레이션 매니저를 생성했다면, `$table->actions()` 배열에 `ViewAction`을 추가하면 됩니다:
 
 ```php
 use Filament\Tables;
@@ -503,15 +503,15 @@ public function table(Table $table): Table
 }
 ```
 
-## Deleting related records
+## 관련 레코드 삭제하기 {#deleting-related-records}
 
-By default, you will not be able to interact with deleted records in the relation manager. If you'd like to add functionality to restore, force delete and filter trashed records in your relation manager, use the `--soft-deletes` flag when generating the relation manager:
+기본적으로, 관계 관리자에서는 삭제된 레코드와 상호작용할 수 없습니다. 관계 관리자에서 복원, 강제 삭제 및 삭제된(휴지통) 레코드를 필터링하는 기능을 추가하려면, 관계 관리자를 생성할 때 `--soft-deletes` 플래그를 사용하세요:
 
 ```bash
 php artisan make:filament-relation-manager CategoryResource posts title --soft-deletes
 ```
 
-Alternatively, you may add soft deleting functionality to an existing relation manager:
+또는, 기존 관계 관리자에 소프트 삭제 기능을 추가할 수도 있습니다:
 
 ```php
 use Filament\Tables;
@@ -549,13 +549,13 @@ public function table(Table $table): Table
 }
 ```
 
-### Customizing the `DeleteAction`
+### `DeleteAction` 사용자 지정하기 {#customizing-the-deleteaction}
 
-To learn how to customize the `DeleteAction`, including changing the notification and adding lifecycle hooks, please see the [Actions documentation](../../actions/prebuilt-actions/delete).
+알림 변경 및 라이프사이클 훅 추가 등 `DeleteAction`을(를) 사용자 지정하는 방법에 대해 알아보려면 [액션 문서](../../actions/prebuilt-actions/delete)를 참고하세요.
 
-## Importing related records
+## 관련 레코드 가져오기 {#importing-related-records}
 
-The [`ImportAction`](../../actions/prebuilt-actions/import) can be added to the header of a relation manager to import records. In this case, you probably want to tell the importer which owner these new records belong to. You can use [import options](../../actions/prebuilt-actions/import#using-import-options) to pass through the ID of the owner record:
+[`ImportAction`](../../actions/prebuilt-actions/import)은 관계 관리자 헤더에 추가하여 레코드를 가져올 수 있습니다. 이 경우, 가져온 새 레코드가 어떤 소유자에 속하는지 가져오기 도구에 알려주고 싶을 것입니다. [가져오기 옵션](../../actions/prebuilt-actions/import#using-import-options)을 사용하여 소유자 레코드의 ID를 전달할 수 있습니다:
 
 ```php
 ImportAction::make()
@@ -563,7 +563,7 @@ ImportAction::make()
     ->options(['categoryId' => $this->getOwnerRecord()->getKey()])
 ```
 
-Now, in the importer class, you can associate the owner in a one-to-many relationship with the imported record:
+이제 가져오기 클래스에서, 일대다 관계에서 소유자를 가져온 레코드에 연결할 수 있습니다:
 
 ```php
 public function resolveRecord(): ?Product
@@ -578,7 +578,7 @@ public function resolveRecord(): ?Product
 }
 ```
 
-Alternatively, you can attach the record in a many-to-many relationship using the `afterSave()` hook of the importer:
+또는, 가져오기 도구의 `afterSave()` 후크를 사용하여 다대다 관계에서 레코드를 연결할 수도 있습니다:
 
 ```php
 protected function afterSave(): void
@@ -587,15 +587,15 @@ protected function afterSave(): void
 }
 ```
 
-## Accessing the relationship's owner record
+## 관계의 소유자 레코드에 접근하기 {#accessing-the-relationships-owner-record}
 
-Relation managers are Livewire components. When they are first loaded, the owner record (the Eloquent record which serves as a parent - the main resource model) is saved into a property. You can read this property using:
+관계 매니저는 Livewire 컴포넌트입니다. 처음 로드될 때, 소유자 레코드(부모 역할을 하는 Eloquent 레코드 - 주요 리소스 모델)가 속성에 저장됩니다. 이 속성은 다음과 같이 읽을 수 있습니다:
 
 ```php
 $this->getOwnerRecord()
 ```
 
-However, if you're inside a `static` method like `form()` or `table()`, `$this` isn't accessible. So, you may [use a callback](../../forms/advanced#form-component-utility-injection) to access the `$livewire` instance:
+하지만 `form()`이나 `table()`과 같은 `static` 메서드 내부에서는 `$this`에 접근할 수 없습니다. 따라서 [$livewire 인스턴스에 접근하기 위해 콜백을 사용할 수 있습니다.](../../forms/advanced#form-component-utility-injection)
 
 ```php
 use Filament\Forms;
@@ -617,11 +617,11 @@ public function form(Form $form): Form
 }
 ```
 
-All methods in Filament accept a callback which you can access `$livewire->ownerRecord` in.
+Filament의 모든 메서드는 콜백을 받아들이며, 이 안에서 `$livewire->ownerRecord`에 접근할 수 있습니다.
 
-## Grouping relation managers
+## 관계 매니저 그룹화하기 {#grouping-relation-managers}
 
-You may choose to group relation managers together into one tab. To do this, you may wrap multiple managers in a `RelationGroup` object, with a label:
+여러 관계 매니저를 하나의 탭으로 그룹화할 수 있습니다. 이를 위해 여러 매니저를 `RelationGroup` 객체로 감싸고, 라벨을 지정하면 됩니다:
 
 ```php
 use Filament\Resources\RelationManagers\RelationGroup;
@@ -639,11 +639,11 @@ public static function getRelations(): array
 }
 ```
 
-## Conditionally showing relation managers
+## 관계 매니저 조건부 표시 {#conditionally-showing-relation-managers}
 
-By default, relation managers will be visible if the `viewAny()` method for the related model policy returns `true`.
+기본적으로, 관련 모델 정책의 `viewAny()` 메서드가 `true`를 반환하면 관계 매니저가 표시됩니다.
 
-You may use the `canViewForRecord()` method to determine if the relation manager should be visible for a specific owner record and page:
+특정 소유자 레코드와 페이지에 대해 관계 매니저를 표시할지 여부를 결정하려면 `canViewForRecord()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -654,9 +654,9 @@ public static function canViewForRecord(Model $ownerRecord, string $pageClass): 
 }
 ```
 
-## Combining the relation manager tabs with the form
+## 관계 관리자 탭을 폼과 결합하기 {#combining-the-relation-manager-tabs-with-the-form}
 
-On the Edit or View page class, override the `hasCombinedRelationManagerTabsWithContent()` method:
+Edit 또는 View 페이지 클래스에서 `hasCombinedRelationManagerTabsWithContent()` 메서드를 오버라이드하세요:
 
 ```php
 public function hasCombinedRelationManagerTabsWithContent(): bool
@@ -665,9 +665,9 @@ public function hasCombinedRelationManagerTabsWithContent(): bool
 }
 ```
 
-### Setting an icon for the form tab
+### 폼 탭에 아이콘 설정하기 {#setting-an-icon-for-the-form-tab}
 
-On the Edit or View page class, override the `getContentTabIcon()` method:
+Edit 또는 View 페이지 클래스에서 `getContentTabIcon()` 메서드를 오버라이드하세요:
 
 ```php
 public function getContentTabIcon(): ?string
@@ -676,9 +676,9 @@ public function getContentTabIcon(): ?string
 }
 ```
 
-### Setting the position of the form tab
+### 폼 탭의 위치 설정하기 {#setting-the-position-of-the-form-tab}
 
-By default, the form tab is rendered before the relation tabs. To render it after, you can override the `getContentTabPosition()` method on the Edit or View page class:
+기본적으로 폼 탭은 관계 탭들보다 먼저 렌더링됩니다. 폼 탭을 뒤에 렌더링하려면, Edit 또는 View 페이지 클래스에서 `getContentTabPosition()` 메서드를 오버라이드하면 됩니다:
 
 ```php
 use Filament\Resources\Pages\ContentTabPosition;
@@ -689,15 +689,15 @@ public function getContentTabPosition(): ?ContentTabPosition
 }
 ```
 
-## Adding badges to relation manager tabs
+## 관계 관리자 탭에 배지 추가하기 {#adding-badges-to-relation-manager-tabs}
 
-You can add a badge to a relation manager tab by setting the `$badge` property:
+관계 관리자 탭에 배지를 추가하려면 `$badge` 속성을 설정하면 됩니다:
 
 ```php
 protected static ?string $badge = 'new';
 ```
 
-Alternatively, you can override the `getBadge()` method:
+또는, `getBadge()` 메서드를 오버라이드할 수도 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -708,7 +708,7 @@ public static function getBadge(Model $ownerRecord, string $pageClass): ?string
 }
 ```
 
-Or, if you are using a [relation group](#grouping-relation-managers), you can use the `badge()` method:
+또는, [관계 그룹](#grouping-relation-managers)을 사용하는 경우 `badge()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Resources\RelationManagers\RelationGroup;
@@ -718,15 +718,15 @@ RelationGroup::make('Contacts', [
 ])->badge('new');
 ```
 
-### Changing the color of relation manager tab badges
+### 관계 관리자 탭 배지의 색상 변경하기 {#changing-the-color-of-relation-manager-tab-badges}
 
-If a badge value is defined, it will display using the primary color by default. To style the badge contextually, set the `$badgeColor` to either `danger`, `gray`, `info`, `primary`, `success` or `warning`:
+배지 값이 정의되어 있으면 기본적으로 primary 색상으로 표시됩니다. 배지의 색상을 상황에 맞게 스타일링하려면 `$badgeColor`를 `danger`, `gray`, `info`, `primary`, `success`, `warning` 중 하나로 설정하세요:
 
 ```php
 protected static ?string $badgeColor = 'danger';
 ```
 
-Alternatively, you can override the `getBadgeColor()` method:
+또는, `getBadgeColor()` 메서드를 오버라이드할 수도 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -737,7 +737,7 @@ public static function getBadgeColor(Model $ownerRecord, string $pageClass): ?st
 }
 ```
 
-Or, if you are using a [relation group](#grouping-relation-managers), you can use the `badgeColor()` method:
+또는, [관계 그룹](#grouping-relation-managers)을 사용하는 경우 `badgeColor()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Resources\RelationManagers\RelationGroup;
@@ -747,38 +747,38 @@ RelationGroup::make('Contacts', [
 ])->badgeColor('danger');
 ```
 
-### Adding a tooltip to relation manager tab badges
+### 관계 관리자 탭 배지에 툴팁 추가하기 {#adding-a-tooltip-to-relation-manager-tab-badges}
 
-If a badge value is defined, you can add a tooltip to it by setting the `$badgeTooltip` property:
+배지 값이 정의되어 있다면, `$badgeTooltip` 속성을 설정하여 툴팁을 추가할 수 있습니다:
 
 ```php
-protected static ?string $badgeTooltip = 'There are new posts';
+protected static ?string $badgeTooltip = '새 게시물이 있습니다';
 ```
 
-Alternatively, you can override the `getBadgeTooltip()` method:
+또는, `getBadgeTooltip()` 메서드를 오버라이드할 수도 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
 
 public static function getBadgeTooltip(Model $ownerRecord, string $pageClass): ?string
 {
-    return 'There are new posts';
+    return '새 게시물이 있습니다';
 }
 ```
 
-Or, if you are using a [relation group](#grouping-relation-managers), you can use the `badgeTooltip()` method:
+또는, [관계 그룹](#grouping-relation-managers)을 사용하는 경우에는 `badgeTooltip()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Resources\RelationManagers\RelationGroup;
 
 RelationGroup::make('Contacts', [
     // ...
-])->badgeTooltip('There are new posts');
+])->badgeTooltip('새 게시물이 있습니다');
 ```
 
-## Sharing a resource's form and table with a relation manager
+## 리소스의 폼과 테이블을 관계 매니저와 공유하기 {#sharing-a-resources-form-and-table-with-a-relation-manager}
 
-You may decide that you want a resource's form and table to be identical to a relation manager's, and subsequently want to reuse the code you previously wrote. This is easy, by calling the `form()` and `table()` methods of the resource from the relation manager:
+리소스의 폼과 테이블이 관계 매니저의 것과 동일하게 되길 원하고, 이전에 작성한 코드를 재사용하고 싶을 수 있습니다. 이는 관계 매니저에서 리소스의 `form()` 및 `table()` 메서드를 호출함으로써 쉽게 할 수 있습니다:
 
 ```php
 use App\Filament\Resources\Blog\PostResource;
@@ -796,9 +796,9 @@ public function table(Table $table): Table
 }
 ```
 
-### Hiding a shared form component on the relation manager
+### 관계 관리자에서 공유 폼 컴포넌트 숨기기 {#hiding-a-shared-form-component-on-the-relation-manager}
 
-If you're sharing a form component from the resource with the relation manager, you may want to hide it on the relation manager. This is especially useful if you want to hide a `Select` field for the owner record in the relation manager, since Filament will handle this for you anyway. To do this, you may use the `hiddenOn()` method, passing the name of the relation manager:
+리소스에서 관계 관리자와 폼 컴포넌트를 공유하는 경우, 해당 컴포넌트를 관계 관리자에서 숨기고 싶을 수 있습니다. 이는 특히 관계 관리자에서 소유자 레코드에 대한 `Select` 필드를 숨기고 싶을 때 유용합니다. Filament가 이를 자동으로 처리해주기 때문입니다. 이를 위해서는 `hiddenOn()` 메서드를 사용하고, 관계 관리자의 이름을 전달하면 됩니다:
 
 ```php
 use App\Filament\Resources\Blog\PostResource\RelationManagers\CommentsRelationManager;
@@ -809,9 +809,9 @@ Select::make('post_id')
     ->hiddenOn(CommentsRelationManager::class)
 ```
 
-### Hiding a shared table column on the relation manager
+### 관계 관리자에서 공유 테이블 컬럼 숨기기 {#hiding-a-shared-table-column-on-the-relation-manager}
 
-If you're sharing a table column from the resource with the relation manager, you may want to hide it on the relation manager. This is especially useful if you want to hide a column for the owner record in the relation manager, since this is not appropriate when the owner record is already listed above the relation manager. To do this, you may use the `hiddenOn()` method, passing the name of the relation manager:
+리소스에서 관계 관리자와 테이블 컬럼을 공유하는 경우, 관계 관리자에서 해당 컬럼을 숨기고 싶을 수 있습니다. 이는 특히 관계 관리자 위에 이미 소유자 레코드가 나열되어 있을 때, 관계 관리자에서 소유자 레코드의 컬럼을 숨기고 싶을 때 유용합니다. 이를 위해 `hiddenOn()` 메서드를 사용하여 관계 관리자의 이름을 전달할 수 있습니다:
 
 ```php
 use App\Filament\Resources\Blog\PostResource\RelationManagers\CommentsRelationManager;
@@ -821,9 +821,9 @@ TextColumn::make('post.title')
     ->hiddenOn(CommentsRelationManager::class)
 ```
 
-### Hiding a shared table filter on the relation manager
+### 관계 관리자에서 공유 테이블 필터 숨기기 {#hiding-a-shared-table-filter-on-the-relation-manager}
 
-If you're sharing a table filter from the resource with the relation manager, you may want to hide it on the relation manager. This is especially useful if you want to hide a filter for the owner record in the relation manager, since this is not appropriate when the table is already filtered by the owner record. To do this, you may use the `hiddenOn()` method, passing the name of the relation manager:
+리소스에서 관계 관리자로 테이블 필터를 공유하는 경우, 관계 관리자에서 해당 필터를 숨기고 싶을 수 있습니다. 이는 특히 관계 관리자에서 소유자 레코드에 대한 필터를 숨기고 싶을 때 유용합니다. 이미 테이블이 소유자 레코드로 필터링되어 있을 때는 해당 필터가 적절하지 않기 때문입니다. 이를 위해 `hiddenOn()` 메서드를 사용하여 관계 관리자의 이름을 전달할 수 있습니다:
 
 ```php
 use App\Filament\Resources\Blog\PostResource\RelationManagers\CommentsRelationManager;
@@ -834,9 +834,9 @@ SelectFilter::make('post')
     ->hiddenOn(CommentsRelationManager::class)
 ```
 
-### Overriding shared configuration on the relation manager
+### 관계 관리자에서 공유 설정 재정의하기 {#overriding-shared-configuration-on-the-relation-manager}
 
-Any configuration that you make inside the resource can be overwritten on the relation manager. For example, if you wanted to disable pagination on the relation manager's inherited table but not the resource itself:
+리소스 내부에서 설정한 모든 구성은 관계 관리자에서 덮어쓸 수 있습니다. 예를 들어, 리소스 자체는 그대로 두고 관계 관리자의 상속된 테이블에서만 페이지네이션을 비활성화하고 싶다면 다음과 같이 할 수 있습니다:
 
 ```php
 use App\Filament\Resources\Blog\PostResource;
@@ -849,7 +849,7 @@ public function table(Table $table): Table
 }
 ```
 
-It is probably also useful to provide extra configuration on the relation manager if you wanted to add a header action to [create](#creating-related-records), [attach](#attaching-and-detaching-records), or [associate](#associating-and-dissociating-records) records in the relation manager:
+또한, 관계 관리자에서 [관련 레코드 생성](#creating-related-records), [레코드 연결 및 분리](#attaching-and-detaching-records), [레코드 연관 및 해제](#associating-and-dissociating-records)와 같은 헤더 액션을 추가하고 싶을 때 추가 설정을 제공하는 것도 유용할 수 있습니다:
 
 ```php
 use App\Filament\Resources\Blog\PostResource;
@@ -866,9 +866,9 @@ public function table(Table $table): Table
 }
 ```
 
-## Customizing the relation manager Eloquent query
+## 관계 관리자 Eloquent 쿼리 커스터마이징 {#customizing-the-relation-manager-eloquent-query}
 
-You can apply your own query constraints or [model scopes](https://laravel.com/docs/eloquent#query-scopes) that affect the entire relation manager. To do this, you can pass a function to the `modifyQueryUsing()` method of the table, inside which you can customize the query:
+전체 관계 관리자에 영향을 주는 쿼리 제약 조건이나 [모델 스코프](https://laravel.com/docs/eloquent#query-scopes)를 직접 적용할 수 있습니다. 이를 위해 테이블의 `modifyQueryUsing()` 메서드에 함수를 전달하여 쿼리를 원하는 대로 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Tables;
@@ -884,15 +884,15 @@ public function table(Table $table): Table
 }
 ```
 
-## Customizing the relation manager title
+## 관계 매니저 제목 커스터마이징하기 {#customizing-the-relation-manager-title}
 
-To set the title of the relation manager, you can use the `$title` property on the relation manager class:
+관계 매니저의 제목을 설정하려면, 관계 매니저 클래스에서 `$title` 속성을 사용할 수 있습니다:
 
 ```php
 protected static ?string $title = 'Posts';
 ```
 
-To set the title of the relation manager dynamically, you can override the `getTitle()` method on the relation manager class:
+관계 매니저의 제목을 동적으로 설정하려면, 관계 매니저 클래스에서 `getTitle()` 메서드를 오버라이드할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -903,7 +903,7 @@ public static function getTitle(Model $ownerRecord, string $pageClass): string
 }
 ```
 
-The title will be reflected in the [heading of the table](../../tables/advanced#customizing-the-table-header), as well as the relation manager tab if there is more than one. If you want to customize the table heading independently, you can still use the `$table->heading()` method:
+제목은 [테이블의 헤더](../../tables/advanced#customizing-the-table-header)와, 여러 개의 관계 매니저 탭이 있을 경우 해당 탭에도 반영됩니다. 테이블 헤더만 따로 커스터마이즈하고 싶다면, 여전히 `$table->heading()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables;
@@ -918,19 +918,19 @@ public function table(Table $table): Table
 }
 ```
 
-## Customizing the relation manager record title
+## 관계 매니저 레코드 제목 커스터마이징 {#customizing-the-relation-manager-record-title}
 
-The relation manager uses the concept of a "record title attribute" to determine which attribute of the related model should be used to identify it. When creating a relation manager, this attribute is passed as the third argument to the `make:filament-relation-manager` command:
+관계 매니저는 "레코드 제목 속성(record title attribute)"이라는 개념을 사용하여, 관련 모델의 어떤 속성을 식별자로 사용할지 결정합니다. 관계 매니저를 생성할 때, 이 속성은 `make:filament-relation-manager` 명령어의 세 번째 인수로 전달됩니다:
 
 ```bash
 php artisan make:filament-relation-manager CategoryResource posts title
 ```
 
-In this example, the `title` attribute of the `Post` model will be used to identify a post in the relation manager.
+이 예시에서는, 관계 매니저에서 게시글을 식별하기 위해 `Post` 모델의 `title` 속성이 사용됩니다.
 
-This is mainly used by the action classes. For instance, when you [attach](#attaching-and-detaching-records) or [associate](#associating-and-dissociating-records) a record, the titles will be listed in the select field. When you [edit](#editing-related-records), [view](#viewing-related-records) or [delete](#deleting-related-records) a record, the title will be used in the header of the modal.
+이 기능은 주로 액션 클래스에서 사용됩니다. 예를 들어, 레코드를 [첨부](#attaching-and-detaching-records)하거나 [연관](#associating-and-dissociating-records)할 때, 제목이 선택 필드에 나열됩니다. 또한, 레코드를 [수정](#editing-related-records), [조회](#viewing-related-records), [삭제](#deleting-related-records)할 때, 제목이 모달의 헤더에 사용됩니다.
 
-In some cases, you may want to concatenate multiple attributes together to form a title. You can do this by replacing the `recordTitleAttribute()` configuration method with `recordTitle()`, passing a function that transforms a model into a title:
+경우에 따라 여러 속성을 결합하여 제목을 만들고 싶을 수 있습니다. 이럴 때는 `recordTitleAttribute()` 설정 메서드를 `recordTitle()`로 교체하고, 모델을 제목으로 변환하는 함수를 전달하면 됩니다:
 
 ```php
 use App\Models\Post;
@@ -946,7 +946,7 @@ public function table(Table $table): Table
 }
 ```
 
-If you're using `recordTitle()`, and you have an [associate action](#associating-and-dissociating-records) or [attach action](#attaching-and-detaching-records), you will also want to specify search columns for those actions:
+`recordTitle()`을 사용하고 있고, [연관 액션](#associating-and-dissociating-records)이나 [첨부 액션](#attaching-and-detaching-records)을 사용하는 경우, 해당 액션에 대한 검색 컬럼도 지정해 주어야 합니다:
 
 ```php
 use Filament\Tables\Actions\AssociateAction;
@@ -959,21 +959,21 @@ AttachAction::make()
     ->recordSelectSearchColumns(['title', 'id'])
 ```
 
-## Relation pages
+## 관계 페이지 {#relation-pages}
 
-Using a `ManageRelatedRecords` page is an alternative to using a relation manager, if you want to keep the functionality of managing a relationship separate from editing or viewing the owner record.
+`ManageRelatedRecords` 페이지를 사용하는 것은 관계 관리자를 사용하는 것에 대한 대안으로, 관계 관리를 소유자 레코드의 편집 또는 보기와 분리하여 관리하고 싶을 때 적합합니다.
 
-This feature is ideal if you are using [resource sub-navigation](getting-started#resource-sub-navigation), as you are easily able to switch between the View or Edit page and the relation page.
+이 기능은 [리소스 하위 내비게이션](getting-started#resource-sub-navigation)을 사용할 때 이상적입니다. 뷰 또는 편집 페이지와 관계 페이지 간에 쉽게 전환할 수 있기 때문입니다.
 
-To create a relation page, you should use the `make:filament-page` command:
+관계 페이지를 생성하려면 `make:filament-page` 명령어를 사용해야 합니다:
 
 ```bash
 php artisan make:filament-page ManageCustomerAddresses --resource=CustomerResource --type=ManageRelatedRecords
 ```
 
-When you run this command, you will be asked a series of questions to customize the page, for example, the name of the relationship and its title attribute.
+이 명령어를 실행하면, 관계 이름과 제목 속성 등 페이지를 맞춤 설정할 수 있도록 일련의 질문이 표시됩니다.
 
-You must register this new page in your resource's `getPages()` method:
+이 새 페이지는 리소스의 `getPages()` 메서드에 등록해야 합니다:
 
 ```php
 public static function getPages(): array
@@ -988,13 +988,13 @@ public static function getPages(): array
 }
 ```
 
-> When using a relation page, you do not need to generate a relation manager with `make:filament-relation-manager`, and you do not need to register it in the `getRelations()` method of the resource.
+> 관계 페이지를 사용할 때는 `make:filament-relation-manager`로 관계 관리자를 생성할 필요가 없으며, 리소스의 `getRelations()` 메서드에 등록할 필요도 없습니다.
 
-Now, you can customize the page in exactly the same way as a relation manager, with the same `table()` and `form()`.
+이제 관계 관리자와 동일하게, 동일한 `table()`과 `form()`을 사용하여 페이지를 자유롭게 커스터마이즈할 수 있습니다.
 
-### Adding relation pages to resource sub-navigation
+### 리소스 하위 내비게이션에 관계 페이지 추가하기 {#adding-relation-pages-to-resource-sub-navigation}
 
-If you're using [resource sub-navigation](getting-started#resource-sub-navigation), you can register this page as normal in `getRecordSubNavigation()` of the resource:
+[리소스 하위 내비게이션](getting-started#resource-sub-navigation)을 사용하고 있다면, 이 페이지를 리소스의 `getRecordSubNavigation()`에서 일반적으로 등록할 수 있습니다:
 
 ```php
 use App\Filament\Resources\CustomerResource\Pages;
@@ -1009,9 +1009,9 @@ public static function getRecordSubNavigation(Page $page): array
 }
 ```
 
-## Passing properties to relation managers
+## 관계 매니저에 속성 전달하기 {#passing-properties-to-relation-managers}
 
-When registering a relation manager in a resource, you can use the `make()` method to pass an array of [Livewire properties](https://livewire.laravel.com/docs/properties) to it:
+리소스에서 관계 매니저를 등록할 때, `make()` 메서드를 사용하여 [Livewire 속성](https://livewire.laravel.com/docs/properties) 배열을 전달할 수 있습니다:
 
 ```php
 use App\Filament\Resources\Blog\PostResource\RelationManagers\CommentsRelationManager;
@@ -1026,7 +1026,7 @@ public static function getRelations(): array
 }
 ```
 
-This array of properties gets mapped to [public Livewire properties](https://livewire.laravel.com/docs/properties) on the relation manager class:
+이 속성 배열은 관계 매니저 클래스의 [public Livewire 속성](https://livewire.laravel.com/docs/properties)으로 매핑됩니다:
 
 ```php
 use Filament\Resources\RelationManagers\RelationManager;
@@ -1039,13 +1039,13 @@ class CommentsRelationManager extends RelationManager
 }
 ```
 
-Now, you can access the `status` in the relation manager class using `$this->status`.
+이제 관계 매니저 클래스에서 `$this->status`를 사용하여 `status`에 접근할 수 있습니다.
 
-## Disabling lazy loading
+## 지연 로딩 비활성화 {#disabling-lazy-loading}
 
-By default, relation managers are lazy-loaded. This means that they will only be loaded when they are visible on the page.
+기본적으로, 관계 매니저는 지연 로딩(lazy-loaded)됩니다. 이는 페이지에서 보일 때만 로드된다는 의미입니다.
 
-To disable this behavior, you may override the `$isLazy` property on the relation manager class:
+이 동작을 비활성화하려면, 관계 매니저 클래스에서 `$isLazy` 속성을 오버라이드하면 됩니다:
 
 ```php
 protected static bool $isLazy = false;

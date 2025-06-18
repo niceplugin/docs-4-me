@@ -1,11 +1,11 @@
 ---
-title: Image entry
+title: ImageEntry
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [인포리스트.엔트리] ImageEntry
 
-## Overview
+## 개요 {#overview}
 
-Images can be easily displayed within your infolist:
+이미지는 인포리스트 내에서 쉽게 표시할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -13,13 +13,13 @@ use Filament\Infolists\Components\ImageEntry;
 ImageEntry::make('header_image')
 ```
 
-The entry must contain the path to the image, relative to the root directory of its storage disk, or an absolute URL to it.
+엔트리에는 스토리지 디스크의 루트 디렉터리를 기준으로 한 이미지 경로나, 이미지의 절대 URL이 포함되어야 합니다.
 
 <AutoScreenshot name="infolists/entries/image/simple" alt="Image entry" version="3.x" />
 
-## Managing the image disk
+## 이미지 디스크 관리 {#managing-the-image-disk}
 
-By default, the `public` disk will be used to retrieve images. You may pass a custom disk name to the `disk()` method:
+기본적으로 이미지를 가져올 때 `public` 디스크가 사용됩니다. `disk()` 메서드에 커스텀 디스크 이름을 전달할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -28,9 +28,9 @@ ImageEntry::make('header_image')
     ->disk('s3')
 ```
 
-## Private images
+## 비공개 이미지 {#private-images}
 
-Filament can generate temporary URLs to render private images, you may set the `visibility()` to `private`:
+Filament은 비공개 이미지를 렌더링하기 위해 임시 URL을 생성할 수 있습니다. `visibility()`를 `private`으로 설정할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -39,9 +39,9 @@ ImageEntry::make('header_image')
     ->visibility('private')
 ```
 
-## Customizing the size
+## 크기 커스터마이징 {#customizing-the-size}
 
-You may customize the image size by passing a `width()` and `height()`, or both with `size()`:
+`width()`와 `height()`를 각각 또는 `size()`로 둘 다 전달하여 이미지 크기를 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -56,9 +56,9 @@ ImageEntry::make('author.avatar')
     ->size(40)
 ```
 
-## Square image
+## 정사각형 이미지 {#square-image}
 
-You may display the image using a 1:1 aspect ratio:
+이미지를 1:1 비율로 표시할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -68,11 +68,11 @@ ImageEntry::make('author.avatar')
     ->square()
 ```
 
-<AutoScreenshot name="infolists/entries/image/square" alt="Square image entry" version="3.x" />
+<AutoScreenshot name="infolists/entries/image/square" alt="정사각형 ImageEntry" version="3.x" />
 
-## Circular image
+## 원형 이미지 {#circular-image}
 
-You may make the image fully rounded, which is useful for rendering avatars:
+이미지를 완전히 둥글게 만들 수 있으며, 이는 아바타를 렌더링할 때 유용합니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -82,11 +82,11 @@ ImageEntry::make('author.avatar')
     ->circular()
 ```
 
-<AutoScreenshot name="infolists/entries/image/circular" alt="Circular image entry" version="3.x" />
+<AutoScreenshot name="infolists/entries/image/circular" alt="원형 ImageEntry" version="3.x" />
 
-## Adding a default image URL
+## 기본 이미지 URL 추가하기 {#adding-a-default-image-url}
 
-You can display a placeholder image if one doesn't exist yet, by passing a URL to the `defaultImageUrl()` method:
+아직 이미지가 존재하지 않는 경우, `defaultImageUrl()` 메서드에 URL을 전달하여 플레이스홀더 이미지를 표시할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -95,9 +95,9 @@ ImageEntry::make('avatar')
     ->defaultImageUrl(url('/images/placeholder.png'))
 ```
 
-## Stacking images
+## 이미지 쌓기 {#stacking-images}
 
-You may display multiple images as a stack of overlapping images by using `stacked()`:
+여러 이미지를 겹쳐진 이미지 스택으로 표시하려면 `stacked()`를 사용할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -108,11 +108,11 @@ ImageEntry::make('colleagues.avatar')
     ->stacked()
 ```
 
-<AutoScreenshot name="infolists/entries/image/stacked" alt="Stacked image entry" version="3.x" />
+<AutoScreenshot name="infolists/entries/image/stacked" alt="겹쳐진 ImageEntry" version="3.x" />
 
-### Customizing the stacked ring width
+### 스택된 링 너비 커스터마이징하기 {#customizing-the-stacked-ring-width}
 
-The default ring width is `3`, but you may customize it to be from `0` to `8`:
+기본 링 너비는 `3`이지만, `0`에서 `8`까지 원하는 값으로 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -124,9 +124,9 @@ ImageEntry::make('colleagues.avatar')
     ->ring(5)
 ```
 
-### Customizing the stacked overlap
+### 겹침 정도 커스터마이징하기 {#customizing-the-stacked-overlap}
 
-The default overlap is `4`, but you may customize it to be from `0` to `8`:
+기본 겹침 값은 `4`이지만, `0`에서 `8`까지 원하는 값으로 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -138,9 +138,9 @@ ImageEntry::make('colleagues.avatar')
     ->overlap(2)
 ```
 
-## Setting a limit
+## 제한 설정 {#setting-a-limit}
 
-You may limit the maximum number of images you want to display by passing `limit()`:
+표시할 이미지의 최대 개수를 제한하려면 `limit()`을 전달하면 됩니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -152,11 +152,11 @@ ImageEntry::make('colleagues.avatar')
     ->limit(3)
 ```
 
-<AutoScreenshot name="infolists/entries/image/limited" alt="Limited image entry" version="3.x" />
+<AutoScreenshot name="infolists/entries/image/limited" alt="제한된 ImageEntry" version="3.x" />
 
-### Showing the remaining images count
+### 남은 이미지 개수 표시하기 {#showing-the-remaining-images-count}
 
-When you set a limit you may also display the count of remaining images by passing `limitedRemainingText()`.
+제한을 설정할 때 `limitedRemainingText()`를 전달하여 남은 이미지 개수를 표시할 수도 있습니다.
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -169,11 +169,11 @@ ImageEntry::make('colleagues.avatar')
     ->limitedRemainingText()
 ```
 
-<AutoScreenshot name="infolists/entries/image/limited-remaining-text" alt="Limited image entry with remaining text" version="3.x" />
+<AutoScreenshot name="infolists/entries/image/limited-remaining-text" alt="남은 개수가 표시된 제한된 ImageEntry" version="3.x" />
 
-#### Showing the limited remaining text separately
+#### 제한된 남은 텍스트를 별도로 표시하기 {#showing-the-limited-remaining-text-separately}
 
-By default, `limitedRemainingText()` will display the count of remaining images as a number stacked on the other images. If you prefer to show the count as a number after the images, you may use the `isSeparate: true` parameter:
+기본적으로, `limitedRemainingText()`는 남은 이미지의 개수를 다른 이미지 위에 숫자로 표시합니다. 만약 이미지 뒤에 숫자를 별도로 표시하고 싶다면, `isSeparate: true` 파라미터를 사용할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -188,9 +188,9 @@ ImageEntry::make('colleagues.avatar')
 
 <AutoScreenshot name="infolists/entries/image/limited-remaining-text-separately" alt="Limited image entry with remaining text separately" version="3.x" />
 
-#### Customizing the limited remaining text size
+#### 제한된 남은 텍스트 크기 커스터마이징하기 {#customizing-the-limited-remaining-text-size}
 
-By default, the size of the remaining text is `sm`. You can customize this to be `xs`, `md` or `lg` using the `size` parameter:
+기본적으로 남은 텍스트의 크기는 `sm`입니다. `size` 파라미터를 사용하여 `xs`, `md`, `lg`로 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -203,9 +203,9 @@ ImageEntry::make('colleagues.avatar')
     ->limitedRemainingText(size: 'lg')
 ```
 
-## Custom attributes
+## 사용자 지정 속성 {#custom-attributes}
 
-You may customize the extra HTML attributes of the image using `extraImgAttributes()`:
+`extraImgAttributes()`를 사용하여 이미지의 추가 HTML 속성을 사용자 지정할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;
@@ -217,9 +217,9 @@ ImageEntry::make('logo')
     ]),
 ```
 
-## Prevent file existence checks
+## 파일 존재 여부 확인 방지 {#prevent-file-existence-checks}
 
-When the infolist is loaded, it will automatically detect whether the images exist. This is all done on the backend. When using remote storage with many images, this can be time-consuming. You can use the `checkFileExistence(false)` method to disable this feature:
+인포리스트가 로드될 때, 이미지가 존재하는지 자동으로 감지합니다. 이 모든 과정은 백엔드에서 처리됩니다. 이미지가 많은 원격 스토리지를 사용할 경우, 이 과정이 시간이 오래 걸릴 수 있습니다. 이 기능을 비활성화하려면 `checkFileExistence(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ImageEntry;

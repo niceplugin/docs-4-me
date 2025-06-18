@@ -1,10 +1,10 @@
 ---
-title: Delete action
+title: DeleteAction
 ---
+# [액션.내장된액션] DeleteAction
+## 개요 {#overview}
 
-## Overview
-
-Filament includes a prebuilt action that is able to delete Eloquent records. When the trigger button is clicked, a modal asks the user for confirmation. You may use it like so:
+Filament에는 Eloquent 레코드를 삭제할 수 있는 내장된 액션이 포함되어 있습니다. 트리거 버튼을 클릭하면 모달이 나타나 사용자에게 확인을 요청합니다. 다음과 같이 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\DeleteAction;
@@ -13,7 +13,7 @@ DeleteAction::make()
     ->record($this->post)
 ```
 
-If you want to delete table rows, you can use the `Filament\Tables\Actions\DeleteAction` instead, or `Filament\Tables\Actions\DeleteBulkAction` to delete multiple at once:
+테이블 행을 삭제하려면 `Filament\Tables\Actions\DeleteAction`을 대신 사용할 수 있으며, 여러 개를 한 번에 삭제하려면 `Filament\Tables\Actions\DeleteBulkAction`을 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\BulkActionGroup;
@@ -37,27 +37,27 @@ public function table(Table $table): Table
 }
 ```
 
-## Redirecting after deleting
+## 삭제 후 리디렉션 {#redirecting-after-deleting}
 
-You may set up a custom redirect when the record is deleted using the `successRedirectUrl()` method:
+레코드가 삭제된 후 `successRedirectUrl()` 메서드를 사용하여 커스텀 리디렉션을 설정할 수 있습니다:
 
 ```php
 DeleteAction::make()
     ->successRedirectUrl(route('posts.list'))
 ```
 
-## Customizing the delete notification
+## 삭제 알림 커스터마이징하기 {#customizing-the-delete-notification}
 
-When the record is successfully deleted, a notification is dispatched to the user, which indicates the success of their action.
+레코드가 성공적으로 삭제되면, 사용자의 작업이 성공적으로 처리되었음을 알리는 알림이 사용자에게 전송됩니다.
 
-To customize the title of this notification, use the `successNotificationTitle()` method:
+이 알림의 제목을 커스터마이징하려면, `successNotificationTitle()` 메서드를 사용하세요:
 
 ```php
 DeleteAction::make()
-    ->successNotificationTitle('User deleted')
+    ->successNotificationTitle('사용자가 삭제되었습니다')
 ```
 
-You may customize the entire notification using the `successNotification()` method:
+알림 전체를 커스터마이징하려면 `successNotification()` 메서드를 사용하세요:
 
 ```php
 use Filament\Notifications\Notification;
@@ -66,21 +66,21 @@ DeleteAction::make()
     ->successNotification(
        Notification::make()
             ->success()
-            ->title('User deleted')
-            ->body('The user has been deleted successfully.'),
+            ->title('사용자가 삭제되었습니다')
+            ->body('사용자가 성공적으로 삭제되었습니다.'),
     )
 ```
 
-To disable the notification altogether, use the `successNotification(null)` method:
+알림을 완전히 비활성화하려면, `successNotification(null)` 메서드를 사용하세요:
 
 ```php
 DeleteAction::make()
     ->successNotification(null)
 ```
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-You can use the `before()` and `after()` methods to execute code before and after a record is deleted:
+레코드가 삭제되기 전과 후에 코드를 실행하려면 `before()`와 `after()` 메서드를 사용할 수 있습니다:
 
 ```php
 DeleteAction::make()

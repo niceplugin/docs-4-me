@@ -13,6 +13,9 @@ features:
   - title: Livewire
     details: JavaScript 없이도 동적인 웹 인터페이스를 만들 수 있게 해주는 Laravel 전용 라이브러리
     link: /livewire/3.x/quickstart
+  - title: Filament
+    details: 복잡한 CMS를 코드 몇 줄로 빠르게 구현할 수 있는 Laravel 전용 툴킷
+    link: /filament/3.x/panels/installation
 ---
 
 <!--

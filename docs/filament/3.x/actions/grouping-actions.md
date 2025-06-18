@@ -1,11 +1,11 @@
 ---
-title: Grouping actions
+title: 액션 그룹화
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [액션] 액션 그룹화
 
-## Overview
+## 개요 {#overview}
 
-You may group actions together into a dropdown menu by using an `ActionGroup` object. Groups may contain many actions, or other groups:
+여러 액션을 `ActionGroup` 객체를 사용하여 드롭다운 메뉴로 그룹화할 수 있습니다. 그룹에는 여러 액션이나 다른 그룹을 포함할 수 있습니다:
 
 ```php
 ActionGroup::make([
@@ -15,90 +15,90 @@ ActionGroup::make([
 ])
 ```
 
-<AutoScreenshot name="actions/group/simple" alt="Action group" version="3.x" />
+<AutoScreenshot name="actions/group/simple" alt="액션 그룹" version="3.x" />
 
-This page is about customizing the look of the group's trigger button and dropdown.
+이 페이지에서는 그룹의 트리거 버튼과 드롭다운의 모양을 커스터마이즈하는 방법에 대해 다룹니다.
 
-## Customizing the group trigger style
+## 그룹 트리거 스타일 커스터마이징 {#customizing-the-group-trigger-style}
 
-The button which opens the dropdown may be customized in the same way as a normal action. [All the methods available for trigger buttons](trigger-button) may be used to customize the group trigger button:
+드롭다운을 여는 버튼은 일반 액션과 동일한 방식으로 커스터마이즈할 수 있습니다. [트리거 버튼에 사용할 수 있는 모든 메서드](trigger-button)를 그룹 트리거 버튼에도 사용할 수 있습니다:
 
 ```php
 use Filament\Support\Enums\ActionSize;
 
 ActionGroup::make([
-    // Array of actions
+    // 액션 배열
 ])
-    ->label('More actions')
+    ->label('추가 작업')
     ->icon('heroicon-m-ellipsis-vertical')
     ->size(ActionSize::Small)
     ->color('primary')
     ->button()
 ```
 
-<AutoScreenshot name="actions/group/customized" alt="Action group with custom trigger style" version="3.x" />
+<AutoScreenshot name="actions/group/customized" alt="커스텀 트리거 스타일의 액션 그룹" version="3.x" />
 
-## Setting the placement of the dropdown
+## 드롭다운 위치 설정하기 {#setting-the-placement-of-the-dropdown}
 
-The dropdown may be positioned relative to the trigger button by using the `dropdownPlacement()` method:
+드롭다운은 `dropdownPlacement()` 메서드를 사용하여 트리거 버튼을 기준으로 위치를 지정할 수 있습니다:
 
 ```php
 ActionGroup::make([
-    // Array of actions
+    // 액션 배열
 ])
     ->dropdownPlacement('top-start')
 ```
 
-<AutoScreenshot name="actions/group/placement" alt="Action group with top placement style" version="3.x" />
+<AutoScreenshot name="actions/group/placement" alt="상단 위치 스타일의 액션 그룹" version="3.x" />
 
-## Adding dividers between actions
+## 작업들 사이에 구분선 추가하기 {#adding-dividers-between-actions}
 
-You may add dividers between groups of actions by using nested `ActionGroup` objects:
+중첩된 `ActionGroup` 객체를 사용하여 작업 그룹 사이에 구분선을 추가할 수 있습니다:
 
 ```php
 ActionGroup::make([
     ActionGroup::make([
-        // Array of actions
+        // 작업 배열
     ])->dropdown(false),
-    // Array of actions
+    // 작업 배열
 ])
 ```
 
-The `dropdown(false)` method puts the actions inside the parent dropdown, instead of a new nested dropdown.
+`dropdown(false)` 메서드는 새로운 중첩 드롭다운 대신 상위 드롭다운 안에 작업들을 배치합니다.
 
-<AutoScreenshot name="actions/group/nested" alt="Action groups nested with dividers" version="3.x" />
+<AutoScreenshot name="actions/group/nested" alt="구분선이 있는 중첩 작업 그룹" version="3.x" />
 
-## Setting the width of the dropdown
+## 드롭다운의 너비 설정하기 {#setting-the-width-of-the-dropdown}
 
-The dropdown may be set to a width by using the `dropdownWidth()` method. Options correspond to [Tailwind's max-width scale](https://tailwindcss.com/docs/max-width). The options are `ExtraSmall`, `Small`, `Medium`, `Large`, `ExtraLarge`, `TwoExtraLarge`, `ThreeExtraLarge`, `FourExtraLarge`, `FiveExtraLarge`, `SixExtraLarge` and `SevenExtraLarge`:
+드롭다운의 너비는 `dropdownWidth()` 메서드를 사용하여 설정할 수 있습니다. 옵션은 [Tailwind의 max-width 스케일](https://tailwindcss.com/docs/max-width)에 해당합니다. 사용 가능한 옵션은 `ExtraSmall`, `Small`, `Medium`, `Large`, `ExtraLarge`, `TwoExtraLarge`, `ThreeExtraLarge`, `FourExtraLarge`, `FiveExtraLarge`, `SixExtraLarge`, `SevenExtraLarge`입니다:
 
 ```php
 use Filament\Support\Enums\MaxWidth;
 
 ActionGroup::make([
-    // Array of actions
+    // 액션 배열
 ])
     ->dropdownWidth(MaxWidth::ExtraSmall)
 ```
 
-## Controlling the maximum height of the dropdown
+## 드롭다운의 최대 높이 제어하기 {#controlling-the-maximum-height-of-the-dropdown}
 
-The dropdown content can have a maximum height using the `maxHeight()` method, so that it scrolls. You can pass a [CSS length](https://developer.mozilla.org/en-US/docs/Web/CSS/length):
+드롭다운 내용은 `maxHeight()` 메서드를 사용하여 최대 높이를 지정할 수 있으며, 이로 인해 스크롤이 생깁니다. [CSS 길이](https://developer.mozilla.org/en-US/docs/Web/CSS/length)를 전달할 수 있습니다:
 
 ```php
 ActionGroup::make([
-    // Array of actions
+    // 액션 배열
 ])
     ->maxHeight('400px')
 ```
 
-## Controlling the dropdown offset
+## 드롭다운 오프셋 제어하기 {#controlling-the-dropdown-offset}
 
-You may control the offset of the dropdown using the `dropdownOffset()` method, by default the offset is set to `8`.
+기본적으로 오프셋이 `8`로 설정되어 있지만, `dropdownOffset()` 메서드를 사용하여 드롭다운의 오프셋을 제어할 수 있습니다.
 
 ```php
 ActionGroup::make([
-    // Array of actions
+    // 액션 배열
 ])
     ->dropdownOffset(16)
 ```

@@ -1,19 +1,19 @@
 ---
-title: Getting started
+title: 시작하기
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [테이블.필터] 시작하기
 
-## Overview
+
+## 개요 {#overview}
 
 <LaracastsBanner
-    title="Table Filters"
-    description="Watch the Rapid Laravel Development with Filament series on Laracasts - it will teach you the basics of adding filters to Filament resource tables."
+    title="테이블 필터"
+    description="Laracasts의 Rapid Laravel Development with Filament 시리즈를 시청하세요. 이 시리즈는 Filament 리소스 테이블에 필터를 추가하는 기본 방법을 알려줍니다."
     url="https://laracasts.com/series/rapid-laravel-development-with-filament/episodes/10"
     series="rapid-laravel-development"
 />
 
-Filters allow you to define certain constraints on your data, and allow users to scope it to find the information they need. You put them in the `$table->filters()` method:
+필터는 데이터에 특정 제약 조건을 정의할 수 있게 해주며, 사용자가 원하는 정보를 찾을 수 있도록 범위를 지정할 수 있게 해줍니다. 필터는 `$table->filters()` 메서드에 넣습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -27,9 +27,9 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/filters/simple" alt="Table with filter" version="3.x" />
+<AutoScreenshot name="tables/filters/simple" alt="필터가 적용된 테이블" version="3.x" />
 
-Filters may be created using the static `make()` method, passing its unique name. You should then pass a callback to `query()` which applies your filter's scope:
+필터는 고유한 이름을 전달하여 정적 `make()` 메서드를 사용해 생성할 수 있습니다. 그런 다음, 필터의 범위를 적용하는 콜백을 `query()`에 전달해야 합니다:
 
 ```php
 use Filament\Tables\Filters\Filter;
@@ -39,20 +39,20 @@ Filter::make('is_featured')
     ->query(fn (Builder $query): Builder => $query->where('is_featured', true))
 ```
 
-## Available filters
+## 사용 가능한 필터 {#available-filters}
 
-By default, using the `Filter::make()` method will render a checkbox form component. When the checkbox is on, the `query()` will be activated.
+기본적으로 `Filter::make()` 메서드를 사용하면 체크박스 폼 컴포넌트가 렌더링됩니다. 체크박스가 켜지면 `query()`가 활성화됩니다.
 
-- You can also [replace the checkbox with a toggle](#using-a-toggle-button-instead-of-a-checkbox).
-- You can use a [ternary filter](ternary) to replace the checkbox with a select field to allow users to pick between 3 states - usually "true", "false" and "blank". This is useful for filtering boolean columns that are nullable.
-- The [trashed filter](ternary#filtering-soft-deletable-records) is a pre-built ternary filter that allows you to filter soft-deletable records.
-- You may use a [select filter](select) to allow users to select from a list of options, and filter using the selection.
-- You may use a [query builder](query-builder) to allow users to create complex sets of filters, with an advanced user interface for combining constraints.
-- You may build [custom filters](custom) with other form fields, to do whatever you want.
+- [체크박스를 토글 버튼으로 교체](#using-a-toggle-button-instead-of-a-checkbox)할 수도 있습니다.
+- [테넌시 필터](ternary)를 사용하여 체크박스를 셀렉트 필드로 교체해 사용자가 3가지 상태(보통 "true", "false", "blank") 중에서 선택할 수 있도록 할 수 있습니다. 이는 nullable인 불리언 컬럼을 필터링할 때 유용합니다.
+- [삭제됨 필터](ternary#filtering-soft-deletable-records)는 소프트 삭제 가능한 레코드를 필터링할 수 있는 내장된 테넌시 필터입니다.
+- [셀렉트 필터](select)를 사용하여 사용자가 옵션 목록에서 선택하고, 그 선택을 기준으로 필터링할 수 있습니다.
+- [쿼리 빌더](query-builder)를 사용하여 사용자가 제약 조건을 조합할 수 있는 고급 UI로 복잡한 필터 세트를 만들 수 있습니다.
+- [커스텀 필터](custom)를 다른 폼 필드와 함께 만들어 원하는 대로 동작하도록 할 수 있습니다.
 
-## Setting a label
+## 라벨 설정하기 {#setting-a-label}
 
-By default, the label of the filter, which is displayed in the filter form, is generated from the name of the filter. You may customize this using the `label()` method:
+기본적으로 필터 폼에 표시되는 필터의 라벨은 필터의 이름에서 자동으로 생성됩니다. `label()` 메서드를 사용하여 이를 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\Filter;
@@ -61,24 +61,24 @@ Filter::make('is_featured')
     ->label('Featured')
 ```
 
-Optionally, you can have the label automatically translated [using Laravel's localization features](https://laravel.com/docs/localization) with the `translateLabel()` method:
+선택적으로, `translateLabel()` 메서드를 사용하여 [라라벨의 로컬라이제이션 기능](https://laravel.com/docs/localization)으로 라벨을 자동 번역할 수도 있습니다:
 
 ```php
 use Filament\Tables\Filters\Filter;
 
 Filter::make('is_featured')
-    ->translateLabel() // Equivalent to `label(__('Is featured'))`
+    ->translateLabel() // `label(__('Is featured'))`와 동일합니다.
 ```
 
-## Customizing the filter form
+## 필터 폼 커스터마이징 {#customizing-the-filter-form}
 
-By default, creating a filter with the `Filter` class will render a [checkbox form component](../../forms/fields/checkbox). When the checkbox is checked, the `query()` function will be applied to the table's query, scoping the records in the table. When the checkbox is unchecked, the `query()` function will be removed from the table's query.
+기본적으로, `Filter` 클래스를 사용하여 필터를 생성하면 [체크박스 폼 컴포넌트](../../forms/fields/checkbox)가 렌더링됩니다. 체크박스가 체크되면, `query()` 함수가 테이블의 쿼리에 적용되어 테이블의 레코드가 범위 지정됩니다. 체크박스가 해제되면, `query()` 함수가 테이블의 쿼리에서 제거됩니다.
 
-Filters are built entirely on Filament's form fields. They can render any combination of form fields, which users can then interact with to filter the table.
+필터는 완전히 Filament의 폼 필드를 기반으로 구축됩니다. 필터는 다양한 폼 필드 조합을 렌더링할 수 있으며, 사용자는 이를 통해 테이블을 필터링할 수 있습니다.
 
-### Using a toggle button instead of a checkbox
+### 체크박스 대신 토글 버튼 사용하기 {#using-a-toggle-button-instead-of-a-checkbox}
 
-The simplest example of managing the form field that is used for a filter is to replace the [checkbox](../../forms/fields/checkbox) with a [toggle button](../../forms/fields/toggle), using the `toggle()` method:
+필터에 사용되는 폼 필드를 관리하는 가장 간단한 예시는 [체크박스](../../forms/fields/checkbox)를 [토글 버튼](../../forms/fields/toggle)으로 교체하는 것으로, `toggle()` 메서드를 사용합니다:
 
 ```php
 use Filament\Tables\Filters\Filter;
@@ -87,11 +87,11 @@ Filter::make('is_featured')
     ->toggle()
 ```
 
-<AutoScreenshot name="tables/filters/toggle" alt="Table with toggle filter" version="3.x" />
+<AutoScreenshot name="tables/filters/toggle" alt="토글 필터가 있는 테이블" version="3.x" />
 
-### Applying the filter by default
+### 기본적으로 필터 적용하기 {#applying-the-filter-by-default}
 
-You may set a filter to be enabled by default, using the `default()` method:
+`default()` 메서드를 사용하여 필터가 기본적으로 활성화되도록 설정할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\Filter;
@@ -100,9 +100,9 @@ Filter::make('is_featured')
     ->default()
 ```
 
-### Customizing the built-in filter form field
+### 기본 제공 필터 폼 필드 커스터마이징하기 {#customizing-the-built-in-filter-form-field}
 
-Whether you are using a checkbox, a [toggle](#using-a-toggle-button-instead-of-a-checkbox) or a [select](select), you can customize the built-in form field used for the filter, using the `modifyFormFieldUsing()` method. The method accepts a function with a `$field` parameter that gives you access to the form field object to customize:
+체크박스, [토글](#using-a-toggle-button-instead-of-a-checkbox), 또는 [셀렉트](select)를 사용하든, `modifyFormFieldUsing()` 메서드를 사용하여 필터에 사용되는 기본 제공 폼 필드를 커스터마이징할 수 있습니다. 이 메서드는 `$field` 파라미터를 가진 함수를 받아, 폼 필드 객체에 접근하여 원하는 대로 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Checkbox;
@@ -112,9 +112,9 @@ Filter::make('is_featured')
     ->modifyFormFieldUsing(fn (Checkbox $field) => $field->inline(false))
 ```
 
-## Persist filters in session
+## 세션에 필터 유지 {#persist-filters-in-session}
 
-To persist the table filters in the user's session, use the `persistFiltersInSession()` method:
+테이블 필터를 사용자의 세션에 유지하려면 `persistFiltersInSession()` 메서드를 사용하세요:
 
 ```php
 use Filament\Tables\Table;
@@ -129,9 +129,9 @@ public function table(Table $table): Table
 }
 ```
 
-## Deferring filters
+## 필터 지연 적용 {#deferring-filters}
 
-You can defer filter changes from affecting the table, until the user clicks an "Apply" button. To do this, use the `deferFilters()` method:
+사용자가 "적용" 버튼을 클릭할 때까지 필터 변경 사항이 테이블에 영향을 주지 않도록 지연시킬 수 있습니다. 이를 위해 `deferFilters()` 메서드를 사용하세요:
 
 ```php
 use Filament\Tables\Table;
@@ -146,9 +146,9 @@ public function table(Table $table): Table
 }
 ```
 
-### Customizing the apply filters action
+### 필터 적용 액션 커스터마이징하기 {#customizing-the-apply-filters-action}
 
-When deferring filters, you can customize the "Apply" button, using the `filtersApplyAction()` method, passing a closure that returns an action. All methods that are available to [customize action trigger buttons](../../actions/trigger-button) can be used:
+필터를 지연 적용할 때, `filtersApplyAction()` 메서드를 사용하여 "적용" 버튼을 커스터마이즈할 수 있습니다. 이 메서드에는 액션을 반환하는 클로저를 전달합니다. [액션 트리거 버튼 커스터마이징](../../actions/trigger-button)에 사용할 수 있는 모든 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\Action;
@@ -163,14 +163,14 @@ public function table(Table $table): Table
         ->filtersApplyAction(
             fn (Action $action) => $action
                 ->link()
-                ->label('Save filters to table'),
+                ->label('필터를 테이블에 저장'),
         );
 }
 ```
 
-## Deselecting records when filters change
+## 필터가 변경될 때 레코드 선택 해제 {#deselecting-records-when-filters-change}
 
-By default, all records will be deselected when the filters change. Using the `deselectAllRecordsWhenFiltered(false)` method, you can disable this behavior:
+기본적으로, 필터가 변경되면 모든 레코드의 선택이 해제됩니다. `deselectAllRecordsWhenFiltered(false)` 메서드를 사용하면 이 동작을 비활성화할 수 있습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -185,13 +185,13 @@ public function table(Table $table): Table
 }
 ```
 
-## Modifying the base query
+## 기본 쿼리 수정하기 {#modifying-the-base-query}
 
-By default, modifications to the Eloquent query performed in the `query()` method will be applied inside a scoped `where()` clause. This is to ensure that the query does not clash with any other filters that may be applied, especially those that use `orWhere()`.
+기본적으로, `query()` 메서드에서 수행된 Eloquent 쿼리의 수정은 스코프가 지정된 `where()` 절 내부에 적용됩니다. 이는 쿼리가 `orWhere()`를 사용하는 등 다른 필터와 충돌하지 않도록 보장하기 위함입니다.
 
-However, the downside of this is that the `query()` method cannot be used to modify the query in other ways, such as removing global scopes, since the base query needs to be modified directly, not the scoped query.
+하지만 이 방식의 단점은, `query()` 메서드를 사용하여 글로벌 스코프 제거와 같이 쿼리를 다른 방식으로 수정할 수 없다는 점입니다. 이러한 경우에는 기본 쿼리를 직접 수정해야 하므로, 스코프가 지정된 쿼리가 아닌 기본 쿼리를 수정해야 합니다.
 
-To modify the base query directly, you may use the `baseQuery()` method, passing a closure that receives the base query:
+기본 쿼리를 직접 수정하려면, 클로저를 전달받는 `baseQuery()` 메서드를 사용할 수 있습니다. 이 클로저는 기본 쿼리를 인자로 받습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Builder;
@@ -205,9 +205,9 @@ TernaryFilter::make('trashed')
     ]))
 ```
 
-## Customizing the filters trigger action
+## 필터 트리거 액션 커스터마이징하기 {#customizing-the-filters-trigger-action}
 
-To customize the filters trigger buttons, you may use the `filtersTriggerAction()` method, passing a closure that returns an action. All methods that are available to [customize action trigger buttons](../../actions/trigger-button) can be used:
+필터 트리거 버튼을 커스터마이징하려면, `filtersTriggerAction()` 메서드를 사용하고, 액션을 반환하는 클로저를 전달하면 됩니다. [액션 트리거 버튼 커스터마이징](../../actions/trigger-button)에 사용할 수 있는 모든 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\Action;
@@ -227,11 +227,11 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/filters/custom-trigger-action" alt="Table with custom filters trigger action" version="3.x" />
+<AutoScreenshot name="tables/filters/custom-trigger-action" alt="커스텀 필터 트리거 액션이 적용된 테이블" version="3.x" />
 
-## Table filter utility injection
+## 테이블 필터 유틸리티 주입 {#table-filter-utility-injection}
 
-The vast majority of methods used to configure filters accept functions as parameters instead of hardcoded values:
+대부분의 필터 구성 메서드는 하드코딩된 값 대신 함수형 파라미터를 허용합니다:
 
 ```php
 use App\Models\Author;
@@ -241,15 +241,15 @@ SelectFilter::make('author')
     ->options(fn (): array => Author::query()->pluck('name', 'id')->all())
 ```
 
-This alone unlocks many customization possibilities.
+이것만으로도 다양한 커스터마이징이 가능합니다.
 
-The package is also able to inject many utilities to use inside these functions, as parameters. All customization methods that accept functions as arguments can inject utilities.
+이 패키지는 또한 이러한 함수 내부에서 사용할 수 있도록 다양한 유틸리티를 파라미터로 주입할 수 있습니다. 함수형 인자를 받는 모든 커스터마이징 메서드는 유틸리티 주입이 가능합니다.
 
-These injected utilities require specific parameter names to be used. Otherwise, Filament doesn't know what to inject.
+이렇게 주입되는 유틸리티는 특정 파라미터 이름을 사용해야 합니다. 그렇지 않으면 Filament가 무엇을 주입해야 할지 알 수 없습니다.
 
-### Injecting the current filter instance
+### 현재 필터 인스턴스 주입하기 {#injecting-the-current-filter-instance}
 
-If you wish to access the current filter instance, define a `$filter` parameter:
+현재 필터 인스턴스에 접근하고 싶다면, `$filter` 파라미터를 정의하세요:
 
 ```php
 use Filament\Tables\Filters\BaseFilter;
@@ -259,9 +259,9 @@ function (BaseFilter $filter) {
 }
 ```
 
-### Injecting the current Livewire component instance
+### 현재 Livewire 컴포넌트 인스턴스 주입하기 {#injecting-the-current-livewire-component-instance}
 
-If you wish to access the current Livewire component instance that the table belongs to, define a `$livewire` parameter:
+테이블이 속한 현재 Livewire 컴포넌트 인스턴스에 접근하고 싶다면, `$livewire` 파라미터를 정의하세요:
 
 ```php
 use Filament\Tables\Contracts\HasTable;
@@ -271,9 +271,9 @@ function (HasTable $livewire) {
 }
 ```
 
-### Injecting the current table instance
+### 현재 테이블 인스턴스 주입하기 {#injecting-the-current-table-instance}
 
-If you wish to access the current table configuration instance that the filter belongs to, define a `$table` parameter:
+필터가 속한 현재 테이블 구성 인스턴스에 접근하고 싶다면, `$table` 파라미터를 정의하세요:
 
 ```php
 use Filament\Tables\Table;
@@ -283,9 +283,9 @@ function (Table $table) {
 }
 ```
 
-### Injecting multiple utilities
+### 여러 유틸리티 주입하기 {#injecting-multiple-utilities}
 
-The parameters are injected dynamically using reflection, so you are able to combine multiple parameters in any order:
+매개변수는 리플렉션을 사용하여 동적으로 주입되므로, 여러 매개변수를 어떤 순서로든 조합할 수 있습니다:
 
 ```php
 use Filament\Tables\Contracts\HasTable;
@@ -296,9 +296,9 @@ function (HasTable $livewire, Table $table) {
 }
 ```
 
-### Injecting dependencies from Laravel's container
+### 라라벨 컨테이너에서 의존성 주입하기 {#injecting-dependencies-from-laravels-container}
 
-You may inject anything from Laravel's container like normal, alongside utilities:
+유틸리티와 함께, 라라벨 컨테이너에서 평소처럼 어떤 것이든 주입할 수 있습니다:
 
 ```php
 use Filament\Tables\Table;

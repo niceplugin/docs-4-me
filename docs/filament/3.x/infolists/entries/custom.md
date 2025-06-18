@@ -1,18 +1,18 @@
 ---
-title: Custom entries
+title: 커스텀 엔트리
 ---
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [인포리스트.엔트리] 커스텀 엔트리
 
 <LaracastsBanner
-    title="Build a Custom Infolist Entry"
-    description="Watch the Build Advanced Components for Filament series on Laracasts - it will teach you how to build components, and you'll get to know all the internal tools to help you."
+    title="사용자 정의 Infolist 엔트리 만들기"
+    description="Laracasts의 Build Advanced Components for Filament 시리즈를 시청하세요. 이 시리즈는 컴포넌트 제작 방법과 내부 도구 활용법을 모두 알려줍니다."
     url="https://laracasts.com/series/build-advanced-components-for-filament/episodes/8"
     series="building-advanced-components"
 />
 
-## View entries
+## 뷰 엔트리 {#view-entries}
 
-You may render a custom view for an entry using the `view()` method:
+`view()` 메서드를 사용하여 엔트리에 대한 커스텀 뷰를 렌더링할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\ViewEntry;
@@ -21,21 +21,21 @@ ViewEntry::make('status')
     ->view('filament.infolists.entries.status-switcher')
 ```
 
-This assumes that you have a `resources/views/filament/infolists/entries/status-switcher.blade.php` file.
+이는 `resources/views/filament/infolists/entries/status-switcher.blade.php` 파일이 존재한다고 가정합니다.
 
-## Custom classes
+## 커스텀 클래스 {#custom-classes}
 
-You may create your own custom entry classes and entry views, which you can reuse across your project, and even release as a plugin to the community.
+프로젝트 전반에서 재사용하거나, 커뮤니티에 플러그인으로 배포할 수 있도록 나만의 커스텀 엔트리 클래스와 엔트리 뷰를 생성할 수 있습니다.
 
-> If you're just creating a simple custom entry to use once, you could instead use a [view entry](#view-entries) to render any custom Blade file.
+> 단 한 번만 사용할 간단한 커스텀 엔트리를 만들고 싶다면, [뷰 엔트리](#view-entries)를 사용하여 원하는 Blade 파일을 렌더링할 수 있습니다.
 
-To create a custom entry class and view, you may use the following command:
+커스텀 엔트리 클래스와 뷰를 생성하려면 다음 명령어를 사용할 수 있습니다:
 
 ```bash
 php artisan make:infolist-entry StatusSwitcher
 ```
 
-This will create the following entry class:
+이 명령어는 다음과 같은 엔트리 클래스를 생성합니다:
 
 ```php
 use Filament\Infolists\Components\Entry;
@@ -46,11 +46,11 @@ class StatusSwitcher extends Entry
 }
 ```
 
-It will also create a view file at `resources/views/filament/infolists/entries/status-switcher.blade.php`.
+또한 `resources/views/filament/infolists/entries/status-switcher.blade.php` 경로에 뷰 파일도 생성됩니다.
 
-## Accessing the state
+## 상태 접근하기 {#accessing-the-state}
 
-Inside your view, you may retrieve the state of the entry using the `$getState()` function:
+뷰 내부에서 `$getState()` 함수를 사용하여 엔트리의 상태를 가져올 수 있습니다:
 
 ```blade
 <div>
@@ -58,9 +58,9 @@ Inside your view, you may retrieve the state of the entry using the `$getState()
 </div>
 ```
 
-## Accessing the Eloquent record
+## Eloquent 레코드에 접근하기 {#accessing-the-eloquent-record}
 
-Inside your view, you may access the Eloquent record using the `$getRecord()` function:
+뷰 내부에서 `$getRecord()` 함수를 사용하여 Eloquent 레코드에 접근할 수 있습니다:
 
 ```blade
 <div>

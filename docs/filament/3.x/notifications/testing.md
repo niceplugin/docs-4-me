@@ -1,14 +1,14 @@
 ---
-title: Testing
+title: 테스트
 ---
+# [알림] 테스트
+## 개요 {#overview}
 
-## Overview
+이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성됩니다. 테스트를 위해 Pest의 Livewire 플러그인을 사용하려면 Pest 문서의 플러그인 설치 안내를 따라주세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만, 이를 PHPUnit에 쉽게 적용할 수도 있습니다.
 
-All examples in this guide will be written using [Pest](https://pestphp.com). To use Pest's Livewire plugin for testing, you can follow the installation instructions in the Pest documentation on plugins: [Livewire plugin for Pest](https://pestphp.com/docs/plugins#livewire). However, you can easily adapt this to PHPUnit.
+## 세션 알림 테스트하기 {#testing-session-notifications}
 
-## Testing session notifications
-
-To check if a notification was sent using the session, use the `assertNotified()` helper:
+세션을 사용하여 알림이 전송되었는지 확인하려면 `assertNotified()` 헬퍼를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -35,7 +35,7 @@ it('sends a notification', function () {
 });
 ```
 
-You may optionally pass a notification title to test for:
+옵션으로 알림 제목을 전달하여 테스트할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
@@ -47,7 +47,7 @@ it('sends a notification', function () {
 });
 ```
 
-Or test if the exact notification was sent:
+또는 정확히 해당 알림이 전송되었는지 테스트할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
@@ -64,7 +64,7 @@ it('sends a notification', function () {
 });
 ```
 
-Conversely, you can assert that a notification was not sent:
+반대로, 알림이 전송되지 않았는지 확인할 수도 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
@@ -73,9 +73,9 @@ use function Pest\Livewire\livewire;
 it('does not send a notification', function () {
     livewire(CreatePost::class)
         ->assertNotNotified()
-        // or
+        // 또는
         ->assertNotNotified('Unable to create post')
-        // or
+        // 또는
         ->assertNotNotified(
             Notification::make()
                 ->danger()

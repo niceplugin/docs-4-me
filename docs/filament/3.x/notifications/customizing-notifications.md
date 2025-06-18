@@ -1,18 +1,18 @@
 ---
-title: Customizing notifications
+title: 알림 커스터마이징
 ---
+# [알림] 알림 커스터마이징
+## 개요 {#overview}
 
-## Overview
+알림은 기본적으로 완전히 스타일이 적용되어 제공됩니다. 그러나 직접 스타일을 적용하거나 사용자 지정 뷰를 사용하여 알림을 렌더링하고 싶다면 여러 가지 옵션이 있습니다.
 
-Notifications come fully styled out of the box. However, if you want to apply your own styling or use a custom view to render notifications, there are multiple options.
+## 알림 스타일링 {#styling-notifications}
 
-## Styling notifications
+알림에는 자체 CSS 클래스가 있어 원하는 스타일을 적용할 수 있습니다. 브라우저에서 검사 도구를 열어 어떤 클래스를 타겟팅해야 하는지 확인하세요.
 
-Notifications have dedicated CSS classes you can hook into to apply your own styling. Open the inspector in your browser to find out which classes you need to target.
+## 알림 위치 지정 {#positioning-notifications}
 
-## Positioning notifications
-
-You can configure the alignment of the notifications in a service provider or middleware, by calling `Notifications::alignment()` and `Notifications::verticalAlignment()`. You can pass `Alignment::Start`, `Alignment::Center`, `Alignment::End`, `VerticalAlignment::Start`, `VerticalAlignment::Center` or `VerticalAlignment::End`:
+서비스 프로바이더나 미들웨어에서 `Notifications::alignment()` 및 `Notifications::verticalAlignment()`를 호출하여 알림의 정렬을 설정할 수 있습니다. `Alignment::Start`, `Alignment::Center`, `Alignment::End`, `VerticalAlignment::Start`, `VerticalAlignment::Center`, `VerticalAlignment::End` 중 하나를 전달할 수 있습니다:
 
 ```php
 use Filament\Notifications\Livewire\Notifications;
@@ -23,9 +23,9 @@ Notifications::alignment(Alignment::Start);
 Notifications::verticalAlignment(VerticalAlignment::End);
 ```
 
-## Using a custom notification view
+## 커스텀 알림 뷰 사용하기 {#using-a-custom-notification-view}
 
-If your desired customization can't be achieved using the CSS classes above, you can create a custom view to render the notification. To configure the notification view, call the static `configureUsing()` method inside a service provider's `boot()` method and specify the view to use:
+위의 CSS 클래스만으로 원하는 커스터마이징이 불가능하다면, 알림을 렌더링할 커스텀 뷰를 생성할 수 있습니다. 알림 뷰를 설정하려면 서비스 프로바이더의 `boot()` 메서드 안에서 정적 `configureUsing()` 메서드를 호출하고 사용할 뷰를 지정하세요:
 
 ```php
 use Filament\Notifications\Notification;
@@ -35,15 +35,15 @@ Notification::configureUsing(function (Notification $notification): void {
 });
 ```
 
-Next, create the view, in this example `resources/views/filament/notifications/notification.blade.php`. The view should use the package's base notification component for the notification functionality and pass the available `$notification` variable through the `notification` attribute. This is the bare minimum required to create your own notification view:
+다음으로, 이 예시에서는 `resources/views/filament/notifications/notification.blade.php`에 뷰를 생성합니다. 뷰에서는 패키지의 기본 알림 컴포넌트를 사용하여 알림 기능을 제공하고, 사용 가능한 `$notification` 변수를 `notification` 속성으로 전달해야 합니다. 아래는 커스텀 알림 뷰를 만들기 위해 필요한 최소한의 코드입니다:
 
 ```blade
 <x-filament-notifications::notification :notification="$notification">
-    {{-- Notification content --}}
+    {{-- 알림 내용 --}}
 </x-filament-notifications::notification>
 ```
 
-Getters for all notification properties will be available in the view. So, a custom notification view might look like this:
+모든 알림 속성에 대한 getter를 뷰에서 사용할 수 있습니다. 따라서 커스텀 알림 뷰는 다음과 같이 작성할 수 있습니다:
 
 ```blade
 <x-filament-notifications::notification
@@ -65,16 +65,16 @@ Getters for all notification properties will be available in the view. So, a cus
     </p>
 
     <span x-on:click="close">
-        Close
+        닫기
     </span>
 </x-filament-notifications::notification>
 ```
 
-## Using a custom notification object
+## 커스텀 알림 객체 사용하기 {#using-a-custom-notification-object}
 
-Maybe your notifications require additional functionality that's not defined in the package's `Notification` class. Then you can create your own `Notification` class, which extends the package's `Notification` class. For example, your notification design might need a size property.
+패키지의 `Notification` 클래스에 정의되지 않은 추가 기능이 알림에 필요할 수 있습니다. 이럴 때는 패키지의 `Notification` 클래스를 확장하여 직접 `Notification` 클래스를 만들 수 있습니다. 예를 들어, 알림 디자인에 size 속성이 필요할 수 있습니다.
 
-Your custom `Notification` class in `app/Notifications/Notification.php` might contain:
+`app/Notifications/Notification.php`에 있는 커스텀 `Notification` 클래스는 다음과 같을 수 있습니다:
 
 ```php
 <?php
@@ -114,7 +114,7 @@ class Notification extends BaseNotification
 }
 ```
 
-Next, you should bind your custom `Notification` class into the container inside a service provider's `register()` method:
+다음으로, 서비스 프로바이더의 `register()` 메서드 안에서 커스텀 `Notification` 클래스를 컨테이너에 바인딩해야 합니다:
 
 ```php
 use App\Notifications\Notification;
@@ -123,4 +123,4 @@ use Filament\Notifications\Notification as BaseNotification;
 $this->app->bind(BaseNotification::class, Notification::class);
 ```
 
-You can now use your custom `Notification` class in the same way as you would with the default `Notification` object.
+이제 기본 `Notification` 객체를 사용할 때와 동일하게 커스텀 `Notification` 클래스를 사용할 수 있습니다.

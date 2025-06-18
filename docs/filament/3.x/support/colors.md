@@ -1,16 +1,16 @@
 ---
-title: Colors
+title: 색상
 ---
+# [핵심개념] 색상
+## 개요 {#overview}
 
-## Overview
+Filament는 색상 팔레트를 정의하기 위해 CSS 변수를 사용합니다. 이러한 CSS 변수들은 Filament를 설치할 때 로드하는 프리셋 파일에서 Tailwind 클래스에 매핑됩니다.
 
-Filament uses CSS variables to define its color palette. These CSS variables are mapped to Tailwind classes in the preset file that you load when installing Filament.
+## 기본 색상 사용자 지정 {#customizing-the-default-colors}
 
-## Customizing the default colors
+서비스 프로바이더의 `boot()` 메서드나 미들웨어에서 `FilamentColor::register()` 메서드를 호출하여 Filament가 UI 요소에 사용하는 색상을 사용자 지정할 수 있습니다.
 
-From a service provider's `boot()` method, or middleware, you can call the `FilamentColor::register()` method, which you can use to customize which colors Filament uses for UI elements.
-
-There are 6 default colors that are used throughout Filament that you are able to customize:
+Filament 전반에서 사용되는 6가지 기본 색상을 사용자 지정할 수 있습니다:
 
 ```php
 use Filament\Support\Colors\Color;
@@ -26,13 +26,13 @@ FilamentColor::register([
 ]);
 ```
 
-The `Color` class contains every [Tailwind CSS color](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) to choose from.
+`Color` 클래스에는 선택할 수 있는 모든 [Tailwind CSS 색상](https://tailwindcss.com/docs/customizing-colors#color-palette-reference)이 포함되어 있습니다.
 
-You can also pass in a function to `register()` which will only get called when the app is getting rendered. This is useful if you are calling `register()` from a service provider, and want to access objects like the currently authenticated user, which are initialized later in middleware.
+또한 `register()`에 함수를 전달할 수도 있는데, 이 함수는 앱이 렌더링될 때만 호출됩니다. 이는 서비스 프로바이더에서 `register()`를 호출하면서, 미들웨어에서 나중에 초기화되는 현재 인증된 사용자와 같은 객체에 접근하고 싶을 때 유용합니다.
 
-## Using a non-Tailwind color
+## Tailwind이 아닌 색상 사용하기 {#using-a-non-tailwind-color}
 
-You can use custom colors that are not included in the [Tailwind CSS color](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) palette by passing an array of color shades from `50` to `950` in RGB format:
+[Tailwind CSS 색상](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) 팔레트에 포함되지 않은 커스텀 색상을 사용할 수 있습니다. 이때 `50`부터 `950`까지의 색상 음영을 RGB 형식의 배열로 전달하면 됩니다:
 
 ```php
 use Filament\Support\Facades\FilamentColor;
@@ -54,9 +54,9 @@ FilamentColor::register([
 ]);
 ```
 
-### Generating a custom color from a hex code
+### 16진수 코드에서 사용자 지정 색상 생성하기 {#generating-a-custom-color-from-a-hex-code}
 
-You can use the `Color::hex()` method to generate a custom color palette from a hex code:
+`Color::hex()` 메서드를 사용하여 16진수 코드에서 사용자 지정 색상 팔레트를 생성할 수 있습니다:
 
 ```php
 use Filament\Support\Colors\Color;
@@ -67,9 +67,9 @@ FilamentColor::register([
 ]);
 ```
 
-### Generating a custom color from an RGB value
+### RGB 값에서 사용자 지정 색상 생성하기 {#generating-a-custom-color-from-an-rgb-value}
 
-You can use the `Color::rgb()` method to generate a custom color palette from an RGB value:
+`Color::rgb()` 메서드를 사용하여 RGB 값에서 사용자 지정 색상 팔레트를 생성할 수 있습니다:
 
 ```php
 use Filament\Support\Colors\Color;
@@ -80,9 +80,9 @@ FilamentColor::register([
 ]);
 ```
 
-## Registering extra colors
+## 추가 색상 등록하기 {#registering-extra-colors}
 
-You can register extra colors that you can use throughout Filament:
+Filament 전역에서 사용할 수 있는 추가 색상을 등록할 수 있습니다:
 
 ```php
 use Filament\Support\Colors\Color;
@@ -93,4 +93,4 @@ FilamentColor::register([
 ]);
 ```
 
-Now, you can use this color anywhere you would normally add `primary`, `danger`, etc.
+이제, 기존에 `primary`, `danger` 등을 사용하는 곳 어디에서나 이 색상을 사용할 수 있습니다.

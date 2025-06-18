@@ -1,33 +1,17 @@
 ---
-title: Empty state
+title: 비어 있는 상태
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [테이블] 비어 있는 상태
 
-## Overview
+## 개요 {#overview}
 
-The table's "empty state" is rendered when there are no rows in the table.
+테이블에 행이 없을 때 "빈 상태(empty state)"가 렌더링됩니다.
 
-<AutoScreenshot name="tables/empty-state" alt="Table with empty state" version="3.x" />
+<AutoScreenshot name="tables/empty-state" alt="빈 상태의 테이블" version="3.x" />
 
-## Setting the empty state heading
+## 비어 있는 상태의 헤딩 설정하기 {#setting-the-empty-state-heading}
 
-To customize the heading of the empty state, use the `emptyStateHeading()` method:
-
-```php
-use Filament\Tables\Table;
-
-public function table(Table $table): Table
-{
-    return $table
-        ->emptyStateHeading('No posts yet');
-}
-```
-
-<AutoScreenshot name="tables/empty-state-heading" alt="Table with customized empty state heading" version="3.x" />
-
-## Setting the empty state description
-
-To customize the description of the empty state, use the `emptyStateDescription()` method:
+비어 있는 상태의 헤딩을 커스터마이즈하려면 `emptyStateHeading()` 메서드를 사용하세요:
 
 ```php
 use Filament\Tables\Table;
@@ -35,15 +19,31 @@ use Filament\Tables\Table;
 public function table(Table $table): Table
 {
     return $table
-        ->emptyStateDescription('Once you write your first post, it will appear here.');
+        ->emptyStateHeading('아직 게시물이 없습니다');
 }
 ```
 
-<AutoScreenshot name="tables/empty-state-description" alt="Table with empty state description" version="3.x" />
+<AutoScreenshot name="tables/empty-state-heading" alt="커스터마이즈된 비어 있는 상태 헤딩이 있는 테이블" version="3.x" />
 
-## Setting the empty state icon
+## 비어 있는 상태 설명 설정하기 {#setting-the-empty-state-description}
 
-To customize the [icon](https://blade-ui-kit.com/blade-icons?set=1#search) of the empty state, use the `emptyStateIcon()` method:
+비어 있는 상태의 설명을 사용자 정의하려면 `emptyStateDescription()` 메서드를 사용하세요:
+
+```php
+use Filament\Tables\Table;
+
+public function table(Table $table): Table
+{
+    return $table
+        ->emptyStateDescription('첫 번째 게시글을 작성하면 여기에 표시됩니다.');
+}
+```
+
+<AutoScreenshot name="tables/empty-state-description" alt="비어 있는 상태 설명이 있는 테이블" version="3.x" />
+
+## 비어 있는 상태 아이콘 설정하기 {#setting-the-empty-state-icon}
+
+비어 있는 상태의 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 커스터마이즈하려면 `emptyStateIcon()` 메서드를 사용하세요:
 
 ```php
 use Filament\Tables\Table;
@@ -55,11 +55,11 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/empty-state-icon" alt="Table with customized empty state icon" version="3.x" />
+<AutoScreenshot name="tables/empty-state-icon" alt="커스텀된 비어 있는 상태 아이콘이 있는 테이블" version="3.x" />
 
-## Adding empty state actions
+## 비어 있는 상태에 액션 추가하기 {#adding-empty-state-actions}
 
-You can add [Actions](actions) to the empty state to prompt users to take action. Pass these to the `emptyStateActions()` method:
+사용자에게 조치를 취하도록 유도하기 위해 비어 있는 상태에 [액션](actions)을 추가할 수 있습니다. 이 액션들은 `emptyStateActions()` 메서드에 전달합니다:
 
 ```php
 use Filament\Tables\Actions\Action;
@@ -70,7 +70,7 @@ public function table(Table $table): Table
     return $table
         ->emptyStateActions([
             Action::make('create')
-                ->label('Create post')
+                ->label('게시글 생성')
                 ->url(route('posts.create'))
                 ->icon('heroicon-m-plus')
                 ->button(),
@@ -78,11 +78,11 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/empty-state-actions" alt="Table with empty state actions" version="3.x" />
+<AutoScreenshot name="tables/empty-state-actions" alt="비어 있는 상태 액션이 있는 테이블" version="3.x" />
 
-## Using a custom empty state view
+## 커스텀 빈 상태 뷰 사용하기 {#using-a-custom-empty-state-view}
 
-You may use a completely custom empty state view by passing it to the `emptyState()` method:
+`emptyState()` 메서드에 완전히 커스텀한 빈 상태 뷰를 전달하여 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\Action;

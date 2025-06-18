@@ -1,20 +1,20 @@
 ---
-title: Button Blade component
+title: 버튼 Blade 컴포넌트
 ---
+# [핵심개념.Blade컴포넌트] button
+## 개요 {#overview}
 
-## Overview
-
-The button component is used to render a clickable button that can perform an action:
+버튼 컴포넌트는 클릭 가능한 버튼을 렌더링하여 동작을 수행할 때 사용됩니다:
 
 ```blade
 <x-filament::button wire:click="openNewUserModal">
-    New user
+    새 사용자
 </x-filament::button>
 ```
 
-## Using a button as an anchor link
+## 버튼을 앵커 링크로 사용하기 {#using-a-button-as-an-anchor-link}
 
-By default, a button's underlying HTML tag is `<button>`. You can change it to be an `<a>` tag by using the `tag` attribute:
+기본적으로 버튼의 하위 HTML 태그는 `<button>`입니다. `tag` 속성을 사용하여 `<a>` 태그로 변경할 수 있습니다:
 
 ```blade
 <x-filament::button
@@ -25,9 +25,9 @@ By default, a button's underlying HTML tag is `<button>`. You can change it to b
 </x-filament::button>
 ```
 
-## Setting the size of a button
+## 버튼 크기 설정하기 {#setting-the-size-of-a-button}
 
-By default, the size of a button is "medium". You can make it "extra small", "small", "large" or "extra large" by using the `size` attribute:
+기본적으로 버튼의 크기는 "medium"입니다. `size` 속성을 사용하여 "extra small", "small", "large", "extra large"로 변경할 수 있습니다:
 
 ```blade
 <x-filament::button size="xs">
@@ -47,9 +47,9 @@ By default, the size of a button is "medium". You can make it "extra small", "sm
 </x-filament::button>
 ```
 
-## Changing the color of a button
+## 버튼 색상 변경하기 {#changing-the-color-of-a-button}
 
-By default, the color of a button is "primary". You can change it to be `danger`, `gray`, `info`, `success` or `warning` by using the `color` attribute:
+기본적으로 버튼의 색상은 "primary"입니다. `color` 속성을 사용하여 `danger`, `gray`, `info`, `success`, `warning` 중 하나로 변경할 수 있습니다:
 
 ```blade
 <x-filament::button color="danger">
@@ -73,9 +73,9 @@ By default, the color of a button is "primary". You can change it to be `danger`
 </x-filament::button>
 ```
 
-## Adding an icon to a button
+## 버튼에 아이콘 추가하기 {#adding-an-icon-to-a-button}
 
-You can add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to a button by using the `icon` attribute:
+`icon` 속성을 사용하여 버튼에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 추가할 수 있습니다:
 
 ```blade
 <x-filament::button icon="heroicon-m-sparkles">
@@ -83,7 +83,7 @@ You can add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to a bu
 </x-filament::button>
 ```
 
-You can also change the icon's position to be after the text instead of before it, using the `icon-position` attribute:
+또한, `icon-position` 속성을 사용하여 아이콘의 위치를 텍스트 뒤로 변경할 수도 있습니다:
 
 ```blade
 <x-filament::button
@@ -94,9 +94,9 @@ You can also change the icon's position to be after the text instead of before i
 </x-filament::button>
 ```
 
-## Making a button outlined
+## 버튼을 아웃라인 형태로 만들기 {#making-a-button-outlined}
 
-You can make a button use an "outlined" design using the `outlined` attribute:
+`outlined` 속성을 사용하여 버튼을 "아웃라인" 디자인으로 만들 수 있습니다:
 
 ```blade
 <x-filament::button outlined>
@@ -104,9 +104,9 @@ You can make a button use an "outlined" design using the `outlined` attribute:
 </x-filament::button>
 ```
 
-## Adding a tooltip to a button
+## 버튼에 툴팁 추가하기 {#adding-a-tooltip-to-a-button}
 
-You can add a tooltip to a button by using the `tooltip` attribute:
+`tooltip` 속성을 사용하여 버튼에 툴팁을 추가할 수 있습니다:
 
 ```blade
 <x-filament::button tooltip="Register a user">
@@ -114,26 +114,26 @@ You can add a tooltip to a button by using the `tooltip` attribute:
 </x-filament::button>
 ```
 
-## Adding a badge to a button
+## 버튼에 배지 추가하기 {#adding-a-badge-to-a-button}
 
-You can render a [badge](badge) on top of a button by using the `badge` slot:
+`badge` 슬롯을 사용하여 버튼 위에 [배지](badge)를 렌더링할 수 있습니다:
 
 ```blade
 <x-filament::button>
-    Mark notifications as read
-    
+    알림을 읽음으로 표시
+
     <x-slot name="badge">
         3
     </x-slot>
 </x-filament::button>
 ```
 
-You can [change the color](badge#changing-the-color-of-the-badge) of the badge using the `badge-color` attribute:
+`badge-color` 속성을 사용하여 배지의 [색상을 변경](badge#changing-the-color-of-the-badge)할 수 있습니다:
 
 ```blade
 <x-filament::button badge-color="danger">
-    Mark notifications as read
-    
+    알림을 읽음으로 표시
+
     <x-slot name="badge">
         3
     </x-slot>

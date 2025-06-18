@@ -1,16 +1,16 @@
 ---
-title: Testing
+title: 테스트
 ---
+# [인포리스트] 테스트
+## 개요 {#overview}
 
-## Overview
+이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성됩니다. Pest의 Livewire 플러그인을 테스트에 사용하려면, Pest 문서의 플러그인 설치 안내를 따라주세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만, 이를 PHPUnit에 맞게 쉽게 변환할 수 있습니다.
 
-All examples in this guide will be written using [Pest](https://pestphp.com). To use Pest's Livewire plugin for testing, you can follow the installation instructions in the Pest documentation on plugins: [Livewire plugin for Pest](https://pestphp.com/docs/plugins#livewire). However, you can easily adapt this to PHPUnit.
+Infolist Builder는 Livewire 컴포넌트에서 동작하므로, [Livewire 테스트 헬퍼](https://livewire.laravel.com/docs/testing)를 사용할 수 있습니다. 하지만, 인포리스트에서 사용할 수 있는 커스텀 테스트 헬퍼도 제공합니다.
 
-Since the Infolist Builder works on Livewire components, you can use the [Livewire testing helpers](https://livewire.laravel.com/docs/testing). However, we have custom testing helpers that you can use with infolists:
+## 액션 {#actions}
 
-## Actions
-
-You can call an action by passing its infolist component key, and then the name of the action to `callInfolistAction()`:
+액션을 호출하려면 인포리스트 컴포넌트 키와 액션 이름을 `callInfolistAction()`에 전달하면 됩니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -28,7 +28,7 @@ it('can send invoices', function () {
 });
 ```
 
-To pass an array of data into an action, use the `data` parameter:
+액션에 데이터 배열을 전달하려면 `data` 파라미터를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -50,7 +50,7 @@ it('can send invoices', function () {
 });
 ```
 
-If you ever need to only set an action's data without immediately calling it, you can use `setInfolistActionData()`:
+액션을 즉시 호출하지 않고 데이터만 설정해야 할 경우, `setInfolistActionData()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -68,14 +68,14 @@ it('can send invoices', function () {
 });
 ```
 
-### Execution
+### 실행 {#execution}
 
-To check if an action has been halted, you can use `assertInfolistActionHalted()`:
+액션이 중단되었는지 확인하려면 `assertInfolistActionHalted()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('stops sending if invoice has no email address', function () {
+it('송장에 이메일 주소가 없으면 전송을 중단한다', function () {
     $invoice = Invoice::factory(['email' => null])->create();
 
     livewire(EditInvoice::class, [
@@ -86,11 +86,11 @@ it('stops sending if invoice has no email address', function () {
 });
 ```
 
-### Errors
+### 오류 {#errors}
 
-`assertHasNoInfolistActionErrors()` is used to assert that no validation errors occurred when submitting the action form.
+`assertHasNoInfolistActionErrors()`는 액션 폼을 제출할 때 검증 오류가 발생하지 않았는지 확인하는 데 사용됩니다.
 
-To check if a validation error has occurred with the data, use `assertHasInfolistActionErrors()`, similar to `assertHasErrors()` in Livewire:
+데이터에 검증 오류가 발생했는지 확인하려면, Livewire의 `assertHasErrors()`와 유사하게 `assertHasInfolistActionErrors()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -108,7 +108,7 @@ it('can validate invoice recipient email', function () {
 });
 ```
 
-To check if an action is pre-filled with data, you can use the `assertInfolistActionDataSet()` method:
+액션이 데이터로 미리 채워져 있는지 확인하려면 `assertInfolistActionDataSet()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -133,14 +133,14 @@ it('can send invoices to the primary contact by default', function () {
 });
 ```
 
-### Action state
+### 액션 상태 {#action-state}
 
-To ensure that an action exists or doesn't in an infolist, you can use the `assertInfolistActionExists()` or  `assertInfolistActionDoesNotExist()` method:
+인포리스트에 액션이 존재하는지 또는 존재하지 않는지 확인하려면 `assertInfolistActionExists()` 또는 `assertInfolistActionDoesNotExist()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can send but not unsend invoices', function () {
+it('송장은 보낼 수 있지만, 다시 보내지는 못한다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -151,12 +151,12 @@ it('can send but not unsend invoices', function () {
 });
 ```
 
-To ensure an action is hidden or visible for a user, you can use the `assertInfolistActionHidden()` or `assertInfolistActionVisible()` methods:
+사용자에게 액션이 숨겨져 있거나 보이는지 확인하려면 `assertInfolistActionHidden()` 또는 `assertInfolistActionVisible()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can only print customers', function () {
+it('고객만 인쇄할 수 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -167,12 +167,12 @@ it('can only print customers', function () {
 });
 ```
 
-To ensure an action is enabled or disabled for a user, you can use the `assertInfolistActionEnabled()` or `assertInfolistActionDisabled()` methods:
+사용자에게 액션이 활성화되어 있거나 비활성화되어 있는지 확인하려면 `assertInfolistActionEnabled()` 또는 `assertInfolistActionDisabled()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can only print a customer for a sent invoice', function () {
+it('보낸 송장에 대해서만 고객을 인쇄할 수 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -183,12 +183,12 @@ it('can only print a customer for a sent invoice', function () {
 });
 ```
 
-To check if an action is hidden to a user, you can use the `assertInfolistActionHidden()` method:
+사용자에게 액션이 숨겨져 있는지 확인하려면 `assertInfolistActionHidden()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can not send invoices', function () {
+it('송장을 보낼 수 없다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -198,14 +198,14 @@ it('can not send invoices', function () {
 });
 ```
 
-### Button appearance
+### 버튼 모양 {#button-appearance}
 
-To ensure an action has the correct label, you can use `assertInfolistActionHasLabel()` and `assertInfolistActionDoesNotHaveLabel()`:
+액션에 올바른 라벨이 있는지 확인하려면 `assertInfolistActionHasLabel()`과 `assertInfolistActionDoesNotHaveLabel()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('send action has correct label', function () {
+it('send 액션에 올바른 라벨이 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -216,12 +216,12 @@ it('send action has correct label', function () {
 });
 ```
 
-To ensure an action's button is showing the correct icon, you can use `assertInfolistActionHasIcon()` or `assertInfolistActionDoesNotHaveIcon()`:
+액션 버튼이 올바른 아이콘을 표시하는지 확인하려면 `assertInfolistActionHasIcon()` 또는 `assertInfolistActionDoesNotHaveIcon()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('when enabled the send button has correct icon', function () {
+it('활성화 시 send 버튼에 올바른 아이콘이 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -233,12 +233,12 @@ it('when enabled the send button has correct icon', function () {
 });
 ```
 
-To ensure that an action's button is displaying the right color, you can use `assertInfolistActionHasColor()` or `assertInfolistActionDoesNotHaveColor()`:
+액션 버튼이 올바른 색상을 표시하는지 확인하려면 `assertInfolistActionHasColor()` 또는 `assertInfolistActionDoesNotHaveColor()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('actions display proper colors', function () {
+it('액션이 올바른 색상을 표시한다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -249,14 +249,14 @@ it('actions display proper colors', function () {
 });
 ```
 
-### URL
+### URL {#url}
 
-To ensure an action has the correct URL, you can use `assertInfolistActionHasUrl()`, `assertInfolistActionDoesNotHaveUrl()`, `assertInfolistActionShouldOpenUrlInNewTab()`, and `assertInfolistActionShouldNotOpenUrlInNewTab()`:
+액션이 올바른 URL을 가지는지 확인하려면 `assertInfolistActionHasUrl()`, `assertInfolistActionDoesNotHaveUrl()`, `assertInfolistActionShouldOpenUrlInNewTab()`, `assertInfolistActionShouldNotOpenUrlInNewTab()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('links to the correct Filament sites', function () {
+it('올바른 Filament 사이트로 연결되는지 확인합니다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [

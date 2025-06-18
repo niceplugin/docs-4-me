@@ -1,13 +1,13 @@
 ---
-title: Color picker
+title: ColorPicker
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [폼.필드] ColorPicker
 
-## Overview
+## 개요 {#overview}
 
-The color picker component allows you to pick a color in a range of formats.
+컬러 피커 컴포넌트는 다양한 형식으로 색상을 선택할 수 있게 해줍니다.
 
-By default, the component uses HEX format:
+기본적으로, 이 컴포넌트는 HEX 형식을 사용합니다:
 
 ```php
 use Filament\Forms\Components\ColorPicker;
@@ -15,11 +15,11 @@ use Filament\Forms\Components\ColorPicker;
 ColorPicker::make('color')
 ```
 
-<AutoScreenshot name="forms/fields/color-picker/simple" alt="Color picker" version="3.x" />
+<AutoScreenshot name="forms/fields/color-picker/simple" alt="컬러 피커" version="3.x" />
 
-## Setting the color format
+## 색상 형식 설정 {#setting-the-color-format}
 
-While HEX format is used by default, you can choose which color format to use:
+기본적으로 HEX 형식이 사용되지만, 사용할 색상 형식을 선택할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\ColorPicker;
@@ -34,9 +34,9 @@ ColorPicker::make('rgba_color')
     ->rgba()
 ```
 
-## Color picker validation
+## ColorPicker 유효성 검사 {#color-picker-validation}
 
-You may use Laravel's validation rules to validate the values of the color picker:
+ColorPicker의 값을 검증하기 위해 Laravel의 유효성 검사 규칙을 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\ColorPicker;

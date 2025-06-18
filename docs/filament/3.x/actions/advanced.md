@@ -1,10 +1,10 @@
 ---
-title: Advanced actions
+title: 고급 액션
 ---
+# [액션] 고급 액션
+## 액션 유틸리티 주입 {#action-utility-injection}
 
-## Action utility injection
-
-The vast majority of methods used to configure actions accept functions as parameters instead of hardcoded values:
+대부분의 액션 설정 메서드는 하드코딩된 값 대신 함수(클로저)를 파라미터로 받습니다:
 
 ```php
 Action::make('edit')
@@ -12,15 +12,15 @@ Action::make('edit')
     ->url(fn (): string => route('posts.edit', ['post' => $this->post]))
 ```
 
-This alone unlocks many customization possibilities.
+이것만으로도 다양한 커스터마이징이 가능합니다.
 
-The package is also able to inject many utilities to use inside these functions, as parameters. All customization methods that accept functions as arguments can inject utilities.
+이 패키지는 또한 이러한 함수 내부에서 사용할 수 있는 다양한 유틸리티를 파라미터로 주입할 수 있습니다. 함수형 인자를 받는 모든 커스터마이징 메서드는 유틸리티 주입이 가능합니다.
 
-These injected utilities require specific parameter names to be used. Otherwise, Filament doesn't know what to inject.
+이렇게 주입되는 유틸리티들은 특정 파라미터 이름을 사용해야 합니다. 그렇지 않으면 Filament가 무엇을 주입해야 하는지 알 수 없습니다.
 
-### Injecting the current modal form data
+### 현재 모달 폼 데이터 주입하기 {#injecting-the-current-modal-form-data}
 
-If you wish to access the current [modal form data](modals#modal-forms), define a `$data` parameter:
+현재 [모달 폼 데이터](modals#modal-forms)에 접근하고 싶다면, `$data` 파라미터를 정의하세요:
 
 ```php
 function (array $data) {
@@ -28,11 +28,11 @@ function (array $data) {
 }
 ```
 
-Be aware that this will be empty if the modal has not been submitted yet.
+모달이 아직 제출되지 않았다면 이 값이 비어 있을 수 있다는 점에 유의하세요.
 
-### Injecting the current arguments
+### 현재 인자 주입하기 {#injecting-the-current-arguments}
 
-If you wish to access the [current arguments](adding-an-action-to-a-livewire-component#passing-action-arguments) that have been passed to the action, define an `$arguments` parameter:
+액션에 전달된 [현재 인자](adding-an-action-to-a-livewire-component#passing-action-arguments)에 접근하고 싶다면, `$arguments` 파라미터를 정의하세요:
 
 ```php
 function (array $arguments) {
@@ -40,9 +40,9 @@ function (array $arguments) {
 }
 ```
 
-### Injecting the current Livewire component instance
+### 현재 Livewire 컴포넌트 인스턴스 주입하기 {#injecting-the-current-livewire-component-instance}
 
-If you wish to access the current Livewire component instance that the action belongs to, define a `$livewire` parameter:
+액션이 속한 현재 Livewire 컴포넌트 인스턴스에 접근하고 싶다면, `$livewire` 파라미터를 정의하세요:
 
 ```php
 use Livewire\Component;
@@ -52,9 +52,9 @@ function (Component $livewire) {
 }
 ```
 
-### Injecting the current action instance
+### 현재 액션 인스턴스 주입하기 {#injecting-the-current-action-instance}
 
-If you wish to access the current action instance, define a `$action` parameter:
+현재 액션 인스턴스에 접근하고 싶다면, `$action` 파라미터를 정의하세요:
 
 ```php
 function (Action $action) {
@@ -62,9 +62,9 @@ function (Action $action) {
 }
 ```
 
-### Injecting multiple utilities
+### 여러 유틸리티 주입하기 {#injecting-multiple-utilities}
 
-The parameters are injected dynamically using reflection, so you are able to combine multiple parameters in any order:
+매개변수는 리플렉션을 사용하여 동적으로 주입되므로, 여러 매개변수를 어떤 순서로든 조합할 수 있습니다:
 
 ```php
 use Livewire\Component;
@@ -74,9 +74,9 @@ function (array $arguments, Component $livewire) {
 }
 ```
 
-### Injecting dependencies from Laravel's container
+### 라라벨 컨테이너에서 의존성 주입하기 {#injecting-dependencies-from-laravels-container}
 
-You may inject anything from Laravel's container like normal, alongside utilities:
+유틸리티와 함께, 라라벨 컨테이너에서 평소처럼 어떤 것이든 주입할 수 있습니다:
 
 ```php
 use Illuminate\Http\Request;

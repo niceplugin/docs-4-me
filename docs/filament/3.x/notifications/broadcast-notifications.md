@@ -1,20 +1,20 @@
 ---
-title: Broadcast notifications
+title: 브로드캐스트 알림
 ---
+# [알림] 브로드캐스트 알림
+## 개요 {#overview}
 
-## Overview
+> 시작하려면, 패키지가 [설치](installation)되어 있는지 확인하세요. `@livewire('notifications')`가 Blade 레이아웃 어딘가에 포함되어 있어야 합니다.
 
-> To start, make sure the package is [installed](installation) - `@livewire('notifications')` should be in your Blade layout somewhere.
+기본적으로 Filament는 Laravel 세션을 통해 플래시 알림을 전송합니다. 하지만 알림이 실시간으로 사용자에게 "브로드캐스트"되길 원할 수도 있습니다. 예를 들어, 큐에 등록된 작업이 처리 완료된 후 임시 성공 알림을 전송하는 데 사용할 수 있습니다.
 
-By default, Filament will send flash notifications via the Laravel session. However, you may wish that your notifications are "broadcast" to a user in real-time, instead. This could be used to send a temporary success notification from a queued job after it has finished processing.
+우리는 [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation)와의 네이티브 통합을 제공합니다. Echo가 설치되어 있는지, 그리고 [서버 사이드 웹소켓 통합](https://laravel.com/docs/broadcasting#server-side-installation) 예를 들어 Pusher와 같은 것이 설치되어 있는지 확인하세요.
 
-We have a native integration with [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation). Make sure Echo is installed, as well as a [server-side websockets integration](https://laravel.com/docs/broadcasting#server-side-installation) like Pusher.
+## 브로드캐스트 알림 보내기 {#sending-broadcast-notifications}
 
-## Sending broadcast notifications
+상황에 따라 여러 가지 방법으로 브로드캐스트 알림을 보낼 수 있습니다.
 
-There are several ways to send broadcast notifications, depending on which one suits you best.
-
-You may use our fluent API:
+다음과 같이 플루언트 API를 사용할 수 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
@@ -22,11 +22,11 @@ use Filament\Notifications\Notification;
 $recipient = auth()->user();
 
 Notification::make()
-    ->title('Saved successfully')
+    ->title('저장에 성공했습니다')
     ->broadcast($recipient);
 ```
 
-Or, use the `notify()` method:
+또는, `notify()` 메서드를 사용할 수도 있습니다:
 
 ```php
 use Filament\Notifications\Notification;
@@ -35,12 +35,12 @@ $recipient = auth()->user();
 
 $recipient->notify(
     Notification::make()
-        ->title('Saved successfully')
+        ->title('저장에 성공했습니다')
         ->toBroadcast(),
 )
 ```
 
-Alternatively, use a traditional [Laravel notification class](https://laravel.com/docs/notifications#generating-notifications) by returning the notification from the `toBroadcast()` method:
+또는, 전통적인 [Laravel 알림 클래스](https://laravel.com/docs/notifications#generating-notifications)를 사용하여 `toBroadcast()` 메서드에서 알림을 반환할 수도 있습니다:
 
 ```php
 use App\Models\User;
@@ -50,7 +50,7 @@ use Illuminate\Notifications\Messages\BroadcastMessage;
 public function toBroadcast(User $notifiable): BroadcastMessage
 {
     return Notification::make()
-        ->title('Saved successfully')
+        ->title('저장에 성공했습니다')
         ->getBroadcastMessage();
 }
 ```

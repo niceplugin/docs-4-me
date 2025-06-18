@@ -1,42 +1,42 @@
 ---
-title: Tabs Blade component
+title: 탭스 블레이드 컴포넌트
 ---
+# [핵심개념.Blade컴포넌트] tabs
+## 개요 {#overview}
 
-## Overview
-
-The tabs component allows you to render a set of tabs, which can be used to toggle between multiple sections of content:
+탭 컴포넌트는 여러 콘텐츠 섹션 간을 전환할 수 있는 탭 집합을 렌더링할 수 있게 해줍니다:
 
 ```blade
 <x-filament::tabs label="Content tabs">
     <x-filament::tabs.item>
-        Tab 1
+        탭 1
     </x-filament::tabs.item>
 
     <x-filament::tabs.item>
-        Tab 2
+        탭 2
     </x-filament::tabs.item>
 
     <x-filament::tabs.item>
-        Tab 3
+        탭 3
     </x-filament::tabs.item>
 </x-filament::tabs>
 ```
 
-## Triggering the active state of the tab
+## 탭의 활성 상태 트리거하기 {#triggering-the-active-state-of-the-tab}
 
-By default, tabs do not appear "active". To make a tab appear active, you can use the `active` attribute:
+기본적으로 탭은 "활성" 상태로 표시되지 않습니다. 탭을 활성 상태로 보이게 하려면 `active` 속성을 사용할 수 있습니다:
 
 ```blade
 <x-filament::tabs>
     <x-filament::tabs.item active>
-        Tab 1
+        탭 1
     </x-filament::tabs.item>
 
-    {{-- Other tabs --}}
+    {{-- 다른 탭들 --}}
 </x-filament::tabs>
 ```
 
-You can also use the `active` attribute to make a tab appear active conditionally:
+또한 `active` 속성을 사용하여 조건부로 탭을 활성 상태로 만들 수 있습니다:
 
 ```blade
 <x-filament::tabs>
@@ -44,14 +44,14 @@ You can also use the `active` attribute to make a tab appear active conditionall
         :active="$activeTab === 'tab1'"
         wire:click="$set('activeTab', 'tab1')"
     >
-        Tab 1
+        탭 1
     </x-filament::tabs.item>
 
-    {{-- Other tabs --}}
+    {{-- 다른 탭들 --}}
 </x-filament::tabs>
 ```
 
-Or you can use the `alpine-active` attribute to make a tab appear active conditionally using Alpine.js:
+또는 Alpine.js를 사용하여 `alpine-active` 속성으로 조건부로 탭을 활성 상태로 만들 수도 있습니다:
 
 ```blade
 <x-filament::tabs x-data="{ activeTab: 'tab1' }">
@@ -59,30 +59,30 @@ Or you can use the `alpine-active` attribute to make a tab appear active conditi
         alpine-active="activeTab === 'tab1'"
         x-on:click="activeTab = 'tab1'"
     >
-        Tab 1
+        탭 1
     </x-filament::tabs.item>
 
-    {{-- Other tabs --}}
+    {{-- 다른 탭들 --}}
 </x-filament::tabs>
 ```
 
-## Setting a tab icon
+## 탭 아이콘 설정하기 {#setting-a-tab-icon}
 
-Tabs may have an [icon](https://blade-ui-kit.com/blade-icons?set=1#search), which you can set using the `icon` attribute:
+탭에는 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 사용할 수 있으며, `icon` 속성을 사용하여 설정할 수 있습니다:
 
 ```blade
 <x-filament::tabs>
     <x-filament::tabs.item icon="heroicon-m-bell">
-        Notifications
+        알림
     </x-filament::tabs.item>
 
-    {{-- Other tabs --}}
+    {{-- 다른 탭들 --}}
 </x-filament::tabs>
 ```
 
-### Setting the tab icon position
+### 탭 아이콘 위치 설정 {#setting-the-tab-icon-position}
 
-The icon of the tab may be positioned before or after the label using the `icon-position` attribute:
+탭의 아이콘은 `icon-position` 속성을 사용하여 라벨 앞이나 뒤에 위치시킬 수 있습니다:
 
 ```blade
 <x-filament::tabs>
@@ -90,34 +90,34 @@ The icon of the tab may be positioned before or after the label using the `icon-
         icon="heroicon-m-bell"
         icon-position="after"
     >
-        Notifications
+        알림
     </x-filament::tabs.item>
 
-    {{-- Other tabs --}}
+    {{-- 다른 탭들 --}}
 </x-filament::tabs>
 ```
 
-## Setting a tab badge
+## 탭 배지 설정하기 {#setting-a-tab-badge}
 
-Tabs may have a [badge](badge), which you can set using the `badge` slot:
+탭에는 [배지](badge)를 추가할 수 있으며, `badge` 슬롯을 사용하여 설정할 수 있습니다:
 
 ```blade
 <x-filament::tabs>
     <x-filament::tabs.item>
-        Notifications
+        알림
 
         <x-slot name="badge">
             5
         </x-slot>
     </x-filament::tabs.item>
 
-    {{-- Other tabs --}}
+    {{-- 다른 탭들 --}}
 </x-filament::tabs>
 ```
 
-## Using a tab as an anchor link
+## 탭을 앵커 링크로 사용하기 {#using-a-tab-as-an-anchor-link}
 
-By default, a tab's underlying HTML tag is `<button>`. You can change it to be an `<a>` tag by using the `tag` attribute:
+기본적으로 탭의 하위 HTML 태그는 `<button>`입니다. `tag` 속성을 사용하여 `<a>` 태그로 변경할 수 있습니다:
 
 ```blade
 <x-filament::tabs>
@@ -128,6 +128,6 @@ By default, a tab's underlying HTML tag is `<button>`. You can change it to be a
         Notifications
     </x-filament::tabs.item>
 
-    {{-- Other tabs --}}
+    {{-- 다른 탭들 --}}
 </x-filament::tabs>
 ```

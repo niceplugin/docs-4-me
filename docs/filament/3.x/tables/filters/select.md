@@ -1,12 +1,12 @@
 ---
-title: Select filters
+title: SelectFilter
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [테이블.필터] SelectFilter
 
-## Overview
 
-Often, you will want to use a [select field](../../forms/fields/select) instead of a checkbox. This is especially true when you want to filter a column based on a set of pre-defined options that the user can choose from. To do this, you can create a filter using the `SelectFilter` class:
+## 개요 {#overview}
+
+종종 [선택 필드](../../forms/fields/select)를 체크박스 대신 사용하고 싶을 때가 있습니다. 특히 사용자가 선택할 수 있는 미리 정의된 옵션 집합을 기반으로 컬럼을 필터링하려는 경우에 그렇습니다. 이를 위해 `SelectFilter` 클래스를 사용하여 필터를 생성할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;
@@ -19,11 +19,11 @@ SelectFilter::make('status')
     ])
 ```
 
-The `options()` that are passed to the filter are the same as those that are passed to the [select field](../../forms/fields/select).
+필터에 전달되는 `options()`는 [선택 필드](../../forms/fields/select)에 전달되는 것과 동일합니다.
 
-## Customizing the column used by a select filter
+## SelectFilter에서 사용되는 컬럼 커스터마이징하기 {#customizing-the-column-used-by-a-select-filter}
 
-Select filters do not require a custom `query()` method. The column name used to scope the query is the name of the filter. To customize this, you may use the `attribute()` method:
+SelectFilter는 커스텀 `query()` 메서드를 필요로 하지 않습니다. 쿼리에 사용되는 컬럼명은 필터의 이름과 동일합니다. 이를 커스터마이즈하려면 `attribute()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;
@@ -37,9 +37,9 @@ SelectFilter::make('status')
     ->attribute('status_id')
 ```
 
-## Multi-select filters
+## 다중 선택 필터 {#multi-select-filters}
 
-These allow the user to select multiple options to apply the filter to their table. For example, a status filter may present the user with a few status options to pick from and filter the table using. When the user selects multiple options, the table will be filtered to show records that match any of the selected options. You can enable this behavior using the `multiple()` method:
+이 기능을 사용하면 사용자가 여러 옵션을 선택하여 테이블에 필터를 적용할 수 있습니다. 예를 들어, 상태 필터는 사용자가 몇 가지 상태 옵션 중에서 선택하여 테이블을 필터링할 수 있도록 합니다. 사용자가 여러 옵션을 선택하면, 테이블은 선택된 옵션 중 하나라도 일치하는 레코드만 표시하게 됩니다. 이러한 동작은 `multiple()` 메서드를 사용하여 활성화할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;
@@ -53,9 +53,9 @@ SelectFilter::make('status')
     ])
 ```
 
-## Relationship select filters
+## 관계 SelectFilter {#relationship-select-filters}
 
-Select filters are also able to automatically populate themselves based on a relationship. For example, if your table has a `author` relationship with a `name` column, you may use `relationship()` to filter the records belonging to an author:
+SelectFilter는 관계를 기반으로 자동으로 값을 채울 수도 있습니다. 예를 들어, 테이블에 `author` 관계와 `name` 컬럼이 있다면, `relationship()`을 사용하여 특정 저자에 속한 레코드만 필터링할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;
@@ -64,9 +64,9 @@ SelectFilter::make('author')
     ->relationship('author', 'name')
 ```
 
-### Preloading the select filter relationship options
+### 선택 필터 관계 옵션 미리 불러오기 {#preloading-the-select-filter-relationship-options}
 
-If you'd like to populate the searchable options from the database when the page is loaded, instead of when the user searches, you can use the `preload()` method:
+페이지가 로드될 때 데이터베이스에서 검색 가능한 옵션을 미리 불러오고 싶다면, 사용자가 검색할 때가 아니라 `preload()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;
@@ -77,9 +77,9 @@ SelectFilter::make('author')
     ->preload()
 ```
 
-### Customizing the select filter relationship query
+### 선택 필터 관계 쿼리 커스터마이징하기 {#customizing-the-select-filter-relationship-query}
 
-You may customize the database query that retrieves options using the third parameter of the `relationship()` method:
+옵션을 가져오는 데이터베이스 쿼리는 `relationship()` 메서드의 세 번째 매개변수를 사용하여 커스터마이징할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;
@@ -89,9 +89,9 @@ SelectFilter::make('author')
     ->relationship('author', 'name', fn (Builder $query) => $query->withTrashed())
 ```
 
-### Searching select filter options
+### 선택 필터 옵션 검색하기 {#searching-select-filter-options}
 
-You may enable a search input to allow easier access to many options, using the `searchable()` method:
+여러 옵션에 더 쉽게 접근할 수 있도록 `searchable()` 메서드를 사용하여 검색 입력을 활성화할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;
@@ -101,26 +101,26 @@ SelectFilter::make('author')
     ->searchable()
 ```
 
-## Disable placeholder selection
+## 플레이스홀더 선택 비활성화 {#disable-placeholder-selection}
 
-You can remove the placeholder (null option), which disables the filter so all options are applied, using the `selectablePlaceholder()` method:
+플레이스홀더(null 옵션)를 제거하여, 필터가 비활성화되지 않고 모든 옵션이 적용되도록 하려면 `selectablePlaceholder()` 메서드를 사용하세요:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;
 
 SelectFilter::make('status')
     ->options([
-        'draft' => 'Draft',
-        'reviewing' => 'Reviewing',
-        'published' => 'Published',
+        'draft' => '초안',
+        'reviewing' => '검토 중',
+        'published' => '게시됨',
     ])
     ->default('draft')
     ->selectablePlaceholder(false)
 ```
 
-## Applying select filters by default
+## 기본적으로 선택 필터 적용하기 {#applying-select-filters-by-default}
 
-You may set a select filter to be enabled by default, using the `default()` method. If using a single select filter, the `default()` method accepts a single option value. If using a `multiple()` select filter, the `default()` method accepts an array of option values:
+`default()` 메서드를 사용하여 선택 필터를 기본적으로 활성화할 수 있습니다. 단일 선택 필터를 사용하는 경우, `default()` 메서드는 하나의 옵션 값을 받습니다. `multiple()` 선택 필터를 사용하는 경우, `default()` 메서드는 옵션 값들의 배열을 받습니다:
 
 ```php
 use Filament\Tables\Filters\SelectFilter;

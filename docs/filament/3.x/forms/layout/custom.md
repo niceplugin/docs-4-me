@@ -1,18 +1,18 @@
 ---
-title: Custom layouts
+title: 커스텀 레이아웃
 ---
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [폼.레이아웃] 커스텀 레이아웃
 
 <LaracastsBanner
-    title="Build a Custom Form Layout"
-    description="Watch the Build Advanced Components for Filament series on Laracasts - it will teach you how to build components, and you'll get to know all the internal tools to help you."
+    title="커스텀 폼 레이아웃 만들기"
+    description="Laracasts의 Filament 고급 컴포넌트 빌드(Build Advanced Components for Filament) 시리즈를 시청하세요. 컴포넌트 제작 방법과 내부 도구 활용법을 모두 배울 수 있습니다."
     url="https://laracasts.com/series/build-advanced-components-for-filament/episodes/7"
     series="building-advanced-components"
 />
 
-## View components
+## 뷰 컴포넌트 {#view-components}
 
-Aside from [building custom layout components](#custom-layout-classes), you may create "view" components which allow you to create custom layouts without extra PHP classes.
+[커스텀 레이아웃 컴포넌트 만들기](#custom-layout-classes) 외에도, 추가적인 PHP 클래스 없이 커스텀 레이아웃을 만들 수 있는 "뷰" 컴포넌트를 생성할 수 있습니다.
 
 ```php
 use Filament\Forms\Components\View;
@@ -20,21 +20,21 @@ use Filament\Forms\Components\View;
 View::make('filament.forms.components.wizard')
 ```
 
-This assumes that you have a `resources/views/filament/forms/components/wizard.blade.php` file.
+이는 `resources/views/filament/forms/components/wizard.blade.php` 파일이 존재한다고 가정합니다.
 
-## Custom layout classes
+## 커스텀 레이아웃 클래스 {#custom-layout-classes}
 
-You may create your own custom component classes and views, which you can reuse across your project, and even release as a plugin to the community.
+프로젝트 전반에 걸쳐 재사용할 수 있고, 심지어 커뮤니티에 플러그인으로 배포할 수도 있는 커스텀 컴포넌트 클래스와 뷰를 직접 만들 수 있습니다.
 
-> If you're just creating a simple custom component to use once, you could instead use a [view component](#view-components) to render any custom Blade file.
+> 한 번만 사용할 간단한 커스텀 컴포넌트를 만들고 싶다면, [뷰 컴포넌트](#view-components)를 사용하여 원하는 Blade 파일을 렌더링할 수 있습니다.
 
-To create a custom component class and view, you may use the following command:
+커스텀 컴포넌트 클래스와 뷰를 생성하려면 다음 명령어를 사용할 수 있습니다:
 
 ```bash
 php artisan make:form-layout Wizard
 ```
 
-This will create the following layout component class:
+이 명령어는 다음과 같은 레이아웃 컴포넌트 클래스를 생성합니다:
 
 ```php
 use Filament\Forms\Components\Component;
@@ -50,11 +50,11 @@ class Wizard extends Component
 }
 ```
 
-It will also create a view file at `resources/views/filament/forms/components/wizard.blade.php`.
+또한 `resources/views/filament/forms/components/wizard.blade.php` 경로에 뷰 파일도 생성됩니다.
 
-## Rendering the component's schema
+## 컴포넌트의 스키마 렌더링하기 {#rendering-the-components-schema}
 
-Inside your view, you may render the component's `schema()` using the `$getChildComponentContainer()` function:
+뷰 내부에서 `$getChildComponentContainer()` 함수를 사용하여 컴포넌트의 `schema()`를 렌더링할 수 있습니다:
 
 ```blade
 <div>
@@ -62,9 +62,9 @@ Inside your view, you may render the component's `schema()` using the `$getChild
 </div>
 ```
 
-## Accessing the Eloquent record
+## Eloquent 레코드에 접근하기 {#accessing-the-eloquent-record}
 
-Inside your view, you may access the Eloquent record using the `$getRecord()` function:
+뷰 내부에서 `$getRecord()` 함수를 사용하여 Eloquent 레코드에 접근할 수 있습니다:
 
 ```blade
 <div>

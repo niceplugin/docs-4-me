@@ -1,22 +1,22 @@
 ---
-title: Clusters
+title: 클러스터
 ---
+# [패널] 클러스터
+## 개요 {#overview}
 
-## Overview
+클러스터는 패널 내에서 [리소스](resources)와 [커스텀 페이지](pages)를 함께 그룹화할 수 있는 계층적 구조입니다. 클러스터는 패널을 논리적인 섹션으로 구성하는 데 유용하며, 패널의 사이드바 크기를 줄이는 데 도움이 됩니다.
 
-Clusters are a hierarchical structure in panels that allow you to group [resources](resources) and [custom pages](pages) together. They are useful for organizing your panel into logical sections, and can help reduce the size of your panel's sidebar.
+클러스터를 사용할 때는 다음과 같은 일들이 발생합니다:
 
-When using a cluster, a few things happen:
+- 클러스터 내 첫 번째 리소스나 페이지로 연결되는 새로운 네비게이션 항목이 네비게이션에 추가됩니다.
+- 해당 리소스나 페이지의 개별 네비게이션 항목은 메인 네비게이션에서 더 이상 보이지 않습니다.
+- 클러스터 내 각 리소스나 페이지에 클러스터에 속한 리소스나 페이지의 네비게이션 항목을 포함하는 새로운 하위 네비게이션 UI가 추가됩니다.
+- 클러스터 내의 리소스와 페이지는 클러스터 이름이 접두사로 붙은 새로운 URL을 갖게 됩니다. [리소스](resources/getting-started#generating-urls-to-resource-pages)와 [페이지](pages#generating-urls-to-pages)에 대한 URL을 올바르게 생성하고 있다면, 이 변경 사항은 자동으로 처리됩니다.
+- 클러스터의 이름이 클러스터 내 모든 리소스와 페이지의 브레드크럼에 표시됩니다. 이를 클릭하면 클러스터 내 첫 번째 리소스나 페이지로 이동합니다.
 
-- A new navigation item is added to the navigation, which is a link to the first resource or page in the cluster.
-- The individual navigation items for the resources or pages are no longer visible in the main navigation.
-- A new sub-navigation UI is added to each resource or page in the cluster, which contains the navigation items for the resources or pages in the cluster.
-- Resources and pages in the cluster get a new URL, prefixed with the name of the cluster. If you are generating URLs to [resources](resources/getting-started#generating-urls-to-resource-pages) and [pages](pages#generating-urls-to-pages) correctly, then this change should be handled for you automatically.
-- The cluster's name is in the breadcrumbs of all resources and pages in the cluster. When clicking it, you are taken to the first resource or page in the cluster.
+## 클러스터 생성하기 {#creating-a-cluster}
 
-## Creating a cluster
-
-Before creating your first cluster, you must tell the panel where cluster classes should be located. Alongside methods like `discoverResources()` and `discoverPages()` in the [configuration](configuration), you can use `discoverClusters()`:
+첫 번째 클러스터를 생성하기 전에, 패널에 클러스터 클래스가 어디에 위치해야 하는지 알려주어야 합니다. [설정](configuration)에서 `discoverResources()`와 `discoverPages()`와 같은 메서드와 함께, `discoverClusters()`를 사용할 수 있습니다:
 
 ```php
 public function panel(Panel $panel): Panel
@@ -29,13 +29,13 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-Now, you can create a cluster with the `php artisan make:filament-cluster` command:
+이제 `php artisan make:filament-cluster` 명령어로 클러스터를 생성할 수 있습니다:
 
 ```bash
 php artisan make:filament-cluster Settings
 ```
 
-This will create a new cluster class in the `app/Filament/Clusters` directory:
+이 명령어는 `app/Filament/Clusters` 디렉터리에 새로운 클러스터 클래스를 생성합니다:
 
 ```php
 <?php
@@ -50,11 +50,11 @@ class Settings extends Cluster
 }
 ```
 
-The [`$navigationIcon`](navigation#customizing-a-navigation-items-icon) property is defined by default since you will most likely want to customize this immediately. All other [navigation properties and methods](navigation) are also available to use, including [`$navigationLabel`](navigation#customizing-a-navigation-items-label), [`$navigationSort`](navigation#sorting-navigation-items) and [`$navigationGroup`](navigation#grouping-navigation-items). These are used to customize the cluster's main navigation item, in the same way you would customize the item for a resource or page.
+[`$navigationIcon`](navigation#customizing-a-navigation-items-icon) 속성은 기본적으로 정의되어 있습니다. 이는 대부분 바로 커스터마이즈하고 싶을 것이기 때문입니다. 그 외의 모든 [네비게이션 속성과 메서드](navigation)도 사용할 수 있으며, [`$navigationLabel`](navigation#customizing-a-navigation-items-label), [`$navigationSort`](navigation#sorting-navigation-items), [`$navigationGroup`](navigation#grouping-navigation-items) 등이 있습니다. 이 속성들은 리소스나 페이지의 네비게이션 항목을 커스터마이즈하는 것과 동일하게, 클러스터의 메인 네비게이션 항목을 커스터마이즈하는 데 사용됩니다.
 
-## Adding resources and pages to a cluster
+## 클러스터에 리소스와 페이지 추가하기 {#adding-resources-and-pages-to-a-cluster}
 
-To add resources and pages to a cluster, you just need to define the `$cluster` property on the resource or page class, and set it to the cluster class [you created](#creating-a-cluster):
+리소스나 페이지를 클러스터에 추가하려면, 해당 리소스 또는 페이지 클래스에서 `$cluster` 프로퍼티를 정의하고, [생성한](#creating-a-cluster) 클러스터 클래스 값으로 설정하면 됩니다:
 
 ```php
 use App\Filament\Clusters\Settings;
@@ -62,9 +62,9 @@ use App\Filament\Clusters\Settings;
 protected static ?string $cluster = Settings::class;
 ```
 
-## Code structure recommendations for panels using clusters
+## 클러스터를 사용하는 패널의 코드 구조 권장 사항 {#code-structure-recommendations-for-panels-using-clusters}
 
-When using clusters, it is recommended that you move all of your resources and pages into a directory with the same name as the cluster. For example, here is a directory structure for a panel that uses a cluster called `Settings`, containing a `ColorResource` and two custom pages:
+클러스터를 사용할 때는 모든 리소스와 페이지를 클러스터와 동일한 이름의 디렉터리로 이동하는 것이 권장됩니다. 예를 들어, `Settings`라는 클러스터를 사용하는 패널의 디렉터리 구조는 다음과 같습니다. 이 구조에는 `ColorResource`와 두 개의 커스텀 페이지가 포함되어 있습니다:
 
 ```
 .
@@ -83,21 +83,21 @@ When using clusters, it is recommended that you move all of your resources and p
 |   |   |   |   |   +-- ListColors.php
 ```
 
-This is a recommendation, not a requirement. You can structure your panel however you like, as long as the resources and pages in your cluster use the [`$cluster`](#adding-resources-and-pages-to-a-cluster) property. This is just a suggestion to help you keep your panel organized.
+이것은 권장 사항일 뿐 필수는 아닙니다. 클러스터 내의 리소스와 페이지가 [`$cluster`](#adding-resources-and-pages-to-a-cluster) 속성을 사용하기만 하면, 원하는 대로 패널 구조를 구성할 수 있습니다. 이 구조는 패널을 더 체계적으로 관리하는 데 도움이 되는 제안일 뿐입니다.
 
-When a cluster exists in your panel, and you generate new resources or pages with the `make:filament-resource` or `make:filament-page` commands, you will be asked if you want to create them inside a cluster directory, according to these guidelines. If you choose to, then Filament will also assign the correct `$cluster` property to the resource or page class for you. If you do not, you will need to [define the `$cluster` property](#adding-resources-and-pages-to-a-cluster) yourself.
+패널에 클러스터가 존재하고, `make:filament-resource` 또는 `make:filament-page` 명령어로 새로운 리소스나 페이지를 생성할 때, 위의 가이드라인에 따라 클러스터 디렉터리 내에 생성할 것인지 묻게 됩니다. 만약 그렇게 선택하면, Filament가 해당 리소스나 페이지 클래스에 올바른 `$cluster` 속성도 자동으로 할당해줍니다. 그렇지 않은 경우에는 [직접 `$cluster` 속성을 정의](#adding-resources-and-pages-to-a-cluster)해야 합니다.
 
-## Customizing the cluster breadcrumb
+## 클러스터 브레드크럼 커스터마이징 {#customizing-the-cluster-breadcrumb}
 
-The cluster's name is in the breadcrumbs of all resources and pages in the cluster.
+클러스터의 이름은 클러스터 내 모든 리소스와 페이지의 브레드크럼에 표시됩니다.
 
-You may customize the breadcrumb name using the `$clusterBreadcrumb` property in the cluster class:
+클러스터 클래스에서 `$clusterBreadcrumb` 속성을 사용하여 브레드크럼 이름을 커스터마이징할 수 있습니다:
 
 ```php
 protected static ?string $clusterBreadcrumb = 'cluster';
 ```
 
-Alternatively, you may use the `getClusterBreadcrumb()` to define a dynamic breadcrumb name:
+또는, `getClusterBreadcrumb()` 메서드를 사용하여 동적으로 브레드크럼 이름을 정의할 수도 있습니다:
 
 ```php
 public static function getClusterBreadcrumb(): string

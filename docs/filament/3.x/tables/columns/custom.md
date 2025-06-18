@@ -1,18 +1,18 @@
 ---
-title: Custom columns
+title: 커스텀 컬럼
 ---
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [테이블.컬럼] 커스텀 컬럼
 
 <LaracastsBanner
-    title="Build a Custom Table Column"
-    description="Watch the Build Advanced Components for Filament series on Laracasts - it will teach you how to build components, and you'll get to know all the internal tools to help you."
+    title="커스텀 테이블 컬럼 만들기"
+    description="Laracasts의 Filament 고급 컴포넌트 빌드(Build Advanced Components for Filament) 시리즈를 시청하세요. 컴포넌트 제작 방법과 내부 도구 활용법을 모두 배울 수 있습니다."
     url="https://laracasts.com/series/build-advanced-components-for-filament/episodes/10"
     series="building-advanced-components"
 />
 
-## View columns
+## 뷰 컬럼 {#view-columns}
 
-You may render a custom view for a cell using the `view()` method:
+`view()` 메서드를 사용하여 셀에 대한 커스텀 뷰를 렌더링할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\ViewColumn;
@@ -20,21 +20,21 @@ use Filament\Tables\Columns\ViewColumn;
 ViewColumn::make('status')->view('filament.tables.columns.status-switcher')
 ```
 
-This assumes that you have a `resources/views/filament/tables/columns/status-switcher.blade.php` file.
+이는 `resources/views/filament/tables/columns/status-switcher.blade.php` 파일이 존재한다고 가정합니다.
 
-## Custom classes
+## 커스텀 클래스 {#custom-classes}
 
-You may create your own custom column classes and cell views, which you can reuse across your project, and even release as a plugin to the community.
+프로젝트 전반에 재사용하거나, 커뮤니티에 플러그인으로 배포할 수 있도록 직접 커스텀 컬럼 클래스와 셀 뷰를 만들 수 있습니다.
 
-> If you're just creating a simple custom column to use once, you could instead use a [view column](#view-columns) to render any custom Blade file.
+> 단순히 한 번만 사용할 간단한 커스텀 컬럼을 만들고 싶다면, [뷰 컬럼](#view-columns)을 사용해 원하는 Blade 파일을 렌더링할 수 있습니다.
 
-To create a custom column class and view, you may use the following command:
+커스텀 컬럼 클래스와 뷰를 생성하려면 다음 명령어를 사용할 수 있습니다:
 
 ```bash
 php artisan make:table-column StatusSwitcher
 ```
 
-This will create the following column class:
+이 명령어는 다음과 같은 컬럼 클래스를 생성합니다:
 
 ```php
 use Filament\Tables\Columns\Column;
@@ -45,11 +45,11 @@ class StatusSwitcher extends Column
 }
 ```
 
-It will also create a view file at `resources/views/filament/tables/columns/status-switcher.blade.php`.
+또한 `resources/views/filament/tables/columns/status-switcher.blade.php` 경로에 뷰 파일도 생성됩니다.
 
-## Accessing the state
+## 상태 접근하기 {#accessing-the-state}
 
-Inside your view, you may retrieve the state of the cell using the `$getState()` function:
+뷰 내부에서 `$getState()` 함수를 사용하여 셀의 상태를 가져올 수 있습니다:
 
 ```blade
 <div>
@@ -57,9 +57,9 @@ Inside your view, you may retrieve the state of the cell using the `$getState()`
 </div>
 ```
 
-## Accessing the Eloquent record
+## Eloquent 레코드에 접근하기 {#accessing-the-eloquent-record}
 
-Inside your view, you may access the Eloquent record using the `$getRecord()` function:
+뷰 내부에서 `$getRecord()` 함수를 사용하여 Eloquent 레코드에 접근할 수 있습니다:
 
 ```blade
 <div>

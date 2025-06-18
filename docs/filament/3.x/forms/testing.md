@@ -1,16 +1,16 @@
 ---
-title: Testing
+title: 테스트
 ---
+# [폼] 테스트
+## 개요 {#overview}
 
-## Overview
+이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성됩니다. Pest의 Livewire 플러그인을 테스트에 사용하려면, Pest 문서의 플러그인 설치 안내를 따라주세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만, 이를 PHPUnit에 쉽게 적용할 수도 있습니다.
 
-All examples in this guide will be written using [Pest](https://pestphp.com). To use Pest's Livewire plugin for testing, you can follow the installation instructions in the Pest documentation on plugins: [Livewire plugin for Pest](https://pestphp.com/docs/plugins#livewire). However, you can easily adapt this to PHPUnit.
+Form Builder는 Livewire 컴포넌트에서 동작하므로, [Livewire 테스트 헬퍼](https://livewire.laravel.com/docs/testing)를 사용할 수 있습니다. 하지만, 폼과 함께 사용할 수 있는 커스텀 테스트 헬퍼도 제공합니다.
 
-Since the Form Builder works on Livewire components, you can use the [Livewire testing helpers](https://livewire.laravel.com/docs/testing). However, we have custom testing helpers that you can use with forms:
+## 폼 채우기 {#filling-a-form}
 
-## Filling a form
-
-To fill a form with data, pass the data to `fillForm()`:
+폼에 데이터를 채우려면, `fillForm()`에 데이터를 전달하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -22,9 +22,9 @@ livewire(CreatePost::class)
     ]);
 ```
 
-> If you have multiple forms on a Livewire component, you can specify which form you want to fill using `fillForm([...], 'createPostForm')`.
+> Livewire 컴포넌트에 여러 개의 폼이 있는 경우, `fillForm([...], 'createPostForm')`을 사용하여 채우고자 하는 폼을 지정할 수 있습니다.
 
-To check that a form has data, use `assertFormSet()`:
+폼에 데이터가 채워졌는지 확인하려면 `assertFormSet()`을 사용하세요:
 
 ```php
 use Illuminate\Support\Str;
@@ -43,9 +43,9 @@ it('can automatically generate a slug from the title', function () {
 });
 ```
 
-> If you have multiple forms on a Livewire component, you can specify which form you want to check using `assertFormSet([...], 'createPostForm')`.
+> Livewire 컴포넌트에 여러 개의 폼이 있는 경우, `assertFormSet([...], 'createPostForm')`을 사용하여 확인하고자 하는 폼을 지정할 수 있습니다.
 
-You may also find it useful to pass a function to the `assertFormSet()` method, which allows you to access the form `$state` and perform additional assertions:
+`assertFormSet()` 메서드에 함수를 전달하여 폼의 `$state`에 접근하고 추가적인 검증을 수행할 수도 있습니다:
 
 ```php
 use Illuminate\Support\Str;
@@ -69,11 +69,11 @@ it('can automatically generate a slug from the title without any spaces', functi
 });
 ```
 
-You can return an array from the function if you want Filament to continue to assert the form state after the function has been run.
+함수 실행 후 Filament가 폼 상태를 계속 검증하도록 하려면, 함수에서 배열을 반환할 수 있습니다.
 
-## Validation
+## 유효성 검사 {#validation}
 
-Use `assertHasFormErrors()` to ensure that data is properly validated in a form:
+폼에서 데이터가 올바르게 유효성 검사되는지 확인하려면 `assertHasFormErrors()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -88,7 +88,7 @@ it('can validate input', function () {
 });
 ```
 
-And `assertHasNoFormErrors()` to ensure there are no validation errors:
+그리고 유효성 검사 오류가 없는지 확인하려면 `assertHasNoFormErrors()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -102,11 +102,11 @@ livewire(CreatePost::class)
     ->assertHasNoFormErrors();
 ```
 
-> If you have multiple forms on a Livewire component, you can pass the name of a specific form as the second parameter like `assertHasFormErrors(['title' => 'required'], 'createPostForm')` or `assertHasNoFormErrors([], 'createPostForm')`.
+> Livewire 컴포넌트에 여러 개의 폼이 있는 경우, 두 번째 매개변수로 특정 폼의 이름을 전달할 수 있습니다. 예를 들어 `assertHasFormErrors(['title' => 'required'], 'createPostForm')` 또는 `assertHasNoFormErrors([], 'createPostForm')`와 같이 사용할 수 있습니다.
 
-## Form existence
+## 폼 존재 여부 확인 {#form-existence}
 
-To check that a Livewire component has a form, use `assertFormExists()`:
+Livewire 컴포넌트에 폼이 있는지 확인하려면 `assertFormExists()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -117,11 +117,11 @@ it('has a form', function () {
 });
 ```
 
-> If you have multiple forms on a Livewire component, you can pass the name of a specific form like `assertFormExists('createPostForm')`.
+> Livewire 컴포넌트에 여러 개의 폼이 있는 경우, `assertFormExists('createPostForm')`처럼 특정 폼의 이름을 전달할 수 있습니다.
 
-## Fields
+## 필드 {#fields}
 
-To ensure that a form has a given field, pass the field name to `assertFormFieldExists()`:
+폼에 특정 필드가 있는지 확인하려면, 필드 이름을 `assertFormFieldExists()`에 전달하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -132,7 +132,7 @@ it('has a title field', function () {
 });
 ```
 
-You may pass a function as an additional argument in order to assert that a field passes a given "truth test". This is useful for asserting that a field has a specific configuration:
+필드가 특정 "진리 테스트"를 통과하는지 확인하려면, 추가 인수로 함수를 전달할 수 있습니다. 이는 필드가 특정 설정을 가지고 있는지 검증할 때 유용합니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -145,7 +145,7 @@ it('has a title field', function () {
 });
 ```
 
-To assert that a form does not have a given field, pass the field name to `assertFormFieldDoesNotExist()`:
+폼에 특정 필드가 없는지 확인하려면, 필드 이름을 `assertFormFieldDoesNotExist()`에 전달하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -156,63 +156,63 @@ it('does not have a conditional field', function () {
 });
 ```
 
-> If you have multiple forms on a Livewire component, you can specify which form you want to check for the existence of the field like `assertFormFieldExists('title', 'createPostForm')`.
+> Livewire 컴포넌트에 여러 개의 폼이 있는 경우, `assertFormFieldExists('title', 'createPostForm')`처럼 필드의 존재 여부를 확인할 폼을 지정할 수 있습니다.
 
-### Hidden fields
+### 숨겨진 필드 {#hidden-fields}
 
-To ensure that a field is visible, pass the name to `assertFormFieldIsVisible()`:
+필드가 보이는지 확인하려면, `assertFormFieldIsVisible()`에 이름을 전달하세요:
 
 ```php
 use function Pest\Livewire\livewire;
 
-test('title is visible', function () {
+test('title이 보이는지 확인', function () {
     livewire(CreatePost::class)
         ->assertFormFieldIsVisible('title');
 });
 ```
 
-Or to ensure that a field is hidden you can pass the name to `assertFormFieldIsHidden()`:
+또는 필드가 숨겨져 있는지 확인하려면, 이름을 `assertFormFieldIsHidden()`에 전달할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-test('title is hidden', function () {
+test('title이 숨겨져 있는지 확인', function () {
     livewire(CreatePost::class)
         ->assertFormFieldIsHidden('title');
 });
 ```
 
-> For both `assertFormFieldIsHidden()` and `assertFormFieldIsVisible()` you can pass the name of a specific form the field belongs to as the second argument like `assertFormFieldIsHidden('title', 'createPostForm')`.
+> `assertFormFieldIsHidden()`과 `assertFormFieldIsVisible()` 모두에서 필드가 속한 특정 폼의 이름을 두 번째 인자로 전달할 수 있습니다. 예: `assertFormFieldIsHidden('title', 'createPostForm')`
 
-### Disabled fields
+### 비활성화된 필드 {#disabled-fields}
 
-To ensure that a field is enabled, pass the name to `assertFormFieldIsEnabled()`:
+필드가 활성화되어 있는지 확인하려면, 필드 이름을 `assertFormFieldIsEnabled()`에 전달하세요:
 
 ```php
 use function Pest\Livewire\livewire;
 
-test('title is enabled', function () {
+test('title이 활성화되어 있음', function () {
     livewire(CreatePost::class)
         ->assertFormFieldIsEnabled('title');
 });
 ```
 
-Or to ensure that a field is disabled you can pass the name to `assertFormFieldIsDisabled()`:
+또는 필드가 비활성화되어 있는지 확인하려면, 필드 이름을 `assertFormFieldIsDisabled()`에 전달할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-test('title is disabled', function () {
+test('title이 비활성화되어 있음', function () {
     livewire(CreatePost::class)
         ->assertFormFieldIsDisabled('title');
 });
 ```
 
-> For both `assertFormFieldIsEnabled()` and `assertFormFieldIsDisabled()` you can pass the name of a specific form the field belongs to as the second argument like `assertFormFieldIsEnabled('title', 'createPostForm')`.
+> `assertFormFieldIsEnabled()`와 `assertFormFieldIsDisabled()` 모두에서 필드가 속한 특정 폼의 이름을 두 번째 인자로 전달할 수 있습니다. 예: `assertFormFieldIsEnabled('title', 'createPostForm')`
 
-## Layout components
+## 레이아웃 컴포넌트 {#layout-components}
 
-If you need to check if a particular layout component exists rather than a field, you may use `assertFormComponentExists()`.  As layout components do not have names, this method uses the `key()` provided by the developer:
+특정 필드가 아닌 레이아웃 컴포넌트가 존재하는지 확인해야 할 경우, `assertFormComponentExists()`를 사용할 수 있습니다. 레이아웃 컴포넌트는 이름이 없으므로, 이 메서드는 개발자가 제공한 `key()`를 사용합니다:
 
 ```php
 use Filament\Forms\Components\Section;
@@ -233,7 +233,7 @@ test('comments section exists', function () {
 });
 ```
 
-To assert that a form does not have a given component, pass the component key to `assertFormComponentDoesNotExist()`:
+폼에 특정 컴포넌트가 없는지 확인하려면, 컴포넌트 키를 `assertFormComponentDoesNotExist()`에 전달하면 됩니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -244,7 +244,7 @@ it('does not have a conditional component', function () {
 });
 ```
 
-To check if the component exists and passes a given truth test, you can pass a function to the second argument of `assertFormComponentExists()`, returning true or false if the component passes the test or not:
+컴포넌트가 존재하는지와 함께 특정 조건을 만족하는지 확인하려면, `assertFormComponentExists()`의 두 번째 인자로 함수를 전달할 수 있습니다. 이 함수는 컴포넌트가 조건을 통과하면 true, 아니면 false를 반환합니다:
 
 ```php
 use Filament\Forms\Components\Component;
@@ -262,7 +262,7 @@ test('comments section has heading', function () {
 });
 ```
 
-If you want more informative test results, you can embed an assertion within your truth test callback:
+더 자세한 테스트 결과를 원한다면, 진위 테스트 콜백 내에 어설션을 포함할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Component;
@@ -286,59 +286,59 @@ test('comments section is enabled', function () {
 });
 ```
 
-### Wizard
+### 위자드 {#wizard}
 
-To go to a wizard's next step, use `goToNextWizardStep()`:
+위자드의 다음 단계로 이동하려면 `goToNextWizardStep()`을 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('moves to next wizard step', function () {
+it('다음 위자드 단계로 이동합니다', function () {
     livewire(CreatePost::class)
         ->goToNextWizardStep()
         ->assertHasFormErrors(['title']);
 });
 ```
 
-You can also go to the previous step by calling `goToPreviousWizardStep()`:
+이전 단계로 이동하려면 `goToPreviousWizardStep()`을 호출하면 됩니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('moves to next wizard step', function () {
+it('이전 위자드 단계로 이동합니다', function () {
     livewire(CreatePost::class)
         ->goToPreviousWizardStep()
         ->assertHasFormErrors(['title']);
 });
 ```
 
-If you want to go to a specific step, use `goToWizardStep()`, then the `assertWizardCurrentStep` method which can ensure you are on the desired step without validation errors from the previous:
+특정 단계로 이동하고 싶다면 `goToWizardStep()`을 사용한 후, `assertWizardCurrentStep` 메서드로 원하는 단계에 있고 이전 단계의 유효성 검사 오류가 없는지 확인할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('moves to the wizards second step', function () {
+it('위자드의 두 번째 단계로 이동합니다', function () {
     livewire(CreatePost::class)
         ->goToWizardStep(2)
         ->assertWizardCurrentStep(2);
 });
 ```
 
-If you have multiple forms on a single Livewire component, any of the wizard test helpers can accept a `formName` parameter:
+하나의 Livewire 컴포넌트에 여러 개의 폼이 있다면, 모든 위자드 테스트 헬퍼에 `formName` 파라미터를 전달할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('moves to next wizard step only for fooForm', function () {
+it('fooForm에 대해서만 다음 위자드 단계로 이동합니다', function () {
     livewire(CreatePost::class)
         ->goToNextWizardStep(formName: 'fooForm')
         ->assertHasFormErrors(['title'], formName: 'fooForm');
 });
 ```
 
-## Actions
+## 액션 {#actions}
 
-You can call an action by passing its form component name, and then the name of the action to `callFormComponentAction()`:
+액션을 호출하려면 폼 컴포넌트 이름과 액션 이름을 `callFormComponentAction()`에 전달하면 됩니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -356,7 +356,7 @@ it('can send invoices', function () {
 });
 ```
 
-To pass an array of data into an action, use the `data` parameter:
+액션에 데이터를 배열로 전달하려면 `data` 파라미터를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -378,7 +378,7 @@ it('can send invoices', function () {
 });
 ```
 
-If you ever need to only set an action's data without immediately calling it, you can use `setFormComponentActionData()`:
+액션을 즉시 호출하지 않고 데이터만 설정해야 할 경우, `setFormComponentActionData()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -396,14 +396,14 @@ it('can send invoices', function () {
 });
 ```
 
-### Execution
+### 실행 {#execution}
 
-To check if an action has been halted, you can use `assertFormComponentActionHalted()`:
+액션이 중단되었는지 확인하려면 `assertFormComponentActionHalted()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('stops sending if invoice has no email address', function () {
+it('송장이 이메일 주소가 없으면 전송을 중단한다', function () {
     $invoice = Invoice::factory(['email' => null])->create();
 
     livewire(EditInvoice::class, [
@@ -414,11 +414,11 @@ it('stops sending if invoice has no email address', function () {
 });
 ```
 
-### Errors
+### 오류 {#errors}
 
-`assertHasNoFormComponentActionErrors()` is used to assert that no validation errors occurred when submitting the action form.
+`assertHasNoFormComponentActionErrors()`는 액션 폼을 제출할 때 검증 오류가 발생하지 않았는지 확인하는 데 사용됩니다.
 
-To check if a validation error has occurred with the data, use `assertHasFormComponentActionErrors()`, similar to `assertHasErrors()` in Livewire:
+데이터에 검증 오류가 발생했는지 확인하려면, Livewire의 `assertHasErrors()`와 유사하게 `assertHasFormComponentActionErrors()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -436,7 +436,7 @@ it('can validate invoice recipient email', function () {
 });
 ```
 
-To check if an action is pre-filled with data, you can use the `assertFormComponentActionDataSet()` method:
+액션이 데이터로 미리 채워져 있는지 확인하려면 `assertFormComponentActionDataSet()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -461,14 +461,14 @@ it('can send invoices to the primary contact by default', function () {
 });
 ```
 
-### Action state
+### 액션 상태 {#action-state}
 
-To ensure that an action exists or doesn't in a form, you can use the `assertFormComponentActionExists()` or  `assertFormComponentActionDoesNotExist()` method:
+폼에서 액션이 존재하는지 또는 존재하지 않는지 확인하려면 `assertFormComponentActionExists()` 또는 `assertFormComponentActionDoesNotExist()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can send but not unsend invoices', function () {
+it('송장은 보낼 수 있지만, 다시 보내지는 못한다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -479,12 +479,12 @@ it('can send but not unsend invoices', function () {
 });
 ```
 
-To ensure an action is hidden or visible for a user, you can use the `assertFormComponentActionHidden()` or `assertFormComponentActionVisible()` methods:
+사용자에게 액션이 숨겨져 있는지 또는 보이는지 확인하려면 `assertFormComponentActionHidden()` 또는 `assertFormComponentActionVisible()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can only print customers', function () {
+it('고객만 출력할 수 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -495,12 +495,12 @@ it('can only print customers', function () {
 });
 ```
 
-To ensure an action is enabled or disabled for a user, you can use the `assertFormComponentActionEnabled()` or `assertFormComponentActionDisabled()` methods:
+사용자에게 액션이 활성화되어 있는지 또는 비활성화되어 있는지 확인하려면 `assertFormComponentActionEnabled()` 또는 `assertFormComponentActionDisabled()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can only print a customer for a sent invoice', function () {
+it('보낸 송장에 대해서만 고객을 출력할 수 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -511,12 +511,12 @@ it('can only print a customer for a sent invoice', function () {
 });
 ```
 
-To check if an action is hidden to a user, you can use the `assertFormComponentActionHidden()` method:
+사용자에게 액션이 숨겨져 있는지 확인하려면 `assertFormComponentActionHidden()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can not send invoices', function () {
+it('송장을 보낼 수 없다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -526,14 +526,14 @@ it('can not send invoices', function () {
 });
 ```
 
-### Button appearance
+### 버튼 모양 {#button-appearance}
 
-To ensure an action has the correct label, you can use `assertFormComponentActionHasLabel()` and `assertFormComponentActionDoesNotHaveLabel()`:
+액션에 올바른 라벨이 있는지 확인하려면 `assertFormComponentActionHasLabel()`과 `assertFormComponentActionDoesNotHaveLabel()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('send action has correct label', function () {
+it('send 액션에 올바른 라벨이 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -544,12 +544,12 @@ it('send action has correct label', function () {
 });
 ```
 
-To ensure an action's button is showing the correct icon, you can use `assertFormComponentActionHasIcon()` or `assertFormComponentActionDoesNotHaveIcon()`:
+액션 버튼에 올바른 아이콘이 표시되는지 확인하려면 `assertFormComponentActionHasIcon()` 또는 `assertFormComponentActionDoesNotHaveIcon()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('when enabled the send button has correct icon', function () {
+it('활성화 시 send 버튼에 올바른 아이콘이 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -561,12 +561,12 @@ it('when enabled the send button has correct icon', function () {
 });
 ```
 
-To ensure that an action's button is displaying the right color, you can use `assertFormComponentActionHasColor()` or `assertFormComponentActionDoesNotHaveColor()`:
+액션 버튼이 올바른 색상을 표시하는지 확인하려면 `assertFormComponentActionHasColor()` 또는 `assertFormComponentActionDoesNotHaveColor()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('actions display proper colors', function () {
+it('액션이 올바른 색상을 표시한다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -577,9 +577,9 @@ it('actions display proper colors', function () {
 });
 ```
 
-### URL
+### URL {#url}
 
-To ensure an action has the correct URL, you can use `assertFormComponentActionHasUrl()`, `assertFormComponentActionDoesNotHaveUrl()`, `assertFormComponentActionShouldOpenUrlInNewTab()`, and `assertFormComponentActionShouldNotOpenUrlInNewTab()`:
+액션이 올바른 URL을 가지는지 확인하려면 `assertFormComponentActionHasUrl()`, `assertFormComponentActionDoesNotHaveUrl()`, `assertFormComponentActionShouldOpenUrlInNewTab()`, `assertFormComponentActionShouldNotOpenUrlInNewTab()`를 사용할 수 있습니다.
 
 ```php
 use function Pest\Livewire\livewire;

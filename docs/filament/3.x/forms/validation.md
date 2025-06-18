@@ -1,177 +1,177 @@
 ---
-title: Validation
+title: 유효성 검사
 ---
+# [폼] 유효성 검사
+## 개요 {#overview}
 
-## Overview
+검증 규칙은 [필드](fields/getting-started)마다 추가할 수 있습니다.
 
-Validation rules may be added to any [field](fields/getting-started).
+Laravel에서는 보통 검증 규칙을 `['required', 'max:255']`와 같은 배열이나 `required|max:255`와 같은 문자열로 정의합니다. 이런 방식은 단순한 폼 요청을 백엔드에서만 처리할 때는 충분합니다. 하지만 Filament는 사용자가 백엔드 요청 전에 실수를 바로잡을 수 있도록 프론트엔드 검증도 제공합니다.
 
-In Laravel, validation rules are usually defined in arrays like `['required', 'max:255']` or a combined string like `required|max:255`. This is fine if you're exclusively working in the backend with simple form requests. But Filament is also able to give your users frontend validation, so they can fix their mistakes before any backend requests are made.
+Filament는 여러 [전용 검증 메서드](#available-rules)를 포함하고 있지만, [다른 Laravel 검증 규칙](#other-rules)이나 [커스텀 검증 규칙](#custom-rules)도 사용할 수 있습니다.
 
-Filament includes several [dedicated validation methods](#available-rules), but you can also use any [other Laravel validation rules](#other-rules), including [custom validation rules](#custom-rules).
+> 일부 검증은 필드 이름에 의존하므로 `->rule()`/`->rules()`로 전달할 경우 동작하지 않을 수 있습니다. 가능하다면 전용 검증 메서드를 사용하세요.
 
-> Beware that some validations rely on the field name and therefore won't work when passed via `->rule()`/`->rules()`. Use the dedicated validation methods whenever you can.
+## 사용 가능한 규칙 {#available-rules}
 
-## Available rules
+### 활성 URL {#active-url}
 
-### Active URL
-
-The field must have a valid A or AAAA record according to the `dns_get_record()` PHP function. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-active-url)
+해당 필드는 `dns_get_record()` PHP 함수에 따라 유효한 A 또는 AAAA 레코드를 가져야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-active-url)
 
 ```php
 Field::make('name')->activeUrl()
 ```
 
-### After (date)
+### After (date) {#after-date}
 
-The field value must be a value after a given date. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-after)
+필드 값은 지정된 날짜 이후여야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-after)
 
 ```php
 Field::make('start_date')->after('tomorrow')
 ```
 
-Alternatively, you may pass the name of another field to compare against:
+또는 비교할 다른 필드의 이름을 전달할 수도 있습니다:
 
 ```php
 Field::make('start_date')
 Field::make('end_date')->after('start_date')
 ```
 
-### After or equal to (date)
+### 이후 또는 같은 날짜 (after or equal to) {#after-or-equal-to-date}
 
-The field value must be a date after or equal to the given date. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-after-or-equal)
+필드 값은 지정된 날짜 이후이거나 같아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-after-or-equal)
 
 ```php
 Field::make('start_date')->afterOrEqual('tomorrow')
 ```
 
-Alternatively, you may pass the name of another field to compare against:
+또는, 비교할 다른 필드의 이름을 전달할 수도 있습니다:
 
 ```php
 Field::make('start_date')
 Field::make('end_date')->afterOrEqual('start_date')
 ```
 
-### Alpha
+### Alpha {#alpha}
 
-The field must be entirely alphabetic characters. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-alpha)
+필드는 반드시 전부 알파벳 문자여야 합니다. [라라벨 문서 참고.](https://laravel.com/docs/validation#rule-alpha)
 
 ```php
 Field::make('name')->alpha()
 ```
 
-### Alpha Dash
+### 알파 대시 {#alpha-dash}
 
-The field may have alphanumeric characters, as well as dashes and underscores. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-alpha-dash)
+필드는 영숫자 문자뿐만 아니라 대시(-)와 밑줄(_)도 포함할 수 있습니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-alpha-dash)
 
 ```php
 Field::make('name')->alphaDash()
 ```
 
-### Alpha Numeric
+### 알파뉴메릭 {#alpha-numeric}
 
-The field must be entirely alphanumeric characters. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-alpha-num)
+필드는 완전히 영숫자 문자여야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-alpha-num)
 
 ```php
 Field::make('name')->alphaNum()
 ```
 
-### ASCII
+### ASCII {#ascii}
 
-The field must be entirely 7-bit ASCII characters. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-ascii)
+필드는 전체가 7비트 ASCII 문자여야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-ascii)
 
 ```php
 Field::make('name')->ascii()
 ```
 
-### Before (date)
+### Before (date) {#before-date}
 
-The field value must be a date before a given date. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-before)
+필드 값은 지정된 날짜 이전이어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-before)
 
 ```php
 Field::make('start_date')->before('first day of next month')
 ```
 
-Alternatively, you may pass the name of another field to compare against:
+또는, 비교할 다른 필드의 이름을 전달할 수도 있습니다:
 
 ```php
 Field::make('start_date')->before('end_date')
 Field::make('end_date')
 ```
 
-### Before or equal to (date)
+### 이전 또는 같은 날짜 (date) {#before-or-equal-to-date}
 
-The field value must be a date before or equal to the given date. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-before-or-equal)
+필드 값은 지정된 날짜보다 이전이거나 같아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-before-or-equal)
 
 ```php
 Field::make('start_date')->beforeOrEqual('end of this month')
 ```
 
-Alternatively, you may pass the name of another field to compare against:
+또는, 비교할 다른 필드의 이름을 전달할 수도 있습니다:
 
 ```php
 Field::make('start_date')->beforeOrEqual('end_date')
 Field::make('end_date')
 ```
 
-### Confirmed
+### Confirmed {#confirmed}
 
-The field must have a matching field of `{field}_confirmation`. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-confirmed)
+이 필드는 `{field}_confirmation`과(와) 일치하는 필드가 있어야 합니다. [라라벨 공식 문서를 참고하세요.](https://laravel.com/docs/validation#rule-confirmed)
 
 ```php
 Field::make('password')->confirmed()
 Field::make('password_confirmation')
 ```
 
-### Different
+### 다름 {#different}
 
-The field value must be different to another. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-different)
+필드 값이 다른 값과 달라야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-different)
 
 ```php
 Field::make('backup_email')->different('email')
 ```
 
-### Doesnt Start With
+### {#doesnt-start-with}로 시작하지 않음
 
-The field must not start with one of the given values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-doesnt-start-with)
+필드는 주어진 값 중 하나로 시작하지 않아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-doesnt-start-with)
 
 ```php
 Field::make('name')->doesntStartWith(['admin'])
 ```
 
-### Doesnt End With
+### ~로 끝나지 않음 {#doesnt-end-with}
 
-The field must not end with one of the given values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-doesnt-end-with)
+해당 필드는 주어진 값들 중 하나로 끝나지 않아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-doesnt-end-with)
 
 ```php
 Field::make('name')->doesntEndWith(['admin'])
 ```
 
-### Ends With
+### 다음으로 끝남 {#ends-with}
 
-The field must end with one of the given values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-ends-with)
+필드는 주어진 값 중 하나로 끝나야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-ends-with)
 
 ```php
 Field::make('name')->endsWith(['bot'])
 ```
 
-### Enum
+### Enum {#enum}
 
-The field must contain a valid enum value. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-enum)
+필드는 유효한 enum 값을 포함해야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-enum)
 
 ```php
 Field::make('status')->enum(MyStatus::class)
 ```
 
-### Exists
+### Exists {#exists}
 
-The field value must exist in the database. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-exists)
+필드 값이 데이터베이스에 존재해야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-exists)
 
 ```php
 Field::make('invitation')->exists()
 ```
 
-By default, the form's model will be searched, [if it is registered](adding-a-form-to-a-livewire-component#setting-a-form-model). You may specify a custom table name or model to search:
+기본적으로, 폼의 모델이 [등록되어 있다면](adding-a-form-to-a-livewire-component#setting-a-form-model) 해당 모델에서 검색이 이루어집니다. 검색할 커스텀 테이블명이나 모델을 지정할 수도 있습니다:
 
 ```php
 use App\Models\Invitation;
@@ -179,13 +179,13 @@ use App\Models\Invitation;
 Field::make('invitation')->exists(table: Invitation::class)
 ```
 
-By default, the field name will be used as the column to search. You may specify a custom column to search:
+기본적으로 필드명이 검색할 컬럼으로 사용됩니다. 검색할 커스텀 컬럼을 지정할 수도 있습니다:
 
 ```php
 Field::make('invitation')->exists(column: 'id')
 ```
 
-You can further customize the rule by passing a [closure](advanced#closure-customization) to the `modifyRuleUsing` parameter:
+`modifyRuleUsing` 파라미터에 [클로저](/filament/3.x/forms/advanced#closure-customization)를 전달하여 규칙을 더욱 커스터마이즈할 수 있습니다:
 
 ```php
 use Illuminate\Validation\Rules\Exists;
@@ -196,48 +196,48 @@ Field::make('invitation')
     })
 ```
 
-### Filled
+### Filled {#filled}
 
-The field must not be empty when it is present. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-filled)
+필드가 존재할 때 비어 있지 않아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-filled)
 
 ```php
 Field::make('name')->filled()
 ```
 
-### Greater than
+### 크다 {#greater-than}
 
-The field value must be greater than another. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-gt)
+필드 값이 다른 값보다 커야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-gt)
 
 ```php
 Field::make('newNumber')->gt('oldNumber')
 ```
 
-### Greater than or equal to
+### 크거나 같음 {#greater-than-or-equal-to}
 
-The field value must be greater than or equal to another. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-gte)
+필드 값이 다른 값보다 크거나 같아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-gte)
 
 ```php
 Field::make('newNumber')->gte('oldNumber')
 ```
 
-### Hex color
+### 16진수 색상 {#hex-color}
 
-The field value must be a valid color in hexadecimal format. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-hex-color)
+필드 값은 16진수 형식의 유효한 색상이어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-hex-color)
 
 ```php
 Field::make('color')->hexColor()
 ```
 
-### In
-The field must be included in the given list of values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-in)
+### In {#in}
+필드는 주어진 값 목록에 포함되어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-in)
 
 ```php
 Field::make('status')->in(['pending', 'completed'])
 ```
 
-### Ip Address
+### IP 주소 {#ip-address}
 
-The field must be an IP address. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-ip)
+필드는 IP 주소여야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-ip)
 
 ```php
 Field::make('ip_address')->ip()
@@ -245,97 +245,97 @@ Field::make('ip_address')->ipv4()
 Field::make('ip_address')->ipv6()
 ```
 
-### JSON
+### JSON {#json}
 
-The field must be a valid JSON string. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-json)
+필드는 유효한 JSON 문자열이어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-json)
 
 ```php
 Field::make('ip_address')->json()
 ```
 
-### Less than
+### 미만 {#less-than}
 
-The field value must be less than another. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-lt)
+필드 값이 다른 값보다 작아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-lt)
 
 ```php
 Field::make('newNumber')->lt('oldNumber')
 ```
 
-### Less than or equal to
+### 이하 {#less-than-or-equal-to}
 
-The field value must be less than or equal to another. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-lte)
+필드 값이 다른 값보다 작거나 같아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-lte)
 
 ```php
 Field::make('newNumber')->lte('oldNumber')
 ```
 
-### Mac Address
+### Mac Address {#mac-address}
 
-The field must be a MAC address. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-mac)
+이 필드는 MAC 주소여야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-mac)
 
 ```php
 Field::make('mac_address')->macAddress()
 ```
 
-### Multiple Of
+### 배수 {#multiple-of}
 
-The field must be a multiple of value. [See the Laravel documentation.](https://laravel.com/docs/validation#multiple-of)
+필드는 지정된 값의 배수여야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#multiple-of)
 
 ```php
 Field::make('number')->multipleOf(2)
 ```
 
-### Not In
+### Not In {#not-in}
 
-The field must not be included in the given list of values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-not-in)
+필드는 주어진 값 목록에 포함되지 않아야 합니다. [라라벨 문서를 참조하세요.](https://laravel.com/docs/validation#rule-not-in)
 
 ```php
 Field::make('status')->notIn(['cancelled', 'rejected'])
 ```
 
-### Not Regex
+### Not Regex {#not-regex}
 
-The field must not match the given regular expression. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-not-regex)
+필드는 주어진 정규식과 일치하지 않아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-not-regex)
 
 ```php
 Field::make('email')->notRegex('/^.+$/i')
 ```
 
-### Nullable
+### Nullable {#nullable}
 
-The field value can be empty. This rule is applied by default if the `required` rule is not present. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-nullable)
+필드 값이 비어 있을 수 있습니다. 이 규칙은 `required` 규칙이 없을 때 기본적으로 적용됩니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-nullable)
 
 ```php
 Field::make('name')->nullable()
 ```
 
-### Prohibited
+### 금지됨 {#prohibited}
 
-The field value must be empty. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-prohibited)
+필드 값이 비어 있어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-prohibited)
 
 ```php
 Field::make('name')->prohibited()
 ```
 
-### Prohibited If
+### Prohibited If {#prohibited-if}
 
-The field must be empty *only if* the other specified field has any of the given values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-prohibited-if)
+지정된 다른 필드가 주어진 값 중 하나를 가질 때에만 해당 필드는 비어 있어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-prohibited-if)
 
 ```php
 Field::make('name')->prohibitedIf('field', 'value')
 ```
 
-### Prohibited Unless
+### Prohibited Unless {#prohibited-unless}
 
-The field must be empty *unless* the other specified field has any of the given values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-prohibited-unless)
+이 필드는 *다른* 지정된 필드가 주어진 값 중 하나를 가질 때를 *제외하고* 비어 있어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-prohibited-unless)
 
 ```php
 Field::make('name')->prohibitedUnless('field', 'value')
 ```
 
-### Prohibits
+### 금지 {#prohibits}
 
-If the field is not empty, all other specified fields must be empty. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-prohibits)
+필드가 비어 있지 않은 경우, 지정된 다른 모든 필드는 비어 있어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-prohibits)
 
 ```php
 Field::make('name')->prohibits('field')
@@ -343,110 +343,110 @@ Field::make('name')->prohibits('field')
 Field::make('name')->prohibits(['field', 'another_field'])
 ```
 
-### Required
+### 필수 {#required}
 
-The field value must not be empty. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-required)
+필드 값은 비어 있으면 안 됩니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-required)
 
 ```php
 Field::make('name')->required()
 ```
 
-### Required If
+### Required If {#required-if}
 
-The field value must not be empty _only if_ the other specified field has any of the given values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-required-if)
+이 필드는 _오직_ 지정된 다른 필드가 주어진 값 중 하나를 가질 때만 비어 있으면 안 됩니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-required-if)
 
 ```php
 Field::make('name')->requiredIf('field', 'value')
 ```
 
-### Required If Accepted
+### 필수(승인 시) {#required-if-accepted}
 
-The field value must not be empty _only if_ the other specified field is equal to "yes", "on", 1, "1", true, or "true". [See the Laravel documentation.](https://laravel.com/docs/validation#rule-required-if-accepted)
+이 필드는 _오직_ 지정된 다른 필드의 값이 "yes", "on", 1, "1", true, 또는 "true"일 때만 비어 있으면 안 됩니다. [라라벨 공식 문서를 참고하세요.](https://laravel.com/docs/validation#rule-required-if-accepted)
 
 ```php
 Field::make('name')->requiredIfAccepted('field')
 ```
 
-### Required Unless
+### 필수(Required) Unless {#required-unless}
 
-The field value must not be empty _unless_ the other specified field has any of the given values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-required-unless)
+해당 필드의 값은 _다른_ 지정된 필드가 주어진 값 중 하나를 가질 때를 _제외하고_ 비어 있으면 안 됩니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-required-unless)
 
 ```php
 Field::make('name')->requiredUnless('field', 'value')
 ```
 
-### Required With
+### Required With {#required-with}
 
-The field value must not be empty _only if_ any of the other specified fields are not empty. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-required-with)
+이 필드의 값은 _오직_ 지정된 다른 필드들 중 하나라도 비어 있지 않은 경우에만 비어 있으면 안 됩니다. [라라벨 공식 문서를 참고하세요.](https://laravel.com/docs/validation#rule-required-with)
 
 ```php
 Field::make('name')->requiredWith('field,another_field')
 ```
 
-### Required With All
+### 모든 필드와 함께 필수 {#required-with-all}
 
-The field value must not be empty _only if_ all the other specified fields are not empty. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-required-with-all)
+지정된 다른 모든 필드가 비어 있지 않은 경우에만 이 필드 값이 비어 있으면 안 됩니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-required-with-all)
 
 ```php
 Field::make('name')->requiredWithAll('field,another_field')
 ```
 
-### Required Without
+### 필수(다른 필드가 비어 있을 때) {#required-without}
 
-The field value must not be empty _only when_ any of the other specified fields are empty. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-required-without)
+이 필드는 _오직_ 지정된 다른 필드들 중 하나라도 비어 있을 때만 값이 비어 있으면 안 됩니다. [라라벨 문서 참고.](https://laravel.com/docs/validation#rule-required-without)
 
 ```php
 Field::make('name')->requiredWithout('field,another_field')
 ```
 
-### Required Without All
+### 모두 없을 때 필수 {#required-without-all}
 
-The field value must not be empty _only when_ all the other specified fields are empty. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-required-without-all)
+지정된 다른 모든 필드가 비어 있을 때에만 이 필드 값이 비어 있으면 안 됩니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-required-without-all)
 
 ```php
 Field::make('name')->requiredWithoutAll('field,another_field')
 ```
 
-### Regex
+### 정규식 {#regex}
 
-The field must match the given regular expression. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-regex)
+필드는 주어진 정규식과 일치해야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-regex)
 
 ```php
 Field::make('email')->regex('/^.+@.+$/i')
 ```
 
-### Same
+### 동일 {#same}
 
-The field value must be the same as another. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-same)
+필드 값이 다른 값과 동일해야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-same)
 
 ```php
 Field::make('password')->same('passwordConfirmation')
 ```
 
-### Starts With
+### Starts With {#starts-with}
 
-The field must start with one of the given values. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-starts-with)
+필드는 주어진 값 중 하나로 시작해야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-starts-with)
 
 ```php
 Field::make('name')->startsWith(['a'])
 ```
 
-### String
+### 문자열 {#string}
 
-The field must be a string. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-string)
+필드는 문자열이어야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-string)
 ```php
 Field::make('name')->string()
 ```
 
-### Unique
+### 고유성 {#unique}
 
-The field value must not exist in the database. [See the Laravel documentation.](https://laravel.com/docs/validation#rule-unique)
+필드 값이 데이터베이스에 존재하지 않아야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-unique)
 
 ```php
 Field::make('email')->unique()
 ```
 
-By default, the form's model will be searched, [if it is registered](adding-a-form-to-a-livewire-component#setting-a-form-model). You may specify a custom table name or model to search:
+기본적으로, 폼의 모델이 [등록되어 있다면](adding-a-form-to-a-livewire-component#setting-a-form-model) 해당 모델에서 검색이 이루어집니다. 검색할 커스텀 테이블명이나 모델을 지정할 수도 있습니다:
 
 ```php
 use App\Models\User;
@@ -454,25 +454,25 @@ use App\Models\User;
 Field::make('email')->unique(table: User::class)
 ```
 
-By default, the field name will be used as the column to search. You may specify a custom column to search:
+기본적으로, 필드명이 검색할 컬럼으로 사용됩니다. 검색할 커스텀 컬럼을 지정할 수도 있습니다:
 
 ```php
 Field::make('email')->unique(column: 'email_address')
 ```
 
-Sometimes, you may wish to ignore a given model during unique validation. For example, consider an "update profile" form that includes the user's name, email address, and location. You will probably want to verify that the email address is unique. However, if the user only changes the name field and not the email field, you do not want a validation error to be thrown because the user is already the owner of the email address in question.
+때때로, 고유성 검증 중에 특정 모델을 무시하고 싶을 수 있습니다. 예를 들어, 사용자의 이름, 이메일 주소, 위치를 포함하는 "프로필 수정" 폼을 생각해보세요. 이메일 주소가 고유한지 확인하고 싶겠지만, 사용자가 이름만 변경하고 이메일은 변경하지 않았다면, 이미 해당 이메일의 소유자이므로 검증 오류가 발생하지 않아야 합니다.
 
 ```php
 Field::make('email')->unique(ignorable: $ignoredUser)
 ```
 
-If you're using the [Panel Builder](../panels), you can easily ignore the current record by using `ignoreRecord` instead:
+[패널 빌더](../panels)를 사용 중이라면, `ignoreRecord`를 사용하여 현재 레코드를 쉽게 무시할 수 있습니다:
 
 ```php
 Field::make('email')->unique(ignoreRecord: true)
 ```
 
-You can further customize the rule by passing a [closure](advanced#closure-customization) to the `modifyRuleUsing` parameter:
+[클로저](/filament/3.x/forms/advanced#closure-customization)를 `modifyRuleUsing` 파라미터에 전달하여 규칙을 더욱 커스터마이즈할 수 있습니다:
 
 ```php
 use Illuminate\Validation\Rules\Unique;
@@ -484,41 +484,41 @@ Field::make('email')
 ```
 
 
-### ULID
+### ULID {#ulid}
 
-The field under validation must be a valid [Universally Unique Lexicographically Sortable Identifier](https://github.com/ulid/spec) (ULID). [See the Laravel documentation.](https://laravel.com/docs/validation#rule-ulid)
+검증 중인 필드는 유효한 [범용 고유 정렬 가능 식별자](https://github.com/ulid/spec) (ULID)여야 합니다. [라라벨 문서를 참고하세요.](https://laravel.com/docs/validation#rule-ulid)
 
 ```php
 Field::make('identifier')->ulid()
 ```
 
-### UUID
+### UUID {#uuid}
 
-The field must be a valid RFC 4122 (version 1, 3, 4, or 5) universally unique identifier (UUID). [See the Laravel documentation.](https://laravel.com/docs/validation#rule-uuid)
+이 필드는 RFC 4122(버전 1, 3, 4, 또는 5) 표준에 맞는 유효한 범용 고유 식별자(UUID)여야 합니다. [라라벨 공식 문서 참고.](https://laravel.com/docs/validation#rule-uuid)
 
 ```php
 Field::make('identifier')->uuid()
 ```
 
-## Other rules
+## 기타 규칙 {#other-rules}
 
-You may add other validation rules to any field using the `rules()` method:
+`rules()` 메서드를 사용하여 어떤 필드에도 다른 유효성 검사 규칙을 추가할 수 있습니다:
 
 ```php
 TextInput::make('slug')->rules(['alpha_dash'])
 ```
 
-A full list of validation rules may be found in the [Laravel documentation](https://laravel.com/docs/validation#available-validation-rules).
+유효성 검사 규칙의 전체 목록은 [Laravel 문서](https://laravel.com/docs/validation#available-validation-rules)에서 확인할 수 있습니다.
 
-## Custom rules
+## 커스텀 규칙 {#custom-rules}
 
-You may use any custom validation rules as you would do in [Laravel](https://laravel.com/docs/validation#custom-validation-rules):
+[Laravel](https://laravel.com/docs/validation#custom-validation-rules)에서와 마찬가지로, 원하는 커스텀 유효성 검사 규칙을 사용할 수 있습니다:
 
 ```php
 TextInput::make('slug')->rules([new Uppercase()])
 ```
 
-You may also use [closure rules](https://laravel.com/docs/validation#using-closures):
+[클로저 규칙](https://laravel.com/docs/validation#using-closures)도 사용할 수 있습니다:
 
 ```php
 use Closure;
@@ -532,7 +532,7 @@ TextInput::make('slug')->rules([
 ])
 ```
 
-You may [inject utilities](advanced#form-component-utility-injection) like [`$get`](advanced#injecting-the-state-of-another-field) into your custom rules, for example if you need to reference other field values in your form:
+폼에서 다른 필드 값을 참조해야 하는 경우, 커스텀 규칙에 [`$get`](/filament/3.x/forms/advanced#injecting-the-state-of-another-field)과 같은 [유틸리티를 주입](/filament/3.x/forms/advanced#form-component-utility-injection)할 수도 있습니다:
 
 ```php
 use Closure;
@@ -547,9 +547,9 @@ TextInput::make('slug')->rules([
 ])
 ```
 
-## Customizing validation attributes
+## 유효성 검사 속성 사용자 지정 {#customizing-validation-attributes}
 
-When fields fail validation, their label is used in the error message. To customize the label used in field error messages, use the `validationAttribute()` method:
+필드가 유효성 검사에 실패하면 해당 레이블이 오류 메시지에 사용됩니다. 필드 오류 메시지에 사용되는 레이블을 사용자 지정하려면 `validationAttribute()` 메서드를 사용하세요:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -557,9 +557,9 @@ use Filament\Forms\Components\TextInput;
 TextInput::make('name')->validationAttribute('full name')
 ```
 
-## Validation messages
+## 유효성 검사 메시지 {#validation-messages}
 
-By default Laravel's validation error message is used. To customize the error messages, use the `validationMessages()` method:
+기본적으로 Laravel의 유효성 검사 오류 메시지가 사용됩니다. 오류 메시지를 커스터마이즈하려면 `validationMessages()` 메서드를 사용하세요:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -567,13 +567,13 @@ use Filament\Forms\Components\TextInput;
 TextInput::make('email')
     ->unique(// ...)
     ->validationMessages([
-        'unique' => 'The :attribute has already been registered.',
+        'unique' => '이미 등록된 :attribute 입니다.',
     ])
 ```
 
-## Sending validation notifications
+## 유효성 검사 알림 보내기 {#sending-validation-notifications}
 
-If you want to send a notification when validation error occurs, you may do so by using the `onValidationError()` method on your Livewire component:
+유효성 검사 오류가 발생했을 때 알림을 보내고 싶다면, Livewire 컴포넌트에서 `onValidationError()` 메서드를 사용하면 됩니다:
 
 ```php
 use Filament\Notifications\Notification;
@@ -588,7 +588,7 @@ protected function onValidationError(ValidationException $exception): void
 }
 ```
 
-Alternatively, if you are using the Panel Builder and want this behavior on all the pages, add this inside the `boot()` method of your `AppServiceProvider`:
+또는, Panel Builder를 사용하고 있고 모든 페이지에서 이 동작을 원한다면, `AppServiceProvider`의 `boot()` 메서드 안에 다음 코드를 추가하세요:
 
 ```php
 use Filament\Notifications\Notification;

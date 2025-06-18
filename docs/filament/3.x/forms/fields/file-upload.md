@@ -1,19 +1,19 @@
 ---
-title: File upload
+title: FileUpload
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [폼.필드] FileUpload
 
-## Overview
+
+## 개요 {#overview}
 
 <LaracastsBanner
-    title="File Uploads"
-    description="Watch the Rapid Laravel Development with Filament series on Laracasts - it will teach you the basics of adding file upload fields to Filament forms."
+    title="파일 업로드"
+    description="Laracasts의 Rapid Laravel Development with Filament 시리즈를 시청하세요. Filament 폼에 파일 업로드 필드를 추가하는 기본 방법을 배울 수 있습니다."
     url="https://laracasts.com/series/rapid-laravel-development-with-filament/episodes/8"
     series="rapid-laravel-development"
 />
 
-The file upload field is based on [Filepond](https://pqina.nl/filepond).
+파일 업로드 필드는 [Filepond](https://pqina.nl/filepond)를 기반으로 합니다.
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -21,17 +21,17 @@ use Filament\Forms\Components\FileUpload;
 FileUpload::make('attachment')
 ```
 
-<AutoScreenshot name="forms/fields/file-upload/simple" alt="File upload" version="3.x" />
+<AutoScreenshot name="forms/fields/file-upload/simple" alt="파일 업로드" version="3.x" />
 
-> Filament also supports [`spatie/laravel-medialibrary`](https://github.com/spatie/laravel-medialibrary). See our [plugin documentation](/plugins/filament-spatie-media-library) for more information.
+> Filament는 [`spatie/laravel-medialibrary`](https://github.com/spatie/laravel-medialibrary)도 지원합니다. 자세한 내용은 [플러그인 문서](https://filamentphp.com/plugins/filament-spatie-media-library)를 참고하세요.
 
-## Configuring the storage disk and directory
+## 저장소 디스크 및 디렉터리 설정 {#configuring-the-storage-disk-and-directory}
 
-By default, files will be uploaded publicly to your storage disk defined in the [configuration file](../installation#publishing-configuration). You can also set the `FILAMENT_FILESYSTEM_DISK` environment variable to change this.
+기본적으로 파일은 [설정 파일](../installation#publishing-configuration)에 정의된 저장소 디스크에 공개적으로 업로드됩니다. `FILAMENT_FILESYSTEM_DISK` 환경 변수를 설정하여 이를 변경할 수도 있습니다.
 
-> To correctly preview images and other files, FilePond requires files to be served from the same domain as the app, or the appropriate CORS headers need to be present. Ensure that the `APP_URL` environment variable is correct, or modify the [filesystem](https://laravel.com/docs/filesystem) driver to set the correct URL. If you're hosting files on a separate domain like S3, ensure that CORS headers are set up.
+> 이미지 및 기타 파일을 올바르게 미리보기하려면 FilePond가 앱과 동일한 도메인에서 파일이 제공되거나, 적절한 CORS 헤더가 있어야 합니다. `APP_URL` 환경 변수가 올바른지 확인하거나, [filesystem](https://laravel.com/docs/filesystem) 드라이버를 수정하여 올바른 URL을 설정하세요. S3와 같은 별도의 도메인에 파일을 호스팅하는 경우 CORS 헤더가 설정되어 있는지 확인하세요.
 
-To change the disk and directory for a specific field, and the visibility of files, use the `disk()`, `directory()` and `visibility()` methods:
+특정 필드에 대해 디스크와 디렉터리, 파일의 공개 범위를 변경하려면 `disk()`, `directory()`, `visibility()` 메서드를 사용하세요:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -42,11 +42,11 @@ FileUpload::make('attachment')
     ->visibility('private')
 ```
 
-> It is the responsibility of the developer to delete these files from the disk if they are removed, as Filament is unaware if they are depended on elsewhere. One way to do this automatically is observing a [model event](https://laravel.com/docs/eloquent#events).
+> 파일이 삭제될 경우, Filament는 해당 파일이 다른 곳에서 사용되는지 알 수 없으므로, 개발자가 직접 디스크에서 파일을 삭제해야 합니다. 이를 자동으로 처리하는 한 가지 방법은 [모델 이벤트](https://laravel.com/docs/eloquent#events)를 관찰하는 것입니다.
 
-## Uploading multiple files
+## 여러 파일 업로드하기 {#uploading-multiple-files}
 
-You may also upload multiple files. This stores URLs in JSON:
+여러 파일을 업로드할 수도 있습니다. 이 경우 URL이 JSON으로 저장됩니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -55,7 +55,7 @@ FileUpload::make('attachments')
     ->multiple()
 ```
 
-If you're saving the file URLs using Eloquent, you should be sure to add an `array` [cast](https://laravel.com/docs/eloquent-mutators#array-and-json-casting) to the model property:
+파일 URL을 Eloquent를 사용해 저장하는 경우, 모델 속성에 `array` [캐스트](https://laravel.com/docs/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -70,9 +70,9 @@ class Message extends Model
 }
 ```
 
-### Controlling the maximum parallel uploads
+### 최대 동시 업로드 수 제어하기 {#controlling-the-maximum-parallel-uploads}
 
-You can control the maximum number of parallel uploads using the `maxParallelUploads()` method:
+`maxParallelUploads()` 메서드를 사용하여 최대 동시 업로드 수를 제어할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -82,29 +82,29 @@ FileUpload::make('attachments')
     ->maxParallelUploads(1)
 ```
 
-This will limit the number of parallel uploads to `1`. If unset, we'll use the [default FilePond value](https://pqina.nl/filepond/docs/api/instance/properties/#core-properties) which is `2`.
+이렇게 하면 동시 업로드 수가 `1`로 제한됩니다. 설정하지 않으면 [기본 FilePond 값](https://pqina.nl/filepond/docs/api/instance/properties/#core-properties)인 `2`가 사용됩니다.
 
-## Controlling file names
+## 파일 이름 제어하기 {#controlling-file-names}
 
-By default, a random file name will be generated for newly-uploaded files. This is to ensure that there are never any conflicts with existing files.
+기본적으로, 새로 업로드된 파일에는 무작위 파일 이름이 생성됩니다. 이는 기존 파일과의 충돌이 발생하지 않도록 하기 위함입니다.
 
-### Security implications of controlling file names
+### 파일 이름 제어의 보안상 영향 {#security-implications-of-controlling-file-names}
 
-Before using the `preserveFilenames()` or `getUploadedFileNameForStorageUsing()` methods, please be aware of the security implications. If you allow users to upload files with their own file names, there are ways that they can exploit this to upload malicious files. **This applies even if you use the [`acceptedFileTypes()`](#file-type-validation) method** to restrict the types of files that can be uploaded, since it uses Laravel's `mimetypes` rule which does not validate the extension of the file, only its mime type, which could be manipulated.
+`preserveFilenames()` 또는 `getUploadedFileNameForStorageUsing()` 메서드를 사용하기 전에, 보안상 영향을 반드시 인지해야 합니다. 사용자가 직접 파일 이름을 지정하여 파일을 업로드할 수 있도록 허용하면, 이를 악용해 악성 파일을 업로드할 수 있는 방법이 존재합니다. **이것은 [`acceptedFileTypes()`](#file-type-validation) 메서드를 사용하여 업로드 가능한 파일 유형을 제한하더라도 마찬가지입니다.** 이 메서드는 Laravel의 `mimetypes` 규칙을 사용하기 때문에 파일의 확장자가 아닌 mime type만을 검증하며, mime type은 조작될 수 있습니다.
 
-This is specifically an issue with the `getClientOriginalName()` method on the `TemporaryUploadedFile` object, which the `preserveFilenames()` method uses. By default, Livewire generates a random file name for each file uploaded, and uses the mime type of the file to determine the file extension.
+이 문제는 특히 `TemporaryUploadedFile` 객체의 `getClientOriginalName()` 메서드와 관련이 있으며, `preserveFilenames()` 메서드는 이를 사용합니다. 기본적으로 Livewire는 업로드된 각 파일에 대해 무작위 파일 이름을 생성하고, 파일의 mime type을 사용하여 파일 확장자를 결정합니다.
 
-Using these methods **with the `local` or `public` filesystem disks** will make your app vulnerable to remote code execution if the attacker uploads a PHP file with a deceptive mime type. **Using an S3 disk protects you from this specific attack vector**, as S3 will not execute PHP files in the same way that your server might when serving files from local storage.
+이러한 메서드를 **`local` 또는 `public` 파일 시스템 디스크와 함께 사용할 경우**, 공격자가 속임수 mime type을 가진 PHP 파일을 업로드하면 원격 코드 실행에 취약해질 수 있습니다. **S3 디스크를 사용할 경우에는 이 특정 공격 벡터로부터 보호받을 수 있습니다.** S3는 로컬 스토리지에서 파일을 제공할 때처럼 PHP 파일을 실행하지 않기 때문입니다.
 
-If you are using the `local` or `public` disk, you should consider using the [`storeFileNamesIn()` method](#storing-original-file-names-independently) to store the original file names in a separate column in your database, and keep the randomly generated file names in the file system. This way, you can still display the original file names to users, while keeping the file system secure.
+`local` 또는 `public` 디스크를 사용하는 경우, [`storeFileNamesIn()` 메서드](#storing-original-file-names-independently)를 사용하여 원본 파일 이름을 데이터베이스의 별도 컬럼에 저장하고, 파일 시스템에는 무작위로 생성된 파일 이름을 유지하는 방식을 고려해야 합니다. 이렇게 하면 파일 시스템의 보안을 유지하면서도 사용자에게 원본 파일 이름을 표시할 수 있습니다.
 
-On top of this security issue, you should also be aware that allowing users to upload files with their own file names can lead to conflicts with existing files, and can make it difficult to manage your storage. Users could upload files with the same name and overwrite the other's content if you do not scope them to a specific directory, so these features should in all cases only be accessible to trusted users.
+이 보안 문제 외에도, 사용자가 직접 파일 이름을 지정하여 업로드할 수 있도록 허용하면 기존 파일과의 충돌이 발생할 수 있으며, 스토리지 관리가 어려워질 수 있습니다. 특정 디렉터리로 범위를 지정하지 않으면 사용자가 동일한 이름의 파일을 업로드하여 다른 사용자의 파일을 덮어쓸 수 있으므로, 이러한 기능은 반드시 신뢰할 수 있는 사용자에게만 제공해야 합니다.
 
-### Preserving original file names
+### 원본 파일 이름 유지 {#preserving-original-file-names}
 
-> Important: Before using this feature, please ensure that you have read the [security implications](#security-implications-of-controlling-file-names).
+> 중요: 이 기능을 사용하기 전에 [파일 이름 제어의 보안 영향](#security-implications-of-controlling-file-names)을 반드시 읽어보시기 바랍니다.
 
-To preserve the original filenames of the uploaded files, use the `preserveFilenames()` method:
+업로드된 파일의 원본 파일 이름을 유지하려면 `preserveFilenames()` 메서드를 사용하세요:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -113,11 +113,11 @@ FileUpload::make('attachment')
     ->preserveFilenames()
 ```
 
-### Generating custom file names
+### 사용자 지정 파일 이름 생성 {#generating-custom-file-names}
 
-> Important: Before using this feature, please ensure that you have read the [security implications](#security-implications-of-controlling-file-names).
+> 중요: 이 기능을 사용하기 전에 [파일 이름 제어의 보안 영향](#security-implications-of-controlling-file-names)을 반드시 읽어보시기 바랍니다.
 
-You may completely customize how file names are generated using the `getUploadedFileNameForStorageUsing()` method, and returning a string from the closure based on the `$file` that was uploaded:
+`getUploadedFileNameForStorageUsing()` 메서드를 사용하여 파일 이름이 생성되는 방식을 완전히 사용자 지정할 수 있습니다. 업로드된 `$file`을 기반으로 클로저에서 문자열을 반환하면 됩니다:
 
 ```php
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -129,9 +129,9 @@ FileUpload::make('attachment')
     )
 ```
 
-### Storing original file names independently
+### 원본 파일 이름을 별도로 저장하기 {#storing-original-file-names-independently}
 
-You can keep the randomly generated file names, while still storing the original file name, using the `storeFileNamesIn()` method:
+`storeFileNamesIn()` 메서드를 사용하면 무작위로 생성된 파일 이름을 유지하면서도 원본 파일 이름을 저장할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -141,11 +141,11 @@ FileUpload::make('attachments')
     ->storeFileNamesIn('attachment_file_names')
 ```
 
-`attachment_file_names` will now store the original file names of your uploaded files, so you can save them to the database when the form is submitted. If you're uploading `multiple()` files, make sure that you add an `array` [cast](https://laravel.com/docs/eloquent-mutators#array-and-json-casting) to this Eloquent model property too.
+이제 `attachment_file_names`에는 업로드한 파일의 원본 파일 이름이 저장되므로, 폼이 제출될 때 이를 데이터베이스에 저장할 수 있습니다. `multiple()` 파일 업로드를 사용하는 경우, 해당 Eloquent 모델 속성에 [array 캐스팅](https://laravel.com/docs/eloquent-mutators#array-and-json-casting)도 추가해야 합니다.
 
-## Avatar mode
+## 아바타 모드 {#avatar-mode}
 
-You can enable avatar mode for your file upload field using the `avatar()` method:
+`avatar()` 메서드를 사용하여 파일 업로드 필드에 아바타 모드를 활성화할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -154,13 +154,13 @@ FileUpload::make('avatar')
     ->avatar()
 ```
 
-This will only allow images to be uploaded, and when they are, it will display them in a compact circle layout that is perfect for avatars.
+이렇게 하면 이미지 파일만 업로드할 수 있으며, 업로드된 이미지는 아바타에 적합한 컴팩트한 원형 레이아웃으로 표시됩니다.
 
-This feature pairs well with the [circle cropper](#allowing-users-to-crop-images-as-a-circle).
+이 기능은 [원형 크로퍼](#allowing-users-to-crop-images-as-a-circle)와 함께 사용하면 더욱 좋습니다.
 
-## Image editor
+## 이미지 편집기 {#image-editor}
 
-You can enable an image editor for your file upload field using the `imageEditor()` method:
+`imageEditor()` 메서드를 사용하여 파일 업로드 필드에 이미지 편집기를 활성화할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -170,11 +170,11 @@ FileUpload::make('image')
     ->imageEditor()
 ```
 
-You can open the editor once you upload an image by clicking the pencil icon. You can also open the editor by clicking the pencil icon on an existing image, which will remove and re-upload it on save.
+이미지를 업로드한 후 연필 아이콘을 클릭하면 편집기를 열 수 있습니다. 기존 이미지의 연필 아이콘을 클릭해도 편집기를 열 수 있으며, 저장 시 이미지를 제거하고 다시 업로드합니다.
 
-### Allowing users to crop images to aspect ratios
+### 사용자가 이미지의 종횡비를 맞춰 자르도록 허용하기 {#allowing-users-to-crop-images-to-aspect-ratios}
 
-You can allow users to crop images to a set of specific aspect ratios using the `imageEditorAspectRatios()` method:
+`imageEditorAspectRatios()` 메서드를 사용하여 사용자가 특정 종횡비로 이미지를 자를 수 있도록 허용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -189,7 +189,7 @@ FileUpload::make('image')
     ])
 ```
 
-You can also allow users to choose no aspect ratio, "free cropping", by passing `null` as an option:
+옵션으로 `null`을 전달하면 사용자가 종횡비를 지정하지 않고 "자유 자르기"를 선택할 수 있도록 할 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -205,9 +205,9 @@ FileUpload::make('image')
     ])
 ```
 
-### Setting the image editor's mode
+### 이미지 편집기 모드 설정하기 {#setting-the-image-editors-mode}
 
-You can change the mode of the image editor using the `imageEditorMode()` method, which accepts either `1`, `2` or `3`. These options are explained in the [Cropper.js documentation](https://github.com/fengyuanchen/cropperjs#viewmode):
+`imageEditorMode()` 메서드를 사용하여 이미지 편집기의 모드를 변경할 수 있습니다. 이 메서드는 `1`, `2`, `3` 중 하나를 인자로 받습니다. 각 옵션에 대한 설명은 [Cropper.js 문서](https://github.com/fengyuanchen/cropperjs#viewmode)에서 확인할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -218,9 +218,9 @@ FileUpload::make('image')
     ->imageEditorMode(2)
 ```
 
-### Customizing the image editor's empty fill color
+### 이미지 에디터의 빈 공간 채우기 색상 커스터마이즈하기 {#customizing-the-image-editors-empty-fill-color}
 
-By default, the image editor will make the empty space around the image transparent. You can customize this using the `imageEditorEmptyFillColor()` method:
+기본적으로 이미지 에디터는 이미지 주변의 빈 공간을 투명하게 만듭니다. `imageEditorEmptyFillColor()` 메서드를 사용하여 이를 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -231,9 +231,9 @@ FileUpload::make('image')
     ->imageEditorEmptyFillColor('#000000')
 ```
 
-### Setting the image editor's viewport size
+### 이미지 편집기 뷰포트 크기 설정하기 {#setting-the-image-editors-viewport-size}
 
-You can change the size of the image editor's viewport using the `imageEditorViewportWidth()` and `imageEditorViewportHeight()` methods, which generate an aspect ratio to use across device sizes:
+`imageEditorViewportWidth()`와 `imageEditorViewportHeight()` 메서드를 사용하여 이미지 편집기의 뷰포트 크기를 변경할 수 있습니다. 이 메서드들은 다양한 기기 크기에서 사용할 종횡비를 생성합니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -245,9 +245,9 @@ FileUpload::make('image')
     ->imageEditorViewportHeight('1080')
 ```
 
-### Allowing users to crop images as a circle
+### 사용자가 이미지를 원형으로 자르도록 허용하기 {#allowing-users-to-crop-images-as-a-circle}
 
-You can allow users to crop images as a circle using the `circleCropper()` method:
+`circleCropper()` 메서드를 사용하여 사용자가 이미지를 원형으로 자를 수 있도록 허용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -259,11 +259,11 @@ FileUpload::make('image')
     ->circleCropper()
 ```
 
-This is perfectly accompanied by the [`avatar()` method](#avatar-mode), which renders the images in a compact circle layout.
+이 기능은 이미지를 컴팩트한 원형 레이아웃으로 렌더링하는 [`avatar()` 메서드](#avatar-mode)와 완벽하게 어울립니다.
 
-### Cropping and resizing images without the editor
+### 에디터 없이 이미지 자르기 및 크기 조정 {#cropping-and-resizing-images-without-the-editor}
 
-Filepond allows you to crop and resize images before they are uploaded, without the need for a separate editor. You can customize this behavior using the `imageCropAspectRatio()`, `imageResizeTargetHeight()` and `imageResizeTargetWidth()` methods. `imageResizeMode()` should be set for these methods to have an effect - either [`force`, `cover`, or `contain`](https://pqina.nl/filepond/docs/api/plugins/image-resize).
+Filepond를 사용하면 별도의 에디터 없이 이미지를 업로드하기 전에 자르거나 크기를 조정할 수 있습니다. 이 동작은 `imageCropAspectRatio()`, `imageResizeTargetHeight()`, `imageResizeTargetWidth()` 메서드를 사용하여 커스터마이즈할 수 있습니다. 이러한 메서드가 효과를 발휘하려면 `imageResizeMode()`를 반드시 설정해야 하며, 값은 [`force`, `cover`, `contain`](https://pqina.nl/filepond/docs/api/plugins/image-resize) 중 하나여야 합니다.
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -276,9 +276,9 @@ FileUpload::make('image')
     ->imageResizeTargetHeight('1080')
 ```
 
-## Altering the appearance of the file upload area
+## 파일 업로드 영역의 외관 변경 {#altering-the-appearance-of-the-file-upload-area}
 
-You may also alter the general appearance of the Filepond component. Available options for these methods are available on the [Filepond website](https://pqina.nl/filepond/docs/api/instance/properties/#styles).
+Filepond 컴포넌트의 전반적인 외관도 변경할 수 있습니다. 이러한 메서드에서 사용할 수 있는 옵션은 [Filepond 웹사이트](https://pqina.nl/filepond/docs/api/instance/properties/#styles)에서 확인할 수 있습니다.
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -293,9 +293,9 @@ FileUpload::make('attachment')
     ->uploadProgressIndicatorPosition('left')
 ```
 
-### Displaying files in a grid
+### 그리드에서 파일 표시하기 {#displaying-files-in-a-grid}
 
-You can use the [Filepond `grid` layout](https://pqina.nl/filepond/docs/api/style/#grid-layout) by setting the `panelLayout()`:
+`panelLayout()`을 설정하여 [Filepond `grid` 레이아웃](https://pqina.nl/filepond/docs/api/style/#grid-layout)을 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -305,9 +305,9 @@ FileUpload::make('attachments')
     ->panelLayout('grid')
 ```
 
-## Reordering files
+## 파일 순서 변경 {#reordering-files}
 
-You can also allow users to re-order uploaded files using the `reorderable()` method:
+`reorderable()` 메서드를 사용하여 사용자가 업로드된 파일의 순서를 변경할 수 있도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -317,7 +317,7 @@ FileUpload::make('attachments')
     ->reorderable()
 ```
 
-When using this method, FilePond may add newly-uploaded files to the beginning of the list, instead of the end. To fix this, use the `appendFiles()` method:
+이 메서드를 사용할 때, FilePond는 새로 업로드된 파일을 목록의 끝이 아닌 시작 부분에 추가할 수 있습니다. 이를 해결하려면 `appendFiles()` 메서드를 사용하세요:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -328,9 +328,9 @@ FileUpload::make('attachments')
     ->appendFiles()
 ```
 
-## Opening files in a new tab
+## 새 탭에서 파일 열기 {#opening-files-in-a-new-tab}
 
-You can add a button to open each file in a new tab with the `openable()` method:
+`openable()` 메서드를 사용하여 각 파일을 새 탭에서 열 수 있는 버튼을 추가할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -340,9 +340,9 @@ FileUpload::make('attachments')
     ->openable()
 ```
 
-## Downloading files
+## 파일 다운로드 {#downloading-files}
 
-If you wish to add a download button to each file instead, you can use the `downloadable()` method:
+각 파일에 다운로드 버튼을 추가하고 싶다면, `downloadable()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -352,9 +352,9 @@ FileUpload::make('attachments')
     ->downloadable()
 ```
 
-## Previewing files
+## 파일 미리보기 {#previewing-files}
 
-By default, some file types can be previewed in FilePond. If you wish to disable the preview for all files, you can use the `previewable(false)` method:
+기본적으로 일부 파일 유형은 FilePond에서 미리볼 수 있습니다. 모든 파일에 대해 미리보기를 비활성화하려면 `previewable(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -364,9 +364,9 @@ FileUpload::make('attachments')
     ->previewable(false)
 ```
 
-## Moving files instead of copying when the form is submitted
+## 폼 제출 시 파일을 복사하는 대신 이동하기 {#moving-files-instead-of-copying-when-the-form-is-submitted}
 
-By default, files are initially uploaded to Livewire's temporary storage directory, and then copied to the destination directory when the form is submitted. If you wish to move the files instead, providing that temporary uploads are stored on the same disk as permanent files, you can use the `moveFiles()` method:
+기본적으로 파일은 처음에 Livewire의 임시 저장소 디렉터리에 업로드된 후, 폼이 제출될 때 대상 디렉터리로 복사됩니다. 만약 파일을 복사하는 대신 이동하고 싶다면, 임시 업로드와 영구 파일이 동일한 디스크에 저장되어 있어야 하며, 이 경우 `moveFiles()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -375,9 +375,9 @@ FileUpload::make('attachment')
     ->moveFiles()
 ```
 
-## Preventing files from being stored permanently
+## 파일이 영구적으로 저장되는 것을 방지하기 {#preventing-files-from-being-stored-permanently}
 
-If you wish to prevent files from being stored permanently when the form is submitted, you can use the `storeFiles(false)` method:
+폼이 제출될 때 파일이 영구적으로 저장되는 것을 방지하고 싶다면, `storeFiles(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -386,13 +386,13 @@ FileUpload::make('attachment')
     ->storeFiles(false)
 ```
 
-When the form is submitted, a temporary file upload object will be returned instead of a permanently stored file path. This is perfect for temporary files like imported CSVs.
+폼이 제출되면, 영구적으로 저장된 파일 경로 대신 임시 파일 업로드 객체가 반환됩니다. 이는 임시 파일(예: 가져온 CSV 파일) 등에 적합합니다.
 
-Please be aware that images, video and audio files will not show the stored file name in the form's preview, unless you use [`previewable(false)`](#previewing-files). This is due to a limitation with the FilePond preview plugin.
+이미지, 비디오, 오디오 파일의 경우 [`previewable(false)`](#previewing-files) 옵션을 사용하지 않으면 폼의 미리보기에서 저장된 파일 이름이 표시되지 않습니다. 이는 FilePond 미리보기 플러그인의 한계 때문입니다.
 
-## Orienting images from their EXIF data
+## EXIF 데이터로부터 이미지 방향 맞추기 {#orienting-images-from-their-exif-data}
 
-By default, FilePond will automatically orient images based on their EXIF data. If you wish to disable this behavior, you can use the `orientImagesFromExif(false)` method:
+기본적으로 FilePond는 이미지의 EXIF 데이터를 기반으로 이미지를 자동으로 방향에 맞게 조정합니다. 이 동작을 비활성화하려면 `orientImagesFromExif(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -401,9 +401,9 @@ FileUpload::make('attachment')
     ->orientImagesFromExif(false)
 ```
 
-## Hiding the remove file button
+## 업로드된 파일 삭제 버튼 숨기기 {#hiding-the-remove-file-button}
 
-It is also possible to hide the remove uploaded file button by using `deletable(false)`:
+`deletable(false)`을 사용하여 업로드된 파일 삭제 버튼을 숨길 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -412,9 +412,9 @@ FileUpload::make('attachment')
     ->deletable(false)
 ```
 
-## Preventing pasting files
+## 파일 붙여넣기 방지 {#preventing-pasting-files}
 
-You can disable the ability to paste files via the clipboard using the `pasteable(false)` method:
+클립보드를 통해 파일을 붙여넣는 기능을 `pasteable(false)` 메서드를 사용하여 비활성화할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -423,9 +423,9 @@ FileUpload::make('attachment')
     ->pasteable(false)
 ```
 
-## Prevent file information fetching
+## 파일 정보 가져오기 방지 {#prevent-file-information-fetching}
 
-While the form is loaded, it will automatically detect whether the files exist, what size they are, and what type of files they are. This is all done on the backend. When using remote storage with many files, this can be time-consuming. You can use the `fetchFileInformation(false)` method to disable this feature:
+폼이 로드되는 동안, 파일이 존재하는지, 크기가 얼마인지, 파일 유형이 무엇인지가 자동으로 감지됩니다. 이 모든 과정은 백엔드에서 처리됩니다. 파일이 많은 원격 스토리지를 사용할 때는 이 과정이 시간이 오래 걸릴 수 있습니다. 이 기능을 비활성화하려면 `fetchFileInformation(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -434,26 +434,26 @@ FileUpload::make('attachment')
     ->fetchFileInformation(false)
 ```
 
-## Customizing the uploading message
+## 업로드 메시지 커스터마이징 {#customizing-the-uploading-message}
 
-You may customize the uploading message that is displayed in the form's submit button using the `uploadingMessage()` method:
+폼의 제출 버튼에 표시되는 업로드 메시지는 `uploadingMessage()` 메서드를 사용하여 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
 
 FileUpload::make('attachment')
-    ->uploadingMessage('Uploading attachment...')
+    ->uploadingMessage('첨부 파일을 업로드하는 중...')
 ```
 
-## File upload validation
+## 파일 업로드 검증 {#file-upload-validation}
 
-As well as all rules listed on the [validation](../validation) page, there are additional rules that are specific to file uploads.
+[검증](../validation) 페이지에 나열된 모든 규칙뿐만 아니라, 파일 업로드에만 적용되는 추가 규칙들이 있습니다.
 
-Since Filament is powered by Livewire and uses its file upload system, you will want to refer to the default Livewire file upload validation rules in the `config/livewire.php` file as well. This also controls the 12MB file size maximum.
+Filament는 Livewire를 기반으로 하며 Livewire의 파일 업로드 시스템을 사용하므로, `config/livewire.php` 파일에 있는 기본 Livewire 파일 업로드 검증 규칙도 참고해야 합니다. 이 설정은 12MB 파일 크기 제한도 제어합니다.
 
-### File type validation
+### 파일 유형 검증 {#file-type-validation}
 
-You may restrict the types of files that may be uploaded using the `acceptedFileTypes()` method, and passing an array of MIME types.
+`acceptedFileTypes()` 메서드를 사용하여 업로드할 수 있는 파일 유형을 제한할 수 있으며, MIME 타입의 배열을 전달합니다.
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -462,7 +462,7 @@ FileUpload::make('document')
     ->acceptedFileTypes(['application/pdf'])
 ```
 
-You may also use the `image()` method as shorthand to allow all image MIME types.
+모든 이미지 MIME 타입을 허용하려면 `image()` 메서드를 간단하게 사용할 수도 있습니다.
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -471,9 +471,9 @@ FileUpload::make('image')
     ->image()
 ```
 
-#### Custom MIME type mapping
+#### 사용자 지정 MIME 타입 매핑 {#custom-mime-type-mapping}
 
-Some file formats may not be recognized correctly by the browser when uploading files. Filament allows you to manually define MIME types for specific file extensions using the `mimeTypeMap()` method:
+일부 파일 형식은 파일 업로드 시 브라우저에서 올바르게 인식되지 않을 수 있습니다. Filament에서는 `mimeTypeMap()` 메서드를 사용하여 특정 파일 확장자에 대한 MIME 타입을 수동으로 정의할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -489,9 +489,9 @@ FileUpload::make('designs')
     ]);
 ```
 
-### File size validation
+### 파일 크기 검증 {#file-size-validation}
 
-You may also restrict the size of uploaded files in kilobytes:
+업로드된 파일의 크기를 킬로바이트 단위로 제한할 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -501,24 +501,24 @@ FileUpload::make('attachment')
     ->maxSize(1024)
 ```
 
-#### Uploading large files
+#### 대용량 파일 업로드 {#uploading-large-files}
 
-If you experience issues when uploading large files, such as HTTP requests failing with a response status of 422 in the browser's console, you may need to tweak your configuration.
+대용량 파일을 업로드할 때, 브라우저 콘솔에서 HTTP 요청이 422 상태 코드로 실패하는 등의 문제가 발생한다면, 설정을 조정해야 할 수 있습니다.
 
-In the `php.ini` file for your server, increasing the maximum file size may fix the issue:
+서버의 `php.ini` 파일에서 최대 파일 크기를 늘리면 문제가 해결될 수 있습니다:
 
 ```ini
 post_max_size = 120M
 upload_max_filesize = 120M
 ```
 
-Livewire also validates file size before uploading. To publish the Livewire config file, run:
+Livewire는 업로드 전에 파일 크기도 검증합니다. Livewire 설정 파일을 발행하려면 다음 명령어를 실행하세요:
 
 ```bash
 php artisan livewire:publish --config
 ```
 
-The [max upload size can be adjusted in the `rules` key of `temporary_file_upload`]((https://livewire.laravel.com/docs/uploads#global-validation)). In this instance, KB are used in the rule, and 120MB is 122880KB:
+[최대 업로드 크기는 `temporary_file_upload`의 `rules` 키에서 조정할 수 있습니다](https://livewire.laravel.com/docs/uploads#global-validation). 이때 규칙에서는 KB 단위를 사용하며, 120MB는 122880KB입니다:
 
 ```php
 'temporary_file_upload' => [
@@ -528,9 +528,9 @@ The [max upload size can be adjusted in the `rules` key of `temporary_file_uploa
 ],
 ```
 
-### Number of files validation
+### 파일 개수 유효성 검사 {#number-of-files-validation}
 
-You may customize the number of files that may be uploaded, using the `minFiles()` and `maxFiles()` methods:
+업로드할 수 있는 파일의 개수는 `minFiles()`와 `maxFiles()` 메서드를 사용하여 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\FileUpload;

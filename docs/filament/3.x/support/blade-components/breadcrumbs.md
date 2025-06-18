@@ -1,18 +1,18 @@
 ---
-title: Breadcrumbs Blade component
+title: Breadcrumbs 블레이드 컴포넌트
 ---
+# [핵심개념.Blade컴포넌트] breadcrumbs
+## 개요 {#overview}
 
-## Overview
-
-The breadcrumbs component is used to render a simple, linear navigation that informs the user of their current location within the application:
+breadcrumbs 컴포넌트는 사용자가 애플리케이션 내에서 현재 위치를 알 수 있도록 간단하고 선형적인 내비게이션을 렌더링하는 데 사용됩니다:
 
 ```blade
 <x-filament::breadcrumbs :breadcrumbs="[
-    '/' => 'Home',
-    '/dashboard' => 'Dashboard',
-    '/dashboard/users' => 'Users',
-    '/dashboard/users/create' => 'Create User',
+    '/' => '홈',
+    '/dashboard' => '대시보드',
+    '/dashboard/users' => '사용자',
+    '/dashboard/users/create' => '사용자 생성',
 ]" />
 ```
 
-The keys of the array are URLs that the user is able to click on to navigate, and the values are the text that will be displayed for each link.
+배열의 키는 사용자가 클릭하여 이동할 수 있는 URL이고, 값은 각 링크에 표시될 텍스트입니다.

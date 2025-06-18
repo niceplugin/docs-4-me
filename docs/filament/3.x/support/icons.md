@@ -1,32 +1,32 @@
 ---
-title: Icons
+title: 아이콘
 ---
+# [핵심개념] 아이콘
+## 개요 {#overview}
 
-## Overview
+아이콘은 Filament UI 전체에서 사용자 경험의 핵심 부분을 시각적으로 전달하는 데 사용됩니다. 아이콘을 렌더링하기 위해 우리는 Blade UI Kit의 [Blade Icons](https://github.com/blade-ui-kit/blade-icons) 패키지를 사용합니다.
 
-Icons are used throughout the entire Filament UI to visually communicate core parts of the user experience. To render icons, we use the [Blade Icons](https://github.com/blade-ui-kit/blade-icons) package from Blade UI Kit.
+이들은 다양한 Blade Icons 패키지에서 [사용 가능한 모든 아이콘을 검색할 수 있는 웹사이트](https://blade-ui-kit.com/blade-icons?set=1#search)를 제공합니다. 각 패키지는 선택할 수 있는 서로 다른 아이콘 세트를 포함하고 있습니다.
 
-They have a website where you can [search all the available icons](https://blade-ui-kit.com/blade-icons?set=1#search) from various Blade Icons packages. Each package contains a different icon set that you can choose from.
+## 커스텀 SVG를 아이콘으로 사용하기 {#using-custom-svgs-as-icons}
 
-## Using custom SVGs as icons
+[Blade Icons](https://github.com/blade-ui-kit/blade-icons) 패키지를 사용하면 커스텀 SVG를 아이콘으로 등록할 수 있습니다. Filament에서 직접 만든 아이콘을 사용하고 싶을 때 유용합니다.
 
-The [Blade Icons](https://github.com/blade-ui-kit/blade-icons) package allows you to register custom SVGs as icons. This is useful if you want to use your own custom icons in Filament.
-
-To start with, publish the Blade Icons configuration file:
+먼저, Blade Icons 설정 파일을 퍼블리시합니다:
 
 ```bash
 php artisan vendor:publish --tag=blade-icons
 ```
 
-Now, open the `config/blade-icons.php` file, and uncomment the `default` set in the `sets` array.
+이제 `config/blade-icons.php` 파일을 열고, `sets` 배열에서 `default` 세트의 주석을 해제하세요.
 
-Now that the default set exists in the config file, you can simply put any icons you want inside the `resources/svg` directory of your application. For example, if you put an SVG file named `star.svg` inside the `resources/svg` directory, you can reference it anywhere in Filament as `icon-star`. The `icon-` prefix is configurable in the `config/blade-icons.php` file too. You can also render the custom icon in a Blade view using the [`@svg('icon-star')` directive](https://github.com/blade-ui-kit/blade-icons#directive).
+이제 설정 파일에 기본 세트가 존재하므로, 원하는 아이콘을 애플리케이션의 `resources/svg` 디렉터리에 넣기만 하면 됩니다. 예를 들어, `resources/svg` 디렉터리에 `star.svg`라는 SVG 파일을 넣으면 Filament 어디에서든 `icon-star`로 참조할 수 있습니다. `icon-` 접두사는 `config/blade-icons.php` 파일에서 설정할 수 있습니다. 또한 Blade 뷰에서 [`@svg('icon-star')` 디렉티브](https://github.com/blade-ui-kit/blade-icons#directive)를 사용해 커스텀 아이콘을 렌더링할 수도 있습니다.
 
-## Replacing the default icons
+## 기본 아이콘 교체하기 {#replacing-the-default-icons}
 
-Filament includes an icon management system that allows you to replace any icons that are used by default in the UI with your own. This happens in the `boot()` method of any service provider, like `AppServiceProvider`, or even a dedicated service provider for icons. If you wanted to build a plugin to replace Heroicons with a different set, you could absolutely do that by creating a Laravel package with a similar service provider.
+Filament에는 아이콘 관리 시스템이 내장되어 있어, UI에서 기본적으로 사용되는 모든 아이콘을 원하는 아이콘으로 교체할 수 있습니다. 이 작업은 `AppServiceProvider`와 같은 서비스 프로바이더의 `boot()` 메서드나, 아이콘 전용 서비스 프로바이더에서 수행할 수 있습니다. 만약 Heroicons를 다른 아이콘 세트로 교체하는 플러그인을 만들고 싶다면, 비슷한 서비스 프로바이더를 가진 Laravel 패키지를 만들어서 충분히 구현할 수 있습니다.
 
-To replace an icon, you can use the `FilamentIcon` facade. It has a `register()` method, which accepts an array of icons to replace. The key of the array is the unique [icon alias](#available-icon-aliases) that identifies the icon in the Filament UI, and the value is name of a Blade icon to replace it instead. Alternatively, you may use HTML instead of an icon name to render an icon from a Blade view for example:
+아이콘을 교체하려면 `FilamentIcon` 파사드를 사용할 수 있습니다. 이 파사드에는 `register()` 메서드가 있으며, 교체할 아이콘의 배열을 인수로 받습니다. 배열의 키는 Filament UI에서 아이콘을 식별하는 고유한 [아이콘 별칭](#available-icon-aliases)이고, 값은 대신 사용할 Blade 아이콘의 이름입니다. 또는, 아이콘 이름 대신 HTML을 사용하여 Blade 뷰에서 아이콘을 렌더링할 수도 있습니다:
 
 ```php
 use Filament\Support\Facades\FilamentIcon;
@@ -37,9 +37,9 @@ FilamentIcon::register([
 ]);
 ```
 
-### Allowing users to customize icons from your plugin
+### 플러그인에서 사용자가 아이콘을 커스터마이즈할 수 있도록 허용하기 {#allowing-users-to-customize-icons-from-your-plugin}
 
-If you have built a Filament plugin, your users may want to be able to customize icons in the same way that they can with any core Filament package. This is possible if you replace any manual `@svg()` usages with the `<x-filament::icon>` Blade component. This component allows you to pass in an icon alias, the name of the SVG icon that should be used by default, and any classes or HTML attributes:
+Filament 플러그인을 개발했다면, 사용자가 코어 Filament 패키지에서처럼 아이콘을 커스터마이즈할 수 있기를 원할 수 있습니다. 이를 위해서는 수동으로 `@svg()`를 사용하는 대신 `<x-filament::icon>` Blade 컴포넌트를 사용하면 됩니다. 이 컴포넌트는 아이콘 별칭(alias), 기본적으로 사용될 SVG 아이콘의 이름, 그리고 클래스나 HTML 속성을 전달할 수 있습니다:
 
 ```blade
 <x-filament::icon
@@ -50,7 +50,7 @@ If you have built a Filament plugin, your users may want to be able to customize
 />
 ```
 
-Alternatively, you may pass an SVG element into the component's slot instead of defining a default icon name:
+또는, 기본 아이콘 이름을 정의하는 대신 컴포넌트의 슬롯에 SVG 요소를 직접 전달할 수도 있습니다:
 
 ```blade
 <x-filament::icon
@@ -64,159 +64,159 @@ Alternatively, you may pass an SVG element into the component's slot instead of 
 </x-filament::icon>
 ```
 
-## Available icon aliases
+## 사용 가능한 아이콘 별칭 {#available-icon-aliases}
 
-### Panel Builder icon aliases
+### 패널 빌더 아이콘 별칭 {#panel-builder-icon-aliases}
 
-- `panels::global-search.field` - Global search field
-- `panels::pages.dashboard.actions.filter` - Trigger button of the dashboard filter action
-- `panels::pages.dashboard.navigation-item` - Dashboard page navigation item
-- `panels::pages.password-reset.request-password-reset.actions.login` - Trigger button of the login action on the request password reset page
-- `panels::pages.password-reset.request-password-reset.actions.login.rtl` - Trigger button of the login action on the request password reset page (right-to-left direction)
-- `panels::resources.pages.edit-record.navigation-item` - Resource edit record page navigation item
-- `panels::resources.pages.manage-related-records.navigation-item` - Resource manage related records page navigation item
-- `panels::resources.pages.view-record.navigation-item` - Resource view record page navigation item
-- `panels::sidebar.collapse-button` - Button to collapse the sidebar
-- `panels::sidebar.collapse-button.rtl` - Button to collapse the sidebar (right-to-left direction)
-- `panels::sidebar.expand-button` - Button to expand the sidebar
-- `panels::sidebar.expand-button.rtl` - Button to expand the sidebar (right-to-left direction)
-- `panels::sidebar.group.collapse-button` - Collapse button for a sidebar group
-- `panels::tenant-menu.billing-button` - Billing button in the tenant menu
-- `panels::tenant-menu.profile-button` - Profile button in the tenant menu
-- `panels::tenant-menu.registration-button` - Registration button in the tenant menu
-- `panels::tenant-menu.toggle-button` - Button to toggle the tenant menu
-- `panels::theme-switcher.light-button` - Button to switch to the light theme from the theme switcher
-- `panels::theme-switcher.dark-button` - Button to switch to the dark theme from the theme switcher
-- `panels::theme-switcher.system-button` - Button to switch to the system theme from the theme switcher
-- `panels::topbar.close-sidebar-button` - Button to close the sidebar
-- `panels::topbar.open-sidebar-button` - Button to open the sidebar
-- `panels::topbar.group.toggle-button` - Toggle button for a topbar group
-- `panels::topbar.open-database-notifications-button` - Button to open the database notifications modal
-- `panels::user-menu.profile-item` - Profile item in the user menu
-- `panels::user-menu.logout-button` - Button in the user menu to log out
-- `panels::widgets.account.logout-button` - Button in the account widget to log out
-- `panels::widgets.filament-info.open-documentation-button` - Button to open the documentation from the Filament info widget
-- `panels::widgets.filament-info.open-github-button` - Button to open GitHub from the Filament info widget
+- `panels::global-search.field` - 글로벌 검색 필드
+- `panels::pages.dashboard.actions.filter` - 대시보드 필터 액션의 트리거 버튼
+- `panels::pages.dashboard.navigation-item` - 대시보드 페이지 네비게이션 항목
+- `panels::pages.password-reset.request-password-reset.actions.login` - 비밀번호 재설정 요청 페이지의 로그인 액션 트리거 버튼
+- `panels::pages.password-reset.request-password-reset.actions.login.rtl` - 비밀번호 재설정 요청 페이지의 로그인 액션 트리거 버튼(오른쪽-왼쪽 방향)
+- `panels::resources.pages.edit-record.navigation-item` - 리소스 레코드 편집 페이지 네비게이션 항목
+- `panels::resources.pages.manage-related-records.navigation-item` - 리소스 관련 레코드 관리 페이지 네비게이션 항목
+- `panels::resources.pages.view-record.navigation-item` - 리소스 레코드 보기 페이지 네비게이션 항목
+- `panels::sidebar.collapse-button` - 사이드바를 접는 버튼
+- `panels::sidebar.collapse-button.rtl` - 사이드바를 접는 버튼(오른쪽-왼쪽 방향)
+- `panels::sidebar.expand-button` - 사이드바를 펼치는 버튼
+- `panels::sidebar.expand-button.rtl` - 사이드바를 펼치는 버튼(오른쪽-왼쪽 방향)
+- `panels::sidebar.group.collapse-button` - 사이드바 그룹 접기 버튼
+- `panels::tenant-menu.billing-button` - 테넌트 메뉴의 결제 버튼
+- `panels::tenant-menu.profile-button` - 테넌트 메뉴의 프로필 버튼
+- `panels::tenant-menu.registration-button` - 테넌트 메뉴의 등록 버튼
+- `panels::tenant-menu.toggle-button` - 테넌트 메뉴 토글 버튼
+- `panels::theme-switcher.light-button` - 테마 스위처에서 라이트 테마로 전환하는 버튼
+- `panels::theme-switcher.dark-button` - 테마 스위처에서 다크 테마로 전환하는 버튼
+- `panels::theme-switcher.system-button` - 테마 스위처에서 시스템 테마로 전환하는 버튼
+- `panels::topbar.close-sidebar-button` - 사이드바를 닫는 버튼
+- `panels::topbar.open-sidebar-button` - 사이드바를 여는 버튼
+- `panels::topbar.group.toggle-button` - 상단바 그룹 토글 버튼
+- `panels::topbar.open-database-notifications-button` - 데이터베이스 알림 모달을 여는 버튼
+- `panels::user-menu.profile-item` - 사용자 메뉴의 프로필 항목
+- `panels::user-menu.logout-button` - 사용자 메뉴의 로그아웃 버튼
+- `panels::widgets.account.logout-button` - 계정 위젯의 로그아웃 버튼
+- `panels::widgets.filament-info.open-documentation-button` - Filament 정보 위젯에서 문서 열기 버튼
+- `panels::widgets.filament-info.open-github-button` - Filament 정보 위젯에서 GitHub 열기 버튼
 
-### Form Builder icon aliases
+### 폼 빌더 아이콘 별칭 {#form-builder-icon-aliases}
 
-- `forms::components.builder.actions.clone` - Trigger button of a clone action in a builder item
-- `forms::components.builder.actions.collapse` - Trigger button of a collapse action in a builder item
-- `forms::components.builder.actions.delete` - Trigger button of a delete action in a builder item
-- `forms::components.builder.actions.expand` - Trigger button of an expand action in a builder item
-- `forms::components.builder.actions.move-down` - Trigger button of a move down action in a builder item
-- `forms::components.builder.actions.move-up` - Trigger button of a move up action in a builder item
-- `forms::components.builder.actions.reorder` - Trigger button of a reorder action in a builder item
-- `forms::components.checkbox-list.search-field` - Search input in a checkbox list
-- `forms::components.file-upload.editor.actions.drag-crop` - Trigger button of a drag crop action in a file upload editor
-- `forms::components.file-upload.editor.actions.drag-move` - Trigger button of a drag move action in a file upload editor
-- `forms::components.file-upload.editor.actions.flip-horizontal` - Trigger button of a flip horizontal action in a file upload editor
-- `forms::components.file-upload.editor.actions.flip-vertical` - Trigger button of a flip vertical action in a file upload editor
-- `forms::components.file-upload.editor.actions.move-down` - Trigger button of a move down action in a file upload editor
-- `forms::components.file-upload.editor.actions.move-left` - Trigger button of a move left action in a file upload editor
-- `forms::components.file-upload.editor.actions.move-right` - Trigger button of a move right action in a file upload editor
-- `forms::components.file-upload.editor.actions.move-up` - Trigger button of a move up action in a file upload editor
-- `forms::components.file-upload.editor.actions.rotate-left` - Trigger button of a rotate left action in a file upload editor
-- `forms::components.file-upload.editor.actions.rotate-right` - Trigger button of a rotate right action in a file upload editor
-- `forms::components.file-upload.editor.actions.zoom-100` - Trigger button of a zoom 100 action in a file upload editor
-- `forms::components.file-upload.editor.actions.zoom-in` - Trigger button of a zoom in action in a file upload editor
-- `forms::components.file-upload.editor.actions.zoom-out` - Trigger button of a zoom out action in a file upload editor
-- `forms::components.key-value.actions.delete` - Trigger button of a delete action in a key-value field item
-- `forms::components.key-value.actions.reorder` - Trigger button of a reorder action in a key-value field item
-- `forms::components.repeater.actions.clone` - Trigger button of a clone action in a repeater item
-- `forms::components.repeater.actions.collapse` - Trigger button of a collapse action in a repeater item
-- `forms::components.repeater.actions.delete` - Trigger button of a delete action in a repeater item
-- `forms::components.repeater.actions.expand` - Trigger button of an expand action in a repeater item
-- `forms::components.repeater.actions.move-down` - Trigger button of a move down action in a repeater item
-- `forms::components.repeater.actions.move-up` - Trigger button of a move up action in a repeater item
-- `forms::components.repeater.actions.reorder` - Trigger button of a reorder action in a repeater item
-- `forms::components.select.actions.create-option` - Trigger button of a create option action in a select field
-- `forms::components.select.actions.edit-option` - Trigger button of an edit option action in a select field
-- `forms::components.text-input.actions.hide-password` - Trigger button of a hide password action in a text input field
-- `forms::components.text-input.actions.show-password` - Trigger button of a show password action in a text input field
-- `forms::components.toggle-buttons.boolean.false` - "False" option of a `boolean()` toggle buttons field
-- `forms::components.toggle-buttons.boolean.true` - "True" option of a `boolean()` toggle buttons field
-- `forms::components.wizard.completed-step` - Completed step in a wizard
+- `forms::components.builder.actions.clone` - 빌더 항목에서 복제 액션의 트리거 버튼
+- `forms::components.builder.actions.collapse` - 빌더 항목에서 접기 액션의 트리거 버튼
+- `forms::components.builder.actions.delete` - 빌더 항목에서 삭제 액션의 트리거 버튼
+- `forms::components.builder.actions.expand` - 빌더 항목에서 펼치기 액션의 트리거 버튼
+- `forms::components.builder.actions.move-down` - 빌더 항목에서 아래로 이동 액션의 트리거 버튼
+- `forms::components.builder.actions.move-up` - 빌더 항목에서 위로 이동 액션의 트리거 버튼
+- `forms::components.builder.actions.reorder` - 빌더 항목에서 순서 변경 액션의 트리거 버튼
+- `forms::components.checkbox-list.search-field` - 체크박스 리스트의 검색 입력창
+- `forms::components.file-upload.editor.actions.drag-crop` - 파일 업로드 에디터에서 드래그 크롭 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.drag-move` - 파일 업로드 에디터에서 드래그 이동 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.flip-horizontal` - 파일 업로드 에디터에서 수평 반전 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.flip-vertical` - 파일 업로드 에디터에서 수직 반전 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.move-down` - 파일 업로드 에디터에서 아래로 이동 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.move-left` - 파일 업로드 에디터에서 왼쪽으로 이동 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.move-right` - 파일 업로드 에디터에서 오른쪽으로 이동 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.move-up` - 파일 업로드 에디터에서 위로 이동 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.rotate-left` - 파일 업로드 에디터에서 왼쪽으로 회전 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.rotate-right` - 파일 업로드 에디터에서 오른쪽으로 회전 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.zoom-100` - 파일 업로드 에디터에서 100% 확대 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.zoom-in` - 파일 업로드 에디터에서 확대 액션의 트리거 버튼
+- `forms::components.file-upload.editor.actions.zoom-out` - 파일 업로드 에디터에서 축소 액션의 트리거 버튼
+- `forms::components.key-value.actions.delete` - 키-값 필드 항목에서 삭제 액션의 트리거 버튼
+- `forms::components.key-value.actions.reorder` - 키-값 필드 항목에서 순서 변경 액션의 트리거 버튼
+- `forms::components.repeater.actions.clone` - 리피터 항목에서 복제 액션의 트리거 버튼
+- `forms::components.repeater.actions.collapse` - 리피터 항목에서 접기 액션의 트리거 버튼
+- `forms::components.repeater.actions.delete` - 리피터 항목에서 삭제 액션의 트리거 버튼
+- `forms::components.repeater.actions.expand` - 리피터 항목에서 펼치기 액션의 트리거 버튼
+- `forms::components.repeater.actions.move-down` - 리피터 항목에서 아래로 이동 액션의 트리거 버튼
+- `forms::components.repeater.actions.move-up` - 리피터 항목에서 위로 이동 액션의 트리거 버튼
+- `forms::components.repeater.actions.reorder` - 리피터 항목에서 순서 변경 액션의 트리거 버튼
+- `forms::components.select.actions.create-option` - 셀렉트 필드에서 옵션 생성 액션의 트리거 버튼
+- `forms::components.select.actions.edit-option` - 셀렉트 필드에서 옵션 편집 액션의 트리거 버튼
+- `forms::components.text-input.actions.hide-password` - 텍스트 입력 필드에서 비밀번호 숨기기 액션의 트리거 버튼
+- `forms::components.text-input.actions.show-password` - 텍스트 입력 필드에서 비밀번호 표시 액션의 트리거 버튼
+- `forms::components.toggle-buttons.boolean.false` - `boolean()` 토글 버튼 필드의 "False" 옵션
+- `forms::components.toggle-buttons.boolean.true` - `boolean()` 토글 버튼 필드의 "True" 옵션
+- `forms::components.wizard.completed-step` - 위저드에서 완료된 단계
 
-### Table Builder icon aliases
+### Table Builder 아이콘 별칭 {#table-builder-icon-aliases}
 
-- `tables::actions.disable-reordering` - Trigger button of the disable reordering action
-- `tables::actions.enable-reordering` - Trigger button of the enable reordering action
-- `tables::actions.filter` - Trigger button of the filter action
-- `tables::actions.group` - Trigger button of a group records action
-- `tables::actions.open-bulk-actions` - Trigger button of an open bulk actions action
-- `tables::actions.toggle-columns` - Trigger button of the toggle columns action
-- `tables::columns.collapse-button` - Button to collapse a column
-- `tables::columns.icon-column.false` - Falsy state of an icon column
-- `tables::columns.icon-column.true` - Truthy state of an icon column
-- `tables::empty-state` - Empty state icon
-- `tables::filters.query-builder.constraints.boolean` - Default icon for a boolean constraint in the query builder
-- `tables::filters.query-builder.constraints.date` - Default icon for a date constraint in the query builder
-- `tables::filters.query-builder.constraints.number` - Default icon for a number constraint in the query builder
-- `tables::filters.query-builder.constraints.relationship` - Default icon for a relationship constraint in the query builder
-- `tables::filters.query-builder.constraints.select` - Default icon for a select constraint in the query builder
-- `tables::filters.query-builder.constraints.text` - Default icon for a text constraint in the query builder
-- `tables::filters.remove-all-button` - Button to remove all filters
-- `tables::grouping.collapse-button` - Button to collapse a group of records
-- `tables::header-cell.sort-asc-button` - Sort button of a column sorted in ascending order
-- `tables::header-cell.sort-button` - Sort button of a column when it is currently not sorted
-- `tables::header-cell.sort-desc-button` - Sort button of a column sorted in descending order
-- `tables::reorder.handle` - Handle to grab in order to reorder a record with drag and drop
-- `tables::search-field` - Search input
+- `tables::actions.disable-reordering` - 정렬 비활성화 액션의 트리거 버튼
+- `tables::actions.enable-reordering` - 정렬 활성화 액션의 트리거 버튼
+- `tables::actions.filter` - 필터 액션의 트리거 버튼
+- `tables::actions.group` - 레코드 그룹화 액션의 트리거 버튼
+- `tables::actions.open-bulk-actions` - 대량 작업 열기 액션의 트리거 버튼
+- `tables::actions.toggle-columns` - 컬럼 토글 액션의 트리거 버튼
+- `tables::columns.collapse-button` - 컬럼을 접는 버튼
+- `tables::columns.icon-column.false` - 아이콘 컬럼의 거짓 상태
+- `tables::columns.icon-column.true` - 아이콘 컬럼의 참 상태
+- `tables::empty-state` - 비어있는 상태 아이콘
+- `tables::filters.query-builder.constraints.boolean` - 쿼리 빌더에서 불리언 제약 조건의 기본 아이콘
+- `tables::filters.query-builder.constraints.date` - 쿼리 빌더에서 날짜 제약 조건의 기본 아이콘
+- `tables::filters.query-builder.constraints.number` - 쿼리 빌더에서 숫자 제약 조건의 기본 아이콘
+- `tables::filters.query-builder.constraints.relationship` - 쿼리 빌더에서 관계 제약 조건의 기본 아이콘
+- `tables::filters.query-builder.constraints.select` - 쿼리 빌더에서 선택 제약 조건의 기본 아이콘
+- `tables::filters.query-builder.constraints.text` - 쿼리 빌더에서 텍스트 제약 조건의 기본 아이콘
+- `tables::filters.remove-all-button` - 모든 필터를 제거하는 버튼
+- `tables::grouping.collapse-button` - 레코드 그룹을 접는 버튼
+- `tables::header-cell.sort-asc-button` - 오름차순 정렬된 컬럼의 정렬 버튼
+- `tables::header-cell.sort-button` - 현재 정렬되지 않은 컬럼의 정렬 버튼
+- `tables::header-cell.sort-desc-button` - 내림차순 정렬된 컬럼의 정렬 버튼
+- `tables::reorder.handle` - 드래그 앤 드롭으로 레코드 순서를 변경할 때 잡는 핸들
+- `tables::search-field` - 검색 입력 필드
 
-### Notifications icon aliases
+### 알림 아이콘 별칭 {#notifications-icon-aliases}
 
-- `notifications::database.modal.empty-state` - Empty state of the database notifications modal
-- `notifications::notification.close-button` - Button to close a notification
-- `notifications::notification.danger` - Danger notification
-- `notifications::notification.info` - Info notification
-- `notifications::notification.success` - Success notification
-- `notifications::notification.warning` - Warning notification
+- `notifications::database.modal.empty-state` - 데이터베이스 알림 모달의 비어 있는 상태
+- `notifications::notification.close-button` - 알림을 닫는 버튼
+- `notifications::notification.danger` - 위험 알림
+- `notifications::notification.info` - 정보 알림
+- `notifications::notification.success` - 성공 알림
+- `notifications::notification.warning` - 경고 알림
 
-### Actions icon aliases
+### 액션 아이콘 별칭 {#actions-icon-aliases}
 
-- `actions::action-group` - Trigger button of an action group
-- `actions::create-action.grouped` - Trigger button of a grouped create action
-- `actions::delete-action` - Trigger button of a delete action
-- `actions::delete-action.grouped` - Trigger button of a grouped delete action
-- `actions::delete-action.modal` - Modal of a delete action
-- `actions::detach-action` - Trigger button of a detach action
-- `actions::detach-action.modal` - Modal of a detach action
-- `actions::dissociate-action` - Trigger button of a dissociate action
-- `actions::dissociate-action.modal` - Modal of a dissociate action
-- `actions::edit-action` - Trigger button of an edit action
-- `actions::edit-action.grouped` - Trigger button of a grouped edit action
-- `actions::export-action.grouped` - Trigger button of a grouped export action
-- `actions::force-delete-action` - Trigger button of a force delete action
-- `actions::force-delete-action.grouped` - Trigger button of a grouped force delete action
-- `actions::force-delete-action.modal` - Modal of a force delete action
-- `actions::import-action.grouped` - Trigger button of a grouped import action
-- `actions::modal.confirmation` - Modal of an action that requires confirmation
-- `actions::replicate-action` - Trigger button of a replicate action
-- `actions::replicate-action.grouped` - Trigger button of a grouped replicate action
-- `actions::restore-action` - Trigger button of a restore action
-- `actions::restore-action.grouped` - Trigger button of a grouped restore action
-- `actions::restore-action.modal` - Modal of a restore action
-- `actions::view-action` - Trigger button of a view action
-- `actions::view-action.grouped` - Trigger button of a grouped view action
+- `actions::action-group` - 액션 그룹의 트리거 버튼
+- `actions::create-action.grouped` - 그룹화된 생성 액션의 트리거 버튼
+- `actions::delete-action` - 삭제 액션의 트리거 버튼
+- `actions::delete-action.grouped` - 그룹화된 삭제 액션의 트리거 버튼
+- `actions::delete-action.modal` - 삭제 액션의 모달
+- `actions::detach-action` - 분리 액션의 트리거 버튼
+- `actions::detach-action.modal` - 분리 액션의 모달
+- `actions::dissociate-action` - 연결 해제 액션의 트리거 버튼
+- `actions::dissociate-action.modal` - 연결 해제 액션의 모달
+- `actions::edit-action` - 편집 액션의 트리거 버튼
+- `actions::edit-action.grouped` - 그룹화된 편집 액션의 트리거 버튼
+- `actions::export-action.grouped` - 그룹화된 내보내기 액션의 트리거 버튼
+- `actions::force-delete-action` - 강제 삭제 액션의 트리거 버튼
+- `actions::force-delete-action.grouped` - 그룹화된 강제 삭제 액션의 트리거 버튼
+- `actions::force-delete-action.modal` - 강제 삭제 액션의 모달
+- `actions::import-action.grouped` - 그룹화된 가져오기 액션의 트리거 버튼
+- `actions::modal.confirmation` - 확인이 필요한 액션의 모달
+- `actions::replicate-action` - 복제 액션의 트리거 버튼
+- `actions::replicate-action.grouped` - 그룹화된 복제 액션의 트리거 버튼
+- `actions::restore-action` - 복원 액션의 트리거 버튼
+- `actions::restore-action.grouped` - 그룹화된 복원 액션의 트리거 버튼
+- `actions::restore-action.modal` - 복원 액션의 모달
+- `actions::view-action` - 보기 액션의 트리거 버튼
+- `actions::view-action.grouped` - 그룹화된 보기 액션의 트리거 버튼
 
-### Infolist Builder icon aliases
+### Infolist Builder 아이콘 별칭 {#infolist-builder-icon-aliases}
 
-- `infolists::components.icon-entry.false` - Falsy state of an icon entry
-- `infolists::components.icon-entry.true` - Truthy state of an icon entry
+- `infolists::components.icon-entry.false` - 아이콘 항목의 거짓 상태
+- `infolists::components.icon-entry.true` - 아이콘 항목의 참 상태
 
-### UI components icon aliases
+### UI 컴포넌트 아이콘 별칭 {#ui-components-icon-aliases}
 
-- `badge.delete-button` - Button to delete a badge
-- `breadcrumbs.separator` - Separator between breadcrumbs
-- `breadcrumbs.separator.rtl` - Separator between breadcrumbs (right-to-left direction)
-- `modal.close-button` - Button to close a modal
-- `pagination.first-button` - Button to go to the first page
-- `pagination.first-button.rtl` - Button to go to the first page (right-to-left direction)
-- `pagination.last-button` - Button to go to the last page
-- `pagination.last-button.rtl` - Button to go to the last page (right-to-left direction)
-- `pagination.next-button` - Button to go to the next page
-- `pagination.next-button.rtl` - Button to go to the next page (right-to-left direction)
-- `pagination.previous-button` - Button to go to the previous page
-- `pagination.previous-button.rtl` - Button to go to the previous page (right-to-left direction)
-- `section.collapse-button` - Button to collapse a section
+- `badge.delete-button` - 배지를 삭제하는 버튼
+- `breadcrumbs.separator` - 브레드크럼 사이의 구분자
+- `breadcrumbs.separator.rtl` - 브레드크럼 사이의 구분자 (오른쪽에서 왼쪽 방향)
+- `modal.close-button` - 모달을 닫는 버튼
+- `pagination.first-button` - 첫 페이지로 이동하는 버튼
+- `pagination.first-button.rtl` - 첫 페이지로 이동하는 버튼 (오른쪽에서 왼쪽 방향)
+- `pagination.last-button` - 마지막 페이지로 이동하는 버튼
+- `pagination.last-button.rtl` - 마지막 페이지로 이동하는 버튼 (오른쪽에서 왼쪽 방향)
+- `pagination.next-button` - 다음 페이지로 이동하는 버튼
+- `pagination.next-button.rtl` - 다음 페이지로 이동하는 버튼 (오른쪽에서 왼쪽 방향)
+- `pagination.previous-button` - 이전 페이지로 이동하는 버튼
+- `pagination.previous-button.rtl` - 이전 페이지로 이동하는 버튼 (오른쪽에서 왼쪽 방향)
+- `section.collapse-button` - 섹션을 접는 버튼

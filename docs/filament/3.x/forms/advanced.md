@@ -1,16 +1,16 @@
 ---
-title: Advanced forms
+title: 고급 폼
 ---
+# [폼] 고급 폼
+## 개요 {#overview}
 
-## Overview
+Filament Form Builder는 유연하고 커스터마이즈가 가능하도록 설계되었습니다. 기존의 많은 폼 빌더들은 사용자가 폼 스키마를 정의할 수 있도록 해주지만, 필드 간 상호작용이나 커스텀 로직을 정의할 수 있는 훌륭한 인터페이스를 제공하지는 않습니다. 모든 Filament 폼은 [Livewire](https://livewire.laravel.com) 위에 구축되어 있기 때문에, 폼은 초기 렌더링 이후에도 사용자 입력에 따라 동적으로 적응할 수 있습니다. 개발자는 [파라미터 인젝션](#form-component-utility-injection)을 사용하여 실시간으로 다양한 유틸리티에 접근하고, 사용자 입력에 따라 동적으로 폼을 구성할 수 있습니다. 필드의 [라이프사이클](#field-lifecycle)은 훅 함수를 사용하여 각 필드에 대한 커스텀 기능을 정의할 수 있도록 확장 가능합니다. 이를 통해 개발자는 복잡한 폼도 손쉽게 구축할 수 있습니다.
 
-Filament Form Builder is designed to be flexible and customizable. Many existing form builders allow users to define a form schema, but don't provide a great interface for defining inter-field interactions, or custom logic. Since all Filament forms are built on top of [Livewire](https://livewire.laravel.com), the form can adapt dynamically to user input, even after it has been initially rendered. Developers can use [parameter injection](#form-component-utility-injection) to access many utilities in real time and build dynamic forms based on user input. The [lifecycle](#field-lifecycle) of fields is open to extension using hook functions to define custom functionality for each field. This allows developers to build complex forms with ease.
+## 반응성의 기본 {#the-basics-of-reactivity}
 
-## The basics of reactivity
+[Livewire](https://livewire.laravel.com)는 Blade로 렌더링된 HTML이 전체 페이지를 새로 고치지 않고도 동적으로 다시 렌더링될 수 있도록 해주는 도구입니다. Filament 폼은 Livewire 위에 구축되어 있기 때문에, 처음 렌더링된 후에도 레이아웃이 동적으로 변경될 수 있습니다.
 
-[Livewire](https://livewire.laravel.com) is a tool that allows Blade-rendered HTML to dynamically re-render without requiring a full page reload. Filament forms are built on top of Livewire, so they are able to re-render dynamically, allowing their layout to adapt after they are initially rendered.
-
-By default, when a user uses a field, the form will not re-render. Since rendering requires a round-trip to the server, this is a performance optimization. However, if you wish to re-render the form after the user has interacted with a field, you can use the `live()` method:
+기본적으로 사용자가 필드를 사용할 때 폼은 다시 렌더링되지 않습니다. 렌더링에는 서버와의 왕복 통신이 필요하므로, 이는 성능 최적화를 위한 것입니다. 하지만 사용자가 필드와 상호작용한 후 폼을 다시 렌더링하고 싶다면 `live()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Select;
@@ -24,11 +24,11 @@ Select::make('status')
     ->live()
 ```
 
-In this example, when the user changes the value of the `status` field, the form will re-render. This allows you to then make changes to fields in the form based on the new value of the `status` field. Also, you can [hook in to the field's lifecycle](#field-updates) to perform custom logic when the field is updated.
+이 예시에서 사용자가 `status` 필드의 값을 변경하면 폼이 다시 렌더링됩니다. 이를 통해 `status` 필드의 새로운 값에 따라 폼 내의 다른 필드들을 변경할 수 있습니다. 또한, [필드의 라이프사이클에 후킹](#field-updates)하여 필드가 업데이트될 때 커스텀 로직을 실행할 수도 있습니다.
 
-### Reactive fields on blur
+### 블러 시 반응형 필드 {#reactive-fields-on-blur}
 
-By default, when a field is set to `live()`, the form will re-render every time the field is interacted with. However, this may not be appropriate for some fields like the text input, since making network requests while the user is still typing results in suboptimal performance. You may wish to re-render the form only after the user has finished using the field, when it becomes out of focus. You can do this using the `live(onBlur: true)` method:
+기본적으로 필드에 `live()`가 설정되어 있으면, 해당 필드와 상호작용할 때마다 폼이 다시 렌더링됩니다. 하지만 텍스트 입력과 같은 일부 필드에는 이 방식이 적합하지 않을 수 있습니다. 사용자가 입력 중일 때마다 네트워크 요청이 발생하면 성능이 저하될 수 있기 때문입니다. 사용자가 필드 사용을 마치고 포커스가 해제된 후에만 폼을 다시 렌더링하고 싶을 수 있습니다. 이럴 때는 `live(onBlur: true)` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -37,22 +37,22 @@ TextInput::make('username')
     ->live(onBlur: true)
 ```
 
-### Debouncing reactive fields
+### 디바운싱 리액티브 필드 {#debouncing-reactive-fields}
 
-You may wish to find a middle ground between `live()` and `live(onBlur: true)`, using "debouncing". Debouncing will prevent a network request from being sent until a user has finished typing for a certain period of time. You can do this using the `live(debounce: 500)` method:
+`live()`와 `live(onBlur: true)` 사이의 중간 지점을 찾고 싶을 때, "디바운싱"을 사용할 수 있습니다. 디바운싱은 사용자가 일정 시간 동안 입력을 멈출 때까지 네트워크 요청이 전송되지 않도록 방지합니다. 이는 `live(debounce: 500)` 메서드를 사용하여 구현할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
 
 TextInput::make('username')
-    ->live(debounce: 500) // Wait 500ms before re-rendering the form.
+    ->live(debounce: 500) // 폼이 다시 렌더링되기 전에 500ms 대기합니다.
 ```
 
-In this example, `500` is the number of milliseconds to wait before sending a network request. You can customize this number to whatever you want, or even use a string like `'1s'`.
+이 예시에서 `500`은 네트워크 요청을 보내기 전에 대기할 밀리초(ms) 단위의 시간입니다. 이 숫자는 원하는 대로 커스터마이즈할 수 있으며, `'1s'`와 같은 문자열도 사용할 수 있습니다.
 
-## Form component utility injection
+## 폼 컴포넌트 유틸리티 주입 {#form-component-utility-injection}
 
-The vast majority of methods used to configure [fields](fields/getting-started) and [layout components](layout/getting-started) accept functions as parameters instead of hardcoded values:
+대부분의 [필드](fields/getting-started) 및 [레이아웃 컴포넌트](/filament/3.x/forms/layout/getting-started)를 구성하는 데 사용되는 메서드는 하드코딩된 값 대신 함수형 파라미터를 허용합니다:
 
 ```php
 use App\Models\User;
@@ -78,15 +78,15 @@ TextInput::make('middle_name')
     ->required(fn (): bool => auth()->user()->hasMiddleName())
 ```
 
-This alone unlocks many customization possibilities.
+이것만으로도 다양한 커스터마이징이 가능합니다.
 
-The package is also able to inject many utilities to use inside these functions, as parameters. All customization methods that accept functions as arguments can inject utilities.
+이 패키지는 또한 이러한 함수 내부에서 사용할 수 있도록 다양한 유틸리티를 파라미터로 주입할 수 있습니다. 함수형 인자를 받는 모든 커스터마이징 메서드는 유틸리티 주입이 가능합니다.
 
-These injected utilities require specific parameter names to be used. Otherwise, Filament doesn't know what to inject.
+이렇게 주입되는 유틸리티는 특정 파라미터 이름을 사용해야 합니다. 그렇지 않으면 Filament가 무엇을 주입해야 하는지 알 수 없습니다.
 
-### Injecting the current state of a field
+### 필드의 현재 상태 주입하기 {#injecting-the-current-state-of-a-field}
 
-If you wish to access the current state (value) of the field, define a `$state` parameter:
+필드의 현재 상태(값)에 접근하고 싶다면, `$state` 파라미터를 정의하세요:
 
 ```php
 function ($state) {
@@ -94,9 +94,9 @@ function ($state) {
 }
 ```
 
-### Injecting the current form component instance
+### 현재 폼 컴포넌트 인스턴스 주입하기 {#injecting-the-current-form-component-instance}
 
-If you wish to access the current component instance, define a `$component` parameter:
+현재 컴포넌트 인스턴스에 접근하고 싶다면, `$component` 파라미터를 정의하세요:
 
 ```php
 use Filament\Forms\Components\Component;
@@ -106,9 +106,9 @@ function (Component $component) {
 }
 ```
 
-### Injecting the current Livewire component instance
+### 현재 Livewire 컴포넌트 인스턴스 주입하기 {#injecting-the-current-livewire-component-instance}
 
-If you wish to access the current Livewire component instance, define a `$livewire` parameter:
+현재 Livewire 컴포넌트 인스턴스에 접근하고 싶다면, `$livewire` 파라미터를 정의하세요:
 
 ```php
 use Livewire\Component as Livewire;
@@ -118,9 +118,9 @@ function (Livewire $livewire) {
 }
 ```
 
-### Injecting the current form record
+### 현재 폼 레코드 주입하기 {#injecting-the-current-form-record}
 
-If your form is associated with an Eloquent model instance, define a `$record` parameter:
+폼이 Eloquent 모델 인스턴스와 연관되어 있다면, `$record` 파라미터를 정의하세요:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -130,37 +130,37 @@ function (?Model $record) {
 }
 ```
 
-### Injecting the state of another field
+### 다른 필드의 상태 주입하기 {#injecting-the-state-of-another-field}
 
-You may also retrieve the state (value) of another field from within a callback, using a `$get` parameter:
+콜백 내에서 `$get` 파라미터를 사용하여 다른 필드의 상태(값)를 가져올 수도 있습니다:
 
 ```php
 use Filament\Forms\Get;
 
 function (Get $get) {
-    $email = $get('email'); // Store the value of the `email` field in the `$email` variable.
+    $email = $get('email'); // `email` 필드의 값을 `$email` 변수에 저장합니다.
     //...
 }
 ```
 
-### Injecting a function to set the state of another field
+### 다른 필드의 상태를 설정하는 함수를 주입하기 {#injecting-a-function-to-set-the-state-of-another-field}
 
-In a similar way to `$get`, you may also set the value of another field from within a callback, using a `$set` parameter:
+`$get`과 유사하게, 콜백 내에서 `$set` 파라미터를 사용하여 다른 필드의 값을 설정할 수도 있습니다:
 
 ```php
 use Filament\Forms\Set;
 
 function (Set $set) {
-    $set('title', 'Blog Post'); // Set the `title` field to `Blog Post`.
+    $set('title', 'Blog Post'); // `title` 필드를 `Blog Post`로 설정합니다.
     //...
 }
 ```
 
-When this function is run, the state of the `title` field will be updated, and the form will re-render with the new title. This is useful inside the [`afterStateUpdated`](#field-updates) method.
+이 함수가 실행되면 `title` 필드의 상태가 업데이트되고, 폼이 새로운 제목으로 다시 렌더링됩니다. 이는 [`afterStateUpdated`](#field-updates) 메서드 내에서 유용하게 사용할 수 있습니다.
 
-### Injecting the current form operation
+### 현재 폼 작업 주입하기 {#injecting-the-current-form-operation}
 
-If you're writing a form for a panel resource or relation manager, and you wish to check if a form is `create`, `edit` or `view`, use the `$operation` parameter:
+패널 리소스나 관계 매니저를 위한 폼을 작성할 때, 폼이 `create`, `edit`, `view` 중 어떤 작업인지 확인하고 싶다면 `$operation` 파라미터를 사용하세요:
 
 ```php
 function (string $operation) {
@@ -168,11 +168,11 @@ function (string $operation) {
 }
 ```
 
-> Outside the panel, you can set a form's operation by using the `operation()` method on the form definition.
+> 패널 외부에서는 폼 정의에서 `operation()` 메서드를 사용하여 폼의 작업을 설정할 수 있습니다.
 
-### Injecting multiple utilities
+### 여러 유틸리티 주입하기 {#injecting-multiple-utilities}
 
-The parameters are injected dynamically using reflection, so you are able to combine multiple parameters in any order:
+매개변수는 리플렉션을 사용하여 동적으로 주입되므로, 여러 매개변수를 어떤 순서로든 조합하여 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Get;
@@ -184,9 +184,9 @@ function (Livewire $livewire, Get $get, Set $set) {
 }
 ```
 
-### Injecting dependencies from Laravel's container
+### 라라벨 컨테이너에서 의존성 주입하기 {#injecting-dependencies-from-laravels-container}
 
-You may inject anything from Laravel's container like normal, alongside utilities:
+유틸리티와 함께, 라라벨 컨테이너에서 평소처럼 어떤 것이든 주입할 수 있습니다:
 
 ```php
 use Filament\Forms\Set;
@@ -197,15 +197,15 @@ function (Request $request, Set $set) {
 }
 ```
 
-## Field lifecycle
+## 필드 생명주기 {#field-lifecycle}
 
-Each field in a form has a lifecycle, which is the process it goes through when the form is loaded, when it is interacted with by the user, and when it is submitted. You may customize what happens at each stage of this lifecycle using a function that gets run at that stage.
+폼의 각 필드는 생명주기를 가지며, 이는 폼이 로드될 때, 사용자가 상호작용할 때, 그리고 제출될 때 거치는 과정을 의미합니다. 이 생명주기의 각 단계에서 실행되는 함수를 사용하여 각 단계에서 발생하는 일을 커스터마이즈할 수 있습니다.
 
-### Field hydration
+### 필드 하이드레이션 {#field-hydration}
 
-Hydration is the process that fills fields with data. It runs when you call the form's `fill()` method. You may customize what happens after a field is hydrated using the `afterStateHydrated()` method.
+하이드레이션은 필드에 데이터를 채우는 과정입니다. 이 과정은 폼의 `fill()` 메서드를 호출할 때 실행됩니다. 필드가 하이드레이션된 후에 어떤 동작을 할지 `afterStateHydrated()` 메서드를 사용하여 커스터마이즈할 수 있습니다.
 
-In this example, the `name` field will always be hydrated with the correctly capitalized name:
+이 예시에서는, `name` 필드는 항상 올바르게 대문자로 변환된 이름으로 하이드레이션됩니다:
 
 ```php
 use Closure;
@@ -218,7 +218,7 @@ TextInput::make('name')
     })
 ```
 
-As a shortcut for formatting the field's state like this when it is hydrated, you can use the `formatStateUsing()` method:
+이렇게 필드의 상태를 하이드레이션 시 포맷팅하는 간단한 방법으로, `formatStateUsing()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Closure;
@@ -228,11 +228,11 @@ TextInput::make('name')
     ->formatStateUsing(fn (string $state): string => ucwords($state))
 ```
 
-### Field updates
+### 필드 업데이트 {#field-updates}
 
-You may use the `afterStateUpdated()` method to customize what happens after a field is updated by the user. Only changes from the user on the frontend will trigger this function, not manual changes to the state from `$set()` or another PHP function.
+사용자가 필드를 업데이트한 후에 어떤 동작을 할지 커스터마이즈하려면 `afterStateUpdated()` 메서드를 사용할 수 있습니다. 이 함수는 프론트엔드에서 사용자가 변경한 경우에만 트리거되며, `$set()`이나 다른 PHP 함수로 상태를 수동으로 변경할 때는 트리거되지 않습니다.
 
-Inside this function, you can also inject the `$old` value of the field before it was updated, using the `$old` parameter:
+이 함수 내부에서는 필드가 업데이트되기 전의 `$old` 값을 `$old` 파라미터로 주입받아 사용할 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -243,13 +243,13 @@ TextInput::make('name')
     })
 ```
 
-For an example of how to use this method, learn how to [automatically generate a slug from a title](#generating-a-slug-from-a-title).
+이 메서드를 어떻게 사용하는지 예시를 보려면 [제목에서 자동으로 슬러그를 생성하는 방법](#generating-a-slug-from-a-title)을 참고하세요.
 
-### Field dehydration
+### 필드 탈수 {#field-dehydration}
 
-Dehydration is the process that gets data from the fields in your forms, and transforms it. It runs when you call the form's `getState()` method.
+탈수(Dehydration)는 폼의 필드에서 데이터를 가져와 변환하는 과정입니다. 이 과정은 폼의 `getState()` 메서드를 호출할 때 실행됩니다.
 
-You may customize how the state is transformed when it is dehydrated using the `dehydrateStateUsing()` function. In this example, the `name` field will always be dehydrated with the correctly capitalized name:
+`dehydrateStateUsing()` 함수를 사용하여 상태가 탈수될 때 어떻게 변환되는지 커스터마이즈할 수 있습니다. 아래 예시에서 `name` 필드는 항상 올바르게 대문자로 변환되어 탈수됩니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -259,9 +259,9 @@ TextInput::make('name')
     ->dehydrateStateUsing(fn (string $state): string => ucwords($state))
 ```
 
-#### Preventing a field from being dehydrated
+#### 필드가 비활성화(dehydrated)되는 것을 방지하기 {#preventing-a-field-from-being-dehydrated}
 
-You may also prevent a field from being dehydrated altogether using `dehydrated(false)`. In this example, the field will not be present in the array returned from `getState()`:
+`dehydrated(false)`를 사용하여 필드가 아예 비활성화(dehydrated)되지 않도록 막을 수도 있습니다. 아래 예시에서 해당 필드는 `getState()`에서 반환되는 배열에 포함되지 않습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -271,15 +271,15 @@ TextInput::make('password_confirmation')
     ->dehydrated(false)
 ```
 
-If your form auto-saves data to the database, like in a [resource](../panels/resources/getting-started) or [table action](../tables/actions), this is useful to prevent a field from being saved to the database if it is purely used for presentational purposes.
+폼이 [리소스](../panels/resources/getting-started)나 [테이블 액션](../tables/actions)처럼 데이터를 데이터베이스에 자동 저장하는 경우, 단순히 표시 용도로만 사용되는 필드가 데이터베이스에 저장되는 것을 방지할 때 유용합니다.
 
-## Reactive forms cookbook
+## 반응형 폼 요리책 {#reactive-forms-cookbook}
 
-This section contains a collection of recipes for common tasks you may need to perform when building an advanced form.
+이 섹션에는 고급 폼을 만들 때 자주 수행해야 하는 일반적인 작업에 대한 다양한 레시피가 포함되어 있습니다.
 
-### Conditionally hiding a field
+### 필드를 조건부로 숨기기 {#conditionally-hiding-a-field}
 
-To conditionally hide or show a field, you can pass a function to the `hidden()` method, and return `true` or `false` depending on whether you want the field to be hidden or not. The function can [inject utilities](#form-component-utility-injection) as parameters, so you can do things like check the value of another field:
+필드를 조건부로 숨기거나 표시하려면, `hidden()` 메서드에 함수를 전달하고, 해당 필드를 숨길지 여부에 따라 `true` 또는 `false`를 반환하면 됩니다. 이 함수는 [유틸리티를 주입](#form-component-utility-injection)받을 수 있으므로, 다른 필드의 값을 확인하는 등의 작업을 할 수 있습니다:
 
 ```php
 use Filament\Forms\Get;
@@ -293,9 +293,9 @@ TextInput::make('company_name')
     ->hidden(fn (Get $get): bool => ! $get('is_company'))
 ```
 
-In this example, the `is_company` checkbox is [`live()`](#the-basics-of-reactivity). This allows the form to rerender when the value of the `is_company` field changes. You can access the value of that field from within the `hidden()` function using the [`$get()` utility](#injecting-the-current-state-of-a-field). The value of the field is inverted using `!` so that the `company_name` field is hidden when the `is_company` field is `false`.
+이 예시에서 `is_company` 체크박스는 [`live()`](#the-basics-of-reactivity)입니다. 이는 `is_company` 필드의 값이 변경될 때 폼이 다시 렌더링되도록 해줍니다. `hidden()` 함수 내에서 [`$get()` 유틸리티](#injecting-the-current-state-of-a-field)를 사용해 해당 필드의 값을 가져올 수 있습니다. 필드의 값은 `!`로 반전되어, `is_company` 필드가 `false`일 때 `company_name` 필드가 숨겨집니다.
 
-Alternatively, you can use the `visible()` method to show a field conditionally. It does the exact inverse of `hidden()`, and could be used if you prefer the clarity of the code when written this way:
+또는, `visible()` 메서드를 사용해 필드를 조건부로 표시할 수도 있습니다. 이 메서드는 `hidden()`과 정확히 반대 동작을 하며, 코드의 가독성을 위해 이렇게 작성하는 것이 더 명확할 때 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Get;
@@ -309,9 +309,9 @@ TextInput::make('company_name')
     ->visible(fn (Get $get): bool => $get('is_company'))
 ```
 
-### Conditionally making a field required
+### 필드를 조건부로 필수로 만들기 {#conditionally-making-a-field-required}
 
-To conditionally make a field required, you can pass a function to the `required()` method, and return `true` or `false` depending on whether you want the field to be required or not. The function can [inject utilities](#form-component-utility-injection) as parameters, so you can do things like check the value of another field:
+필드를 조건부로 필수로 만들려면, `required()` 메서드에 함수를 전달하고, 해당 필드를 필수로 만들지 여부에 따라 `true` 또는 `false`를 반환하면 됩니다. 이 함수는 [유틸리티 주입](#form-component-utility-injection)을 매개변수로 받을 수 있으므로, 다른 필드의 값을 확인하는 등의 작업을 할 수 있습니다:
 
 ```php
 use Filament\Forms\Get;
@@ -324,13 +324,13 @@ TextInput::make('vat_number')
     ->required(fn (Get $get): bool => filled($get('company_name')))
 ```
 
-In this example, the `company_name` field is [`live(onBlur: true)`](#reactive-fields-on-blur). This allows the form to rerender after the value of the `company_name` field changes and the user clicks away. You can access the value of that field from within the `required()` function using the [`$get()` utility](#injecting-the-current-state-of-a-field). The value of the field is checked using `filled()` so that the `vat_number` field is required when the `company_name` field is not `null` or an empty string. The result is that the `vat_number` field is only required when the `company_name` field is filled in.
+이 예시에서 `company_name` 필드는 [`live(onBlur: true)`](#reactive-fields-on-blur)로 설정되어 있습니다. 이는 `company_name` 필드의 값이 변경되고 사용자가 다른 곳을 클릭하면 폼이 다시 렌더링되도록 합니다. `required()` 함수 내에서 [`$get()` 유틸리티](#injecting-the-current-state-of-a-field)를 사용해 해당 필드의 값을 가져올 수 있습니다. 필드의 값은 `filled()`로 확인되며, `company_name` 필드가 `null`이 아니거나 빈 문자열이 아닐 때 `vat_number` 필드가 필수로 지정됩니다. 결과적으로, `company_name` 필드가 입력된 경우에만 `vat_number` 필드가 필수로 지정됩니다.
 
-Using a function is able to make any other [validation rule](validation) dynamic in a similar way.
+함수를 사용하면 다른 [검증 규칙](/filament/3.x/forms/validation)도 이와 비슷한 방식으로 동적으로 만들 수 있습니다.
 
-### Generating a slug from a title
+### 제목에서 슬러그 생성하기 {#generating-a-slug-from-a-title}
 
-To generate a slug from a title while the user is typing, you can use the [`afterStateUpdated()` method](#field-updates) on the title field to [`$set()`](#injecting-a-function-to-set-the-state-of-another-field) the value of the slug field:
+사용자가 입력하는 동안 제목에서 슬러그를 생성하려면, 제목 필드에서 [`afterStateUpdated()` 메서드](#field-updates)를 사용하여 슬러그 필드의 값을 [`$set()`](#injecting-a-function-to-set-the-state-of-another-field)로 설정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -344,9 +344,9 @@ TextInput::make('title')
 TextInput::make('slug')
 ```
 
-In this example, the `title` field is [`live(onBlur: true)`](#reactive-fields-on-blur). This allows the form to rerender when the value of the `title` field changes and the user clicks away. The `afterStateUpdated()` method is used to run a function after the state of the `title` field is updated. The function injects the [`$set()` utility](#injecting-a-function-to-set-the-state-of-another-field) and the new state of the `title` field. The `Str::slug()` utility method is part of Laravel and is used to generate a slug from a string. The `slug` field is then updated using the `$set()` function.
+이 예시에서 `title` 필드는 [`live(onBlur: true)`](#reactive-fields-on-blur)로 설정되어 있습니다. 이는 `title` 필드의 값이 변경되고 사용자가 포커스를 벗어날 때 폼이 다시 렌더링되도록 합니다. `afterStateUpdated()` 메서드는 `title` 필드의 상태가 업데이트된 후 함수를 실행하는 데 사용됩니다. 이 함수는 [`$set()` 유틸리티](#injecting-a-function-to-set-the-state-of-another-field)와 `title` 필드의 새로운 상태를 주입받습니다. `Str::slug()` 유틸리티 메서드는 Laravel의 일부로, 문자열에서 슬러그를 생성하는 데 사용됩니다. 이후 `$set()` 함수를 사용해 `slug` 필드가 업데이트됩니다.
 
-One thing to note is that the user may customize the slug manually, and we don't want to overwrite their changes if the title changes. To prevent this, we can use the old version of the title to work out if the user has modified it themselves. To access the old version of the title, you can inject `$old`, and to get the current value of the slug before it gets changed, we can use the [`$get()` utility](#injecting-the-state-of-another-field):
+한 가지 주의할 점은 사용자가 슬러그를 직접 수정할 수 있으며, 이 경우 제목이 변경되어도 사용자가 수정한 슬러그를 덮어쓰지 않아야 한다는 것입니다. 이를 방지하기 위해, 사용자가 직접 수정했는지 확인하려면 이전 제목 버전을 활용할 수 있습니다. 이전 제목 버전에 접근하려면 `$old`를 주입하고, 변경되기 전 슬러그의 현재 값을 얻으려면 [`$get()` 유틸리티](#injecting-the-state-of-another-field)를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -367,9 +367,9 @@ TextInput::make('title')
 TextInput::make('slug')
 ```
 
-### Dependant select options
+### 종속 선택 옵션 {#dependant-select-options}
 
-To dynamically update the options of a [select field](fields/select) based on the value of another field, you can pass a function to the `options()` method of the select field. The function can [inject utilities](#form-component-utility-injection) as parameters, so you can do things like check the value of another field using the [`$get()` utility](#injecting-the-current-state-of-a-field):
+다른 필드의 값에 따라 [select 필드](fields/select)의 옵션을 동적으로 업데이트하려면, select 필드의 `options()` 메서드에 함수를 전달할 수 있습니다. 이 함수는 [유틸리티를 주입](#form-component-utility-injection)받을 수 있으므로, [`$get()` 유틸리티](#injecting-the-current-state-of-a-field)를 사용해 다른 필드의 값을 확인하는 등의 작업을 할 수 있습니다:
 
 ```php
 use Filament\Forms\Get;
@@ -377,33 +377,33 @@ use Filament\Forms\Components\Select;
 
 Select::make('category')
     ->options([
-        'web' => 'Web development',
-        'mobile' => 'Mobile development',
-        'design' => 'Design',
+        'web' => '웹 개발',
+        'mobile' => '모바일 개발',
+        'design' => '디자인',
     ])
     ->live()
 
 Select::make('sub_category')
     ->options(fn (Get $get): array => match ($get('category')) {
         'web' => [
-            'frontend_web' => 'Frontend development',
-            'backend_web' => 'Backend development',
+            'frontend_web' => '프론트엔드 개발',
+            'backend_web' => '백엔드 개발',
         ],
         'mobile' => [
-            'ios_mobile' => 'iOS development',
-            'android_mobile' => 'Android development',
+            'ios_mobile' => 'iOS 개발',
+            'android_mobile' => '안드로이드 개발',
         ],
         'design' => [
-            'app_design' => 'Panel design',
-            'marketing_website_design' => 'Marketing website design',
+            'app_design' => '패널 디자인',
+            'marketing_website_design' => '마케팅 웹사이트 디자인',
         ],
         default => [],
     })
 ```
 
-In this example, the `category` field is [`live()`](#the-basics-of-reactivity). This allows the form to rerender when the value of the `category` field changes. You can access the value of that field from within the `options()` function using the [`$get()` utility](#injecting-the-current-state-of-a-field). The value of the field is used to determine which options should be available in the `sub_category` field. The `match ()` statement in PHP is used to return an array of options based on the value of the `category` field. The result is that the `sub_category` field will only show options relevant to the selected `category` field.
+이 예시에서 `category` 필드는 [`live()`](#the-basics-of-reactivity)입니다. 이는 `category` 필드의 값이 변경될 때 폼이 다시 렌더링되도록 합니다. [`$get()` 유틸리티](#injecting-the-current-state-of-a-field)를 사용해 `options()` 함수 내에서 해당 필드의 값을 가져올 수 있습니다. 필드의 값에 따라 `sub_category` 필드에 표시될 옵션이 결정됩니다. PHP의 `match ()` 구문을 사용해 `category` 필드의 값에 따라 옵션 배열을 반환합니다. 그 결과, `sub_category` 필드는 선택된 `category` 필드와 관련된 옵션만 표시하게 됩니다.
 
-You could adapt this example to use options loaded from an Eloquent model or other data source, by querying within the function:
+이 예제를 Eloquent 모델이나 다른 데이터 소스에서 옵션을 불러오도록 변경할 수도 있습니다. 함수 내에서 쿼리를 실행하면 됩니다:
 
 ```php
 use Filament\Forms\Get;
@@ -420,9 +420,9 @@ Select::make('sub_category')
         ->pluck('name', 'id'))
 ```
 
-### Dynamic fields based on a select option
+### 선택 옵션에 따라 동적으로 필드 표시하기 {#dynamic-fields-based-on-a-select-option}
 
-You may wish to render a different set of fields based on the value of a field, like a select. To do this, you can pass a function to the `schema()` method of any [layout component](layout/getting-started), which checks the value of the field and returns a different schema based on that value. Also, you will need a way to initialise the new fields in the dynamic schema when they are first loaded.
+필드(예: select)의 값에 따라 다른 필드 집합을 렌더링하고 싶을 수 있습니다. 이를 위해, [레이아웃 컴포넌트](/filament/3.x/forms/layout/getting-started)의 `schema()` 메서드에 함수를 전달하여 해당 필드의 값을 확인하고, 그 값에 따라 다른 스키마를 반환할 수 있습니다. 또한, 동적 스키마에 새 필드가 처음 로드될 때 이를 초기화하는 방법이 필요합니다.
 
 ```php
 use Filament\Forms\Components\FileUpload;
@@ -465,11 +465,11 @@ Grid::make(2)
     ->key('dynamicTypeFields')
 ```
 
-In this example, the `type` field is [`live()`](#the-basics-of-reactivity). This allows the form to rerender when the value of the `type` field changes. The `afterStateUpdated()` method is used to run a function after the state of the `type` field is updated. In this case, we [inject the current select field instance](#injecting-the-current-form-component-instance), which we can then use to get the form "container" instance that holds both the select and the grid components. With this container, we can target the grid component using a unique key (`dynamicTypeFields`) that we have assigned to it. With that grid component instance, we can call `fill()`, just as we do on a normal form to initialise it. The `schema()` method of the grid component is then used to return a different schema based on the value of the `type` field. This is done by using the [`$get()` utility](#injecting-the-current-state-of-a-field), and returning a different schema array dynamically.
+이 예시에서 `type` 필드는 [`live()`](#the-basics-of-reactivity)가 적용되어 있습니다. 이를 통해 `type` 필드의 값이 변경될 때 폼이 다시 렌더링됩니다. `afterStateUpdated()` 메서드는 `type` 필드의 상태가 업데이트된 후 함수를 실행하는 데 사용됩니다. 이 경우, [현재 select 필드 인스턴스를 주입](#injecting-the-current-form-component-instance)하여, select와 grid 컴포넌트를 모두 포함하는 폼 "컨테이너" 인스턴스를 가져올 수 있습니다. 이 컨테이너를 통해, 고유 키(`dynamicTypeFields`)를 사용해 grid 컴포넌트를 지정할 수 있습니다. 해당 grid 컴포넌트 인스턴스에서 `fill()`을 호출하여 일반 폼에서처럼 초기화할 수 있습니다. grid 컴포넌트의 `schema()` 메서드는 `type` 필드의 값에 따라 다른 스키마를 반환하는 데 사용됩니다. 이는 [`$get()` 유틸리티](#injecting-the-current-state-of-a-field)를 사용하여 동적으로 다른 스키마 배열을 반환함으로써 구현됩니다.
 
-### Auto-hashing password field
+### 비밀번호 필드 자동 해싱 {#auto-hashing-password-field}
 
-You have a password field:
+비밀번호 필드가 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -478,7 +478,7 @@ TextInput::make('password')
     ->password()
 ```
 
-And you can use a [dehydration function](#field-dehydration) to hash the password when the form is submitted:
+그리고 [탈수 함수(dehydration function)](#field-dehydration)를 사용하여 폼이 제출될 때 비밀번호를 해싱할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -489,7 +489,7 @@ TextInput::make('password')
     ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
 ```
 
-But if your form is used to change an existing password, you don't want to overwrite the existing password if the field is empty. You can [prevent the field from being dehydrated](#preventing-a-field-from-being-dehydrated) if the field is null or an empty string (using the `filled()` helper):
+하지만 이 폼이 기존 비밀번호를 변경하는 데 사용된다면, 필드가 비어 있을 때 기존 비밀번호를 덮어쓰고 싶지 않을 것입니다. 필드가 null이거나 빈 문자열일 때 [필드가 탈수되지 않도록](#preventing-a-field-from-being-dehydrated) 할 수 있습니다(`filled()` 헬퍼 사용):
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -501,7 +501,7 @@ TextInput::make('password')
     ->dehydrated(fn (?string $state): bool => filled($state))
 ```
 
-However, you want to require the password to be filled when the user is being created, by [injecting the `$operation` utility](#injecting-the-current-form-operation), and then [conditionally making the field required](#conditionally-making-a-field-required):
+하지만 사용자를 생성할 때는 비밀번호 입력을 필수로 하고 싶을 수 있습니다. 이럴 때는 [$operation 유틸리티를 주입](#injecting-the-current-form-operation)하고, [조건부로 필드를 필수로](#conditionally-making-a-field-required) 만들 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -514,11 +514,11 @@ TextInput::make('password')
     ->required(fn (string $operation): bool => $operation === 'create')
 ```
 
-## Saving data to relationships
+## 관계에 데이터 저장하기 {#saving-data-to-relationships}
 
-> If you're building a form inside your Livewire component, make sure you have set up the [form's model](adding-a-form-to-a-livewire-component#setting-a-form-model). Otherwise, Filament doesn't know which model to use to retrieve the relationship from.
+> Livewire 컴포넌트 내에 폼을 만들고 있다면, 반드시 [폼의 모델](adding-a-form-to-a-livewire-component#setting-a-form-model)을 설정했는지 확인하세요. 그렇지 않으면 Filament는 어떤 모델에서 관계를 가져와야 하는지 알 수 없습니다.
 
-As well as being able to give structure to fields, [layout components](layout/getting-started) are also able to "teleport" their nested fields into a relationship. Filament will handle loading data from a `HasOne`, `BelongsTo` or `MorphOne` Eloquent relationship, and then it will save the data back to the same relationship. To set this behavior up, you can use the `relationship()` method on any layout component:
+필드에 구조를 부여할 수 있을 뿐만 아니라, [레이아웃 컴포넌트](/filament/3.x/forms/layout/getting-started)는 중첩된 필드를 관계로 "텔레포트"할 수도 있습니다. Filament는 `HasOne`, `BelongsTo` 또는 `MorphOne` Eloquent 관계에서 데이터를 불러오고, 다시 해당 관계에 데이터를 저장합니다. 이 동작을 설정하려면, 어떤 레이아웃 컴포넌트에서든 `relationship()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Fieldset;
@@ -535,9 +535,9 @@ Fieldset::make('Metadata')
     ])
 ```
 
-In this example, the `title`, `description` and `image` are automatically loaded from the `metadata` relationship, and saved again when the form is submitted. If the `metadata` record does not exist, it is automatically created.
+이 예시에서 `title`, `description`, `image`는 자동으로 `metadata` 관계에서 불러오고, 폼이 제출될 때 다시 저장됩니다. 만약 `metadata` 레코드가 존재하지 않으면, 자동으로 생성됩니다.
 
-This functionality is not just limited to fieldsets - you can use it with any layout component. For example, you could use a `Group` component which has no styling associated with it:
+이 기능은 필드셋에만 국한되지 않습니다. 어떤 레이아웃 컴포넌트와도 사용할 수 있습니다. 예를 들어, 스타일이 없는 `Group` 컴포넌트를 사용할 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\Group;
@@ -556,15 +556,15 @@ Group::make()
     ])
 ```
 
-### Saving data to a `BelongsTo` relationship
+### `BelongsTo` 관계에 데이터 저장하기 {#saving-data-to-a-belongsto-relationship}
 
-Please note that if you are saving the data to a `BelongsTo` relationship, then the foreign key column in your database must be `nullable()`. This is because Filament saves the form first, before saving the relationship. Since the form is saved first, the foreign ID does not exist yet, so it must be nullable. Immediately after the form is saved, Filament saves the relationship, which will then fill in the foreign ID and save it again.
+`BelongsTo` 관계에 데이터를 저장하는 경우, 데이터베이스의 외래 키 컬럼이 반드시 `nullable()`이어야 한다는 점에 유의하세요. 이는 Filament가 폼을 먼저 저장한 후, 관계를 저장하기 때문입니다. 폼이 먼저 저장되기 때문에 외래 키가 아직 존재하지 않으므로, 해당 컬럼이 nullable이어야 합니다. 폼이 저장된 직후, Filament가 관계를 저장하면서 외래 키를 채우고 다시 저장하게 됩니다.
 
-It is worth noting that if you have an observer on your form model, then you may need to adapt it to ensure that it does not depend on the relationship existing when it is created. For example, if you have an observer that sends an email to a related record when a form is created, you may need to switch to using a different hook that runs after the relationship is attached, like `updated()`.
+또한, 폼 모델에 옵저버가 있는 경우, 생성 시점에 관계가 존재하지 않는다는 점에 의존하지 않도록 옵저버를 수정해야 할 수도 있습니다. 예를 들어, 폼이 생성될 때 관련 레코드에 이메일을 보내는 옵저버가 있다면, 관계가 연결된 후에 실행되는 `updated()`와 같은 다른 후크를 사용하도록 변경해야 할 수 있습니다.
 
-### Conditionally saving data to a relationship
+### 관계에 데이터를 조건부로 저장하기 {#conditionally-saving-data-to-a-relationship}
 
-Sometimes, saving the related record may be optional. If the user fills out the customer fields, then the customer will be created / updated. Otherwise, the customer will not be created, or will be deleted if it already exists. To do this, you can pass a `condition` function as an argument to `relationship()`, which can use the `$state` of the related form to determine whether the relationship should be saved or not:
+때때로, 연관된 레코드를 저장하는 것이 선택적일 수 있습니다. 사용자가 고객 필드를 입력하면 고객이 생성되거나 업데이트됩니다. 그렇지 않으면 고객이 생성되지 않거나, 이미 존재하는 경우 삭제됩니다. 이를 위해 `relationship()`에 `condition` 함수를 인수로 전달할 수 있으며, 이 함수는 연관 폼의 `$state`를 사용하여 관계를 저장할지 여부를 결정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Group;
@@ -585,11 +585,11 @@ Group::make()
     ])
 ```
 
-In this example, the customer's name is not `required()`, and the email address is only required when the `name` is filled. The `condition` function is used to check whether the `name` field is filled, and if it is, then the customer will be created / updated. Otherwise, the customer will not be created, or will be deleted if it already exists.
+이 예시에서 고객의 이름은 `required()`가 아니며, 이메일 주소는 `name`이 입력된 경우에만 필수입니다. `condition` 함수는 `name` 필드가 입력되었는지 확인하는 데 사용되며, 입력된 경우 고객이 생성되거나 업데이트됩니다. 그렇지 않으면 고객이 생성되지 않거나, 이미 존재하는 경우 삭제됩니다.
 
-## Inserting Livewire components into a form
+## 폼에 Livewire 컴포넌트 삽입하기 {#inserting-livewire-components-into-a-form}
 
-You may insert a Livewire component directly into a form:
+Livewire 컴포넌트를 폼에 직접 삽입할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Livewire;
@@ -598,7 +598,7 @@ use App\Livewire\Foo;
 Livewire::make(Foo::class)
 ```
 
-If you are rendering multiple of the same Livewire component, please make sure to pass a unique `key()` to each:
+동일한 Livewire 컴포넌트를 여러 번 렌더링하는 경우, 각 컴포넌트에 고유한 `key()`를 전달해야 합니다:
 
 ```php
 use Filament\Forms\Components\Livewire;
@@ -614,9 +614,9 @@ Livewire::make(Foo::class)
     ->key('foo-third')
 ```
 
-### Passing parameters to a Livewire component
+### Livewire 컴포넌트에 파라미터 전달하기 {#passing-parameters-to-a-livewire-component}
 
-You can pass an array of parameters to a Livewire component:
+Livewire 컴포넌트에 파라미터 배열을 전달할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Livewire;
@@ -625,7 +625,7 @@ use App\Livewire\Foo;
 Livewire::make(Foo::class, ['bar' => 'baz'])
 ```
 
-Now, those parameters will be passed to the Livewire component's `mount()` method:
+이제 해당 파라미터들은 Livewire 컴포넌트의 `mount()` 메서드로 전달됩니다:
 
 ```php
 class Foo extends Component
@@ -637,7 +637,7 @@ class Foo extends Component
 }
 ```
 
-Alternatively, they will be available as public properties on the Livewire component:
+또는, Livewire 컴포넌트의 public 프로퍼티로도 사용할 수 있습니다:
 
 ```php
 class Foo extends Component
@@ -646,9 +646,9 @@ class Foo extends Component
 }
 ```
 
-#### Accessing the current record in the Livewire component
+#### Livewire 컴포넌트에서 현재 레코드에 접근하기 {#accessing-the-current-record-in-the-livewire-component}
 
-You can access the current record in the Livewire component using the `$record` parameter in the `mount()` method, or the `$record` property:
+Livewire 컴포넌트에서 현재 레코드는 `mount()` 메서드의 `$record` 파라미터나 `$record` 프로퍼티를 사용하여 접근할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -660,13 +660,13 @@ class Foo extends Component
         // ...
     }
     
-    // or
+    // 또는
     
     public ?Model $record = null;
 }
 ```
 
-Please be aware that when the record has not yet been created, it will be `null`. If you'd like to hide the Livewire component when the record is `null`, you can use the `hidden()` method:
+레코드가 아직 생성되지 않은 경우에는 `null`임을 유의하세요. 레코드가 `null`일 때 Livewire 컴포넌트를 숨기고 싶다면, `hidden()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Livewire;
@@ -676,9 +676,9 @@ Livewire::make(Foo::class)
     ->hidden(fn (?Model $record): bool => $record === null)
 ```
 
-### Lazy loading a Livewire component
+### Livewire 컴포넌트 지연 로딩하기 {#lazy-loading-a-livewire-component}
 
-You may allow the component to [lazily load](https://livewire.laravel.com/docs/lazy#rendering-placeholder-html) using the `lazy()` method:
+`lazy()` 메서드를 사용하여 컴포넌트를 [지연 로드](https://livewire.laravel.com/docs/lazy#rendering-placeholder-html)할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Livewire;

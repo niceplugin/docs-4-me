@@ -1,92 +1,92 @@
 ---
-title: Modal Blade component
+title: 모달 블레이드 컴포넌트
 ---
+# [핵심개념.Blade컴포넌트] modal
+## 개요 {#overview}
 
-## Overview
-
-The modal component is able to open a dialog window or slide-over with any content:
+모달 컴포넌트는 어떤 내용이든 다이얼로그 창이나 슬라이드 오버로 열 수 있습니다:
 
 ```blade
 <x-filament::modal>
     <x-slot name="trigger">
         <x-filament::button>
-            Open modal
+            모달 열기
         </x-filament::button>
     </x-slot>
 
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Controlling a modal from JavaScript
+## JavaScript에서 모달 제어하기 {#controlling-a-modal-from-javascript}
 
-You can use the `trigger` slot to render a button that opens the modal. However, this is not required. You have complete control over when the modal opens and closes through JavaScript. First, give the modal an ID so that you can reference it:
+`trigger` 슬롯을 사용하여 모달을 여는 버튼을 렌더링할 수 있습니다. 하지만, 이는 필수가 아닙니다. JavaScript를 통해 모달이 열리고 닫히는 시점을 완전히 제어할 수 있습니다. 먼저, 모달에 ID를 부여하여 참조할 수 있도록 합니다:
 
 ```blade
 <x-filament::modal id="edit-user">
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-Now, you can dispatch an `open-modal` or `close-modal` browser event, passing the modal's ID, which will open or close the modal. For example, from a Livewire component:
+이제, `open-modal` 또는 `close-modal` 브라우저 이벤트를 디스패치하면서 모달의 ID를 전달하면, 해당 모달을 열거나 닫을 수 있습니다. 예를 들어, Livewire 컴포넌트에서 다음과 같이 사용할 수 있습니다:
 
 ```php
 $this->dispatch('open-modal', id: 'edit-user');
 ```
 
-Or from Alpine.js:
+또는 Alpine.js에서 다음과 같이 사용할 수 있습니다:
 
 ```php
 $dispatch('open-modal', { id: 'edit-user' })
 ```
 
-## Adding a heading to a modal
+## 모달에 제목 추가하기 {#adding-a-heading-to-a-modal}
 
-You can add a heading to a modal by using the `heading` slot:
+`heading` 슬롯을 사용하여 모달에 제목을 추가할 수 있습니다:
 
 ```blade
 <x-filament::modal>
     <x-slot name="heading">
-        Modal heading
+        모달 제목
     </x-slot>
 
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Adding a description to a modal
+## 모달에 설명 추가하기 {#adding-a-description-to-a-modal}
 
-You can add a description, below the heading, to a modal by using the `description` slot:
+`description` 슬롯을 사용하여 모달의 제목 아래에 설명을 추가할 수 있습니다:
 
 ```blade
 <x-filament::modal>
     <x-slot name="heading">
-        Modal heading
+        모달 제목
     </x-slot>
 
     <x-slot name="description">
-        Modal description
+        모달 설명
     </x-slot>
 
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Adding an icon to a modal
+## 모달에 아이콘 추가하기 {#adding-an-icon-to-a-modal}
 
-You can add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to a modal by using the `icon` attribute:
+`icon` 속성을 사용하여 모달에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 추가할 수 있습니다:
 
 ```blade
 <x-filament::modal icon="heroicon-o-information-circle">
     <x-slot name="heading">
-        Modal heading
+        모달 제목
     </x-slot>
 
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-By default, the color of an icon is "primary". You can change it to be `danger`, `gray`, `info`, `success` or `warning` by using the `icon-color` attribute:
+기본적으로 아이콘의 색상은 "primary"입니다. `icon-color` 속성을 사용하여 `danger`, `gray`, `info`, `success`, `warning` 중 하나로 변경할 수 있습니다:
 
 ```blade
 <x-filament::modal
@@ -94,153 +94,153 @@ By default, the color of an icon is "primary". You can change it to be `danger`,
     icon-color="danger"
 >
     <x-slot name="heading">
-        Modal heading
+        모달 제목
     </x-slot>
 
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Adding a footer to a modal
+## 모달에 푸터 추가하기 {#adding-a-footer-to-a-modal}
 
-You can add a footer to a modal by using the `footer` slot:
+`footer` 슬롯을 사용하여 모달에 푸터를 추가할 수 있습니다:
 
 ```blade
 <x-filament::modal>
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
     
     <x-slot name="footer">
-        {{-- Modal footer content --}}
+        {{-- 모달 푸터 내용 --}}
     </x-slot>
 </x-filament::modal>
 ```
 
-Alternatively, you can add actions into the footer by using the `footerActions` slot:
+또는, `footerActions` 슬롯을 사용하여 푸터에 액션을 추가할 수도 있습니다:
 
 ```blade
 <x-filament::modal>
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
     
     <x-slot name="footerActions">
-        {{-- Modal footer actions --}}
+        {{-- 모달 푸터 액션 --}}
     </x-slot>
 </x-filament::modal>
 ```
 
-## Changing the modal's alignment
+## 모달의 정렬 변경하기 {#changing-the-modals-alignment}
 
-By default, modal content will be aligned to the start, or centered if the modal is `xs` or `sm` in [width](#changing-the-modal-width). If you wish to change the alignment of content in a modal, you can use the `alignment` attribute and pass it `start` or `center`:
+기본적으로 모달의 내용은 시작 부분에 정렬되며, 모달의 [너비](#changing-the-modal-width)가 `xs` 또는 `sm`인 경우에는 중앙에 정렬됩니다. 모달 내 콘텐츠의 정렬을 변경하고 싶다면, `alignment` 속성에 `start` 또는 `center` 값을 전달하여 사용할 수 있습니다:
 
 ```blade
 <x-filament::modal alignment="center">
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Using a slide-over instead of a modal
+## 모달 대신 슬라이드 오버 사용하기 {#using-a-slide-over-instead-of-a-modal}
 
-You can open a "slide-over" dialog instead of a modal by using the `slide-over` attribute:
+`slide-over` 속성을 사용하여 모달 대신 "슬라이드 오버" 다이얼로그를 열 수 있습니다:
 
 ```blade
 <x-filament::modal slide-over>
-    {{-- Slide-over content --}}
+    {{-- 슬라이드 오버 내용 --}}
 </x-filament::modal>
 ```
 
-## Making the modal header sticky
+## 모달 헤더를 스티키로 만들기 {#making-the-modal-header-sticky}
 
-The header of a modal scrolls out of view with the modal content when it overflows the modal size. However, slide-overs have a sticky modal that's always visible. You may control this behavior using the `sticky-header` attribute:
+모달의 헤더는 모달의 크기를 초과하여 내용이 넘칠 때, 모달 내용과 함께 화면 밖으로 스크롤됩니다. 하지만 슬라이드 오버는 항상 보이는 스티키 모달 헤더를 가지고 있습니다. 이 동작은 `sticky-header` 속성을 사용하여 제어할 수 있습니다:
 
 ```blade
 <x-filament::modal sticky-header>
     <x-slot name="heading">
-        Modal heading
+        모달 헤더
     </x-slot>
 
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Making the modal footer sticky
+## 모달 푸터를 스티키로 만들기 {#making-the-modal-footer-sticky}
 
-The footer of a modal is rendered inline after the content by default. Slide-overs, however, have a sticky footer that always shows when scrolling the content. You may enable this for a modal too using the `sticky-footer` attribute:
+모달의 푸터는 기본적으로 콘텐츠 뒤에 인라인으로 렌더링됩니다. 하지만 슬라이드오버는 콘텐츠를 스크롤할 때 항상 표시되는 스티키 푸터를 가지고 있습니다. 모달에서도 `sticky-footer` 속성을 사용하여 이 기능을 활성화할 수 있습니다:
 
 ```blade
 <x-filament::modal sticky-footer>
-    {{-- Modal content --}}
+    {{-- 모달 콘텐츠 --}}
     
     <x-slot name="footer">
-        {{-- Modal footer content --}}
+        {{-- 모달 푸터 콘텐츠 --}}
     </x-slot>
 </x-filament::modal>
 ```
 
-## Changing the modal width
+## 모달 너비 변경하기 {#changing-the-modal-width}
 
-You can change the width of the modal by using the `width` attribute. Options correspond to [Tailwind's max-width scale](https://tailwindcss.com/docs/max-width). The options are `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`, and `screen`:
+`width` 속성을 사용하여 모달의 너비를 변경할 수 있습니다. 옵션은 [Tailwind의 max-width 스케일](https://tailwindcss.com/docs/max-width)과 일치합니다. 사용 가능한 옵션은 `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`, 그리고 `screen`입니다:
 
 ```blade
 <x-filament::modal width="5xl">
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Closing the modal by clicking away
+## 모달 바깥을 클릭하여 닫기 {#closing-the-modal-by-clicking-away}
 
-By default, when you click away from a modal, it will close itself. If you wish to disable this behavior for a specific action, you can use the `close-by-clicking-away` attribute:
+기본적으로 모달 바깥을 클릭하면 모달이 닫힙니다. 특정 액션에 대해 이 동작을 비활성화하고 싶다면, `close-by-clicking-away` 속성을 사용할 수 있습니다:
 
 ```blade
 <x-filament::modal :close-by-clicking-away="false">
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Closing the modal by escaping
+## Esc 키로 모달 닫기 {#closing-the-modal-by-escaping}
 
-By default, when you press escape on a modal, it will close itself. If you wish to disable this behavior for a specific action, you can use the `close-by-escaping` attribute:
+기본적으로 모달에서 Esc 키를 누르면 모달이 닫힙니다. 특정 액션에 대해 이 동작을 비활성화하고 싶다면, `close-by-escaping` 속성을 사용할 수 있습니다:
 
 ```blade
 <x-filament::modal :close-by-escaping="false">
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Hiding the modal close button
+## 모달 닫기 버튼 숨기기 {#hiding-the-modal-close-button}
 
-By default, modals with a header have a close button in the top right corner. You can remove the close button from the modal by using the `close-button` attribute:
+기본적으로, 헤더가 있는 모달에는 오른쪽 상단에 닫기 버튼이 있습니다. `close-button` 속성을 사용하여 모달에서 닫기 버튼을 제거할 수 있습니다:
 
 ```blade
 <x-filament::modal :close-button="false">
     <x-slot name="heading">
-        Modal heading
+        모달 헤딩
     </x-slot>
 
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Preventing the modal from autofocusing
+## 모달의 자동 포커스 방지하기 {#preventing-the-modal-from-autofocusing}
 
-By default, modals will autofocus on the first focusable element when opened. If you wish to disable this behavior, you can use the `autofocus` attribute:
+기본적으로 모달이 열릴 때 첫 번째 포커스 가능한 요소에 자동으로 포커스됩니다. 이 동작을 비활성화하려면 `autofocus` 속성을 사용할 수 있습니다:
 
 ```blade
 <x-filament::modal :autofocus="false">
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 
-## Disabling the modal trigger button
+## 모달 트리거 버튼 비활성화하기 {#disabling-the-modal-trigger-button}
 
-By default, the trigger button will open the modal even if it is disabled, since the click event listener is registered on a wrapping element of the button itself. If you want to prevent the modal from opening, you should also use the `disabled` attribute on the trigger slot:
+기본적으로 트리거 버튼이 비활성화되어 있어도, 클릭 이벤트 리스너가 버튼 자체의 래핑 요소에 등록되어 있기 때문에 모달이 열립니다. 모달이 열리지 않도록 하려면 트리거 슬롯에도 `disabled` 속성을 사용해야 합니다:
 
 ```blade
 <x-filament::modal>
     <x-slot name="trigger" disabled>
         <x-filament::button :disabled="true">
-            Open modal
+            모달 열기
         </x-filament::button>
     </x-slot>
-    {{-- Modal content --}}
+    {{-- 모달 내용 --}}
 </x-filament::modal>
 ```
 

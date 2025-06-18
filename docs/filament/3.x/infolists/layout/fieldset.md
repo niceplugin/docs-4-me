@@ -1,11 +1,11 @@
 ---
 title: Fieldset
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [인포리스트.레이아웃] Fieldset
 
-## Overview
+## 개요 {#overview}
 
-You may want to group entries into a Fieldset. Each fieldset has a label, a border, and a two-column grid by default:
+엔트리들을 Fieldset으로 그룹화하고 싶을 수 있습니다. 각 필드셋은 기본적으로 라벨, 테두리, 그리고 2열 그리드를 가집니다:
 
 ```php
 use Filament\Infolists\Components\Fieldset;
@@ -18,9 +18,9 @@ Fieldset::make('Label')
 
 <AutoScreenshot name="infolists/layout/fieldset/simple" alt="Fieldset" version="3.x" />
 
-## Using grid columns within a fieldset
+## 필드셋 내에서 그리드 열 사용하기 {#using-grid-columns-within-a-fieldset}
 
-You may use the `columns()` method to customize the [grid](grid) within the fieldset:
+`columns()` 메서드를 사용하여 필드셋 내의 [그리드](grid)를 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Fieldset;

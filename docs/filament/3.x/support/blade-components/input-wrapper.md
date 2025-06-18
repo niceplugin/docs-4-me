@@ -1,10 +1,10 @@
 ---
-title: Input wrapper Blade component
+title: 입력 래퍼 Blade 컴포넌트
 ---
+# [핵심개념.Blade컴포넌트] input.wrapper
+## 개요 {#overview}
 
-## Overview
-
-The input wrapper component should be used as a wrapper around the [input](input) or [select](select) components. It provides a border and other elements such as a prefix or suffix.
+input wrapper 컴포넌트는 [input](input) 또는 [select](select) 컴포넌트의 래퍼로 사용해야 합니다. 이 컴포넌트는 테두리와 prefix, suffix와 같은 기타 요소들을 제공합니다.
 
 ```blade
 <x-filament::input.wrapper>
@@ -23,11 +23,11 @@ The input wrapper component should be used as a wrapper around the [input](input
 </x-filament::input.wrapper>
 ```
 
-## Triggering the error state of the input
+## 입력의 에러 상태 트리거하기 {#triggering-the-error-state-of-the-input}
 
-The component has special styling that you can use if it is invalid. To trigger this styling, you can use either Blade or Alpine.js.
+이 컴포넌트는 입력값이 유효하지 않을 때 사용할 수 있는 특별한 스타일을 제공합니다. 이 스타일을 트리거하려면 Blade 또는 Alpine.js를 사용할 수 있습니다.
 
-To trigger the error state using Blade, you can pass the `valid` attribute to the component, which contains either true or false based on if the input is valid or not:
+Blade를 사용하여 에러 상태를 트리거하려면, 입력값이 유효한지 여부에 따라 true 또는 false 값을 가지는 `valid` 속성을 컴포넌트에 전달하면 됩니다:
 
 ```blade
 <x-filament::input.wrapper :valid="! $errors->has('name')">
@@ -38,7 +38,7 @@ To trigger the error state using Blade, you can pass the `valid` attribute to th
 </x-filament::input.wrapper>
 ```
 
-Alternatively, you can use an Alpine.js expression to trigger the error state, based on if it evaluates to `true` or `false`:
+또는, Alpine.js 표현식을 사용하여 에러 상태를 트리거할 수도 있습니다. 이때 해당 표현식이 `true` 또는 `false`로 평가되는지에 따라 스타일이 적용됩니다:
 
 ```blade
 <div x-data="{ errors: ['name'] }">
@@ -51,9 +51,9 @@ Alternatively, you can use an Alpine.js expression to trigger the error state, b
 </div>
 ```
 
-## Disabling the input
+## 입력 비활성화하기 {#disabling-the-input}
 
-To disable the input, you must also pass the `disabled` attribute to the wrapper component:
+입력을 비활성화하려면, `disabled` 속성을 래퍼 컴포넌트에도 전달해야 합니다:
 
 ```blade
 <x-filament::input.wrapper disabled>
@@ -65,9 +65,9 @@ To disable the input, you must also pass the `disabled` attribute to the wrapper
 </x-filament::input.wrapper>
 ```
 
-## Adding affix text aside the input
+## 입력 옆에 접두사/접미사 텍스트 추가하기 {#adding-affix-text-aside-the-input}
 
-You may place text before and after the input using the `prefix` and `suffix` slots:
+`prefix`와 `suffix` 슬롯을 사용하여 입력란 앞과 뒤에 텍스트를 배치할 수 있습니다:
 
 ```blade
 <x-filament::input.wrapper>
@@ -86,9 +86,9 @@ You may place text before and after the input using the `prefix` and `suffix` sl
 </x-filament::input.wrapper>
 ```
 
-### Using icons as affixes
+### 접두사 및 접미사로 아이콘 사용하기 {#using-icons-as-affixes}
 
-You may place an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) before and after the input using the `prefix-icon` and `suffix-icon` attributes:
+`prefix-icon`과 `suffix-icon` 속성을 사용하여 입력란 앞과 뒤에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 배치할 수 있습니다:
 
 ```blade
 <x-filament::input.wrapper suffix-icon="heroicon-m-globe-alt">
@@ -99,9 +99,9 @@ You may place an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) befor
 </x-filament::input.wrapper>
 ```
 
-#### Setting the affix icon's color
+#### 접두사/접미사 아이콘 색상 설정하기 {#setting-the-affix-icons-color}
 
-Affix icons are gray by default, but you may set a different color using the `prefix-icon-color` and `affix-icon-color` attributes:
+접두사/접미사 아이콘은 기본적으로 회색이지만, `prefix-icon-color`와 `affix-icon-color` 속성을 사용하여 다른 색상으로 설정할 수 있습니다:
 
 ```blade
 <x-filament::input.wrapper

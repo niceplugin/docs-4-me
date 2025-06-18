@@ -1,11 +1,11 @@
 ---
-title: Checkbox column
+title: CheckboxColumn
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [테이블.컬럼] CheckboxColumn
 
-## Overview
+## 개요 {#overview}
 
-The checkbox column allows you to render a checkbox inside the table, which can be used to update that database record without needing to open a new page or a modal:
+CheckboxColumn은 테이블 안에 체크박스를 렌더링할 수 있게 해주며, 새로운 페이지나 모달을 열 필요 없이 해당 데이터베이스 레코드를 업데이트하는 데 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\CheckboxColumn;
@@ -13,18 +13,18 @@ use Filament\Tables\Columns\CheckboxColumn;
 CheckboxColumn::make('is_admin')
 ```
 
-<AutoScreenshot name="tables/columns/checkbox/simple" alt="Checkbox column" version="3.x" />
+<AutoScreenshot name="tables/columns/checkbox/simple" alt="CheckboxColumn" version="3.x" />
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-Hooks may be used to execute code at various points within the checkbox's lifecycle:
+훅을 사용하여 체크박스의 라이프사이클 내 여러 지점에서 코드를 실행할 수 있습니다:
 
 ```php
 CheckboxColumn::make()
     ->beforeStateUpdated(function ($record, $state) {
-        // Runs before the state is saved to the database.
+        // 상태가 데이터베이스에 저장되기 전에 실행됩니다.
     })
     ->afterStateUpdated(function ($record, $state) {
-        // Runs after the state is saved to the database.
+        // 상태가 데이터베이스에 저장된 후에 실행됩니다.
     })
 ```

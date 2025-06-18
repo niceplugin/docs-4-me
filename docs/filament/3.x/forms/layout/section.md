@@ -1,17 +1,17 @@
 ---
 title: Section
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [폼.레이아웃] Section
 
-## Overview
+## 개요 {#overview}
 
-You may want to separate your fields into sections, each with a heading and description. To do this, you can use a section component:
+필드들을 각각의 섹션으로 나누고, 각 섹션에 제목과 설명을 추가하고 싶을 수 있습니다. 이를 위해 섹션 컴포넌트를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Section;
 
 Section::make('Rate limiting')
-    ->description('Prevent abuse by limiting the number of requests per period')
+    ->description('기간당 요청 수를 제한하여 남용을 방지합니다')
     ->schema([
         // ...
     ])
@@ -19,7 +19,7 @@ Section::make('Rate limiting')
 
 <AutoScreenshot name="forms/layout/section/simple" alt="Section" version="3.x" />
 
-You can also use a section without a header, which just wraps the components in a simple card:
+헤더 없이 섹션을 사용할 수도 있으며, 이 경우 컴포넌트들이 단순한 카드로 감싸집니다:
 
 ```php
 use Filament\Forms\Components\Section;
@@ -32,13 +32,13 @@ Section::make()
 
 <AutoScreenshot name="forms/layout/section/without-header" alt="Section without header" version="3.x" />
 
-## Adding actions to the section's header or footer
+## 섹션의 헤더 또는 푸터에 액션 추가하기 {#adding-actions-to-the-sections-header-or-footer}
 
-Sections can have actions in their [header](#adding-actions-to-the-sections-header) or [footer](#adding-actions-to-the-sections-footer).
+섹션은 [헤더](#adding-actions-to-the-sections-header)나 [푸터](#adding-actions-to-the-sections-footer)에 액션을 가질 수 있습니다.
 
-### Adding actions to the section's header
+### 섹션 헤더에 액션 추가하기 {#adding-actions-to-the-sections-header}
 
-You may add [actions](../actions) to the section's header using the `headerActions()` method:
+`headerActions()` 메서드를 사용하여 섹션의 헤더에 [액션](../actions)을 추가할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -56,13 +56,13 @@ Section::make('Rate limiting')
     ])
 ```
 
-<AutoScreenshot name="forms/layout/section/header/actions" alt="Section with header actions" version="3.x" />
+<AutoScreenshot name="forms/layout/section/header/actions" alt="헤더 액션이 있는 섹션" version="3.x" />
 
-> [Make sure the section has a heading or ID](#adding-actions-to-a-section-without-heading)
+> [섹션에 제목이나 ID가 있는지 확인하세요](#adding-actions-to-a-section-without-heading)
 
-### Adding actions to the section's footer
+### 섹션 푸터에 액션 추가하기 {#adding-actions-to-the-sections-footer}
 
-In addition to [header actions](#adding-an-icon-to-the-sections-header), you may add [actions](../actions) to the section's footer using the `footerActions()` method:
+[헤더 액션](#adding-an-icon-to-the-sections-header) 외에도, `footerActions()` 메서드를 사용하여 섹션의 푸터에 [액션](../actions)을 추가할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -80,13 +80,13 @@ Section::make('Rate limiting')
     ])
 ```
 
-<AutoScreenshot name="forms/layout/section/footer/actions" alt="Section with footer actions" version="3.x" />
+<AutoScreenshot name="forms/layout/section/footer/actions" alt="푸터 액션이 있는 섹션" version="3.x" />
 
-> [Make sure the section has a heading or ID](#adding-actions-to-a-section-without-heading)
+> [섹션에 헤딩이나 ID가 있는지 확인하세요](#adding-actions-to-a-section-without-heading)
 
-#### Aligning section footer actions
+#### 섹션 푸터 액션 정렬 {#aligning-section-footer-actions}
 
-Footer actions are aligned to the inline start by default. You may customize the alignment using the `footerActionsAlignment()` method:
+푸터 액션은 기본적으로 인라인 시작(왼쪽)에 정렬됩니다. `footerActionsAlignment()` 메서드를 사용하여 정렬을 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -106,9 +106,9 @@ Section::make('Rate limiting')
     ->footerActionsAlignment(Alignment::End)
 ```
 
-### Adding actions to a section without heading
+### 제목이 없는 섹션에 액션 추가하기 {#adding-actions-to-a-section-without-heading}
 
-If your section does not have a heading, Filament has no way of locating the action inside it. In this case, you must pass a unique `id()` to the section:
+섹션에 제목이 없는 경우, Filament는 그 안에 있는 액션을 찾을 방법이 없습니다. 이럴 때는 섹션에 고유한 `id()`를 전달해야 합니다:
 
 ```php
 use Filament\Forms\Components\Section;
@@ -123,9 +123,9 @@ Section::make()
     ])
 ```
 
-## Adding an icon to the section's header
+## 섹션 헤더에 아이콘 추가하기 {#adding-an-icon-to-the-sections-header}
 
-You may add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to the section's header using the `icon()` method:
+`icon()` 메서드를 사용하여 섹션의 헤더에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 추가할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Section;
@@ -138,11 +138,11 @@ Section::make('Cart')
     ])
 ```
 
-<AutoScreenshot name="forms/layout/section/icons" alt="Section with icon" version="3.x" />
+<AutoScreenshot name="forms/layout/section/icons" alt="아이콘이 있는 섹션" version="3.x" />
 
-## Positioning the heading and description aside
+## 제목과 설명을 옆에 배치하기 {#positioning-the-heading-and-description-aside}
 
-You may use the `aside()` to align heading & description on the left, and the form components inside a card on the right:
+`aside()`를 사용하여 제목과 설명을 왼쪽에 정렬하고, 카드 안의 폼 컴포넌트는 오른쪽에 배치할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Section;
@@ -155,41 +155,41 @@ Section::make('Rate limiting')
     ])
 ```
 
-<AutoScreenshot name="forms/layout/section/aside" alt="Section with heading and description aside" version="3.x" />
+<AutoScreenshot name="forms/layout/section/aside" alt="제목과 설명이 옆에 배치된 섹션" version="3.x" />
 
-## Collapsing sections
+## 섹션 접기 {#collapsing-sections}
 
-Sections may be `collapsible()` to optionally hide content in long forms:
+섹션은 `collapsible()`을 사용하여 긴 폼에서 내용을 선택적으로 숨길 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Section;
 
 Section::make('Cart')
-    ->description('The items you have selected for purchase')
+    ->description('구매를 위해 선택한 상품들')
     ->schema([
         // ...
     ])
     ->collapsible()
 ```
 
-Your sections may be `collapsed()` by default:
+섹션을 기본적으로 `collapsed()` 상태로 둘 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\Section;
 
 Section::make('Cart')
-    ->description('The items you have selected for purchase')
+    ->description('구매를 위해 선택한 상품들')
     ->schema([
         // ...
     ])
     ->collapsed()
 ```
 
-<AutoScreenshot name="forms/layout/section/collapsed" alt="Collapsed section" version="3.x" />
+<AutoScreenshot name="forms/layout/section/collapsed" alt="접힌 섹션" version="3.x" />
 
-### Persisting collapsed sections
+### 섹션 접기 상태 유지 {#persisting-collapsed-sections}
 
-You can persist whether a section is collapsed in local storage using the `persistCollapsed()` method, so it will remain collapsed when the user refreshes the page:
+`persistCollapsed()` 메서드를 사용하면 섹션이 접힌 상태를 로컬 스토리지에 저장할 수 있어, 사용자가 페이지를 새로고침해도 접힌 상태가 유지됩니다:
 
 ```php
 use Filament\Infolists\Components\Section;
@@ -203,7 +203,7 @@ Section::make('Cart')
     ->persistCollapsed()
 ```
 
-To persist the collapse state, the local storage needs a unique ID to store the state. This ID is generated based on the heading of the section. If your section does not have a heading, or if you have multiple sections with the same heading that you do not want to collapse together, you can manually specify the `id()` of that section to prevent an ID conflict:
+접기 상태를 저장하려면, 로컬 스토리지에 상태를 저장할 고유한 ID가 필요합니다. 이 ID는 섹션의 헤딩(heading)을 기반으로 생성됩니다. 만약 섹션에 헤딩이 없거나, 동일한 헤딩을 가진 여러 섹션이 있는데 이들이 함께 접히는 것을 원하지 않는 경우, 해당 섹션의 `id()`를 수동으로 지정하여 ID 충돌을 방지할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\Section;
@@ -218,15 +218,15 @@ Section::make('Cart')
     ->id('order-cart')
 ```
 
-## Compact section styling
+## 컴팩트 섹션 스타일링 {#compact-section-styling}
 
-When nesting sections, you can use a more compact styling:
+섹션을 중첩할 때, 더 컴팩트한 스타일을 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Section;
 
 Section::make('Rate limiting')
-    ->description('Prevent abuse by limiting the number of requests per period')
+    ->description('일정 기간 동안 요청 수를 제한하여 남용을 방지합니다')
     ->schema([
         // ...
     ])
@@ -235,9 +235,9 @@ Section::make('Rate limiting')
 
 <AutoScreenshot name="forms/layout/section/compact" alt="Compact section" version="3.x" />
 
-## Using grid columns within a section
+## 섹션 내에서 그리드 열 사용하기 {#using-grid-columns-within-a-section}
 
-You may use the `columns()` method to easily create a [grid](grid) within the section:
+`columns()` 메서드를 사용하여 섹션 내에 쉽게 [그리드](grid)를 생성할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Section;

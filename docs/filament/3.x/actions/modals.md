@@ -1,15 +1,15 @@
 ---
-title: Modals
+title: 모달
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [액션] 모달
 
-## Overview
+## 개요 {#overview}
 
-Actions may require additional confirmation or input from the user before they run. You may open a modal before an action is executed to do this.
+액션은 실행되기 전에 사용자로부터 추가 확인이나 입력이 필요할 수 있습니다. 이를 위해 액션이 실행되기 전에 모달을 열 수 있습니다.
 
-## Confirmation modals
+## 확인 모달 {#confirmation-modals}
 
-You may require confirmation before an action is run using the `requiresConfirmation()` method. This is useful for particularly destructive actions, such as those that delete records.
+`requiresConfirmation()` 메서드를 사용하여 액션이 실행되기 전에 확인을 요구할 수 있습니다. 이는 레코드를 삭제하는 것과 같이 특히 파괴적인 액션에 유용합니다.
 
 ```php
 use App\Models\Post;
@@ -19,15 +19,15 @@ Action::make('delete')
     ->requiresConfirmation()
 ```
 
-<AutoScreenshot name="actions/modal/confirmation" alt="Confirmation modal" version="3.x" />
+<AutoScreenshot name="actions/modal/confirmation" alt="확인 모달" version="3.x" />
 
-> The confirmation modal is not available when a `url()` is set instead of an `action()`. Instead, you should redirect to the URL within the `action()` closure.
+> `action()` 대신 `url()`이 설정된 경우에는 확인 모달을 사용할 수 없습니다. 대신, `action()` 클로저 내에서 해당 URL로 리디렉션해야 합니다.
 
-## Modal forms
+## 모달 폼 {#modal-forms}
 
-You may also render a form in the modal to collect extra information from the user before the action runs.
+액션이 실행되기 전에 사용자로부터 추가 정보를 수집하기 위해 모달에서 폼을 렌더링할 수도 있습니다.
 
-You may use components from the [Form Builder](../forms) to create custom action modal forms. The data from the form is available in the `$data` array of the `action()` closure:
+[폼 빌더](/filament/3.x/forms/getting-started)의 컴포넌트를 사용하여 커스텀 액션 모달 폼을 생성할 수 있습니다. 폼에서 입력된 데이터는 `action()` 클로저의 `$data` 배열에서 사용할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -47,11 +47,11 @@ Action::make('updateAuthor')
     })
 ```
 
-<AutoScreenshot name="actions/modal/form" alt="Modal with form" version="3.x" />
+<AutoScreenshot name="actions/modal/form" alt="폼이 있는 모달" version="3.x" />
 
-### Filling the form with existing data
+### 기존 데이터로 폼 채우기 {#filling-the-form-with-existing-data}
 
-You may fill the form with existing data, using the `fillForm()` method:
+기존 데이터를 사용하여 `fillForm()` 메서드로 폼을 채울 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -75,9 +75,9 @@ Action::make('updateAuthor')
     })
 ```
 
-### Using a wizard as a modal form
+### 위자드를 모달 폼으로 사용하기 {#using-a-wizard-as-a-modal-form}
 
-You may create a [multistep form wizard](../forms/layout/wizard) inside a modal. Instead of using a `form()`, define a `steps()` array and pass your `Step` objects:
+[다단계 폼 위자드](../forms/layout/wizard)를 모달 안에 생성할 수 있습니다. `form()`을 사용하는 대신, `steps()` 배열을 정의하고 `Step` 객체들을 전달하세요:
 
 ```php
 use Filament\Forms\Components\MarkdownEditor;
@@ -88,7 +88,7 @@ use Filament\Forms\Components\Wizard\Step;
 Action::make('create')
     ->steps([
         Step::make('Name')
-            ->description('Give the category a unique name')
+            ->description('카테고리에 고유한 이름을 지정하세요')
             ->schema([
                 TextInput::make('name')
                     ->required()
@@ -101,25 +101,25 @@ Action::make('create')
             ])
             ->columns(2),
         Step::make('Description')
-            ->description('Add some extra details')
+            ->description('추가 정보를 입력하세요')
             ->schema([
                 MarkdownEditor::make('description'),
             ]),
         Step::make('Visibility')
-            ->description('Control who can view it')
+            ->description('누가 볼 수 있는지 제어하세요')
             ->schema([
                 Toggle::make('is_visible')
-                    ->label('Visible to customers.')
+                    ->label('고객에게 표시됩니다.')
                     ->default(true),
             ]),
     ])
 ```
 
-<AutoScreenshot name="actions/modal/wizard" alt="Modal with wizard" version="3.x" />
+<AutoScreenshot name="actions/modal/wizard" alt="위자드가 포함된 모달" version="3.x" />
 
-### Disabling all form fields
+### 모든 폼 필드 비활성화하기 {#disabling-all-form-fields}
 
-You may wish to disable all form fields in the modal, ensuring the user cannot edit them. You may do so using the `disabledForm()` method:
+모달에서 모든 폼 필드를 비활성화하여 사용자가 수정하지 못하도록 하고 싶을 수 있습니다. `disabledForm()` 메서드를 사용하여 이를 할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -142,9 +142,9 @@ Action::make('approvePost')
     })
 ```
 
-## Customizing the modal's heading, description, and submit action label
+## 모달의 제목, 설명, 제출 버튼 라벨 커스터마이징하기 {#customizing-the-modals-heading-description-and-submit-action-label}
 
-You may customize the heading, description and label of the submit button in the modal:
+모달에서 제목, 설명, 제출 버튼의 라벨을 커스터마이즈할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -152,16 +152,16 @@ use App\Models\Post;
 Action::make('delete')
     ->action(fn (Post $record) => $record->delete())
     ->requiresConfirmation()
-    ->modalHeading('Delete post')
-    ->modalDescription('Are you sure you\'d like to delete this post? This cannot be undone.')
-    ->modalSubmitActionLabel('Yes, delete it')
+    ->modalHeading('게시글 삭제')
+    ->modalDescription('이 게시글을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')
+    ->modalSubmitActionLabel('네, 삭제합니다')
 ```
 
-<AutoScreenshot name="actions/modal/confirmation-custom-text" alt="Confirmation modal with custom text" version="3.x" />
+<AutoScreenshot name="actions/modal/confirmation-custom-text" alt="커스텀 텍스트가 적용된 확인 모달" version="3.x" />
 
-## Adding an icon inside the modal
+## 모달 안에 아이콘 추가하기 {#adding-an-icon-inside-the-modal}
 
-You may add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) inside the modal using the `modalIcon()` method:
+`modalIcon()` 메서드를 사용하여 모달 안에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 추가할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -172,9 +172,9 @@ Action::make('delete')
     ->modalIcon('heroicon-o-trash')
 ```
 
-<AutoScreenshot name="actions/modal/icon" alt="Confirmation modal with icon" version="3.x" />
+<AutoScreenshot name="actions/modal/icon" alt="아이콘이 있는 확인 모달" version="3.x" />
 
-By default, the icon will inherit the color of the action button. You may customize the color of the icon using the `modalIconColor()` method:
+기본적으로 아이콘은 액션 버튼의 색상을 상속받습니다. `modalIconColor()` 메서드를 사용하여 아이콘의 색상을 커스터마이즈할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -187,9 +187,9 @@ Action::make('delete')
     ->modalIconColor('warning')
 ```
 
-## Customizing the alignment of modal content
+## 모달 콘텐츠 정렬 사용자 지정 {#customizing-the-alignment-of-modal-content}
 
-By default, modal content will be aligned to the start, or centered if the modal is `xs` or `sm` in [width](#changing-the-modal-width). If you wish to change the alignment of content in a modal, you can use the `modalAlignment()` method and pass it `Alignment::Start` or `Alignment::Center`:
+기본적으로 모달 콘텐츠는 시작 부분에 정렬되며, 모달의 [너비](#changing-the-modal-width)가 `xs` 또는 `sm`인 경우에는 중앙에 정렬됩니다. 모달에서 콘텐츠의 정렬을 변경하고 싶다면, `modalAlignment()` 메서드를 사용하고 `Alignment::Start` 또는 `Alignment::Center`를 전달할 수 있습니다:
 
 ```php
 use Filament\Support\Enums\Alignment;
@@ -204,21 +204,21 @@ Action::make('updateAuthor')
     ->modalAlignment(Alignment::Center)
 ```
 
-## Custom modal content
+## 사용자 지정 모달 내용 {#custom-modal-content}
 
-You may define custom content to be rendered inside your modal, which you can specify by passing a Blade view into the `modalContent()` method:
+모달 내부에 렌더링될 사용자 지정 내용을 정의할 수 있으며, `modalContent()` 메서드에 Blade 뷰를 전달하여 지정할 수 있습니다:
 
 ```php
 use App\Models\Post;
 
 Action::make('advance')
     ->action(fn (Post $record) => $record->advance())
-    ->modalContent(view('filament.pages.actions.advance'))
-```
+    ->modalContent
 
-### Passing data to the custom modal content
 
-You can pass data to the view by returning it from a function. For example, if the `$record` of an action is set, you can pass that through to the view:
+### 커스텀 모달 콘텐츠에 데이터 전달하기 {#passing-data-to-the-custom-modal-content}
+
+함수를 통해 데이터를 반환하여 뷰에 전달할 수 있습니다. 예를 들어, 액션의 `$record`가 설정되어 있다면, 이를 뷰로 전달할 수 있습니다:
 
 ```php
 use Illuminate\Contracts\View\View;
@@ -231,9 +231,9 @@ Action::make('advance')
     ))
 ```
 
-### Adding custom modal content below the form
+### 폼 아래에 커스텀 모달 콘텐츠 추가하기 {#adding-custom-modal-content-below-the-form}
 
-By default, the custom content is displayed above the modal form if there is one, but you can add content below using `modalContentFooter()` if you wish:
+기본적으로 커스텀 콘텐츠는 모달 폼 위에 표시되지만, 원한다면 `modalContentFooter()`를 사용하여 아래에 콘텐츠를 추가할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -243,9 +243,9 @@ Action::make('advance')
     ->modalContentFooter(view('filament.pages.actions.advance'))
 ```
 
-### Adding an action to custom modal content
+### 사용자 지정 모달 콘텐츠에 액션 추가하기 {#adding-an-action-to-custom-modal-content}
 
-You can add an action button to your custom modal content, which is useful if you want to add a button that performs an action other than the main action. You can do this by registering an action with the `registerModalActions()` method, and then passing it to the view:
+사용자 지정 모달 콘텐츠에 액션 버튼을 추가할 수 있습니다. 이는 메인 액션 이외의 동작을 수행하는 버튼을 추가하고 싶을 때 유용합니다. `registerModalActions()` 메서드로 액션을 등록한 후, 이를 뷰에 전달하여 사용할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -264,7 +264,7 @@ Action::make('advance')
     ))
 ```
 
-Now, in the view file, you can render the action button by calling `getModalAction()`:
+이제 뷰 파일에서 `getModalAction()`을 호출하여 액션 버튼을 렌더링할 수 있습니다:
 
 ```blade
 <div>
@@ -272,9 +272,9 @@ Now, in the view file, you can render the action button by calling `getModalActi
 </div>
 ```
 
-## Using a slide-over instead of a modal
+## 모달 대신 슬라이드 오버 사용하기 {#using-a-slide-over-instead-of-a-modal}
 
-You can open a "slide-over" dialog instead of a modal by using the `slideOver()` method:
+`slideOver()` 메서드를 사용하면 모달 대신 "슬라이드 오버" 대화 상자를 열 수 있습니다:
 
 ```php
 Action::make('updateAuthor')
@@ -287,13 +287,13 @@ Action::make('updateAuthor')
     ->slideOver()
 ```
 
-<AutoScreenshot name="actions/modal/slide-over" alt="Slide over with form" version="3.x" />
+<AutoScreenshot name="actions/modal/slide-over" alt="폼이 있는 슬라이드 오버" version="3.x" />
 
-Instead of opening in the center of the screen, the modal content will now slide in from the right and consume the entire height of the browser.
+이제 모달 내용이 화면 중앙에 열리는 대신, 오른쪽에서 슬라이드되어 브라우저의 전체 높이를 차지하게 됩니다.
 
-## Making the modal header sticky
+## 모달 헤더를 스티키로 만들기 {#making-the-modal-header-sticky}
 
-The header of a modal scrolls out of view with the modal content when it overflows the modal size. However, slide-overs have a sticky header that's always visible. You may control this behavior using `stickyModalHeader()`:
+모달의 헤더는 모달의 크기를 초과하여 내용이 스크롤될 때, 내용과 함께 화면 밖으로 스크롤됩니다. 하지만 슬라이드오버는 항상 보이는 스티키 헤더를 가지고 있습니다. 이 동작은 `stickyModalHeader()`를 사용하여 제어할 수 있습니다:
 
 ```php
 Action::make('updateAuthor')
@@ -306,9 +306,9 @@ Action::make('updateAuthor')
     ->stickyModalHeader()
 ```
 
-## Making the modal footer sticky
+## 모달 푸터를 스티키로 만들기 {#making-the-modal-footer-sticky}
 
-The footer of a modal is rendered inline after the content by default. Slide-overs, however, have a sticky footer that always shows when scrolling the content. You may enable this for a modal too using `stickyModalFooter()`:
+모달의 푸터는 기본적으로 콘텐츠 뒤에 인라인으로 렌더링됩니다. 하지만 슬라이드오버는 콘텐츠를 스크롤할 때 항상 표시되는 스티키 푸터를 가지고 있습니다. 모달에서도 `stickyModalFooter()`를 사용하여 이 기능을 활성화할 수 있습니다:
 
 ```php
 Action::make('updateAuthor')
@@ -321,9 +321,9 @@ Action::make('updateAuthor')
     ->stickyModalFooter()
 ```
 
-## Changing the modal width
+## 모달 너비 변경하기 {#changing-the-modal-width}
 
-You can change the width of the modal by using the `modalWidth()` method. Options correspond to [Tailwind's max-width scale](https://tailwindcss.com/docs/max-width). The options are `ExtraSmall`, `Small`, `Medium`, `Large`, `ExtraLarge`, `TwoExtraLarge`, `ThreeExtraLarge`, `FourExtraLarge`, `FiveExtraLarge`, `SixExtraLarge`, `SevenExtraLarge`, and `Screen`:
+`modalWidth()` 메서드를 사용하여 모달의 너비를 변경할 수 있습니다. 옵션은 [Tailwind의 max-width 스케일](https://tailwindcss.com/docs/max-width)과 일치합니다. 사용 가능한 옵션은 `ExtraSmall`, `Small`, `Medium`, `Large`, `ExtraLarge`, `TwoExtraLarge`, `ThreeExtraLarge`, `FourExtraLarge`, `FiveExtraLarge`, `SixExtraLarge`, `SevenExtraLarge`, 그리고 `Screen`입니다:
 
 ```php
 use Filament\Support\Enums\MaxWidth;
@@ -338,9 +338,9 @@ Action::make('updateAuthor')
     ->modalWidth(MaxWidth::FiveExtraLarge)
 ```
 
-## Executing code when the modal opens
+## 모달이 열릴 때 코드 실행하기 {#executing-code-when-the-modal-opens}
 
-You may execute code within a closure when the modal opens, by passing it to the `mountUsing()` method:
+모달이 열릴 때 클로저 내에서 코드를 실행하려면, `mountUsing()` 메서드에 전달하면 됩니다:
 
 ```php
 use Filament\Forms\Form;
@@ -353,29 +353,29 @@ Action::make('create')
     })
 ```
 
-> The `mountUsing()` method, by default, is used by Filament to initialize the [form](#modal-forms). If you override this method, you will need to call `$form->fill()` to ensure the form is initialized correctly. If you wish to populate the form with data, you can do so by passing an array to the `fill()` method, instead of [using `fillForm()` on the action itself](#filling-the-form-with-existing-data).
+> `mountUsing()` 메서드는 기본적으로 Filament가 [폼](#modal-forms)을 초기화할 때 사용합니다. 이 메서드를 오버라이드할 경우, 폼이 올바르게 초기화되도록 반드시 `$form->fill()`을 호출해야 합니다. 폼에 데이터를 채우고 싶다면, [액션 자체에서 `fillForm()`을 사용하는 것](#filling-the-form-with-existing-data) 대신 `fill()` 메서드에 배열을 전달하여 데이터를 채울 수 있습니다.
 
-## Customizing the action buttons in the footer of the modal
+## 모달 하단의 액션 버튼 사용자 지정 {#customizing-the-action-buttons-in-the-footer-of-the-modal}
 
-By default, there are two actions in the footer of a modal. The first is a button to submit, which executes the `action()`. The second button closes the modal and cancels the action.
+기본적으로 모달의 하단에는 두 개의 액션이 있습니다. 첫 번째는 `action()`을 실행하는 제출 버튼입니다. 두 번째 버튼은 모달을 닫고 액션을 취소합니다.
 
-### Modifying a default modal footer action button
+### 기본 모달 푸터 액션 버튼 수정하기 {#modifying-a-default-modal-footer-action-button}
 
-To modify the action instance that is used to render one of the default action buttons, you may pass a closure to the `modalSubmitAction()` and `modalCancelAction()` methods:
+기본 액션 버튼 중 하나를 렌더링하는 액션 인스턴스를 수정하려면, `modalSubmitAction()` 및 `modalCancelAction()` 메서드에 클로저를 전달할 수 있습니다:
 
 ```php
 use Filament\Actions\StaticAction;
 
 Action::make('help')
     ->modalContent(view('actions.help'))
-    ->modalCancelAction(fn (StaticAction $action) => $action->label('Close'))
+    ->modalCancelAction(fn (StaticAction $action) => $action->label('닫기'))
 ```
 
-The [methods available to customize trigger buttons](trigger-button) will work to modify the `$action` instance inside the closure.
+[트리거 버튼을 커스터마이즈할 수 있는 메서드들](trigger-button)은 클로저 내부의 `$action` 인스턴스를 수정하는 데 사용할 수 있습니다.
 
-### Removing a default modal footer action button
+### 기본 모달 푸터 액션 버튼 제거하기 {#removing-a-default-modal-footer-action-button}
 
-To remove a default action, you may pass `false` to either `modalSubmitAction()` or `modalCancelAction()`:
+기본 액션을 제거하려면 `modalSubmitAction()` 또는 `modalCancelAction()`에 `false`를 전달하면 됩니다:
 
 ```php
 Action::make('help')
@@ -383,9 +383,9 @@ Action::make('help')
     ->modalSubmitAction(false)
 ```
 
-### Adding an extra modal action button to the footer
+### 모달 하단에 추가 액션 버튼 추가하기 {#adding-an-extra-modal-action-button-to-the-footer}
 
-You may pass an array of extra actions to be rendered, between the default actions, in the footer of the modal using the `extraModalFooterActions()` method:
+`extraModalFooterActions()` 메서드를 사용하여, 모달의 하단에 기본 액션들 사이에 렌더링될 추가 액션들의 배열을 전달할 수 있습니다:
 
 ```php
 Action::make('create')
@@ -398,9 +398,9 @@ Action::make('create')
     ])
 ```
 
-`$action->makeModalSubmitAction()` returns an action instance that can be customized using the [methods available to customize trigger buttons](trigger-button).
+`$action->makeModalSubmitAction()`은 [트리거 버튼을 커스터마이즈할 수 있는 메서드들](trigger-button)을 사용하여 커스터마이즈할 수 있는 액션 인스턴스를 반환합니다.
 
-The second parameter of `makeModalSubmitAction()` allows you to pass an array of arguments that will be accessible inside the action's `action()` closure as `$arguments`. These could be useful as flags to indicate that the action should behave differently based on the user's decision:
+`makeModalSubmitAction()`의 두 번째 파라미터로는, 액션의 `action()` 클로저 내에서 `$arguments`로 접근할 수 있는 인자 배열을 전달할 수 있습니다. 이 인자들은 사용자의 결정에 따라 액션이 다르게 동작해야 함을 나타내는 플래그로 유용하게 사용할 수 있습니다:
 
 ```php
 Action::make('create')
@@ -412,17 +412,17 @@ Action::make('create')
         $action->makeModalSubmitAction('createAnother', arguments: ['another' => true]),
     ])
     ->action(function (array $data, array $arguments): void {
-        // Create
+        // 생성
 
         if ($arguments['another'] ?? false) {
-            // Reset the form and don't close the modal
+            // 폼을 리셋하고 모달을 닫지 않음
         }
     })
 ```
 
-#### Opening another modal from an extra footer action
+#### 추가 푸터 액션에서 다른 모달 열기 {#opening-another-modal-from-an-extra-footer-action}
 
-You can nest actions within each other, allowing you to open a new modal from an extra footer action:
+액션을 서로 중첩할 수 있으므로, 추가 푸터 액션에서 새로운 모달을 열 수 있습니다:
 
 ```php
 Action::make('edit')
@@ -436,9 +436,9 @@ Action::make('edit')
     ])
 ```
 
-Now, the edit modal will have a "Delete" button in the footer, which will open a confirmation modal when clicked. This action is completely independent of the `edit` action, and will not run the `edit` action when it is clicked.
+이제 edit 모달의 푸터에 "Delete" 버튼이 생기며, 클릭 시 확인 모달이 열립니다. 이 액션은 `edit` 액션과 완전히 독립적이며, 클릭해도 `edit` 액션이 실행되지 않습니다.
 
-In this example though, you probably want to cancel the `edit` action if the `delete` action is run. You can do this using the `cancelParentActions()` method:
+하지만 이 예시에서는 `delete` 액션이 실행될 경우 `edit` 액션을 취소하고 싶을 수 있습니다. 이럴 때는 `cancelParentActions()` 메서드를 사용할 수 있습니다:
 
 ```php
 Action::make('delete')
@@ -449,7 +449,7 @@ Action::make('delete')
     ->cancelParentActions()
 ```
 
-If you have deep nesting with multiple parent actions, but you don't want to cancel all of them, you can pass the name of the parent action you want to cancel, including its children, to `cancelParentActions()`:
+여러 부모 액션이 깊게 중첩되어 있지만, 모두 취소하고 싶지 않은 경우에는, 취소하고 싶은 부모 액션의 이름(및 그 자식들)을 `cancelParentActions()`에 전달할 수 있습니다:
 
 ```php
 Action::make('first')
@@ -481,11 +481,11 @@ Action::make('first')
     ])
 ```
 
-In this example, if the `fourth` action is run, the `second` action is canceled, but so is the `third` action since it is a child of `second`. The `first` action is not canceled, however, since it is the parent of `second`. The `first` action's modal will remain open.
+이 예시에서 `fourth` 액션이 실행되면, `second` 액션이 취소되고, `second`의 자식인 `third` 액션도 함께 취소됩니다. 하지만 `second`의 부모인 `first` 액션은 취소되지 않으므로, `first` 액션의 모달은 계속 열려 있습니다.
 
-## Closing the modal by clicking away
+## 모달 바깥을 클릭하여 닫기 {#closing-the-modal-by-clicking-away}
 
-By default, when you click away from a modal, it will close itself. If you wish to disable this behavior for a specific action, you can use the `closeModalByClickingAway(false)` method:
+기본적으로 모달 바깥을 클릭하면 모달이 닫힙니다. 특정 액션에 대해 이 동작을 비활성화하고 싶다면, `closeModalByClickingAway(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 Action::make('updateAuthor')
@@ -498,7 +498,7 @@ Action::make('updateAuthor')
     ->closeModalByClickingAway(false)
 ```
 
-If you'd like to change the behavior for all modals in the application, you can do so by calling `Modal::closedByClickingAway()` inside a service provider or middleware:
+애플리케이션의 모든 모달에 대해 이 동작을 변경하고 싶다면, 서비스 프로바이더나 미들웨어 내부에서 `Modal::closedByClickingAway()`를 호출하면 됩니다:
 
 ```php
 use Filament\Support\View\Components\Modal;
@@ -506,9 +506,9 @@ use Filament\Support\View\Components\Modal;
 Modal::closedByClickingAway(false);
 ```
 
-## Closing the modal by escaping
+## Esc 키로 모달 닫기 {#closing-the-modal-by-escaping}
 
-By default, when you press escape on a modal, it will close itself. If you wish to disable this behavior for a specific action, you can use the `closeModalByEscaping(false)` method:
+기본적으로 모달에서 Esc 키를 누르면 모달이 닫힙니다. 특정 액션에 대해 이 동작을 비활성화하고 싶다면, `closeModalByEscaping(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 Action::make('updateAuthor')
@@ -521,7 +521,7 @@ Action::make('updateAuthor')
     ->closeModalByEscaping(false)
 ```
 
-If you'd like to change the behavior for all modals in the application, you can do so by calling `Modal::closedByEscaping()` inside a service provider or middleware:
+애플리케이션의 모든 모달에 대해 이 동작을 변경하고 싶다면, 서비스 프로바이더나 미들웨어 내부에서 `Modal::closedByEscaping()`을 호출하면 됩니다:
 
 ```php
 use Filament\Support\View\Components\Modal;
@@ -529,9 +529,9 @@ use Filament\Support\View\Components\Modal;
 Modal::closedByEscaping(false);
 ```
 
-## Hiding the modal close button
+## 모달 닫기 버튼 숨기기 {#hiding-the-modal-close-button}
 
-By default, modals have a close button in the top right corner. If you wish to hide the close button, you can use the `modalCloseButton(false)` method:
+기본적으로 모달에는 오른쪽 상단에 닫기 버튼이 있습니다. 닫기 버튼을 숨기고 싶다면 `modalCloseButton(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 Action::make('updateAuthor')
@@ -544,7 +544,7 @@ Action::make('updateAuthor')
     ->modalCloseButton(false)
 ```
 
-If you'd like to hide the close button for all modals in the application, you can do so by calling `Modal::closeButton(false)` inside a service provider or middleware:
+애플리케이션의 모든 모달에서 닫기 버튼을 숨기고 싶다면, 서비스 프로바이더나 미들웨어 내부에서 `Modal::closeButton(false)`를 호출하면 됩니다:
 
 ```php
 use Filament\Support\View\Components\Modal;
@@ -552,9 +552,9 @@ use Filament\Support\View\Components\Modal;
 Modal::closeButton(false);
 ```
 
-## Preventing the modal from autofocusing
+## 모달의 자동 포커스 방지 {#preventing-the-modal-from-autofocusing}
 
-By default, modals will autofocus on the first focusable element when opened. If you wish to disable this behavior, you can use the `modalAutofocus(false)` method:
+기본적으로 모달은 열릴 때 첫 번째로 포커스 가능한 요소에 자동으로 포커스를 맞춥니다. 이 동작을 비활성화하려면 `modalAutofocus(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 Action::make('updateAuthor')
@@ -567,7 +567,7 @@ Action::make('updateAuthor')
     ->modalAutofocus(false)
 ```
 
-If you'd like to disable autofocus for all modals in the application, you can do so by calling `Modal::autofocus(false)` inside a service provider or middleware:
+애플리케이션의 모든 모달에 대해 자동 포커스를 비활성화하고 싶다면, 서비스 프로바이더나 미들웨어 내부에서 `Modal::autofocus(false)`를 호출하면 됩니다:
 
 ```php
 use Filament\Support\View\Components\Modal;
@@ -575,20 +575,20 @@ use Filament\Support\View\Components\Modal;
 Modal::autofocus(false);
 ```
 
-## Optimizing modal configuration methods
+## 모달 구성 메서드 최적화 {#optimizing-modal-configuration-methods}
 
-When you use database queries or other heavy operations inside modal configuration methods like `modalHeading()`, they can be executed more than once. This is because Filament uses these methods to decide whether to render the modal or not, and also to render the modal's content.
+`modalHeading()`과 같은 모달 구성 메서드 내에서 데이터베이스 쿼리나 기타 무거운 작업을 사용할 경우, 해당 메서드가 한 번 이상 실행될 수 있습니다. 이는 Filament가 모달을 렌더링할지 여부를 결정할 때와 모달의 내용을 렌더링할 때 이 메서드들을 사용하기 때문입니다.
 
-To skip the check that Filament does to decide whether to render the modal, you can use the `modal()` method, which will inform Filament that the modal exists for this action and it does not need to check again:
+Filament가 모달을 렌더링할지 확인하는 과정을 건너뛰고 싶다면, `modal()` 메서드를 사용할 수 있습니다. 이 메서드는 해당 액션에 대해 모달이 존재함을 Filament에 알려주어, 추가적인 확인이 필요 없도록 합니다:
 
 ```php
 Action::make('updateAuthor')
     ->modal()
 ```
 
-## Conditionally hiding the modal
+## 모달을 조건부로 숨기기 {#conditionally-hiding-the-modal}
 
-You may have a need to conditionally show a modal for confirmation reasons while falling back to the default action. This can be achieved using `modalHidden()`:
+확인 등의 이유로 모달을 조건부로 표시해야 하며, 기본 동작으로 돌아가야 할 때가 있을 수 있습니다. 이는 `modalHidden()`을 사용하여 구현할 수 있습니다:
 
 ```php
 Action::make('create')
@@ -599,9 +599,9 @@ Action::make('create')
     ->modalContent(view('filament.pages.actions.create'))
 ```
 
-## Adding extra attributes to the modal window
+## 모달 창에 추가 속성 지정하기 {#adding-extra-attributes-to-the-modal-window}
 
-You may also pass extra HTML attributes to the modal window using `extraModalWindowAttributes()`:
+`extraModalWindowAttributes()`를 사용하여 모달 창에 추가 HTML 속성을 전달할 수도 있습니다:
 
 ```php
 Action::make('updateAuthor')

@@ -1,10 +1,10 @@
 ---
-title: Create action
+title: CreateAction
 ---
+# [액션.내장된액션] CreateAction
+## 개요 {#overview}
 
-## Overview
-
-Filament includes a prebuilt action that is able to create Eloquent records. When the trigger button is clicked, a modal will open with a form inside. The user fills the form, and that data is validated and saved into the database. You may use it like so:
+Filament에는 Eloquent 레코드를 생성할 수 있는 내장된 액션이 포함되어 있습니다. 트리거 버튼을 클릭하면 모달이 열리고 그 안에 폼이 표시됩니다. 사용자가 폼을 작성하면 해당 데이터가 검증되어 데이터베이스에 저장됩니다. 다음과 같이 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\CreateAction;
@@ -20,7 +20,7 @@ CreateAction::make()
     ])
 ```
 
-If you want to add this action to the header of a table instead, you can use `Filament\Tables\Actions\CreateAction`:
+이 액션을 테이블의 헤더에 추가하고 싶다면, `Filament\Tables\Actions\CreateAction`을 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -42,9 +42,9 @@ public function table(Table $table): Table
 }
 ```
 
-## Customizing data before saving
+## 저장 전에 데이터 커스터마이징하기 {#customizing-data-before-saving}
 
-Sometimes, you may wish to modify form data before it is finally saved to the database. To do this, you may use the `mutateFormDataUsing()` method, which has access to the `$data` as an array, and returns the modified version:
+때때로, 폼 데이터를 데이터베이스에 최종적으로 저장하기 전에 수정하고 싶을 수 있습니다. 이를 위해 `mutateFormDataUsing()` 메서드를 사용할 수 있으며, 이 메서드는 배열 형태의 `$data`에 접근할 수 있고, 수정된 버전을 반환합니다:
 
 ```php
 CreateAction::make()
@@ -55,9 +55,9 @@ CreateAction::make()
     })
 ```
 
-## Customizing the creation process
+## 생성 프로세스 커스터마이징하기 {#customizing-the-creation-process}
 
-You can tweak how the record is created with the `using()` method:
+`using()` 메서드를 사용하여 레코드가 생성되는 방식을 조정할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -68,18 +68,18 @@ CreateAction::make()
     })
 ```
 
-`$model` is the class name of the model, but you can replace this with your own hard-coded class if you wish.
+`$model`은 모델의 클래스 이름이지만, 원한다면 직접 하드코딩한 클래스로 대체할 수도 있습니다.
 
-## Redirecting after creation
+## 생성 후 리디렉션 {#redirecting-after-creation}
 
-You may set up a custom redirect when the form is submitted using the `successRedirectUrl()` method:
+폼이 제출될 때 `successRedirectUrl()` 메서드를 사용하여 커스텀 리디렉션을 설정할 수 있습니다:
 
 ```php
 CreateAction::make()
     ->successRedirectUrl(route('posts.list'))
 ```
 
-If you want to redirect using the created record, use the `$record` parameter:
+생성된 레코드를 사용하여 리디렉션하고 싶다면, `$record` 파라미터를 사용하세요:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -90,18 +90,18 @@ CreateAction::make()
     ]))
 ```
 
-## Customizing the save notification
+## 저장 알림 커스터마이징 {#customizing-the-save-notification}
 
-When the record is successfully created, a notification is dispatched to the user, which indicates the success of their action.
+레코드가 성공적으로 생성되면, 사용자의 작업이 성공했음을 알리는 알림이 사용자에게 전송됩니다.
 
-To customize the title of this notification, use the `successNotificationTitle()` method:
+이 알림의 제목을 커스터마이징하려면, `successNotificationTitle()` 메서드를 사용하세요:
 
 ```php
 CreateAction::make()
-    ->successNotificationTitle('User registered')
+    ->successNotificationTitle('사용자 등록 완료')
 ```
 
-You may customize the entire notification using the `successNotification()` method:
+알림 전체를 커스터마이징하려면 `successNotification()` 메서드를 사용하세요:
 
 ```php
 use Filament\Notifications\Notification;
@@ -110,49 +110,49 @@ CreateAction::make()
     ->successNotification(
        Notification::make()
             ->success()
-            ->title('User registered')
-            ->body('The user has been created successfully.'),
+            ->title('사용자 등록 완료')
+            ->body('사용자가 성공적으로 생성되었습니다.'),
     )
 ```
 
-To disable the notification altogether, use the `successNotification(null)` method:
+알림을 완전히 비활성화하려면, `successNotification(null)` 메서드를 사용하세요:
 
 ```php
 CreateAction::make()
     ->successNotification(null)
 ```
 
-## Lifecycle hooks
+## 라이프사이클 훅 {#lifecycle-hooks}
 
-Hooks may be used to execute code at various points within the action's lifecycle, like before a form is saved.
+훅은 액션의 라이프사이클 내 여러 지점에서 코드를 실행하는 데 사용할 수 있으며, 예를 들어 폼이 저장되기 전에 실행할 수 있습니다.
 
-There are several available hooks:
+여러 가지 사용 가능한 훅이 있습니다:
 
 ```php
 CreateAction::make()
     ->beforeFormFilled(function () {
-        // Runs before the form fields are populated with their default values.
+        // 폼 필드가 기본값으로 채워지기 전에 실행됩니다.
     })
     ->afterFormFilled(function () {
-        // Runs after the form fields are populated with their default values.
+        // 폼 필드가 기본값으로 채워진 후에 실행됩니다.
     })
     ->beforeFormValidated(function () {
-        // Runs before the form fields are validated when the form is submitted.
+        // 폼이 제출될 때 폼 필드가 검증되기 전에 실행됩니다.
     })
     ->afterFormValidated(function () {
-        // Runs after the form fields are validated when the form is submitted.
+        // 폼이 제출될 때 폼 필드가 검증된 후에 실행됩니다.
     })
     ->before(function () {
-        // Runs before the form fields are saved to the database.
+        // 폼 필드가 데이터베이스에 저장되기 전에 실행됩니다.
     })
     ->after(function () {
-        // Runs after the form fields are saved to the database.
+        // 폼 필드가 데이터베이스에 저장된 후에 실행됩니다.
     })
 ```
 
-## Halting the creation process
+## 생성 프로세스 중단하기 {#halting-the-creation-process}
 
-At any time, you may call `$action->halt()` from inside a lifecycle hook or mutation method, which will halt the entire creation process:
+언제든지 라이프사이클 훅이나 변이 메서드 내부에서 `$action->halt()`를 호출하여 전체 생성 프로세스를 중단할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -164,8 +164,8 @@ CreateAction::make()
         if (! $record->team->subscribed()) {
             Notification::make()
                 ->warning()
-                ->title('You don\'t have an active subscription!')
-                ->body('Choose a plan to continue.')
+                ->title('활성화된 구독이 없습니다!')
+                ->body('계속하려면 요금제를 선택하세요.')
                 ->persistent()
                 ->actions([
                     Action::make('subscribe')
@@ -179,15 +179,15 @@ CreateAction::make()
     })
 ```
 
-If you'd like the action modal to close too, you can completely `cancel()` the action instead of halting it:
+액션 모달도 함께 닫고 싶다면, 중단하는 대신 액션을 완전히 `cancel()`할 수 있습니다:
 
 ```php
 $action->cancel();
 ```
 
-## Using a wizard
+## 위자드 사용하기 {#using-a-wizard}
 
-You may easily transform the creation process into a multistep wizard. Instead of using a `form()`, define a `steps()` array and pass your `Step` objects:
+생성 프로세스를 손쉽게 다단계 위자드로 변환할 수 있습니다. `form()` 대신, `steps()` 배열을 정의하고 `Step` 객체들을 전달하세요:
 
 ```php
 use Filament\Forms\Components\MarkdownEditor;
@@ -198,7 +198,7 @@ use Filament\Forms\Components\Wizard\Step;
 CreateAction::make()
     ->steps([
         Step::make('Name')
-            ->description('Give the category a unique name')
+            ->description('카테고리에 고유한 이름을 지정하세요')
             ->schema([
                 TextInput::make('name')
                     ->required()
@@ -211,23 +211,23 @@ CreateAction::make()
             ])
             ->columns(2),
         Step::make('Description')
-            ->description('Add some extra details')
+            ->description('추가 정보를 입력하세요')
             ->schema([
                 MarkdownEditor::make('description'),
             ]),
         Step::make('Visibility')
-            ->description('Control who can view it')
+            ->description('누가 볼 수 있는지 제어하세요')
             ->schema([
                 Toggle::make('is_visible')
-                    ->label('Visible to customers.')
+                    ->label('고객에게 표시됩니다.')
                     ->default(true),
             ]),
     ])
 ```
 
-Now, create a new record to see your wizard in action! Edit will still use the form defined within the resource class.
+이제 새 레코드를 생성하여 위자드가 동작하는 모습을 확인해보세요! 편집(Edit) 기능은 여전히 리소스 클래스 내에 정의된 폼을 사용합니다.
 
-If you'd like to allow free navigation, so all the steps are skippable, use the `skippableSteps()` method:
+모든 단계를 건너뛸 수 있도록 자유로운 이동을 허용하고 싶다면, `skippableSteps()` 메서드를 사용하세요:
 
 ```php
 CreateAction::make()
@@ -237,9 +237,9 @@ CreateAction::make()
     ->skippableSteps()
 ```
 
-## Disabling create another
+## "다른 항목 생성" 비활성화 {#disabling-create-another}
 
-If you'd like to remove the "create another" button from the modal, you can use the `createAnother(false)` method:
+모달에서 "다른 항목 생성" 버튼을 제거하고 싶다면, `createAnother(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 CreateAction::make()

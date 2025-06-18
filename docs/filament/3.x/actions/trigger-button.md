@@ -1,37 +1,37 @@
 ---
-title: Trigger button
+title: 트리거 버튼
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [액션] 트리거 버튼
 
-## Overview
+## 개요 {#overview}
 
-All actions have a trigger button. When the user clicks on it, the action is executed - a modal will open, a closure function will be executed, or they will be redirected to a URL.
+모든 액션에는 트리거 버튼이 있습니다. 사용자가 이 버튼을 클릭하면 액션이 실행됩니다. 모달이 열리거나, 클로저 함수가 실행되거나, 사용자가 URL로 리디렉션됩니다.
 
-This page is about customizing the look of that trigger button.
+이 페이지에서는 해당 트리거 버튼의 모양을 커스터마이즈하는 방법에 대해 설명합니다.
 
-## Choosing a trigger style
+## 트리거 스타일 선택하기 {#choosing-a-trigger-style}
 
-Out of the box, action triggers have 4 styles - "button", "link", "icon button", and "badge".
+기본적으로, 액션 트리거는 4가지 스타일을 제공합니다 - "버튼", "링크", "아이콘 버튼", 그리고 "배지"입니다.
 
-"Button" triggers have a background color, label, and optionally an [icon](#setting-an-icon). Usually, this is the default button style, but you can use it manually with the `button()` method:
+"버튼" 트리거는 배경색, 라벨, 그리고 선택적으로 [아이콘](#setting-an-icon)을 가질 수 있습니다. 보통 기본 버튼 스타일이지만, `button()` 메서드를 사용해 수동으로 적용할 수도 있습니다:
 
 ```php
 Action::make('edit')
     ->button()
 ```
 
-<AutoScreenshot name="actions/trigger-button/button" alt="Button trigger" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/button" alt="버튼 트리거" version="3.x" />
 
-"Link" triggers have no background color. They must have a label and optionally an [icon](#setting-an-icon). They look like a link that you might find embedded within text. You can switch to that style with the `link()` method:
+"링크" 트리거는 배경색이 없습니다. 반드시 라벨이 필요하며, 선택적으로 [아이콘](#setting-an-icon)을 추가할 수 있습니다. 일반 텍스트 내에 삽입된 링크처럼 보입니다. `link()` 메서드로 이 스타일로 전환할 수 있습니다:
 
 ```php
 Action::make('edit')
     ->link()
 ```
 
-<AutoScreenshot name="actions/trigger-button/link" alt="Link trigger" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/link" alt="링크 트리거" version="3.x" />
 
-"Icon button" triggers are circular buttons with an [icon](#setting-an-icon) and no label. You can switch to that style with the `iconButton()` method:
+"아이콘 버튼" 트리거는 [아이콘](#setting-an-icon)만 있고 라벨이 없는 원형 버튼입니다. `iconButton()` 메서드로 이 스타일로 전환할 수 있습니다:
 
 ```php
 Action::make('edit')
@@ -39,20 +39,20 @@ Action::make('edit')
     ->iconButton()
 ```
 
-<AutoScreenshot name="actions/trigger-button/icon-button" alt="Icon button trigger" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/icon-button" alt="아이콘 버튼 트리거" version="3.x" />
 
-"Badge" triggers have a background color, label, and optionally an [icon](#setting-an-icon). You can use a badge as trigger using the `badge()` method:
+"배지" 트리거는 배경색, 라벨, 그리고 선택적으로 [아이콘](#setting-an-icon)을 가질 수 있습니다. `badge()` 메서드를 사용해 배지를 트리거로 사용할 수 있습니다:
 
 ```php
 Action::make('edit')
     ->badge()
 ```
 
-<AutoScreenshot name="actions/trigger-button/badge" alt="Badge trigger" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/badge" alt="배지 트리거" version="3.x" />
 
-### Using an icon button on mobile devices only
+### 모바일 기기에서만 아이콘 버튼 사용하기 {#using-an-icon-button-on-mobile-devices-only}
 
-You may want to use a button style with a label on desktop, but remove the label on mobile. This will transform it into an icon button. You can do this with the `labeledFrom()` method, passing in the responsive [breakpoint](https://tailwindcss.com/docs/responsive-design#overview) at which you want the label to be added to the button:
+데스크톱에서는 라벨이 있는 버튼 스타일을 사용하고, 모바일에서는 라벨을 제거하고 싶을 수 있습니다. 이렇게 하면 버튼이 아이콘 버튼으로 변환됩니다. 이 기능은 `labeledFrom()` 메서드를 사용하여, 버튼에 라벨이 추가될 반응형 [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)를 지정함으로써 구현할 수 있습니다:
 
 ```php
 Action::make('edit')
@@ -61,9 +61,9 @@ Action::make('edit')
     ->labeledFrom('md')
 ```
 
-## Setting a label
+## 레이블 설정하기 {#setting-a-label}
 
-By default, the label of the trigger button is generated from its name. You may customize this using the `label()` method:
+기본적으로 트리거 버튼의 레이블은 이름에서 자동으로 생성됩니다. `label()` 메서드를 사용하여 이를 커스터마이즈할 수 있습니다:
 
 ```php
 Action::make('edit')
@@ -71,17 +71,17 @@ Action::make('edit')
     ->url(fn (): string => route('posts.edit', ['post' => $this->post]))
 ```
 
-Optionally, you can have the label automatically translated [using Laravel's localization features](https://laravel.com/docs/localization) with the `translateLabel()` method:
+선택적으로, `translateLabel()` 메서드를 사용하여 [라라벨의 로컬라이제이션 기능](https://laravel.com/docs/localization)으로 레이블을 자동 번역할 수 있습니다:
 
 ```php
 Action::make('edit')
-    ->translateLabel() // Equivalent to `label(__('Edit'))`
+    ->translateLabel() // `label(__('Edit'))`과 동일
     ->url(fn (): string => route('posts.edit', ['post' => $this->post]))
 ```
 
-## Setting a color
+## 색상 설정하기 {#setting-a-color}
 
-Buttons may have a color to indicate their significance. It may be either `danger`, `gray`, `info`, `primary`, `success` or `warning`:
+버튼은 그 중요성을 나타내기 위해 색상을 가질 수 있습니다. 색상은 `danger`, `gray`, `info`, `primary`, `success`, `warning` 중 하나일 수 있습니다:
 
 ```php
 Action::make('delete')
@@ -90,9 +90,9 @@ Action::make('delete')
 
 <AutoScreenshot name="actions/trigger-button/danger" alt="Red trigger" version="3.x" />
 
-## Setting a size
+## 크기 설정 {#setting-a-size}
 
-Buttons come in 3 sizes - `ActionSize::Small`, `ActionSize::Medium` or `ActionSize::Large`. You can change the size of the action's trigger using the `size()` method:
+버튼은 3가지 크기가 있습니다 - `ActionSize::Small`, `ActionSize::Medium`, `ActionSize::Large`. 액션 트리거의 크기는 `size()` 메서드를 사용하여 변경할 수 있습니다:
 
 ```php
 use Filament\Support\Enums\ActionSize;
@@ -103,9 +103,9 @@ Action::make('create')
 
 <AutoScreenshot name="actions/trigger-button/large" alt="Large trigger" version="3.x" />
 
-## Setting an icon
+## 아이콘 설정하기 {#setting-an-icon}
 
-Buttons may have an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to add more detail to the UI. You can set the icon using the `icon()` method:
+버튼에는 UI에 더 많은 디테일을 추가하기 위해 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 사용할 수 있습니다. `icon()` 메서드를 사용하여 아이콘을 설정할 수 있습니다:
 
 ```php
 Action::make('edit')
@@ -113,9 +113,9 @@ Action::make('edit')
     ->icon('heroicon-m-pencil-square')
 ```
 
-<AutoScreenshot name="actions/trigger-button/icon" alt="Trigger with icon" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/icon" alt="아이콘이 있는 트리거" version="3.x" />
 
-You can also change the icon's position to be after the label instead of before it, using the `iconPosition()` method:
+또한 `iconPosition()` 메서드를 사용하여 아이콘의 위치를 라벨 앞이 아닌 뒤로 변경할 수도 있습니다:
 
 ```php
 use Filament\Support\Enums\IconPosition;
@@ -126,11 +126,11 @@ Action::make('edit')
     ->iconPosition(IconPosition::After)
 ```
 
-<AutoScreenshot name="actions/trigger-button/icon-after" alt="Trigger with icon after the label" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/icon-after" alt="라벨 뒤에 아이콘이 있는 트리거" version="3.x" />
 
-## Authorization
+## 권한 부여 {#authorization}
 
-You may conditionally show or hide actions for certain users. To do this, you can use either the `visible()` or `hidden()` methods:
+특정 사용자에게만 액션을 조건부로 표시하거나 숨길 수 있습니다. 이를 위해 `visible()` 또는 `hidden()` 메서드를 사용할 수 있습니다:
 
 ```php
 Action::make('edit')
@@ -142,27 +142,27 @@ Action::make('edit')
     ->hidden(! auth()->user()->can('update', $this->post))
 ```
 
-This is useful for authorization of certain actions to only users who have permission.
+이 방법은 특정 권한이 있는 사용자만 액션을 사용할 수 있도록 권한을 제어할 때 유용합니다.
 
-### Disabling a button
+### 버튼 비활성화하기 {#disabling-a-button}
 
-If you want to disable a button instead of hiding it, you can use the `disabled()` method:
+버튼을 숨기는 대신 비활성화하고 싶다면 `disabled()` 메서드를 사용할 수 있습니다:
 
 ```php
 Action::make('delete')
     ->disabled()
 ```
 
-You can conditionally disable a button by passing a boolean to it:
+불리언 값을 전달하여 버튼을 조건부로 비활성화할 수도 있습니다:
 
 ```php
 Action::make('delete')
     ->disabled(! auth()->user()->can('delete', $this->post))
 ```
 
-## Registering keybindings
+## 단축키 등록하기 {#registering-keybindings}
 
-You can attach keyboard shortcuts to trigger buttons. These use the same key codes as [Mousetrap](https://craig.is/killing/mice):
+트리거 버튼에 키보드 단축키를 연결할 수 있습니다. 이때 [Mousetrap](https://craig.is/killing/mice)과 동일한 키 코드를 사용합니다:
 
 ```php
 use Filament\Actions\Action;
@@ -172,9 +172,9 @@ Action::make('save')
     ->keyBindings(['command+s', 'ctrl+s'])
 ```
 
-## Adding a badge to the corner of the button
+## 버튼 모서리에 배지 추가하기 {#adding-a-badge-to-the-corner-of-the-button}
 
-You can add a badge to the corner of the button, to display whatever you want. It's useful for displaying a count of something, or a status indicator:
+버튼의 모서리에 배지를 추가하여 원하는 내용을 표시할 수 있습니다. 이는 어떤 항목의 개수나 상태 표시기에 유용하게 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\Action;
@@ -185,9 +185,9 @@ Action::make('filter')
     ->badge(5)
 ```
 
-<AutoScreenshot name="actions/trigger-button/badged" alt="Trigger with badge" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/badged" alt="배지가 있는 트리거" version="3.x" />
 
-You can also pass a color to be used for the badge, which can be either `danger`, `gray`, `info`, `primary`, `success` and `warning`:
+배지에 사용할 색상도 지정할 수 있으며, `danger`, `gray`, `info`, `primary`, `success`, `warning` 중 하나를 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\Action;
@@ -199,11 +199,11 @@ Action::make('filter')
     ->badgeColor('success')
 ```
 
-<AutoScreenshot name="actions/trigger-button/success-badged" alt="Trigger with green badge" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/success-badged" alt="초록색 배지가 있는 트리거" version="3.x" />
 
-## Outlined button style
+## 외곽선 버튼 스타일 {#outlined-button-style}
 
-When you're using the "button" trigger style, you might wish to make it less prominent. You could use a different [color](#setting-a-color), but sometimes you might want to make it outlined instead. You can do this with the `outlined()` method:
+"button" 트리거 스타일을 사용할 때, 버튼을 덜 눈에 띄게 만들고 싶을 수 있습니다. [색상](#setting-a-color)을 다르게 지정할 수도 있지만, 때로는 외곽선 스타일로 만들고 싶을 때가 있습니다. 이럴 때는 `outlined()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\Action;
@@ -214,11 +214,11 @@ Action::make('edit')
     ->outlined()
 ```
 
-<AutoScreenshot name="actions/trigger-button/outlined" alt="Outlined trigger button" version="3.x" />
+<AutoScreenshot name="actions/trigger-button/outlined" alt="외곽선 트리거 버튼" version="3.x" />
 
-## Adding extra HTML attributes
+## 추가 HTML 속성 지정하기 {#adding-extra-html-attributes}
 
-You can pass extra HTML attributes to the button which will be merged onto the outer DOM element. Pass an array of attributes to the `extraAttributes()` method, where the key is the attribute name and the value is the attribute value:
+버튼에 추가 HTML 속성을 전달할 수 있으며, 이는 외부 DOM 요소에 병합됩니다. `extraAttributes()` 메서드에 속성 이름을 키로, 속성 값을 값으로 하는 배열을 전달하세요:
 
 ```php
 use Filament\Actions\Action;
@@ -226,11 +226,11 @@ use Filament\Actions\Action;
 Action::make('edit')
     ->url(fn (): string => route('posts.edit', ['post' => $this->post]))
     ->extraAttributes([
-        'title' => 'Edit this post',
+        'title' => '이 게시글을 편집',
     ])
 ```
 
-If you pass CSS classes in a string, they will be merged with the default classes that already apply to the other HTML element of the button:
+CSS 클래스를 문자열로 전달하면, 버튼의 다른 HTML 요소에 이미 적용된 기본 클래스와 병합됩니다:
 
 ```php
 use Filament\Actions\Action;

@@ -1,11 +1,11 @@
 ---
 title: Wizard
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [폼.레이아웃] Wizard
 
-## Overview
+## 개요 {#overview}
 
-Similar to [tabs](tabs), you may want to use a multistep form wizard to reduce the number of components that are visible at once. These are especially useful if your form has a definite chronological order, in which you want each step to be validated as the user progresses.
+[tabs](tabs)와 유사하게, 한 번에 표시되는 컴포넌트의 수를 줄이기 위해 다단계 폼 위자드를 사용할 수 있습니다. 이러한 위자드는 폼에 명확한 순서가 있고, 사용자가 진행할 때 각 단계를 검증하고 싶을 때 특히 유용합니다.
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -28,11 +28,11 @@ Wizard::make([
 
 <AutoScreenshot name="forms/layout/wizard/simple" alt="Wizard" version="3.x" />
 
-> We have different setup instructions if you're looking to add a wizard to the creation process inside a [panel resource](../../panels/resources/creating-records#using-a-wizard) or an [action modal](../../actions/modals#using-a-wizard-as-a-modal-form). Following that documentation will ensure that the ability to submit the form is only available on the last step of the wizard.
+> [패널 리소스](../../panels/resources/creating-records#using-a-wizard) 내부의 생성 프로세스나 [액션 모달](../../actions/modals#using-a-wizard-as-a-modal-form)에 위자드를 추가하려는 경우에는 별도의 설정 지침이 있습니다. 해당 문서를 따르면 폼 제출 기능이 위자드의 마지막 단계에서만 가능하도록 할 수 있습니다.
 
-## Rendering a submit button on the last step
+## 마지막 단계에 제출 버튼 렌더링하기 {#rendering-a-submit-button-on-the-last-step}
 
-You may use the `submitAction()` method to render submit button HTML or a view at the end of the wizard, on the last step. This provides a clearer UX than displaying a submit button below the wizard at all times:
+`submitAction()` 메서드를 사용하여 위자드의 마지막 단계에서 제출 버튼 HTML이나 뷰를 렌더링할 수 있습니다. 이 방법은 항상 위자드 아래에 제출 버튼을 표시하는 것보다 더 명확한 UX를 제공합니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -47,7 +47,7 @@ Wizard::make([
 ])->submitAction(new HtmlString('<button type="submit">Submit</button>'))
 ```
 
-Alternatively, you can use the built-in Filament button Blade component:
+또는, 내장된 Filament 버튼 Blade 컴포넌트를 사용할 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -66,11 +66,11 @@ Wizard::make([
 BLADE)))
 ```
 
-You could use this component in a separate Blade view if you want.
+원한다면 이 컴포넌트를 별도의 Blade 뷰에서 사용할 수도 있습니다.
 
-## Setting up step icons
+## 단계 아이콘 설정하기 {#setting-up-step-icons}
 
-Steps may also have an [icon](https://blade-ui-kit.com/blade-icons?set=1#search), set using the `icon()` method:
+단계에는 `icon()` 메서드를 사용하여 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 설정할 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -82,11 +82,11 @@ Wizard\Step::make('Order')
     ]),
 ```
 
-<AutoScreenshot name="forms/layout/wizard/icons" alt="Wizard with step icons" version="3.x" />
+<AutoScreenshot name="forms/layout/wizard/icons" alt="단계 아이콘이 있는 위자드" version="3.x" />
 
-## Customizing the icon for completed steps
+## 완료된 단계의 아이콘 커스터마이징하기 {#customizing-the-icon-for-completed-steps}
 
-You may customize the [icon](#setting-up-step-icons) of a completed step using the `completedIcon()` method:
+완료된 단계의 [아이콘](#setting-up-step-icons)은 `completedIcon()` 메서드를 사용하여 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -98,27 +98,27 @@ Wizard\Step::make('Order')
     ]),
 ```
 
-<AutoScreenshot name="forms/layout/wizard/completed-icons" alt="Wizard with completed step icons" version="3.x" />
+<AutoScreenshot name="forms/layout/wizard/completed-icons" alt="완료된 단계 아이콘이 있는 위자드" version="3.x" />
 
-## Adding descriptions to steps
+## 단계에 설명 추가하기 {#adding-descriptions-to-steps}
 
-You may add a short description after the title of each step using the `description()` method:
+각 단계의 제목 뒤에 `description()` 메서드를 사용하여 간단한 설명을 추가할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
 
 Wizard\Step::make('Order')
-    ->description('Review your basket')
+    ->description('장바구니를 확인하세요')
     ->schema([
         // ...
     ]),
 ```
 
-<AutoScreenshot name="forms/layout/wizard/descriptions" alt="Wizard with step descriptions" version="3.x" />
+<AutoScreenshot name="forms/layout/wizard/descriptions" alt="단계 설명이 있는 위자드" version="3.x" />
 
-## Setting the default active step
+## 기본 활성 단계 설정 {#setting-the-default-active-step}
 
-You may use the `startOnStep()` method to load a specific step in the wizard:
+`startOnStep()` 메서드를 사용하여 위자드에서 특정 단계를 기본으로 로드할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -128,9 +128,9 @@ Wizard::make([
 ])->startOnStep(2)
 ```
 
-## Allowing steps to be skipped
+## 단계 건너뛰기 허용하기 {#allowing-steps-to-be-skipped}
 
-If you'd like to allow free navigation, so all steps are skippable, use the `skippable()` method:
+모든 단계를 자유롭게 이동할 수 있도록 하여, 모든 단계를 건너뛸 수 있게 하려면 `skippable()` 메서드를 사용하세요:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -140,9 +140,9 @@ Wizard::make([
 ])->skippable()
 ```
 
-## Persisting the current step in the URL's query string
+## 현재 단계를 URL의 쿼리 문자열에 저장하기 {#persisting-the-current-step-in-the-urls-query-string}
 
-By default, the current step is not persisted in the URL's query string. You can change this behavior using the `persistStepInQueryString()` method:
+기본적으로 현재 단계는 URL의 쿼리 문자열에 저장되지 않습니다. 이 동작을 변경하려면 `persistStepInQueryString()` 메서드를 사용하면 됩니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -152,7 +152,7 @@ Wizard::make([
 ])->persistStepInQueryString()
 ```
 
-By default, the current step is persisted in the URL's query string using the `step` key. You can change this key by passing it to the `persistStepInQueryString()` method:
+기본적으로 현재 단계는 `step` 키를 사용하여 URL의 쿼리 문자열에 저장됩니다. 이 키를 변경하려면 `persistStepInQueryString()` 메서드에 원하는 값을 전달하면 됩니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -162,9 +162,9 @@ Wizard::make([
 ])->persistStepInQueryString('wizard-step')
 ```
 
-## Step lifecycle hooks
+## 단계 생명주기 훅 {#step-lifecycle-hooks}
 
-You may use the `afterValidation()` and `beforeValidation()` methods to run code before and after validation occurs on the step:
+`afterValidation()` 및 `beforeValidation()` 메서드를 사용하여 단계에서 검증이 발생하기 전과 후에 코드를 실행할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -181,9 +181,9 @@ Wizard\Step::make('Order')
     ]),
 ```
 
-### Preventing the next step from being loaded
+### 다음 단계가 로드되는 것을 방지하기 {#preventing-the-next-step-from-being-loaded}
 
-Inside `afterValidation()` or `beforeValidation()`, you may throw `Filament\Support\Exceptions\Halt`, which will prevent the wizard from loading the next step:
+`afterValidation()` 또는 `beforeValidation()` 내부에서 `Filament\Support\Exceptions\Halt`를 throw하면, 위자드가 다음 단계를 로드하지 않도록 막을 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -202,9 +202,9 @@ Wizard\Step::make('Order')
     ]),
 ```
 
-## Using grid columns within a step
+## 단계 내에서 그리드 열 사용하기 {#using-grid-columns-within-a-step}
 
-You may use the `columns()` method to customize the [grid](grid) within the step:
+`columns()` 메서드를 사용하여 단계 내의 [그리드](grid)를 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Wizard;
@@ -219,14 +219,14 @@ Wizard::make([
 ])
 ```
 
-## Customizing the wizard action objects
+## 위자드 액션 객체 커스터마이징 {#customizing-the-wizard-action-objects}
 
-This component uses action objects for easy customization of buttons within it. You can customize these buttons by passing a function to an action registration method. The function has access to the `$action` object, which you can use to [customize it](../../actions/trigger-button). The following methods are available to customize the actions:
+이 컴포넌트는 내부 버튼을 쉽게 커스터마이즈할 수 있도록 액션 객체를 사용합니다. 액션 등록 메서드에 함수를 전달하여 이 버튼들을 커스터마이즈할 수 있습니다. 이 함수는 `$action` 객체에 접근할 수 있으며, 이를 사용해 [커스터마이즈](../../actions/trigger-button)할 수 있습니다. 액션을 커스터마이즈할 수 있는 다음 메서드들이 제공됩니다:
 
 - `nextAction()`
 - `previousAction()`
 
-Here is an example of how you might customize an action:
+다음은 액션을 커스터마이즈하는 예시입니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;

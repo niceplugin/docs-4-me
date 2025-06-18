@@ -1,10 +1,10 @@
 ---
-title: Ternary filters
+title: TernaryFilter
 ---
+# [테이블.필터] TernaryFilter
+## 개요 {#overview}
 
-## Overview
-
-Ternary filters allow you to easily create a select filter which has three states - usually true, false and blank. To filter a column named `is_admin` to be `true` or `false`, you may use the ternary filter:
+TernaryFilter는 일반적으로 true, false, 공백의 세 가지 상태를 가지는 select 필터를 쉽게 생성할 수 있게 해줍니다. `is_admin`이라는 컬럼을 `true` 또는 `false`로 필터링하려면, TernaryFilter를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\TernaryFilter;
@@ -12,9 +12,9 @@ use Filament\Tables\Filters\TernaryFilter;
 TernaryFilter::make('is_admin')
 ```
 
-## Using a ternary filter with a nullable column
+## 널 허용 컬럼과 TernaryFilter 사용하기 {#using-a-ternary-filter-with-a-nullable-column}
 
-Another common pattern is to use a nullable column. For example, when filtering verified and unverified users using the `email_verified_at` column, unverified users have a null timestamp in this column. To apply that logic, you may use the `nullable()` method:
+또 다른 일반적인 패턴은 널 허용 컬럼을 사용하는 것입니다. 예를 들어, `email_verified_at` 컬럼을 사용하여 인증된 사용자와 인증되지 않은 사용자를 필터링할 때, 인증되지 않은 사용자는 이 컬럼에 null 타임스탬프가 있습니다. 이러한 로직을 적용하려면 `nullable()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\TernaryFilter;
@@ -23,9 +23,9 @@ TernaryFilter::make('email_verified_at')
     ->nullable()
 ```
 
-## Customizing the column used by a ternary filter
+## TernaryFilter에서 사용되는 컬럼 커스터마이징하기 {#customizing-the-column-used-by-a-ternary-filter}
 
-The column name used to scope the query is the name of the filter. To customize this, you may use the `attribute()` method:
+쿼리를 범위 지정할 때 사용되는 컬럼 이름은 필터의 이름입니다. 이를 커스터마이징하려면 `attribute()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\TernaryFilter;
@@ -35,45 +35,45 @@ TernaryFilter::make('verified')
     ->attribute('status_id')
 ```
 
-## Customizing the ternary filter option labels
+## TernaryFilter 옵션 라벨 커스터마이징 {#customizing-the-ternary-filter-option-labels}
 
-You may customize the labels used for each state of the ternary filter. The true option label can be customized using the `trueLabel()` method. The false option label can be customized using the `falseLabel()` method. The blank (default) option label can be customized using the `placeholder()` method:
+TernaryFilter의 각 상태에 사용되는 라벨을 커스터마이징할 수 있습니다. true 옵션 라벨은 `trueLabel()` 메서드를 사용하여 커스터마이징할 수 있습니다. false 옵션 라벨은 `falseLabel()` 메서드를 사용하여 커스터마이징할 수 있습니다. 빈(기본) 옵션 라벨은 `placeholder()` 메서드를 사용하여 커스터마이징할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 
 TernaryFilter::make('email_verified_at')
-    ->label('Email verification')
+    ->label('이메일 인증')
     ->nullable()
-    ->placeholder('All users')
-    ->trueLabel('Verified users')
-    ->falseLabel('Not verified users')
+    ->placeholder('모든 사용자')
+    ->trueLabel('인증된 사용자')
+    ->falseLabel('인증되지 않은 사용자')
 ```
 
-## Customizing how a ternary filter modifies the query
+## TernaryFilter가 쿼리를 수정하는 방식을 커스터마이징하기 {#customizing-how-a-ternary-filter-modifies-the-query}
 
-You may customize how the query changes for each state of the ternary filter, use the `queries()` method:
+TernaryFilter의 각 상태에 따라 쿼리가 어떻게 변경되는지 커스터마이징하려면 `queries()` 메서드를 사용하세요:
 
 ```php
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 
 TernaryFilter::make('email_verified_at')
-    ->label('Email verification')
-    ->placeholder('All users')
-    ->trueLabel('Verified users')
-    ->falseLabel('Not verified users')
+    ->label('이메일 인증')
+    ->placeholder('모든 사용자')
+    ->trueLabel('인증된 사용자')
+    ->falseLabel('인증되지 않은 사용자')
     ->queries(
         true: fn (Builder $query) => $query->whereNotNull('email_verified_at'),
         false: fn (Builder $query) => $query->whereNull('email_verified_at'),
-        blank: fn (Builder $query) => $query, // In this example, we do not want to filter the query when it is blank.
+        blank: fn (Builder $query) => $query, // 이 예시에서는 공백일 때 쿼리를 필터링하지 않습니다.
     )
 ```
 
-## Filtering soft deletable records
+## 소프트 삭제된 레코드 필터링 {#filtering-soft-deletable-records}
 
-The `TrashedFilter` can be used to filter soft deleted records. It is a type of ternary filter that is built-in to Filament. You can use it like so:
+`TrashedFilter`는 소프트 삭제된 레코드를 필터링하는 데 사용할 수 있습니다. 이것은 Filament에 내장된 TernaryFilter의 한 종류입니다. 다음과 같이 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Filters\TrashedFilter;

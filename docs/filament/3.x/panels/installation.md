@@ -1,20 +1,20 @@
 ---
-title: Installation
+title: 설치
 ---
+# [패널] 설치
+## 요구 사항 {#requirements}
 
-## Requirements
+Filament을 실행하려면 다음이 필요합니다:
 
-Filament requires the following to run:
+- PHP 8.1 이상
+- Laravel v10.0 이상
+- Livewire v3.0 이상
 
-- PHP 8.1+
-- Laravel v10.0+
-- Livewire v3.0+
+## 설치 {#installation}
 
-## Installation
+> Filament v2에서 업그레이드하는 경우, [업그레이드 가이드](upgrade-guide)를 참고하세요.
 
-> If you are upgrading from Filament v2, please review the [upgrade guide](upgrade-guide).
-
-Install the Filament Panel Builder by running the following commands in your Laravel project directory:
+Laravel 프로젝트 디렉터리에서 다음 명령어를 실행하여 Filament 패널 빌더를 설치하세요:
 
 ```bash
 composer require filament/filament:"^3.3" -W
@@ -22,71 +22,73 @@ composer require filament/filament:"^3.3" -W
 php artisan filament:install --panels
 ```
 
-This will create and register a new [Laravel service provider](https://laravel.com/docs/providers) called `app/Providers/Filament/AdminPanelProvider.php`.
+이 명령어는 `app/Providers/Filament/AdminPanelProvider.php`라는 새로운 [Laravel 서비스 프로바이더](https://laravel.com/docs/providers)를 생성하고 등록합니다.
 
-> If you get an error when accessing your panel, check that the service provider was registered in `bootstrap/providers.php` (Laravel 11 and above) or `config/app.php` (Laravel 10 and below). If not, you should manually add it.
+> 패널에 접근할 때 오류가 발생한다면, 서비스 프로바이더가 `bootstrap/providers.php`(Laravel 11 이상) 또는 `config/app.php`(Laravel 10 이하)에 등록되어 있는지 확인하세요. 등록되어 있지 않다면 수동으로 추가해야 합니다.
 
-## Create a user
-You can create a new user account with the following command:
+## 사용자 생성 {#create-a-user}
+
+다음 명령어로 새 사용자 계정을 생성할 수 있습니다:
 
 ```bash
 php artisan make:filament-user
 ```
 
-Open `/admin` in your web browser, sign in, and start building your app!
+웹 브라우저에서 `/admin`을 열고, 로그인한 후 앱을 만들어보세요!
 
-Not sure where to start? Review the [Getting Started guide](getting-started) to learn how to build a complete Filament admin panel.
+어디서 시작해야 할지 모르겠나요? [시작 가이드](getting-started)를 참고하여 Filament 관리자 패널을 완성하는 방법을 배워보세요.
 
-## Using other Filament packages
-The Filament Panel Builder pre-installs the [Form Builder](/docs/forms), [Table Builder](/docs/tables), [Notifications](/docs/notifications), [Actions](/docs/actions), [Infolists](/docs/infolists), and [Widgets](/docs/widgets) packages. No other installation steps are required to use these packages within a panel.
+## 다른 Filament 패키지 사용하기 {#using-other-filament-packages}
 
-## Improving Filament panel performance
+Filament 패널 빌더는 [폼 빌더](/filament/3.x/forms), [테이블 빌더](/filament/3.x/tables), [알림](/filament/3.x/notifications), [액션](/filament/3.x/actions), [인포리스트](/filament/3.x/infolists), [위젯](/filament/3.x/widgets) 패키지를 미리 설치합니다. 패널 내에서 이 패키지들을 사용하기 위해 추가적인 설치 과정은 필요하지 않습니다.
 
-### Optimizing Filament for production
+## Filament 패널 성능 향상하기 {#improving-filament-panel-performance}
 
-To optimize Filament for production, you should run the following command in your deployment script:
+### 프로덕션 환경에서 Filament 최적화하기 {#optimizing-filament-for-production}
+
+프로덕션 환경에서 Filament를 최적화하려면, 배포 스크립트에서 다음 명령어를 실행해야 합니다:
 
 ```bash
 php artisan filament:optimize
 ```
 
-This command will [cache the Filament components](#caching-filament-components) and additionally the [Blade icons](#caching-blade-icons), which can significantly improve the performance of your Filament panels. This command is a shorthand for the commands `php artisan filament:cache-components` and `php artisan icons:cache`.
+이 명령어는 [Filament 컴포넌트 캐시](#caching-filament-components)와 추가적으로 [Blade 아이콘 캐시](#caching-blade-icons)를 생성하여 Filament 패널의 성능을 크게 향상시킬 수 있습니다. 이 명령어는 `php artisan filament:cache-components`와 `php artisan icons:cache` 명령어의 축약형입니다.
 
-To clear the caches at once, you can run:
+캐시를 한 번에 모두 삭제하려면 다음 명령어를 실행할 수 있습니다:
 
 ```bash
 php artisan filament:optimize-clear
 ```
 
-#### Caching Filament components
+#### Filament 컴포넌트 캐싱 {#caching-filament-components}
 
-If you're not using the [`filament:optimize` command](#optimizing-filament-for-production), you may wish to consider running `php artisan filament:cache-components` in your deployment script, especially if you have large numbers of components (resources, pages, widgets, relation managers, custom Livewire components, etc.). This will create cache files in the `bootstrap/cache/filament` directory of your application, which contain indexes for each type of component. This can significantly improve the performance of Filament in some apps, as it reduces the number of files that need to be scanned and auto-discovered for components.
+[`filament:optimize` 명령어](#optimizing-filament-for-production)를 사용하지 않는 경우, 배포 스크립트에서 `php artisan filament:cache-components`를 실행하는 것을 고려해볼 수 있습니다. 특히 컴포넌트(리소스, 페이지, 위젯, 관계 매니저, 커스텀 Livewire 컴포넌트 등)가 많은 경우에 유용합니다. 이 명령어는 애플리케이션의 `bootstrap/cache/filament` 디렉터리에 각 컴포넌트 유형별 인덱스를 포함하는 캐시 파일을 생성합니다. 이로 인해 일부 앱에서는 컴포넌트 파일을 스캔하고 자동으로 발견하는 횟수가 줄어들어 Filament의 성능이 크게 향상될 수 있습니다.
 
-However, if you are actively developing your app locally, you should avoid using this command, as it will prevent any new components from being discovered until the cache is cleared or rebuilt.
+하지만 로컬에서 앱을 적극적으로 개발 중이라면 이 명령어 사용을 피해야 합니다. 캐시가 삭제되거나 다시 빌드될 때까지 새로운 컴포넌트가 발견되지 않기 때문입니다.
 
-You can clear the cache at any time without rebuilding it by running `php artisan filament:clear-cached-components`.
+언제든지 `php artisan filament:clear-cached-components` 명령어를 실행하여 캐시를 재생성하지 않고도 캐시를 삭제할 수 있습니다.
 
-#### Caching Blade Icons
+#### Blade 아이콘 캐싱 {#caching-blade-icons}
 
-If you're not using the [`filament:optimize` command](#optimizing-filament-for-production), you may wish to consider running `php artisan icons:cache` locally, and also in your deployment script. This is because Filament uses the [Blade Icons](https://blade-ui-kit.com/blade-icons) package, which can be much more performant when cached.
+[`filament:optimize` 명령어](#optimizing-filament-for-production)를 사용하지 않는 경우, 로컬과 배포 스크립트에서 `php artisan icons:cache`를 실행하는 것을 고려해볼 수 있습니다. 이는 Filament가 [Blade Icons](https://blade-ui-kit.com/blade-icons) 패키지를 사용하기 때문이며, 캐싱할 경우 성능이 훨씬 더 좋아질 수 있습니다.
 
-### Enabling OPcache on your server
+### 서버에서 OPcache 활성화하기 {#enabling-opcache-on-your-server}
 
-From the [Laravel Forge documentation](https://forge.laravel.com/docs/servers/php.html#opcache):
+[Laravel Forge 문서](https://forge.laravel.com/docs/servers/php.html#opcache)에서 발췌:
 
-> Optimizing the PHP OPcache for production will configure OPcache to store your compiled PHP code in memory to greatly improve performance.
+> 프로덕션 환경에서 PHP OPcache를 최적화하면 OPcache가 컴파일된 PHP 코드를 메모리에 저장하여 성능을 크게 향상시킵니다.
 
-Please use a search engine to find the relevant OPcache setup instructions for your environment.
+사용 중인 환경에 맞는 OPcache 설정 방법은 검색 엔진을 통해 찾아보시기 바랍니다.
 
-### Optimizing your Laravel app
+### Laravel 앱 최적화하기 {#optimizing-your-laravel-app}
 
-You should also consider optimizing your Laravel app for production by running `php artisan optimize` in your deployment script. This will cache the configuration files and routes.
+배포 스크립트에서 `php artisan optimize` 명령어를 실행하여 Laravel 앱을 프로덕션 환경에 맞게 최적화하는 것도 고려해야 합니다. 이 명령어는 설정 파일과 라우트를 캐시합니다.
 
-## Deploying to production
+## 프로덕션 배포 {#deploying-to-production}
 
-### Allowing users to access a panel
+### 사용자가 패널에 접근할 수 있도록 허용하기 {#allowing-users-to-access-a-panel}
 
-By default, all `User` models can access Filament locally. However, when deploying to production or running unit tests, you must update your `App\Models\User.php` to implement the `FilamentUser` contract — ensuring that only the correct users can access your panel:
+기본적으로 모든 `User` 모델은 로컬 환경에서 Filament에 접근할 수 있습니다. 그러나 프로덕션에 배포하거나 단위 테스트를 실행할 때는 `App\Models\User.php`를 수정하여 `FilamentUser` 계약을 구현해야 합니다. 이렇게 하면 올바른 사용자만 패널에 접근할 수 있습니다:
 
 ```php
 <?php
@@ -108,33 +110,33 @@ class User extends Authenticatable implements FilamentUser
 }
 ```
 
-> If you don't complete these steps, a 403 Forbidden error will be returned when accessing the app in production.
+> 이 단계를 완료하지 않으면 프로덕션 환경에서 앱에 접근할 때 403 Forbidden 오류가 반환됩니다.
 
-Learn more about [users](users).
+[사용자](users)에 대해 더 알아보기.
 
-### Using a production-ready storage disk
+### 프로덕션 준비가 완료된 스토리지 디스크 사용하기 {#using-a-production-ready-storage-disk}
 
-Filament has a storage disk defined in the [configuration](#publishing-configuration), which by default is set to `public`. You can set the `FILAMENT_FILESYSTEM_DISK` environment variable to change this.
+Filament에는 [설정](#publishing-configuration)에서 정의된 스토리지 디스크가 있으며, 기본값은 `public`으로 설정되어 있습니다. 이 값을 변경하려면 `FILAMENT_FILESYSTEM_DISK` 환경 변수를 설정할 수 있습니다.
 
-The `public` disk, while great for easy local development, is not suitable for production. It does not support file visibility, so features of Filament such as [file uploads](../forms/fields/file-upload) will create public files. In production, you need to use a production-ready disk such as `s3` with a private access policy, to prevent unauthorized access to the uploaded files.
+`public` 디스크는 로컬 개발에는 편리하지만, 프로덕션 환경에는 적합하지 않습니다. 이 디스크는 파일 가시성을 지원하지 않기 때문에, Filament의 [파일 업로드](../forms/fields/file-upload)와 같은 기능을 사용할 경우 파일이 모두 공개로 생성됩니다. 프로덕션 환경에서는 업로드된 파일에 대한 무단 접근을 방지하기 위해, `s3`와 같이 비공개 접근 정책을 가진 프로덕션 준비가 완료된 디스크를 사용해야 합니다.
 
-## Publishing configuration
+## 구성 파일 퍼블리싱 {#publishing-configuration}
 
-You can publish the Filament package configuration (if needed) using the following command:
+필요하다면 다음 명령어를 사용하여 Filament 패키지의 구성 파일을 퍼블리싱할 수 있습니다:
 
 ```bash
 php artisan vendor:publish --tag=filament-config
 ```
 
-## Publishing translations
+## 번역 파일 퍼블리싱 {#publishing-translations}
 
-You can publish the language files for translations (if needed) with the following command:
+필요하다면 다음 명령어를 사용하여 번역을 위한 언어 파일을 퍼블리싱할 수 있습니다:
 
 ```bash
 php artisan vendor:publish --tag=filament-panels-translations
 ```
 
-Since this package depends on other Filament packages, you can publish the language files for those packages with the following commands:
+이 패키지는 다른 Filament 패키지에 의존하므로, 아래 명령어들을 사용하여 해당 패키지들의 언어 파일도 퍼블리싱할 수 있습니다:
 
 ```bash
 php artisan vendor:publish --tag=filament-actions-translations
@@ -150,11 +152,11 @@ php artisan vendor:publish --tag=filament-tables-translations
 php artisan vendor:publish --tag=filament-translations
 ```
 
-## Upgrading
+## 업그레이드 {#upgrading}
 
-> Upgrading from Filament v2? Please review the [upgrade guide](upgrade-guide).
+> Filament v2에서 업그레이드하시나요? [업그레이드 가이드](upgrade-guide)를 확인해 주세요.
 
-Filament automatically upgrades to the latest non-breaking version when you run `composer update`. After any updates, all Laravel caches need to be cleared, and frontend assets need to be republished. You can do this all at once using the `filament:upgrade` command, which should have been added to your `composer.json` file when you ran `filament:install` the first time:
+Filament는 `composer update`를 실행할 때 자동으로 최신의 비파괴(non-breaking) 버전으로 업그레이드됩니다. 업데이트 후에는 모든 Laravel 캐시를 비워야 하며, 프론트엔드 에셋도 다시 배포해야 합니다. 이 모든 작업은 `filament:upgrade` 명령어로 한 번에 처리할 수 있으며, 이 명령어는 처음 `filament:install`을 실행할 때 `composer.json` 파일에 추가되어야 합니다:
 
 ```json
 "post-autoload-dump": [
@@ -163,7 +165,7 @@ Filament automatically upgrades to the latest non-breaking version when you run 
 ],
 ```
 
-Please note that `filament:upgrade` does not actually handle the update process, as Composer does that already. If you're upgrading manually without a `post-autoload-dump` hook, you can run the command yourself:
+`filament:upgrade`는 실제로 업데이트 과정을 처리하지 않는다는 점에 유의하세요. Composer가 이미 그 역할을 합니다. 만약 `post-autoload-dump` 훅 없이 수동으로 업그레이드한다면, 아래 명령어를 직접 실행할 수 있습니다:
 
 ```bash
 composer update

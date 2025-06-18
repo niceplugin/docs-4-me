@@ -1,18 +1,18 @@
 ---
-title: Stats overview widgets
+title: StatsOverviewWidget
 ---
+# [위젯] StatsOverviewWidget
+## 개요 {#overview}
 
-## Overview
+Filament에는 "통계 개요" 위젯 템플릿이 내장되어 있어, 커스텀 뷰를 작성하지 않고도 하나의 위젯에서 여러 통계를 표시할 수 있습니다.
 
-Filament comes with a "stats overview" widget template, which you can use to display a number of different stats in a single widget, without needing to write a custom view.
-
-Start by creating a widget with the command:
+다음 명령어로 위젯을 생성하세요:
 
 ```bash
 php artisan make:filament-widget StatsOverview --stats-overview
 ```
 
-This command will create a new `StatsOverview.php` file. Open it, and return `Stat` instances from the `getStats()` method:
+이 명령어는 새로운 `StatsOverview.php` 파일을 생성합니다. 파일을 열고, `getStats()` 메서드에서 `Stat` 인스턴스를 반환하세요:
 
 ```php
 <?php
@@ -35,11 +35,11 @@ class StatsOverview extends BaseWidget
 }
 ```
 
-Now, check out your widget in the dashboard.
+이제 대시보드에서 위젯을 확인해보세요.
 
-## Adding a description and icon to a stat
+## 통계에 설명과 아이콘 추가하기 {#adding-a-description-and-icon-to-a-stat}
 
-You may add a `description()` to provide additional information, along with a `descriptionIcon()`:
+추가 정보를 제공하기 위해 `description()`을 추가할 수 있으며, `descriptionIcon()`도 함께 사용할 수 있습니다:
 
 ```php
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -48,32 +48,32 @@ protected function getStats(): array
 {
     return [
         Stat::make('Unique views', '192.1k')
-            ->description('32k increase')
+            ->description('32k 증가')
             ->descriptionIcon('heroicon-m-arrow-trending-up'),
         Stat::make('Bounce rate', '21%')
-            ->description('7% decrease')
+            ->description('7% 감소')
             ->descriptionIcon('heroicon-m-arrow-trending-down'),
         Stat::make('Average time on page', '3:12')
-            ->description('3% increase')
+            ->description('3% 증가')
             ->descriptionIcon('heroicon-m-arrow-trending-up'),
     ];
 }
 ```
 
-The `descriptionIcon()` method also accepts a second parameter to put the icon before the description instead of after it:
+`descriptionIcon()` 메서드는 두 번째 매개변수를 받아 아이콘을 설명 뒤가 아니라 앞에 배치할 수도 있습니다:
 
 ```php
 use Filament\Support\Enums\IconPosition;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
 Stat::make('Unique views', '192.1k')
-    ->description('32k increase')
+    ->description('32k 증가')
     ->descriptionIcon('heroicon-m-arrow-trending-up', IconPosition::Before)
 ```
 
-## Changing the color of the stat
+## 통계의 색상 변경하기 {#changing-the-color-of-the-stat}
 
-You may also give stats a `color()` (`danger`, `gray`, `info`, `primary`, `success` or `warning`):
+통계에 `color()`를 지정할 수도 있습니다 (`danger`, `gray`, `info`, `primary`, `success`, `warning` 중 하나):
 
 ```php
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -82,24 +82,24 @@ protected function getStats(): array
 {
     return [
         Stat::make('Unique views', '192.1k')
-            ->description('32k increase')
+            ->description('32k 증가')
             ->descriptionIcon('heroicon-m-arrow-trending-up')
             ->color('success'),
         Stat::make('Bounce rate', '21%')
-            ->description('7% increase')
+            ->description('7% 증가')
             ->descriptionIcon('heroicon-m-arrow-trending-down')
             ->color('danger'),
         Stat::make('Average time on page', '3:12')
-            ->description('3% increase')
+            ->description('3% 증가')
             ->descriptionIcon('heroicon-m-arrow-trending-up')
             ->color('success'),
     ];
 }
 ```
 
-## Adding extra HTML attributes to a stat
+## 통계에 추가 HTML 속성 추가하기 {#adding-extra-html-attributes-to-a-stat}
 
-You may also pass extra HTML attributes to stats using `extraAttributes()`:
+`extraAttributes()`를 사용하여 통계에 추가 HTML 속성을 전달할 수도 있습니다:
 
 ```php
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -118,11 +118,11 @@ protected function getStats(): array
 }
 ```
 
-In this example, we are deliberately escaping the `$` in `$dispatch()` since this needs to be passed directly to the HTML, it is not a PHP variable.
+이 예시에서는 `$dispatch()`의 `$`를 의도적으로 이스케이프 처리하고 있습니다. 이는 PHP 변수로 인식되는 것이 아니라 HTML에 직접 전달되어야 하기 때문입니다.
 
-## Adding a chart to a stat
+## 통계에 차트 추가하기 {#adding-a-chart-to-a-stat}
 
-You may also add or chain a `chart()` to each stat to provide historical data. The `chart()` method accepts an array of data points to plot:
+각 통계에 `chart()`를 추가하거나 체이닝하여 과거 데이터를 제공할 수도 있습니다. `chart()` 메서드는 플롯할 데이터 포인트의 배열을 인수로 받습니다:
 
 ```php
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -131,7 +131,7 @@ protected function getStats(): array
 {
     return [
         Stat::make('Unique views', '192.1k')
-            ->description('32k increase')
+            ->description('32k 증가')
             ->descriptionIcon('heroicon-m-arrow-trending-up')
             ->chart([7, 2, 10, 3, 15, 4, 17])
             ->color('success'),
@@ -140,35 +140,35 @@ protected function getStats(): array
 }
 ```
 
-## Live updating stats (polling)
+## 실시간 통계 업데이트(폴링) {#live-updating-stats-polling}
 
-By default, stats overview widgets refresh their data every 5 seconds.
+기본적으로, StatsOverviewWidget은 5초마다 데이터를 새로고침합니다.
 
-To customize this, you may override the `$pollingInterval` property on the class to a new interval:
+이 값을 변경하려면 클래스에서 `$pollingInterval` 속성을 새로운 간격으로 오버라이드하면 됩니다:
 
 ```php
 protected static ?string $pollingInterval = '10s';
 ```
 
-Alternatively, you may disable polling altogether:
+또는, 폴링을 완전히 비활성화할 수도 있습니다:
 
 ```php
 protected static ?string $pollingInterval = null;
 ```
 
-## Disabling lazy loading
+## 지연 로딩 비활성화 {#disabling-lazy-loading}
 
-By default, widgets are lazy-loaded. This means that they will only be loaded when they are visible on the page.
+기본적으로 위젯은 지연 로딩(lazy-loaded)됩니다. 이는 위젯이 페이지에 표시될 때만 로드된다는 의미입니다.
 
-To disable this behavior, you may override the `$isLazy` property on the widget class:
+이 동작을 비활성화하려면, 위젯 클래스에서 `$isLazy` 속성을 오버라이드하면 됩니다:
 
 ```php
 protected static bool $isLazy = false;
 ```
 
-## Adding a heading and description
+## 제목과 설명 추가하기 {#adding-a-heading-and-description}
 
-You may also add heading and description text above the widget by overriding the `$heading` and `$description` properties:
+위젯 위에 제목과 설명 텍스트를 추가하려면 `$heading`과 `$description` 속성을 오버라이드하면 됩니다:
 
 ```php
 protected ?string $heading = 'Analytics';
@@ -176,7 +176,7 @@ protected ?string $heading = 'Analytics';
 protected ?string $description = 'An overview of some analytics.';
 ```
 
-If you need to dynamically generate the heading or description text, you can instead override the `getHeading()` and `getDescription()` methods:
+제목이나 설명 텍스트를 동적으로 생성해야 하는 경우, `getHeading()`과 `getDescription()` 메서드를 오버라이드할 수도 있습니다:
 
 ```php
 protected function getHeading(): ?string

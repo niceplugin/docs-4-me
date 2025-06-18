@@ -1,25 +1,25 @@
 ---
-title: Actions
+title: 액션
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
-import LaracastsBanner from "@components/LaracastsBanner.astro"
+# [테이블] 액션
 
-## Overview
+
+## 개요 {#overview}
 
 <LaracastsBanner
-    title="Table Actions"
-    description="Watch the Rapid Laravel Development with Filament series on Laracasts - it will teach you the basics of adding actions to Filament resource tables."
+    title="테이블 액션"
+    description="Laracasts의 Rapid Laravel Development with Filament 시리즈를 시청하세요. Filament 리소스 테이블에 액션을 추가하는 기본 방법을 배울 수 있습니다."
     url="https://laracasts.com/series/rapid-laravel-development-with-filament/episodes/11"
     series="rapid-laravel-development"
 />
 
-Filament's tables can use [Actions](../actions). They are buttons that can be added to the [end of any table row](#row-actions), or even in the [header](#header-actions) of a table. For instance, you may want an action to "create" a new record in the header, and then "edit" and "delete" actions on each row. [Bulk actions](#bulk-actions) can be used to execute code when records in the table are selected. Additionally, actions can be added to any [table column](#column-actions), such that each cell in that column is a trigger for your action.
+Filament의 테이블은 [액션](../actions)을 사용할 수 있습니다. 액션은 [테이블의 각 행 끝](#row-actions)이나, 심지어 테이블의 [헤더](#header-actions)에 추가할 수 있는 버튼입니다. 예를 들어, 헤더에는 "새 레코드 생성" 액션을, 각 행에는 "수정" 및 "삭제" 액션을 추가할 수 있습니다. [일괄 액션](#bulk-actions)은 테이블에서 레코드를 선택했을 때 코드를 실행하는 데 사용할 수 있습니다. 또한, 액션은 [테이블 컬럼](#column-actions)에도 추가할 수 있어, 해당 컬럼의 각 셀이 액션을 트리거하는 역할을 하게 할 수 있습니다.
 
-It's highly advised that you read the documentation about [customizing action trigger buttons](../actions/trigger-button) and [action modals](../actions/modals) to that you are aware of the full capabilities of actions.
+액션의 모든 기능을 제대로 활용하려면 [액션 트리거 버튼 커스터마이징](../actions/trigger-button)과 [액션 모달](../actions/modals)에 관한 문서를 꼭 읽어보시길 권장합니다.
 
-## Row actions
+## 행 액션 {#row-actions}
 
-Action buttons can be rendered at the end of each table row. You can put them in the `$table->actions()` method:
+액션 버튼은 각 테이블 행의 끝에 렌더링할 수 있습니다. `$table->actions()` 메서드에 넣을 수 있습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -33,9 +33,9 @@ public function table(Table $table): Table
 }
 ```
 
-Actions may be created using the static `make()` method, passing its unique name.
+액션은 고유한 이름을 전달하여 정적 `make()` 메서드를 사용해 생성할 수 있습니다.
 
-You can then pass a function to `action()` which executes the task, or a function to `url()` which creates a link:
+그런 다음, 작업을 실행하는 함수는 `action()`에, 링크를 생성하는 함수는 `url()`에 전달할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -50,13 +50,13 @@ Action::make('delete')
     ->action(fn (Post $record) => $record->delete())
 ```
 
-All methods on the action accept callback functions, where you can access the current table `$record` that was clicked.
+액션의 모든 메서드는 콜백 함수를 받을 수 있으며, 클릭된 현재 테이블의 `$record`에 접근할 수 있습니다.
 
 <AutoScreenshot name="tables/actions/simple" alt="Table with actions" version="3.x" />
 
-### Positioning row actions before columns
+### 행 액션을 컬럼 앞에 위치시키기 {#positioning-row-actions-before-columns}
 
-By default, the row actions in your table are rendered in the final cell of each row. You may move them before the columns by using the `position` argument:
+기본적으로, 테이블의 행 액션은 각 행의 마지막 셀에 렌더링됩니다. `position` 인수를 사용하여 이들을 컬럼 앞에 위치시킬 수 있습니다:
 
 ```php
 use Filament\Tables\Enums\ActionsPosition;
@@ -71,11 +71,11 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/actions/before-columns" alt="Table with actions before columns" version="3.x" />
+<AutoScreenshot name="tables/actions/before-columns" alt="컬럼 앞에 액션이 위치한 테이블" version="3.x" />
 
-### Positioning row actions before the checkbox column
+### 체크박스 열 앞에 행 액션 위치시키기 {#positioning-row-actions-before-the-checkbox-column}
 
-By default, the row actions in your table are rendered in the final cell of each row. You may move them before the checkbox column by using the `position` argument:
+기본적으로, 테이블의 행 액션은 각 행의 마지막 셀에 렌더링됩니다. `position` 인수를 사용하여 이들을 체크박스 열 앞에 위치시킬 수 있습니다:
 
 ```php
 use Filament\Tables\Enums\ActionsPosition;
@@ -90,13 +90,13 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/actions/before-cells" alt="Table with actions before cells" version="3.x" />
+<AutoScreenshot name="tables/actions/before-cells" alt="셀 앞에 액션이 있는 테이블" version="3.x" />
 
-### Accessing the selected table rows
+### 선택된 테이블 행에 접근하기 {#accessing-the-selected-table-rows}
 
-You may want an action to be able to access all the selected rows in the table. Usually, this is done with a [bulk action](#bulk-actions) in the header of the table. However, you may want to do this with a row action, where the selected rows provide context for the action.
+액션이 테이블에서 선택된 모든 행에 접근할 수 있도록 하고 싶을 수 있습니다. 일반적으로 이는 테이블 헤더의 [일괄 액션](#bulk-actions)을 통해 이루어집니다. 하지만, 선택된 행들이 액션에 대한 컨텍스트를 제공하는 행 액션(row action)에서 이 기능을 사용하고 싶을 수도 있습니다.
 
-For example, you may want to have a row action that copies the row data to all the selected records. To force the table to be selectable, even if there aren't bulk actions defined, you need to use the `selectable()` method. To allow the action to access the selected records, you need to use the `accessSelectedRecords()` method. Then, you can use the `$selectedRecords` parameter in your action to access the selected records:
+예를 들어, 행 데이터를 모든 선택된 레코드에 복사하는 행 액션을 만들고 싶을 수 있습니다. 일괄 액션이 정의되어 있지 않더라도 테이블이 선택 가능하도록 강제하려면 `selectable()` 메서드를 사용해야 합니다. 액션이 선택된 레코드에 접근할 수 있도록 하려면 `accessSelectedRecords()` 메서드를 사용해야 합니다. 그런 다음, 액션 내에서 `$selectedRecords` 파라미터를 사용해 선택된 레코드에 접근할 수 있습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -122,9 +122,9 @@ public function table(Table $table): Table
 }
 ```
 
-## Bulk actions
+## 일괄 작업 {#bulk-actions}
 
-Tables also support "bulk actions". These can be used when the user selects rows in the table. Traditionally, when rows are selected, a "bulk actions" button appears in the top left corner of the table. When the user clicks this button, they are presented with a dropdown menu of actions to choose from. You can put them in the `$table->bulkActions()` method:
+테이블은 "일괄 작업"도 지원합니다. 사용자가 테이블에서 행을 선택할 때 사용할 수 있습니다. 일반적으로 행이 선택되면, 테이블의 왼쪽 상단에 "일괄 작업" 버튼이 나타납니다. 사용자가 이 버튼을 클릭하면, 선택할 수 있는 작업의 드롭다운 메뉴가 표시됩니다. 이 작업들은 `$table->bulkActions()` 메서드에 넣을 수 있습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -138,7 +138,7 @@ public function table(Table $table): Table
 }
 ```
 
-Bulk actions may be created using the static `make()` method, passing its unique name. You should then pass a callback to `action()` which executes the task:
+일괄 작업은 고유한 이름을 전달하여 정적 `make()` 메서드를 사용해 생성할 수 있습니다. 그런 다음, 작업을 실행하는 콜백을 `action()`에 전달해야 합니다:
 
 ```php
 use Filament\Tables\Actions\BulkAction;
@@ -149,13 +149,13 @@ BulkAction::make('delete')
     ->action(fn (Collection $records) => $records->each->delete())
 ```
 
-The function allows you to access the current table `$records` that are selected. It is an Eloquent collection of models.
+이 함수는 현재 테이블에서 선택된 `$records`에 접근할 수 있게 해줍니다. 이는 모델의 Eloquent 컬렉션입니다.
 
-<AutoScreenshot name="tables/actions/bulk" alt="Table with bulk action" version="3.x" />
+<AutoScreenshot name="tables/actions/bulk" alt="일괄 작업이 있는 테이블" version="3.x" />
 
-### Grouping bulk actions
+### 일괄 작업 그룹화 {#grouping-bulk-actions}
 
-You may use a `BulkActionGroup` object to [group multiple bulk actions together](../actions/grouping-actions) in a dropdown. Any bulk actions that remain outside the `BulkActionGroup` will be rendered next to the dropdown's trigger button:
+여러 개의 일괄 작업을 [드롭다운에서 함께 그룹화](../actions/grouping-actions)하려면 `BulkActionGroup` 객체를 사용할 수 있습니다. `BulkActionGroup` 외부에 남아 있는 일괄 작업은 드롭다운 트리거 버튼 옆에 렌더링됩니다:
 
 ```php
 use Filament\Tables\Actions\BulkAction;
@@ -179,7 +179,7 @@ public function table(Table $table): Table
 }
 ```
 
-Alternatively, if all of your bulk actions are grouped, you can use the shorthand `groupedBulkActions()` method:
+또는, 모든 일괄 작업이 그룹화되어 있다면, 간단하게 `groupedBulkActions()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\BulkAction;
@@ -200,9 +200,9 @@ public function table(Table $table): Table
 }
 ```
 
-### Deselecting records once a bulk action has finished
+### 일괄 작업이 완료된 후 레코드 선택 해제하기 {#deselecting-records-once-a-bulk-action-has-finished}
 
-You may deselect the records after a bulk action has been executed using the `deselectRecordsAfterCompletion()` method:
+`deselectRecordsAfterCompletion()` 메서드를 사용하여 일괄 작업이 실행된 후 레코드의 선택을 해제할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\BulkAction;
@@ -213,9 +213,9 @@ BulkAction::make('delete')
     ->deselectRecordsAfterCompletion()
 ```
 
-### Disabling bulk actions for some rows
+### 일부 행에 대해 일괄 작업 비활성화하기 {#disabling-bulk-actions-for-some-rows}
 
-You may conditionally disable bulk actions for a specific record:
+특정 레코드에 대해 조건부로 일괄 작업을 비활성화할 수 있습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -233,9 +233,9 @@ public function table(Table $table): Table
 }
 ```
 
-### Preventing bulk-selection of all pages
+### 모든 페이지의 일괄 선택 방지 {#preventing-bulk-selection-of-all-pages}
 
-The `selectCurrentPageOnly()` method can be used to prevent the user from easily bulk-selecting all records in the table at once, and instead only allows them to select one page at a time:
+`selectCurrentPageOnly()` 메서드는 사용자가 테이블의 모든 레코드를 한 번에 쉽게 일괄 선택하지 못하도록 방지하며, 대신 한 번에 한 페이지만 선택할 수 있도록 합니다:
 
 ```php
 use Filament\Tables\Table;
@@ -250,9 +250,9 @@ public function table(Table $table): Table
 }
 ```
 
-## Header actions
+## 헤더 액션 {#header-actions}
 
-Both [row actions](#row-actions) and [bulk actions](#bulk-actions) can be rendered in the header of the table. You can put them in the `$table->headerActions()` method:
+[행 액션](#row-actions)과 [일괄 액션](#bulk-actions) 모두 테이블의 헤더에 렌더링할 수 있습니다. 이들은 `$table->headerActions()` 메서드에 넣을 수 있습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -266,31 +266,31 @@ public function table(Table $table): Table
 }
 ```
 
-This is useful for things like "create" actions, which are not related to any specific table row, or bulk actions that need to be more visible.
+이 기능은 특정 테이블 행과 관련이 없는 "생성" 액션이나, 더 눈에 띄게 보여야 하는 일괄 액션 등에 유용합니다.
 
-<AutoScreenshot name="tables/actions/header" alt="Table with header actions" version="3.x" />
+<AutoScreenshot name="tables/actions/header" alt="헤더 액션이 있는 테이블" version="3.x" />
 
-## Column actions
+## 컬럼 액션 {#column-actions}
 
-Actions can be added to columns, such that when a cell in that column is clicked, it acts as the trigger for an action. You can learn more about [column actions](columns/getting-started#running-actions) in the documentation.
+컬럼에 액션을 추가할 수 있으며, 해당 컬럼의 셀을 클릭하면 액션의 트리거로 작동합니다. 문서에서 [컬럼 액션](columns/getting-started#running-actions)에 대해 더 자세히 알아볼 수 있습니다.
 
-## Prebuilt table actions
+## 기본 제공 테이블 액션 {#prebuilt-table-actions}
 
-Filament includes several prebuilt actions and bulk actions that you can add to a table. Their aim is to simplify the most common Eloquent-related actions:
+Filament에는 테이블에 추가할 수 있는 여러 가지 기본 제공 액션과 일괄 액션이 포함되어 있습니다. 이들의 목적은 가장 일반적인 Eloquent 관련 작업을 간소화하는 데 있습니다:
 
-- [Create](../actions/prebuilt-actions/create)
-- [Edit](../actions/prebuilt-actions/edit)
-- [View](../actions/prebuilt-actions/view)
-- [Delete](../actions/prebuilt-actions/delete)
-- [Replicate](../actions/prebuilt-actions/replicate)
-- [Force-delete](../actions/prebuilt-actions/force-delete)
-- [Restore](../actions/prebuilt-actions/restore)
-- [Import](../actions/prebuilt-actions/import)
-- [Export](../actions/prebuilt-actions/export)
+- [생성](../actions/prebuilt-actions/create)
+- [수정](../actions/prebuilt-actions/edit)
+- [보기](../actions/prebuilt-actions/view)
+- [삭제](../actions/prebuilt-actions/delete)
+- [복제](../actions/prebuilt-actions/replicate)
+- [강제 삭제](../actions/prebuilt-actions/force-delete)
+- [복원](../actions/prebuilt-actions/restore)
+- [가져오기](../actions/prebuilt-actions/import)
+- [내보내기](../actions/prebuilt-actions/export)
 
-## Grouping actions
+## 액션 그룹화 {#grouping-actions}
 
-You may use an `ActionGroup` object to group multiple table actions together in a dropdown:
+여러 테이블 액션을 드롭다운으로 그룹화하려면 `ActionGroup` 객체를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\ActionGroup;
@@ -313,13 +313,13 @@ public function table(Table $table): Table
 }
 ```
 
-<AutoScreenshot name="tables/actions/group" alt="Table with action group" version="3.x" />
+<AutoScreenshot name="tables/actions/group" alt="액션 그룹이 있는 테이블" version="3.x" />
 
-### Choosing an action group button style
+### 액션 그룹 버튼 스타일 선택하기 {#choosing-an-action-group-button-style}
 
-Out of the box, action group triggers have 3 styles - "button", "link", and "icon button".
+기본적으로, 액션 그룹 트리거는 3가지 스타일이 있습니다 - "버튼", "링크", 그리고 "아이콘 버튼"입니다.
 
-"Icon button" triggers are circular buttons with an [icon](#setting-the-action-group-button-icon) and no label. Usually, this is the default button style, but you can use it manually with the `iconButton()` method:
+"아이콘 버튼" 트리거는 [아이콘](#setting-the-action-group-button-icon)만 있고 라벨이 없는 원형 버튼입니다. 보통 이 스타일이 기본 버튼 스타일이지만, `iconButton()` 메서드를 사용해 수동으로 적용할 수도 있습니다:
 
 ```php
 use Filament\Tables\Actions\ActionGroup;
@@ -329,9 +329,9 @@ ActionGroup::make([
 ])->iconButton()
 ```
 
-<AutoScreenshot name="tables/actions/group-icon-button" alt="Table with icon button action group" version="3.x" />
+<AutoScreenshot name="tables/actions/group-icon-button" alt="아이콘 버튼 액션 그룹이 있는 테이블" version="3.x" />
 
-"Button" triggers have a background color, label, and optionally an [icon](#setting-the-action-group-button-icon). You can switch to that style with the `button()` method:
+"버튼" 트리거는 배경색, 라벨, 그리고 선택적으로 [아이콘](#setting-the-action-group-button-icon)을 가질 수 있습니다. `button()` 메서드를 사용해 이 스타일로 변경할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\ActionGroup;
@@ -343,9 +343,9 @@ ActionGroup::make([
     ->label('Actions')
 ```
 
-<AutoScreenshot name="tables/actions/group-button" alt="Table with button action group" version="3.x" />
+<AutoScreenshot name="tables/actions/group-button" alt="버튼 액션 그룹이 있는 테이블" version="3.x" />
 
-"Link" triggers have no background color. They must have a label and optionally an [icon](#setting-the-action-group-button-icon). They look like a link that you might find embedded within text. You can switch to that style with the `link()` method:
+"링크" 트리거는 배경색이 없습니다. 반드시 라벨이 있어야 하며, 선택적으로 [아이콘](#setting-the-action-group-button-icon)을 가질 수 있습니다. 일반적으로 텍스트 내에 삽입된 링크처럼 보입니다. `link()` 메서드를 사용해 이 스타일로 변경할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\ActionGroup;
@@ -357,11 +357,11 @@ ActionGroup::make([
     ->label('Actions')
 ```
 
-<AutoScreenshot name="tables/actions/group-link" alt="Table with link action group" version="3.x" />
+<AutoScreenshot name="tables/actions/group-link" alt="링크 액션 그룹이 있는 테이블" version="3.x" />
 
-### Setting the action group button icon
+### 액션 그룹 버튼 아이콘 설정하기 {#setting-the-action-group-button-icon}
 
-You may set the [icon](https://blade-ui-kit.com/blade-icons?set=1#search) of the action group button using the `icon()` method:
+`icon()` 메서드를 사용하여 액션 그룹 버튼의 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 설정할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\ActionGroup;
@@ -371,11 +371,11 @@ ActionGroup::make([
 ])->icon('heroicon-m-ellipsis-horizontal');
 ```
 
-<AutoScreenshot name="tables/actions/group-icon" alt="Table with customized action group icon" version="3.x" />
+<AutoScreenshot name="tables/actions/group-icon" alt="사용자 지정 액션 그룹 아이콘이 있는 테이블" version="3.x" />
 
-### Setting the action group button color
+### 액션 그룹 버튼 색상 설정하기 {#setting-the-action-group-button-color}
 
-You may set the color of the action group button using the `color()` method:
+`color()` 메서드를 사용하여 액션 그룹 버튼의 색상을 설정할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\ActionGroup;
@@ -385,11 +385,11 @@ ActionGroup::make([
 ])->color('info');
 ```
 
-<AutoScreenshot name="tables/actions/group-color" alt="Table with customized action group color" version="3.x" />
+<AutoScreenshot name="tables/actions/group-color" alt="사용자 지정 액션 그룹 색상이 적용된 테이블" version="3.x" />
 
-### Setting the action group button size
+### 액션 그룹 버튼 크기 설정하기 {#setting-the-action-group-button-size}
 
-Buttons come in 3 sizes - `sm`, `md` or `lg`. You may set the size of the action group button using the `size()` method:
+버튼은 `sm`, `md`, `lg`의 3가지 크기가 있습니다. `size()` 메서드를 사용하여 액션 그룹 버튼의 크기를 설정할 수 있습니다:
 
 ```php
 use Filament\Support\Enums\ActionSize;
@@ -400,11 +400,11 @@ ActionGroup::make([
 ])->size(ActionSize::Small);
 ```
 
-<AutoScreenshot name="tables/actions/group-small" alt="Table with small action group" version="3.x" />
+<AutoScreenshot name="tables/actions/group-small" alt="작은 액션 그룹이 있는 테이블" version="3.x" />
 
-### Setting the action group tooltip
+### 액션 그룹 툴팁 설정하기 {#setting-the-action-group-tooltip}
 
-You may set the tooltip of the action group using the `tooltip()` method:
+`tooltip()` 메서드를 사용하여 액션 그룹의 툴팁을 설정할 수 있습니다:
 
 ```php
 use Filament\Tables\Actions\ActionGroup;
@@ -414,15 +414,15 @@ ActionGroup::make([
 ])->tooltip('Actions');
 ```
 
-<AutoScreenshot name="tables/actions/group-tooltip" alt="Table with action group tooltip" version="3.x" />
+<AutoScreenshot name="tables/actions/group-tooltip" alt="액션 그룹 툴팁이 있는 테이블" version="3.x" />
 
-## Table action utility injection
+## 테이블 액션 유틸리티 주입 {#table-action-utility-injection}
 
-All actions, not just table actions, have access to [many utilities](../actions/advanced#action-utility-injection) within the vast majority of configuration methods. However, in addition to those, table actions have access to a few more:
+모든 액션은 테이블 액션뿐만 아니라 [많은 유틸리티](../actions/advanced#action-utility-injection)에 대부분의 설정 메서드 내에서 접근할 수 있습니다. 그러나 이 외에도, 테이블 액션은 몇 가지 추가 유틸리티에 접근할 수 있습니다:
 
-### Injecting the current Eloquent record
+### 현재 Eloquent 레코드 주입하기 {#injecting-the-current-eloquent-record}
 
-If you wish to access the current Eloquent record of the action, define a `$record` parameter:
+액션의 현재 Eloquent 레코드에 접근하고 싶다면, `$record` 파라미터를 정의하세요:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -432,11 +432,11 @@ function (Model $record) {
 }
 ```
 
-Be aware that bulk actions, header actions, and empty state actions do not have access to the `$record`, as they are not related to any table row.
+일괄 액션, 헤더 액션, 빈 상태 액션은 어떤 테이블 행과도 관련이 없으므로 `$record`에 접근할 수 없다는 점에 유의하세요.
 
-### Injecting the current Eloquent model class
+### 현재 Eloquent 모델 클래스 주입하기 {#injecting-the-current-eloquent-model-class}
 
-If you wish to access the current Eloquent model class of the table, define a `$model` parameter:
+테이블의 현재 Eloquent 모델 클래스에 접근하고 싶다면, `$model` 파라미터를 정의하세요:
 
 ```php
 function (string $model) {
@@ -444,9 +444,9 @@ function (string $model) {
 }
 ```
 
-### Injecting the current table instance
+### 현재 테이블 인스턴스 주입하기 {#injecting-the-current-table-instance}
 
-If you wish to access the current table configuration instance that the action belongs to, define a `$table` parameter:
+액션이 속한 현재 테이블 구성 인스턴스에 접근하고 싶다면, `$table` 파라미터를 정의하세요:
 
 ```php
 use Filament\Tables\Table;

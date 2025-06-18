@@ -1,26 +1,26 @@
 ---
-title: Pages
+title: 페이지
 ---
+# [패널] 페이지
+## 개요 {#overview}
 
-## Overview
+Filament을 사용하면 앱을 위해 완전히 맞춤화된 페이지를 생성할 수 있습니다.
 
-Filament allows you to create completely custom pages for the app.
+## 페이지 생성하기 {#creating-a-page}
 
-## Creating a page
-
-To create a new page, you can use:
+새 페이지를 생성하려면 다음 명령어를 사용할 수 있습니다:
 
 ```bash
 php artisan make:filament-page Settings
 ```
 
-This command will create two files - a page class in the `/Pages` directory of the Filament directory, and a view in the `/pages` directory of the Filament views directory.
+이 명령어는 Filament 디렉터리의 `/Pages` 디렉터리에 페이지 클래스 파일 하나와, Filament 뷰 디렉터리의 `/pages` 디렉터리에 뷰 파일 하나를 생성합니다.
 
-Page classes are all full-page [Livewire](https://livewire.laravel.com) components with a few extra utilities you can use with the panel.
+페이지 클래스는 모두 패널에서 사용할 수 있는 몇 가지 추가 유틸리티가 포함된 전체 페이지 [Livewire](https://livewire.laravel.com) 컴포넌트입니다.
 
-## Authorization
+## 권한 부여 {#authorization}
 
-You can prevent pages from appearing in the menu by overriding the `canAccess()` method in your Page class. This is useful if you want to control which users can see the page in the navigation, and also which users can visit the page directly:
+Page 클래스에서 `canAccess()` 메서드를 오버라이드하여 메뉴에 페이지가 표시되지 않도록 할 수 있습니다. 이는 어떤 사용자가 내비게이션에서 페이지를 볼 수 있는지, 그리고 어떤 사용자가 페이지에 직접 방문할 수 있는지 제어하고 싶을 때 유용합니다:
 
 ```php
 public static function canAccess(): bool
@@ -29,15 +29,15 @@ public static function canAccess(): bool
 }
 ```
 
-## Adding actions to pages
+## 페이지에 액션 추가하기 {#adding-actions-to-pages}
 
-Actions are buttons that can perform tasks on the page, or visit a URL. You can read more about their capabilities [here](../actions).
+액션은 페이지에서 작업을 수행하거나 URL을 방문할 수 있는 버튼입니다. 그 기능에 대해 더 알고 싶다면 [여기](../actions)를 참고하세요.
 
-Since all pages are Livewire components, you can [add actions](../actions/adding-an-action-to-a-livewire-component#adding-the-action) anywhere. Pages already have the `InteractsWithActions` trait, `HasActions` interface, and `<x-filament-actions::modals />` Blade component all set up for you.
+모든 페이지는 Livewire 컴포넌트이기 때문에, [액션을 어디서든 추가](../actions/adding-an-action-to-a-livewire-component#adding-the-action)할 수 있습니다. 페이지에는 이미 `InteractsWithActions` 트레이트, `HasActions` 인터페이스, `<x-filament-actions::modals />` Blade 컴포넌트가 모두 설정되어 있습니다.
 
-### Header actions
+### 헤더 액션 {#header-actions}
 
-You can also easily add actions to the header of any page, including [resource pages](resources/getting-started). You don't need to worry about adding anything to the Blade template, we handle that for you. Just return your actions from the `getHeaderActions()` method of the page class:
+[리소스 페이지](resources/getting-started)를 포함한 모든 페이지의 헤더에 쉽게 액션을 추가할 수 있습니다. Blade 템플릿에 아무것도 추가할 필요가 없으며, 저희가 이를 처리해 드립니다. 페이지 클래스의 `getHeaderActions()` 메서드에서 액션을 반환하기만 하면 됩니다:
 
 ```php
 use Filament\Actions\Action;
@@ -54,9 +54,9 @@ protected function getHeaderActions(): array
 }
 ```
 
-### Opening an action modal when a page loads
+### 페이지가 로드될 때 액션 모달 열기 {#opening-an-action-modal-when-a-page-loads}
 
-You can also open an action when a page loads by setting the `$defaultAction` property to the name of the action you want to open:
+페이지가 로드될 때 열고 싶은 액션의 이름을 `$defaultAction` 속성에 설정하여 액션을 열 수 있습니다:
 
 ```php
 use Filament\Actions\Action;
@@ -71,21 +71,21 @@ public function onboardingAction(): Action
 }
 ```
 
-You can also pass an array of arguments to the default action using the `$defaultActionArguments` property:
+또한 `$defaultActionArguments` 속성을 사용하여 기본 액션에 인자 배열을 전달할 수도 있습니다:
 
 ```php
 public $defaultActionArguments = ['step' => 2];
 ```
 
-Alternatively, you can open an action modal when a page loads by specifying the `action` as a query string parameter to the page:
+또는, 페이지의 쿼리 문자열 파라미터로 `action`을 지정하여 페이지가 로드될 때 액션 모달을 열 수도 있습니다:
 
 ```
 /admin/products/edit/932510?action=onboarding
 ```
 
-### Refreshing form data
+### 폼 데이터 새로고침 {#refreshing-form-data}
 
-If you're using actions on an [Edit](resources/editing-records) or [View](resources/viewing-records) resource page, you can refresh data within the main form using the `refreshFormData()` method:
+[Edit](resources/editing-records) 또는 [View](resources/viewing-records) 리소스 페이지에서 액션을 사용할 때, `refreshFormData()` 메서드를 사용하여 메인 폼 내의 데이터를 새로고침할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -101,13 +101,13 @@ Action::make('approve')
     })
 ```
 
-This method accepts an array of model attributes that you wish to refresh in the form.
+이 메서드는 폼에서 새로고침하고자 하는 모델 속성들의 배열을 인자로 받습니다.
 
-## Adding widgets to pages
+## 페이지에 위젯 추가하기 {#adding-widgets-to-pages}
 
-Filament allows you to display [widgets](dashboard) inside pages, below the header and above the footer.
+Filament에서는 페이지의 헤더 아래와 푸터 위에 [위젯](dashboard)을 표시할 수 있습니다.
 
-To add a widget to a page, use the `getHeaderWidgets()` or `getFooterWidgets()` methods:
+페이지에 위젯을 추가하려면 `getHeaderWidgets()` 또는 `getFooterWidgets()` 메서드를 사용하세요:
 
 ```php
 use App\Filament\Widgets\StatsOverviewWidget;
@@ -120,15 +120,15 @@ protected function getHeaderWidgets(): array
 }
 ```
 
-`getHeaderWidgets()` returns an array of widgets to display above the page content, whereas `getFooterWidgets()` are displayed below.
+`getHeaderWidgets()`는 페이지 콘텐츠 위에 표시할 위젯 배열을 반환하며, `getFooterWidgets()`는 아래에 표시됩니다.
 
-If you'd like to learn how to build and customize widgets, check out the [Dashboard](dashboard) documentation section.
+위젯을 만드는 방법과 커스터마이즈하는 방법을 알고 싶다면 [Dashboard](dashboard) 문서 섹션을 참고하세요.
 
-### Customizing the widgets' grid
+### 위젯 그리드 커스터마이징 {#customizing-the-widgets-grid}
 
-You may change how many grid columns are used to display widgets.
+위젯을 표시하는 데 사용되는 그리드 열의 수를 변경할 수 있습니다.
 
-You may override the `getHeaderWidgetsColumns()` or `getFooterWidgetsColumns()` methods to return a number of grid columns to use:
+`getHeaderWidgetsColumns()` 또는 `getFooterWidgetsColumns()` 메서드를 오버라이드하여 사용할 그리드 열의 수를 반환할 수 있습니다:
 
 ```php
 public function getHeaderWidgetsColumns(): int | array
@@ -137,9 +137,9 @@ public function getHeaderWidgetsColumns(): int | array
 }
 ```
 
-#### Responsive widgets grid
+#### 반응형 위젯 그리드 {#responsive-widgets-grid}
 
-You may wish to change the number of widget grid columns based on the responsive [breakpoint](https://tailwindcss.com/docs/responsive-design#overview) of the browser. You can do this using an array that contains the number of columns that should be used at each breakpoint:
+브라우저의 반응형 [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)에 따라 위젯 그리드 열의 개수를 변경하고 싶을 수 있습니다. 각 브레이크포인트에서 사용해야 하는 열의 개수를 포함하는 배열을 사용하여 이를 설정할 수 있습니다:
 
 ```php
 public function getHeaderWidgetsColumns(): int | array
@@ -151,11 +151,11 @@ public function getHeaderWidgetsColumns(): int | array
 }
 ```
 
-This pairs well with [responsive widget widths](dashboard#responsive-widget-widths).
+이는 [반응형 위젯 너비](dashboard#responsive-widget-widths)와 잘 어울립니다.
 
-#### Passing data to widgets from the page
+#### 페이지에서 위젯으로 데이터 전달하기 {#passing-data-to-widgets-from-the-page}
 
-You may pass data to widgets from the page using the `getWidgetsData()` method:
+페이지에서 위젯으로 데이터를 전달하려면 `getWidgetsData()` 메서드를 사용할 수 있습니다:
 
 ```php
 public function getWidgetData(): array
@@ -168,15 +168,15 @@ public function getWidgetData(): array
 }
 ```
 
-Now, you can define a corresponding public `$stats` array property on the widget class, which will be automatically filled:
+이제 위젯 클래스에 해당하는 public `$stats` 배열 프로퍼티를 정의하면, 자동으로 값이 채워집니다:
 
 ```php
 public $stats = [];
 ```
 
-### Passing properties to widgets on pages
+### 페이지에서 위젯에 속성 전달하기 {#passing-properties-to-widgets-on-pages}
 
-When registering a widget on a page, you can use the `make()` method to pass an array of [Livewire properties](https://livewire.laravel.com/docs/properties) to it:
+페이지에 위젯을 등록할 때, `make()` 메서드를 사용하여 [Livewire 속성](https://livewire.laravel.com/docs/properties) 배열을 전달할 수 있습니다:
 
 ```php
 use App\Filament\Widgets\StatsOverviewWidget;
@@ -191,7 +191,7 @@ protected function getHeaderWidgets(): array
 }
 ```
 
-This array of properties gets mapped to [public Livewire properties](https://livewire.laravel.com/docs/properties) on the widget class:
+이 속성 배열은 위젯 클래스의 [public Livewire 속성](https://livewire.laravel.com/docs/properties)으로 매핑됩니다:
 
 ```php
 use Filament\Widgets\Widget;
@@ -204,17 +204,17 @@ class StatsOverviewWidget extends Widget
 }
 ```
 
-Now, you can access the `status` in the widget class using `$this->status`.
+이제 위젯 클래스에서 `$this->status`를 사용하여 `status`에 접근할 수 있습니다.
 
-## Customizing the page title
+## 페이지 제목 사용자 지정 {#customizing-the-page-title}
 
-By default, Filament will automatically generate a title for your page based on its name. You may override this by defining a `$title` property on your page class:
+기본적으로 Filament는 페이지 이름을 기반으로 자동으로 제목을 생성합니다. 페이지 클래스에 `$title` 속성을 정의하여 이를 오버라이드할 수 있습니다:
 
 ```php
 protected static ?string $title = 'Custom Page Title';
 ```
 
-Alternatively, you may return a string from the `getTitle()` method:
+또는 `getTitle()` 메서드에서 문자열을 반환할 수도 있습니다:
 
 ```php
 use Illuminate\Contracts\Support\Htmlable;
@@ -225,68 +225,68 @@ public function getTitle(): string | Htmlable
 }
 ```
 
-## Customizing the page navigation label
+## 페이지 네비게이션 라벨 커스터마이징 {#customizing-the-page-navigation-label}
 
-By default, Filament will use the page's [title](#customizing-the-page-title) as its [navigation](navigation) item label. You may override this by defining a `$navigationLabel` property on your page class:
+기본적으로 Filament는 페이지의 [제목](#customizing-the-page-title)을 [네비게이션](navigation) 항목 라벨로 사용합니다. 페이지 클래스에서 `$navigationLabel` 프로퍼티를 정의하여 이를 오버라이드할 수 있습니다:
 
 ```php
-protected static ?string $navigationLabel = 'Custom Navigation Label';
+protected static ?string $navigationLabel = '커스텀 네비게이션 라벨';
 ```
 
-Alternatively, you may return a string from the `getNavigationLabel()` method:
+또는, `getNavigationLabel()` 메서드에서 문자열을 반환할 수도 있습니다:
 
 ```php
 public static function getNavigationLabel(): string
 {
-    return __('Custom Navigation Label');
+    return __('커스텀 네비게이션 라벨');
 }
 ```
 
-## Customizing the page URL
+## 페이지 URL 사용자 지정 {#customizing-the-page-url}
 
-By default, Filament will automatically generate a URL (slug) for your page based on its name. You may override this by defining a `$slug` property on your page class:
+기본적으로 Filament는 페이지 이름을 기반으로 URL(슬러그)을 자동으로 생성합니다. 페이지 클래스에서 `$slug` 속성을 정의하여 이를 오버라이드할 수 있습니다:
 
 ```php
 protected static ?string $slug = 'custom-url-slug';
 ```
 
-## Customizing the page heading
+## 페이지 헤딩 커스터마이징 {#customizing-the-page-heading}
 
-By default, Filament will use the page's [title](#customizing-the-page-title) as its heading. You may override this by defining a `$heading` property on your page class:
+기본적으로 Filament는 페이지의 [타이틀](#customizing-the-page-title)을 헤딩으로 사용합니다. 페이지 클래스에서 `$heading` 프로퍼티를 정의하여 이를 오버라이드할 수 있습니다:
 
 ```php
-protected ?string $heading = 'Custom Page Heading';
+protected ?string $heading = '커스텀 페이지 헤딩';
 ```
 
-Alternatively, you may return a string from the `getHeading()` method:
+또는, `getHeading()` 메서드에서 문자열을 반환할 수도 있습니다:
 
 ```php
 public function getHeading(): string
 {
-    return __('Custom Page Heading');
+    return __('커스텀 페이지 헤딩');
 }
 ```
 
-### Adding a page subheading
+### 페이지 부제목 추가하기 {#adding-a-page-subheading}
 
-You may also add a subheading to your page by defining a `$subheading` property on your page class:
+페이지 클래스에 `$subheading` 속성을 정의하여 페이지에 부제목을 추가할 수도 있습니다:
 
 ```php
-protected ?string $subheading = 'Custom Page Subheading';
+protected ?string $subheading = '사용자 지정 페이지 부제목';
 ```
 
-Alternatively, you may return a string from the `getSubheading()` method:
+또는 `getSubheading()` 메서드에서 문자열을 반환할 수도 있습니다:
 
 ```php
 public function getSubheading(): ?string
 {
-    return __('Custom Page Subheading');
+    return __('사용자 지정 페이지 부제목');
 }
 ```
 
-## Replacing the page header with a custom view
+## 페이지 헤더를 커스텀 뷰로 교체하기 {#replacing-the-page-header-with-a-custom-view}
 
-You may replace the default [heading](#customizing-the-page-heading), [subheading](#adding-a-page-subheading) and [actions](#header-actions) with a custom header view for any page. You may return it from the `getHeader()` method:
+기본 [헤딩](#customizing-the-page-heading), [서브헤딩](#adding-a-page-subheading), [액션](#header-actions)을 원하는 페이지에서 커스텀 헤더 뷰로 교체할 수 있습니다. `getHeader()` 메서드에서 이를 반환하면 됩니다:
 
 ```php
 use Illuminate\Contracts\View\View;
@@ -297,11 +297,11 @@ public function getHeader(): ?View
 }
 ```
 
-This example assumes you have a Blade view at `resources/views/filament/settings/custom-header.blade.php`.
+이 예시는 `resources/views/filament/settings/custom-header.blade.php`에 Blade 뷰가 있다고 가정합니다.
 
-## Rendering a custom view in the footer of the page
+## 페이지 하단에 커스텀 뷰 렌더링하기 {#rendering-a-custom-view-in-the-footer-of-the-page}
 
-You may also add a footer to any page, below its content. You may return it from the `getFooter()` method:
+모든 페이지의 콘텐츠 아래에 푸터를 추가할 수도 있습니다. `getFooter()` 메서드에서 반환하면 됩니다:
 
 ```php
 use Illuminate\Contracts\View\View;
@@ -312,11 +312,11 @@ public function getFooter(): ?View
 }
 ```
 
-This example assumes you have a Blade view at `resources/views/filament/settings/custom-footer.blade.php`.
+이 예제는 `resources/views/filament/settings/custom-footer.blade.php`에 Blade 뷰가 있다고 가정합니다.
 
-## Customizing the maximum content width
+## 최대 콘텐츠 너비 사용자 지정 {#customizing-the-maximum-content-width}
 
-By default, Filament will restrict the width of the content on the page, so it doesn't become too wide on large screens. To change this, you may override the `getMaxContentWidth()` method. Options correspond to [Tailwind's max-width scale](https://tailwindcss.com/docs/max-width). The options are `ExtraSmall`, `Small`, `Medium`, `Large`, `ExtraLarge`, `TwoExtraLarge`, `ThreeExtraLarge`, `FourExtraLarge`, `FiveExtraLarge`, `SixExtraLarge`, `SevenExtraLarge`, `Full`, `MinContent`, `MaxContent`, `FitContent`,  `Prose`, `ScreenSmall`, `ScreenMedium`, `ScreenLarge`, `ScreenExtraLarge` and `ScreenTwoExtraLarge`. The default is `SevenExtraLarge`:
+기본적으로 Filament는 페이지의 콘텐츠 너비를 제한하여, 큰 화면에서 너무 넓어지지 않도록 합니다. 이를 변경하려면 `getMaxContentWidth()` 메서드를 오버라이드하면 됩니다. 옵션은 [Tailwind의 max-width 스케일](https://tailwindcss.com/docs/max-width)에 해당합니다. 사용할 수 있는 옵션은 `ExtraSmall`, `Small`, `Medium`, `Large`, `ExtraLarge`, `TwoExtraLarge`, `ThreeExtraLarge`, `FourExtraLarge`, `FiveExtraLarge`, `SixExtraLarge`, `SevenExtraLarge`, `Full`, `MinContent`, `MaxContent`, `FitContent`,  `Prose`, `ScreenSmall`, `ScreenMedium`, `ScreenLarge`, `ScreenExtraLarge`, `ScreenTwoExtraLarge`입니다. 기본값은 `SevenExtraLarge`입니다:
 
 ```php
 use Filament\Support\Enums\MaxWidth;
@@ -327,11 +327,11 @@ public function getMaxContentWidth(): MaxWidth
 }
 ```
 
-## Generating URLs to pages
+## 페이지로의 URL 생성 {#generating-urls-to-pages}
 
-Filament provides `getUrl()` static method on page classes to generate URLs to them. Traditionally, you would need to construct the URL by hand or by using Laravel's `route()` helper, but these methods depend on knowledge of the page's slug or route naming conventions.
+Filament는 페이지 클래스에서 URL을 생성할 수 있도록 `getUrl()` 정적 메서드를 제공합니다. 기존에는 URL을 직접 작성하거나 Laravel의 `route()` 헬퍼를 사용해야 했지만, 이러한 방법들은 페이지의 슬러그나 라우트 명명 규칙에 대한 지식이 필요합니다.
 
-The `getUrl()` method, without any arguments, will generate a URL:
+`getUrl()` 메서드는 인자 없이 호출하면 URL을 생성합니다:
 
 ```php
 use App\Filament\Pages\Settings;
@@ -339,7 +339,7 @@ use App\Filament\Pages\Settings;
 Settings::getUrl(); // /admin/settings
 ```
 
-If your page uses URL / query parameters, you should use the argument:
+페이지가 URL 또는 쿼리 파라미터를 사용하는 경우, 인자를 전달해야 합니다:
 
 ```php
 use App\Filament\Pages\Settings;
@@ -347,9 +347,9 @@ use App\Filament\Pages\Settings;
 Settings::getUrl(['section' => 'notifications']); // /admin/settings?section=notifications
 ```
 
-### Generating URLs to pages in other panels
+### 다른 패널의 페이지로 URL 생성하기 {#generating-urls-to-pages-in-other-panels}
 
-If you have multiple panels in your app, `getUrl()` will generate a URL within the current panel. You can also indicate which panel the page is associated with, by passing the panel ID to the `panel` argument:
+앱에 여러 개의 패널이 있는 경우, `getUrl()`은 현재 패널 내에서의 URL을 생성합니다. 페이지가 연결된 패널을 지정하려면 `panel` 인자에 패널 ID를 전달할 수 있습니다:
 
 ```php
 use App\Filament\Pages\Settings;
@@ -357,19 +357,19 @@ use App\Filament\Pages\Settings;
 Settings::getUrl(panel: 'marketing');
 ```
 
-## Adding sub-navigation between pages
+## 페이지 간 하위 내비게이션 추가하기 {#adding-sub-navigation-between-pages}
 
-You may want to add a common sub-navigation to multiple pages, to allow users to quickly navigate between them. You can do this by defining a [cluster](clusters). Clusters can also contain [resources](resources), and you can switch between multiple pages or resources within a cluster.
+여러 페이지에 공통 하위 내비게이션을 추가하여 사용자가 빠르게 이동할 수 있도록 할 수 있습니다. 이를 위해 [클러스터](clusters)를 정의하면 됩니다. 클러스터에는 [리소스](resources)도 포함될 수 있으며, 클러스터 내에서 여러 페이지나 리소스 간에 전환할 수 있습니다.
 
-## Adding extra attributes to the body tag of a page
+## 페이지의 body 태그에 추가 속성 추가하기 {#adding-extra-attributes-to-the-body-tag-of-a-page}
 
-You may wish to add extra attributes to the `<body>` tag of a page. To do this, you can set an array of attributes in `$extraBodyAttributes`:
+페이지의 `<body>` 태그에 추가 속성을 넣고 싶을 수 있습니다. 이를 위해 `$extraBodyAttributes`에 속성 배열을 설정할 수 있습니다:
 
 ```php
 protected array $extraBodyAttributes = [];
 ```
 
-Or, you can return an array of attributes and their values from the `getExtraBodyAttributes()` method:
+또는, `getExtraBodyAttributes()` 메서드에서 속성과 그 값의 배열을 반환할 수도 있습니다:
 
 ```php
 public function getExtraBodyAttributes(): array

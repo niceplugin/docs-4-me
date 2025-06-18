@@ -1,10 +1,10 @@
 ---
-title: Icon button Blade component
+title: 아이콘 버튼 Blade 컴포넌트
 ---
+# [핵심개념.Blade컴포넌트] icon-button
+## 개요 {#overview}
 
-## Overview
-
-The button component is used to render a clickable button that can perform an action:
+버튼 컴포넌트는 클릭 가능한 버튼을 렌더링하여 동작을 수행할 때 사용됩니다:
 
 ```blade
 <x-filament::icon-button
@@ -14,9 +14,9 @@ The button component is used to render a clickable button that can perform an ac
 />
 ```
 
-## Using an icon button as an anchor link
+## 아이콘 버튼을 앵커 링크로 사용하기 {#using-an-icon-button-as-an-anchor-link}
 
-By default, an icon button's underlying HTML tag is `<button>`. You can change it to be an `<a>` tag by using the `tag` attribute:
+기본적으로 아이콘 버튼의 HTML 태그는 `<button>`입니다. `tag` 속성을 사용하여 `<a>` 태그로 변경할 수 있습니다:
 
 ```blade
 <x-filament::icon-button
@@ -27,9 +27,9 @@ By default, an icon button's underlying HTML tag is `<button>`. You can change i
 />
 ```
 
-## Setting the size of an icon button
+## 아이콘 버튼의 크기 설정하기 {#setting-the-size-of-an-icon-button}
 
-By default, the size of an icon button is "medium". You can make it "extra small", "small", "large" or "extra large" by using the `size` attribute:
+기본적으로 아이콘 버튼의 크기는 "medium"입니다. `size` 속성을 사용하여 "extra small", "small", "large", "extra large"로 변경할 수 있습니다:
 
 ```blade
 <x-filament::icon-button
@@ -57,9 +57,9 @@ By default, the size of an icon button is "medium". You can make it "extra small
 />
 ```
 
-## Changing the color of an icon button
+## 아이콘 버튼의 색상 변경하기 {#changing-the-color-of-an-icon-button}
 
-By default, the color of an icon button is "primary". You can change it to be `danger`, `gray`, `info`, `success` or `warning` by using the `color` attribute:
+기본적으로 아이콘 버튼의 색상은 "primary"입니다. `color` 속성을 사용하여 `danger`, `gray`, `info`, `success`, `warning` 중 하나로 변경할 수 있습니다:
 
 ```blade
 <x-filament::icon-button
@@ -93,21 +93,21 @@ By default, the color of an icon button is "primary". You can change it to be `d
 />
 ```
 
-## Adding a tooltip to an icon button
+## 아이콘 버튼에 툴팁 추가하기 {#adding-a-tooltip-to-an-icon-button}
 
-You can add a tooltip to an icon button by using the `tooltip` attribute:
+`tooltip` 속성을 사용하여 아이콘 버튼에 툴팁을 추가할 수 있습니다:
 
 ```blade
 <x-filament::icon-button
     icon="heroicon-m-plus"
-    tooltip="Register a user"
-    label="New label"
+    tooltip="사용자 등록"
+    label="새 레이블"
 />
 ```
 
-## Adding a badge to an icon button
+## 아이콘 버튼에 배지 추가하기 {#adding-a-badge-to-an-icon-button}
 
-You can render a [badge](badge) on top of an icon button by using the `badge` slot:
+`badge` 슬롯을 사용하여 아이콘 버튼 위에 [배지](badge)를 렌더링할 수 있습니다:
 
 ```blade
 <x-filament::icon-button
@@ -120,7 +120,7 @@ You can render a [badge](badge) on top of an icon button by using the `badge` sl
 </x-filament::icon-button>
 ```
 
-You can [change the color](badge#changing-the-color-of-the-badge) of the badge using the `badge-color` attribute:
+`badge-color` 속성을 사용하여 배지의 [색상을 변경](badge#changing-the-color-of-the-badge)할 수 있습니다:
 
 ```blade
 <x-filament::icon-button

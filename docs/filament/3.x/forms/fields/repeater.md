@@ -1,11 +1,11 @@
 ---
 title: Repeater
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [폼.필드] Repeater
 
-## Overview
+## 개요 {#overview}
 
-The repeater component allows you to output a JSON array of repeated form components.
+리피터 컴포넌트는 반복되는 폼 컴포넌트의 JSON 배열을 출력할 수 있게 해줍니다.
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -28,9 +28,9 @@ Repeater::make('members')
 
 <AutoScreenshot name="forms/fields/repeater/simple" alt="Repeater" version="3.x" />
 
-We recommend that you store repeater data with a `JSON` column in your database. Additionally, if you're using Eloquent, make sure that column has an `array` cast.
+리피터 데이터를 데이터베이스의 `JSON` 컬럼에 저장하는 것을 권장합니다. 또한, Eloquent를 사용하는 경우 해당 컬럼에 `array` 캐스트가 적용되어 있는지 확인하세요.
 
-As evident in the above example, the component schema can be defined within the `schema()` method of the component:
+위 예시에서 볼 수 있듯이, 컴포넌트의 스키마는 `schema()` 메서드 내에서 정의할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -43,11 +43,11 @@ Repeater::make('members')
     ])
 ```
 
-If you wish to define a repeater with multiple schema blocks that can be repeated in any order, please use the [builder](builder).
+여러 개의 스키마 블록을 임의의 순서로 반복할 수 있는 리피터를 정의하고 싶다면, [builder](builder)를 사용하세요.
 
-## Setting empty default items
+## 빈 기본 항목 설정하기 {#setting-empty-default-items}
 
-Repeaters may have a certain number of empty items created by default, using the `defaultItems()` method:
+리피터는 `defaultItems()` 메서드를 사용하여 기본적으로 생성되는 빈 항목의 개수를 지정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -59,15 +59,15 @@ Repeater::make('members')
     ->defaultItems(3)
 ```
 
-Note that these default items are only created when the form is loaded without existing data. Inside [panel resources](../../panels/resources#resource-forms) this only works on Create Pages, as Edit Pages will always fill the data from the model.
+이러한 기본 항목들은 폼이 기존 데이터 없이 로드될 때만 생성된다는 점에 유의하세요. [패널 리소스](/filament/3.x/panels/resources/getting-started#resource-forms) 내에서는 생성 페이지(Create Pages)에서만 동작하며, 수정 페이지(Edit Pages)에서는 항상 모델의 데이터로 채워집니다.
 
-## Adding items
+## 항목 추가 {#adding-items}
 
-An action button is displayed below the repeater to allow the user to add a new item.
+사용자가 새 항목을 추가할 수 있도록 반복자 아래에 액션 버튼이 표시됩니다.
 
-## Setting the add action button's label
+## 추가 액션 버튼의 라벨 설정하기 {#setting-the-add-action-buttons-label}
 
-You may set a label to customize the text that should be displayed in the button for adding a repeater item, using the `addActionLabel()` method:
+`addActionLabel()` 메서드를 사용하여 반복자 항목을 추가하는 버튼에 표시될 텍스트를 커스터마이즈할 수 있습니다.
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -76,12 +76,12 @@ Repeater::make('members')
     ->schema([
         // ...
     ])
-    ->addActionLabel('Add member')
+    ->addActionLabel('멤버 추가')
 ```
 
-### Aligning the add action button
+### 추가 액션 버튼 정렬 {#aligning-the-add-action-button}
 
-By default, the add action is aligned in the center. You may adjust this using the `addActionAlignment()` method, passing an `Alignment` option of `Alignment::Start` or `Alignment::End`:
+기본적으로 추가 액션은 중앙에 정렬됩니다. `addActionAlignment()` 메서드를 사용하여 `Alignment::Start` 또는 `Alignment::End` 옵션을 전달하여 이를 조정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -94,9 +94,9 @@ Repeater::make('members')
     ->addActionAlignment(Alignment::Start)
 ```
 
-### Preventing the user from adding items
+### 사용자가 항목을 추가하지 못하도록 방지하기 {#preventing-the-user-from-adding-items}
 
-You may prevent the user from adding items to the repeater using the `addable(false)` method:
+`addable(false)` 메서드를 사용하여 사용자가 반복자에 항목을 추가하지 못하도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -108,13 +108,13 @@ Repeater::make('members')
     ->addable(false)
 ```
 
-## Deleting items
+## 항목 삭제 {#deleting-items}
 
-An action button is displayed on each item to allow the user to delete it.
+각 항목에는 사용자가 해당 항목을 삭제할 수 있도록 액션 버튼이 표시됩니다.
 
-### Preventing the user from deleting items
+### 사용자가 항목을 삭제하지 못하도록 방지하기 {#preventing-the-user-from-deleting-items}
 
-You may prevent the user from deleting items from the repeater using the `deletable(false)` method:
+`deletable(false)` 메서드를 사용하여 사용자가 반복자에서 항목을 삭제하지 못하도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -126,13 +126,13 @@ Repeater::make('members')
     ->deletable(false)
 ```
 
-## Reordering items
+## 항목 순서 변경 {#reordering-items}
 
-A button is displayed on each item to allow the user to drag and drop to reorder it in the list.
+각 항목에는 사용자가 목록에서 드래그 앤 드롭하여 순서를 변경할 수 있도록 버튼이 표시됩니다.
 
-### Preventing the user from reordering items
+### 사용자가 항목을 재정렬하지 못하도록 방지하기 {#preventing-the-user-from-reordering-items}
 
-You may prevent the user from reordering items from the repeater using the `reorderable(false)` method:
+`reorderable(false)` 메서드를 사용하여 반복기에서 사용자가 항목을 재정렬하지 못하도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -144,9 +144,9 @@ Repeater::make('members')
     ->reorderable(false)
 ```
 
-### Reordering items with buttons
+### 버튼으로 항목 순서 변경하기 {#reordering-items-with-buttons}
 
-You may use the `reorderableWithButtons()` method to enable reordering items with buttons to move the item up and down:
+`reorderableWithButtons()` 메서드를 사용하여 항목을 위아래로 이동시키는 버튼을 통해 순서를 변경할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -158,11 +158,11 @@ Repeater::make('members')
     ->reorderableWithButtons()
 ```
 
-<AutoScreenshot name="forms/fields/repeater/reorderable-with-buttons" alt="Repeater that is reorderable with buttons" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/reorderable-with-buttons" alt="버튼으로 순서를 변경할 수 있는 Repeater" version="3.x" />
 
-### Preventing reordering with drag and drop
+### 드래그 앤 드롭으로 재정렬 방지하기 {#preventing-reordering-with-drag-and-drop}
 
-You may use the `reorderableWithDragAndDrop(false)` method to prevent items from being ordered with drag and drop:
+`reorderableWithDragAndDrop(false)` 메서드를 사용하여 항목이 드래그 앤 드롭으로 정렬되지 않도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -174,9 +174,9 @@ Repeater::make('members')
     ->reorderableWithDragAndDrop(false)
 ```
 
-## Collapsing items
+## 항목 접기 {#collapsing-items}
 
-The repeater may be `collapsible()` to optionally hide content in long forms:
+리피터는 `collapsible()`을 사용하여 긴 폼에서 내용을 선택적으로 숨길 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -188,7 +188,7 @@ Repeater::make('qualifications')
     ->collapsible()
 ```
 
-You may also collapse all items by default:
+모든 항목을 기본적으로 접을 수도 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -200,11 +200,11 @@ Repeater::make('qualifications')
     ->collapsed()
 ```
 
-<AutoScreenshot name="forms/fields/repeater/collapsed" alt="Collapsed repeater" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/collapsed" alt="접힌 리피터" version="3.x" />
 
-## Cloning items
+## 항목 복제하기 {#cloning-items}
 
-You may allow repeater items to be duplicated using the `cloneable()` method:
+`cloneable()` 메서드를 사용하여 반복기 항목을 복제할 수 있도록 허용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -216,13 +216,13 @@ Repeater::make('qualifications')
     ->cloneable()
 ```
 
-<AutoScreenshot name="forms/fields/repeater/cloneable" alt="Cloneable repeater" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/cloneable" alt="복제 가능한 반복기" version="3.x" />
 
-## Integrating with an Eloquent relationship
+## Eloquent 관계와 통합하기 {#integrating-with-an-eloquent-relationship}
 
-> If you're building a form inside your Livewire component, make sure you have set up the [form's model](../adding-a-form-to-a-livewire-component#setting-a-form-model). Otherwise, Filament doesn't know which model to use to retrieve the relationship from.
+> Livewire 컴포넌트 내에서 폼을 구축하는 경우, 반드시 [폼의 모델](../adding-a-form-to-a-livewire-component#setting-a-form-model)을 설정했는지 확인하세요. 그렇지 않으면 Filament는 어떤 모델에서 관계를 가져와야 하는지 알 수 없습니다.
 
-You may employ the `relationship()` method of the `Repeater` to configure a `HasMany` relationship. Filament will load the item data from the relationship, and save it back to the relationship when the form is submitted. If a custom relationship name is not passed to `relationship()`, Filament will use the field name as the relationship name:
+`Repeater`의 `relationship()` 메서드를 사용하여 `HasMany` 관계를 설정할 수 있습니다. Filament는 관계에서 항목 데이터를 불러오고, 폼이 제출될 때 다시 관계에 저장합니다. `relationship()`에 커스텀 관계 이름을 전달하지 않으면, Filament는 필드 이름을 관계 이름으로 사용합니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -234,7 +234,7 @@ Repeater::make('qualifications')
     ])
 ```
 
-When using `disabled()` with `relationship()`, ensure that `disabled()` is called before `relationship()`. This ensures that the `dehydrated()` call from within `relationship()` is not overridden by the call from `disabled()`:
+`relationship()`과 함께 `disabled()`를 사용할 때는, 반드시 `disabled()`를 `relationship()`보다 먼저 호출해야 합니다. 이렇게 하면 `relationship()` 내부의 `dehydrated()` 호출이 `disabled()`의 호출에 의해 덮어써지지 않게 됩니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -247,9 +247,9 @@ Repeater::make('qualifications')
     ])
 ```
 
-### Reordering items in a relationship
+### 관계에서 항목 순서 변경하기 {#reordering-items-in-a-relationship}
 
-By default, [reordering](#reordering-items) relationship repeater items is disabled. This is because your related model needs a `sort` column to store the order of related records. To enable reordering, you may use the `orderColumn()` method, passing in a name of the column on your related model to store the order in:
+기본적으로 [순서 변경](#reordering-items)은 관계 리피터 항목에서 비활성화되어 있습니다. 이는 관련 모델에 관련 레코드의 순서를 저장할 `sort` 컬럼이 필요하기 때문입니다. 순서 변경을 활성화하려면, 관련 모델에서 순서를 저장할 컬럼명을 `orderColumn()` 메서드에 전달하여 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -262,7 +262,7 @@ Repeater::make('qualifications')
     ->orderColumn('sort')
 ```
 
-If you use something like [`spatie/eloquent-sortable`](https://github.com/spatie/eloquent-sortable) with an order column such as `order_column`, you may pass this in to `orderColumn()`:
+[`spatie/eloquent-sortable`](https://github.com/spatie/eloquent-sortable)과 같이 `order_column`과 같은 정렬 컬럼을 사용하는 경우, 이 값을 `orderColumn()`에 전달할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -275,11 +275,11 @@ Repeater::make('qualifications')
     ->orderColumn('order_column')
 ```
 
-### Integrating with a `BelongsToMany` Eloquent relationship
+### `BelongsToMany` Eloquent 관계와 통합하기 {#integrating-with-a-belongstomany-eloquent-relationship}
 
-There is a common misconception that using a `BelongsToMany` relationship with a repeater is as simple as using a `HasMany` relationship. This is not the case, as a `BelongsToMany` relationship requires a pivot table to store the relationship data. The repeater saves its data to the related model, not the pivot table. Therefore, if you want to map each repeater item to a row in the pivot table, you must use a `HasMany` relationship with a pivot model to use a repeater with a `BelongsToMany` relationship.
+`BelongsToMany` 관계를 repeater와 함께 사용하는 것이 `HasMany` 관계를 사용하는 것만큼 간단하다는 오해가 종종 있습니다. 하지만 실제로는 그렇지 않습니다. `BelongsToMany` 관계는 관계 데이터를 저장하기 위해 피벗 테이블이 필요합니다. repeater는 관련 모델에 데이터를 저장하지, 피벗 테이블에 저장하지 않습니다. 따라서 repeater의 각 항목을 피벗 테이블의 행에 매핑하려면, `BelongsToMany` 관계에서 repeater를 사용하기 위해 피벗 모델과 함께 `HasMany` 관계를 사용해야 합니다.
 
-Imagine you have a form to create a new `Order` model. Each order belongs to many `Product` models, and each product belongs to many orders. You have a `order_product` pivot table to store the relationship data. Instead of using the `products` relationship with the repeater, you should create a new relationship called `orderProducts` on the `Order` model, and use that with the repeater:
+예를 들어, 새로운 `Order` 모델을 생성하는 폼이 있다고 가정해봅시다. 각 주문은 여러 `Product` 모델에 속하고, 각 상품도 여러 주문에 속합니다. 관계 데이터를 저장하기 위해 `order_product` 피벗 테이블이 있습니다. repeater에서 `products` 관계를 사용하는 대신, `Order` 모델에 `orderProducts`라는 새로운 관계를 만들고 이를 repeater와 함께 사용해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -290,7 +290,7 @@ public function orderProducts(): HasMany
 }
 ```
 
-If you don't already have an `OrderProduct` pivot model, you should create that, with inverse relationships to `Order` and `Product`:
+아직 `OrderProduct` 피벗 모델이 없다면, 이를 생성하고 `Order`와 `Product`에 대한 역관계를 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -312,9 +312,9 @@ class OrderProduct extends Pivot
 }
 ```
 
-> Please ensure that your pivot model has a primary key column, like `id`, to allow Filament to keep track of which repeater items have been created, updated and deleted. To make sure that Filament keeps track of the primary key, the pivot model needs to have the `$incrementing` property set to `true`.
+> 피벗 모델에 `id`와 같은 기본 키 컬럼이 있어야 Filament가 repeater 항목의 생성, 수정, 삭제를 추적할 수 있습니다. Filament가 기본 키를 추적할 수 있도록 피벗 모델의 `$incrementing` 속성을 `true`로 설정해야 합니다.
 
-Now you can use the `orderProducts` relationship with the repeater, and it will save the data to the `order_product` pivot table:
+이제 repeater에서 `orderProducts` 관계를 사용할 수 있으며, 데이터가 `order_product` 피벗 테이블에 저장됩니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -330,9 +330,9 @@ Repeater::make('orderProducts')
     ])
 ```
 
-### Mutating related item data before filling the field
+### 필드에 값을 채우기 전에 관련 항목 데이터 변형하기 {#mutating-related-item-data-before-filling-the-field}
 
-You may mutate the data for a related item before it is filled into the field using the `mutateRelationshipDataBeforeFillUsing()` method. This method accepts a closure that receives the current item's data in a `$data` variable. You must return the modified array of data:
+`mutateRelationshipDataBeforeFillUsing()` 메서드를 사용하여 관련 항목의 데이터를 필드에 채우기 전에 변형할 수 있습니다. 이 메서드는 현재 항목의 데이터가 `$data` 변수로 전달되는 클로저를 인수로 받습니다. 수정된 데이터 배열을 반환해야 합니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -349,9 +349,9 @@ Repeater::make('qualifications')
     })
 ```
 
-### Mutating related item data before creating
+### 관련 항목 데이터 생성 전 변형하기 {#mutating-related-item-data-before-creating}
 
-You may mutate the data for a new related item before it is created in the database using the `mutateRelationshipDataBeforeCreateUsing()` method. This method accepts a closure that receives the current item's data in a `$data` variable. You can choose to return either the modified array of data, or `null` to prevent the item from being created:
+`mutateRelationshipDataBeforeCreateUsing()` 메서드를 사용하여 데이터베이스에 새 관련 항목이 생성되기 전에 해당 항목의 데이터를 변형할 수 있습니다. 이 메서드는 현재 항목의 데이터가 `$data` 변수로 전달되는 클로저를 인수로 받습니다. 수정된 데이터 배열을 반환하거나, 항목 생성을 방지하려면 `null`을 반환할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -368,9 +368,9 @@ Repeater::make('qualifications')
     })
 ```
 
-### Mutating related item data before saving
+### 관련 항목 데이터 저장 전 변환하기 {#mutating-related-item-data-before-saving}
 
-You may mutate the data for an existing related item before it is saved in the database using the `mutateRelationshipDataBeforeSaveUsing()` method. This method accepts a closure that receives the current item's data in a `$data` variable. You can choose to return either the modified array of data, or `null` to prevent the item from being saved:
+`mutateRelationshipDataBeforeSaveUsing()` 메서드를 사용하여 데이터베이스에 저장되기 전에 기존 관련 항목의 데이터를 변환할 수 있습니다. 이 메서드는 현재 항목의 데이터가 `$data` 변수로 전달되는 클로저를 인수로 받습니다. 수정된 데이터 배열을 반환하거나, `null`을 반환하여 항목이 저장되지 않도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -387,9 +387,9 @@ Repeater::make('qualifications')
     })
 ```
 
-## Grid layout
+## 그리드 레이아웃 {#grid-layout}
 
-You may organize repeater items into columns by using the `grid()` method:
+`grid()` 메서드를 사용하여 반복자 항목을 열로 정렬할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -401,13 +401,13 @@ Repeater::make('qualifications')
     ->grid(2)
 ```
 
-<AutoScreenshot name="forms/fields/repeater/grid" alt="Repeater with a 2 column grid of items" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/grid" alt="2열 그리드로 구성된 반복자" version="3.x" />
 
-This method accepts the same options as the `columns()` method of the [grid](../layout/grid). This allows you to responsively customize the number of grid columns at various breakpoints.
+이 메서드는 [그리드](../layout/grid)의 `columns()` 메서드와 동일한 옵션을 허용합니다. 이를 통해 다양한 브레이크포인트에서 그리드 열의 개수를 반응형으로 커스터마이즈할 수 있습니다.
 
-## Adding a label to repeater items based on their content
+## 내용에 따라 반복자 항목에 라벨 추가하기 {#adding-a-label-to-repeater-items-based-on-their-content}
 
-You may add a label for repeater items using the `itemLabel()` method. This method accepts a closure that receives the current item's data in a `$state` variable. You must return a string to be used as the item label:
+`itemLabel()` 메서드를 사용하여 반복자 항목에 라벨을 추가할 수 있습니다. 이 메서드는 현재 항목의 데이터를 `$state` 변수로 받는 클로저를 인자로 받습니다. 항목 라벨로 사용할 문자열을 반환해야 합니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -431,13 +431,13 @@ Repeater::make('members')
     ->itemLabel(fn (array $state): ?string => $state['name'] ?? null),
 ```
 
-Any fields that you use from `$state` should be `live()` if you wish to see the item label update live as you use the form.
+폼을 사용하면서 항목 라벨이 실시간으로 업데이트되는 것을 보고 싶다면 `$state`에서 사용하는 필드는 `live()`로 지정해야 합니다.
 
-<AutoScreenshot name="forms/fields/repeater/labelled" alt="Repeater with item labels" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/labelled" alt="항목 라벨이 있는 반복자" version="3.x" />
 
-## Simple repeaters with one field
+## 필드 하나만 있는 간단한 리피터 {#simple-repeaters-with-one-field}
 
-You can use the `simple()` method to create a repeater with a single field, using a minimal design
+`simple()` 메서드를 사용하여 하나의 필드만 있는 리피터를 최소한의 디자인으로 만들 수 있습니다.
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -451,9 +451,9 @@ Repeater::make('invitations')
     )
 ```
 
-<AutoScreenshot name="forms/fields/repeater/simple-one-field" alt="Simple repeater design with only one field" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/simple-one-field" alt="필드 하나만 있는 간단한 리피터 디자인" version="3.x" />
 
-Instead of using a nested array to store data, simple repeaters use a flat array of values. This means that the data structure for the above example could look like this:
+데이터를 저장할 때 중첩 배열을 사용하는 대신, 간단한 리피터는 값의 평면 배열(flat array)을 사용합니다. 위 예시의 데이터 구조는 다음과 같이 될 수 있습니다:
 
 ```php
 [
@@ -464,15 +464,15 @@ Instead of using a nested array to store data, simple repeaters use a flat array
 ],
 ```
 
-## Using `$get()` to access parent field values
+## `$get()`을 사용하여 상위 필드 값에 접근하기 {#using-get-to-access-parent-field-values}
 
-All form components are able to [use `$get()` and `$set()`](../advanced) to access another field's value. However, you might experience unexpected behavior when using this inside the repeater's schema.
+모든 폼 컴포넌트는 [다른 필드의 값을 `$get()` 및 `$set()`](../advanced)으로 접근할 수 있습니다. 그러나 이 기능을 리피터의 스키마 내부에서 사용할 때는 예상치 못한 동작이 발생할 수 있습니다.
 
-This is because `$get()` and `$set()`, by default, are scoped to the current repeater item. This means that you are able to interact with another field inside that repeater item easily without knowing which repeater item the current form component belongs to.
+이는 `$get()`과 `$set()`이 기본적으로 현재 리피터 아이템에 범위가 한정되기 때문입니다. 즉, 현재 폼 컴포넌트가 속한 리피터 아이템이 무엇인지 몰라도 해당 리피터 아이템 내의 다른 필드와 쉽게 상호작용할 수 있습니다.
 
-The consequence of this is that you may be confused when you are unable to interact with a field outside the repeater. We use `../` syntax to solve this problem - `$get('../../parent_field_name')`.
+이로 인해 리피터 외부의 필드와 상호작용할 수 없을 때 혼란스러울 수 있습니다. 이 문제를 해결하기 위해 `../` 문법을 사용합니다 - `$get('../../parent_field_name')`.
 
-Consider your form has this data structure:
+예를 들어, 폼의 데이터 구조가 다음과 같다고 가정해봅시다:
 
 ```php
 [
@@ -486,21 +486,21 @@ Consider your form has this data structure:
 ]
 ```
 
-You are trying to retrieve the value of `client_id` from inside the repeater item.
+리피터 아이템 내부에서 `client_id`의 값을 가져오려고 합니다.
 
-`$get()` is relative to the current repeater item, so `$get('client_id')` is looking for `$get('repeater.item1.client_id')`.
+`$get()`은 현재 리피터 아이템을 기준으로 동작하므로, `$get('client_id')`는 `$get('repeater.item1.client_id')`를 찾게 됩니다.
 
-You can use `../` to go up a level in the data structure, so `$get('../client_id')` is `$get('repeater.client_id')` and `$get('../../client_id')` is `$get('client_id')`.
+`../`를 사용하면 데이터 구조에서 한 단계 위로 올라갈 수 있으므로, `$get('../client_id')`는 `$get('repeater.client_id')`가 되고, `$get('../../client_id')`는 `$get('client_id')`가 됩니다.
 
-The special case of `$get()` with no arguments, or `$get('')` or `$get('./')`, will always return the full data array for the current repeater item.
+특별한 경우로, 인자가 없는 `$get()`, 또는 `$get('')`, `$get('./')`는 항상 현재 리피터 아이템의 전체 데이터 배열을 반환합니다.
 
-## Repeater validation
+## 반복자 유효성 검사 {#repeater-validation}
 
-As well as all rules listed on the [validation](../validation) page, there are additional rules that are specific to repeaters.
+[유효성 검사](../validation) 페이지에 나열된 모든 규칙뿐만 아니라, 반복자에만 적용되는 추가 규칙도 있습니다.
 
-### Number of items validation
+### 항목 수 유효성 검사 {#number-of-items-validation}
 
-You can validate the minimum and maximum number of items that you can have in a repeater by setting the `minItems()` and `maxItems()` methods:
+`minItems()` 및 `maxItems()` 메서드를 설정하여 반복자에서 가질 수 있는 최소 및 최대 항목 수를 유효성 검사할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -513,14 +513,14 @@ Repeater::make('members')
     ->maxItems(5)
 ```
 
-### Distinct state validation
+### Distinct state validation {#distinct-state-validation}
 
-In many cases, you will want to ensure some sort of uniqueness between repeater items. A couple of common examples could be:
+많은 경우에, 리피터 항목들 간에 어떤 형태로든 고유성을 보장하고 싶을 때가 있습니다. 일반적인 예시는 다음과 같습니다:
 
-- Ensuring that only one [checkbox](checkbox) or [toggle](toggle) is activated at once across items in the repeater.
-- Ensuring that an option may only be selected once across [select](select), [radio](radio), [checkbox list](checkbox-list), or [toggle buttons](toggle-buttons) fields in a repeater.
+- 리피터 내의 항목들 중 오직 하나의 [체크박스](checkbox) 또는 [토글](toggle)만 활성화되도록 보장하는 경우
+- 리피터 내의 [셀렉트](select), [라디오](radio), [체크박스 리스트](checkbox-list), 또는 [토글 버튼](toggle-buttons) 필드에서 하나의 옵션만 한 번씩 선택되도록 보장하는 경우
 
-You can use the `distinct()` method to validate that the state of a field is unique across all items in the repeater:
+`distinct()` 메서드를 사용하여 리피터 내 모든 항목에서 필드의 상태가 고유한지 검증할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Checkbox;
@@ -534,14 +534,14 @@ Repeater::make('answers')
     ])
 ```
 
-The behavior of the `distinct()` validation depends on the data type that the field handles
+`distinct()` 검증의 동작 방식은 필드가 다루는 데이터 타입에 따라 달라집니다.
 
-- If the field returns a boolean, like a [checkbox](checkbox) or [toggle](toggle), the validation will ensure that only one item has a value of `true`. There may be many fields in the repeater that have a value of `false`.
-- Otherwise, for fields like a [select](select), [radio](radio), [checkbox list](checkbox-list), or [toggle buttons](toggle-buttons), the validation will ensure that each option may only be selected once across all items in the repeater.
+- 필드가 [체크박스](checkbox)나 [토글](toggle)처럼 불리언 값을 반환하는 경우, 검증은 오직 하나의 항목만 값이 `true`가 되도록 보장합니다. 여러 필드가 `false` 값을 가질 수 있습니다.
+- 그 외에 [셀렉트](select), [라디오](radio), [체크박스 리스트](checkbox-list), [토글 버튼](toggle-buttons)과 같은 필드의 경우, 검증은 각 옵션이 리피터 내 모든 항목에서 한 번만 선택될 수 있도록 보장합니다.
 
-#### Automatically fixing indistinct state
+#### 불분명한 상태 자동 수정 {#automatically-fixing-indistinct-state}
 
-If you'd like to automatically fix indistinct state, you can use the `fixIndistinctState()` method:
+불분명한 상태를 자동으로 수정하고 싶다면, `fixIndistinctState()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Checkbox;
@@ -555,16 +555,16 @@ Repeater::make('answers')
     ])
 ```
 
-This method will automatically enable the `distinct()` and `live()` methods on the field.
+이 메서드는 해당 필드에 `distinct()`와 `live()` 메서드를 자동으로 활성화합니다.
 
-Depending on the data type that the field handles, the behavior of the `fixIndistinctState()` adapts:
+필드가 다루는 데이터 타입에 따라 `fixIndistinctState()`의 동작이 달라집니다:
 
-- If the field returns a boolean, like a [checkbox](checkbox) or [toggle](toggle), and one of the fields is enabled, Filament will automatically disable all other enabled fields on behalf of the user.
-- Otherwise, for fields like a [select](select), [radio](radio), [checkbox list](checkbox-list), or [toggle buttons](toggle-buttons), when a user selects an option, Filament will automatically deselect all other usages of that option on behalf of the user.
+- 필드가 [checkbox](checkbox)나 [toggle](toggle)처럼 불리언 값을 반환하고, 필드 중 하나가 활성화되면, Filament는 사용자를 대신해 다른 모든 활성화된 필드를 자동으로 비활성화합니다.
+- 그 외에 [select](select), [radio](radio), [checkbox list](checkbox-list), [toggle buttons](toggle-buttons)와 같은 필드의 경우, 사용자가 옵션을 선택하면 Filament가 해당 옵션의 다른 모든 사용을 자동으로 선택 해제합니다.
 
-#### Disabling options when they are already selected in another item
+#### 다른 항목에서 이미 선택된 옵션 비활성화하기 {#disabling-options-when-they-are-already-selected-in-another-item}
 
-If you'd like to disable options in a [select](select), [radio](radio), [checkbox list](checkbox-list), or [toggle buttons](toggle-buttons) when they are already selected in another item, you can use the `disableOptionsWhenSelectedInSiblingRepeaterItems()` method:
+[select](select), [radio](radio), [checkbox list](checkbox-list), 또는 [toggle buttons](toggle-buttons)에서 다른 항목에서 이미 선택된 옵션을 비활성화하고 싶다면, `disableOptionsWhenSelectedInSiblingRepeaterItems()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -580,9 +580,9 @@ Repeater::make('members')
     ])
 ```
 
-This method will automatically enable the `distinct()` and `live()` methods on the field.
+이 메서드는 필드에 자동으로 `distinct()`와 `live()` 메서드를 활성화합니다.
 
-In case you want to add another condition to [disable options](../select#disabling-specific-options) with, you can chain `disableOptionWhen()` with the `merge: true` argument:
+[옵션 비활성화](../select#disabling-specific-options)에 다른 조건을 추가하고 싶다면, `merge: true` 인자를 사용하여 `disableOptionWhen()`을 체이닝할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -599,9 +599,9 @@ Repeater::make('members')
     ])
 ```
 
-## Customizing the repeater item actions
+## 반복자 항목 액션 커스터마이징 {#customizing-the-repeater-item-actions}
 
-This field uses action objects for easy customization of buttons within it. You can customize these buttons by passing a function to an action registration method. The function has access to the `$action` object, which you can use to [customize it](../../actions/trigger-button). The following methods are available to customize the actions:
+이 필드는 내부 버튼을 쉽게 커스터마이즈할 수 있도록 액션 객체를 사용합니다. 액션 등록 메서드에 함수를 전달하여 이러한 버튼을 커스터마이즈할 수 있습니다. 이 함수는 `$action` 객체에 접근할 수 있으며, 이를 사용해 [커스터마이즈](../../actions/trigger-button)할 수 있습니다. 액션을 커스터마이즈할 수 있는 다음과 같은 메서드들이 제공됩니다:
 
 - `addAction()`
 - `cloneAction()`
@@ -614,7 +614,7 @@ This field uses action objects for easy customization of buttons within it. You 
 - `moveUpAction()`
 - `reorderAction()`
 
-Here is an example of how you might customize an action:
+다음은 액션을 커스터마이즈하는 예시입니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -625,13 +625,13 @@ Repeater::make('members')
         // ...
     ])
     ->collapseAllAction(
-        fn (Action $action) => $action->label('Collapse all members'),
+        fn (Action $action) => $action->label('모든 멤버 접기'),
     )
 ```
 
-### Confirming repeater actions with a modal
+### 반복자 액션을 모달로 확인하기 {#confirming-repeater-actions-with-a-modal}
 
-You can confirm actions with a modal by using the `requiresConfirmation()` method on the action object. You may use any [modal customization method](../../actions/modals) to change its content and behavior:
+액션 객체에서 `requiresConfirmation()` 메서드를 사용하여 모달로 액션을 확인할 수 있습니다. [모달 커스터마이징 메서드](../../actions/modals)를 사용하여 모달의 내용과 동작을 변경할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -646,11 +646,11 @@ Repeater::make('members')
     )
 ```
 
-> The `collapseAction()`, `collapseAllAction()`, `expandAction()`, `expandAllAction()` and `reorderAction()` methods do not support confirmation modals, as clicking their buttons does not make the network request that is required to show the modal.
+> `collapseAction()`, `collapseAllAction()`, `expandAction()`, `expandAllAction()`, `reorderAction()` 메서드는 버튼 클릭 시 모달을 표시하는 데 필요한 네트워크 요청이 발생하지 않으므로, 확인 모달을 지원하지 않습니다.
 
-### Adding extra item actions to a repeater
+### 반복자에 추가 항목 액션 추가하기 {#adding-extra-item-actions-to-a-repeater}
 
-You may add new [action buttons](../actions) to the header of each repeater item by passing `Action` objects into `extraItemActions()`:
+`extraItemActions()`에 `Action` 객체를 전달하여 각 반복자 항목의 헤더에 새로운 [액션 버튼](../actions)을 추가할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -679,32 +679,32 @@ Repeater::make('members')
     ])
 ```
 
-In this example, `$arguments['item']` gives you the ID of the current repeater item. You can validate the data in that repeater item using the `getItemState()` method on the repeater component. This method returns the validated data for the item. If the item is not valid, it will cancel the action and show an error message for that item in the form.
+이 예시에서 `$arguments['item']`은 현재 반복자 항목의 ID를 제공합니다. 반복자 컴포넌트의 `getItemState()` 메서드를 사용하여 해당 반복자 항목의 데이터를 검증할 수 있습니다. 이 메서드는 해당 항목의 검증된 데이터를 반환합니다. 만약 항목이 유효하지 않으면, 액션이 취소되고 해당 항목에 대한 오류 메시지가 폼에 표시됩니다.
 
-If you want to get the raw data from the current item without validating it, you can use `$component->getRawItemState($arguments['item'])` instead.
+현재 항목의 원시 데이터를 검증 없이 가져오고 싶다면, 대신 `$component->getRawItemState($arguments['item'])`를 사용할 수 있습니다.
 
-If you want to manipulate the raw data for the entire repeater, for example, to add, remove or modify items, you can use `$component->getState()` to get the data, and `$component->state($state)` to set it again:
+반복자 전체의 원시 데이터를 조작하고 싶다면, 예를 들어 항목을 추가, 삭제 또는 수정하려면, `$component->getState()`로 데이터를 가져오고, `$component->state($state)`로 다시 설정할 수 있습니다:
 
 ```php
 use Illuminate\Support\Str;
 
-// Get the raw data for the entire repeater
+// 반복자 전체의 원시 데이터 가져오기
 $state = $component->getState();
 
-// Add an item, with a random UUID as the key
+// 무작위 UUID를 키로 하여 항목 추가
 $state[Str::uuid()] = [
     'email' => auth()->user()->email,
 ];
 
-// Set the new data for the repeater
+// 반복자에 새로운 데이터 설정
 $component->state($state);
 ```
 
-## Testing repeaters
+## 반복자 테스트하기 {#testing-repeaters}
 
-Internally, repeaters generate UUIDs for items to keep track of them in the Livewire HTML easier. This means that when you are testing a form with a repeater, you need to ensure that the UUIDs are consistent between the form and the test. This can be tricky, and if you don't do it correctly, your tests can fail as the tests are expecting a UUID, not a numeric key.
+내부적으로, 반복자는 항목을 추적하기 위해 UUID를 생성하여 Livewire HTML에서 더 쉽게 관리할 수 있도록 합니다. 이는 반복자가 포함된 폼을 테스트할 때, 폼과 테스트 간에 UUID가 일치해야 함을 의미합니다. 이 과정이 까다로울 수 있으며, 올바르게 처리하지 않으면 테스트에서는 숫자 키가 아닌 UUID를 기대하기 때문에 테스트가 실패할 수 있습니다.
 
-However, since Livewire doesn't need to keep track of the UUIDs in a test, you can disable the UUID generation and replace them with numeric keys, using the `Repeater::fake()` method at the start of your test:
+하지만 Livewire는 테스트에서 UUID를 추적할 필요가 없으므로, 테스트 시작 시 `Repeater::fake()` 메서드를 사용하여 UUID 생성을 비활성화하고 숫자 키로 대체할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -728,7 +728,7 @@ livewire(EditPost::class, ['record' => $post])
 $undoRepeaterFake();
 ```
 
-You may also find it useful to test the number of items in a repeater by passing a function to the `assertFormSet()` method:
+또한 `assertFormSet()` 메서드에 함수를 전달하여 반복자 내 항목의 개수를 테스트하는 것도 유용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -745,11 +745,11 @@ livewire(EditPost::class, ['record' => $post])
 $undoRepeaterFake();
 ```
 
-### Testing repeater actions
+### 반복자 액션 테스트하기 {#testing-repeater-actions}
 
-In order to test that repeater actions are working as expected, you can utilize the `callFormComponentAction()` method to call your repeater actions and then [perform additional assertions](../testing#actions).
+반복자(repeater) 액션이 예상대로 동작하는지 테스트하려면, `callFormComponentAction()` 메서드를 사용하여 반복자 액션을 호출한 뒤 [추가적인 어설션을 수행](../testing#actions)할 수 있습니다.
 
-To interact with an action on a particular repeater item, you need to pass in the `item` argument with the key of that repeater item. If your repeater is reading from a relationship, you should prefix the ID (key) of the related record with `record-` to form the key of the repeater item:  
+특정 반복자 항목의 액션과 상호작용하려면, 해당 반복자 항목의 키를 `item` 인자로 전달해야 합니다. 만약 반복자가 관계(relation)에서 데이터를 읽고 있다면, 관련 레코드의 ID(키) 앞에 `record-`를 붙여 반복자 항목의 키를 만들어야 합니다:
 
 ```php
 use App\Models\Quote;

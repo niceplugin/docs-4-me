@@ -1,22 +1,22 @@
 ---
-title: Adding an infolist to a Livewire component
+title: Livewire 컴포넌트에 인포리스트 추가하기
 ---
+# [인포리스트] Livewire 컴포넌트에 인포리스트 추가하기
+## Livewire 컴포넌트 설정하기 {#setting-up-the-livewire-component}
 
-## Setting up the Livewire component
-
-First, generate a new Livewire component:
+먼저, 새로운 Livewire 컴포넌트를 생성합니다:
 
 ```bash
 php artisan make:livewire ViewProduct
 ```
 
-Then, render your Livewire component on the page:
+그런 다음, 페이지에서 Livewire 컴포넌트를 렌더링합니다:
 
 ```blade
 @livewire('view-product')
 ```
 
-Alternatively, you can use a full-page Livewire component:
+또는, 전체 페이지 Livewire 컴포넌트를 사용할 수도 있습니다:
 
 ```php
 use App\Livewire\ViewProduct;
@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('products/{product}', ViewProduct::class);
 ```
 
-You must use the `InteractsWithInfolists` and `InteractsWithForms` traits, and implement the `HasInfolists` and `HasForms` interfaces on your Livewire component class:
+Livewire 컴포넌트 클래스에서 `InteractsWithInfolists`와 `InteractsWithForms` 트레이트를 사용하고, `HasInfolists`와 `HasForms` 인터페이스를 구현해야 합니다:
 
 ```php
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -43,9 +43,9 @@ class ViewProduct extends Component implements HasForms, HasInfolists
 }
 ```
 
-## Adding the infolist
+## 인포리스트 추가하기 {#adding-the-infolist}
 
-Next, add a method to the Livewire component which accepts an `$infolist` object, modifies it, and returns it:
+다음으로, `$infolist` 객체를 받아 수정한 후 반환하는 메서드를 Livewire 컴포넌트에 추가합니다:
 
 ```php
 use Filament\Infolists\Infolist;
@@ -60,17 +60,17 @@ public function productInfolist(Infolist $infolist): Infolist
 }
 ```
 
-Finally, render the infolist in the Livewire component's view:
+마지막으로, Livewire 컴포넌트의 뷰에서 인포리스트를 렌더링합니다:
 
 ```blade
 {{ $this->productInfolist }}
 ```
 
-## Passing data to the infolist
+## 인포리스트에 데이터 전달하기 {#passing-data-to-the-infolist}
 
-You can pass data to the infolist in two ways:
+인포리스트에 데이터를 전달하는 방법은 두 가지가 있습니다:
 
-Either pass an Eloquent model instance to the `record()` method of the infolist, to automatically map all the model attributes and relationships to the entries in the infolist's schema:
+첫 번째 방법은 인포리스트의 `record()` 메서드에 Eloquent 모델 인스턴스를 전달하여, 모델의 모든 속성과 관계를 인포리스트 스키마의 엔트리에 자동으로 매핑하는 것입니다:
 
 ```php
 use Filament\Infolists\Components\TextEntry;
@@ -88,7 +88,7 @@ public function productInfolist(Infolist $infolist): Infolist
 }
 ```
 
-Alternatively, you can pass an array of data to the `state()` method of the infolist, to manually map the data to the entries in the infolist's schema:
+또 다른 방법은 인포리스트의 `state()` 메서드에 데이터 배열을 전달하여, 인포리스트 스키마의 엔트리에 데이터를 수동으로 매핑하는 것입니다:
 
 ```php
 use Filament\Infolists\Components\TextEntry;

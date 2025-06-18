@@ -1,22 +1,22 @@
 ---
-title: Adding an action to a Livewire component
+title: Livewire 컴포넌트에 액션 추가하기
 ---
+# [액션] Livewire 컴포넌트에 액션 추가하기
+## Livewire 컴포넌트 설정하기 {#setting-up-the-livewire-component}
 
-## Setting up the Livewire component
-
-First, generate a new Livewire component:
+먼저, 새로운 Livewire 컴포넌트를 생성합니다:
 
 ```bash
 php artisan make:livewire ManageProduct
 ```
 
-Then, render your Livewire component on the page:
+그런 다음, 페이지에서 Livewire 컴포넌트를 렌더링합니다:
 
 ```blade
 @livewire('manage-product')
 ```
 
-Alternatively, you can use a full-page Livewire component:
+또는, 전체 페이지 Livewire 컴포넌트를 사용할 수도 있습니다:
 
 ```php
 use App\Livewire\ManageProduct;
@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('products/{product}/manage', ManageProduct::class);
 ```
 
-You must use the `InteractsWithActions` and `InteractsWithForms` traits, and implement the `HasActions` and `HasForms` interfaces on your Livewire component class:
+Livewire 컴포넌트 클래스에서 `InteractsWithActions`와 `InteractsWithForms` 트레이트를 사용하고, `HasActions`와 `HasForms` 인터페이스를 구현해야 합니다:
 
 ```php
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -43,9 +43,9 @@ class ManagePost extends Component implements HasForms, HasActions
 }
 ```
 
-## Adding the action
+## 액션 추가하기 {#adding-the-action}
 
-Add a method that returns your action. The method must share the exact same name as the action, or the name followed by `Action`:
+액션을 반환하는 메서드를 추가하세요. 이 메서드는 액션과 정확히 같은 이름이거나, 이름 뒤에 `Action`이 붙은 이름이어야 합니다:
 
 ```php
 use App\Models\Post;
@@ -70,17 +70,17 @@ class ManagePost extends Component implements HasForms, HasActions
             ->action(fn () => $this->post->delete());
     }
     
-    // This method name also works, since the action name is `delete`:
+    // 액션 이름이 `delete`이므로, 이 메서드 이름도 동작합니다:
     // public function delete(): Action
     
-    // This method name does not work, since the action name is `delete`, not `deletePost`:
+    // 액션 이름이 `delete`이기 때문에, 이 메서드 이름은 동작하지 않습니다:
     // public function deletePost(): Action
 
     // ...
 }
 ```
 
-Finally, you need to render the action in your view. To do this, you can use `{{ $this->deleteAction }}`, where you replace `deleteAction` with the name of your action method:
+마지막으로, 뷰에서 액션을 렌더링해야 합니다. 이를 위해 <span v-pre>`{{ $this->deleteAction }}`</span>을 사용할 수 있으며, 여기서 `deleteAction`을 액션 메서드 이름으로 바꿔 사용하면 됩니다:
 
 ```blade
 <div>
@@ -90,11 +90,11 @@ Finally, you need to render the action in your view. To do this, you can use `{{
 </div>
 ```
 
-You also need `<x-filament-actions::modals />` which injects the HTML required to render action modals. This only needs to be included within the Livewire component once, regardless of how many actions you have for that component.
+또한 액션 모달을 렌더링하는 데 필요한 HTML을 주입하는 `<x-filament-actions::modals />`도 필요합니다. 이 컴포넌트는 해당 Livewire 컴포넌트 내에서 한 번만 포함하면 되며, 액션이 몇 개 있든 상관없습니다.
 
-## Passing action arguments
+## 액션 인자 전달하기 {#passing-action-arguments}
 
-Sometimes, you may wish to pass arguments to your action. For example, if you're rendering the same action multiple times in the same view, but each time for a different model, you could pass the model ID as an argument, and then retrieve it later. To do this, you can invoke the action in your view and pass in the arguments as an array:
+때때로 액션에 인자를 전달하고 싶을 수 있습니다. 예를 들어, 동일한 액션을 같은 뷰에서 여러 번 렌더링하지만, 매번 다른 모델에 대해 렌더링하는 경우 모델 ID를 인자로 전달한 뒤 나중에 이를 가져올 수 있습니다. 이를 위해 뷰에서 액션을 호출할 때 인자 배열을 전달할 수 있습니다:
 
 ```php
 <div>
@@ -108,7 +108,7 @@ Sometimes, you may wish to pass arguments to your action. For example, if you're
 </div>
 ```
 
-Now, you can access the post ID in your action method:
+이제 액션 메서드에서 post ID에 접근할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -126,9 +126,9 @@ public function deleteAction(): Action
 }
 ```
 
-## Hiding actions in a Livewire view
+## Livewire 뷰에서 액션 숨기기 {#hiding-actions-in-a-livewire-view}
 
-If you use `hidden()` or `visible()` to control if an action is rendered, you should wrap the action in an `@if` check for `isVisible()`:
+`hidden()` 또는 `visible()`을 사용하여 액션이 렌더링될지 제어하려면, 액션을 `isVisible()`에 대한 `@if` 체크로 감싸야 합니다:
 
 ```blade
 <div>
@@ -136,7 +136,7 @@ If you use `hidden()` or `visible()` to control if an action is rendered, you sh
         {{ $this->deleteAction }}
     @endif
     
-    {{-- Or --}}
+    {{-- 또는 --}}
     
     @if (($this->deleteAction)(['post' => $post->id])->isVisible())
         {{ ($this->deleteAction)(['post' => $post->id]) }}
@@ -144,9 +144,9 @@ If you use `hidden()` or `visible()` to control if an action is rendered, you sh
 </div>
 ```
 
-The `hidden()` and `visible()` methods also control if the action is `disabled()`, so they are still useful to protect the action from being run if the user does not have permission. Encapsulating this logic in the `hidden()` or `visible()` of the action itself is good practice otherwise you need to define the condition in the view and in `disabled()`.
+`hidden()`과 `visible()` 메서드는 액션이 `disabled()` 상태인지도 제어하므로, 사용자가 권한이 없을 때 액션 실행을 방지하는 데 여전히 유용합니다. 이러한 로직을 액션 자체의 `hidden()` 또는 `visible()`에 캡슐화하는 것이 좋은 습관이며, 그렇지 않으면 뷰와 `disabled()` 모두에 조건을 정의해야 합니다.
 
-You can also take advantage of this to hide any wrapping elements that may not need to be rendered if the action is hidden:
+또한, 액션이 숨겨질 때 렌더링할 필요가 없는 래핑 요소도 함께 숨길 수 있습니다:
 
 ```blade
 <div>
@@ -158,9 +158,9 @@ You can also take advantage of this to hide any wrapping elements that may not n
 </div>
 ```
 
-## Grouping actions in a Livewire view
+## Livewire 뷰에서 액션 그룹화하기 {#grouping-actions-in-a-livewire-view}
 
-You may [group actions together into a dropdown menu](grouping-actions) by using the `<x-filament-actions::group>` Blade component, passing in the `actions` array as an attribute:
+`<x-filament-actions::group>` Blade 컴포넌트를 사용하여 `actions` 배열을 속성으로 전달하면 [여러 액션을 드롭다운 메뉴로 그룹화](grouping-actions)할 수 있습니다:
 
 ```blade
 <div>
@@ -174,7 +174,7 @@ You may [group actions together into a dropdown menu](grouping-actions) by using
 </div>
 ```
 
-You can also pass in any attributes to customize the appearance of the trigger button and dropdown:
+트리거 버튼과 드롭다운의 외형을 커스터마이즈하기 위해 다양한 속성을 추가로 전달할 수도 있습니다:
 
 ```blade
 <div>
@@ -196,9 +196,9 @@ You can also pass in any attributes to customize the appearance of the trigger b
 </div>
 ```
 
-## Chaining actions
+## 액션 체이닝 {#chaining-actions}
 
-You can chain multiple actions together, by calling the `replaceMountedAction()` method to replace the current action with another when it has finished:
+여러 개의 액션을 함께 체이닝하려면, 현재 액션이 완료된 후 `replaceMountedAction()` 메서드를 호출하여 현재 액션을 다른 액션으로 교체할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -233,13 +233,13 @@ public function publishAction(): Action
 }
 ```
 
-Now, when the first action is submitted, the second action will open in its place. The [arguments](#passing-action-arguments) that were originally passed to the first action get passed to the second action, so you can use them to persist data between requests.
+이제 첫 번째 액션이 제출되면, 두 번째 액션이 그 자리에 열립니다. 처음에 첫 번째 액션에 전달된 [인자](#passing-action-arguments)는 두 번째 액션에도 전달되므로, 이를 사용해 요청 간 데이터를 유지할 수 있습니다.
 
-If the first action is canceled, the second one is not opened. If the second action is canceled, the first one has already run and cannot be cancelled.
+첫 번째 액션이 취소되면 두 번째 액션은 열리지 않습니다. 두 번째 액션이 취소되면, 첫 번째 액션은 이미 실행된 상태이므로 취소할 수 없습니다.
 
-## Programmatically triggering actions
+## 프로그래밍적으로 액션 트리거하기 {#programmatically-triggering-actions}
 
-Sometimes you may need to trigger an action without the user clicking on the built-in trigger button, especially from JavaScript. Here is an example action which could be registered on a Livewire component:
+때때로 사용자가 내장된 트리거 버튼을 클릭하지 않아도, 특히 JavaScript에서 액션을 트리거해야 할 때가 있습니다. 다음은 Livewire 컴포넌트에 등록할 수 있는 예시 액션입니다:
 
 ```php
 use Filament\Actions\Action;
@@ -254,7 +254,7 @@ public function testAction(): Action
 }
 ```
 
-You can trigger that action from a click in your HTML using the `wire:click` attribute, calling the `mountAction()` method and optionally passing in any arguments that you want to be available:
+HTML에서 `wire:click` 속성을 사용하여 클릭 시 해당 액션을 트리거할 수 있으며, `mountAction()` 메서드를 호출하고 원하는 인자를 선택적으로 전달할 수 있습니다:
 
 ```blade
 <button wire:click="mountAction('test', { id: 12345 })">
@@ -262,7 +262,7 @@ You can trigger that action from a click in your HTML using the `wire:click` att
 </button>
 ```
 
-To trigger that action from JavaScript, you can use the [`$wire` utility](https://livewire.laravel.com/docs/alpine#controlling-livewire-from-alpine-using-wire), passing in the same arguments:
+JavaScript에서 해당 액션을 트리거하려면, 동일한 인자를 전달하여 [`$wire` 유틸리티](https://livewire.laravel.com/docs/alpine#controlling-livewire-from-alpine-using-wire)를 사용할 수 있습니다:
 
 ```js
 $wire.mountAction('test', { id: 12345 })

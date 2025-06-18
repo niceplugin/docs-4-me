@@ -1,16 +1,16 @@
 ---
-title: Layout
+title: 레이아웃
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [테이블] 레이아웃
 
-## The problem with traditional table layouts
+## 기존 테이블 레이아웃의 문제점 {#the-problem-with-traditional-table-layouts}
 
-Traditional tables are notorious for having bad responsiveness. On mobile, there is only so much flexibility you have when rendering content that is horizontally long:
+기존의 테이블은 반응형이 좋지 않기로 악명이 높습니다. 모바일에서는 가로로 긴 콘텐츠를 렌더링할 때 유연성이 제한적입니다:
 
-- Allow the user to scroll horizontally to see more table content
-- Hide non-important columns on smaller devices
+- 사용자가 테이블의 더 많은 내용을 보기 위해 가로로 스크롤할 수 있도록 허용
+- 작은 기기에서는 중요하지 않은 컬럼을 숨김
 
-Both of these are possible with Filament. Tables automatically scroll horizontally when they overflow anyway, and you may choose to show and hide columns based on the responsive [breakpoint](https://tailwindcss.com/docs/responsive-design#overview) of the browser. To do this, you may use a `visibleFrom()` or `hiddenFrom()` method:
+이 두 가지 모두 Filament에서 가능합니다. 테이블이 넘칠 경우 자동으로 가로 스크롤이 활성화되며, 브라우저의 반응형 [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)에 따라 컬럼을 표시하거나 숨길 수 있습니다. 이를 위해 `visibleFrom()` 또는 `hiddenFrom()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\TextColumn;
@@ -19,17 +19,17 @@ TextColumn::make('slug')
     ->visibleFrom('md')
 ```
 
-This is fine, but there is still a glaring issue - **on mobile, the user is unable to see much information in a table row at once without scrolling**.
+이 방법도 괜찮지만, 여전히 명백한 문제가 있습니다. **모바일에서는 사용자가 한 번에 테이블 행의 많은 정보를 볼 수 없고 스크롤해야만 합니다.**
 
-Thankfully, Filament lets you build responsive table-like interfaces, without touching HTML or CSS. These layouts let you define exactly where content appears in a table row, at each responsive breakpoint.
+다행히도, Filament를 사용하면 HTML이나 CSS를 직접 다루지 않고도 반응형 테이블과 유사한 인터페이스를 만들 수 있습니다. 이러한 레이아웃을 통해 각 반응형 브레이크포인트에서 테이블 행에 콘텐츠가 정확히 어디에 나타날지 정의할 수 있습니다.
 
-<AutoScreenshot name="tables/layout/demo" alt="Table with responsive layout" version="3.x" />
+<AutoScreenshot name="tables/layout/demo" alt="반응형 레이아웃이 적용된 테이블" version="3.x" />
 
-<AutoScreenshot name="tables/layout/demo/mobile" alt="Table with responsive layout on mobile" version="3.x" />
+<AutoScreenshot name="tables/layout/demo/mobile" alt="모바일에서 반응형 레이아웃이 적용된 테이블" version="3.x" />
 
-## Allowing columns to stack on mobile
+## 모바일에서 컬럼이 쌓이도록 허용하기 {#allowing-columns-to-stack-on-mobile}
 
-Let's introduce a component - `Split`:
+`Split` 컴포넌트를 소개합니다:
 
 ```php
 use Filament\Support\Enums\FontWeight;
@@ -47,13 +47,13 @@ Split::make([
 ])
 ```
 
-<AutoScreenshot name="tables/layout/split" alt="Table with a split layout" version="3.x" />
+<AutoScreenshot name="tables/layout/split" alt="분할 레이아웃이 적용된 테이블" version="3.x" />
 
-<AutoScreenshot name="tables/layout/split/mobile" alt="Table with a split layout on mobile" version="3.x" />
+<AutoScreenshot name="tables/layout/split/mobile" alt="모바일에서 분할 레이아웃이 적용된 테이블" version="3.x" />
 
-A `Split` component is used to wrap around columns, and allow them to stack on mobile.
+`Split` 컴포넌트는 컬럼을 감싸 모바일에서 컬럼들이 쌓이도록 해줍니다.
 
-By default, columns within a split will appear aside each other all the time. However, you may choose a responsive [breakpoint](https://tailwindcss.com/docs/responsive-design#overview) where this behavior starts `from()`. Before this point, the columns will stack on top of each other:
+기본적으로, split 내부의 컬럼들은 항상 나란히 표시됩니다. 하지만, 이 동작이 시작되는 반응형 [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)를 `from()`으로 지정할 수 있습니다. 이 지점 이전에는 컬럼들이 위아래로 쌓입니다:
 
 ```php
 use Filament\Support\Enums\FontWeight;
@@ -72,15 +72,15 @@ Split::make([
 ])->from('md')
 ```
 
-In this example, the columns will only appear horizontally aside each other from `md` [breakpoint](https://tailwindcss.com/docs/responsive-design#overview) devices onwards:
+이 예시에서는, 컬럼들이 `md` [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview) 이상의 기기에서만 가로로 나란히 표시됩니다:
 
-<AutoScreenshot name="tables/layout/split-desktop" alt="Table with a split layout on desktop" version="3.x" />
+<AutoScreenshot name="tables/layout/split-desktop" alt="데스크톱에서 분할 레이아웃이 적용된 테이블" version="3.x" />
 
-<AutoScreenshot name="tables/layout/split-desktop/mobile" alt="Table with a stacked layout on mobile" version="3.x" />
+<AutoScreenshot name="tables/layout/split-desktop/mobile" alt="모바일에서 쌓인 레이아웃이 적용된 테이블" version="3.x" />
 
-### Preventing a column from creating whitespace
+### 열이 공백을 생성하지 않도록 방지하기 {#preventing-a-column-from-creating-whitespace}
 
-Splits, like table columns, will automatically adjust their whitespace to ensure that each column has proportionate separation. You can prevent this from happening, using `grow(false)`. In this example, we will make sure that the avatar image will sit tightly against the name column:
+테이블 열과 같은 Split은 각 열이 비례적으로 분리되도록 자동으로 공백을 조정합니다. `grow(false)`를 사용하면 이러한 동작을 방지할 수 있습니다. 이 예시에서는 아바타 이미지가 이름 열에 딱 붙어 있도록 설정합니다:
 
 ```php
 use Filament\Support\Enums\FontWeight;
@@ -100,15 +100,15 @@ Split::make([
 ])
 ```
 
-The other columns which are allowed to `grow()` will adjust to consume the newly-freed space:
+`grow()`가 허용된 다른 열들은 새로 확보된 공간을 차지하도록 자동으로 조정됩니다:
 
-<AutoScreenshot name="tables/layout/grow-disabled" alt="Table with a column that doesn't grow" version="3.x" />
+<AutoScreenshot name="tables/layout/grow-disabled" alt="성장하지 않는 열이 있는 테이블" version="3.x" />
 
-<AutoScreenshot name="tables/layout/grow-disabled/mobile" alt="Table with a column that doesn't grow on mobile" version="3.x" />
+<AutoScreenshot name="tables/layout/grow-disabled/mobile" alt="모바일에서 성장하지 않는 열이 있는 테이블" version="3.x" />
 
-### Stacking within a split
+### 분할 내에서 스택 쌓기 {#stacking-within-a-split}
 
-Inside a split, you may stack multiple columns on top of each other vertically. This allows you to display more data inside fewer columns on desktop:
+분할(Split) 내에서는 여러 컬럼을 수직으로 쌓아올릴 수 있습니다. 이를 통해 데스크톱에서 더 적은 수의 컬럼 안에 더 많은 데이터를 표시할 수 있습니다:
 
 ```php
 use Filament\Support\Enums\FontWeight;
@@ -133,13 +133,13 @@ Split::make([
 ])
 ```
 
-<AutoScreenshot name="tables/layout/stack" alt="Table with a stack" version="3.x" />
+<AutoScreenshot name="tables/layout/stack" alt="스택이 있는 테이블" version="3.x" />
 
-<AutoScreenshot name="tables/layout/stack/mobile" alt="Table with a stack on mobile" version="3.x" />
+<AutoScreenshot name="tables/layout/stack/mobile" alt="모바일에서 스택이 있는 테이블" version="3.x" />
 
-#### Hiding a stack on mobile
+#### 모바일에서 스택 숨기기 {#hiding-a-stack-on-mobile}
 
-Similar to individual columns, you may choose to hide a stack based on the responsive [breakpoint](https://tailwindcss.com/docs/responsive-design#overview) of the browser. To do this, you may use a `visibleFrom()` method:
+개별 컬럼과 마찬가지로, 브라우저의 반응형 [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)에 따라 스택을 숨길 수 있습니다. 이를 위해 `visibleFrom()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Support\Enums\FontWeight;
@@ -164,13 +164,13 @@ Split::make([
 ])
 ```
 
-<AutoScreenshot name="tables/layout/stack-hidden-on-mobile" alt="Table with a stack" version="3.x" />
+<AutoScreenshot name="tables/layout/stack-hidden-on-mobile" alt="스택이 있는 테이블" version="3.x" />
 
-<AutoScreenshot name="tables/layout/stack-hidden-on-mobile/mobile" alt="Table with no stack on mobile" version="3.x" />
+<AutoScreenshot name="tables/layout/stack-hidden-on-mobile/mobile" alt="모바일에서 스택이 없는 테이블" version="3.x" />
 
-#### Aligning stacked content
+#### 스택된 콘텐츠 정렬 {#aligning-stacked-content}
 
-By default, columns within a stack are aligned to the start. You may choose to align columns within a stack to the `Alignment::Center` or `Alignment::End`:
+기본적으로, 스택 내의 컬럼들은 시작점에 정렬됩니다. 스택 내의 컬럼들을 `Alignment::Center` 또는 `Alignment::End`로 정렬할 수도 있습니다:
 
 ```php
 use Filament\Support\Enums\Alignment;
@@ -200,13 +200,13 @@ Split::make([
 ])
 ```
 
-Ensure that the columns within the stack have `grow(false)` set, otherwise they will stretch to fill the entire width of the stack and follow their own alignment configuration instead of the stack's.
+스택 내의 컬럼에 `grow(false)`가 설정되어 있는지 확인하세요. 그렇지 않으면 컬럼이 스택의 전체 너비를 채우기 위해 늘어나며, 스택의 정렬 설정이 아닌 각 컬럼의 정렬 설정을 따르게 됩니다.
 
-<AutoScreenshot name="tables/layout/stack-aligned-right" alt="Table with a stack aligned right" version="3.x" />
+<AutoScreenshot name="tables/layout/stack-aligned-right" alt="오른쪽 정렬된 스택이 있는 테이블" version="3.x" />
 
-#### Spacing stacked content
+#### 스택된 콘텐츠 간격 조정 {#spacing-stacked-content}
 
-By default, stacked content has no vertical padding between columns. To add some, you may use the `space()` method, which accepts either `1`, `2`, or `3`, corresponding to [Tailwind's spacing scale](https://tailwindcss.com/docs/space):
+기본적으로, 스택된 콘텐츠는 열 사이에 수직 패딩이 없습니다. 간격을 추가하려면 `space()` 메서드를 사용할 수 있으며, 이 메서드는 [Tailwind의 간격 스케일](https://tailwindcss.com/docs/space)에 해당하는 `1`, `2`, 또는 `3`을 인수로 받습니다:
 
 ```php
 use Filament\Tables\Columns\Layout\Stack;
@@ -220,11 +220,11 @@ Stack::make([
 ])->space(1)
 ```
 
-## Controlling column width using a grid
+## 그리드를 사용하여 컬럼 너비 제어하기 {#controlling-column-width-using-a-grid}
 
-Sometimes, using a `Split` creates inconsistent widths when columns contain lots of content. This is because it's powered by Flexbox internally and each row individually controls how much space is allocated to content.
+때때로, `Split`을 사용하면 컬럼에 많은 내용이 포함될 때 너비가 일관되지 않게 됩니다. 이는 내부적으로 Flexbox를 사용하고 각 행이 개별적으로 콘텐츠에 할당되는 공간을 제어하기 때문입니다.
 
-Instead, you may use a `Grid` layout, which uses CSS Grid Layout to allow you to control column widths:
+대신, CSS Grid Layout을 사용하는 `Grid` 레이아웃을 사용하여 컬럼 너비를 제어할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Layout\Grid;
@@ -241,9 +241,9 @@ Grid::make([
     ])
 ```
 
-These columns will always consume equal width within the grid, from the `lg` [breakpoint](https://tailwindcss.com/docs/responsive-design#overview).
+이 컬럼들은 항상 `lg` [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)에서 그리드 내에서 동일한 너비를 차지합니다.
 
-You may choose to customize the number of columns within the grid at other breakpoints:
+다른 브레이크포인트에서 그리드 내 컬럼의 개수를 커스터마이즈할 수도 있습니다:
 
 ```php
 use Filament\Tables\Columns\Layout\Grid;
@@ -266,7 +266,7 @@ Grid::make([
     ])
 ```
 
-And you can even control how many grid columns will be consumed by each component at each [breakpoint](https://tailwindcss.com/docs/responsive-design#overview):
+그리고 각 [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)에서 각 컴포넌트가 차지할 그리드 컬럼의 개수도 제어할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Layout\Grid;
@@ -295,11 +295,11 @@ Grid::make([
     ])
 ```
 
-## Collapsible content
+## 접을 수 있는 콘텐츠 {#collapsible-content}
 
-When you're using a column layout like split or stack, then you can also add collapsible content. This is very useful for when you don't want to display all data in the table at once, but still want it to be accessible to the user if they need to access it, without navigating away.
+split 또는 stack과 같은 열 레이아웃을 사용할 때, 접을 수 있는 콘텐츠를 추가할 수도 있습니다. 이는 테이블에 모든 데이터를 한 번에 표시하고 싶지 않지만, 사용자가 필요할 때 접근할 수 있도록 하고 싶을 때 매우 유용합니다. 사용자는 다른 페이지로 이동하지 않고도 데이터를 볼 수 있습니다.
 
-Split and stack components can be made `collapsible()`, but there is also a dedicated `Panel` component that provides a pre-styled background color and border radius, to separate the collapsible content from the rest:
+Split과 Stack 컴포넌트는 `collapsible()`로 만들 수 있지만, 접을 수 있는 콘텐츠를 나머지와 구분하기 위해 미리 스타일이 지정된 배경색과 테두리 반경을 제공하는 전용 `Panel` 컴포넌트도 있습니다:
 
 ```php
 use Filament\Support\Enums\FontWeight;
@@ -329,7 +329,7 @@ use Filament\Tables\Columns\TextColumn;
 ]
 ```
 
-You can expand a panel by default using the `collapsed(false)` method:
+`collapsed(false)` 메서드를 사용하여 패널을 기본적으로 확장된 상태로 만들 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Layout\Panel;
@@ -346,15 +346,15 @@ Panel::make([
 ])->collapsed(false)
 ```
 
-<AutoScreenshot name="tables/layout/collapsible" alt="Table with collapsible content" version="3.x" />
+<AutoScreenshot name="tables/layout/collapsible" alt="접을 수 있는 콘텐츠가 있는 테이블" version="3.x" />
 
-<AutoScreenshot name="tables/layout/collapsible/mobile" alt="Table with collapsible content on mobile" version="3.x" />
+<AutoScreenshot name="tables/layout/collapsible/mobile" alt="모바일에서 접을 수 있는 콘텐츠가 있는 테이블" version="3.x" />
 
-## Arranging records into a grid
+## 레코드를 그리드로 배열하기 {#arranging-records-into-a-grid}
 
-Sometimes, you may find that your data fits into a grid format better than a list. Filament can handle that too!
+때로는 데이터가 리스트보다 그리드 형식에 더 잘 맞을 때가 있습니다. Filament는 이런 경우도 문제없이 처리할 수 있습니다!
 
-Simply use the `$table->contentGrid()` method:
+간단히 `$table->contentGrid()` 메서드를 사용하세요:
 
 ```php
 use Filament\Tables\Columns\Layout\Stack;
@@ -365,7 +365,7 @@ public function table(Table $table): Table
     return $table
         ->columns([
             Stack::make([
-                // Columns
+                // 컬럼들
             ]),
         ])
         ->contentGrid([
@@ -375,21 +375,21 @@ public function table(Table $table): Table
 }
 ```
 
-In this example, the rows will be displayed in a grid:
+이 예시에서는 행이 그리드로 표시됩니다:
 
-- On mobile, they will be displayed in 1 column only.
-- From the `md` [breakpoint](https://tailwindcss.com/docs/responsive-design#overview), they will be displayed in 2 columns.
-- From the `xl` [breakpoint](https://tailwindcss.com/docs/responsive-design#overview) onwards, they will be displayed in 3 columns.
+- 모바일에서는 1개의 컬럼으로만 표시됩니다.
+- `md` [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)부터는 2개의 컬럼으로 표시됩니다.
+- `xl` [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview) 이상에서는 3개의 컬럼으로 표시됩니다.
 
-These settings are fully customizable, any [breakpoint](https://tailwindcss.com/docs/responsive-design#overview) from `sm` to `2xl` can contain `1` to `12` columns.
+이 설정은 완전히 커스터마이즈할 수 있으며, `sm`부터 `2xl`까지의 [브레이크포인트](https://tailwindcss.com/docs/responsive-design#overview)에서 `1`부터 `12`까지의 컬럼을 지정할 수 있습니다.
 
-<AutoScreenshot name="tables/layout/grid" alt="Table with grid layout" version="3.x" />
+<AutoScreenshot name="tables/layout/grid" alt="그리드 레이아웃의 테이블" version="3.x" />
 
-<AutoScreenshot name="tables/layout/grid/mobile" alt="Table with grid layout on mobile" version="3.x" />
+<AutoScreenshot name="tables/layout/grid/mobile" alt="모바일에서 그리드 레이아웃의 테이블" version="3.x" />
 
-## Custom HTML
+## 커스텀 HTML {#custom-html}
 
-You may add custom HTML to your table using a `View` component. It can even be `collapsible()`:
+`View` 컴포넌트를 사용하여 테이블에 커스텀 HTML을 추가할 수 있습니다. `collapsible()`로 접을 수 있게 만들 수도 있습니다:
 
 ```php
 use Filament\Support\Enums\FontWeight;
@@ -412,12 +412,12 @@ use Filament\Tables\Columns\TextColumn;
 ]
 ```
 
-Now, create a `/resources/views/users/table/collapsible-row-content.blade.php` file, and add in your HTML. You can access the table record using `$getRecord()`:
+이제 `/resources/views/users/table/collapsible-row-content.blade.php` 파일을 생성하고, 원하는 HTML을 추가하세요. `$getRecord()`를 사용하여 테이블 레코드에 접근할 수 있습니다:
 
 ```blade
 <p class="px-4 py-3 bg-gray-100 rounded-lg">
     <span class="font-medium">
-        Email address:
+        이메일 주소:
     </span>
 
     <span>
@@ -426,9 +426,9 @@ Now, create a `/resources/views/users/table/collapsible-row-content.blade.php` f
 </p>
 ```
 
-### Embedding other components
+### 다른 컴포넌트 임베딩하기 {#embedding-other-components}
 
-You could even pass in columns or other layout components to the `components()` method:
+`components()` 메서드에 컬럼이나 다른 레이아웃 컴포넌트도 전달할 수 있습니다:
 
 ```php
 use Filament\Support\Enums\FontWeight;
@@ -455,7 +455,7 @@ use Filament\Tables\Columns\TextColumn;
 ]
 ```
 
-Now, render the components in the Blade file:
+이제 Blade 파일에서 컴포넌트를 렌더링합니다:
 
 ```blade
 <div class="px-4 py-3 bg-gray-100 rounded-lg">

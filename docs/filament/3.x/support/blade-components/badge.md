@@ -1,10 +1,10 @@
 ---
-title: Badge Blade component
+title: 배지 블레이드 컴포넌트
 ---
+# [핵심개념.Blade컴포넌트] badge
+## 개요 {#overview}
 
-## Overview
-
-The badge component is used to render a small box with some text inside:
+배지 컴포넌트는 내부에 텍스트가 들어간 작은 상자를 렌더링하는 데 사용됩니다:
 
 ```blade
 <x-filament::badge>
@@ -12,9 +12,9 @@ The badge component is used to render a small box with some text inside:
 </x-filament::badge>
 ```
 
-## Setting the size of a badge
+## 배지의 크기 설정하기 {#setting-the-size-of-a-badge}
 
-By default, the size of a badge is "medium". You can make it "extra small" or "small" by using the `size` attribute:
+기본적으로 배지의 크기는 "medium"입니다. `size` 속성을 사용하여 "extra small" 또는 "small"로 설정할 수 있습니다:
 
 ```blade
 <x-filament::badge size="xs">
@@ -26,9 +26,9 @@ By default, the size of a badge is "medium". You can make it "extra small" or "s
 </x-filament::badge>
 ```
 
-## Changing the color of the badge
+## 배지 색상 변경하기 {#changing-the-color-of-the-badge}
 
-By default, the color of a badge is "primary". You can change it to be `danger`, `gray`, `info`, `success` or `warning` by using the `color` attribute:
+기본적으로 배지의 색상은 "primary"입니다. `color` 속성을 사용하여 `danger`, `gray`, `info`, `success`, `warning` 중 하나로 변경할 수 있습니다:
 
 ```blade
 <x-filament::badge color="danger">
@@ -52,9 +52,9 @@ By default, the color of a badge is "primary". You can change it to be `danger`,
 </x-filament::badge>
 ```
 
-## Adding an icon to a badge
+## 배지에 아이콘 추가하기 {#adding-an-icon-to-a-badge}
 
-You can add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to a badge by using the `icon` attribute:
+`icon` 속성을 사용하여 배지에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 추가할 수 있습니다:
 
 ```blade
 <x-filament::badge icon="heroicon-m-sparkles">
@@ -62,7 +62,7 @@ You can add an [icon](https://blade-ui-kit.com/blade-icons?set=1#search) to a ba
 </x-filament::badge>
 ```
 
-You can also change the icon's position to be after the text instead of before it, using the `icon-position` attribute:
+또한 `icon-position` 속성을 사용하여 아이콘의 위치를 텍스트 뒤로 변경할 수도 있습니다:
 
 ```blade
 <x-filament::badge

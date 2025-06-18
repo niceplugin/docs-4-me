@@ -3,6 +3,7 @@ import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-i
 import { sidebar_laravel } from './configs/sidebar/laravel'
 import { livewire } from './configs/sidebar/livewire'
 import { sidebar_filament } from './configs/sidebar/filament'
+import { search } from './configs/search'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -20,6 +21,7 @@ export default defineConfig({
     //   pattern: 'https://github.com/niceplugin/docs-4-me/edit/main/docs/:path',
     //   text: '이 페이지 편집 제안하기'
     // },
+    search,
 
     nav: [
       { text: '홈', link: '/' },

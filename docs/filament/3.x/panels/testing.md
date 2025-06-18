@@ -1,16 +1,16 @@
 ---
-title: Testing
+title: 테스트
 ---
+# [패널] 테스트
+## 개요 {#overview}
 
-## Overview
+이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성됩니다. Pest의 Livewire 플러그인을 테스트에 사용하려면, Pest 문서의 플러그인 설치 안내를 참고하세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만, 이를 PHPUnit에 맞게 쉽게 변환할 수 있습니다.
 
-All examples in this guide will be written using [Pest](https://pestphp.com). To use Pest's Livewire plugin for testing, you can follow the installation instructions in the Pest documentation on plugins: [Livewire plugin for Pest](https://pestphp.com/docs/plugins#livewire). However, you can easily adapt this to PHPUnit.
+앱의 모든 페이지는 Livewire 컴포넌트이므로, 우리는 어디서나 Livewire 테스트 헬퍼를 사용합니다. 만약 Livewire 컴포넌트 테스트가 처음이라면, Livewire 공식 문서의 [이 가이드](https://livewire.laravel.com/docs/testing)를 먼저 읽어보시기 바랍니다.
 
-Since all pages in the app are Livewire components, we're just using Livewire testing helpers everywhere. If you've never tested Livewire components before, please read [this guide](https://livewire.laravel.com/docs/testing) from the Livewire docs.
+## 시작하기 {#getting-started}
 
-## Getting started
-
-Ensure that you are authenticated to access the app in your `TestCase`:
+`TestCase`에서 앱에 접근할 수 있도록 인증되어 있는지 확인하세요:
 
 ```php
 protected function setUp(): void
@@ -21,27 +21,27 @@ protected function setUp(): void
 }
 ```
 
-### Testing multiple panels
+### 여러 패널 테스트하기 {#testing-multiple-panels}
 
-If you have multiple panels and you would like to test a non-default panel, you will need to tell Filament which panel you are testing. This can be done in the `setUp()` method of the test case, or you can do it at the start of a particular test. Filament usually does this in a middleware when you access the panel through a request, so if you're not making a request in your test like when testing a Livewire component, you need to set the current panel manually:
+여러 개의 패널이 있고 기본이 아닌 다른 패널을 테스트하고 싶다면, Filament에 어떤 패널을 테스트할 것인지 알려주어야 합니다. 이는 테스트 케이스의 `setUp()` 메서드에서 할 수도 있고, 특정 테스트의 시작 부분에서 할 수도 있습니다. Filament는 일반적으로 요청을 통해 패널에 접근할 때 미들웨어에서 이 작업을 수행하지만, Livewire 컴포넌트 테스트처럼 테스트에서 요청을 보내지 않는 경우에는 현재 패널을 수동으로 설정해야 합니다:
 
 ```php
 use Filament\Facades\Filament;
 
 Filament::setCurrentPanel(
-    Filament::getPanel('app'), // Where `app` is the ID of the panel you want to test.
+    Filament::getPanel('app'), // 여기서 `app`은 테스트하려는 패널의 ID입니다.
 );
 ```
 
-## Resources
+## 리소스 {#resources}
 
-### Pages
+### 페이지 {#pages}
 
-#### List
+#### 목록 {#list}
 
-##### Routing & render
+##### 라우팅 & 렌더링 {#routing-render}
 
-To ensure that the List page for the `PostResource` is able to render successfully, generate a page URL, perform a request to this URL and ensure that it is successful:
+`PostResource`의 목록(List) 페이지가 정상적으로 렌더링되는지 확인하려면, 페이지 URL을 생성하고 해당 URL로 요청을 수행한 후 성공적으로 응답하는지 확인하세요:
 
 ```php
 it('can render page', function () {
@@ -49,11 +49,11 @@ it('can render page', function () {
 });
 ```
 
-##### Table
+##### 테이블 {#table}
 
-Filament includes a selection of helpers for testing tables. A full guide to testing tables can be found [in the Table Builder documentation](../tables/testing).
+Filament에는 테이블 테스트를 위한 다양한 헬퍼가 포함되어 있습니다. 테이블 테스트에 대한 전체 가이드는 [Table Builder 문서](../tables/testing)에서 확인할 수 있습니다.
 
-To use a table [testing helper](../tables/testing), make assertions on the resource's List page class, which holds the table:
+테이블 [테스트 헬퍼](../tables/testing)를 사용하려면, 테이블을 포함하고 있는 리소스의 List 페이지 클래스에서 어설션을 작성하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -66,11 +66,11 @@ it('can list posts', function () {
 });
 ```
 
-#### Create
+#### 생성 {#create}
 
-##### Routing & render
+##### 라우팅 & 렌더링 {#routing-render-1}
 
-To ensure that the Create page for the `PostResource` is able to render successfully, generate a page URL, perform a request to this URL and ensure that it is successful:
+`PostResource`의 Create 페이지가 정상적으로 렌더링되는지 확인하려면, 페이지 URL을 생성하고 해당 URL로 요청을 수행한 후 성공적으로 응답하는지 확인하세요:
 
 ```php
 it('can render page', function () {
@@ -78,9 +78,9 @@ it('can render page', function () {
 });
 ```
 
-##### Creating
+##### 생성하기 {#creating}
 
-You may check that data is correctly saved into the database by calling `fillForm()` with your form data, and then asserting that the database contains a matching record:
+`fillForm()`에 폼 데이터를 전달한 후, 데이터베이스에 일치하는 레코드가 저장되었는지 확인하여 데이터를 올바르게 저장했는지 검증할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -107,9 +107,9 @@ it('can create', function () {
 });
 ```
 
-##### Validation
+##### 유효성 검사 {#validation}
 
-Use `assertHasFormErrors()` to ensure that data is properly validated in a form:
+폼에서 데이터가 올바르게 유효성 검사되는지 확인하려면 `assertHasFormErrors()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -124,11 +124,11 @@ it('can validate input', function () {
 });
 ```
 
-#### Edit
+#### 편집 {#edit}
 
-##### Routing & render
+##### 라우팅 & 렌더링 {#routing-render-2}
 
-To ensure that the Edit page for the `PostResource` is able to render successfully, generate a page URL, perform a request to this URL and ensure that it is successful:
+`PostResource`의 Edit 페이지가 정상적으로 렌더링되는지 확인하려면, 페이지 URL을 생성하고 해당 URL로 요청을 수행한 후 성공적으로 응답하는지 확인하세요:
 
 ```php
 it('can render page', function () {
@@ -138,9 +138,9 @@ it('can render page', function () {
 });
 ```
 
-##### Filling existing data
+##### 기존 데이터 채우기 {#filling-existing-data}
 
-To check that the form is filled with the correct data from the database, you may `assertFormSet()` that the data in the form matches that of the record:
+폼이 데이터베이스에서 올바른 데이터로 채워졌는지 확인하려면, 폼의 데이터가 레코드와 일치하는지 `assertFormSet()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -160,9 +160,9 @@ it('can retrieve data', function () {
 });
 ```
 
-##### Saving
+##### 저장하기 {#saving}
 
-You may check that data is correctly saved into the database by calling `fillForm()` with your form data, and then asserting that the database contains a matching record:
+`fillForm()`에 폼 데이터를 전달한 후, 데이터베이스에 일치하는 레코드가 저장되었는지 확인할 수 있습니다. 다음과 같이 작성합니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -191,9 +191,9 @@ it('can save', function () {
 });
 ```
 
-##### Validation
+##### 유효성 검사 {#validation-1}
 
-Use `assertHasFormErrors()` to ensure that data is properly validated in a form:
+폼에서 데이터가 올바르게 유효성 검사되는지 확인하려면 `assertHasFormErrors()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -212,9 +212,9 @@ it('can validate input', function () {
 });
 ```
 
-##### Deleting
+##### 삭제하기 {#deleting}
 
-You can test the `DeleteAction` using `callAction()`:
+`callAction()`을 사용하여 `DeleteAction`을 테스트할 수 있습니다:
 
 ```php
 use Filament\Actions\DeleteAction;
@@ -232,7 +232,7 @@ it('can delete', function () {
 });
 ```
 
-You can ensure that a particular user is not able to see a `DeleteAction` using `assertActionHidden()`:
+특정 사용자가 `DeleteAction`을 볼 수 없도록 하려면 `assertActionHidden()`을 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\DeleteAction;
@@ -248,11 +248,11 @@ it('can not delete', function () {
 });
 ```
 
-#### View
+#### 뷰 {#view}
 
-##### Routing & render
+##### 라우팅 & 렌더링 {#routing-render-3}
 
-To ensure that the View page for the `PostResource` is able to render successfully, generate a page URL, perform a request to this URL and ensure that it is successful:
+`PostResource`의 View 페이지가 정상적으로 렌더링되는지 확인하려면, 페이지 URL을 생성하고 해당 URL로 요청을 수행한 뒤 성공적으로 응답되는지 확인하세요:
 
 ```php
 it('can render page', function () {
@@ -262,9 +262,9 @@ it('can render page', function () {
 });
 ```
 
-##### Filling existing data
+##### 기존 데이터 채우기 {#filling-existing-data-1}
 
-To check that the form is filled with the correct data from the database, you may `assertFormSet()` that the data in the form matches that of the record:
+폼이 데이터베이스의 올바른 데이터로 채워졌는지 확인하려면, 폼의 데이터가 레코드와 일치하는지 `assertFormSet()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -284,11 +284,11 @@ it('can retrieve data', function () {
 });
 ```
 
-### Relation managers
+### 관계 관리자 {#relation-managers}
 
-##### Render
+##### 렌더링 {#render}
 
-To ensure that a relation manager is able to render successfully, mount the Livewire component:
+관계 매니저가 성공적으로 렌더링될 수 있도록 Livewire 컴포넌트를 마운트하세요:
 
 ```php
 use App\Filament\Resources\CategoryResource\Pages\EditCategory;
@@ -307,11 +307,11 @@ it('can render relation manager', function () {
 });
 ```
 
-##### Table
+##### 테이블 {#table-1}
 
-Filament includes a selection of helpers for testing tables. A full guide to testing tables can be found [in the Table Builder documentation](../tables/testing).
+Filament에는 테이블 테스트를 위한 다양한 헬퍼가 포함되어 있습니다. 테이블 테스트에 대한 전체 가이드는 [Table Builder 문서](../tables/testing)에서 확인할 수 있습니다.
 
-To use a table [testing helper](../tables/testing), make assertions on the relation manager class, which holds the table:
+테이블 [테스트 헬퍼](../tables/testing)를 사용하려면, 테이블을 보유한 릴레이션 매니저 클래스에서 어설션을 수행하세요:
 
 ```php
 use App\Filament\Resources\CategoryResource\Pages\EditCategory;

@@ -1,26 +1,26 @@
 ---
-title: Build a standalone plugin
+title: 독립형 플러그인 만들기
 ---
+# [핵심개념.플러그인] 독립형 플러그인 만들기
+## 서문 {#preface}
 
-## Preface
+계속 진행하기 전에 [패널 플러그인 개발](/filament/3.x/panels/plugins/)과 [시작 가이드](/filament/3.x/support/plugins/getting-started)를 읽어보시기 바랍니다.
 
-Please read the docs on [panel plugin development](/docs/3.x/panels/plugins/) and the [getting started guide](/docs/3.x/support/plugins/getting-started) before continuing.
+## 개요 {#overview}
 
-## Overview
+이 안내서에서는 폼에서 사용할 수 있는 새로운 폼 컴포넌트를 추가하는 간단한 플러그인을 만들어보겠습니다. 이는 해당 컴포넌트가 사용자 패널에서도 사용 가능하다는 것을 의미합니다.
 
-In this walkthrough, we'll build a simple plugin that adds a new form component that can be used in forms. This also means it will be available to users in their panels.
+이 플러그인의 최종 코드는 [https://github.com/awcodes/headings](https://github.com/awcodes/headings)에서 확인할 수 있습니다.
 
-You can find the final code for this plugin at [https://github.com/awcodes/headings](https://github.com/awcodes/headings).
+## 1단계: 플러그인 생성하기 {#step-1-create-the-plugin}
 
-## Step 1: Create the plugin
+먼저, [시작 가이드](/filament/3.x/support/plugins/getting-started#creating-a-plugin)에 설명된 단계에 따라 플러그인을 생성하겠습니다.
 
-First, we'll create the plugin using the steps outlined in the [getting started guide](/docs/3.x/support/plugins/getting-started#creating-a-plugin).
+## 2단계: 정리하기 {#step-2-clean-up}
 
-## Step 2: Clean up
+다음으로, 필요하지 않은 보일러플레이트 코드를 제거하여 플러그인을 정리하겠습니다. 양이 많아 보일 수 있지만, 이 플러그인은 단순하기 때문에 많은 보일러플레이트 코드를 제거할 수 있습니다.
 
-Next, we'll clean up the plugin to remove the boilerplate code we don't need. This will seem like a lot, but since this is a simple plugin, we can remove a lot of the boilerplate code.
-
-Remove the following directories and files:
+다음 디렉터리와 파일을 삭제하세요:
 1. `bin`
 1. `config`
 1. `database`
@@ -29,18 +29,18 @@ Remove the following directories and files:
 1. `stubs`
 1. `tailwind.config.js`
 
-Now we can clean up our `composer.json` file to remove unneeded options.
+이제 `composer.json` 파일에서 불필요한 옵션을 제거해 정리할 수 있습니다.
 
 ```json
 "autoload": {
     "psr-4": {
-        // We can remove the database factories
+        // 데이터베이스 팩토리를 제거할 수 있습니다
         "Awcodes\\Headings\\Database\\Factories\\": "database/factories/"
     }
 },
 "extra": {
     "laravel": {
-        // We can remove the facade
+        // 파사드를 제거할 수 있습니다
         "aliases": {
             "Headings": "Awcodes\\Headings\\Facades\\ClockWidget"
         }
@@ -48,7 +48,7 @@ Now we can clean up our `composer.json` file to remove unneeded options.
 },
 ```
 
-Normally, Filament v3 recommends that users style their plugins with a custom filament theme, but for the sake of example let's provide our own stylesheet that can be loaded asynchronously using the new `x-load` features in Filament v3. So, let's update our `package.json` file to include cssnano, postcss, postcss-cli and postcss-nesting to build our stylesheet.
+일반적으로 Filament v3에서는 사용자가 커스텀 필라멘트 테마로 플러그인 스타일을 지정하는 것을 권장하지만, 예시를 위해 Filament v3의 새로운 `x-load` 기능을 사용해 비동기로 로드할 수 있는 자체 스타일시트를 제공하겠습니다. 따라서, 스타일시트를 빌드하기 위해 `package.json` 파일에 cssnano, postcss, postcss-cli, postcss-nesting을 추가합시다.
 
 ```json
 {
@@ -65,13 +65,13 @@ Normally, Filament v3 recommends that users style their plugins with a custom fi
 }
 ```
 
-Then we need to install our dependencies.
+그런 다음, 의존성을 설치해야 합니다.
 
 ```bash
 npm install
 ```
 
-We will also need to update our `postcss.config.js` file to configure postcss.
+또한, postcss를 설정하기 위해 `postcss.config.js` 파일을 업데이트해야 합니다.
 
 ```js
 module.exports = {
@@ -84,15 +84,15 @@ module.exports = {
 };
 ```
 
-You may also remove the testing directories and files, but we'll leave them in for now, although we won't be using them for this example, and we highly recommend that you write tests for your plugins.
+테스트 디렉터리와 파일도 제거할 수 있지만, 이번 예시에서는 사용하지 않을 예정이므로 남겨두겠습니다. 하지만 플러그인에 대한 테스트를 작성하는 것을 강력히 권장합니다.
 
-## Step 3: Setting up the provider
+## 3단계: 프로바이더 설정하기 {#step-3-setting-up-the-provider}
 
-Now that we have our plugin cleaned up, we can start adding our code. The boilerplate in the `src/HeadingsServiceProvider.php` file has a lot going on so, let's delete everything and start from scratch.
+이제 플러그인을 정리했으니, 코드를 추가할 수 있습니다. `src/HeadingsServiceProvider.php` 파일의 보일러플레이트에는 많은 내용이 들어 있으므로, 모든 내용을 삭제하고 처음부터 시작하겠습니다.
 
-We need to be able to register our stylesheet with the Filament Asset Manager so that we can load it on demand in our blade view. To do this, we'll need to add the following to the `packageBooted` method in our service provider.
+스타일시트를 Filament Asset Manager에 등록해서, 블레이드 뷰에서 필요할 때 불러올 수 있도록 해야 합니다. 이를 위해 서비스 프로바이더의 `packageBooted` 메서드에 다음 코드를 추가해야 합니다.
 
-***Note the `loadedOnRequest()` method. This is important, because it tells Filament to only load the stylesheet when it's needed.***
+***`loadedOnRequest()` 메서드에 주목하세요. 이 메서드는 Filament에게 스타일시트가 필요할 때만 로드하도록 지시하므로 중요합니다.***
 
 ```php
 namespace Awcodes\Headings;
@@ -121,9 +121,9 @@ class HeadingsServiceProvider extends PackageServiceProvider
 }
 ```
 
-## Step 4: Creating our component
+## 4단계: 컴포넌트 생성하기 {#step-4-creating-our-component}
 
-Next, we'll need to create our component. Create a new file at `src/Heading.php` and add the following code.
+다음으로, 컴포넌트를 생성해야 합니다. `src/Heading.php` 파일을 새로 만들고 아래의 코드를 추가하세요.
 
 ```php
 namespace Awcodes\Headings;
@@ -191,11 +191,11 @@ class Heading extends Component
 }
 ```
 
-## Step 5: Rendering our component
+## 5단계: 컴포넌트 렌더링하기 {#step-5-rendering-our-component}
 
-Next, we'll need to create the view for our component. Create a new file at `resources/views/heading.blade.php` and add the following code.
+다음으로, 컴포넌트의 뷰를 만들어야 합니다. `resources/views/heading.blade.php` 파일을 새로 생성하고 아래 코드를 추가하세요.
 
-We are using x-load to asynchronously load stylesheet, so it's only loaded when necessary. You can learn more about this in the [Core Concepts](/docs/3.x/support/assets#lazy-loading-css) section of the docs.
+스타일시트를 비동기적으로 로드하기 위해 x-load를 사용하고 있습니다. 이렇게 하면 필요할 때만 스타일시트가 로드됩니다. 이에 대한 자세한 내용은 문서의 [핵심 개념](/filament/3.x/support/assets#lazy-loading-css) 섹션에서 확인할 수 있습니다.
 
 ```blade
 @php
@@ -224,9 +224,9 @@ We are using x-load to asynchronously load stylesheet, so it's only loaded when 
 </{{ $level }}>
 ```
 
-## Step 6: Adding some styles
+## 6단계: 스타일 추가하기 {#step-6-adding-some-styles}
 
-Next, let's provide some custom styling for our field. We'll add the following to `resources/css/index.css`. And run `npm run build` to compile our css.
+다음으로, 필드에 맞춤 스타일을 추가해보겠습니다. `resources/css/index.css` 파일에 아래 내용을 추가하세요. 그리고 css를 컴파일하기 위해 `npm run build`를 실행합니다.
 
 ```css
 .headings-component {
@@ -259,15 +259,15 @@ Next, let's provide some custom styling for our field. We'll add the following t
 }
 ```
 
-Then we need to build our stylesheet.
+이제 스타일시트를 빌드해야 합니다.
 
 ```bash
 npm run build
 ```
 
-## Step 7: Update your README
+## 7단계: README 업데이트하기 {#step-7-update-your-readme}
 
-You'll want to update your `README.md` file to include instructions on how to install your plugin and any other information you want to share with users, Like how to use it in their projects. For example:
+`README.md` 파일을 업데이트하여 플러그인 설치 방법과 사용자에게 공유하고 싶은 기타 정보(예: 프로젝트에서 사용하는 방법 등)를 포함해야 합니다. 예를 들어:
 
 ```php
 use Awcodes\Headings\Heading;
@@ -277,4 +277,4 @@ Heading::make(2)
     ->color(Color::Lime),
 ```
 
-And, that's it, our users can now install our plugin and use it in their projects.
+이제 사용자들은 플러그인을 설치하고 자신의 프로젝트에서 사용할 수 있습니다.

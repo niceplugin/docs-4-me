@@ -1,29 +1,29 @@
 ---
-title: Installation
+title: 설치
 ---
+# [알림] 설치
+**Notifications 패키지는 [패널 빌더](/filament/3.x/panels/getting-started)에 미리 설치되어 있습니다.** 이 가이드는 Notifications 패키지를 커스텀 TALL Stack 애플리케이션(Tailwind, Alpine, Livewire, Laravel)에서 사용하는 방법에 대한 안내입니다.
 
-**The Notifications package is pre-installed with the [Panel Builder](/docs/panels).** This guide is for using the Notifications package in a custom TALL Stack application (Tailwind, Alpine, Livewire, Laravel).
+## 요구 사항 {#requirements}
 
-## Requirements
-
-Filament requires the following to run:
+Filament을 실행하려면 다음이 필요합니다:
 
 - PHP 8.1+
 - Laravel v10.0+
 - Livewire v3.0+
-- Tailwind v3.0+ [(Using Tailwind v4?)](#installing-tailwind-css)
+- Tailwind v3.0+ [(Tailwind v4를 사용 중이신가요?)](#installing-tailwind-css)
 
-Require the Notifications package using Composer:
+Composer를 사용하여 Notifications 패키지를 설치하세요:
 
 ```bash
 composer require filament/notifications:"^3.3" -W
 ```
 
-## New Laravel projects
+## 새로운 Laravel 프로젝트 {#new-laravel-projects}
 
-To quickly get started with Filament in a new Laravel project, run the following commands to install [Livewire](https://livewire.laravel.com), [Alpine.js](https://alpinejs.dev), and [Tailwind CSS](https://tailwindcss.com):
+새로운 Laravel 프로젝트에서 Filament를 빠르게 시작하려면, 다음 명령어를 실행하여 [Livewire](https://livewire.laravel.com), [Alpine.js](https://alpinejs.dev), 그리고 [Tailwind CSS](https://tailwindcss.com)를 설치하세요:
 
-> Since these commands will overwrite existing files in your application, only run this in a new Laravel project!
+> 이 명령어들은 애플리케이션의 기존 파일을 덮어쓸 수 있으므로, 반드시 새로운 Laravel 프로젝트에서만 실행하세요!
 
 ```bash
 php artisan filament:install --scaffold --notifications
@@ -33,25 +33,25 @@ npm install
 npm run dev
 ```
 
-## Existing Laravel projects
+## 기존 Laravel 프로젝트 {#existing-laravel-projects}
 
-Run the following command to install the Notifications package assets:
+다음 명령어를 실행하여 Notifications 패키지 에셋을 설치하세요:
 
 ```bash
 php artisan filament:install --notifications
 ```
 
-### Installing Tailwind CSS
+### Tailwind CSS 설치하기 {#installing-tailwind-css}
 
-> Filament uses Tailwind CSS v3 for styling. If your project uses Tailwind CSS v4, you will unfortunately need to downgrade it to v3 to use Filament. Filament v3 can't support Tailwind CSS v4 since it introduces breaking changes. Filament v4 will support Tailwind CSS v4.
+> Filament는 스타일링을 위해 Tailwind CSS v3를 사용합니다. 만약 프로젝트에서 Tailwind CSS v4를 사용하고 있다면, Filament를 사용하기 위해 v3로 다운그레이드해야 합니다. Tailwind CSS v4는 여러 가지 호환성 문제를 일으키기 때문에 Filament v3에서는 지원하지 않습니다. Filament v4에서 Tailwind CSS v4를 지원할 예정입니다.
 
-Run the following command to install Tailwind CSS with the Tailwind Forms and Typography plugins:
+다음 명령어를 실행하여 Tailwind CSS와 Tailwind Forms, Typography 플러그인을 설치하세요:
 
 ```bash
 npm install tailwindcss@3 @tailwindcss/forms @tailwindcss/typography postcss postcss-nesting autoprefixer --save-dev
 ```
 
-Create a new `tailwind.config.js` file and add the Filament `preset` *(includes the Filament color scheme and the required Tailwind plugins)*:
+새로운 `tailwind.config.js` 파일을 생성하고 Filament `preset`을 추가하세요 *(Filament 색상 스킴과 필수 Tailwind 플러그인을 포함합니다)*:
 
 ```js
 import preset from './vendor/filament/support/tailwind.config.preset'
@@ -66,9 +66,9 @@ export default {
 }
 ```
 
-### Configuring styles
+### 스타일 구성 {#configuring-styles}
 
-Add Tailwind's CSS layers to your `resources/css/app.css`:
+`resources/css/app.css` 파일에 Tailwind의 CSS 레이어를 추가하세요:
 
 ```css
 @tailwind base;
@@ -77,7 +77,7 @@ Add Tailwind's CSS layers to your `resources/css/app.css`:
 @tailwind variants;
 ```
 
-Create a `postcss.config.js` file in the root of your project and register Tailwind CSS, PostCSS Nesting and Autoprefixer as plugins:
+프로젝트 루트에 `postcss.config.js` 파일을 생성하고, Tailwind CSS, PostCSS Nesting, Autoprefixer를 플러그인으로 등록하세요:
 
 ```js
 export default {
@@ -89,8 +89,8 @@ export default {
 }
 ```
 
-### Automatically refreshing the browser
-You may also want to update your `vite.config.js` file to refresh the page automatically when Livewire components are updated:
+### 브라우저 자동 새로고침 {#automatically-refreshing-the-browser}
+Livewire 컴포넌트가 업데이트될 때 페이지가 자동으로 새로고침되도록 `vite.config.js` 파일을 업데이트할 수도 있습니다:
 
 ```js
 import { defineConfig } from 'vite'
@@ -109,13 +109,13 @@ export default defineConfig({
 })
 ```
 
-### Compiling assets
+### 에셋 컴파일하기 {#compiling-assets}
 
-Compile your new CSS and Javascript assets using `npm run dev`.
+`npm run dev`를 사용하여 새로운 CSS 및 자바스크립트 에셋을 컴파일하세요.
 
-### Configuring your layout
+### 레이아웃 구성하기 {#configuring-your-layout}
 
-Create a new `resources/views/components/layouts/app.blade.php` layout file for Livewire components:
+Livewire 컴포넌트를 위한 새로운 `resources/views/components/layouts/app.blade.php` 레이아웃 파일을 생성하세요:
 
 ```blade
 <!DOCTYPE html>
@@ -150,19 +150,19 @@ Create a new `resources/views/components/layouts/app.blade.php` layout file for 
 </html>
 ```
 
-## Publishing configuration
+## 구성 파일 퍼블리싱 {#publishing-configuration}
 
-You can publish the package configuration using the following command (optional):
+다음 명령어를 사용하여 패키지 구성 파일을 퍼블리싱할 수 있습니다(선택 사항):
 
 ```bash
 php artisan vendor:publish --tag=filament-config
 ```
 
-## Upgrading
+## 업그레이드 {#upgrading}
 
-> Upgrading from Filament v2? Please review the [upgrade guide](upgrade-guide).
+> Filament v2에서 업그레이드하시나요? [업그레이드 가이드](upgrade-guide)를 확인해 주세요.
 
-Filament automatically upgrades to the latest non-breaking version when you run `composer update`. After any updates, all Laravel caches need to be cleared, and frontend assets need to be republished. You can do this all at once using the `filament:upgrade` command, which should have been added to your `composer.json` file when you ran `filament:install` the first time:
+Filament는 `composer update`를 실행할 때 자동으로 최신의 비파괴(non-breaking) 버전으로 업그레이드됩니다. 업데이트 후에는 모든 Laravel 캐시를 비워야 하며, 프론트엔드 에셋도 다시 배포해야 합니다. 이 모든 작업은 `filament:upgrade` 명령어로 한 번에 처리할 수 있습니다. 이 명령어는 처음 `filament:install`을 실행할 때 `composer.json` 파일에 추가되어야 합니다:
 
 ```json
 "post-autoload-dump": [
@@ -171,7 +171,7 @@ Filament automatically upgrades to the latest non-breaking version when you run 
 ],
 ```
 
-Please note that `filament:upgrade` does not actually handle the update process, as Composer does that already. If you're upgrading manually without a `post-autoload-dump` hook, you can run the command yourself:
+`filament:upgrade`는 실제로 업데이트 과정을 처리하지 않는다는 점에 유의하세요. Composer가 이미 그 역할을 합니다. 만약 `post-autoload-dump` 후크 없이 수동으로 업그레이드한다면, 아래 명령어를 직접 실행할 수 있습니다:
 
 ```bash
 composer update

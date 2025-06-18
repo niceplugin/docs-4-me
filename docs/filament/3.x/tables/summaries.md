@@ -1,15 +1,15 @@
 ---
-title: Summaries
+title: 요약
 ---
-import AutoScreenshot from "@components/AutoScreenshot.astro"
+# [테이블] 요약
 
-## Overview
+## 개요 {#overview}
 
-You may render a "summary" section below your table content. This is great for displaying the results of calculations such as averages, sums, counts, and ranges of the data in your table.
+테이블 내용 아래에 "요약" 섹션을 렌더링할 수 있습니다. 이는 테이블 데이터의 평균, 합계, 개수, 범위와 같은 계산 결과를 표시하는 데 유용합니다.
 
-By default, there will be a single summary line for the current page of data, and an additional summary line for the totals for all data if multiple pages are available. You may also add summaries for [groups](grouping) of records, see ["Summarising groups of rows"](#summarising-groups-of-rows).
+기본적으로, 현재 페이지의 데이터에 대한 단일 요약 행이 표시되며, 여러 페이지가 있는 경우 모든 데이터의 합계를 위한 추가 요약 행이 표시됩니다. 또한 [레코드 그룹](grouping)에 대한 요약도 추가할 수 있습니다. 자세한 내용은 ["행 그룹 요약하기"](#summarising-groups-of-rows)를 참고하세요.
 
-"Summarizer" objects can be added to any [table column](columns) using the `summarize()` method:
+"요약자(Summarizer)" 객체는 `summarize()` 메서드를 사용하여 [테이블 컬럼](columns)에 추가할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -19,7 +19,7 @@ TextColumn::make('rating')
     ->summarize(Average::make())
 ```
 
-Multiple "summarizers" may be added to the same column:
+여러 개의 "요약자"를 동일한 컬럼에 추가할 수도 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -34,24 +34,24 @@ TextColumn::make('rating')
     ])
 ```
 
-> The first column in a table may not use summarizers. That column is used to render the heading and subheading/s of the summary section.
+> 테이블의 첫 번째 컬럼에는 요약자를 사용할 수 없습니다. 해당 컬럼은 요약 섹션의 제목 및 부제목을 렌더링하는 데 사용됩니다.
 
-<AutoScreenshot name="tables/summaries" alt="Table with summaries" version="3.x" />
+<AutoScreenshot name="tables/summaries" alt="요약이 포함된 테이블" version="3.x" />
 
-## Available summarizers
+## 사용 가능한 요약 도구 {#available-summarizers}
 
-Filament ships with four types of summarizer:
+Filament에는 네 가지 유형의 요약 도구가 기본 제공됩니다:
 
-- [Average](#average)
-- [Count](#count)
-- [Range](#range)
-- [Sum](#sum)
+- [평균](#average)
+- [개수](#count)
+- [범위](#range)
+- [합계](#sum)
 
-You may also [create your own custom summarizers](#custom-summaries) to display data in whatever way you wish.
+또한 [사용자 지정 요약 도구를 직접 생성](#custom-summaries)하여 원하는 방식으로 데이터를 표시할 수도 있습니다.
 
-## Average
+## 평균 {#average}
 
-Average can be used to calculate the average of all values in the dataset:
+평균은 데이터셋의 모든 값의 평균을 계산하는 데 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -61,11 +61,11 @@ TextColumn::make('rating')
     ->summarize(Average::make())
 ```
 
-In this example, all ratings in the table will be added together and divided by the number of ratings.
+이 예시에서는 테이블의 모든 평점이 합산된 후 평점의 개수로 나누어집니다.
 
-## Count
+## Count {#count}
 
-Count can be used to find the total number of values in the dataset. Unless you just want to calculate the number of rows, you will probably want to [scope the dataset](#scoping-the-dataset) as well:
+Count는 데이터셋의 값의 총 개수를 찾는 데 사용할 수 있습니다. 단순히 행의 개수만 계산하려는 것이 아니라면, [데이터셋에 범위를 지정](#scoping-the-dataset)하는 것이 좋습니다.
 
 ```php
 use Filament\Tables\Columns\IconColumn;
@@ -79,11 +79,11 @@ IconColumn::make('is_published')
     ),
 ```
 
-In this example, the table will calculate how many posts are published.
+이 예시에서는 테이블이 게시된 게시물의 개수를 계산합니다.
 
-### Counting the occurrence of icons
+### 아이콘의 발생 횟수 세기 {#counting-the-occurrence-of-icons}
 
-Using a count on an [icon column](columns/icon) allows you to use the `icons()` method, which gives the user a visual representation of how many of each icon are in the table:
+[아이콘 컬럼](columns/icon)에서 count를 사용할 때 `icons()` 메서드를 사용할 수 있습니다. 이 메서드는 테이블에 각 아이콘이 몇 개나 있는지 시각적으로 보여줍니다:
 
 ```php
 use Filament\Tables\Columns\IconColumn;
@@ -95,9 +95,9 @@ IconColumn::make('is_published')
     ->summarize(Count::make()->icons()),
 ```
 
-## Range
+## 범위 {#range}
 
-Range can be used to calculate the minimum and maximum value in the dataset:
+범위는 데이터셋에서 최소값과 최대값을 계산하는 데 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Range;
@@ -107,11 +107,11 @@ TextColumn::make('price')
     ->summarize(Range::make())
 ```
 
-In this example, the minimum and maximum price in the table will be found.
+이 예시에서는 테이블에서 최소 가격과 최대 가격이 계산됩니다.
 
-### Date range
+### 날짜 범위 {#date-range}
 
-You may format the range as dates using the `minimalDateTimeDifference()` method:
+`minimalDateTimeDifference()` 메서드를 사용하여 범위를 날짜로 포맷할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Range;
@@ -122,15 +122,15 @@ TextColumn::make('created_at')
     ->summarize(Range::make()->minimalDateTimeDifference())
 ```
 
-This method will present the minimal difference between the minimum and maximum date. For example:
+이 메서드는 최소값과 최대값 날짜 간의 최소 차이를 표시합니다. 예를 들어:
 
-- If the minimum and maximum dates are different days, only the dates will be displayed.
-- If the minimum and maximum dates are on the same day at different times, both the date and time will be displayed.
-- If the minimum and maximum dates and times are identical, they will only appear once.
+- 최소값과 최대값 날짜가 서로 다른 날이라면, 날짜만 표시됩니다.
+- 최소값과 최대값 날짜가 같은 날이지만 시간이 다르다면, 날짜와 시간이 모두 표시됩니다.
+- 최소값과 최대값 날짜와 시간이 동일하다면, 한 번만 표시됩니다.
 
-### Text range
+### 텍스트 범위 {#text-range}
 
-You may format the range as text using the `minimalTextualDifference()` method:
+`minimalTextualDifference()` 메서드를 사용하여 범위를 텍스트로 포맷할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Range;
@@ -140,15 +140,15 @@ TextColumn::make('sku')
     ->summarize(Range::make()->minimalTextualDifference())
 ```
 
-This method will present the minimal difference between the minimum and maximum. For example:
+이 메서드는 최소값과 최대값 사이의 최소한의 차이만을 표시합니다. 예를 들어:
 
-- If the minimum and maximum start with different letters, only the first letters will be displayed.
-- If the minimum and maximum start with the same letter, more of the text will be rendered until a difference is found.
-- If the minimum and maximum are identical, they will only appear once.
+- 최소값과 최대값이 다른 문자로 시작하면, 첫 글자만 표시됩니다.
+- 최소값과 최대값이 같은 문자로 시작하면, 차이가 발생할 때까지 더 많은 텍스트가 표시됩니다.
+- 최소값과 최대값이 동일하다면, 한 번만 표시됩니다.
 
-### Including null values in the range
+### 범위에 null 값 포함하기 {#including-null-values-in-the-range}
 
-By default, we will exclude null values from the range. If you would like to include them, you may use the `excludeNull(false)` method:
+기본적으로 null 값은 범위에서 제외됩니다. null 값을 포함하려면 `excludeNull(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Range;
@@ -158,9 +158,9 @@ TextColumn::make('sku')
     ->summarize(Range::make()->excludeNull(false))
 ```
 
-## Sum
+## 합계 {#sum}
 
-Sum can be used to calculate the total of all values in the dataset:
+합계는 데이터셋의 모든 값의 총합을 계산하는 데 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Sum;
@@ -170,11 +170,11 @@ TextColumn::make('price')
     ->summarize(Sum::make())
 ```
 
-In this example, all prices in the table will be added together.
+이 예시에서는 테이블의 모든 가격이 합산됩니다.
 
-## Setting a label
+## 레이블 설정하기 {#setting-a-label}
 
-You may set a summarizer's label using the `label()` method:
+`summarizer`의 레이블은 `label()` 메서드를 사용하여 설정할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Sum;
@@ -184,9 +184,9 @@ TextColumn::make('price')
     ->summarize(Sum::make()->label('Total'))
 ```
 
-## Scoping the dataset
+## 데이터셋 범위 지정하기 {#scoping-the-dataset}
 
-You may apply a database query scope to a summarizer's dataset using the `query()` method:
+`summarizer`의 데이터셋에 데이터베이스 쿼리 스코프를 적용하려면 `query()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -199,9 +199,9 @@ TextColumn::make('rating')
     ),
 ```
 
-In this example, now only rows where `is_published` is set to `true` will be used to calculate the average.
+이 예시에서는 이제 `is_published`가 `true`로 설정된 행만 평균을 계산하는 데 사용됩니다.
 
-This feature is especially useful with the [count](#count) summarizer, as it can count how many records in the dataset pass a test:
+이 기능은 [count](#count) summarizer와 함께 사용할 때 특히 유용합니다. 데이터셋에서 테스트를 통과한 레코드가 몇 개인지 셀 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\IconColumn;
@@ -215,13 +215,13 @@ IconColumn::make('is_published')
     ),
 ```
 
-In this example, the table will calculate how many posts are published.
+이 예시에서는 테이블이 게시된 게시글의 개수를 계산합니다.
 
-## Formatting
+## 포매팅 {#formatting}
 
-### Number formatting
+### 숫자 형식 지정 {#number-formatting}
 
-The `numeric()` method allows you to format an entry as a number:
+`numeric()` 메서드를 사용하면 항목을 숫자로 형식화할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -231,7 +231,7 @@ TextColumn::make('rating')
     ->summarize(Average::make()->numeric())
 ```
 
-If you would like to customize the number of decimal places used to format the number with, you can use the `decimalPlaces` argument:
+숫자를 형식화할 때 사용할 소수점 자릿수를 커스터마이즈하고 싶다면, `decimalPlaces` 인자를 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -243,7 +243,7 @@ TextColumn::make('rating')
     ))
 ```
 
-By default, your app's locale will be used to format the number suitably. If you would like to customize the locale used, you can pass it to the `locale` argument:
+기본적으로, 앱의 로케일이 숫자를 적절하게 형식화하는 데 사용됩니다. 사용되는 로케일을 커스터마이즈하고 싶다면, `locale` 인자에 값을 전달할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -255,7 +255,7 @@ TextColumn::make('rating')
     ))
 ```
 
-Alternatively, you can set the default locale used across your app using the `Table::$defaultNumberLocale` method in the `boot()` method of a service provider:
+또는, 서비스 프로바이더의 `boot()` 메서드에서 `Table::$defaultNumberLocale` 메서드를 사용하여 앱 전체에서 사용할 기본 로케일을 설정할 수도 있습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -263,9 +263,9 @@ use Filament\Tables\Table;
 Table::$defaultNumberLocale = 'nl';
 ```
 
-### Currency formatting
+### 통화 형식 지정 {#currency-formatting}
 
-The `money()` method allows you to easily format monetary values, in any currency:
+`money()` 메서드를 사용하면 어떤 통화든지 손쉽게 금액 값을 형식화할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Sum;
@@ -275,7 +275,7 @@ TextColumn::make('price')
     ->summarize(Sum::make()->money('EUR'))
 ```
 
-There is also a `divideBy` argument for `money()` that allows you to divide the original value by a number before formatting it. This could be useful if your database stores the price in cents, for example:
+또한, `money()`에는 `divideBy` 인자가 있어, 형식화 전에 원래 값을 특정 숫자로 나눌 수 있습니다. 예를 들어, 데이터베이스에 가격이 센트 단위로 저장되어 있다면 유용하게 사용할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Sum;
@@ -285,7 +285,7 @@ TextColumn::make('price')
     ->summarize(Sum::make()->money('EUR', divideBy: 100))
 ```
 
-By default, your app's locale will be used to format the money suitably. If you would like to customize the locale used, you can pass it to the `locale` argument:
+기본적으로 앱의 로케일이 금액을 적절하게 형식화하는 데 사용됩니다. 사용되는 로케일을 직접 지정하고 싶다면 `locale` 인자에 값을 전달할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Average;
@@ -295,7 +295,7 @@ TextColumn::make('price')
     ->summarize(Sum::make()->money('EUR', locale: 'nl'))
 ```
 
-Alternatively, you can set the default locale used across your app using the `Table::$defaultNumberLocale` method in the `boot()` method of a service provider:
+또는, 서비스 프로바이더의 `boot()` 메서드에서 `Table::$defaultNumberLocale` 메서드를 사용하여 앱 전체에서 사용할 기본 로케일을 설정할 수도 있습니다:
 
 ```php
 use Filament\Tables\Table;
@@ -303,9 +303,9 @@ use Filament\Tables\Table;
 Table::$defaultNumberLocale = 'nl';
 ```
 
-### Limiting text length
+### 텍스트 길이 제한하기 {#limiting-text-length}
 
-You may `limit()` the length of the summary's value:
+요약 값의 길이를 `limit()` 메서드로 제한할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Range;
@@ -315,9 +315,9 @@ TextColumn::make('sku')
     ->summarize(Range::make()->limit(5))
 ```
 
-### Adding a prefix or suffix
+### 접두사 또는 접미사 추가하기 {#adding-a-prefix-or-suffix}
 
-You may add a prefix or suffix to the summary's value:
+요약 값에 접두사 또는 접미사를 추가할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Sum;
@@ -326,14 +326,14 @@ use Illuminate\Support\HtmlString;
 
 TextColumn::make('volume')
     ->summarize(Sum::make()
-        ->prefix('Total volume: ')
+        ->prefix('총 부피: ')
         ->suffix(new HtmlString(' m&sup3;'))
     )
 ```
 
-## Custom summaries
+## 사용자 지정 요약 {#custom-summaries}
 
-You may create a custom summary by returning the value from the `using()` method:
+`using()` 메서드에서 값을 반환하여 사용자 지정 요약을 생성할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Summarizer;
@@ -346,11 +346,11 @@ TextColumn::make('name')
         ->using(fn (Builder $query): string => $query->min('last_name')))
 ```
 
-The callback has access to the database `$query` builder instance to perform calculations with. It should return the value to display in the table.
+콜백은 데이터베이스 `$query` 빌더 인스턴스에 접근하여 계산을 수행할 수 있습니다. 테이블에 표시할 값을 반환해야 합니다.
 
-## Conditionally hiding the summary
+## 요약 조건부 숨기기 {#conditionally-hiding-the-summary}
 
-To hide a summary, you may pass a boolean, or a function that returns a boolean, to the `hidden()` method. If you need it, you can access the Eloquent query builder instance for that summarizer via the `$query` argument of the function:
+요약을 숨기려면 `hidden()` 메서드에 불리언 값이나 불리언을 반환하는 함수를 전달하면 됩니다. 필요하다면, 해당 요약자의 Eloquent 쿼리 빌더 인스턴스에 함수의 `$query` 인자를 통해 접근할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Summarizer;
@@ -362,7 +362,7 @@ TextColumn::make('sku')
         ->hidden(fn (Builder $query): bool => ! $query->exists()))
 ```
 
-Alternatively, you can use the `visible()` method to achieve the opposite effect:
+또는, 반대 효과를 얻기 위해 `visible()` 메서드를 사용할 수도 있습니다:
 
 ```php
 use Filament\Tables\Columns\Summarizers\Summarizer;
@@ -374,13 +374,13 @@ TextColumn::make('sku')
         ->visible(fn (Builder $query): bool => $query->exists()))
 ```
 
-## Summarising groups of rows
+## 행 그룹 요약하기 {#summarising-groups-of-rows}
 
-You can use summaries with [groups](grouping) to display a summary of the records inside a group. This works automatically if you choose to add a summariser to a column in a grouped table.
+[그룹화](grouping)와 함께 요약 기능을 사용하여 그룹 내 레코드의 요약 정보를 표시할 수 있습니다. 그룹화된 테이블에서 열에 요약자를 추가하면 이 기능이 자동으로 작동합니다.
 
-### Hiding the grouped rows and showing the summary only
+### 그룹화된 행을 숨기고 요약만 표시하기 {#hiding-the-grouped-rows-and-showing-the-summary-only}
 
-You may hide the rows inside groups and just show the summary of each group using the `groupsOnly()` method. This is beneficial in many reporting scenarios.
+`groupsOnly()` 메서드를 사용하면 그룹 내의 행을 숨기고 각 그룹의 요약만 표시할 수 있습니다. 이는 다양한 리포트 시나리오에서 유용합니다.
 
 ```php
 use Filament\Tables\Columns\Summarizers\Sum;
