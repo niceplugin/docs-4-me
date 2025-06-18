@@ -1,4 +1,4 @@
-# Laravel Pulse
+# [패키지] Laravel Pulse
 
 
 

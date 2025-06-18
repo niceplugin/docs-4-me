@@ -1,4 +1,4 @@
-# Laravel Telescope
+# [패키지] Laravel Telescope
 
 
 

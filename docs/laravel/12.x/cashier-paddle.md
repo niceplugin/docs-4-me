@@ -1,4 +1,4 @@
-# Laravel Cashier (Paddle)
+# [패키지] Laravel Cashier (Paddle)
 
 
 

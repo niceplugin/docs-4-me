@@ -1,4 +1,4 @@
-# Laravel Pint
+# [패키지] Laravel Pint
 
 
 

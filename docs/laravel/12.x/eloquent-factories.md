@@ -1,4 +1,4 @@
-# Eloquent: 팩토리
+# [Eloquent] 팩토리
 
 
 

@@ -1,4 +1,4 @@
-# Laravel Sanctum
+# [패키지] Laravel Sanctum
 
 
 

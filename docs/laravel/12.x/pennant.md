@@ -1,4 +1,4 @@
-# Laravel Pennant
+# [패키지] Laravel Pennant
 
 
 

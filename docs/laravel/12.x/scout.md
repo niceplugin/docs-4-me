@@ -1,4 +1,4 @@
-# Laravel Scout
+# [패키지] Laravel Scout
 
 
 

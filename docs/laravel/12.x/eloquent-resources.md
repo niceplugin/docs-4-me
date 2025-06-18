@@ -1,4 +1,4 @@
-# Eloquent: API 리소스
+# [Eloquent] API 리소스
 
 
 

@@ -1,4 +1,4 @@
-# 문자열
+# [고급] 문자열
 
 - [소개](#introduction)
 - [사용 가능한 메서드](#available-methods)
