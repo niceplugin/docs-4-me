@@ -1,10 +1,10 @@
 ---
-title: CreateAction
+title: 생성 액션
 ---
 # [액션.내장된액션] CreateAction
 ## 개요 {#overview}
 
-Filament에는 Eloquent 레코드를 생성할 수 있는 내장된 액션이 포함되어 있습니다. 트리거 버튼을 클릭하면 모달이 열리고 그 안에 폼이 표시됩니다. 사용자가 폼을 작성하면 해당 데이터가 검증되어 데이터베이스에 저장됩니다. 다음과 같이 사용할 수 있습니다:
+Filament에는 Eloquent 레코드를 생성할 수 있는 미리 만들어진 액션이 포함되어 있습니다. 트리거 버튼을 클릭하면 모달이 열리고 그 안에 폼이 표시됩니다. 사용자가 폼을 작성하면 해당 데이터가 검증되어 데이터베이스에 저장됩니다. 다음과 같이 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\CreateAction;
@@ -42,9 +42,9 @@ public function table(Table $table): Table
 }
 ```
 
-## 저장 전에 데이터 커스터마이징하기 {#customizing-data-before-saving}
+## 저장 전 데이터 커스터마이징 {#customizing-data-before-saving}
 
-때때로, 폼 데이터를 데이터베이스에 최종적으로 저장하기 전에 수정하고 싶을 수 있습니다. 이를 위해 `mutateFormDataUsing()` 메서드를 사용할 수 있으며, 이 메서드는 배열 형태의 `$data`에 접근할 수 있고, 수정된 버전을 반환합니다:
+때때로, 데이터가 데이터베이스에 최종적으로 저장되기 전에 폼 데이터를 수정하고 싶을 수 있습니다. 이를 위해 `mutateFormDataUsing()` 메서드를 사용할 수 있으며, 이 메서드는 배열 형태의 `$data`에 접근하여 수정된 버전을 반환합니다:
 
 ```php
 CreateAction::make()
@@ -55,9 +55,9 @@ CreateAction::make()
     })
 ```
 
-## 생성 프로세스 커스터마이징하기 {#customizing-the-creation-process}
+## 생성 프로세스 커스터마이징 {#customizing-the-creation-process}
 
-`using()` 메서드를 사용하여 레코드가 생성되는 방식을 조정할 수 있습니다:
+레코드가 생성되는 방식을 `using()` 메서드로 조정할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -68,18 +68,18 @@ CreateAction::make()
     })
 ```
 
-`$model`은 모델의 클래스 이름이지만, 원한다면 직접 하드코딩한 클래스로 대체할 수도 있습니다.
+`$model`은 모델의 클래스 이름이지만, 원한다면 직접 하드코딩한 클래스로 대체할 수 있습니다.
 
-## 생성 후 리디렉션 {#redirecting-after-creation}
+## 생성 후 리다이렉트 {#redirecting-after-creation}
 
-폼이 제출될 때 `successRedirectUrl()` 메서드를 사용하여 커스텀 리디렉션을 설정할 수 있습니다:
+폼이 제출될 때 커스텀 리다이렉트를 설정하려면 `successRedirectUrl()` 메서드를 사용할 수 있습니다:
 
 ```php
 CreateAction::make()
     ->successRedirectUrl(route('posts.list'))
 ```
 
-생성된 레코드를 사용하여 리디렉션하고 싶다면, `$record` 파라미터를 사용하세요:
+생성된 레코드를 사용하여 리다이렉트하고 싶다면, `$record` 파라미터를 사용하세요:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -92,16 +92,16 @@ CreateAction::make()
 
 ## 저장 알림 커스터마이징 {#customizing-the-save-notification}
 
-레코드가 성공적으로 생성되면, 사용자의 작업이 성공했음을 알리는 알림이 사용자에게 전송됩니다.
+레코드가 성공적으로 생성되면, 사용자에게 해당 작업의 성공을 알리는 알림이 전송됩니다.
 
-이 알림의 제목을 커스터마이징하려면, `successNotificationTitle()` 메서드를 사용하세요:
+이 알림의 제목을 커스터마이징하려면 `successNotificationTitle()` 메서드를 사용하세요:
 
 ```php
 CreateAction::make()
     ->successNotificationTitle('사용자 등록 완료')
 ```
 
-알림 전체를 커스터마이징하려면 `successNotification()` 메서드를 사용하세요:
+전체 알림을 커스터마이징하려면 `successNotification()` 메서드를 사용하세요:
 
 ```php
 use Filament\Notifications\Notification;
@@ -115,7 +115,7 @@ CreateAction::make()
     )
 ```
 
-알림을 완전히 비활성화하려면, `successNotification(null)` 메서드를 사용하세요:
+알림을 완전히 비활성화하려면 `successNotification(null)` 메서드를 사용하세요:
 
 ```php
 CreateAction::make()
@@ -124,9 +124,9 @@ CreateAction::make()
 
 ## 라이프사이클 훅 {#lifecycle-hooks}
 
-훅은 액션의 라이프사이클 내 여러 지점에서 코드를 실행하는 데 사용할 수 있으며, 예를 들어 폼이 저장되기 전에 실행할 수 있습니다.
+훅을 사용하여 액션의 라이프사이클 내 여러 시점에 코드를 실행할 수 있습니다. 예를 들어, 폼이 저장되기 전에 실행할 수 있습니다.
 
-여러 가지 사용 가능한 훅이 있습니다:
+사용 가능한 여러 훅이 있습니다:
 
 ```php
 CreateAction::make()
@@ -150,9 +150,9 @@ CreateAction::make()
     })
 ```
 
-## 생성 프로세스 중단하기 {#halting-the-creation-process}
+## 생성 프로세스 중단 {#halting-the-creation-process}
 
-언제든지 라이프사이클 훅이나 변이 메서드 내부에서 `$action->halt()`를 호출하여 전체 생성 프로세스를 중단할 수 있습니다:
+언제든지 라이프사이클 훅이나 변환 메서드 내부에서 `$action->halt()`를 호출하여 전체 생성 프로세스를 중단할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -185,9 +185,9 @@ CreateAction::make()
 $action->cancel();
 ```
 
-## 위자드 사용하기 {#using-a-wizard}
+## 마법사 사용하기 {#using-a-wizard}
 
-생성 프로세스를 손쉽게 다단계 위자드로 변환할 수 있습니다. `form()` 대신, `steps()` 배열을 정의하고 `Step` 객체들을 전달하세요:
+생성 프로세스를 다단계 마법사로 쉽게 변환할 수 있습니다. `form()` 대신, `steps()` 배열을 정의하고 `Step` 객체를 전달하세요:
 
 ```php
 use Filament\Forms\Components\MarkdownEditor;
@@ -211,7 +211,7 @@ CreateAction::make()
             ])
             ->columns(2),
         Step::make('Description')
-            ->description('추가 정보를 입력하세요')
+            ->description('추가 세부 정보를 입력하세요')
             ->schema([
                 MarkdownEditor::make('description'),
             ]),
@@ -225,9 +225,9 @@ CreateAction::make()
     ])
 ```
 
-이제 새 레코드를 생성하여 위자드가 동작하는 모습을 확인해보세요! 편집(Edit) 기능은 여전히 리소스 클래스 내에 정의된 폼을 사용합니다.
+이제 새 레코드를 생성하여 마법사를 직접 확인해보세요! 편집은 여전히 리소스 클래스 내에 정의된 폼을 사용합니다.
 
-모든 단계를 건너뛸 수 있도록 자유로운 이동을 허용하고 싶다면, `skippableSteps()` 메서드를 사용하세요:
+모든 단계를 건너뛸 수 있도록 자유로운 이동을 허용하려면, `skippableSteps()` 메서드를 사용하세요:
 
 ```php
 CreateAction::make()
@@ -237,9 +237,9 @@ CreateAction::make()
     ->skippableSteps()
 ```
 
-## "다른 항목 생성" 비활성화 {#disabling-create-another}
+## "다시 생성" 비활성화 {#disabling-create-another}
 
-모달에서 "다른 항목 생성" 버튼을 제거하고 싶다면, `createAnother(false)` 메서드를 사용할 수 있습니다:
+모달에서 "다시 생성" 버튼을 제거하고 싶다면, `createAnother(false)` 메서드를 사용할 수 있습니다:
 
 ```php
 CreateAction::make()

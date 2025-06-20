@@ -1,5 +1,5 @@
 ---
-title: 위젯을 Blade 뷰에 추가하기
+title: Blade 뷰에 위젯 추가하기
 ---
 # [위젯] 위젯을 Blade 뷰에 추가하기
 ## 개요 {#overview}

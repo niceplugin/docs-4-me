@@ -1,5 +1,5 @@
 ---
-title: 배지 블레이드 컴포넌트
+title: 배지 Blade 컴포넌트
 ---
 # [핵심개념.Blade컴포넌트] badge
 ## 개요 {#overview}
@@ -14,7 +14,7 @@ title: 배지 블레이드 컴포넌트
 
 ## 배지의 크기 설정하기 {#setting-the-size-of-a-badge}
 
-기본적으로 배지의 크기는 "medium"입니다. `size` 속성을 사용하여 "extra small" 또는 "small"로 설정할 수 있습니다:
+기본적으로 배지의 크기는 "medium"입니다. `size` 속성을 사용하여 "extra small" 또는 "small"로 변경할 수 있습니다:
 
 ```blade
 <x-filament::badge size="xs">
@@ -26,9 +26,9 @@ title: 배지 블레이드 컴포넌트
 </x-filament::badge>
 ```
 
-## 배지 색상 변경하기 {#changing-the-color-of-the-badge}
+## 배지의 색상 변경하기 {#changing-the-color-of-the-badge}
 
-기본적으로 배지의 색상은 "primary"입니다. `color` 속성을 사용하여 `danger`, `gray`, `info`, `success`, `warning` 중 하나로 변경할 수 있습니다:
+기본적으로 배지의 색상은 "primary"입니다. `color` 속성을 사용하여 `danger`, `gray`, `info`, `success` 또는 `warning`으로 변경할 수 있습니다:
 
 ```blade
 <x-filament::badge color="danger">
@@ -54,7 +54,7 @@ title: 배지 블레이드 컴포넌트
 
 ## 배지에 아이콘 추가하기 {#adding-an-icon-to-a-badge}
 
-`icon` 속성을 사용하여 배지에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 추가할 수 있습니다:
+[아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 `icon` 속성을 사용하여 배지에 추가할 수 있습니다:
 
 ```blade
 <x-filament::badge icon="heroicon-m-sparkles">
@@ -62,7 +62,7 @@ title: 배지 블레이드 컴포넌트
 </x-filament::badge>
 ```
 
-또한 `icon-position` 속성을 사용하여 아이콘의 위치를 텍스트 뒤로 변경할 수도 있습니다:
+또한 `icon-position` 속성을 사용하여 아이콘의 위치를 텍스트 뒤로 변경할 수 있습니다:
 
 ```blade
 <x-filament::badge

@@ -2,16 +2,16 @@
 title: 설치
 ---
 # [위젯] 설치
-**Widgets 패키지는 [패널 빌더](/filament/3.x/panels/getting-started)에 미리 설치되어 있습니다.** 이 가이드는 Widgets 패키지를 커스텀 TALL Stack 애플리케이션(Tailwind, Alpine, Livewire, Laravel)에서 사용하는 방법에 대한 안내입니다.
+**Widgets 패키지는 [패널 빌더](/filament/3.x/panels/getting-started)에 미리 설치되어 있습니다.** 이 가이드는 Widgets 패키지를 커스텀 TALL Stack 애플리케이션(Tailwind, Alpine, Livewire, Laravel)에서 사용하는 방법을 안내합니다.
 
 ## 요구 사항 {#requirements}
 
-Filament을 실행하려면 다음이 필요합니다:
+Filament를 실행하려면 다음이 필요합니다:
 
-- PHP 8.1 이상
-- Laravel v10.0 이상
-- Livewire v3.0 이상
-- Tailwind v3.0 이상 [(Tailwind v4 사용 중이신가요?)](#installing-tailwind-css)
+- PHP 8.1+
+- Laravel v10.0+
+- Livewire v3.0+
+- Tailwind v3.0+ [(Tailwind v4를 사용 중이신가요?)](#installing-tailwind-css)
 
 ## 설치 {#installation}
 
@@ -23,9 +23,9 @@ composer require filament/widgets:"^3.3" -W
 
 ## 새로운 Laravel 프로젝트 {#new-laravel-projects}
 
-Filament을 새로운 Laravel 프로젝트에 빠르게 설치하려면, 다음 명령어를 실행하여 [Livewire](https://livewire.laravel.com), [Alpine.js](https://alpinejs.dev), 그리고 [Tailwind CSS](https://tailwindcss.com)를 설치하세요:
+새로운 Laravel 프로젝트에서 Filament를 빠르게 시작하려면, 다음 명령어를 실행하여 [Livewire](https://livewire.laravel.com), [Alpine.js](https://alpinejs.dev), [Tailwind CSS](https://tailwindcss.com)를 설치하세요:
 
-> 이 명령어들은 애플리케이션의 기존 파일을 덮어쓸 수 있으므로, 반드시 새로운 Laravel 프로젝트에서만 실행하세요!
+> 이 명령어들은 애플리케이션의 기존 파일을 덮어쓸 수 있으므로, 새로운 Laravel 프로젝트에서만 실행하세요!
 
 ```bash
 php artisan filament:install --scaffold --widgets
@@ -43,9 +43,9 @@ npm run dev
 php artisan filament:install --widgets
 ```
 
-### Tailwind CSS 설치하기 {#installing-tailwind-css}
+### Tailwind CSS 설치 {#installing-tailwind-css}
 
-> Filament는 스타일링을 위해 Tailwind CSS v3를 사용합니다. 만약 프로젝트에서 Tailwind CSS v4를 사용하고 있다면, Filament를 사용하기 위해 v3로 다운그레이드해야 합니다. Tailwind CSS v4는 여러 가지 변경 사항이 있기 때문에 Filament v3에서는 지원하지 않습니다. Filament v4에서 Tailwind CSS v4를 지원할 예정입니다.
+> Filament는 스타일링을 위해 Tailwind CSS v3를 사용합니다. 프로젝트에서 Tailwind CSS v4를 사용 중이라면, Filament를 사용하려면 v3로 다운그레이드해야 합니다. Tailwind CSS v4는 호환성에 문제가 있으므로 Filament v3에서는 지원하지 않습니다. Filament v4에서 Tailwind CSS v4를 지원할 예정입니다.
 
 다음 명령어를 실행하여 Tailwind CSS와 Tailwind Forms, Typography 플러그인을 설치하세요:
 
@@ -70,7 +70,7 @@ export default {
 
 ### 스타일 구성 {#configuring-styles}
 
-Tailwind의 CSS 레이어를 `resources/css/app.css` 파일에 추가하세요:
+Tailwind의 CSS 레이어를 `resources/css/app.css`에 추가하세요:
 
 ```css
 @tailwind base;
@@ -79,7 +79,7 @@ Tailwind의 CSS 레이어를 `resources/css/app.css` 파일에 추가하세요:
 @tailwind variants;
 ```
 
-프로젝트 루트에 `postcss.config.js` 파일을 생성하고, Tailwind CSS, PostCSS Nesting, Autoprefixer를 플러그인으로 등록하세요:
+프로젝트 루트에 `postcss.config.js` 파일을 생성하고 Tailwind CSS, PostCSS Nesting, Autoprefixer를 플러그인으로 등록하세요:
 
 ```js
 export default {
@@ -91,7 +91,7 @@ export default {
 }
 ```
 
-### 브라우저 자동 새로고침 {#automatically-refreshing-the-browser}
+### 브라우저 자동 새로고침 설정 {#automatically-refreshing-the-browser}
 Livewire 컴포넌트가 업데이트될 때 페이지가 자동으로 새로고침되도록 `vite.config.js` 파일을 업데이트할 수도 있습니다:
 
 ```js
@@ -111,11 +111,11 @@ export default defineConfig({
 })
 ```
 
-### 에셋 컴파일하기 {#compiling-assets}
+### 에셋 컴파일 {#compiling-assets}
 
 `npm run dev`를 사용하여 새로운 CSS 및 Javascript 에셋을 컴파일하세요.
 
-### 레이아웃 구성하기 {#configuring-your-layout}
+### 레이아웃 구성 {#configuring-your-layout}
 
 Livewire 컴포넌트를 위한 새로운 `resources/views/components/layouts/app.blade.php` 레이아웃 파일을 생성하세요:
 
@@ -150,9 +150,9 @@ Livewire 컴포넌트를 위한 새로운 `resources/views/components/layouts/ap
 </html>
 ```
 
-## 구성 파일 퍼블리시하기 {#publishing-configuration}
+## 설정 파일 퍼블리싱 {#publishing-configuration}
 
-다음 명령어를 사용하여 패키지 구성 파일을 퍼블리시할 수 있습니다(선택 사항):
+다음 명령어를 사용하여 패키지 설정 파일을 퍼블리시할 수 있습니다(선택 사항):
 
 ```bash
 php artisan vendor:publish --tag=filament-config
@@ -160,7 +160,7 @@ php artisan vendor:publish --tag=filament-config
 
 ## 업그레이드 {#upgrading}
 
-Filament은 `composer update`를 실행할 때 자동으로 최신의 비파괴(non-breaking) 버전으로 업그레이드됩니다. 업데이트 후에는 모든 Laravel 캐시를 비워야 하며, 프론트엔드 에셋도 다시 배포해야 합니다. 이 모든 작업은 `filament:upgrade` 명령어를 사용해 한 번에 처리할 수 있습니다. 이 명령어는 처음 `filament:install`을 실행할 때 `composer.json` 파일에 추가되어야 합니다:
+Filament는 `composer update`를 실행할 때 자동으로 최신의 비파괴(non-breaking) 버전으로 업그레이드됩니다. 업데이트 후에는 모든 Laravel 캐시를 비우고, 프론트엔드 에셋을 다시 퍼블리시해야 합니다. 이 모든 작업은 `filament:upgrade` 명령어로 한 번에 처리할 수 있으며, 이 명령어는 처음 `filament:install`을 실행할 때 `composer.json` 파일에 추가됩니다:
 
 ```json
 "post-autoload-dump": [
@@ -169,7 +169,7 @@ Filament은 `composer update`를 실행할 때 자동으로 최신의 비파괴(
 ],
 ```
 
-`filament:upgrade` 명령어는 실제로 업데이트 과정을 처리하지 않는다는 점에 유의하세요. Composer가 이미 그 역할을 합니다. 만약 `post-autoload-dump` 훅 없이 수동으로 업그레이드한다면, 아래 명령어를 직접 실행할 수 있습니다:
+`filament:upgrade`는 실제로 업데이트 과정을 처리하지 않으며, Composer가 이미 처리합니다. `post-autoload-dump` 후크 없이 수동으로 업그레이드하는 경우, 직접 명령어를 실행할 수 있습니다:
 
 ```bash
 composer update

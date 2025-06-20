@@ -4,9 +4,9 @@ title: 테스트
 # [인포리스트] 테스트
 ## 개요 {#overview}
 
-이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성됩니다. Pest의 Livewire 플러그인을 테스트에 사용하려면, Pest 문서의 플러그인 설치 안내를 따라주세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만, 이를 PHPUnit에 맞게 쉽게 변환할 수 있습니다.
+이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성됩니다. Pest의 Livewire 플러그인을 테스트에 사용하려면 Pest 문서의 플러그인 설치 안내를 따라 하세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만, PHPUnit에 맞게 쉽게 변환할 수 있습니다.
 
-Infolist Builder는 Livewire 컴포넌트에서 동작하므로, [Livewire 테스트 헬퍼](https://livewire.laravel.com/docs/testing)를 사용할 수 있습니다. 하지만, 인포리스트에서 사용할 수 있는 커스텀 테스트 헬퍼도 제공합니다.
+Infolist Builder는 Livewire 컴포넌트에서 동작하므로, [Livewire 테스트 헬퍼](https://livewire.laravel.com/docs/testing)를 사용할 수 있습니다. 하지만, 인포리스트에서 사용할 수 있는 커스텀 테스트 헬퍼도 제공합니다:
 
 ## 액션 {#actions}
 
@@ -15,7 +15,7 @@ Infolist Builder는 Livewire 컴포넌트에서 동작하므로, [Livewire 테�
 ```php
 use function Pest\Livewire\livewire;
 
-it('can send invoices', function () {
+it('송장 전송이 가능하다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -28,12 +28,12 @@ it('can send invoices', function () {
 });
 ```
 
-액션에 데이터 배열을 전달하려면 `data` 파라미터를 사용하세요:
+액션에 데이터를 배열로 전달하려면 `data` 파라미터를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can send invoices', function () {
+it('송장 전송이 가능하다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -50,12 +50,12 @@ it('can send invoices', function () {
 });
 ```
 
-액션을 즉시 호출하지 않고 데이터만 설정해야 할 경우, `setInfolistActionData()`를 사용할 수 있습니다:
+액션의 데이터를 즉시 호출하지 않고 설정만 하고 싶다면, `setInfolistActionData()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can send invoices', function () {
+it('송장 전송이 가능하다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -86,16 +86,16 @@ it('송장에 이메일 주소가 없으면 전송을 중단한다', function ()
 });
 ```
 
-### 오류 {#errors}
+### 에러 {#errors}
 
-`assertHasNoInfolistActionErrors()`는 액션 폼을 제출할 때 검증 오류가 발생하지 않았는지 확인하는 데 사용됩니다.
+`assertHasNoInfolistActionErrors()`는 액션 폼 제출 시 검증 오류가 발생하지 않았는지 확인하는 데 사용됩니다.
 
 데이터에 검증 오류가 발생했는지 확인하려면, Livewire의 `assertHasErrors()`와 유사하게 `assertHasInfolistActionErrors()`를 사용하세요:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can validate invoice recipient email', function () {
+it('송장 수신자 이메일을 검증할 수 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -108,12 +108,12 @@ it('can validate invoice recipient email', function () {
 });
 ```
 
-액션이 데이터로 미리 채워져 있는지 확인하려면 `assertInfolistActionDataSet()` 메서드를 사용할 수 있습니다:
+액션이 데이터로 미리 채워져 있는지 확인하려면, `assertInfolistActionDataSet()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('can send invoices to the primary contact by default', function () {
+it('기본적으로 주요 연락처로 송장을 전송할 수 있다', function () {
     $invoice = Invoice::factory()->create();
     $recipientEmail = $invoice->company->primaryContact->email;
 
@@ -135,12 +135,12 @@ it('can send invoices to the primary contact by default', function () {
 
 ### 액션 상태 {#action-state}
 
-인포리스트에 액션이 존재하는지 또는 존재하지 않는지 확인하려면 `assertInfolistActionExists()` 또는 `assertInfolistActionDoesNotExist()` 메서드를 사용할 수 있습니다:
+인포리스트에 액션이 존재하는지 또는 존재하지 않는지 확인하려면, `assertInfolistActionExists()` 또는 `assertInfolistActionDoesNotExist()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('송장은 보낼 수 있지만, 다시 보내지는 못한다', function () {
+it('송장은 전송할 수 있지만, 전송 취소는 할 수 없다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -151,12 +151,12 @@ it('송장은 보낼 수 있지만, 다시 보내지는 못한다', function () 
 });
 ```
 
-사용자에게 액션이 숨겨져 있거나 보이는지 확인하려면 `assertInfolistActionHidden()` 또는 `assertInfolistActionVisible()` 메서드를 사용할 수 있습니다:
+사용자에게 액션이 숨겨져 있거나 보이는지 확인하려면, `assertInfolistActionHidden()` 또는 `assertInfolistActionVisible()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('고객만 인쇄할 수 있다', function () {
+it('고객만 출력할 수 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -167,12 +167,12 @@ it('고객만 인쇄할 수 있다', function () {
 });
 ```
 
-사용자에게 액션이 활성화되어 있거나 비활성화되어 있는지 확인하려면 `assertInfolistActionEnabled()` 또는 `assertInfolistActionDisabled()` 메서드를 사용할 수 있습니다:
+사용자에게 액션이 활성화되어 있거나 비활성화되어 있는지 확인하려면, `assertInfolistActionEnabled()` 또는 `assertInfolistActionDisabled()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('보낸 송장에 대해서만 고객을 인쇄할 수 있다', function () {
+it('전송된 송장에 대해서만 고객을 출력할 수 있다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -183,12 +183,12 @@ it('보낸 송장에 대해서만 고객을 인쇄할 수 있다', function () {
 });
 ```
 
-사용자에게 액션이 숨겨져 있는지 확인하려면 `assertInfolistActionHidden()` 메서드를 사용할 수 있습니다:
+액션이 사용자에게 숨겨져 있는지 확인하려면, `assertInfolistActionHidden()` 메서드를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('송장을 보낼 수 없다', function () {
+it('송장을 전송할 수 없다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [
@@ -200,7 +200,7 @@ it('송장을 보낼 수 없다', function () {
 
 ### 버튼 모양 {#button-appearance}
 
-액션에 올바른 라벨이 있는지 확인하려면 `assertInfolistActionHasLabel()`과 `assertInfolistActionDoesNotHaveLabel()`을 사용할 수 있습니다:
+액션에 올바른 라벨이 있는지 확인하려면, `assertInfolistActionHasLabel()`과 `assertInfolistActionDoesNotHaveLabel()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -216,7 +216,7 @@ it('send 액션에 올바른 라벨이 있다', function () {
 });
 ```
 
-액션 버튼이 올바른 아이콘을 표시하는지 확인하려면 `assertInfolistActionHasIcon()` 또는 `assertInfolistActionDoesNotHaveIcon()`을 사용할 수 있습니다:
+액션 버튼이 올바른 아이콘을 표시하는지 확인하려면, `assertInfolistActionHasIcon()` 또는 `assertInfolistActionDoesNotHaveIcon()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -233,7 +233,7 @@ it('활성화 시 send 버튼에 올바른 아이콘이 있다', function () {
 });
 ```
 
-액션 버튼이 올바른 색상을 표시하는지 확인하려면 `assertInfolistActionHasColor()` 또는 `assertInfolistActionDoesNotHaveColor()`를 사용할 수 있습니다:
+액션 버튼이 올바른 색상을 표시하는지 확인하려면, `assertInfolistActionHasColor()` 또는 `assertInfolistActionDoesNotHaveColor()`를 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
@@ -251,12 +251,12 @@ it('액션이 올바른 색상을 표시한다', function () {
 
 ### URL {#url}
 
-액션이 올바른 URL을 가지는지 확인하려면 `assertInfolistActionHasUrl()`, `assertInfolistActionDoesNotHaveUrl()`, `assertInfolistActionShouldOpenUrlInNewTab()`, `assertInfolistActionShouldNotOpenUrlInNewTab()`를 사용할 수 있습니다:
+액션에 올바른 URL이 있는지 확인하려면, `assertInfolistActionHasUrl()`, `assertInfolistActionDoesNotHaveUrl()`, `assertInfolistActionShouldOpenUrlInNewTab()`, `assertInfolistActionShouldNotOpenUrlInNewTab()`을 사용할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;
 
-it('올바른 Filament 사이트로 연결되는지 확인합니다', function () {
+it('올바른 Filament 사이트로 연결된다', function () {
     $invoice = Invoice::factory()->create();
 
     livewire(EditInvoice::class, [

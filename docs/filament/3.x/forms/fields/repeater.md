@@ -28,7 +28,7 @@ Repeater::make('members')
 
 <AutoScreenshot name="forms/fields/repeater/simple" alt="Repeater" version="3.x" />
 
-리피터 데이터를 데이터베이스의 `JSON` 컬럼에 저장하는 것을 권장합니다. 또한, Eloquent를 사용하는 경우 해당 컬럼에 `array` 캐스트가 적용되어 있는지 확인하세요.
+리피터 데이터를 데이터베이스의 `JSON` 컬럼에 저장하는 것을 권장합니다. 또한 Eloquent를 사용하는 경우 해당 컬럼에 `array` 캐스트가 적용되어 있는지 확인하세요.
 
 위 예시에서 볼 수 있듯이, 컴포넌트의 스키마는 `schema()` 메서드 내에서 정의할 수 있습니다:
 
@@ -43,7 +43,7 @@ Repeater::make('members')
     ])
 ```
 
-여러 개의 스키마 블록을 임의의 순서로 반복할 수 있는 리피터를 정의하고 싶다면, [builder](builder)를 사용하세요.
+여러 개의 스키마 블록을 임의의 순서로 반복할 수 있는 리피터를 정의하고 싶다면 [builder](builder)를 사용하세요.
 
 ## 빈 기본 항목 설정하기 {#setting-empty-default-items}
 
@@ -59,15 +59,15 @@ Repeater::make('members')
     ->defaultItems(3)
 ```
 
-이러한 기본 항목들은 폼이 기존 데이터 없이 로드될 때만 생성된다는 점에 유의하세요. [패널 리소스](/filament/3.x/panels/resources/getting-started#resource-forms) 내에서는 생성 페이지(Create Pages)에서만 동작하며, 수정 페이지(Edit Pages)에서는 항상 모델의 데이터로 채워집니다.
+이 기본 항목들은 폼이 기존 데이터 없이 로드될 때만 생성된다는 점에 유의하세요. [패널 리소스](/filament/3.x/panels/resources/getting-started#resource-forms) 내에서는 생성 페이지에서만 동작하며, 수정 페이지에서는 항상 모델의 데이터로 채워집니다.
 
-## 항목 추가 {#adding-items}
+## 항목 추가하기 {#adding-items}
 
-사용자가 새 항목을 추가할 수 있도록 반복자 아래에 액션 버튼이 표시됩니다.
+사용자가 새 항목을 추가할 수 있도록 리피터 아래에 액션 버튼이 표시됩니다.
 
 ## 추가 액션 버튼의 라벨 설정하기 {#setting-the-add-action-buttons-label}
 
-`addActionLabel()` 메서드를 사용하여 반복자 항목을 추가하는 버튼에 표시될 텍스트를 커스터마이즈할 수 있습니다.
+`addActionLabel()` 메서드를 사용하여 리피터 항목을 추가하는 버튼에 표시될 텍스트를 커스터마이즈할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -76,12 +76,12 @@ Repeater::make('members')
     ->schema([
         // ...
     ])
-    ->addActionLabel('멤버 추가')
+    ->addActionLabel('Add member')
 ```
 
-### 추가 액션 버튼 정렬 {#aligning-the-add-action-button}
+### 추가 액션 버튼 정렬하기 {#aligning-the-add-action-button}
 
-기본적으로 추가 액션은 중앙에 정렬됩니다. `addActionAlignment()` 메서드를 사용하여 `Alignment::Start` 또는 `Alignment::End` 옵션을 전달하여 이를 조정할 수 있습니다:
+기본적으로 추가 액션은 중앙에 정렬되어 있습니다. `addActionAlignment()` 메서드에 `Alignment::Start` 또는 `Alignment::End` 옵션을 전달하여 이를 조정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -94,9 +94,9 @@ Repeater::make('members')
     ->addActionAlignment(Alignment::Start)
 ```
 
-### 사용자가 항목을 추가하지 못하도록 방지하기 {#preventing-the-user-from-adding-items}
+### 사용자가 항목을 추가하지 못하게 막기 {#preventing-the-user-from-adding-items}
 
-`addable(false)` 메서드를 사용하여 사용자가 반복자에 항목을 추가하지 못하도록 할 수 있습니다:
+`addable(false)` 메서드를 사용하여 사용자가 리피터에 항목을 추가하지 못하도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -108,13 +108,13 @@ Repeater::make('members')
     ->addable(false)
 ```
 
-## 항목 삭제 {#deleting-items}
+## 항목 삭제하기 {#deleting-items}
 
-각 항목에는 사용자가 해당 항목을 삭제할 수 있도록 액션 버튼이 표시됩니다.
+각 항목마다 사용자가 해당 항목을 삭제할 수 있도록 액션 버튼이 표시됩니다.
 
-### 사용자가 항목을 삭제하지 못하도록 방지하기 {#preventing-the-user-from-deleting-items}
+### 사용자가 항목을 삭제하지 못하게 막기 {#preventing-the-user-from-deleting-items}
 
-`deletable(false)` 메서드를 사용하여 사용자가 반복자에서 항목을 삭제하지 못하도록 할 수 있습니다:
+`deletable(false)` 메서드를 사용하여 사용자가 리피터에서 항목을 삭제하지 못하도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -126,13 +126,13 @@ Repeater::make('members')
     ->deletable(false)
 ```
 
-## 항목 순서 변경 {#reordering-items}
+## 항목 순서 변경하기 {#reordering-items}
 
-각 항목에는 사용자가 목록에서 드래그 앤 드롭하여 순서를 변경할 수 있도록 버튼이 표시됩니다.
+각 항목마다 사용자가 드래그 앤 드롭으로 목록 내에서 순서를 변경할 수 있도록 버튼이 표시됩니다.
 
-### 사용자가 항목을 재정렬하지 못하도록 방지하기 {#preventing-the-user-from-reordering-items}
+### 사용자가 항목 순서를 변경하지 못하게 막기 {#preventing-the-user-from-reordering-items}
 
-`reorderable(false)` 메서드를 사용하여 반복기에서 사용자가 항목을 재정렬하지 못하도록 할 수 있습니다:
+`reorderable(false)` 메서드를 사용하여 사용자가 리피터에서 항목의 순서를 변경하지 못하도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -146,7 +146,7 @@ Repeater::make('members')
 
 ### 버튼으로 항목 순서 변경하기 {#reordering-items-with-buttons}
 
-`reorderableWithButtons()` 메서드를 사용하여 항목을 위아래로 이동시키는 버튼을 통해 순서를 변경할 수 있습니다:
+`reorderableWithButtons()` 메서드를 사용하여 항목을 위아래로 이동시키는 버튼으로 순서를 변경할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -158,11 +158,11 @@ Repeater::make('members')
     ->reorderableWithButtons()
 ```
 
-<AutoScreenshot name="forms/fields/repeater/reorderable-with-buttons" alt="버튼으로 순서를 변경할 수 있는 Repeater" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/reorderable-with-buttons" alt="Repeater that is reorderable with buttons" version="3.x" />
 
-### 드래그 앤 드롭으로 재정렬 방지하기 {#preventing-reordering-with-drag-and-drop}
+### 드래그 앤 드롭으로 순서 변경 막기 {#preventing-reordering-with-drag-and-drop}
 
-`reorderableWithDragAndDrop(false)` 메서드를 사용하여 항목이 드래그 앤 드롭으로 정렬되지 않도록 할 수 있습니다:
+`reorderableWithDragAndDrop(false)` 메서드를 사용하여 드래그 앤 드롭으로 항목의 순서를 변경하지 못하도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -200,11 +200,11 @@ Repeater::make('qualifications')
     ->collapsed()
 ```
 
-<AutoScreenshot name="forms/fields/repeater/collapsed" alt="접힌 리피터" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/collapsed" alt="Collapsed repeater" version="3.x" />
 
 ## 항목 복제하기 {#cloning-items}
 
-`cloneable()` 메서드를 사용하여 반복기 항목을 복제할 수 있도록 허용할 수 있습니다:
+`cloneable()` 메서드를 사용하여 리피터 항목을 복제할 수 있도록 허용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -216,13 +216,13 @@ Repeater::make('qualifications')
     ->cloneable()
 ```
 
-<AutoScreenshot name="forms/fields/repeater/cloneable" alt="복제 가능한 반복기" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/cloneable" alt="Cloneable repeater" version="3.x" />
 
 ## Eloquent 관계와 통합하기 {#integrating-with-an-eloquent-relationship}
 
-> Livewire 컴포넌트 내에서 폼을 구축하는 경우, 반드시 [폼의 모델](../adding-a-form-to-a-livewire-component#setting-a-form-model)을 설정했는지 확인하세요. 그렇지 않으면 Filament는 어떤 모델에서 관계를 가져와야 하는지 알 수 없습니다.
+> Livewire 컴포넌트 내에서 폼을 빌드하는 경우, 반드시 [폼의 모델](../adding-a-form-to-a-livewire-component#setting-a-form-model)을 설정해야 합니다. 그렇지 않으면 Filament는 어떤 모델에서 관계를 가져와야 하는지 알 수 없습니다.
 
-`Repeater`의 `relationship()` 메서드를 사용하여 `HasMany` 관계를 설정할 수 있습니다. Filament는 관계에서 항목 데이터를 불러오고, 폼이 제출될 때 다시 관계에 저장합니다. `relationship()`에 커스텀 관계 이름을 전달하지 않으면, Filament는 필드 이름을 관계 이름으로 사용합니다:
+`Repeater`의 `relationship()` 메서드를 사용하여 `HasMany` 관계를 설정할 수 있습니다. Filament는 관계에서 항목 데이터를 불러오고, 폼이 제출될 때 다시 관계에 저장합니다. `relationship()`에 커스텀 관계명을 전달하지 않으면, Filament는 필드명을 관계명으로 사용합니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -234,7 +234,7 @@ Repeater::make('qualifications')
     ])
 ```
 
-`relationship()`과 함께 `disabled()`를 사용할 때는, 반드시 `disabled()`를 `relationship()`보다 먼저 호출해야 합니다. 이렇게 하면 `relationship()` 내부의 `dehydrated()` 호출이 `disabled()`의 호출에 의해 덮어써지지 않게 됩니다:
+`relationship()`과 함께 `disabled()`를 사용할 때는, 반드시 `disabled()`를 `relationship()`보다 먼저 호출해야 합니다. 이렇게 하면 `relationship()` 내부의 `dehydrated()` 호출이 `disabled()`의 호출에 의해 덮어써지지 않습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -249,7 +249,7 @@ Repeater::make('qualifications')
 
 ### 관계에서 항목 순서 변경하기 {#reordering-items-in-a-relationship}
 
-기본적으로 [순서 변경](#reordering-items)은 관계 리피터 항목에서 비활성화되어 있습니다. 이는 관련 모델에 관련 레코드의 순서를 저장할 `sort` 컬럼이 필요하기 때문입니다. 순서 변경을 활성화하려면, 관련 모델에서 순서를 저장할 컬럼명을 `orderColumn()` 메서드에 전달하여 사용할 수 있습니다:
+기본적으로 [순서 변경](#reordering-items) 기능은 관계 리피터 항목에서 비활성화되어 있습니다. 이는 관련 모델에 관련 레코드의 순서를 저장할 `sort` 컬럼이 필요하기 때문입니다. 순서 변경을 활성화하려면, 관련 모델에서 순서를 저장할 컬럼명을 `orderColumn()` 메서드에 전달하면 됩니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -262,7 +262,7 @@ Repeater::make('qualifications')
     ->orderColumn('sort')
 ```
 
-[`spatie/eloquent-sortable`](https://github.com/spatie/eloquent-sortable)과 같이 `order_column`과 같은 정렬 컬럼을 사용하는 경우, 이 값을 `orderColumn()`에 전달할 수 있습니다:
+[`spatie/eloquent-sortable`](https://github.com/spatie/eloquent-sortable)와 같이 `order_column`과 같은 정렬 컬럼을 사용하는 경우, 이를 `orderColumn()`에 전달할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -277,9 +277,9 @@ Repeater::make('qualifications')
 
 ### `BelongsToMany` Eloquent 관계와 통합하기 {#integrating-with-a-belongstomany-eloquent-relationship}
 
-`BelongsToMany` 관계를 repeater와 함께 사용하는 것이 `HasMany` 관계를 사용하는 것만큼 간단하다는 오해가 종종 있습니다. 하지만 실제로는 그렇지 않습니다. `BelongsToMany` 관계는 관계 데이터를 저장하기 위해 피벗 테이블이 필요합니다. repeater는 관련 모델에 데이터를 저장하지, 피벗 테이블에 저장하지 않습니다. 따라서 repeater의 각 항목을 피벗 테이블의 행에 매핑하려면, `BelongsToMany` 관계에서 repeater를 사용하기 위해 피벗 모델과 함께 `HasMany` 관계를 사용해야 합니다.
+`BelongsToMany` 관계를 리피터와 함께 사용하는 것이 `HasMany` 관계와 같이 간단하다고 오해하는 경우가 많습니다. 하지만 실제로는 `BelongsToMany` 관계는 관계 데이터를 저장하기 위해 피벗 테이블이 필요합니다. 리피터는 관련 모델에 데이터를 저장하지, 피벗 테이블에 저장하지 않습니다. 따라서 각 리피터 항목을 피벗 테이블의 행에 매핑하려면, 피벗 모델과 함께 `HasMany` 관계를 사용해야 합니다.
 
-예를 들어, 새로운 `Order` 모델을 생성하는 폼이 있다고 가정해봅시다. 각 주문은 여러 `Product` 모델에 속하고, 각 상품도 여러 주문에 속합니다. 관계 데이터를 저장하기 위해 `order_product` 피벗 테이블이 있습니다. repeater에서 `products` 관계를 사용하는 대신, `Order` 모델에 `orderProducts`라는 새로운 관계를 만들고 이를 repeater와 함께 사용해야 합니다:
+예를 들어, 새로운 `Order` 모델을 생성하는 폼이 있다고 가정해봅시다. 각 주문은 여러 `Product` 모델에 속하고, 각 상품도 여러 주문에 속합니다. 관계 데이터를 저장하기 위해 `order_product` 피벗 테이블이 있습니다. 리피터에 `products` 관계를 사용하는 대신, `Order` 모델에 `orderProducts`라는 새로운 관계를 만들고 이를 리피터와 함께 사용해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -312,9 +312,9 @@ class OrderProduct extends Pivot
 }
 ```
 
-> 피벗 모델에 `id`와 같은 기본 키 컬럼이 있어야 Filament가 repeater 항목의 생성, 수정, 삭제를 추적할 수 있습니다. Filament가 기본 키를 추적할 수 있도록 피벗 모델의 `$incrementing` 속성을 `true`로 설정해야 합니다.
+> 피벗 모델에 `id`와 같은 기본 키 컬럼이 있어야 Filament가 어떤 리피터 항목이 생성, 수정, 삭제되었는지 추적할 수 있습니다. Filament가 기본 키를 추적할 수 있도록 피벗 모델의 `$incrementing` 속성을 `true`로 설정해야 합니다.
 
-이제 repeater에서 `orderProducts` 관계를 사용할 수 있으며, 데이터가 `order_product` 피벗 테이블에 저장됩니다:
+이제 `orderProducts` 관계를 리피터와 함께 사용할 수 있으며, 데이터는 `order_product` 피벗 테이블에 저장됩니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -332,7 +332,7 @@ Repeater::make('orderProducts')
 
 ### 필드에 값을 채우기 전에 관련 항목 데이터 변형하기 {#mutating-related-item-data-before-filling-the-field}
 
-`mutateRelationshipDataBeforeFillUsing()` 메서드를 사용하여 관련 항목의 데이터를 필드에 채우기 전에 변형할 수 있습니다. 이 메서드는 현재 항목의 데이터가 `$data` 변수로 전달되는 클로저를 인수로 받습니다. 수정된 데이터 배열을 반환해야 합니다:
+`mutateRelationshipDataBeforeFillUsing()` 메서드를 사용하여 관련 항목의 데이터를 필드에 채우기 전에 변형할 수 있습니다. 이 메서드는 현재 항목의 데이터를 `$data` 변수로 받는 클로저를 인자로 받습니다. 수정된 데이터 배열을 반환해야 합니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -349,9 +349,9 @@ Repeater::make('qualifications')
     })
 ```
 
-### 관련 항목 데이터 생성 전 변형하기 {#mutating-related-item-data-before-creating}
+### 생성 전에 관련 항목 데이터 변형하기 {#mutating-related-item-data-before-creating}
 
-`mutateRelationshipDataBeforeCreateUsing()` 메서드를 사용하여 데이터베이스에 새 관련 항목이 생성되기 전에 해당 항목의 데이터를 변형할 수 있습니다. 이 메서드는 현재 항목의 데이터가 `$data` 변수로 전달되는 클로저를 인수로 받습니다. 수정된 데이터 배열을 반환하거나, 항목 생성을 방지하려면 `null`을 반환할 수 있습니다:
+`mutateRelationshipDataBeforeCreateUsing()` 메서드를 사용하여 새 관련 항목이 데이터베이스에 생성되기 전에 데이터를 변형할 수 있습니다. 이 메서드는 현재 항목의 데이터를 `$data` 변수로 받는 클로저를 인자로 받습니다. 수정된 데이터 배열을 반환하거나, 항목 생성을 방지하려면 `null`을 반환할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -368,9 +368,9 @@ Repeater::make('qualifications')
     })
 ```
 
-### 관련 항목 데이터 저장 전 변환하기 {#mutating-related-item-data-before-saving}
+### 저장 전에 관련 항목 데이터 변형하기 {#mutating-related-item-data-before-saving}
 
-`mutateRelationshipDataBeforeSaveUsing()` 메서드를 사용하여 데이터베이스에 저장되기 전에 기존 관련 항목의 데이터를 변환할 수 있습니다. 이 메서드는 현재 항목의 데이터가 `$data` 변수로 전달되는 클로저를 인수로 받습니다. 수정된 데이터 배열을 반환하거나, `null`을 반환하여 항목이 저장되지 않도록 할 수 있습니다:
+`mutateRelationshipDataBeforeSaveUsing()` 메서드를 사용하여 기존 관련 항목이 데이터베이스에 저장되기 전에 데이터를 변형할 수 있습니다. 이 메서드는 현재 항목의 데이터를 `$data` 변수로 받는 클로저를 인자로 받습니다. 수정된 데이터 배열을 반환하거나, 항목 저장을 방지하려면 `null`을 반환할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -389,7 +389,7 @@ Repeater::make('qualifications')
 
 ## 그리드 레이아웃 {#grid-layout}
 
-`grid()` 메서드를 사용하여 반복자 항목을 열로 정렬할 수 있습니다:
+`grid()` 메서드를 사용하여 리피터 항목을 여러 열로 정렬할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -401,13 +401,13 @@ Repeater::make('qualifications')
     ->grid(2)
 ```
 
-<AutoScreenshot name="forms/fields/repeater/grid" alt="2열 그리드로 구성된 반복자" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/grid" alt="Repeater with a 2 column grid of items" version="3.x" />
 
-이 메서드는 [그리드](../layout/grid)의 `columns()` 메서드와 동일한 옵션을 허용합니다. 이를 통해 다양한 브레이크포인트에서 그리드 열의 개수를 반응형으로 커스터마이즈할 수 있습니다.
+이 메서드는 [grid](../layout/grid)의 `columns()` 메서드와 동일한 옵션을 받습니다. 이를 통해 다양한 브레이크포인트에서 그리드 열의 개수를 반응형으로 커스터마이즈할 수 있습니다.
 
-## 내용에 따라 반복자 항목에 라벨 추가하기 {#adding-a-label-to-repeater-items-based-on-their-content}
+## 리피터 항목의 내용에 따라 라벨 추가하기 {#adding-a-label-to-repeater-items-based-on-their-content}
 
-`itemLabel()` 메서드를 사용하여 반복자 항목에 라벨을 추가할 수 있습니다. 이 메서드는 현재 항목의 데이터를 `$state` 변수로 받는 클로저를 인자로 받습니다. 항목 라벨로 사용할 문자열을 반환해야 합니다:
+`itemLabel()` 메서드를 사용하여 리피터 항목에 라벨을 추가할 수 있습니다. 이 메서드는 현재 항목의 데이터를 `$state` 변수로 받는 클로저를 인자로 받습니다. 항목 라벨로 사용할 문자열을 반환해야 합니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -431,13 +431,13 @@ Repeater::make('members')
     ->itemLabel(fn (array $state): ?string => $state['name'] ?? null),
 ```
 
-폼을 사용하면서 항목 라벨이 실시간으로 업데이트되는 것을 보고 싶다면 `$state`에서 사용하는 필드는 `live()`로 지정해야 합니다.
+폼을 사용하는 동안 항목 라벨이 실시간으로 업데이트되길 원한다면, `$state`에서 사용하는 필드는 반드시 `live()`이어야 합니다.
 
-<AutoScreenshot name="forms/fields/repeater/labelled" alt="항목 라벨이 있는 반복자" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/labelled" alt="Repeater with item labels" version="3.x" />
 
-## 필드 하나만 있는 간단한 리피터 {#simple-repeaters-with-one-field}
+## 필드가 하나인 단순 리피터 {#simple-repeaters-with-one-field}
 
-`simple()` 메서드를 사용하여 하나의 필드만 있는 리피터를 최소한의 디자인으로 만들 수 있습니다.
+`simple()` 메서드를 사용하여 단일 필드로 구성된, 미니멀한 디자인의 리피터를 만들 수 있습니다
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -451,9 +451,9 @@ Repeater::make('invitations')
     )
 ```
 
-<AutoScreenshot name="forms/fields/repeater/simple-one-field" alt="필드 하나만 있는 간단한 리피터 디자인" version="3.x" />
+<AutoScreenshot name="forms/fields/repeater/simple-one-field" alt="Simple repeater design with only one field" version="3.x" />
 
-데이터를 저장할 때 중첩 배열을 사용하는 대신, 간단한 리피터는 값의 평면 배열(flat array)을 사용합니다. 위 예시의 데이터 구조는 다음과 같이 될 수 있습니다:
+데이터를 중첩 배열로 저장하는 대신, 단순 리피터는 값의 평면 배열을 사용합니다. 위 예시의 데이터 구조는 다음과 같을 수 있습니다:
 
 ```php
 [
@@ -464,15 +464,15 @@ Repeater::make('invitations')
 ],
 ```
 
-## `$get()`을 사용하여 상위 필드 값에 접근하기 {#using-get-to-access-parent-field-values}
+## `$get()`을 사용하여 상위 필드 값 접근하기 {#using-get-to-access-parent-field-values}
 
-모든 폼 컴포넌트는 [다른 필드의 값을 `$get()` 및 `$set()`](../advanced)으로 접근할 수 있습니다. 그러나 이 기능을 리피터의 스키마 내부에서 사용할 때는 예상치 못한 동작이 발생할 수 있습니다.
+모든 폼 컴포넌트는 [다른 필드의 값을 `$get()` 및 `$set()`](../advanced)으로 접근할 수 있습니다. 하지만 리피터의 스키마 내부에서 이를 사용할 때 예상치 못한 동작이 발생할 수 있습니다.
 
-이는 `$get()`과 `$set()`이 기본적으로 현재 리피터 아이템에 범위가 한정되기 때문입니다. 즉, 현재 폼 컴포넌트가 속한 리피터 아이템이 무엇인지 몰라도 해당 리피터 아이템 내의 다른 필드와 쉽게 상호작용할 수 있습니다.
+이는 `$get()`과 `$set()`이 기본적으로 현재 리피터 항목에 스코프되기 때문입니다. 즉, 현재 폼 컴포넌트가 속한 리피터 항목이 무엇인지 몰라도 해당 리피터 항목 내의 다른 필드와 쉽게 상호작용할 수 있습니다.
 
 이로 인해 리피터 외부의 필드와 상호작용할 수 없을 때 혼란스러울 수 있습니다. 이 문제를 해결하기 위해 `../` 문법을 사용합니다 - `$get('../../parent_field_name')`.
 
-예를 들어, 폼의 데이터 구조가 다음과 같다고 가정해봅시다:
+폼의 데이터 구조가 다음과 같다고 가정해봅시다:
 
 ```php
 [
@@ -486,21 +486,21 @@ Repeater::make('invitations')
 ]
 ```
 
-리피터 아이템 내부에서 `client_id`의 값을 가져오려고 합니다.
+리피터 항목 내부에서 `client_id` 값을 가져오려고 합니다.
 
-`$get()`은 현재 리피터 아이템을 기준으로 동작하므로, `$get('client_id')`는 `$get('repeater.item1.client_id')`를 찾게 됩니다.
+`$get()`은 현재 리피터 항목을 기준으로 상대적이므로, `$get('client_id')`는 `$get('repeater.item1.client_id')`를 찾게 됩니다.
 
-`../`를 사용하면 데이터 구조에서 한 단계 위로 올라갈 수 있으므로, `$get('../client_id')`는 `$get('repeater.client_id')`가 되고, `$get('../../client_id')`는 `$get('client_id')`가 됩니다.
+`../`를 사용하면 데이터 구조에서 한 단계 위로 올라갈 수 있으므로, `$get('../client_id')`는 `$get('repeater.client_id')`이고, `$get('../../client_id')`는 `$get('client_id')`가 됩니다.
 
-특별한 경우로, 인자가 없는 `$get()`, 또는 `$get('')`, `$get('./')`는 항상 현재 리피터 아이템의 전체 데이터 배열을 반환합니다.
+특수한 경우로, 인자가 없는 `$get()`, 또는 `$get('')`, `$get('./')`는 항상 현재 리피터 항목의 전체 데이터 배열을 반환합니다.
 
-## 반복자 유효성 검사 {#repeater-validation}
+## 리피터 검증 {#repeater-validation}
 
-[유효성 검사](../validation) 페이지에 나열된 모든 규칙뿐만 아니라, 반복자에만 적용되는 추가 규칙도 있습니다.
+[validation](../validation) 페이지에 나열된 모든 규칙 외에도, 리피터에만 적용되는 추가 규칙이 있습니다.
 
-### 항목 수 유효성 검사 {#number-of-items-validation}
+### 항목 개수 검증 {#number-of-items-validation}
 
-`minItems()` 및 `maxItems()` 메서드를 설정하여 반복자에서 가질 수 있는 최소 및 최대 항목 수를 유효성 검사할 수 있습니다:
+`minItems()` 및 `maxItems()` 메서드를 설정하여 리피터에 가질 수 있는 최소 및 최대 항목 개수를 검증할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -513,14 +513,14 @@ Repeater::make('members')
     ->maxItems(5)
 ```
 
-### Distinct state validation {#distinct-state-validation}
+### 고유 상태 검증 {#distinct-state-validation}
 
-많은 경우에, 리피터 항목들 간에 어떤 형태로든 고유성을 보장하고 싶을 때가 있습니다. 일반적인 예시는 다음과 같습니다:
+많은 경우, 리피터 항목 간에 어떤 형태의 고유성을 보장하고 싶을 수 있습니다. 몇 가지 일반적인 예시는 다음과 같습니다:
 
-- 리피터 내의 항목들 중 오직 하나의 [체크박스](checkbox) 또는 [토글](toggle)만 활성화되도록 보장하는 경우
-- 리피터 내의 [셀렉트](select), [라디오](radio), [체크박스 리스트](checkbox-list), 또는 [토글 버튼](toggle-buttons) 필드에서 하나의 옵션만 한 번씩 선택되도록 보장하는 경우
+- 리피터 내 항목 전체에서 오직 하나의 [checkbox](checkbox) 또는 [toggle](toggle)만 활성화되도록 보장하기.
+- 리피터 내 [select](select), [radio](radio), [checkbox list](checkbox-list), [toggle buttons](toggle-buttons) 필드에서 각 옵션이 한 번만 선택되도록 보장하기.
 
-`distinct()` 메서드를 사용하여 리피터 내 모든 항목에서 필드의 상태가 고유한지 검증할 수 있습니다:
+`distinct()` 메서드를 사용하여 필드의 상태가 리피터의 모든 항목에서 고유한지 검증할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Checkbox;
@@ -534,14 +534,14 @@ Repeater::make('answers')
     ])
 ```
 
-`distinct()` 검증의 동작 방식은 필드가 다루는 데이터 타입에 따라 달라집니다.
+`distinct()` 검증의 동작은 필드가 다루는 데이터 타입에 따라 달라집니다
 
-- 필드가 [체크박스](checkbox)나 [토글](toggle)처럼 불리언 값을 반환하는 경우, 검증은 오직 하나의 항목만 값이 `true`가 되도록 보장합니다. 여러 필드가 `false` 값을 가질 수 있습니다.
-- 그 외에 [셀렉트](select), [라디오](radio), [체크박스 리스트](checkbox-list), [토글 버튼](toggle-buttons)과 같은 필드의 경우, 검증은 각 옵션이 리피터 내 모든 항목에서 한 번만 선택될 수 있도록 보장합니다.
+- 필드가 [checkbox](checkbox)나 [toggle](toggle)처럼 불리언을 반환하는 경우, 검증은 오직 하나의 항목만 값이 `true`가 되도록 보장합니다. 여러 필드가 `false` 값을 가질 수 있습니다.
+- 그 외에 [select](select), [radio](radio), [checkbox list](checkbox-list), [toggle buttons](toggle-buttons)와 같은 필드의 경우, 검증은 각 옵션이 리피터의 모든 항목에서 한 번만 선택되도록 보장합니다.
 
-#### 불분명한 상태 자동 수정 {#automatically-fixing-indistinct-state}
+#### 고유하지 않은 상태 자동 수정하기 {#automatically-fixing-indistinct-state}
 
-불분명한 상태를 자동으로 수정하고 싶다면, `fixIndistinctState()` 메서드를 사용할 수 있습니다:
+고유하지 않은 상태를 자동으로 수정하고 싶다면, `fixIndistinctState()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Checkbox;
@@ -555,16 +555,16 @@ Repeater::make('answers')
     ])
 ```
 
-이 메서드는 해당 필드에 `distinct()`와 `live()` 메서드를 자동으로 활성화합니다.
+이 메서드는 필드에 `distinct()`와 `live()` 메서드를 자동으로 활성화합니다.
 
 필드가 다루는 데이터 타입에 따라 `fixIndistinctState()`의 동작이 달라집니다:
 
-- 필드가 [checkbox](checkbox)나 [toggle](toggle)처럼 불리언 값을 반환하고, 필드 중 하나가 활성화되면, Filament는 사용자를 대신해 다른 모든 활성화된 필드를 자동으로 비활성화합니다.
-- 그 외에 [select](select), [radio](radio), [checkbox list](checkbox-list), [toggle buttons](toggle-buttons)와 같은 필드의 경우, 사용자가 옵션을 선택하면 Filament가 해당 옵션의 다른 모든 사용을 자동으로 선택 해제합니다.
+- 필드가 [checkbox](checkbox)나 [toggle](toggle)처럼 불리언을 반환하고, 필드 중 하나가 활성화된 경우, Filament는 사용자를 대신하여 다른 모든 활성화된 필드를 자동으로 비활성화합니다.
+- 그 외에 [select](select), [radio](radio), [checkbox list](checkbox-list), [toggle buttons](toggle-buttons)와 같은 필드의 경우, 사용자가 옵션을 선택하면 Filament는 사용자를 대신하여 해당 옵션의 다른 모든 사용을 자동으로 선택 해제합니다.
 
 #### 다른 항목에서 이미 선택된 옵션 비활성화하기 {#disabling-options-when-they-are-already-selected-in-another-item}
 
-[select](select), [radio](radio), [checkbox list](checkbox-list), 또는 [toggle buttons](toggle-buttons)에서 다른 항목에서 이미 선택된 옵션을 비활성화하고 싶다면, `disableOptionsWhenSelectedInSiblingRepeaterItems()` 메서드를 사용할 수 있습니다:
+[select](select), [radio](radio), [checkbox list](checkbox-list), [toggle buttons](toggle-buttons)에서 다른 항목에서 이미 선택된 옵션을 비활성화하고 싶다면, `disableOptionsWhenSelectedInSiblingRepeaterItems()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -580,9 +580,9 @@ Repeater::make('members')
     ])
 ```
 
-이 메서드는 필드에 자동으로 `distinct()`와 `live()` 메서드를 활성화합니다.
+이 메서드는 필드에 `distinct()`와 `live()` 메서드를 자동으로 활성화합니다.
 
-[옵션 비활성화](./select#disabling-specific-options)에 다른 조건을 추가하고 싶다면, `merge: true` 인자를 사용하여 `disableOptionWhen()`을 체이닝할 수 있습니다:
+[disable options](./select#disabling-specific-options)에 다른 조건을 추가하고 싶다면, `merge: true` 인자를 사용하여 `disableOptionWhen()`을 체이닝할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -599,9 +599,9 @@ Repeater::make('members')
     ])
 ```
 
-## 반복자 항목 액션 커스터마이징 {#customizing-the-repeater-item-actions}
+## 리피터 항목 액션 커스터마이즈하기 {#customizing-the-repeater-item-actions}
 
-이 필드는 내부 버튼을 쉽게 커스터마이즈할 수 있도록 액션 객체를 사용합니다. 액션 등록 메서드에 함수를 전달하여 이러한 버튼을 커스터마이즈할 수 있습니다. 이 함수는 `$action` 객체에 접근할 수 있으며, 이를 사용해 [커스터마이즈](../../actions/trigger-button)할 수 있습니다. 액션을 커스터마이즈할 수 있는 다음과 같은 메서드들이 제공됩니다:
+이 필드는 내부 버튼을 쉽게 커스터마이즈할 수 있도록 액션 객체를 사용합니다. 액션 등록 메서드에 함수를 전달하여 이 버튼들을 커스터마이즈할 수 있습니다. 함수는 `$action` 객체에 접근할 수 있으며, 이를 사용해 [커스터마이즈](../../actions/trigger-button)할 수 있습니다. 다음 메서드들을 사용해 액션을 커스터마이즈할 수 있습니다:
 
 - `addAction()`
 - `cloneAction()`
@@ -625,13 +625,13 @@ Repeater::make('members')
         // ...
     ])
     ->collapseAllAction(
-        fn (Action $action) => $action->label('모든 멤버 접기'),
+        fn (Action $action) => $action->label('Collapse all members'),
     )
 ```
 
-### 반복자 액션을 모달로 확인하기 {#confirming-repeater-actions-with-a-modal}
+### 모달로 리피터 액션 확인하기 {#confirming-repeater-actions-with-a-modal}
 
-액션 객체에서 `requiresConfirmation()` 메서드를 사용하여 모달로 액션을 확인할 수 있습니다. [모달 커스터마이징 메서드](../../actions/modals)를 사용하여 모달의 내용과 동작을 변경할 수 있습니다:
+액션 객체의 `requiresConfirmation()` 메서드를 사용하여 액션을 모달로 확인할 수 있습니다. [모든 모달 커스터마이즈 메서드](../../actions/modals)를 사용해 내용과 동작을 변경할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -646,11 +646,11 @@ Repeater::make('members')
     )
 ```
 
-> `collapseAction()`, `collapseAllAction()`, `expandAction()`, `expandAllAction()`, `reorderAction()` 메서드는 버튼 클릭 시 모달을 표시하는 데 필요한 네트워크 요청이 발생하지 않으므로, 확인 모달을 지원하지 않습니다.
+> `collapseAction()`, `collapseAllAction()`, `expandAction()`, `expandAllAction()`, `reorderAction()` 메서드는 버튼 클릭 시 모달을 표시하는 데 필요한 네트워크 요청을 하지 않으므로 확인 모달을 지원하지 않습니다.
 
-### 반복자에 추가 항목 액션 추가하기 {#adding-extra-item-actions-to-a-repeater}
+### 리피터에 추가 항목 액션 버튼 추가하기 {#adding-extra-item-actions-to-a-repeater}
 
-`extraItemActions()`에 `Action` 객체를 전달하여 각 반복자 항목의 헤더에 새로운 [액션 버튼](../actions)을 추가할 수 있습니다:
+`extraItemActions()`에 `Action` 객체를 전달하여 각 리피터 항목의 헤더에 새로운 [액션 버튼](../actions)을 추가할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Actions\Action;
@@ -679,16 +679,16 @@ Repeater::make('members')
     ])
 ```
 
-이 예시에서 `$arguments['item']`은 현재 반복자 항목의 ID를 제공합니다. 반복자 컴포넌트의 `getItemState()` 메서드를 사용하여 해당 반복자 항목의 데이터를 검증할 수 있습니다. 이 메서드는 해당 항목의 검증된 데이터를 반환합니다. 만약 항목이 유효하지 않으면, 액션이 취소되고 해당 항목에 대한 오류 메시지가 폼에 표시됩니다.
+이 예시에서 `$arguments['item']`은 현재 리피터 항목의 ID를 제공합니다. 해당 리피터 항목의 데이터를 `getItemState()` 메서드로 검증할 수 있습니다. 이 메서드는 항목의 검증된 데이터를 반환합니다. 항목이 유효하지 않으면 액션이 취소되고 해당 항목에 대한 오류 메시지가 폼에 표시됩니다.
 
-현재 항목의 원시 데이터를 검증 없이 가져오고 싶다면, 대신 `$component->getRawItemState($arguments['item'])`를 사용할 수 있습니다.
+현재 항목의 원시 데이터를 검증 없이 가져오고 싶다면, `$component->getRawItemState($arguments['item'])`를 사용할 수 있습니다.
 
-반복자 전체의 원시 데이터를 조작하고 싶다면, 예를 들어 항목을 추가, 삭제 또는 수정하려면, `$component->getState()`로 데이터를 가져오고, `$component->state($state)`로 다시 설정할 수 있습니다:
+리피터 전체의 원시 데이터를 조작하고 싶다면(예: 항목 추가, 삭제, 수정 등), `$component->getState()`로 데이터를 가져오고, `$component->state($state)`로 다시 설정할 수 있습니다:
 
 ```php
 use Illuminate\Support\Str;
 
-// 반복자 전체의 원시 데이터 가져오기
+// 리피터 전체의 원시 데이터 가져오기
 $state = $component->getState();
 
 // 무작위 UUID를 키로 하여 항목 추가
@@ -696,13 +696,13 @@ $state[Str::uuid()] = [
     'email' => auth()->user()->email,
 ];
 
-// 반복자에 새로운 데이터 설정
+// 리피터에 새 데이터 설정
 $component->state($state);
 ```
 
-## 반복자 테스트하기 {#testing-repeaters}
+## 리피터 테스트하기 {#testing-repeaters}
 
-내부적으로, 반복자는 항목을 추적하기 위해 UUID를 생성하여 Livewire HTML에서 더 쉽게 관리할 수 있도록 합니다. 이는 반복자가 포함된 폼을 테스트할 때, 폼과 테스트 간에 UUID가 일치해야 함을 의미합니다. 이 과정이 까다로울 수 있으며, 올바르게 처리하지 않으면 테스트에서는 숫자 키가 아닌 UUID를 기대하기 때문에 테스트가 실패할 수 있습니다.
+내부적으로, 리피터는 Livewire HTML에서 항목을 추적하기 위해 항목마다 UUID를 생성합니다. 따라서 리피터가 있는 폼을 테스트할 때, 폼과 테스트 간에 UUID가 일치하는지 확인해야 합니다. 이 작업이 까다로울 수 있으며, 제대로 하지 않으면 테스트가 UUID가 아닌 숫자 키를 기대하기 때문에 실패할 수 있습니다.
 
 하지만 Livewire는 테스트에서 UUID를 추적할 필요가 없으므로, 테스트 시작 시 `Repeater::fake()` 메서드를 사용하여 UUID 생성을 비활성화하고 숫자 키로 대체할 수 있습니다:
 
@@ -728,7 +728,7 @@ livewire(EditPost::class, ['record' => $post])
 $undoRepeaterFake();
 ```
 
-또한 `assertFormSet()` 메서드에 함수를 전달하여 반복자 내 항목의 개수를 테스트하는 것도 유용할 수 있습니다:
+`assertFormSet()` 메서드에 함수를 전달하여 리피터의 항목 개수를 테스트하는 것도 유용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Repeater;
@@ -745,11 +745,11 @@ livewire(EditPost::class, ['record' => $post])
 $undoRepeaterFake();
 ```
 
-### 반복자 액션 테스트하기 {#testing-repeater-actions}
+### 리피터 액션 테스트하기 {#testing-repeater-actions}
 
-반복자(repeater) 액션이 예상대로 동작하는지 테스트하려면, `callFormComponentAction()` 메서드를 사용하여 반복자 액션을 호출한 뒤 [추가적인 어설션을 수행](../testing#actions)할 수 있습니다.
+리피터 액션이 예상대로 동작하는지 테스트하려면, `callFormComponentAction()` 메서드를 사용하여 리피터 액션을 호출한 뒤 [추가적인 검증](../testing#actions)을 수행할 수 있습니다.
 
-특정 반복자 항목의 액션과 상호작용하려면, 해당 반복자 항목의 키를 `item` 인자로 전달해야 합니다. 만약 반복자가 관계(relation)에서 데이터를 읽고 있다면, 관련 레코드의 ID(키) 앞에 `record-`를 붙여 반복자 항목의 키를 만들어야 합니다:
+특정 리피터 항목의 액션과 상호작용하려면, 해당 리피터 항목의 키와 함께 `item` 인자를 전달해야 합니다. 리피터가 관계에서 읽어오는 경우, 관련 레코드의 ID(키) 앞에 `record-`를 붙여 리피터 항목의 키를 만듭니다:  
 
 ```php
 use App\Models\Quote;

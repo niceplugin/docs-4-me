@@ -5,7 +5,7 @@ title: Fieldset
 
 ## 개요 {#overview}
 
-필드를 Fieldset으로 그룹화하고 싶을 수 있습니다. 각 Fieldset은 기본적으로 라벨, 테두리, 그리고 2열 그리드를 가집니다:
+필드를 Fieldset으로 그룹화하고 싶을 수 있습니다. 각 필드셋은 기본적으로 라벨, 테두리, 그리고 2열 그리드를 가집니다:
 
 ```php
 use Filament\Forms\Components\Fieldset;

@@ -1,11 +1,11 @@
 ---
-title: TextInput
+title: 텍스트 입력
 ---
 # [폼.필드] TextInput
 
 ## 개요 {#overview}
 
-TextInput은 문자열과 상호작용할 수 있게 해줍니다:
+텍스트 입력을 사용하면 문자열과 상호작용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -13,11 +13,11 @@ use Filament\Forms\Components\TextInput;
 TextInput::make('name')
 ```
 
-<AutoScreenshot name="forms/fields/text-input/simple" alt="TextInput" version="3.x" />
+<AutoScreenshot name="forms/fields/text-input/simple" alt="텍스트 입력" version="3.x" />
 
 ## HTML 입력 타입 설정하기 {#setting-the-html-input-type}
 
-문자열의 타입을 여러 메서드를 사용하여 설정할 수 있습니다. `email()`과 같은 일부 메서드는 유효성 검사도 제공합니다:
+여러 메서드를 사용하여 문자열의 타입을 설정할 수 있습니다. `email()`과 같은 일부 메서드는 유효성 검사도 제공합니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -31,7 +31,7 @@ TextInput::make('text')
     ->url()
 ```
 
-또는 `type()` 메서드를 사용하여 다른 [HTML 입력 타입](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)을 전달할 수도 있습니다:
+또는 `type()` 메서드를 사용하여 다른 [HTML 입력 타입](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)을 전달할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -52,9 +52,9 @@ TextInput::make('text')
     ->inputMode('decimal')
 ```
 
-## 숫자 단계 설정하기 {#setting-the-numeric-step}
+## 숫자 스텝 설정하기 {#setting-the-numeric-step}
 
-`step()` 메서드를 사용하여 입력 필드의 [`step` 속성](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step)을 설정할 수 있습니다:
+`step()` 메서드를 사용하여 입력의 [`step` 속성](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step)을 설정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -64,9 +64,9 @@ TextInput::make('number')
     ->step(100)
 ```
 
-## 자동완성 텍스트 {#autocompleting-text}
+## 텍스트 자동완성 {#autocompleting-text}
 
-`autocomplete()` 메서드를 사용하여 [브라우저에서 텍스트 자동완성](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocomplete)을 허용할 수 있습니다:
+`autocomplete()` 메서드를 사용하여 텍스트가 [브라우저에 의해 자동완성](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocomplete)되도록 허용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -76,7 +76,7 @@ TextInput::make('password')
     ->autocomplete('new-password')
 ```
 
-`autocomplete="off"`의 단축형으로 `autocomplete(false)`를 사용할 수 있습니다:
+`autocomplete="off"`의 단축키로, `autocomplete(false)`를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -86,11 +86,11 @@ TextInput::make('password')
     ->autocomplete(false)
 ```
 
-더 복잡한 자동완성 옵션이 필요한 경우, TextInput은 [데이터리스트](#autocompleting-text-with-a-datalist)도 지원합니다.
+더 복잡한 자동완성 옵션의 경우, 텍스트 입력은 [데이터리스트](#autocompleting-text-with-a-datalist)도 지원합니다.
 
-### datalist로 자동 완성 텍스트 입력하기 {#autocompleting-text-with-a-datalist}
+### 데이터리스트로 텍스트 자동완성 {#autocompleting-text-with-a-datalist}
 
-`datalist()` 메서드를 사용하여 TextInput에 [datalist](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) 옵션을 지정할 수 있습니다:
+`datalist()` 메서드를 사용하여 텍스트 입력에 대한 [데이터리스트](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) 옵션을 지정할 수 있습니다:
 
 ```php
 TextInput::make('manufacturer')
@@ -105,11 +105,11 @@ TextInput::make('manufacturer')
     ])
 ```
 
-Datalist는 사용자가 TextInput을 할 때 자동 완성 옵션을 제공합니다. 하지만 이는 단순히 추천일 뿐이며, 사용자는 여전히 입력란에 어떤 값이든 입력할 수 있습니다. 만약 사용자를 미리 정의된 옵션으로만 제한하고 싶다면 [select 필드](select)를 참고하세요.
+데이터리스트는 사용자가 텍스트 입력을 사용할 때 자동완성 옵션을 제공합니다. 하지만 이는 단순히 추천일 뿐이며, 사용자는 여전히 입력란에 어떤 값이든 입력할 수 있습니다. 사용자를 미리 정의된 옵션 집합으로 엄격하게 제한하려면 [select 필드](select)를 확인하세요.
 
 ## 텍스트 자동 대문자화 {#autocapitalizing-text}
 
-브라우저에서 [텍스트를 자동으로 대문자화](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocapitalize)하도록 `autocapitalize()` 메서드를 사용할 수 있습니다:
+`autocapitalize()` 메서드를 사용하여 텍스트가 [브라우저에 의해 자동으로 대문자화](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocapitalize)되도록 허용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -118,9 +118,9 @@ TextInput::make('name')
     ->autocapitalize('words')
 ```
 
-## 필드 옆에 접두사/접미사 텍스트 추가하기 {#adding-affix-text-aside-the-field}
+## 필드 옆에 접두/접미 텍스트 추가하기 {#adding-affix-text-aside-the-field}
 
-`prefix()`와 `suffix()` 메서드를 사용하여 입력란 앞과 뒤에 텍스트를 추가할 수 있습니다:
+`prefix()`와 `suffix()` 메서드를 사용하여 입력란 앞뒤에 텍스트를 배치할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -130,11 +130,11 @@ TextInput::make('domain')
     ->suffix('.com')
 ```
 
-<AutoScreenshot name="forms/fields/text-input/affix" alt="접두사와 접미사가 있는 TextInput" version="3.x" />
+<AutoScreenshot name="forms/fields/text-input/affix" alt="접두/접미가 있는 텍스트 입력" version="3.x" />
 
-### 아이콘을 접두사/접미사로 사용하기 {#using-icons-as-affixes}
+### 아이콘을 접두/접미로 사용하기 {#using-icons-as-affixes}
 
-`prefixIcon()`과 `suffixIcon()` 메서드를 사용하여 입력란 앞이나 뒤에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 배치할 수 있습니다:
+`prefixIcon()`과 `suffixIcon()` 메서드를 사용하여 입력란 앞뒤에 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 배치할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -144,11 +144,11 @@ TextInput::make('domain')
     ->suffixIcon('heroicon-m-globe-alt')
 ```
 
-<AutoScreenshot name="forms/fields/text-input/suffix-icon" alt="접미사 아이콘이 있는 TextInput란" version="3.x" />
+<AutoScreenshot name="forms/fields/text-input/suffix-icon" alt="접미 아이콘이 있는 텍스트 입력" version="3.x" />
 
-#### 접두사/접미사 아이콘 색상 설정하기 {#setting-the-affix-icons-color}
+#### 접두/접미 아이콘 색상 설정하기 {#setting-the-affix-icons-color}
 
-접두사/접미사 아이콘은 기본적으로 회색이지만, `prefixIconColor()`와 `suffixIconColor()` 메서드를 사용하여 다른 색상으로 설정할 수 있습니다:
+접두/접미 아이콘은 기본적으로 회색이지만, `prefixIconColor()`와 `suffixIconColor()` 메서드를 사용하여 다른 색상으로 설정할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -159,9 +159,9 @@ TextInput::make('domain')
     ->suffixIconColor('success')
 ```
 
-## 표시 가능한 비밀번호 입력란 {#revealable-password-inputs}
+## 비밀번호 입력 표시/숨김 기능 {#revealable-password-inputs}
 
-`password()`를 사용할 때, 입력란을 `revealable()`로 설정하여 사용자가 버튼을 클릭하면 입력 중인 비밀번호를 일반 텍스트로 볼 수 있도록 할 수 있습니다:
+`password()`를 사용할 때, 입력란을 `revealable()`로 만들어 사용자가 버튼을 클릭하여 입력 중인 비밀번호의 일반 텍스트 버전을 볼 수 있도록 할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -171,11 +171,11 @@ TextInput::make('password')
     ->revealable()
 ```
 
-<AutoScreenshot name="forms/fields/text-input/revealable-password" alt="표시 가능한 비밀번호 입력란" version="3.x" />
+<AutoScreenshot name="forms/fields/text-input/revealable-password" alt="비밀번호 표시/숨김이 가능한 텍스트 입력" version="3.x" />
 
 ## 입력 마스킹 {#input-masking}
 
-입력 마스킹은 입력 값이 반드시 따라야 하는 형식을 정의하는 방법입니다.
+입력 마스킹은 입력 값이 반드시 따라야 하는 형식을 정의하는 관행입니다.
 
 Filament에서는 `mask()` 메서드를 사용하여 [Alpine.js 마스크](https://alpinejs.dev/plugins/mask#x-mask)를 설정할 수 있습니다:
 
@@ -187,7 +187,7 @@ TextInput::make('birthday')
     ->placeholder('MM/DD/YYYY')
 ```
 
-[동적 마스크](https://alpinejs.dev/plugins/mask#mask-functions)를 사용하려면, JavaScript 코드를 `RawJs` 객체로 감싸서 전달하세요:
+[동적 마스크](https://alpinejs.dev/plugins/mask#mask-functions)를 사용하려면, JavaScript를 `RawJs` 객체로 감싸세요:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -222,19 +222,19 @@ TextInput::make('name')
     ->readOnly()
 ```
 
-[`disabled()`](getting-started#disabling-a-field)과 비교했을 때 몇 가지 차이점이 있습니다:
+[`disabled()`](getting-started#disabling-a-field)와 비교했을 때 몇 가지 차이점이 있습니다:
 
-- `readOnly()`를 사용할 경우, 폼이 제출될 때 해당 필드는 여전히 서버로 전송됩니다. 브라우저 콘솔이나 JavaScript를 통해 값이 변경될 수 있습니다. 이를 방지하려면 [`dehydrated(false)`](/filament/3.x/forms/advanced#preventing-a-field-from-being-dehydrated)를 사용할 수 있습니다.
-- `readOnly()`를 사용할 때는 불투명도 감소와 같은 스타일 변화가 없습니다.
-- `readOnly()`를 사용할 때 필드는 여전히 포커스를 받을 수 있습니다.
+- `readOnly()`를 사용할 때, 폼이 제출되면 필드가 여전히 서버로 전송됩니다. 브라우저 콘솔이나 JavaScript로 변경될 수 있습니다. 이를 방지하려면 [`dehydrated(false)`](/filament/3.x/forms/advanced#preventing-a-field-from-being-dehydrated)를 사용할 수 있습니다.
+- `readOnly()`를 사용할 때는 불투명도 감소와 같은 스타일 변경이 없습니다.
+- `readOnly()`를 사용할 때 필드는 여전히 포커스가 가능합니다.
 
-## TextInput 검증 {#text-input-validation}
+## 텍스트 입력 유효성 검사 {#text-input-validation}
 
-[검증](../validation) 페이지에 나열된 모든 규칙뿐만 아니라, TextInput에만 적용되는 추가 규칙들도 있습니다.
+[유효성 검사](../validation) 페이지에 나열된 모든 규칙 외에도, 텍스트 입력에만 해당하는 추가 규칙이 있습니다.
 
-### 길이 검증 {#length-validation}
+### 길이 유효성 검사 {#length-validation}
 
-`minLength()`와 `maxLength()` 메서드를 설정하여 입력값의 길이를 제한할 수 있습니다. 이 메서드들은 프론트엔드와 백엔드 모두에서 검증을 추가합니다:
+`minLength()`와 `maxLength()` 메서드를 설정하여 입력의 길이를 제한할 수 있습니다. 이 메서드들은 프론트엔드와 백엔드 모두에 유효성 검사를 추가합니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -244,7 +244,7 @@ TextInput::make('name')
     ->maxLength(255)
 ```
 
-`length()`를 설정하여 입력값의 정확한 길이를 지정할 수도 있습니다. 이 메서드는 프론트엔드와 백엔드 모두에서 검증을 추가합니다:
+`length()`를 설정하여 입력의 정확한 길이를 지정할 수도 있습니다. 이 메서드는 프론트엔드와 백엔드 모두에 유효성 검사를 추가합니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -253,9 +253,9 @@ TextInput::make('code')
     ->length(8)
 ```
 
-### 크기 검증 {#size-validation}
+### 값 크기 유효성 검사 {#size-validation}
 
-숫자 입력값의 최소 및 최대 값을 검증하려면 `minValue()`와 `maxValue()` 메서드를 설정하면 됩니다:
+`minValue()`와 `maxValue()` 메서드를 설정하여 숫자 입력의 최소 및 최대 값을 검증할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -268,9 +268,9 @@ TextInput::make('number')
 
 ### 전화번호 유효성 검사 {#phone-number-validation}
 
-`tel()` 필드를 사용할 때, 값은 다음 정규식으로 유효성 검사를 하게 됩니다: `/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/`.
+`tel()` 필드를 사용할 때, 값은 다음 정규식으로 검증됩니다: `/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/`.
 
-이 정규식을 변경하고 싶다면, `telRegex()` 메서드를 사용할 수 있습니다:
+이를 변경하려면 `telRegex()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;

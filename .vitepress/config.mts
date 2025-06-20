@@ -12,8 +12,8 @@ dotenv.config()
 export default defineConfig({
   lang: 'ko-KR',
   srcDir: 'docs',
-  title: `Docs 4 Me . kr`,
-  description: '나를 위한 문서 한글화 사이트',
+  title: `Laravel`,
+  description: '라라벨 12.x 한글화 사이트. 웹 애플리케이션을 더 빠르고 쉽게 만들 수 있도록 돕는 PHP 기반 오픈 소스 웹 프레임워크',
   head: [
     [
       'link',
@@ -71,6 +71,11 @@ export default defineConfig({
       ...livewire,
       ...sidebar_filament,
     },
+
+    footer: {
+      message: '나를 위한 문서 한글화',
+      copyright: `2025년 ~ 지금까지 😍😎🤩`
+    }
   },
 
   markdown: {

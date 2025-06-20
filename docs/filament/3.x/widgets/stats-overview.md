@@ -1,10 +1,10 @@
 ---
-title: StatsOverviewWidget
+title: 통계 개요 위젯
 ---
 # [위젯] StatsOverviewWidget
 ## 개요 {#overview}
 
-Filament에는 "통계 개요" 위젯 템플릿이 내장되어 있어, 커스텀 뷰를 작성하지 않고도 하나의 위젯에서 여러 통계를 표시할 수 있습니다.
+Filament에는 "통계 개요" 위젯 템플릿이 내장되어 있어, 커스텀 뷰를 작성하지 않고도 하나의 위젯에서 여러 가지 통계를 표시할 수 있습니다.
 
 다음 명령어로 위젯을 생성하세요:
 
@@ -39,7 +39,7 @@ class StatsOverview extends BaseWidget
 
 ## 통계에 설명과 아이콘 추가하기 {#adding-a-description-and-icon-to-a-stat}
 
-추가 정보를 제공하기 위해 `description()`을 추가할 수 있으며, `descriptionIcon()`도 함께 사용할 수 있습니다:
+`description()`을 추가하여 추가 정보를 제공할 수 있으며, `descriptionIcon()`도 함께 사용할 수 있습니다:
 
 ```php
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -60,7 +60,7 @@ protected function getStats(): array
 }
 ```
 
-`descriptionIcon()` 메서드는 두 번째 매개변수를 받아 아이콘을 설명 뒤가 아니라 앞에 배치할 수도 있습니다:
+`descriptionIcon()` 메서드는 아이콘을 설명 뒤가 아니라 앞에 배치하도록 두 번째 매개변수를 받을 수도 있습니다:
 
 ```php
 use Filament\Support\Enums\IconPosition;
@@ -73,7 +73,7 @@ Stat::make('Unique views', '192.1k')
 
 ## 통계의 색상 변경하기 {#changing-the-color-of-the-stat}
 
-통계에 `color()`를 지정할 수도 있습니다 (`danger`, `gray`, `info`, `primary`, `success`, `warning` 중 하나):
+통계에 `color()`를 지정할 수도 있습니다 (`danger`, `gray`, `info`, `primary`, `success` 또는 `warning`):
 
 ```php
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -97,7 +97,7 @@ protected function getStats(): array
 }
 ```
 
-## 통계에 추가 HTML 속성 추가하기 {#adding-extra-html-attributes-to-a-stat}
+## 통계에 추가 HTML 속성 부여하기 {#adding-extra-html-attributes-to-a-stat}
 
 `extraAttributes()`를 사용하여 통계에 추가 HTML 속성을 전달할 수도 있습니다:
 
@@ -118,11 +118,11 @@ protected function getStats(): array
 }
 ```
 
-이 예시에서는 `$dispatch()`의 `$`를 의도적으로 이스케이프 처리하고 있습니다. 이는 PHP 변수로 인식되는 것이 아니라 HTML에 직접 전달되어야 하기 때문입니다.
+이 예시에서는 `$dispatch()`의 `$`를 의도적으로 이스케이프 처리했습니다. 이는 HTML에 직접 전달되어야 하며, PHP 변수는 아닙니다.
 
 ## 통계에 차트 추가하기 {#adding-a-chart-to-a-stat}
 
-각 통계에 `chart()`를 추가하거나 체이닝하여 과거 데이터를 제공할 수도 있습니다. `chart()` 메서드는 플롯할 데이터 포인트의 배열을 인수로 받습니다:
+각 통계에 `chart()`를 추가하거나 체이닝하여 이력 데이터를 제공할 수 있습니다. `chart()` 메서드는 플롯할 데이터 포인트 배열을 받습니다:
 
 ```php
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -142,9 +142,9 @@ protected function getStats(): array
 
 ## 실시간 통계 업데이트(폴링) {#live-updating-stats-polling}
 
-기본적으로, StatsOverviewWidget은 5초마다 데이터를 새로고침합니다.
+기본적으로 통계 개요 위젯은 5초마다 데이터를 새로고침합니다.
 
-이 값을 변경하려면 클래스에서 `$pollingInterval` 속성을 새로운 간격으로 오버라이드하면 됩니다:
+이 값을 변경하려면 클래스의 `$pollingInterval` 속성을 새로운 간격으로 오버라이드하면 됩니다:
 
 ```php
 protected static ?string $pollingInterval = '10s';
@@ -156,11 +156,11 @@ protected static ?string $pollingInterval = '10s';
 protected static ?string $pollingInterval = null;
 ```
 
-## 지연 로딩 비활성화 {#disabling-lazy-loading}
+## 지연 로딩 비활성화하기 {#disabling-lazy-loading}
 
-기본적으로 위젯은 지연 로딩(lazy-loaded)됩니다. 이는 위젯이 페이지에 표시될 때만 로드된다는 의미입니다.
+기본적으로 위젯은 지연 로딩됩니다. 즉, 페이지에서 보일 때만 로드됩니다.
 
-이 동작을 비활성화하려면, 위젯 클래스에서 `$isLazy` 속성을 오버라이드하면 됩니다:
+이 동작을 비활성화하려면 위젯 클래스에서 `$isLazy` 속성을 오버라이드하세요:
 
 ```php
 protected static bool $isLazy = false;
@@ -176,7 +176,7 @@ protected ?string $heading = 'Analytics';
 protected ?string $description = 'An overview of some analytics.';
 ```
 
-제목이나 설명 텍스트를 동적으로 생성해야 하는 경우, `getHeading()`과 `getDescription()` 메서드를 오버라이드할 수도 있습니다:
+제목이나 설명 텍스트를 동적으로 생성해야 한다면, 대신 `getHeading()`과 `getDescription()` 메서드를 오버라이드할 수 있습니다:
 
 ```php
 protected function getHeading(): ?string

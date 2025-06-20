@@ -5,27 +5,27 @@ title: 플러그인 개발
 
 <LaracastsBanner
     title="패널 빌더 플러그인"
-    description="Laracasts에서 Filament용 고급 컴포넌트 빌드(Build Advanced Components for Filament) 시리즈를 시청하세요. 플러그인 시작 방법을 배울 수 있습니다. 이 페이지의 텍스트 기반 가이드도 좋은 개요를 제공합니다."
+    description="Laracasts에서 Filament를 위한 고급 컴포넌트 빌드(Build Advanced Components for Filament) 시리즈를 시청하세요. 이 시리즈는 플러그인을 시작하는 방법을 알려줍니다. 이 페이지의 텍스트 기반 가이드도 좋은 개요를 제공합니다."
     url="https://laracasts.com/series/build-advanced-components-for-filament/episodes/16"
     series="building-advanced-components"
 />
 
 ## 개요 {#overview}
 
-Filament 플러그인의 기본은 Laravel 패키지입니다. 이들은 Composer를 통해 Filament 프로젝트에 설치되며, 라우트, 뷰, 번역을 등록하기 위해 서비스 프로바이더를 사용하는 등 모든 표준 기법을 따릅니다. Laravel 패키지 개발이 처음이라면, 핵심 개념을 이해하는 데 도움이 될 수 있는 몇 가지 자료가 있습니다:
+Filament 플러그인의 기본은 Laravel 패키지입니다. 이들은 Composer를 통해 Filament 프로젝트에 설치되며, 라우트, 뷰, 번역을 등록하기 위해 서비스 프로바이더를 사용하는 등 모든 표준 기술을 따릅니다. Laravel 패키지 개발이 처음이라면, 핵심 개념을 이해하는 데 도움이 될 수 있는 몇 가지 자료가 있습니다:
 
-- [Laravel 공식 문서의 패키지 개발 섹션](https://laravel.com/docs/packages)은 훌륭한 참고 가이드입니다.
+- [Laravel 문서의 패키지 개발 섹션](https://laravel.com/docs/packages)은 훌륭한 참고 가이드입니다.
 - [Spatie의 패키지 트레이닝 강좌](https://spatie.be/products/laravel-package-training)는 과정을 단계별로 가르쳐주는 좋은 영상 시리즈입니다.
-- [Spatie의 Package Tools](https://github.com/spatie/laravel-package-tools)는 유창한 구성 객체를 사용하여 서비스 프로바이더 클래스를 간소화할 수 있게 해줍니다.
+- [Spatie의 Package Tools](https://github.com/spatie/laravel-package-tools)는 유창한 구성 객체를 사용하여 서비스 프로바이더 클래스를 단순화할 수 있게 해줍니다.
 
-Filament 플러그인은 Laravel 패키지의 개념 위에 구축되어, 어떤 Filament 패널에도 재사용 가능한 기능을 제공하고 사용할 수 있게 해줍니다. 플러그인은 각 패널에 하나씩 추가할 수 있으며, 패널마다 다르게 설정할 수도 있습니다.
+Filament 플러그인은 Laravel 패키지의 개념 위에 구축되어, 모든 Filament 패널에서 재사용 가능한 기능을 제공하고 사용할 수 있게 해줍니다. 각 패널에 하나씩 추가할 수 있으며, 패널마다 다르게 구성할 수도 있습니다.
 
 ## 플러그인 클래스로 패널 구성하기 {#configuring-the-panel-with-a-plugin-class}
 
-플러그인 클래스는 패키지가 패널 [구성](configuration) 파일과 상호작용할 수 있도록 사용됩니다. 이는 `Plugin` 인터페이스를 구현하는 간단한 PHP 클래스입니다. 3개의 메서드가 필요합니다:
+플러그인 클래스는 패키지가 패널 [구성](configuration) 파일과 상호작용할 수 있도록 해줍니다. 이는 `Plugin` 인터페이스를 구현하는 간단한 PHP 클래스입니다. 3개의 메서드가 필요합니다:
 
-- `getId()` 메서드는 다른 플러그인들 사이에서 플러그인의 고유 식별자를 반환합니다. 동일한 프로젝트에서 사용될 수 있는 다른 플러그인들과 충돌하지 않도록 충분히 구체적으로 지정해 주세요.
-- `register()` 메서드는 패널에서 사용할 수 있는 모든 [구성](configuration) 옵션을 사용할 수 있게 해줍니다. 여기에는 [리소스](resources/getting-started), [커스텀 페이지](pages), [테마](themes), [렌더 후크](configuration#render-hooks) 등록 등이 포함됩니다.
+- `getId()` 메서드는 다른 플러그인들 사이에서 플러그인의 고유 식별자를 반환합니다. 동일한 프로젝트에서 사용될 수 있는 다른 플러그인과 충돌하지 않도록 충분히 구체적으로 지정해야 합니다.
+- `register()` 메서드는 패널에서 사용할 수 있는 모든 [구성](configuration) 옵션을 사용할 수 있게 해줍니다. 여기에는 [리소스](resources/getting-started), [커스텀 페이지](pages), [테마](themes), [렌더 훅](configuration#render-hooks) 등 다양한 항목의 등록이 포함됩니다.
 - `boot()` 메서드는 플러그인이 등록된 패널이 실제로 사용될 때만 실행됩니다. 이 메서드는 미들웨어 클래스에 의해 실행됩니다.
 
 ```php
@@ -65,7 +65,7 @@ class BlogPlugin implements Plugin
 }
 ```
 
-플러그인 사용자는 플러그인 클래스를 인스턴스화하여 [구성](configuration)의 `plugin()` 메서드에 전달함으로써 패널에 추가할 수 있습니다:
+플러그인 사용자는 플러그인 클래스를 인스턴스화하고 [구성](configuration)의 `plugin()` 메서드에 전달하여 패널에 추가할 수 있습니다:
 
 ```php
 use DanHarrin\FilamentBlog\BlogPlugin;
@@ -78,9 +78,9 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-### 플루언트하게 플러그인 클래스 인스턴스화하기 {#fluently-instantiating-the-plugin-class}
+### 플러그인 클래스의 유창한 인스턴스화 {#fluently-instantiating-the-plugin-class}
 
-사용자들이 플러그인 클래스를 플루언트하게 인스턴스화할 수 있도록 `make()` 메서드를 플러그인 클래스에 추가할 수 있습니다. 또한, 컨테이너(`app()`)를 사용하여 플러그인 객체를 인스턴스화하면 런타임에 다른 구현체로 교체할 수 있습니다:
+사용자가 플러그인 클래스를 유창하게 인스턴스화할 수 있도록 `make()` 메서드를 플러그인 클래스에 추가할 수 있습니다. 또한 컨테이너(`app()`)를 사용하여 플러그인 객체를 인스턴스화하면 런타임에 다른 구현으로 교체할 수 있습니다:
 
 ```php
 use Filament\Contracts\Plugin;
@@ -96,7 +96,7 @@ class BlogPlugin implements Plugin
 }
 ```
 
-이제 사용자들은 `make()` 메서드를 사용할 수 있습니다:
+이제 사용자는 `make()` 메서드를 사용할 수 있습니다:
 
 ```php
 use DanHarrin\FilamentBlog\BlogPlugin;
@@ -112,7 +112,7 @@ public function panel(Panel $panel): Panel
 
 ### 패널별 플러그인 구성 {#configuring-plugins-per-panel}
 
-플러그인 클래스에 다른 메서드를 추가하여 사용자가 플러그인을 구성할 수 있도록 할 수 있습니다. 각 옵션에 대해 setter와 getter 메서드를 모두 추가하는 것을 권장합니다. setter에서는 속성에 사용자의 설정을 저장하고, getter에서는 다시 해당 값을 가져와야 합니다.
+플러그인 클래스에 다른 메서드를 추가하여 사용자가 플러그인을 구성할 수 있도록 할 수 있습니다. 각 옵션에 대해 setter와 getter 메서드를 모두 추가하는 것을 권장합니다. setter에서는 속성에 사용자의 선호값을 저장하고, getter에서는 다시 가져와야 합니다:
 
 ```php
 use DanHarrin\FilamentBlog\Resources\AuthorResource;
@@ -125,30 +125,30 @@ class BlogPlugin implements Plugin
     
     public function authorResource(bool $condition = true): static
     {
-        // 이 메서드는 setter로, 사용자의 설정을
-        // 플러그인 객체의 속성에 저장합니다.
+        // 이곳은 setter 메서드로, 사용자의 선호값이
+        // 플러그인 객체의 속성에 저장됩니다.
         $this->hasAuthorResource = $condition;
     
         // setter 메서드에서 플러그인 객체를 반환하여
-        // 설정 옵션을 체이닝할 수 있도록 합니다.
+        // 구성 옵션을 유창하게 체이닝할 수 있게 합니다.
         return $this;
     }
     
     public function hasAuthorResource(): bool
     {
-        // 이 메서드는 getter로, 사용자의 설정을
-        // 플러그인 속성에서 가져옵니다.
+        // 이곳은 getter 메서드로, 사용자의 선호값이
+        // 플러그인 속성에서 가져와집니다.
         return $this->hasAuthorResource;
     }
     
     public function register(Panel $panel): void
     {
         // `register()` 메서드는 사용자가 플러그인을
-        // 구성한 후에 실행되므로, 사용자의 설정을
-        // 이 안에서 접근할 수 있습니다.
+        // 구성한 후에 실행되므로, 이 안에서
+        // 사용자의 모든 선호값에 접근할 수 있습니다.
         if ($this->hasAuthorResource()) {
             // 여기서는 사용자가 요청한 경우에만
-            // author 리소스를 패널에 등록합니다.
+            // 패널에 author 리소스를 등록합니다.
             $panel->resources([
                 AuthorResource::class,
             ]);
@@ -159,13 +159,13 @@ class BlogPlugin implements Plugin
 }
 ```
 
-또한, 플러그인의 고유 ID를 사용하여 플러그인 클래스 외부에서 해당 설정 옵션에 접근할 수 있습니다. 이를 위해 `filament()` 메서드에 ID를 전달하면 됩니다:
+또한, 플러그인의 고유 ID를 사용하여 플러그인 클래스 외부에서 구성 옵션에 접근할 수 있습니다. 이를 위해 ID를 `filament()` 메서드에 전달하세요:
 
 ```php
 filament('blog')->hasAuthorResource()
 ```
 
-설정에 접근할 때 더 나은 타입 안전성과 IDE 자동완성을 원할 수 있습니다. 이를 달성하는 방법은 자유롭게 선택할 수 있지만, 한 가지 아이디어로는 플러그인 클래스에 정적 메서드를 추가하여 가져오는 방법이 있습니다:
+구성에 접근할 때 더 나은 타입 안전성과 IDE 자동완성을 원할 수 있습니다. 이를 달성하는 방법은 전적으로 여러분에게 달려 있지만, 한 가지 아이디어는 플러그인 클래스에 정적 메서드를 추가하여 가져오는 것입니다:
 
 ```php
 use Filament\Contracts\Plugin;
@@ -181,7 +181,7 @@ class BlogPlugin implements Plugin
 }
 ```
 
-이제 새로운 정적 메서드를 사용하여 플러그인 설정에 접근할 수 있습니다:
+이제 새로운 정적 메서드를 사용하여 플러그인 구성을 접근할 수 있습니다:
 
 ```php
 BlogPlugin::get()->hasAuthorResource()
@@ -189,9 +189,9 @@ BlogPlugin::get()->hasAuthorResource()
 
 ## 플러그인에서 패널 배포하기 {#distributing-a-panel-in-a-plugin}
 
-Laravel 패키지에서 전체 패널을 배포하는 것은 매우 쉽습니다. 이렇게 하면 사용자는 플러그인을 설치하기만 해도 앱의 완전히 새로운 일부가 미리 구축되어 제공됩니다.
+Laravel 패키지에서 전체 패널을 배포하는 것은 매우 쉽습니다. 이렇게 하면 사용자가 플러그인을 설치하기만 하면 앱의 완전히 새로운 부분이 미리 구축되어 제공됩니다.
 
-패널을 [설정](configuration)할 때, 설정 클래스는 `PanelProvider` 클래스를 확장하며, 이는 표준 Laravel 서비스 프로바이더입니다. 패키지에서 서비스 프로바이더로 사용할 수 있습니다:
+패널을 [구성](configuration)할 때, 구성 클래스는 `PanelProvider` 클래스를 확장하며, 이는 표준 Laravel 서비스 프로바이더입니다. 패키지에서 서비스 프로바이더로 사용할 수 있습니다:
 
 ```php
 <?php
