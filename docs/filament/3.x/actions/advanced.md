@@ -4,7 +4,7 @@ title: 고급 액션
 # [액션] 고급 액션
 ## 액션 유틸리티 주입 {#action-utility-injection}
 
-대부분의 액션 설정 메서드는 하드코딩된 값 대신 함수(클로저)를 파라미터로 받습니다:
+대부분의 액션 설정 메서드는 하드코딩된 값 대신 함수형 파라미터를 허용합니다:
 
 ```php
 Action::make('edit')
@@ -16,7 +16,7 @@ Action::make('edit')
 
 이 패키지는 또한 이러한 함수 내부에서 사용할 수 있는 다양한 유틸리티를 파라미터로 주입할 수 있습니다. 함수형 인자를 받는 모든 커스터마이징 메서드는 유틸리티 주입이 가능합니다.
 
-이렇게 주입되는 유틸리티들은 특정 파라미터 이름을 사용해야 합니다. 그렇지 않으면 Filament가 무엇을 주입해야 하는지 알 수 없습니다.
+이렇게 주입되는 유틸리티는 특정 파라미터 이름을 사용해야 합니다. 그렇지 않으면 Filament가 무엇을 주입해야 하는지 알 수 없습니다.
 
 ### 현재 모달 폼 데이터 주입하기 {#injecting-the-current-modal-form-data}
 
@@ -28,7 +28,7 @@ function (array $data) {
 }
 ```
 
-모달이 아직 제출되지 않았다면 이 값이 비어 있을 수 있다는 점에 유의하세요.
+모달이 아직 제출되지 않았다면 이 값은 비어 있을 수 있습니다.
 
 ### 현재 인자 주입하기 {#injecting-the-current-arguments}
 
@@ -62,9 +62,9 @@ function (Action $action) {
 }
 ```
 
-### 여러 유틸리티 주입하기 {#injecting-multiple-utilities}
+### 여러 유틸리티 동시 주입하기 {#injecting-multiple-utilities}
 
-매개변수는 리플렉션을 사용하여 동적으로 주입되므로, 여러 매개변수를 어떤 순서로든 조합할 수 있습니다:
+파라미터는 리플렉션을 통해 동적으로 주입되므로, 원하는 순서로 여러 파라미터를 조합할 수 있습니다:
 
 ```php
 use Livewire\Component;
@@ -74,9 +74,9 @@ function (array $arguments, Component $livewire) {
 }
 ```
 
-### 라라벨 컨테이너에서 의존성 주입하기 {#injecting-dependencies-from-laravels-container}
+### Laravel 컨테이너에서 의존성 주입하기 {#injecting-dependencies-from-laravels-container}
 
-유틸리티와 함께, 라라벨 컨테이너에서 평소처럼 어떤 것이든 주입할 수 있습니다:
+유틸리티와 함께 Laravel 컨테이너에서 제공하는 어떤 의존성도 평소처럼 주입할 수 있습니다:
 
 ```php
 use Illuminate\Http\Request;

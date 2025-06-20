@@ -45,7 +45,7 @@ class ManagePost extends Component implements HasForms, HasActions
 
 ## 액션 추가하기 {#adding-the-action}
 
-액션을 반환하는 메서드를 추가하세요. 이 메서드는 액션과 정확히 같은 이름이거나, 이름 뒤에 `Action`이 붙은 이름이어야 합니다:
+액션을 반환하는 메서드를 추가합니다. 이 메서드는 액션과 정확히 같은 이름이거나, 이름 뒤에 `Action`이 붙은 이름이어야 합니다:
 
 ```php
 use App\Models\Post;
@@ -70,17 +70,17 @@ class ManagePost extends Component implements HasForms, HasActions
             ->action(fn () => $this->post->delete());
     }
     
-    // 액션 이름이 `delete`이므로, 이 메서드 이름도 동작합니다:
+    // 이 메서드 이름도 동작합니다. 액션 이름이 `delete`이기 때문입니다:
     // public function delete(): Action
     
-    // 액션 이름이 `delete`이기 때문에, 이 메서드 이름은 동작하지 않습니다:
+    // 이 메서드 이름은 동작하지 않습니다. 액션 이름이 `delete`이지, `deletePost`가 아니기 때문입니다:
     // public function deletePost(): Action
 
     // ...
 }
 ```
 
-마지막으로, 뷰에서 액션을 렌더링해야 합니다. 이를 위해 <span v-pre>`{{ $this->deleteAction }}`</span>을 사용할 수 있으며, 여기서 `deleteAction`을 액션 메서드 이름으로 바꿔 사용하면 됩니다:
+마지막으로, 뷰에서 액션을 렌더링해야 합니다. 이를 위해 <span v-pre>`{{ $this->deleteAction }}`</span>을 사용할 수 있으며, 여기서 `deleteAction`을 액션 메서드 이름으로 바꿔줍니다:
 
 ```blade
 <div>
@@ -90,11 +90,11 @@ class ManagePost extends Component implements HasForms, HasActions
 </div>
 ```
 
-또한 액션 모달을 렌더링하는 데 필요한 HTML을 주입하는 `<x-filament-actions::modals />`도 필요합니다. 이 컴포넌트는 해당 Livewire 컴포넌트 내에서 한 번만 포함하면 되며, 액션이 몇 개 있든 상관없습니다.
+액션 모달을 렌더링하는 데 필요한 HTML을 주입하는 `<x-filament-actions::modals />`도 필요합니다. 이 컴포넌트 내에서 몇 개의 액션이 있든 한 번만 포함하면 됩니다.
 
 ## 액션 인자 전달하기 {#passing-action-arguments}
 
-때때로 액션에 인자를 전달하고 싶을 수 있습니다. 예를 들어, 동일한 액션을 같은 뷰에서 여러 번 렌더링하지만, 매번 다른 모델에 대해 렌더링하는 경우 모델 ID를 인자로 전달한 뒤 나중에 이를 가져올 수 있습니다. 이를 위해 뷰에서 액션을 호출할 때 인자 배열을 전달할 수 있습니다:
+때때로, 액션에 인자를 전달하고 싶을 수 있습니다. 예를 들어, 같은 액션을 같은 뷰에서 여러 번 렌더링하지만, 매번 다른 모델에 대해 렌더링할 경우, 모델 ID를 인자로 전달하고 나중에 이를 가져올 수 있습니다. 이를 위해 뷰에서 액션을 호출하고 인자를 배열로 전달할 수 있습니다:
 
 ```php
 <div>
@@ -108,7 +108,7 @@ class ManagePost extends Component implements HasForms, HasActions
 </div>
 ```
 
-이제 액션 메서드에서 post ID에 접근할 수 있습니다:
+이제 액션 메서드에서 게시글 ID에 접근할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -128,7 +128,7 @@ public function deleteAction(): Action
 
 ## Livewire 뷰에서 액션 숨기기 {#hiding-actions-in-a-livewire-view}
 
-`hidden()` 또는 `visible()`을 사용하여 액션이 렌더링될지 제어하려면, 액션을 `isVisible()`에 대한 `@if` 체크로 감싸야 합니다:
+액션이 렌더링될지 여부를 제어하기 위해 `hidden()` 또는 `visible()`을 사용하는 경우, `isVisible()`에 대한 `@if` 체크로 액션을 감싸야 합니다:
 
 ```blade
 <div>
@@ -144,7 +144,7 @@ public function deleteAction(): Action
 </div>
 ```
 
-`hidden()`과 `visible()` 메서드는 액션이 `disabled()` 상태인지도 제어하므로, 사용자가 권한이 없을 때 액션 실행을 방지하는 데 여전히 유용합니다. 이러한 로직을 액션 자체의 `hidden()` 또는 `visible()`에 캡슐화하는 것이 좋은 습관이며, 그렇지 않으면 뷰와 `disabled()` 모두에 조건을 정의해야 합니다.
+`hidden()`과 `visible()` 메서드는 액션이 `disabled()`인지도 제어하므로, 사용자가 권한이 없을 때 액션 실행을 방지하는 데에도 유용합니다. 이 로직을 액션 자체의 `hidden()` 또는 `visible()`에 캡슐화하는 것이 좋은 습관입니다. 그렇지 않으면 뷰와 `disabled()` 모두에 조건을 정의해야 합니다.
 
 또한, 액션이 숨겨질 때 렌더링할 필요가 없는 래핑 요소도 함께 숨길 수 있습니다:
 
@@ -160,7 +160,7 @@ public function deleteAction(): Action
 
 ## Livewire 뷰에서 액션 그룹화하기 {#grouping-actions-in-a-livewire-view}
 
-`<x-filament-actions::group>` Blade 컴포넌트를 사용하여 `actions` 배열을 속성으로 전달하면 [여러 액션을 드롭다운 메뉴로 그룹화](grouping-actions)할 수 있습니다:
+<x-filament-actions::group> Blade 컴포넌트를 사용하여 [액션을 드롭다운 메뉴로 그룹화](grouping-actions)할 수 있으며, `actions` 배열을 속성으로 전달합니다:
 
 ```blade
 <div>
@@ -174,7 +174,7 @@ public function deleteAction(): Action
 </div>
 ```
 
-트리거 버튼과 드롭다운의 외형을 커스터마이즈하기 위해 다양한 속성을 추가로 전달할 수도 있습니다:
+트리거 버튼과 드롭다운의 모양을 커스터마이즈하기 위해 속성을 추가로 전달할 수도 있습니다:
 
 ```blade
 <div>
@@ -196,9 +196,9 @@ public function deleteAction(): Action
 </div>
 ```
 
-## 액션 체이닝 {#chaining-actions}
+## 액션 체이닝하기 {#chaining-actions}
 
-여러 개의 액션을 함께 체이닝하려면, 현재 액션이 완료된 후 `replaceMountedAction()` 메서드를 호출하여 현재 액션을 다른 액션으로 교체할 수 있습니다:
+여러 액션을 함께 체이닝할 수 있으며, 첫 번째 액션이 끝났을 때 `replaceMountedAction()` 메서드를 호출하여 현재 액션을 다른 액션으로 교체할 수 있습니다:
 
 ```php
 use App\Models\Post;
@@ -233,13 +233,13 @@ public function publishAction(): Action
 }
 ```
 
-이제 첫 번째 액션이 제출되면, 두 번째 액션이 그 자리에 열립니다. 처음에 첫 번째 액션에 전달된 [인자](#passing-action-arguments)는 두 번째 액션에도 전달되므로, 이를 사용해 요청 간 데이터를 유지할 수 있습니다.
+이제 첫 번째 액션이 제출되면 두 번째 액션이 그 자리에 열립니다. 처음 액션에 전달된 [인자](#passing-action-arguments)는 두 번째 액션에도 전달되므로, 요청 간에 데이터를 유지하는 데 사용할 수 있습니다.
 
-첫 번째 액션이 취소되면 두 번째 액션은 열리지 않습니다. 두 번째 액션이 취소되면, 첫 번째 액션은 이미 실행된 상태이므로 취소할 수 없습니다.
+첫 번째 액션이 취소되면 두 번째 액션은 열리지 않습니다. 두 번째 액션이 취소되면 첫 번째 액션은 이미 실행되었으므로 취소할 수 없습니다.
 
-## 프로그래밍적으로 액션 트리거하기 {#programmatically-triggering-actions}
+## 프로그래밍 방식으로 액션 트리거하기 {#programmatically-triggering-actions}
 
-때때로 사용자가 내장된 트리거 버튼을 클릭하지 않아도, 특히 JavaScript에서 액션을 트리거해야 할 때가 있습니다. 다음은 Livewire 컴포넌트에 등록할 수 있는 예시 액션입니다:
+때로는 사용자가 내장 트리거 버튼을 클릭하지 않고, 특히 JavaScript에서 액션을 트리거해야 할 수도 있습니다. 다음은 Livewire 컴포넌트에 등록할 수 있는 예시 액션입니다:
 
 ```php
 use Filament\Actions\Action;
@@ -254,7 +254,7 @@ public function testAction(): Action
 }
 ```
 
-HTML에서 `wire:click` 속성을 사용하여 클릭 시 해당 액션을 트리거할 수 있으며, `mountAction()` 메서드를 호출하고 원하는 인자를 선택적으로 전달할 수 있습니다:
+HTML에서 `wire:click` 속성을 사용하여, `mountAction()` 메서드를 호출하고 원하는 인자를 전달하여 해당 액션을 트리거할 수 있습니다:
 
 ```blade
 <button wire:click="mountAction('test', { id: 12345 })">
@@ -262,7 +262,7 @@ HTML에서 `wire:click` 속성을 사용하여 클릭 시 해당 액션을 트�
 </button>
 ```
 
-JavaScript에서 해당 액션을 트리거하려면, 동일한 인자를 전달하여 [`$wire` 유틸리티](https://livewire.laravel.com/docs/alpine#controlling-livewire-from-alpine-using-wire)를 사용할 수 있습니다:
+JavaScript에서 해당 액션을 트리거하려면, [`$wire` 유틸리티](https://livewire.laravel.com/docs/alpine#controlling-livewire-from-alpine-using-wire)를 사용하여 동일한 인자를 전달할 수 있습니다:
 
 ```js
 $wire.mountAction('test', { id: 12345 })

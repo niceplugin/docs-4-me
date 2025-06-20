@@ -4,7 +4,7 @@ title: Hidden
 # [폼.필드] Hidden
 ## 개요 {#overview}
 
-Hidden 컴포넌트는 폼에 값을 저장하는 숨겨진 필드를 생성할 수 있게 해줍니다.
+hidden 컴포넌트는 폼에 값을 저장하는 숨겨진 필드를 생성할 수 있게 해줍니다.
 
 ```php
 use Filament\Forms\Components\Hidden;

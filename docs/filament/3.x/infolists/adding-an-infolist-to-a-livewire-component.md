@@ -10,7 +10,7 @@ title: Livewire 컴포넌트에 인포리스트 추가하기
 php artisan make:livewire ViewProduct
 ```
 
-그런 다음, 페이지에서 Livewire 컴포넌트를 렌더링합니다:
+그런 다음, 페이지에 Livewire 컴포넌트를 렌더링합니다:
 
 ```blade
 @livewire('view-product')
@@ -45,7 +45,7 @@ class ViewProduct extends Component implements HasForms, HasInfolists
 
 ## 인포리스트 추가하기 {#adding-the-infolist}
 
-다음으로, `$infolist` 객체를 받아 수정한 후 반환하는 메서드를 Livewire 컴포넌트에 추가합니다:
+다음으로, `$infolist` 객체를 받아서 수정한 후 반환하는 메서드를 Livewire 컴포넌트에 추가합니다:
 
 ```php
 use Filament\Infolists\Infolist;
@@ -70,7 +70,7 @@ public function productInfolist(Infolist $infolist): Infolist
 
 인포리스트에 데이터를 전달하는 방법은 두 가지가 있습니다:
 
-첫 번째 방법은 인포리스트의 `record()` 메서드에 Eloquent 모델 인스턴스를 전달하여, 모델의 모든 속성과 관계를 인포리스트 스키마의 엔트리에 자동으로 매핑하는 것입니다:
+첫 번째로, 인포리스트의 `record()` 메서드에 Eloquent 모델 인스턴스를 전달하여, 모델의 모든 속성과 관계를 인포리스트 스키마의 항목에 자동으로 매핑할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\TextEntry;
@@ -88,7 +88,7 @@ public function productInfolist(Infolist $infolist): Infolist
 }
 ```
 
-또 다른 방법은 인포리스트의 `state()` 메서드에 데이터 배열을 전달하여, 인포리스트 스키마의 엔트리에 데이터를 수동으로 매핑하는 것입니다:
+또는, 인포리스트의 `state()` 메서드에 데이터 배열을 전달하여, 데이터를 인포리스트 스키마의 항목에 수동으로 매핑할 수 있습니다:
 
 ```php
 use Filament\Infolists\Components\TextEntry;

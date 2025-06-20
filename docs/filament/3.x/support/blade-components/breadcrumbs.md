@@ -1,10 +1,10 @@
 ---
-title: Breadcrumbs 블레이드 컴포넌트
+title: Breadcrumbs Blade 컴포넌트
 ---
 # [핵심개념.Blade컴포넌트] breadcrumbs
 ## 개요 {#overview}
 
-breadcrumbs 컴포넌트는 사용자가 애플리케이션 내에서 현재 위치를 알 수 있도록 간단하고 선형적인 내비게이션을 렌더링하는 데 사용됩니다:
+Breadcrumbs 컴포넌트는 사용자가 애플리케이션 내에서 현재 위치를 알 수 있도록 간단하고 선형적인 내비게이션을 렌더링하는 데 사용됩니다:
 
 ```blade
 <x-filament::breadcrumbs :breadcrumbs="[

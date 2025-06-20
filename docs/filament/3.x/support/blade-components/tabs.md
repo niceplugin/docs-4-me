@@ -1,5 +1,5 @@
 ---
-title: 탭스 블레이드 컴포넌트
+title: 탭 Blade 컴포넌트
 ---
 # [핵심개념.Blade컴포넌트] tabs
 ## 개요 {#overview}
@@ -24,7 +24,7 @@ title: 탭스 블레이드 컴포넌트
 
 ## 탭의 활성 상태 트리거하기 {#triggering-the-active-state-of-the-tab}
 
-기본적으로 탭은 "활성" 상태로 표시되지 않습니다. 탭을 활성 상태로 보이게 하려면 `active` 속성을 사용할 수 있습니다:
+기본적으로 탭은 "활성" 상태로 보이지 않습니다. 탭을 활성 상태로 보이게 하려면 `active` 속성을 사용할 수 있습니다:
 
 ```blade
 <x-filament::tabs>
@@ -36,7 +36,7 @@ title: 탭스 블레이드 컴포넌트
 </x-filament::tabs>
 ```
 
-또한 `active` 속성을 사용하여 조건부로 탭을 활성 상태로 만들 수 있습니다:
+`active` 속성을 사용하여 조건부로 탭을 활성 상태로 보이게 할 수도 있습니다:
 
 ```blade
 <x-filament::tabs>
@@ -51,7 +51,7 @@ title: 탭스 블레이드 컴포넌트
 </x-filament::tabs>
 ```
 
-또는 Alpine.js를 사용하여 `alpine-active` 속성으로 조건부로 탭을 활성 상태로 만들 수도 있습니다:
+또는 Alpine.js를 사용하여 `alpine-active` 속성으로 조건부로 탭을 활성 상태로 보이게 할 수도 있습니다:
 
 ```blade
 <x-filament::tabs x-data="{ activeTab: 'tab1' }">
@@ -68,7 +68,7 @@ title: 탭스 블레이드 컴포넌트
 
 ## 탭 아이콘 설정하기 {#setting-a-tab-icon}
 
-탭에는 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 사용할 수 있으며, `icon` 속성을 사용하여 설정할 수 있습니다:
+탭에는 [아이콘](https://blade-ui-kit.com/blade-icons?set=1#search)을 가질 수 있으며, `icon` 속성을 사용하여 설정할 수 있습니다:
 
 ```blade
 <x-filament::tabs>
@@ -80,7 +80,7 @@ title: 탭스 블레이드 컴포넌트
 </x-filament::tabs>
 ```
 
-### 탭 아이콘 위치 설정 {#setting-the-tab-icon-position}
+### 탭 아이콘 위치 설정하기 {#setting-the-tab-icon-position}
 
 탭의 아이콘은 `icon-position` 속성을 사용하여 라벨 앞이나 뒤에 위치시킬 수 있습니다:
 
@@ -99,7 +99,7 @@ title: 탭스 블레이드 컴포넌트
 
 ## 탭 배지 설정하기 {#setting-a-tab-badge}
 
-탭에는 [배지](badge)를 추가할 수 있으며, `badge` 슬롯을 사용하여 설정할 수 있습니다:
+탭에는 [배지](badge)를 가질 수 있으며, `badge` 슬롯을 사용하여 설정할 수 있습니다:
 
 ```blade
 <x-filament::tabs>
@@ -125,7 +125,7 @@ title: 탭스 블레이드 컴포넌트
         :href="route('notifications')"
         tag="a"
     >
-        Notifications
+        알림
     </x-filament::tabs.item>
 
     {{-- 다른 탭들 --}}

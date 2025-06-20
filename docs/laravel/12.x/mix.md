@@ -1,4 +1,4 @@
-# [패키지] 라라벨 믹스
+# Laravel Mix
 
 
 
@@ -14,7 +14,7 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css');
 ```
 
-webpack과 자산 컴파일을 처음 시작할 때 혼란스럽거나 부담스러웠던 경험이 있다면, Laravel Mix를 분명히 좋아하게 될 것입니다. 하지만 애플리케이션을 개발할 때 반드시 Mix를 사용해야 하는 것은 아니며, 원하는 자산 파이프라인 도구를 자유롭게 사용할 수 있고, 아예 사용하지 않아도 됩니다.
+webpack과 자산 컴파일을 처음 시작할 때 혼란스럽거나 부담스러웠던 경험이 있다면, Laravel Mix를 분명히 좋아하게 될 것입니다. 하지만 애플리케이션을 개발할 때 반드시 Mix를 사용할 필요는 없으며, 원하는 자산 파이프라인 도구를 자유롭게 사용할 수 있고, 아예 사용하지 않아도 됩니다.
 
 > [!NOTE]
-> Vite가 새로운 Laravel 설치에서 Laravel Mix를 대체했습니다. Mix 문서는 [공식 Laravel Mix](https://laravel-mix.com/) 웹사이트에서 확인하실 수 있습니다. Vite로 전환하고 싶으시다면 [Vite 마이그레이션 가이드](https://github.com/laravel/vite-plugin/blob/main/UPGRADE.md#migrating-from-laravel-mix-to-vite)를 참고하세요.
+> Vite가 새로운 Laravel 설치에서 Laravel Mix를 대체했습니다. Mix 문서는 [공식 Laravel Mix](https://laravel-mix.com/) 웹사이트를 참고하세요. Vite로 전환하고 싶다면 [Vite 마이그레이션 가이드](https://github.com/laravel/vite-plugin/blob/main/UPGRADE.md#migrating-from-laravel-mix-to-vite)를 참고하세요.

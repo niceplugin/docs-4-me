@@ -1,11 +1,11 @@
 ---
-title: TextInputColumn
+title: 텍스트 입력 칼럼
 ---
 # [테이블.컬럼] TextInputColumn
 
 ## 개요 {#overview}
 
-텍스트 입력 칼럼은 테이블 안에 텍스트 입력란을 렌더링할 수 있게 해주며, 이를 통해 새로운 페이지나 모달을 열지 않고도 해당 데이터베이스 레코드를 업데이트할 수 있습니다:
+텍스트 입력 칼럼을 사용하면 테이블 내에 텍스트 입력란을 렌더링할 수 있으며, 이를 통해 새 페이지나 모달을 열지 않고도 해당 데이터베이스 레코드를 업데이트할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\TextInputColumn;
@@ -17,7 +17,7 @@ TextInputColumn::make('email')
 
 ## 유효성 검사 {#validation}
 
-입력값을 검증하려면, 배열에 [Laravel 유효성 검사 규칙](https://laravel.com/docs/validation#available-validation-rules)을 전달하면 됩니다:
+입력값을 검증하려면 배열로 [라라벨 유효성 검사 규칙](https://laravel.com/docs/validation#available-validation-rules)을 전달할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\TextInputColumn;
@@ -26,9 +26,9 @@ TextInputColumn::make('name')
     ->rules(['required', 'max:255'])
 ```
 
-## HTML 입력 유형 사용자화 {#customizing-the-html-input-type}
+## HTML 입력 타입 커스터마이징 {#customizing-the-html-input-type}
 
-`type()` 메서드를 사용하여 커스텀 [HTML 입력 유형](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)을 지정할 수 있습니다:
+`type()` 메서드를 사용하여 커스텀 [HTML 입력 타입](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)을 전달할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\TextInputColumn;
@@ -38,7 +38,7 @@ TextInputColumn::make('background_color')->type('color')
 
 ## 라이프사이클 훅 {#lifecycle-hooks}
 
-훅을 사용하여 입력의 라이프사이클 내 여러 지점에서 코드를 실행할 수 있습니다:
+훅을 사용하여 입력의 라이프사이클 내 다양한 시점에 코드를 실행할 수 있습니다:
 
 ```php
 TextInputColumn::make()

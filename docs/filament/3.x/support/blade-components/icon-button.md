@@ -4,7 +4,7 @@ title: 아이콘 버튼 Blade 컴포넌트
 # [핵심개념.Blade컴포넌트] icon-button
 ## 개요 {#overview}
 
-버튼 컴포넌트는 클릭 가능한 버튼을 렌더링하여 동작을 수행할 때 사용됩니다:
+버튼 컴포넌트는 클릭 가능한 버튼을 렌더링하여 동작을 수행할 수 있도록 사용됩니다:
 
 ```blade
 <x-filament::icon-button
@@ -16,7 +16,7 @@ title: 아이콘 버튼 Blade 컴포넌트
 
 ## 아이콘 버튼을 앵커 링크로 사용하기 {#using-an-icon-button-as-an-anchor-link}
 
-기본적으로 아이콘 버튼의 HTML 태그는 `<button>`입니다. `tag` 속성을 사용하여 `<a>` 태그로 변경할 수 있습니다:
+기본적으로 아이콘 버튼의 하위 HTML 태그는 `<button>`입니다. `tag` 속성을 사용하여 `<a>` 태그로 변경할 수 있습니다:
 
 ```blade
 <x-filament::icon-button
@@ -29,7 +29,7 @@ title: 아이콘 버튼 Blade 컴포넌트
 
 ## 아이콘 버튼의 크기 설정하기 {#setting-the-size-of-an-icon-button}
 
-기본적으로 아이콘 버튼의 크기는 "medium"입니다. `size` 속성을 사용하여 "extra small", "small", "large", "extra large"로 변경할 수 있습니다:
+기본적으로 아이콘 버튼의 크기는 "medium"입니다. `size` 속성을 사용하여 "extra small", "small", "large" 또는 "extra large"로 변경할 수 있습니다:
 
 ```blade
 <x-filament::icon-button
@@ -59,7 +59,7 @@ title: 아이콘 버튼 Blade 컴포넌트
 
 ## 아이콘 버튼의 색상 변경하기 {#changing-the-color-of-an-icon-button}
 
-기본적으로 아이콘 버튼의 색상은 "primary"입니다. `color` 속성을 사용하여 `danger`, `gray`, `info`, `success`, `warning` 중 하나로 변경할 수 있습니다:
+기본적으로 아이콘 버튼의 색상은 "primary"입니다. `color` 속성을 사용하여 `danger`, `gray`, `info`, `success` 또는 `warning`으로 변경할 수 있습니다:
 
 ```blade
 <x-filament::icon-button
@@ -100,8 +100,8 @@ title: 아이콘 버튼 Blade 컴포넌트
 ```blade
 <x-filament::icon-button
     icon="heroicon-m-plus"
-    tooltip="사용자 등록"
-    label="새 레이블"
+    tooltip="Register a user"
+    label="New label"
 />
 ```
 
@@ -120,7 +120,7 @@ title: 아이콘 버튼 Blade 컴포넌트
 </x-filament::icon-button>
 ```
 
-`badge-color` 속성을 사용하여 배지의 [색상을 변경](badge#changing-the-color-of-the-badge)할 수 있습니다:
+`badge-color` 속성을 사용하여 [배지의 색상](badge#changing-the-color-of-the-badge)을 변경할 수 있습니다:
 
 ```blade
 <x-filament::icon-button

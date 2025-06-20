@@ -23,19 +23,19 @@ php artisan notifications:table
 
 ## 데이터베이스 알림 모달 렌더링하기 {#rendering-the-database-notifications-modal}
 
-> 패널에 데이터베이스 알림을 추가하고 싶다면, [이 가이드의 해당 부분](#adding-the-database-notifications-modal-to-a-panel)을 따라주세요.
+> 패널에 데이터베이스 알림을 추가하려면, [이 가이드의 해당 부분](#adding-the-database-notifications-modal-to-a-panel)을 따라주세요.
 
-[패널 빌더](../panels/getting-started) 외부에서 데이터베이스 알림 모달을 렌더링하고 싶다면, Blade 레이아웃에 새로운 Livewire 컴포넌트를 추가해야 합니다:
+[Panel Builder](../panels/getting-started) 외부에서 데이터베이스 알림 모달을 렌더링하려면, Blade 레이아웃에 새로운 Livewire 컴포넌트를 추가해야 합니다:
 
 ```blade
 @livewire('database-notifications')
 ```
 
-모달을 열기 위해서는 뷰에 "트리거" 버튼이 있어야 합니다. 예를 들어 `/resources/views/filament/notifications/database-notifications-trigger.blade.php`에 새로운 트리거 버튼 컴포넌트를 만드세요:
+모달을 열기 위해서는, 뷰에 "트리거" 버튼이 있어야 합니다. 예를 들어 `/resources/views/filament/notifications/database-notifications-trigger.blade.php`에 새로운 트리거 버튼 컴포넌트를 만드세요:
 
 ```blade
 <button type="button">
-    Notifications ({{ $unreadNotificationsCount }} unread)
+    알림 ({{ $unreadNotificationsCount }}개 읽지 않음)
 </button>
 ```
 
@@ -49,7 +49,7 @@ use Filament\Notifications\Livewire\DatabaseNotifications;
 DatabaseNotifications::trigger('filament.notifications.database-notifications-trigger');
 ```
 
-이제, 뷰에 렌더링된 트리거 버튼을 클릭하면 모달이 나타나고, 클릭 시 데이터베이스 알림이 포함된 모달이 표시됩니다!
+이제, 뷰에 렌더링된 트리거 버튼을 클릭하세요. 클릭 시 데이터베이스 알림이 포함된 모달이 나타나야 합니다!
 
 ### 패널에 데이터베이스 알림 모달 추가하기 {#adding-the-database-notifications-modal-to-a-panel}
 
@@ -66,7 +66,7 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-자세한 내용은 [패널 빌더 문서](../panels/notifications)를 참고하세요.
+자세한 내용은 [Panel Builder 문서](../panels/notifications)를 참고하세요.
 
 ## 데이터베이스 알림 보내기 {#sending-database-notifications}
 
@@ -80,7 +80,7 @@ use Filament\Notifications\Notification;
 $recipient = auth()->user();
 
 Notification::make()
-    ->title('성공적으로 저장되었습니다')
+    ->title('성공적으로 저장됨')
     ->sendToDatabase($recipient);
 ```
 
@@ -93,7 +93,7 @@ $recipient = auth()->user();
 
 $recipient->notify(
     Notification::make()
-        ->title('성공적으로 저장되었습니다')
+        ->title('성공적으로 저장됨')
         ->toDatabase(),
 );
 ```
@@ -109,7 +109,7 @@ use Filament\Notifications\Notification;
 public function toDatabase(User $notifiable): array
 {
     return Notification::make()
-        ->title('성공적으로 저장되었습니다')
+        ->title('성공적으로 저장됨')
         ->getDatabaseMessage();
 }
 ```
@@ -118,9 +118,9 @@ public function toDatabase(User $notifiable): array
 
 별도의 설정 없이, 새로운 데이터베이스 알림은 페이지가 처음 로드될 때만 수신됩니다.
 
-### 새로운 데이터베이스 알림 폴링 {#polling-for-new-database-notifications}
+### 새로운 데이터베이스 알림을 폴링하여 받기 {#polling-for-new-database-notifications}
 
-폴링은 주기적으로 서버에 요청을 보내 새로운 알림이 있는지 확인하는 방법입니다. 이 방식은 설정이 간단하다는 장점이 있지만, 서버 부하가 증가하기 때문에 확장성이 떨어진다고 말하는 사람도 있습니다.
+폴링은 주기적으로 서버에 요청을 보내 새로운 알림이 있는지 확인하는 방법입니다. 설정이 간단하다는 장점이 있지만, 서버 부하가 증가하므로 확장성 측면에서는 적합하지 않을 수 있습니다.
 
 기본적으로 Livewire는 30초마다 새로운 알림을 폴링합니다:
 
@@ -138,9 +138,9 @@ use Filament\Notifications\Livewire\DatabaseNotifications;
 DatabaseNotifications::pollingInterval(null);
 ```
 
-### 웹소켓으로 새로운 데이터베이스 알림을 받기 위해 Echo 사용하기 {#using-echo-to-receive-new-database-notifications-with-websockets}
+### 웹소켓을 사용하여 Echo로 새로운 데이터베이스 알림 받기 {#using-echo-to-receive-new-database-notifications-with-websockets}
 
-또는, 이 패키지는 [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation)와의 네이티브 통합을 제공합니다. Echo가 설치되어 있고, [서버 사이드 웹소켓 통합](https://laravel.com/docs/broadcasting#server-side-installation) 예를 들어 Pusher와 같은 것이 설치되어 있는지 확인하세요.
+또는, 이 패키지는 [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation)와의 네이티브 통합을 제공합니다. Echo가 설치되어 있고, [서버 측 웹소켓 통합](https://laravel.com/docs/broadcasting#server-side-installation)(예: Pusher)도 설치되어 있는지 확인하세요.
 
 웹소켓이 설정되면, 알림을 보낼 때 `isEventDispatched` 파라미터를 `true`로 설정하여 `DatabaseNotificationsSent` 이벤트를 자동으로 디스패치할 수 있습니다. 이렇게 하면 사용자를 위한 새로운 알림을 즉시 가져오게 됩니다:
 
@@ -150,13 +150,13 @@ use Filament\Notifications\Notification;
 $recipient = auth()->user();
 
 Notification::make()
-    ->title('저장에 성공했습니다')
+    ->title('성공적으로 저장됨')
     ->sendToDatabase($recipient, isEventDispatched: true);
 ```
 
 ## 데이터베이스 알림을 읽음으로 표시하기 {#marking-database-notifications-as-read}
 
-모달 상단에는 모든 알림을 한 번에 읽음으로 표시하는 버튼이 있습니다. 또한 알림에 [액션](sending-notifications#adding-actions-to-notifications)을 추가하여 개별 알림을 읽음으로 표시할 수도 있습니다. 이를 위해 액션에서 `markAsRead()` 메서드를 사용하세요:
+모달 상단에는 모든 알림을 한 번에 읽음으로 표시하는 버튼이 있습니다. 또한, 알림에 [액션](sending-notifications#adding-actions-to-notifications)을 추가하여 개별 알림을 읽음으로 표시할 수도 있습니다. 이를 위해 액션에서 `markAsRead()` 메서드를 사용하세요:
 
 ```php
 use Filament\Notifications\Actions\Action;
@@ -174,7 +174,7 @@ Notification::make()
     ->send();
 ```
 
-또는, 알림을 읽지 않음으로 표시하려면 `markAsUnread()` 메서드를 사용할 수 있습니다:
+또는, `markAsUnread()` 메서드를 사용하여 알림을 읽지 않음으로 표시할 수도 있습니다:
 
 ```php
 use Filament\Notifications\Actions\Action;

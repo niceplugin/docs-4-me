@@ -31,9 +31,9 @@ Placeholder::make('documentation')
     ->content(new HtmlString('<a href="https://filamentphp.com/docs">filamentphp.com</a>'))
 ```
 
-## 플레이스홀더 콘텐츠 동적 생성 {#dynamically-generating-placeholder-content}
+## 플레이스홀더 콘텐츠 동적 생성하기 {#dynamically-generating-placeholder-content}
 
-`content()` 메서드에 클로저를 전달하여 플레이스홀더 콘텐츠를 동적으로 생성할 수 있습니다. [고급 클로저 커스터마이징](../advanced#closure-customization) 문서에서 설명한 모든 클로저 매개변수에 접근할 수 있습니다:
+`content()` 메서드에 클로저를 전달하여 플레이스홀더 콘텐츠를 동적으로 생성할 수 있습니다. [고급 클로저 커스터마이징](../advanced#closure-customization) 문서에서 설명한 모든 클로저 파라미터에 접근할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Placeholder;
