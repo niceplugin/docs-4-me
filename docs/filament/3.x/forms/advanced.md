@@ -678,7 +678,7 @@ Livewire::make(Foo::class)
 
 ### Livewire 컴포넌트 지연 로딩 {#lazy-loading-a-livewire-component}
 
-`lazy()` 메서드를 사용해 컴포넌트를 [지연 로딩](https://livewire.laravel.com/docs/lazy#rendering-placeholder-html)할 수 있습니다:
+`lazy()` 메서드를 사용해 컴포넌트를 [지연 로딩](/livewire/3.x/lazy#rendering-placeholder-html)할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Livewire;

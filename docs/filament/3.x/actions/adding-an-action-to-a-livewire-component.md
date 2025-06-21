@@ -262,7 +262,7 @@ HTML에서 `wire:click` 속성을 사용하여, `mountAction()` 메서드를 호
 </button>
 ```
 
-JavaScript에서 해당 액션을 트리거하려면, [`$wire` 유틸리티](https://livewire.laravel.com/docs/alpine#controlling-livewire-from-alpine-using-wire)를 사용하여 동일한 인자를 전달할 수 있습니다:
+JavaScript에서 해당 액션을 트리거하려면, [`$wire` 유틸리티](/livewire/3.x/alpine#controlling-livewire-from-alpine-using-wire)를 사용하여 동일한 인자를 전달할 수 있습니다:
 
 ```js
 $wire.mountAction('test', { id: 12345 })

@@ -69,7 +69,7 @@ class RangeSlider extends Field
 
 Livewire 컴포넌트는 사용자의 브라우저에 상태가 저장되는 PHP 클래스입니다. 네트워크 요청이 발생하면, 상태가 서버로 전송되어 Livewire 컴포넌트 클래스의 public 속성에 채워지며, PHP의 다른 클래스 속성과 동일하게 접근할 수 있습니다.
 
-예를 들어, `$name`이라는 public 속성을 가진 Livewire 컴포넌트가 있다고 가정해봅시다. 이 속성을 Livewire 컴포넌트의 HTML 입력 필드에 두 가지 방법으로 바인딩할 수 있습니다: [`wire:model` 속성](https://livewire.laravel.com/docs/properties#data-binding)을 사용하거나, Alpine.js 속성과 [엔탱글링](https://livewire.laravel.com/docs/javascript#the-wire-object)하는 방법입니다:
+예를 들어, `$name`이라는 public 속성을 가진 Livewire 컴포넌트가 있다고 가정해봅시다. 이 속성을 Livewire 컴포넌트의 HTML 입력 필드에 두 가지 방법으로 바인딩할 수 있습니다: [`wire:model` 속성](/livewire/3.x/properties#data-binding)을 사용하거나, Alpine.js 속성과 [엔탱글링](/livewire/3.x/javascript#the-wire-object)하는 방법입니다:
 
 ```blade
 <input wire:model="name" />

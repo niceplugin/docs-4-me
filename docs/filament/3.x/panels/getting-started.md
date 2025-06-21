@@ -16,7 +16,7 @@ title: 시작하기
 
 ## 사전 준비 사항 {#prerequisites}
 
-Filament를 사용하기 전에 Laravel에 익숙해야 합니다. Filament는 [데이터베이스 마이그레이션](https://laravel.com/docs/migrations)과 [Eloquent ORM](https://laravel.com/docs/eloquent) 등 많은 Laravel의 핵심 개념 위에 구축되어 있습니다. Laravel이 처음이거나 복습이 필요하다면, [Laravel Bootcamp](https://bootcamp.laravel.com)를 완료하는 것을 강력히 추천합니다. 이 과정에서는 Laravel 앱을 구축하는 기본기를 다룹니다.
+Filament를 사용하기 전에 Laravel에 익숙해야 합니다. Filament는 [데이터베이스 마이그레이션](/laravel/12.x/migrations)과 [Eloquent ORM](/laravel/12.x/eloquent) 등 많은 Laravel의 핵심 개념 위에 구축되어 있습니다. Laravel이 처음이거나 복습이 필요하다면, [Laravel Bootcamp](https://bootcamp.laravel.com)를 완료하는 것을 강력히 추천합니다. 이 과정에서는 Laravel 앱을 구축하는 기본기를 다룹니다.
 
 ## 데모 프로젝트 {#the-demo-project}
 
@@ -72,7 +72,7 @@ Schema::create('treatments', function (Blueprint $table) {
 
 ### 모든 모델의 언가드 해제 {#unguarding-all-models}
 
-이 가이드에서는 간결함을 위해 Laravel의 [대량 할당 보호](https://laravel.com/docs/eloquent#mass-assignment)를 비활성화합니다. Filament는 유효한 데이터만 모델에 저장하므로 모델을 안전하게 언가드할 수 있습니다. 모든 Laravel 모델을 한 번에 언가드하려면 `app/Providers/AppServiceProvider.php`의 `boot()` 메서드에 `Model::unguard()`를 추가하세요:
+이 가이드에서는 간결함을 위해 Laravel의 [대량 할당 보호](/laravel/12.x/eloquent#mass-assignment)를 비활성화합니다. Filament는 유효한 데이터만 모델에 저장하므로 모델을 안전하게 언가드할 수 있습니다. 모든 Laravel 모델을 한 번에 언가드하려면 `app/Providers/AppServiceProvider.php`의 `boot()` 메서드에 `Model::unguard()`를 추가하세요:
 
 ```php
 use Illuminate\Database\Eloquent\Model;

@@ -68,7 +68,7 @@ TextColumn::make('title')
     ->label('게시글 제목')
 ```
 
-선택적으로, `translateLabel()` 메서드를 사용하여 [Laravel의 로컬라이제이션 기능](https://laravel.com/docs/localization)으로 라벨을 자동 번역할 수 있습니다:
+선택적으로, `translateLabel()` 메서드를 사용하여 [Laravel의 로컬라이제이션 기능](/laravel/12.x/localization)으로 라벨을 자동 번역할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\TextColumn;

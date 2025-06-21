@@ -22,7 +22,7 @@ composer require filament/filament:"^3.3" -W
 php artisan filament:install --panels
 ```
 
-이 명령은 `app/Providers/Filament/AdminPanelProvider.php`라는 새로운 [Laravel 서비스 프로바이더](https://laravel.com/docs/providers)를 생성하고 등록합니다.
+이 명령은 `app/Providers/Filament/AdminPanelProvider.php`라는 새로운 [Laravel 서비스 프로바이더](/laravel/12.x/providers)를 생성하고 등록합니다.
 
 > 패널에 접근할 때 오류가 발생한다면, 서비스 프로바이더가 `bootstrap/providers.php`(Laravel 11 이상) 또는 `config/app.php`(Laravel 10 이하)에 등록되어 있는지 확인하세요. 등록되어 있지 않다면 수동으로 추가해야 합니다.
 

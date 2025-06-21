@@ -156,7 +156,7 @@ class Todos extends Component
 }
 ```
 
-보시다시피, `$todos` 속성에 세 개의 문자열을 가진 [Laravel 컬렉션](https://laravel.com/docs/collections#main-content)을 할당하고 있습니다.
+보시다시피, `$todos` 속성에 세 개의 문자열을 가진 [Laravel 컬렉션](/laravel/12.x/collections#main-content)을 할당하고 있습니다.
 
 JSON만으로는 Laravel 컬렉션을 표현할 방법이 없으므로, Livewire는 스냅샷 내에서 순수 데이터와 메타데이터를 연관시키는 자체 패턴을 만들었습니다.
 
@@ -206,7 +206,7 @@ $collection = new $metadata['class']($state);
 
 이 접근 방식의 뚜렷한 장점 중 하나는 깊게 중첩된 속성도 탈수 및 수화할 수 있다는 점입니다.
 
-예를 들어, 위의 `Todos` 예시에서 세 번째 항목을 일반 문자열 대신 [Laravel Stringable](https://laravel.com/docs/helpers#method-str)로 바꾼 경우를 생각해봅시다:
+예를 들어, 위의 `Todos` 예시에서 세 번째 항목을 일반 문자열 대신 [Laravel Stringable](/laravel/12.x/helpers#method-str)로 바꾼 경우를 생각해봅시다:
 
 ```php
 class Todos extends Component

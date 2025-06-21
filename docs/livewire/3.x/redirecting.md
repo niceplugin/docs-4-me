@@ -3,7 +3,7 @@
 
 Livewire 요청은 표준 전체 페이지 브라우저 요청이 아니기 때문에, 표준 HTTP 리디렉션은 동작하지 않습니다. 대신, JavaScript를 통해 리디렉션을 트리거해야 합니다. 다행히도, Livewire는 컴포넌트 내에서 사용할 수 있는 간단한 `$this->redirect()` 헬퍼 메서드를 제공합니다. 내부적으로 Livewire가 프론트엔드에서 리디렉션 과정을 처리합니다.
 
-원한다면, 컴포넌트 내에서 [Laravel의 내장 리디렉션 유틸리티](https://laravel.com/docs/responses#redirects)도 사용할 수 있습니다.
+원한다면, 컴포넌트 내에서 [Laravel의 내장 리디렉션 유틸리티](/laravel/12.x/responses#redirects)도 사용할 수 있습니다.
 
 ## 기본 사용법 {#basic-usage}
 
@@ -98,7 +98,7 @@ public function save()
 
 ## 플래시 메시지 {#flash-messages}
 
-Laravel의 내장 리디렉션 메서드를 사용할 수 있을 뿐만 아니라, Livewire는 Laravel의 [세션 플래시 데이터 유틸리티](https://laravel.com/docs/session#flash-data)도 지원합니다.
+Laravel의 내장 리디렉션 메서드를 사용할 수 있을 뿐만 아니라, Livewire는 Laravel의 [세션 플래시 데이터 유틸리티](/laravel/12.x/session#flash-data)도 지원합니다.
 
 리디렉션과 함께 플래시 데이터를 전달하려면, 아래와 같이 Laravel의 `session()->flash()` 메서드를 사용할 수 있습니다:
 

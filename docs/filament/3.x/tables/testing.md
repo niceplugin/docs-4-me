@@ -6,7 +6,7 @@ title: 테스트
 
 이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성됩니다. Pest의 Livewire 플러그인을 테스트에 사용하려면 Pest 문서의 플러그인 설치 안내를 따라주세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만 PHPUnit에 맞게 쉽게 변환할 수 있습니다.
 
-Table Builder는 Livewire 컴포넌트에서 동작하므로, [Livewire 테스트 헬퍼](https://livewire.laravel.com/docs/testing)를 사용할 수 있습니다. 하지만, 테이블을 위해 사용할 수 있는 많은 커스텀 테스트 헬퍼도 제공합니다:
+Table Builder는 Livewire 컴포넌트에서 동작하므로, [Livewire 테스트 헬퍼](/livewire/3.x/testing)를 사용할 수 있습니다. 하지만, 테이블을 위해 사용할 수 있는 많은 커스텀 테스트 헬퍼도 제공합니다:
 
 ## 렌더링 {#render}
 

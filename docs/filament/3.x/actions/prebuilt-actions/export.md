@@ -4,7 +4,7 @@ title: 내보내기 액션
 # [액션.내장된액션] ExportAction
 ## 개요 {#overview}
 
-Filament v3.2에서는 행을 CSV 또는 XLSX 파일로 내보낼 수 있는 사전 구축된 액션이 도입되었습니다. 트리거 버튼을 클릭하면, 내보낼 열과 해당 열의 라벨을 지정할 수 있는 모달이 표시됩니다. 이 기능은 [작업 배치](https://laravel.com/docs/queues#job-batching)와 [데이터베이스 알림](../../notifications/database-notifications#overview)을 사용하므로, Laravel에서 해당 마이그레이션을 퍼블리시해야 합니다. 또한, Filament가 내보내기 정보를 저장하는 데 사용하는 테이블의 마이그레이션도 퍼블리시해야 합니다:
+Filament v3.2에서는 행을 CSV 또는 XLSX 파일로 내보낼 수 있는 사전 구축된 액션이 도입되었습니다. 트리거 버튼을 클릭하면, 내보낼 열과 해당 열의 라벨을 지정할 수 있는 모달이 표시됩니다. 이 기능은 [작업 배치](/laravel/12.x/queues#job-batching)와 [데이터베이스 알림](../../notifications/database-notifications#overview)을 사용하므로, Laravel에서 해당 마이그레이션을 퍼블리시해야 합니다. 또한, Filament가 내보내기 정보를 저장하는 데 사용하는 테이블의 마이그레이션도 퍼블리시해야 합니다:
 
 ```bash
 # Laravel 11 이상
@@ -236,7 +236,7 @@ use Filament\Actions\Exports\ExportColumn;
 ExportColumn::make('users_count')->counts('users')
 ```
 
-이 예시에서, `users`는 개수를 셀 관계의 이름입니다. 컬럼 이름은 `users_count`여야 하며, 이는 [Laravel에서 사용하는](https://laravel.com/docs/eloquent-relationships#counting-related-models) 결과 저장 규칙입니다.
+이 예시에서, `users`는 개수를 셀 관계의 이름입니다. 컬럼 이름은 `users_count`여야 하며, 이는 [Laravel에서 사용하는](/laravel/12.x/eloquent-relationships#counting-related-models) 결과 저장 규칙입니다.
 
 계산 전에 관계에 스코프를 적용하고 싶다면, 메서드에 배열을 전달할 수 있습니다. 키는 관계 이름이고 값은 Eloquent 쿼리에 스코프를 적용하는 함수입니다:
 
@@ -259,7 +259,7 @@ use Filament\Actions\Exports\ExportColumn;
 ExportColumn::make('users_exists')->exists('users')
 ```
 
-이 예시에서, `users`는 존재 여부를 확인할 관계의 이름입니다. 컬럼 이름은 `users_exists`여야 하며, 이는 [Laravel에서 사용하는](https://laravel.com/docs/eloquent-relationships#other-aggregate-functions) 결과 저장 규칙입니다.
+이 예시에서, `users`는 존재 여부를 확인할 관계의 이름입니다. 컬럼 이름은 `users_exists`여야 하며, 이는 [Laravel에서 사용하는](/laravel/12.x/eloquent-relationships#other-aggregate-functions) 결과 저장 규칙입니다.
 
 계산 전에 관계에 스코프를 적용하고 싶다면, 메서드에 배열을 전달할 수 있습니다. 키는 관계 이름이고 값은 Eloquent 쿼리에 스코프를 적용하는 함수입니다:
 
@@ -282,7 +282,7 @@ use Filament\Actions\Exports\ExportColumn;
 ExportColumn::make('users_avg_age')->avg('users', 'age')
 ```
 
-이 예시에서, `users`는 관계 이름이고, `age`는 평균을 낼 필드입니다. 컬럼 이름은 `users_avg_age`여야 하며, 이는 [Laravel에서 사용하는](https://laravel.com/docs/eloquent-relationships#other-aggregate-functions) 결과 저장 규칙입니다.
+이 예시에서, `users`는 관계 이름이고, `age`는 평균을 낼 필드입니다. 컬럼 이름은 `users_avg_age`여야 하며, 이는 [Laravel에서 사용하는](/laravel/12.x/eloquent-relationships#other-aggregate-functions) 결과 저장 규칙입니다.
 
 계산 전에 관계에 스코프를 적용하고 싶다면, 메서드에 배열을 전달할 수 있습니다. 키는 관계 이름이고 값은 Eloquent 쿼리에 스코프를 적용하는 함수입니다:
 
@@ -647,7 +647,7 @@ public function getJobMiddleware(): array
 }
 ```
 
-특정 내보내기 작업에 적용할 미들웨어를 커스터마이징하고 싶다면, 내보내기 클래스에서 이 메서드를 오버라이드할 수 있습니다. 작업 미들웨어에 대한 자세한 내용은 [Laravel 문서](https://laravel.com/docs/queues#job-middleware)를 참고하세요.
+특정 내보내기 작업에 적용할 미들웨어를 커스터마이징하고 싶다면, 내보내기 클래스에서 이 메서드를 오버라이드할 수 있습니다. 작업 미들웨어에 대한 자세한 내용은 [Laravel 문서](/laravel/12.x/queues#job-middleware)를 참고하세요.
 
 ### 내보내기 작업 재시도 커스터마이징하기 {#customizing-the-export-job-retries}
 
@@ -662,7 +662,7 @@ public function getJobRetryUntil(): ?CarbonInterface
 }
 ```
 
-특정 내보내기 작업의 재시도 시간을 커스터마이징하고 싶다면, 내보내기 클래스에서 이 메서드를 오버라이드할 수 있습니다. 작업 재시도에 대한 자세한 내용은 [Laravel 문서](https://laravel.com/docs/queues#time-based-attempts)를 참고하세요.
+특정 내보내기 작업의 재시도 시간을 커스터마이징하고 싶다면, 내보내기 클래스에서 이 메서드를 오버라이드할 수 있습니다. 작업 재시도에 대한 자세한 내용은 [Laravel 문서](/laravel/12.x/queues#time-based-attempts)를 참고하세요.
 
 ### 내보내기 작업 태그 커스터마이징하기 {#customizing-the-export-job-tags}
 
@@ -690,7 +690,7 @@ public function getJobBatchName(): ?string
 
 ## 권한 {#authorization}
 
-기본적으로, 내보내기를 시작한 사용자만 생성된 파일을 다운로드할 수 있습니다. 권한 로직을 커스터마이징하고 싶다면, `ExportPolicy` 클래스를 생성하고 [`AuthServiceProvider`에 등록](https://laravel.com/docs/authorization#registering-policies)할 수 있습니다:
+기본적으로, 내보내기를 시작한 사용자만 생성된 파일을 다운로드할 수 있습니다. 권한 로직을 커스터마이징하고 싶다면, `ExportPolicy` 클래스를 생성하고 [`AuthServiceProvider`에 등록](/laravel/12.x/authorization#registering-policies)할 수 있습니다:
 
 ```php
 use App\Policies\ExportPolicy;

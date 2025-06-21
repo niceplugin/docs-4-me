@@ -489,7 +489,7 @@ class UpdatePost extends Component
 
 #### 입력값 권한 확인 {#authorizing-the-input}
 
-`$id`는 `wire:model` 등으로 클라이언트에서 조작될 수 있으므로, 컨트롤러에서처럼 [Laravel의 권한 확인](https://laravel.com/docs/authorization)을 사용해 현재 사용자가 게시글을 업데이트할 수 있는지 확인할 수 있습니다:
+`$id`는 `wire:model` 등으로 클라이언트에서 조작될 수 있으므로, 컨트롤러에서처럼 [Laravel의 권한 확인](/laravel/12.x/authorization)을 사용해 현재 사용자가 게시글을 업데이트할 수 있는지 확인할 수 있습니다:
 
 ```php
 public function update()

@@ -10,7 +10,7 @@ PHP는 기본적으로 대부분의 원시 값을 쉽게 JSON으로 직렬화합
 
 ## Synthesizer 이해하기 {#understanding-synthesizers}
 
-커스텀 Synthesizer를 만들기 전에, 먼저 Livewire가 [Laravel Stringables](https://laravel.com/docs/strings)를 지원하기 위해 사용하는 내부 Synthesizer를 살펴보겠습니다.
+커스텀 Synthesizer를 만들기 전에, 먼저 Livewire가 [Laravel Stringables](/laravel/12.x/strings)를 지원하기 위해 사용하는 내부 Synthesizer를 살펴보겠습니다.
 
 예를 들어, 애플리케이션에 다음과 같은 `CreatePost` 컴포넌트가 있다고 가정해봅시다:
 

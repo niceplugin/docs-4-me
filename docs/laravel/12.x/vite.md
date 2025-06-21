@@ -69,7 +69,7 @@ node -v
 npm -v
 ```
 
-[공식 Node 웹사이트](https://nodejs.org/en/download/)에서 제공하는 간단한 그래픽 설치 프로그램을 통해 Node와 NPM의 최신 버전을 쉽게 설치할 수 있습니다. 또는 [Laravel Sail](https://laravel.com/docs/{{version}}/sail)을 사용하는 경우, Sail을 통해 Node와 NPM을 실행할 수 있습니다:
+[공식 Node 웹사이트](https://nodejs.org/en/download/)에서 제공하는 간단한 그래픽 설치 프로그램을 통해 Node와 NPM의 최신 버전을 쉽게 설치할 수 있습니다. 또는 [Laravel Sail](/laravel/12.x/sail)을 사용하는 경우, Sail을 통해 Node와 NPM을 실행할 수 있습니다:
 
 ```shell
 ./vendor/bin/sail node -v

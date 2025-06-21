@@ -97,7 +97,7 @@ Select::make('technologies')
 
 <AutoScreenshot name="forms/fields/select/multiple" alt="Multi-select" version="3.x" />
 
-이 옵션들은 JSON 형식으로 반환됩니다. Eloquent를 사용해 저장할 경우, 모델 속성에 `array` [캐스팅](https://laravel.com/docs/eloquent-mutators#array-and-json-casting)을 추가해야 합니다:
+이 옵션들은 JSON 형식으로 반환됩니다. Eloquent를 사용해 저장할 경우, 모델 속성에 `array` [캐스팅](/laravel/12.x/eloquent-mutators#array-and-json-casting)을 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;

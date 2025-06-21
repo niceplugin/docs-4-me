@@ -4,7 +4,7 @@ title: 복제 액션
 # [액션.내장된액션] ReplicateAction
 ## 개요 {#overview}
 
-Filament에는 Eloquent 레코드를 [복제](https://laravel.com/docs/eloquent#replicating-models)할 수 있는 미리 만들어진 액션이 포함되어 있습니다. 다음과 같이 사용할 수 있습니다:
+Filament에는 Eloquent 레코드를 [복제](/laravel/12.x/eloquent#replicating-models)할 수 있는 미리 만들어진 액션이 포함되어 있습니다. 다음과 같이 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\ReplicateAction;

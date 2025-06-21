@@ -110,7 +110,7 @@ protected static ?string $recordTitleAttribute = 'name';
 
 이 설정은 [글로벌 검색](global-search)과 같은 기능에 필요합니다.
 
-> 한 컬럼만으로 레코드를 식별하기에 부족하다면, [Eloquent 접근자](https://laravel.com/docs/eloquent-mutators#defining-an-accessor)의 이름을 지정할 수 있습니다.
+> 한 컬럼만으로 레코드를 식별하기에 부족하다면, [Eloquent 접근자](/laravel/12.x/eloquent-mutators#defining-an-accessor)의 이름을 지정할 수 있습니다.
 
 ## 리소스 폼 {#resource-forms}
 
@@ -212,7 +212,7 @@ public static function table(Table $table): Table
 
 ## 권한 부여 {#authorization}
 
-권한 부여를 위해 Filament는 앱에 등록된 모든 [모델 정책](https://laravel.com/docs/authorization#creating-policies)을 따릅니다. 다음 메서드들이 사용됩니다:
+권한 부여를 위해 Filament는 앱에 등록된 모든 [모델 정책](/laravel/12.x/authorization#creating-policies)을 따릅니다. 다음 메서드들이 사용됩니다:
 
 - `viewAny()`는 리소스를 내비게이션 메뉴에서 완전히 숨기고, 사용자가 어떤 페이지에도 접근하지 못하게 합니다.
 - `create()`는 [새 레코드 생성](creating-records)을 제어합니다.
@@ -445,7 +445,7 @@ CustomerResource::getUrl(panel: 'marketing');
 
 Filament 내에서 리소스 모델에 대한 모든 쿼리는 `getEloquentQuery()` 메서드로 시작합니다.
 
-이로 인해, 전체 리소스에 영향을 주는 쿼리 제약이나 [모델 스코프](https://laravel.com/docs/eloquent#query-scopes)를 쉽게 적용할 수 있습니다:
+이로 인해, 전체 리소스에 영향을 주는 쿼리 제약이나 [모델 스코프](/laravel/12.x/eloquent#query-scopes)를 쉽게 적용할 수 있습니다:
 
 ```php
 public static function getEloquentQuery(): Builder
@@ -476,7 +476,7 @@ public static function getEloquentQuery(): Builder
 }
 ```
 
-글로벌 스코프 제거에 대한 자세한 내용은 [Laravel 문서](https://laravel.com/docs/eloquent#removing-global-scopes)를 참고하세요.
+글로벌 스코프 제거에 대한 자세한 내용은 [Laravel 문서](/laravel/12.x/eloquent#removing-global-scopes)를 참고하세요.
 
 ## 리소스 URL 커스터마이즈 {#customizing-the-resource-url}
 

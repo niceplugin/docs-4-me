@@ -17,7 +17,7 @@ TagsInput::make('tags')
 
 <AutoScreenshot name="forms/fields/tags-input/simple" alt="태그 입력" version="3.x" />
 
-Eloquent를 사용하여 JSON 태그를 저장하는 경우, 모델 속성에 `array` [캐스트](https://laravel.com/docs/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
+Eloquent를 사용하여 JSON 태그를 저장하는 경우, 모델 속성에 `array` [캐스트](/laravel/12.x/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;

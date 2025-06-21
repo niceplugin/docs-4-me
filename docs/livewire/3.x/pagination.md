@@ -47,7 +47,7 @@ class ShowPosts extends Component
 
 보시다시피, `Post::paginate()` 메서드를 통해 보여줄 게시글 수를 제한하는 것 외에도, `$posts->links()`를 사용해 페이지 이동 링크를 렌더링합니다.
 
-Laravel에서 페이지네이션에 대한 더 자세한 정보는 [Laravel의 포괄적인 페이지네이션 문서](https://laravel.com/docs/pagination)를 참고하세요.
+Laravel에서 페이지네이션에 대한 더 자세한 정보는 [Laravel의 포괄적인 페이지네이션 문서](/laravel/12.x/pagination)를 참고하세요.
 
 ## URL 쿼리 문자열 추적 비활성화 {#disabling-url-query-string-tracking}
 
@@ -296,7 +296,7 @@ public function render()
 }
 ```
 
-심플 페이지네이션에 대한 더 자세한 정보는 [Laravel의 "simplePaginator" 문서](https://laravel.com/docs/pagination#simple-pagination)를 참고하세요.
+심플 페이지네이션에 대한 더 자세한 정보는 [Laravel의 "simplePaginator" 문서](/laravel/12.x/pagination#simple-pagination)를 참고하세요.
 
 ## 커서 페이지네이션 사용하기 {#using-cursor-pagination}
 
@@ -317,7 +317,7 @@ public function render()
 https://example.com/posts?cursor=eyJpZCI6MTUsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0
 ```
 
-커서 페이지네이션에 대한 더 자세한 정보는 [Laravel의 커서 페이지네이션 문서](https://laravel.com/docs/pagination#cursor-pagination)를 참고하세요.
+커서 페이지네이션에 대한 더 자세한 정보는 [Laravel의 커서 페이지네이션 문서](/laravel/12.x/pagination#cursor-pagination)를 참고하세요.
 
 ## Tailwind 대신 Bootstrap 사용하기 {#using-bootstrap-instead-of-tailwind}
 

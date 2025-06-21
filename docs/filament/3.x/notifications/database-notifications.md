@@ -7,7 +7,7 @@ title: 데이터베이스 알림
 
 ## 알림 데이터베이스 테이블 설정하기 {#setting-up-the-notifications-database-table}
 
-시작하기 전에, [Laravel 알림 테이블](https://laravel.com/docs/notifications#database-prerequisites)이 데이터베이스에 추가되어 있는지 확인하세요:
+시작하기 전에, [Laravel 알림 테이블](/laravel/12.x/notifications#database-prerequisites)이 데이터베이스에 추가되어 있는지 확인하세요:
 
 ```bash
 # Laravel 11 이상
@@ -100,7 +100,7 @@ $recipient->notify(
 
 > Laravel은 큐를 사용하여 데이터베이스 알림을 전송합니다. 알림을 받으려면 큐가 실행 중인지 확인하세요.
 
-또는, 전통적인 [Laravel 알림 클래스](https://laravel.com/docs/notifications#generating-notifications)를 사용하여 `toDatabase()` 메서드에서 알림을 반환할 수도 있습니다:
+또는, 전통적인 [Laravel 알림 클래스](/laravel/12.x/notifications#generating-notifications)를 사용하여 `toDatabase()` 메서드에서 알림을 반환할 수도 있습니다:
 
 ```php
 use App\Models\User;
@@ -140,7 +140,7 @@ DatabaseNotifications::pollingInterval(null);
 
 ### 웹소켓을 사용하여 Echo로 새로운 데이터베이스 알림 받기 {#using-echo-to-receive-new-database-notifications-with-websockets}
 
-또는, 이 패키지는 [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation)와의 네이티브 통합을 제공합니다. Echo가 설치되어 있고, [서버 측 웹소켓 통합](https://laravel.com/docs/broadcasting#server-side-installation)(예: Pusher)도 설치되어 있는지 확인하세요.
+또는, 이 패키지는 [Laravel Echo](/laravel/12.x/broadcasting#client-side-installation)와의 네이티브 통합을 제공합니다. Echo가 설치되어 있고, [서버 측 웹소켓 통합](/laravel/12.x/broadcasting#server-side-installation)(예: Pusher)도 설치되어 있는지 확인하세요.
 
 웹소켓이 설정되면, 알림을 보낼 때 `isEventDispatched` 파라미터를 `true`로 설정하여 `DatabaseNotificationsSent` 이벤트를 자동으로 디스패치할 수 있습니다. 이렇게 하면 사용자를 위한 새로운 알림을 즉시 가져오게 됩니다:
 

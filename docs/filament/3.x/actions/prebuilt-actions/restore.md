@@ -4,7 +4,7 @@ title: 복원 액션
 # [액션.내장된액션] RestoreAction
 ## 개요 {#overview}
 
-Filament에는 [소프트 삭제](https://laravel.com/docs/eloquent#soft-deleting)된 Eloquent 레코드를 복원할 수 있는 미리 만들어진 액션이 포함되어 있습니다. 트리거 버튼을 클릭하면 모달이 나타나 사용자에게 확인을 요청합니다. 다음과 같이 사용할 수 있습니다:
+Filament에는 [소프트 삭제](/laravel/12.x/eloquent#soft-deleting)된 Eloquent 레코드를 복원할 수 있는 미리 만들어진 액션이 포함되어 있습니다. 트리거 버튼을 클릭하면 모달이 나타나 사용자에게 확인을 요청합니다. 다음과 같이 사용할 수 있습니다:
 
 ```php
 use Filament\Actions\RestoreAction;

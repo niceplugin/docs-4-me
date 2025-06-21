@@ -178,7 +178,7 @@ public function boot(): void
 
 #### 인증 가드 {#authentication-guard}
 
-Fortify에서 사용할 인증 가드는 애플리케이션의 `fortify` 설정 파일에서 커스터마이즈할 수 있습니다. 단, 설정된 가드는 반드시 `Illuminate\Contracts\Auth\StatefulGuard`의 구현체여야 합니다. SPA 인증에 Fortify를 사용하려면, Laravel의 기본 `web` 가드를 [Laravel Sanctum](https://laravel.com/docs/sanctum)과 함께 사용해야 합니다.
+Fortify에서 사용할 인증 가드는 애플리케이션의 `fortify` 설정 파일에서 커스터마이즈할 수 있습니다. 단, 설정된 가드는 반드시 `Illuminate\Contracts\Auth\StatefulGuard`의 구현체여야 합니다. SPA 인증에 Fortify를 사용하려면, Laravel의 기본 `web` 가드를 [Laravel Sanctum](/laravel/12.x/sanctum)과 함께 사용해야 합니다.
 
 
 ### 인증 파이프라인 커스터마이징 {#customizing-the-authentication-pipeline}

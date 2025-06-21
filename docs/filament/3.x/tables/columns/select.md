@@ -24,7 +24,7 @@ SelectColumn::make('status')
 
 ## 유효성 검사 {#validation}
 
-입력값을 검증하려면 배열로 [Laravel 유효성 검사 규칙](https://laravel.com/docs/validation#available-validation-rules)을 전달할 수 있습니다:
+입력값을 검증하려면 배열로 [Laravel 유효성 검사 규칙](/laravel/12.x/validation#available-validation-rules)을 전달할 수 있습니다:
 
 ```php
 use Filament\Tables\Columns\SelectColumn;

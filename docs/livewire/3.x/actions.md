@@ -369,7 +369,7 @@ class ShowPosts extends Component
 
 ## 의존성 주입 {#dependency-injection}
 
-액션 시그니처에 타입힌트된 파라미터를 사용하여 [Laravel의 의존성 주입](https://laravel.com/docs/controllers#dependency-injection-and-controllers) 시스템을 활용할 수 있습니다. Livewire와 Laravel은 액션의 의존성을 컨테이너에서 자동으로 resolve합니다:
+액션 시그니처에 타입힌트된 파라미터를 사용하여 [Laravel의 의존성 주입](/laravel/12.x/controllers#dependency-injection-and-controllers) 시스템을 활용할 수 있습니다. Livewire와 Laravel은 액션의 의존성을 컨테이너에서 자동으로 resolve합니다:
 
 ```php
 <?php
@@ -409,7 +409,7 @@ class ShowPosts extends Component
 </div>
 ```
 
-이 예제에서, `delete()` 메서드는 [Laravel의 서비스 컨테이너](https://laravel.com/docs/container#main-content)를 통해 resolve된 `PostRepository` 인스턴스를 먼저 받고, 그 다음에 제공된 `$postId` 파라미터를 받습니다.
+이 예제에서, `delete()` 메서드는 [Laravel의 서비스 컨테이너](/laravel/12.x/container#main-content)를 통해 resolve된 `PostRepository` 인스턴스를 먼저 받고, 그 다음에 제공된 `$postId` 파라미터를 받습니다.
 
 ## Alpine에서 액션 호출 {#calling-actions-from-alpine}
 

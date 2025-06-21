@@ -32,7 +32,7 @@ class CreatePostTest extends TestCase
 
 물론, 이러한 파일들은 직접 수동으로 생성할 수도 있고, Laravel 애플리케이션의 기존 PHPUnit 테스트 내에서 Livewire의 테스트 유틸리티를 사용할 수도 있습니다.
 
-더 읽기 전에, [Laravel의 자체 내장 테스트 기능](https://laravel.com/docs/testing)에 익숙해지는 것이 좋습니다.
+더 읽기 전에, [Laravel의 자체 내장 테스트 기능](/laravel/12.x/testing)에 익숙해지는 것이 좋습니다.
 
 ## 페이지에 컴포넌트가 포함되어 있는지 테스트하기 {#testing-a-page-contains-a-component}
 
