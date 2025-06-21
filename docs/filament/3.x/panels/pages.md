@@ -176,7 +176,7 @@ public $stats = [];
 
 ### 페이지에서 위젯에 속성 전달하기 {#passing-properties-to-widgets-on-pages}
 
-페이지에 위젯을 등록할 때, `make()` 메서드를 사용하여 [Livewire 속성](https://livewire.laravel.com/docs/properties) 배열을 전달할 수 있습니다:
+페이지에 위젯을 등록할 때, `make()` 메서드를 사용하여 [Livewire 속성](/livewire/3.x/properties) 배열을 전달할 수 있습니다:
 
 ```php
 use App\Filament\Widgets\StatsOverviewWidget;
@@ -191,7 +191,7 @@ protected function getHeaderWidgets(): array
 }
 ```
 
-이 속성 배열은 위젯 클래스의 [public Livewire 속성](https://livewire.laravel.com/docs/properties)에 매핑됩니다:
+이 속성 배열은 위젯 클래스의 [public Livewire 속성](/livewire/3.x/properties)에 매핑됩니다:
 
 ```php
 use Filament\Widgets\Widget;

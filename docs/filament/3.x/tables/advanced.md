@@ -298,7 +298,7 @@ public function table(Table $table): Table
 
 ## Laravel Scout로 레코드 검색하기 {#searching-records-with-laravel-scout}
 
-Filament는 [Laravel Scout](https://laravel.com/docs/scout)와 직접 통합을 제공하지 않지만, 메서드를 오버라이드하여 통합할 수 있습니다.
+Filament는 [Laravel Scout](/laravel/12.x/scout)와 직접 통합을 제공하지 않지만, 메서드를 오버라이드하여 통합할 수 있습니다.
 
 `whereIn()` 절을 사용하여 Scout 결과에 대해 쿼리를 필터링하세요:
 

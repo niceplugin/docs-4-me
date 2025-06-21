@@ -345,4 +345,4 @@ public function panel(Panel $panel): Panel
 
 ### 정책에서 게스트 권한 부여 {#authorizing-guests-in-policies}
 
-존재할 경우, Filament는 접근 제어를 위해 [Laravel 모델 정책](https://laravel.com/docs/authorization#generating-policies)에 의존합니다. [모델 정책에서 게스트 사용자에 대한 읽기 권한](https://laravel.com/docs/authorization#guest-users)을 부여하려면, Policy를 생성하고 `viewAny()` 및 `view()` 메서드를 업데이트하여 `User $user` 파라미터를 `?User $user`로 변경해 선택적으로 만들고, `return true;`를 반환하세요. 또는, 해당 메서드들을 정책에서 완전히 제거할 수도 있습니다.
+존재할 경우, Filament는 접근 제어를 위해 [Laravel 모델 정책](/laravel/12.x/authorization#generating-policies)에 의존합니다. [모델 정책에서 게스트 사용자에 대한 읽기 권한](/laravel/12.x/authorization#guest-users)을 부여하려면, Policy를 생성하고 `viewAny()` 및 `view()` 메서드를 업데이트하여 `User $user` 파라미터를 `?User $user`로 변경해 선택적으로 만들고, `return true;`를 반환하세요. 또는, 해당 메서드들을 정책에서 완전히 제거할 수도 있습니다.

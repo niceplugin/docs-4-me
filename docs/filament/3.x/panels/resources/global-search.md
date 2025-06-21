@@ -54,7 +54,7 @@ public static function getGlobalSearchResultDetails(Model $record): array
 }
 ```
 
-이 예시에서는 레코드의 카테고리와 저자가 검색 결과의 제목 아래에 표시됩니다. 하지만 `category`와 `author` 관계는 지연 로딩(lazy-loading)되므로 성능이 저하될 수 있습니다. 이러한 관계를 [즉시 로딩](https://laravel.com/docs/eloquent-relationships#eager-loading)하려면, `getGlobalSearchEloquentQuery()` 메서드를 오버라이드해야 합니다:
+이 예시에서는 레코드의 카테고리와 저자가 검색 결과의 제목 아래에 표시됩니다. 하지만 `category`와 `author` 관계는 지연 로딩(lazy-loading)되므로 성능이 저하될 수 있습니다. 이러한 관계를 [즉시 로딩](/laravel/12.x/eloquent-relationships#eager-loading)하려면, `getGlobalSearchEloquentQuery()` 메서드를 오버라이드해야 합니다:
 
 ```php
 public static function getGlobalSearchEloquentQuery(): Builder

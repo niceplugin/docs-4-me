@@ -127,7 +127,7 @@ class ViewUser extends ViewRecord
 
 ## 권한 부여 {#authorization}
 
-권한 부여를 위해 Filament는 앱에 등록된 [모델 정책](https://laravel.com/docs/authorization#creating-policies)을 따릅니다.
+권한 부여를 위해 Filament는 앱에 등록된 [모델 정책](/laravel/12.x/authorization#creating-policies)을 따릅니다.
 
 모델 정책의 `view()` 메서드가 `true`를 반환하면 사용자는 View 페이지에 접근할 수 있습니다.
 

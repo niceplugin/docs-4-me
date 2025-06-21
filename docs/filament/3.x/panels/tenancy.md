@@ -12,9 +12,9 @@ title: 멀티 테넌시
 
 "멀티 테넌시"라는 용어는 광범위하며, 상황에 따라 다른 의미를 가질 수 있습니다. Filament의 테넌시 시스템은 사용자가 **여러** 테넌트(조직, 팀, 회사 등)에 속하며, 이들 사이를 전환할 수 있음을 의미합니다.
 
-만약 여러분의 경우가 더 단순하고 다대다 관계가 필요 없다면, Filament에서 테넌시를 설정할 필요가 없습니다. 대신 [옵저버](https://laravel.com/docs/eloquent#observers)와 [글로벌 스코프](https://laravel.com/docs/eloquent#global-scopes)를 사용할 수 있습니다.
+만약 여러분의 경우가 더 단순하고 다대다 관계가 필요 없다면, Filament에서 테넌시를 설정할 필요가 없습니다. 대신 [옵저버](/laravel/12.x/eloquent#observers)와 [글로벌 스코프](/laravel/12.x/eloquent#global-scopes)를 사용할 수 있습니다.
 
-예를 들어, 데이터베이스 컬럼 `users.team_id`가 있다고 가정해봅시다. [글로벌 스코프](https://laravel.com/docs/eloquent#global-scopes)를 사용하여 모든 레코드를 사용자의 `team_id`와 동일하게 범위 지정할 수 있습니다:
+예를 들어, 데이터베이스 컬럼 `users.team_id`가 있다고 가정해봅시다. [글로벌 스코프](/laravel/12.x/eloquent#global-scopes)를 사용하여 모든 레코드를 사용자의 `team_id`와 동일하게 범위 지정할 수 있습니다:
 
 ```php
 use Illuminate\Database\Eloquent\Builder;
@@ -34,7 +34,7 @@ class Post extends Model
 }
 ```
 
-레코드가 생성될 때 자동으로 `team_id`를 설정하려면, [옵저버](https://laravel.com/docs/eloquent#observers)를 만들 수 있습니다:
+레코드가 생성될 때 자동으로 `team_id`를 설정하려면, [옵저버](/laravel/12.x/eloquent#observers)를 만들 수 있습니다:
 
 ```php
 class PostObserver
@@ -725,7 +725,7 @@ public function panel(Panel $panel): Panel
 
 이 예시에서 `domain` 속성은 `example.com` 또는 `subdomain.example.com`과 같은 유효한 도메인 호스트를 포함해야 합니다.
 
-> 참고: 전체 도메인에 파라미터를 사용하는 경우(`tenantDomain('{tenant:domain}')`), Filament는 애플리케이션의 모든 `tenant` 파라미터에 대해 `[a-z0-9.\-]+`로 [글로벌 라우트 파라미터 패턴](https://laravel.com/docs/routing#parameters-global-constraints)을 등록합니다. 이는 Laravel이 기본적으로 라우트 파라미터에 `.` 문자를 허용하지 않기 때문입니다. 이는 테넌시를 사용하는 다른 패널이나, 애플리케이션의 다른 부분에서 `tenant` 라우트 파라미터를 사용할 때 충돌이 발생할 수 있습니다.
+> 참고: 전체 도메인에 파라미터를 사용하는 경우(`tenantDomain('{tenant:domain}')`), Filament는 애플리케이션의 모든 `tenant` 파라미터에 대해 `[a-z0-9.\-]+`로 [글로벌 라우트 파라미터 패턴](/laravel/12.x/routing#parameters-global-constraints)을 등록합니다. 이는 Laravel이 기본적으로 라우트 파라미터에 `.` 문자를 허용하지 않기 때문입니다. 이는 테넌시를 사용하는 다른 패널이나, 애플리케이션의 다른 부분에서 `tenant` 라우트 파라미터를 사용할 때 충돌이 발생할 수 있습니다.
 
 ## 리소스에 대해 테넌시 비활성화하기 {#disabling-tenancy-for-a-resource}
 

@@ -515,7 +515,7 @@ TextColumn::make('index')->state(
 ),
 ```
 
-`$rowLoop`는 [Laravel Blade의 `$loop` 객체](https://laravel.com/docs/blade#the-loop-variable)이므로, 다른 모든 `$loop` 속성을 참조할 수 있습니다.
+`$rowLoop`는 [Laravel Blade의 `$loop` 객체](/laravel/12.x/blade#the-loop-variable)이므로, 다른 모든 `$loop` 속성을 참조할 수 있습니다.
 
 단축키로 `rowIndex()` 메서드를 사용할 수 있습니다:
 

@@ -22,7 +22,7 @@ use Filament\Tables\Columns\TextColumn;
 TextColumn::make('users_count')->counts('users')
 ```
 
-이 예시에서 `users`는 개수를 셀 관계의 이름입니다. 컬럼의 이름은 반드시 `users_count`여야 하며, 이는 [Laravel에서 사용하는](https://laravel.com/docs/eloquent-relationships#counting-related-models) 결과 저장 규칙입니다.
+이 예시에서 `users`는 개수를 셀 관계의 이름입니다. 컬럼의 이름은 반드시 `users_count`여야 하며, 이는 [Laravel에서 사용하는](/laravel/12.x/eloquent-relationships#counting-related-models) 결과 저장 규칙입니다.
 
 계산 전에 관계에 스코프를 적용하고 싶다면, 메서드에 배열을 전달할 수 있습니다. 이때 키는 관계의 이름이고 값은 Eloquent 쿼리에 스코프를 적용할 함수입니다:
 
@@ -45,7 +45,7 @@ use Filament\Tables\Columns\TextColumn;
 TextColumn::make('users_exists')->exists('users')
 ```
 
-이 예시에서 `users`는 존재 여부를 확인할 관계의 이름입니다. 컬럼의 이름은 반드시 `users_exists`여야 하며, 이는 [Laravel에서 사용하는](https://laravel.com/docs/eloquent-relationships#other-aggregate-functions) 결과 저장 규칙입니다.
+이 예시에서 `users`는 존재 여부를 확인할 관계의 이름입니다. 컬럼의 이름은 반드시 `users_exists`여야 하며, 이는 [Laravel에서 사용하는](/laravel/12.x/eloquent-relationships#other-aggregate-functions) 결과 저장 규칙입니다.
 
 계산 전에 관계에 스코프를 적용하고 싶다면, 메서드에 배열을 전달할 수 있습니다. 이때 키는 관계의 이름이고 값은 Eloquent 쿼리에 스코프를 적용할 함수입니다:
 
@@ -68,7 +68,7 @@ use Filament\Tables\Columns\TextColumn;
 TextColumn::make('users_avg_age')->avg('users', 'age')
 ```
 
-이 예시에서 `users`는 관계의 이름이고, `age`는 평균을 낼 필드입니다. 컬럼의 이름은 반드시 `users_avg_age`여야 하며, 이는 [Laravel에서 사용하는](https://laravel.com/docs/eloquent-relationships#other-aggregate-functions) 결과 저장 규칙입니다.
+이 예시에서 `users`는 관계의 이름이고, `age`는 평균을 낼 필드입니다. 컬럼의 이름은 반드시 `users_avg_age`여야 하며, 이는 [Laravel에서 사용하는](/laravel/12.x/eloquent-relationships#other-aggregate-functions) 결과 저장 규칙입니다.
 
 계산 전에 관계에 스코프를 적용하고 싶다면, 메서드에 배열을 전달할 수 있습니다. 이때 키는 관계의 이름이고 값은 Eloquent 쿼리에 스코프를 적용할 함수입니다:
 

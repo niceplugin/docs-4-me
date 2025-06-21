@@ -29,7 +29,7 @@ Filament는 훌륭한 앱을 만들기 위해 필요한 거의 모든 도구를 
 
 플러그인 제작의 구체적인 내용에 들어가기 전에, 이해해야 할 몇 가지 중요한 개념이 있습니다. 플러그인을 만들기 전에 다음을 숙지하는 것이 좋습니다:
 
-1. [Laravel 패키지 개발](https://laravel.com/docs/packages)
+1. [Laravel 패키지 개발](/laravel/12.x/packages)
 2. [Spatie 패키지 도구](https://github.com/spatie/laravel-package-tools)
 3. [Filament 에셋 관리](/filament/3.x/support/assets)
 

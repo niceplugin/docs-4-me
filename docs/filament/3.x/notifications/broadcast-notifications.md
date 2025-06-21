@@ -8,7 +8,7 @@ title: 브로드캐스트 알림
 
 기본적으로 Filament는 Laravel 세션을 통해 플래시 알림을 전송합니다. 하지만, 알림이 실시간으로 사용자에게 "브로드캐스트"되기를 원할 수도 있습니다. 이는 큐에 등록된 작업이 처리된 후 임시 성공 알림을 보내는 데 사용할 수 있습니다.
 
-우리는 [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation)와의 네이티브 통합을 제공합니다. Echo가 설치되어 있는지, 그리고 [서버 사이드 웹소켓 통합](https://laravel.com/docs/broadcasting#server-side-installation) (예: Pusher)도 설치되어 있는지 확인하세요.
+우리는 [Laravel Echo](/laravel/12.x/broadcasting#client-side-installation)와의 네이티브 통합을 제공합니다. Echo가 설치되어 있는지, 그리고 [서버 사이드 웹소켓 통합](/laravel/12.x/broadcasting#server-side-installation) (예: Pusher)도 설치되어 있는지 확인하세요.
 
 ## 브로드캐스트 알림 보내기 {#sending-broadcast-notifications}
 
@@ -40,7 +40,7 @@ $recipient->notify(
 )
 ```
 
-또는, 전통적인 [Laravel 알림 클래스](https://laravel.com/docs/notifications#generating-notifications)를 사용하여 `toBroadcast()` 메서드에서 알림을 반환할 수도 있습니다:
+또는, 전통적인 [Laravel 알림 클래스](/laravel/12.x/notifications#generating-notifications)를 사용하여 `toBroadcast()` 메서드에서 알림을 반환할 수도 있습니다:
 
 ```php
 use App\Models\User;

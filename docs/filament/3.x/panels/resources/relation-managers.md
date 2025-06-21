@@ -868,7 +868,7 @@ public function table(Table $table): Table
 
 ## 관계 매니저 Eloquent 쿼리 커스터마이즈하기 {#customizing-the-relation-manager-eloquent-query}
 
-전체 관계 매니저에 영향을 주는 쿼리 제약이나 [모델 스코프](https://laravel.com/docs/eloquent#query-scopes)를 적용할 수 있습니다. 이를 위해 테이블의 `modifyQueryUsing()` 메서드에 함수를 전달하여 쿼리를 커스터마이즈하세요:
+전체 관계 매니저에 영향을 주는 쿼리 제약이나 [모델 스코프](/laravel/12.x/eloquent#query-scopes)를 적용할 수 있습니다. 이를 위해 테이블의 `modifyQueryUsing()` 메서드에 함수를 전달하여 쿼리를 커스터마이즈하세요:
 
 ```php
 use Filament\Tables;
@@ -1011,7 +1011,7 @@ public static function getRecordSubNavigation(Page $page): array
 
 ## 관계 매니저에 속성 전달하기 {#passing-properties-to-relation-managers}
 
-리소스에 관계 매니저를 등록할 때, `make()` 메서드를 사용하여 [Livewire 속성](https://livewire.laravel.com/docs/properties) 배열을 전달할 수 있습니다:
+리소스에 관계 매니저를 등록할 때, `make()` 메서드를 사용하여 [Livewire 속성](/livewire/3.x/properties) 배열을 전달할 수 있습니다:
 
 ```php
 use App\Filament\Resources\Blog\PostResource\RelationManagers\CommentsRelationManager;
@@ -1026,7 +1026,7 @@ public static function getRelations(): array
 }
 ```
 
-이 속성 배열은 관계 매니저 클래스의 [public Livewire 속성](https://livewire.laravel.com/docs/properties)으로 매핑됩니다:
+이 속성 배열은 관계 매니저 클래스의 [public Livewire 속성](/livewire/3.x/properties)으로 매핑됩니다:
 
 ```php
 use Filament\Resources\RelationManagers\RelationManager;

@@ -2,7 +2,7 @@
 Livewire는 부모 컴포넌트 안에 추가적인 Livewire 컴포넌트를 중첩하여 사용할 수 있도록 해줍니다. 이 기능은 매우 강력하며, 애플리케이션 전반에서 공유되는 Livewire 컴포넌트 내의 동작을 재사용하고 캡슐화할 수 있게 해줍니다.
 
 > [!warning] Livewire 컴포넌트가 꼭 필요한지 확인하세요
-> 템플릿의 일부를 중첩된 Livewire 컴포넌트로 추출하기 전에, 해당 컴포넌트의 내용이 "라이브"해야 하는지 스스로에게 물어보세요. 그렇지 않다면, 간단한 [Blade 컴포넌트](https://laravel.com/docs/blade#components)를 만드는 것을 권장합니다. Livewire의 동적 특성이나 직접적인 성능상의 이점이 있는 경우에만 Livewire 컴포넌트를 만드세요.
+> 템플릿의 일부를 중첩된 Livewire 컴포넌트로 추출하기 전에, 해당 컴포넌트의 내용이 "라이브"해야 하는지 스스로에게 물어보세요. 그렇지 않다면, 간단한 [Blade 컴포넌트](/laravel/12.x/blade#components)를 만드는 것을 권장합니다. Livewire의 동적 특성이나 직접적인 성능상의 이점이 있는 경우에만 Livewire 컴포넌트를 만드세요.
 
 중첩된 Livewire 컴포넌트의 성능, 사용상의 영향, 제약에 대한 자세한 내용은 [Livewire 컴포넌트 중첩에 대한 심층 기술적 고찰](/livewire/3.x/understanding-nesting)을 참고하세요.
 
@@ -40,7 +40,7 @@ class Dashboard extends Component
 
 ## 자식에게 props 전달하기 {#passing-props-to-children}
 
-부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 것은 간단합니다. 사실, 일반적인 [Blade 컴포넌트](https://laravel.com/docs/blade#components)에 props를 전달하는 것과 매우 유사합니다.
+부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 것은 간단합니다. 사실, 일반적인 [Blade 컴포넌트](/laravel/12.x/blade#components)에 props를 전달하는 것과 매우 유사합니다.
 
 예를 들어, `$todos` 컬렉션을 `TodoCount`라는 자식 컴포넌트에 전달하는 `TodoList` 컴포넌트를 살펴보겠습니다:
 

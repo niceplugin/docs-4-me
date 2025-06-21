@@ -58,7 +58,7 @@ class UploadPhoto extends Component
 > [!tip] 원본 파일 이름
 > 임시 업로드의 원본 파일 이름은 `->getClientOriginalName()` 메서드를 호출하여 접근할 수 있습니다.
 
-Livewire는 업로드된 파일을 저장할 때 Laravel이 사용하는 동일한 API를 따르므로, [Laravel의 파일 업로드 문서](https://laravel.com/docs/filesystem#file-uploads)를 참고하셔도 됩니다. 하지만, 아래에 몇 가지 일반적인 저장 시나리오와 예시를 소개합니다:
+Livewire는 업로드된 파일을 저장할 때 Laravel이 사용하는 동일한 API를 따르므로, [Laravel의 파일 업로드 문서](/laravel/12.x/filesystem#file-uploads)를 참고하셔도 됩니다. 하지만, 아래에 몇 가지 일반적인 저장 시나리오와 예시를 소개합니다:
 
 ```php
 public function save()
@@ -127,7 +127,7 @@ class UploadPhotos extends Component
 > [!warning] S3가 올바르게 구성되어 있는지 확인하세요
 > 파일과 관련된 많은 검증 규칙은 파일에 접근할 수 있어야 합니다. [S3에 직접 업로드](#uploading-directly-to-amazon-s3)할 때, S3 파일 객체가 공개적으로 접근 가능하지 않으면 이러한 검증 규칙이 실패합니다.
 
-파일 검증에 대한 자세한 내용은 [Laravel의 파일 검증 문서](https://laravel.com/docs/validation#available-validation-rules)를 참고하세요.
+파일 검증에 대한 자세한 내용은 [Laravel의 파일 검증 문서](/laravel/12.x/validation#available-validation-rules)를 참고하세요.
 
 ## 임시 미리보기 URL {#temporary-preview-urls}
 
@@ -234,7 +234,7 @@ class UploadPhoto extends Component
 }
 ```
 
-파일 업로드 테스트에 대한 자세한 내용은 [Laravel의 파일 업로드 테스트 문서](https://laravel.com/docs/http-tests#testing-file-uploads)를 참고하세요.
+파일 업로드 테스트에 대한 자세한 내용은 [Laravel의 파일 업로드 테스트 문서](/laravel/12.x/http-tests#testing-file-uploads)를 참고하세요.
 
 ## Amazon S3에 직접 업로드하기 {#uploading-directly-to-amazon-s3}
 

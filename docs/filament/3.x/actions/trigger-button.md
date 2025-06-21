@@ -71,7 +71,7 @@ Action::make('edit')
     ->url(fn (): string => route('posts.edit', ['post' => $this->post]))
 ```
 
-선택적으로, `translateLabel()` 메서드를 사용하여 [라벨을 라라벨의 로컬라이제이션 기능](https://laravel.com/docs/localization)으로 자동 번역할 수 있습니다:
+선택적으로, `translateLabel()` 메서드를 사용하여 [라벨을 라라벨의 로컬라이제이션 기능](/laravel/12.x/localization)으로 자동 번역할 수 있습니다:
 
 ```php
 Action::make('edit')

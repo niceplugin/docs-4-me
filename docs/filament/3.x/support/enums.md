@@ -8,7 +8,7 @@ Enum은 고정된 상수 집합을 나타내는 특별한 PHP 클래스입니다
 
 Enum의 "case"는 enum 클래스의 인스턴스이므로, enum에 인터페이스를 추가하는 것은 매우 유용합니다. Filament는 enum에 추가할 수 있는 다양한 인터페이스를 제공하여, enum을 사용할 때의 경험을 향상시켜줍니다.
 
-> Eloquent 모델에서 enum을 속성으로 사용할 때, [정확하게 캐스팅되었는지 확인](https://laravel.com/docs/eloquent-mutators#enum-casting)해 주세요.
+> Eloquent 모델에서 enum을 속성으로 사용할 때, [정확하게 캐스팅되었는지 확인](/laravel/12.x/eloquent-mutators#enum-casting)해 주세요.
 
 ## Enum 라벨 {#enum-labels}
 

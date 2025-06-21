@@ -46,7 +46,7 @@ Filament는 다양한 유형의 데이터를 편집할 수 있도록 여러 종�
 
 ## 라벨 설정하기 {#setting-a-label}
 
-기본적으로 필드의 라벨은 이름을 기반으로 자동으로 결정됩니다. 필드의 라벨을 재정의하려면 `label()` 메서드를 사용할 수 있습니다. 이 방법으로 라벨을 커스터마이즈하면 [로컬라이제이션을 위한 번역 문자열](https://laravel.com/docs/localization#retrieving-translation-strings)을 사용할 수 있습니다:
+기본적으로 필드의 라벨은 이름을 기반으로 자동으로 결정됩니다. 필드의 라벨을 재정의하려면 `label()` 메서드를 사용할 수 있습니다. 이 방법으로 라벨을 커스터마이즈하면 [로컬라이제이션을 위한 번역 문자열](/laravel/12.x/localization#retrieving-translation-strings)을 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -55,7 +55,7 @@ TextInput::make('name')
     ->label(__('fields.name'))
 ```
 
-선택적으로, `translateLabel()` 메서드를 사용하여 [라라벨의 로컬라이제이션 기능](https://laravel.com/docs/localization)으로 라벨을 자동 번역할 수 있습니다:
+선택적으로, `translateLabel()` 메서드를 사용하여 [라라벨의 로컬라이제이션 기능](/laravel/12.x/localization)으로 라벨을 자동 번역할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\TextInput;

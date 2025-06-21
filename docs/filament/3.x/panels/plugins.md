@@ -14,7 +14,7 @@ title: 플러그인 개발
 
 Filament 플러그인의 기본은 Laravel 패키지입니다. 이들은 Composer를 통해 Filament 프로젝트에 설치되며, 라우트, 뷰, 번역을 등록하기 위해 서비스 프로바이더를 사용하는 등 모든 표준 기술을 따릅니다. Laravel 패키지 개발이 처음이라면, 핵심 개념을 이해하는 데 도움이 될 수 있는 몇 가지 자료가 있습니다:
 
-- [Laravel 문서의 패키지 개발 섹션](https://laravel.com/docs/packages)은 훌륭한 참고 가이드입니다.
+- [Laravel 문서의 패키지 개발 섹션](/laravel/12.x/packages)은 훌륭한 참고 가이드입니다.
 - [Spatie의 패키지 트레이닝 강좌](https://spatie.be/products/laravel-package-training)는 과정을 단계별로 가르쳐주는 좋은 영상 시리즈입니다.
 - [Spatie의 Package Tools](https://github.com/spatie/laravel-package-tools)는 유창한 구성 객체를 사용하여 서비스 프로바이더 클래스를 단순화할 수 있게 해줍니다.
 

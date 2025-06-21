@@ -129,7 +129,7 @@ ToggleButtons::make('technologies')
 
 <AutoScreenshot name="forms/fields/toggle-buttons/multiple" alt="여러 개의 토글 버튼 선택됨" version="3.x" />
 
-이 옵션들은 JSON 형식으로 반환됩니다. Eloquent를 사용하여 저장하는 경우, 모델 속성에 `array` [캐스트](https://laravel.com/docs/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
+이 옵션들은 JSON 형식으로 반환됩니다. Eloquent를 사용하여 저장하는 경우, 모델 속성에 `array` [캐스트](/laravel/12.x/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;

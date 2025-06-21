@@ -1,5 +1,5 @@
 # 설치
-Livewire는 Laravel 패키지이므로, Livewire를 설치하고 사용하려면 먼저 Laravel 애플리케이션이 실행 중이어야 합니다. 새로운 Laravel 애플리케이션을 설정하는 데 도움이 필요하다면 [공식 Laravel 문서](https://laravel.com/docs/installation)를 참고하세요.
+Livewire는 Laravel 패키지이므로, Livewire를 설치하고 사용하려면 먼저 Laravel 애플리케이션이 실행 중이어야 합니다. 새로운 Laravel 애플리케이션을 설정하는 데 도움이 필요하다면 [공식 Laravel 문서](/laravel/12.x/installation)를 참고하세요.
 
 Livewire를 설치하려면, 터미널을 열고 Laravel 애플리케이션 디렉터리로 이동한 다음, 아래 명령어를 실행하세요:
 ```shell
@@ -154,7 +154,7 @@ Livewire.start()
 > Livewire와 Alpine을 수동으로 번들링하는 경우, `composer update`를 실행할 때마다 반드시 에셋을 다시 빌드해야 합니다.
 
 > [!warning] Laravel Mix와 호환되지 않음
-> Livewire와 AlpineJS를 수동으로 번들링하는 경우 Laravel Mix는 동작하지 않습니다. 대신 [Vite로 전환](https://laravel.com/docs/vite)하는 것을 권장합니다.
+> Livewire와 AlpineJS를 수동으로 번들링하는 경우 Laravel Mix는 동작하지 않습니다. 대신 [Vite로 전환](/laravel/12.x/vite)하는 것을 권장합니다.
 
 ## Livewire 프론트엔드 에셋 퍼블리싱하기 {#publishing-livewires-frontend-assets}
 

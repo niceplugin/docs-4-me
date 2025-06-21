@@ -411,10 +411,10 @@ class DashboardTest extends TestCase
 
 ## Laravel Echo를 사용한 실시간 이벤트 {#real-time-events-using-laravel-echo}
 
-Livewire는 [Laravel Echo](https://laravel.com/docs/broadcasting#client-side-installation)와 잘 연동되어, WebSocket을 사용한 웹페이지의 실시간 기능을 제공합니다.
+Livewire는 [Laravel Echo](/laravel/12.x/broadcasting#client-side-installation)와 잘 연동되어, WebSocket을 사용한 웹페이지의 실시간 기능을 제공합니다.
 
 > [!warning] Laravel Echo 설치가 선행되어야 합니다
-> 이 기능은 Laravel Echo가 설치되어 있고, 애플리케이션에서 `window.Echo` 객체가 전역적으로 사용 가능하다고 가정합니다. Echo 설치에 대한 자세한 내용은 [Laravel Echo 문서](https://laravel.com/docs/broadcasting#client-side-installation)를 참고하세요.
+> 이 기능은 Laravel Echo가 설치되어 있고, 애플리케이션에서 `window.Echo` 객체가 전역적으로 사용 가능하다고 가정합니다. Echo 설치에 대한 자세한 내용은 [Laravel Echo 문서](/laravel/12.x/broadcasting#client-side-installation)를 참고하세요.
 
 ### Echo 이벤트 수신하기 {#listening-for-echo-events}
 
@@ -548,7 +548,7 @@ public function notifyNewOrder($event)
 프라이빗 및 프레즌스 채널로 브로드캐스트된 이벤트도 수신할 수 있습니다:
 
 > [!info]
-> 진행하기 전에, 브로드캐스트 채널에 대한 <a href="https://laravel.com/docs/master/broadcasting#defining-authorization-callbacks">인증 콜백</a>을 정의했는지 확인하세요.
+> 진행하기 전에, 브로드캐스트 채널에 대한 <a href="/laravel/12.x/master/broadcasting#defining-authorization-callbacks">인증 콜백</a>을 정의했는지 확인하세요.
 
 ```php
 <?php

@@ -86,7 +86,7 @@ function (Table $table) {
 
 ### 현재 테이블 행 루프 주입하기 {#injecting-the-current-table-row-loop}
 
-컬럼이 렌더링되는 [Laravel Blade 루프 객체](https://laravel.com/docs/blade#the-loop-variable)에 접근하고 싶다면 `$rowLoop` 파라미터를 정의하세요:
+컬럼이 렌더링되는 [Laravel Blade 루프 객체](/laravel/12.x/blade#the-loop-variable)에 접근하고 싶다면 `$rowLoop` 파라미터를 정의하세요:
 
 ```php
 function (stdClass $rowLoop) {
@@ -94,7 +94,7 @@ function (stdClass $rowLoop) {
 }
 ```
 
-`$rowLoop`는 [Laravel Blade의 `$loop` 객체](https://laravel.com/docs/blade#the-loop-variable)이므로, `$rowLoop->index`를 사용해 현재 행의 인덱스에 접근할 수 있습니다. `$record`와 마찬가지로, 컬럼이 현재 테이블 행 외부에서 렌더링될 때는 이 파라미터가 `null`이 됩니다.
+`$rowLoop`는 [Laravel Blade의 `$loop` 객체](/laravel/12.x/blade#the-loop-variable)이므로, `$rowLoop->index`를 사용해 현재 행의 인덱스에 접근할 수 있습니다. `$record`와 마찬가지로, 컬럼이 현재 테이블 행 외부에서 렌더링될 때는 이 파라미터가 `null`이 됩니다.
 
 ### 여러 유틸리티 동시 주입하기 {#injecting-multiple-utilities}
 

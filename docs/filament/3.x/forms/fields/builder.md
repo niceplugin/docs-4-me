@@ -77,7 +77,7 @@ Builder::make('content')
 
 ## 블록의 라벨 설정하기 {#setting-a-blocks-label}
 
-기본적으로, 블록의 라벨은 이름을 기반으로 자동으로 결정됩니다. 블록의 라벨을 오버라이드하려면 `label()` 메서드를 사용할 수 있습니다. 이 방법으로 라벨을 커스터마이징하면 [로컬라이제이션을 위한 번역 문자열](https://laravel.com/docs/localization#retrieving-translation-strings)을 사용할 수 있습니다:
+기본적으로, 블록의 라벨은 이름을 기반으로 자동으로 결정됩니다. 블록의 라벨을 오버라이드하려면 `label()` 메서드를 사용할 수 있습니다. 이 방법으로 라벨을 커스터마이징하면 [로컬라이제이션을 위한 번역 문자열](/laravel/12.x/localization#retrieving-translation-strings)을 사용할 수 있습니다:
 
 ```php
 use Filament\Forms\Components\Builder;

@@ -30,7 +30,7 @@ php artisan make:filament-panel app
 
 이 명령은 "app"이라는 새 패널을 생성합니다. 설정 파일은 `app/Providers/Filament/AppPanelProvider.php`에 생성됩니다. 이 패널은 `/app`에서 접근할 수 있지만, 원하지 않는 경우 [경로를 커스터마이즈](#changing-the-path)할 수 있습니다.
 
-이 설정 파일 또한 [Laravel 서비스 프로바이더](https://laravel.com/docs/providers)이므로, `bootstrap/providers.php`(Laravel 11 이상) 또는 `config/app.php`(Laravel 10 이하)에 등록되어야 합니다. Filament가 이를 자동으로 시도하지만, 패널에 접근할 때 오류가 발생한다면 이 과정이 실패했을 수 있습니다.
+이 설정 파일 또한 [Laravel 서비스 프로바이더](/laravel/12.x/providers)이므로, `bootstrap/providers.php`(Laravel 11 이상) 또는 `config/app.php`(Laravel 10 이하)에 등록되어야 합니다. Filament가 이를 자동으로 시도하지만, 패널에 접근할 때 오류가 발생한다면 이 과정이 실패했을 수 있습니다.
 
 ## 경로 변경하기 {#changing-the-path}
 
@@ -86,7 +86,7 @@ public function panel(Panel $panel): Panel
 
 ## 도메인 설정하기 {#setting-a-domain}
 
-기본적으로 Filament는 모든 도메인에서의 요청에 응답합니다. 특정 도메인으로 범위를 제한하고 싶다면, [`Laravel의 Route::domain()`](https://laravel.com/docs/routing#route-group-subdomain-routing)과 유사하게 `domain()` 메서드를 사용할 수 있습니다:
+기본적으로 Filament는 모든 도메인에서의 요청에 응답합니다. 특정 도메인으로 범위를 제한하고 싶다면, [`Laravel의 Route::domain()`](/laravel/12.x/routing#route-group-subdomain-routing)과 유사하게 `domain()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Panel;
@@ -148,7 +148,7 @@ public function panel(Panel $panel): Panel
 
 ## SPA 모드 {#spa-mode}
 
-SPA 모드는 [Livewire의 `wire:navigate` 기능](https://livewire.laravel.com/docs/navigate)을 활용하여, 서버 렌더링된 패널이 싱글 페이지 애플리케이션처럼 느껴지도록 하며, 페이지 로드 간 지연을 줄이고 긴 요청에는 로딩 바를 표시합니다. 패널에서 SPA 모드를 활성화하려면 `spa()` 메서드를 사용할 수 있습니다:
+SPA 모드는 [Livewire의 `wire:navigate` 기능](/livewire/3.x/navigate)을 활용하여, 서버 렌더링된 패널이 싱글 페이지 애플리케이션처럼 느껴지도록 하며, 페이지 로드 간 지연을 줄이고 긴 요청에는 로딩 바를 표시합니다. 패널에서 SPA 모드를 활성화하려면 `spa()` 메서드를 사용할 수 있습니다:
 
 ```php
 use Filament\Panel;
@@ -163,7 +163,7 @@ public function panel(Panel $panel): Panel
 
 ### 특정 URL에 대해 SPA 네비게이션 비활성화 {#disabling-spa-navigation-for-specific-urls}
 
-기본적으로 SPA 모드를 활성화하면, 현재 요청과 동일한 도메인에 있는 모든 URL은 Livewire의 [`wire:navigate`](https://livewire.laravel.com/docs/navigate) 기능을 사용하여 이동합니다. 특정 URL에 대해 이를 비활성화하려면, `spaUrlExceptions()` 메서드를 사용할 수 있습니다:
+기본적으로 SPA 모드를 활성화하면, 현재 요청과 동일한 도메인에 있는 모든 URL은 Livewire의 [`wire:navigate`](/livewire/3.x/navigate) 기능을 사용하여 이동합니다. 특정 URL에 대해 이를 비활성화하려면, `spaUrlExceptions()` 메서드를 사용할 수 있습니다:
 
 ```php
 use App\Filament\Resources\PostResource;

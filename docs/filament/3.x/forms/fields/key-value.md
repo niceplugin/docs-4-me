@@ -15,7 +15,7 @@ KeyValue::make('meta')
 
 <AutoScreenshot name="forms/fields/key-value/simple" alt="Key-value" version="3.x" />
 
-Eloquent에 데이터를 저장하는 경우, 모델 속성에 `array` [캐스트](https://laravel.com/docs/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
+Eloquent에 데이터를 저장하는 경우, 모델 속성에 `array` [캐스트](/laravel/12.x/eloquent-mutators#array-and-json-casting)를 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;

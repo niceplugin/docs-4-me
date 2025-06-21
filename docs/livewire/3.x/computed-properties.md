@@ -57,7 +57,7 @@ class ShowUser extends Component
 > 일반 속성과 달리, computed property는 컴포넌트의 템플릿 내에서 직접적으로 사용할 수 없습니다. 대신, `$this` 객체를 통해 접근해야 합니다. 예를 들어, `posts()`라는 computed property는 템플릿 내에서 `$this->posts`로 접근해야 합니다.
 
 > [!warning] Computed property는 `Livewire\Form` 객체에서 지원되지 않습니다.
-> [Form](https://livewire.laravel.com/docs/forms) 내에서 Computed property를 사용하려고 하면, blade에서 $form->property 문법으로 속성에 접근할 때 오류가 발생합니다.
+> [Form](/livewire/3.x/forms) 내에서 Computed property를 사용하려고 하면, blade에서 $form->property 문법으로 속성에 접근할 때 오류가 발생합니다.
 
 ## 성능 이점 {#performance-advantage}
 
@@ -115,7 +115,7 @@ class ShowPosts extends Component
 
 ### 요청 간 캐싱 {#caching-between-requests}
 
-때로는 computed property의 값을 Livewire 컴포넌트의 수명 동안 캐싱하고 싶을 수 있습니다. 이런 경우에는 [Laravel의 캐싱 유틸리티](https://laravel.com/docs/cache#retrieve-store)를 사용할 수 있습니다.
+때로는 computed property의 값을 Livewire 컴포넌트의 수명 동안 캐싱하고 싶을 수 있습니다. 이런 경우에는 [Laravel의 캐싱 유틸리티](/laravel/12.x/cache#retrieve-store)를 사용할 수 있습니다.
 
 아래는 `user()`라는 computed property의 예시입니다. Eloquent 쿼리를 직접 실행하는 대신, 쿼리를 `Cache::remember()`로 감싸서 이후 요청에서는 쿼리를 다시 실행하지 않고 Laravel의 캐시에서 값을 가져오도록 합니다:
 

@@ -45,7 +45,7 @@ Notification::make()
     ->send();
 ```
 
-제목 텍스트에는 기본적이고 안전한 HTML 요소를 포함할 수 있습니다. Markdown으로 안전한 HTML을 생성하려면 [`Str::markdown()` 헬퍼](https://laravel.com/docs/strings#method-str-markdown)를 사용할 수 있습니다: `title(Str::markdown('Saved **successfully**'))`
+제목 텍스트에는 기본적이고 안전한 HTML 요소를 포함할 수 있습니다. Markdown으로 안전한 HTML을 생성하려면 [`Str::markdown()` 헬퍼](/laravel/12.x/strings#method-str-markdown)를 사용할 수 있습니다: `title(Str::markdown('Saved **successfully**'))`
 
 또는 JavaScript로:
 
@@ -209,7 +209,7 @@ Notification::make()
     ->send();
 ```
 
-본문 텍스트에는 기본적이고 안전한 HTML 요소를 포함할 수 있습니다. Markdown으로 안전한 HTML을 생성하려면 [`Str::markdown()` 헬퍼](https://laravel.com/docs/strings#method-str-markdown)를 사용할 수 있습니다: `body(Str::markdown('Changes to the **post** have been saved.'))`
+본문 텍스트에는 기본적이고 안전한 HTML 요소를 포함할 수 있습니다. Markdown으로 안전한 HTML을 생성하려면 [`Str::markdown()` 헬퍼](/laravel/12.x/strings#method-str-markdown)를 사용할 수 있습니다: `body(Str::markdown('Changes to the **post** have been saved.'))`
 
 또는 JavaScript로:
 

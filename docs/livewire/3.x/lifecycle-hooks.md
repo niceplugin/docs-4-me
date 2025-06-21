@@ -67,7 +67,7 @@ class UpdatePost extends Component
 ```
 
 > [!tip] 모든 훅 메서드에서 의존성 주입을 사용할 수 있습니다
-> Livewire는 생명주기 훅의 메서드 매개변수에 타입힌트를 지정하여 [Laravel의 서비스 컨테이너](https://laravel.com/docs/container#automatic-injection)에서 의존성을 해결할 수 있도록 지원합니다.
+> Livewire는 생명주기 훅의 메서드 매개변수에 타입힌트를 지정하여 [Laravel의 서비스 컨테이너](/laravel/12.x/container#automatic-injection)에서 의존성을 해결할 수 있도록 지원합니다.
 
 `mount()` 메서드는 Livewire 사용에 있어 매우 중요한 부분입니다. 다음 문서에서 `mount()` 메서드를 사용하여 일반적인 작업을 수행하는 추가 예시를 확인할 수 있습니다:
 

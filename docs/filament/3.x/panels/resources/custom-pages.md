@@ -26,7 +26,7 @@ public static function getPages(): array
 
 > 이 메서드에 등록된 페이지의 순서는 중요합니다 - 와일드카드 라우트 세그먼트가 하드코딩된 세그먼트보다 먼저 정의되어 있으면, Laravel의 라우터가 먼저 일치시킵니다.
 
-라우트 경로에 정의된 [파라미터](https://laravel.com/docs/routing#route-parameters)는 [Livewire](https://livewire.laravel.com/docs/components#accessing-route-parameters)와 동일한 방식으로 페이지 클래스에서 사용할 수 있습니다.
+라우트 경로에 정의된 [파라미터](/laravel/12.x/routing#route-parameters)는 [Livewire](/livewire/3.x/components#accessing-route-parameters)와 동일한 방식으로 페이지 클래스에서 사용할 수 있습니다.
 
 ## 리소스 레코드 사용하기 {#using-a-resource-record}
 

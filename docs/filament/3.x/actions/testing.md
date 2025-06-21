@@ -6,7 +6,7 @@ title: 테스트
 
 이 가이드의 모든 예제는 [Pest](https://pestphp.com)를 사용하여 작성되었습니다. Pest의 Livewire 플러그인을 테스트에 사용하려면 Pest 문서의 플러그인 설치 안내를 따라주세요: [Pest용 Livewire 플러그인](https://pestphp.com/docs/plugins#livewire). 하지만 PHPUnit에 맞게 쉽게 변환할 수 있습니다.
 
-모든 액션은 Livewire 컴포넌트에 마운트되므로, 우리는 어디서나 Livewire 테스트 헬퍼를 사용합니다. Livewire 컴포넌트를 테스트해본 적이 없다면, [이 가이드](https://livewire.laravel.com/docs/testing)를 먼저 읽어보세요.
+모든 액션은 Livewire 컴포넌트에 마운트되므로, 우리는 어디서나 Livewire 테스트 헬퍼를 사용합니다. Livewire 컴포넌트를 테스트해본 적이 없다면, [이 가이드](/livewire/3.x/testing)를 먼저 읽어보세요.
 
 ## 시작하기 {#getting-started}
 
@@ -88,7 +88,7 @@ it('송장에 이메일 주소가 없으면 전송을 중단한다', function ()
 
 ## 모달 내용 {#modal-content}
 
-모달의 내용을 검증하려면, 액션을 호출하는 대신 먼저 마운트해야 합니다(호출하면 모달이 닫힙니다). 그런 다음 [Livewire assertion](https://livewire.laravel.com/docs/testing#assertions)인 `assertSee()` 등을 사용하여 모달에 원하는 내용이 포함되어 있는지 검증할 수 있습니다:
+모달의 내용을 검증하려면, 액션을 호출하는 대신 먼저 마운트해야 합니다(호출하면 모달이 닫힙니다). 그런 다음 [Livewire assertion](/livewire/3.x/testing#assertions)인 `assertSee()` 등을 사용하여 모달에 원하는 내용이 포함되어 있는지 검증할 수 있습니다:
 
 ```php
 use function Pest\Livewire\livewire;

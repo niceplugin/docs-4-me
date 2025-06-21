@@ -701,7 +701,7 @@ Livewire는 `wire:dirty` 지시어를 제공하여, 입력값이 서버 측 컴�
 
 지금까지 살펴본 `CreatePost`와 같은 작은 컴포넌트에서도, 유효성 검사 메시지와 라벨 등 폼 필드 보일러플레이트가 많이 중복됩니다.
 
-이런 반복적인 UI 요소는 전용 [Blade 컴포넌트](https://laravel.com/docs/blade#components)로 추출하여 애플리케이션 전체에서 공유하는 것이 좋습니다.
+이런 반복적인 UI 요소는 전용 [Blade 컴포넌트](/laravel/12.x/blade#components)로 추출하여 애플리케이션 전체에서 공유하는 것이 좋습니다.
 
 예를 들어, 아래는 `CreatePost` 컴포넌트의 원래 Blade 템플릿입니다. 아래 두 개의 텍스트 입력을 전용 Blade 컴포넌트로 추출할 것입니다:
 

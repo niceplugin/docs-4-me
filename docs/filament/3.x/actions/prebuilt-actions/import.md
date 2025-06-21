@@ -6,7 +6,7 @@ title: 가져오기 액션
 
 Filament v3.1에서는 CSV에서 행을 가져올 수 있는 미리 만들어진 액션이 도입되었습니다. 트리거 버튼을 클릭하면 모달이 나타나 사용자가 파일을 업로드하도록 요청합니다. 업로드가 완료되면, 사용자는 CSV의 각 열을 데이터베이스의 실제 열에 매핑할 수 있습니다. 만약 어떤 행이 유효성 검사에 실패하면, 실패한 행들은 나머지 행이 가져와진 후 사용자가 검토할 수 있도록 다운로드 가능한 CSV로 컴파일됩니다. 사용자는 또한 가져올 수 있는 모든 열이 포함된 예시 CSV 파일을 다운로드할 수 있습니다.
 
-이 기능은 [job 배치](https://laravel.com/docs/queues#job-batching)와 [데이터베이스 알림](../../notifications/database-notifications#overview)을 사용하므로, Laravel에서 해당 마이그레이션을 퍼블리시해야 합니다. 또한, Filament가 가져오기 정보를 저장하는 데 사용하는 테이블의 마이그레이션도 퍼블리시해야 합니다:
+이 기능은 [job 배치](/laravel/12.x/queues#job-batching)와 [데이터베이스 알림](../../notifications/database-notifications#overview)을 사용하므로, Laravel에서 해당 마이그레이션을 퍼블리시해야 합니다. 또한, Filament가 가져오기 정보를 저장하는 데 사용하는 테이블의 마이그레이션도 퍼블리시해야 합니다:
 
 ```bash
 # Laravel 11 이상
@@ -677,7 +677,7 @@ public function getJobMiddleware(): array
 }
 ```
 
-특정 가져오기 작업에 적용할 미들웨어를 커스터마이징하고 싶다면, 이 메서드를 가져오기 클래스에서 오버라이드할 수 있습니다. 작업 미들웨어에 대한 자세한 내용은 [Laravel 문서](https://laravel.com/docs/queues#job-middleware)를 참고하세요.
+특정 가져오기 작업에 적용할 미들웨어를 커스터마이징하고 싶다면, 이 메서드를 가져오기 클래스에서 오버라이드할 수 있습니다. 작업 미들웨어에 대한 자세한 내용은 [Laravel 문서](/laravel/12.x/queues#job-middleware)를 참고하세요.
 
 ### 가져오기 작업 재시도 커스터마이징 {#customizing-the-import-job-retries}
 
@@ -692,7 +692,7 @@ public function getJobRetryUntil(): ?CarbonInterface
 }
 ```
 
-특정 가져오기 작업의 재시도 시간을 커스터마이징하고 싶다면, 이 메서드를 가져오기 클래스에서 오버라이드할 수 있습니다. 작업 재시도에 대한 자세한 내용은 [Laravel 문서](https://laravel.com/docs/queues#time-based-attempts)를 참고하세요.
+특정 가져오기 작업의 재시도 시간을 커스터마이징하고 싶다면, 이 메서드를 가져오기 클래스에서 오버라이드할 수 있습니다. 작업 재시도에 대한 자세한 내용은 [Laravel 문서](/laravel/12.x/queues#time-based-attempts)를 참고하세요.
 
 ### 가져오기 작업 태그 커스터마이징 {#customizing-the-import-job-tags}
 
@@ -731,7 +731,7 @@ public function getValidationMessages(): array
 }
 ```
 
-유효성 검사 메시지 커스터마이징에 대한 자세한 내용은 [Laravel 문서](https://laravel.com/docs/validation#customizing-the-error-messages)를 참고하세요.
+유효성 검사 메시지 커스터마이징에 대한 자세한 내용은 [Laravel 문서](/laravel/12.x/validation#customizing-the-error-messages)를 참고하세요.
 
 ### 가져오기 유효성 검사 속성 커스터마이징 {#customizing-import-validation-attributes}
 
@@ -746,7 +746,7 @@ ImportColumn::make('name')
 
 ## 가져오기 파일 유효성 검사 커스터마이징 {#customizing-import-file-validation}
 
-`fileRules()` 메서드를 사용하여 가져오기 파일에 대해 새로운 [Laravel 유효성 검사 규칙](https://laravel.com/docs/validation#available-validation-rules)을 추가할 수 있습니다:
+`fileRules()` 메서드를 사용하여 가져오기 파일에 대해 새로운 [Laravel 유효성 검사 규칙](/laravel/12.x/validation#available-validation-rules)을 추가할 수 있습니다:
 
 ```php
 use Illuminate\Validation\Rules\File;
@@ -840,7 +840,7 @@ class ProductImporter extends Importer
 
 ## 권한 {#authorization}
 
-기본적으로, 가져오기를 시작한 사용자만 가져오기가 실패할 경우 생성되는 실패 CSV 파일에 접근할 수 있습니다. 권한 로직을 커스터마이징하고 싶다면, `ImportPolicy` 클래스를 생성하고 [`AuthServiceProvider`에 등록](https://laravel.com/docs/authorization#registering-policies)할 수 있습니다:
+기본적으로, 가져오기를 시작한 사용자만 가져오기가 실패할 경우 생성되는 실패 CSV 파일에 접근할 수 있습니다. 권한 로직을 커스터마이징하고 싶다면, `ImportPolicy` 클래스를 생성하고 [`AuthServiceProvider`에 등록](/laravel/12.x/authorization#registering-policies)할 수 있습니다:
 
 ```php
 use App\Policies\ImportPolicy;

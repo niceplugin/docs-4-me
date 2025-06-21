@@ -335,7 +335,7 @@ document.addEventListener('livewire:navigated', () => { // [!code ++]
 
 사용자가 _두 번째 페이지_를 방문하면, Livewire가 새로운 JavaScript 에셋을 감지하고 전체 브라우저 페이지를 새로고침합니다.
 
-[Laravel의 Vite 플러그인](https://laravel.com/docs/vite#loading-your-scripts-and-styles)을 사용해 에셋을 번들링하고 제공하는 경우, Livewire는 렌더링된 HTML 에셋 태그에 `data-navigate-track`을 자동으로 추가합니다. 평소처럼 에셋과 스크립트를 참조하면 됩니다:
+[Laravel의 Vite 플러그인](/laravel/12.x/vite#loading-your-scripts-and-styles)을 사용해 에셋을 번들링하고 제공하는 경우, Livewire는 렌더링된 HTML 에셋 태그에 `data-navigate-track`을 자동으로 추가합니다. 평소처럼 에셋과 스크립트를 참조하면 됩니다:
 
 ```blade
 <head>

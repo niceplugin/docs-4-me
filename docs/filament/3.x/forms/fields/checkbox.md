@@ -15,7 +15,7 @@ Checkbox::make('is_admin')
 
 <AutoScreenshot name="forms/fields/checkbox/simple" alt="Checkbox" version="3.x" />
 
-불리언 값을 Eloquent를 사용해 저장하는 경우, 모델 속성에 `boolean` [캐스트](https://laravel.com/docs/eloquent-mutators#attribute-casting)를 추가해야 합니다:
+불리언 값을 Eloquent를 사용해 저장하는 경우, 모델 속성에 `boolean` [캐스트](/laravel/12.x/eloquent-mutators#attribute-casting)를 추가해야 합니다:
 
 ```php
 use Illuminate\Database\Eloquent\Model;

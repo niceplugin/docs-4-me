@@ -51,7 +51,7 @@ class CreatePost extends Component
 
 프론트엔드에서는 Laravel의 기존 Blade 지시어를 사용하여 사용자에게 검증 메시지를 보여줄 수 있습니다.
 
-자세한 내용은 [Blade에서 검증 오류 렌더링에 대한 Laravel 문서](https://laravel.com/docs/blade#validation-errors)를 참고하세요.
+자세한 내용은 [Blade에서 검증 오류 렌더링에 대한 Laravel 문서](/laravel/12.x/blade#validation-errors)를 참고하세요.
 
 ## 검증 속성 사용하기 {#validate-attributes}
 

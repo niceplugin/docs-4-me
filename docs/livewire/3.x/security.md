@@ -40,7 +40,7 @@ class ShowPost extends Component
 
 따라서, 이 애플리케이션을 안전하게 유지하고 사용자가 다른 사용자의 게시글을 삭제하지 못하도록 하려면 `delete()` 액션에 권한 부여를 추가해야 합니다.
 
-먼저, 다음 명령어를 실행하여 Post 모델에 대한 [Laravel Policy](https://laravel.com/docs/authorization#creating-policies)를 생성합시다:
+먼저, 다음 명령어를 실행하여 Post 모델에 대한 [Laravel Policy](/laravel/12.x/authorization#creating-policies)를 생성합시다:
 
 ```bash
 php artisan make:policy PostPolicy --model=Post
@@ -84,8 +84,8 @@ public function delete($id)
 ```
 
 더 읽어보기:
-* [Laravel Gates](https://laravel.com/docs/authorization#gates)
-* [Laravel Policies](https://laravel.com/docs/authorization#creating-policies)
+* [Laravel Gates](/laravel/12.x/authorization#gates)
+* [Laravel Policies](/laravel/12.x/authorization#creating-policies)
 
 ## 공개 속성 권한 부여 {#authorizing-public-properties}
 
@@ -170,7 +170,7 @@ class ShowPost extends Component
 이제 이 컴포넌트는 악의적인 사용자가 `$post` 속성을 다른 Eloquent 모델로 변경할 방법이 없으므로 안전합니다.
 
 ### 속성 잠그기 {#locking-the-property}
-원하지 않는 값으로 속성이 설정되는 것을 방지하는 또 다른 방법은 [잠긴 속성](https://livewire.laravel.com/docs/locked)을 사용하는 것입니다. 속성 잠금은 `#[Locked]` 속성(Attribute)을 적용하여 수행합니다. 사용자가 이 값을 변조하려고 시도하면 오류가 발생합니다.
+원하지 않는 값으로 속성이 설정되는 것을 방지하는 또 다른 방법은 [잠긴 속성](/livewire/3.x/locked)을 사용하는 것입니다. 속성 잠금은 `#[Locked]` 속성(Attribute)을 적용하여 수행합니다. 사용자가 이 값을 변조하려고 시도하면 오류가 발생합니다.
 
 잠긴 속성은 백엔드에서 여전히 변경될 수 있으므로, 신뢰할 수 없는 사용자 입력이 Livewire 함수 내에서 속성에 전달되지 않도록 주의해야 합니다.
 
@@ -237,12 +237,12 @@ class ShowPost extends Component
 이제 악의적인 사용자가 `$postId` 값을 자유롭게 수정할 수 있더라도, `delete` 액션이 호출될 때 사용자가 게시글의 소유자가 아니라면 `$this->authorize()`가 `AuthorizationException`을 발생시킵니다.
 
 더 읽어보기:
-* [Laravel Gates](https://laravel.com/docs/authorization#gates)
-* [Laravel Policies](https://laravel.com/docs/authorization#creating-policies)
+* [Laravel Gates](/laravel/12.x/authorization#gates)
+* [Laravel Policies](/laravel/12.x/authorization#creating-policies)
 
 ## 미들웨어 {#middleware}
 
-Livewire 컴포넌트가 다음과 같이 라우트 수준의 [Authorization Middleware](https://laravel.com/docs/authorization#via-middleware)가 포함된 페이지에 로드될 때:
+Livewire 컴포넌트가 다음과 같이 라우트 수준의 [Authorization Middleware](/laravel/12.x/authorization#via-middleware)가 포함된 페이지에 로드될 때:
 
 ```php
 Route::get('/post/{post}', App\Livewire\UpdatePost::class)
@@ -319,7 +319,7 @@ Livewire는 원래 엔드포인트의 미들웨어를 다시 적용하는 내부
 
 위 미들웨어 중 하나라도 초기 페이지 로드에 적용되었다면, 이후의 모든 네트워크 요청에도 지속적으로(다시) 적용됩니다.
 
-하지만, 애플리케이션에서 커스텀 미들웨어를 초기 페이지 로드에 적용하고, Livewire 요청 간에도 지속되길 원한다면, [서비스 프로바이더](https://laravel.com/docs/providers#main-content)에서 다음과 같이 이 목록에 추가해야 합니다:
+하지만, 애플리케이션에서 커스텀 미들웨어를 초기 페이지 로드에 적용하고, Livewire 요청 간에도 지속되길 원한다면, [서비스 프로바이더](/laravel/12.x/providers#main-content)에서 다음과 같이 이 목록에 추가해야 합니다:
 
 ```php
 <?php
@@ -370,13 +370,13 @@ Livewire::setUpdateRoute(function ($handle) {
 
 서버로 전송되는 모든 Livewire AJAX/fetch 요청은 위 엔드포인트를 사용하며, 컴포넌트 업데이트를 처리하기 전에 `LocalizeViewPaths` 미들웨어가 적용됩니다.
 
-[설치 페이지에서 업데이트 라우트 커스터마이징에 대해 더 알아보세요.](https://livewire.laravel.com/docs/installation#configuring-livewires-update-endpoint)
+[설치 페이지에서 업데이트 라우트 커스터마이징에 대해 더 알아보세요.](/livewire/3.x/installation#configuring-livewires-update-endpoint)
 
 ## 스냅샷 체크섬 {#snapshot-checksums}
 
 모든 Livewire 요청 사이에, Livewire 컴포넌트의 스냅샷이 생성되어 브라우저로 전송됩니다. 이 스냅샷은 다음 서버 라운드트립에서 컴포넌트를 다시 빌드하는 데 사용됩니다.
 
-[Hydration 문서에서 Livewire 스냅샷에 대해 더 알아보세요.](https://livewire.laravel.com/docs/hydration#the-snapshot)
+[Hydration 문서에서 Livewire 스냅샷에 대해 더 알아보세요.](/livewire/3.x/hydration#the-snapshot)
 
 fetch 요청은 브라우저에서 가로채거나 변조될 수 있기 때문에, Livewire는 각 스냅샷에 대한 "체크섬"을 생성하여 함께 전송합니다.
 
