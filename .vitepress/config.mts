@@ -87,5 +87,9 @@ export default defineConfig({
     plugins: [
       groupIconVitePlugin()
     ],
+  },
+
+  sitemap: {
+    hostname: 'https://docs4me.kr'
   }
 })
